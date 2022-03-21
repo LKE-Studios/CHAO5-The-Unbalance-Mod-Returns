@@ -1167,7 +1167,6 @@ unsafe fn captain_sidebstart(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
-        fighter.clear_lua_stack();
         let speed_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_s"), hash40("speed_coef"));
         sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_mul);
     }
