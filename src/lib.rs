@@ -17,7 +17,7 @@ mod samus;
 mod yoshi;
 // mod custom;
 
-#[skyline::main(name = "smashline_test")]
+#[skyline::main(name = "chao5_acmd")]
 pub fn main() {
     mario::install();
     donkey::install();
