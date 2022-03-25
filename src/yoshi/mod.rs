@@ -455,7 +455,7 @@ unsafe fn yoshi_bair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=18)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=26.0, Angle=54, KBG=100, FKB=0, BKB=30, Size=11.0, X=0.0, Y=5.0, Z=-11.0, X2=0.0, Y2=5.0, Z2=-9.0, Hitlag=4.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_SLAP, Type=ATTACK_REGION_TAIL)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=26.0, Angle=54, KBG=184, FKB=0, BKB=30, Size=11.0, X=0.0, Y=5.0, Z=-11.0, X2=0.0, Y2=5.0, Z2=-9.0, Hitlag=4.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_SLAP, Type=ATTACK_REGION_TAIL)
         }
         wait(Frames=2)
         if(is_excute){
