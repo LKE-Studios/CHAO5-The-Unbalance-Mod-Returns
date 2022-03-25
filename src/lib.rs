@@ -6,6 +6,7 @@ mod captain;
 mod donkey;
 mod falco;
 mod fox;
+mod ganon;
 mod kirby;
 mod link;
 mod luigi;
@@ -17,7 +18,7 @@ mod samus;
 mod yoshi;
 // mod custom;
 
-#[skyline::main(name = "chao5_acmd")]
+#[skyline::main(name = "smashline_test")]
 pub fn main() {
     mario::install();
     donkey::install();
@@ -31,6 +32,7 @@ pub fn main() {
     ness::install();
     captain::install();
     purin::install();
+    ganon::install();
     falco::install();
     // custom::install();
 }

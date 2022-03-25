@@ -1190,6 +1190,38 @@ unsafe fn fox_downb(fighter: &mut L2CAgentBase) {
     });
 }
 
+#[acmd_script(//SpecialLwStartSFX
+    agent = "fox", 
+    script = "sound_speciallwstart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn fox_downbsound(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+            PLAY_SE(hash40("se_fox_special_l01"))
+            PLAY_SE(hash40("se_item_item_get"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirLwStartSFX
+    agent = "fox", 
+    script = "sound_specialairlwstart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn fox_downbairsound(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+            PLAY_SE(hash40("se_fox_special_l01"))
+            PLAY_SE(hash40("se_item_item_get"))
+        }
+    });
+}
+
 #[acmd_script(//SpecialAirLwStart
     agent = "fox", 
     script = "game_specialairlwstart", 
@@ -1353,6 +1385,8 @@ pub fn install() {
         fox_illusion1,
         fox_illusion2,
         fox_downb,
+        fox_downbsound,
+        fox_downbairsound,
         fox_downbair,
         fox_uptauntr,
         fox_uptauntl,
