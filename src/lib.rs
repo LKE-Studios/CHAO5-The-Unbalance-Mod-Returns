@@ -34,8 +34,11 @@ pub fn main() {
     ness::install();
     captain::install();
     purin::install();
+<<<<<<< HEAD
     koopa::install();
     marth::install();
+=======
+>>>>>>> 6742e66298fdd0cb5b27b05f184770d21980577d
     ganon::install();
     falco::install();
     // custom::install();
