@@ -1065,7 +1065,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=8)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=367, KBG=100, FKB=107, BKB=0, Size=6.0, X=0.0, Y=10.0, Z=14.5, X2=0.0, Y2=10.0, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=16.0, Angle=46, KBG=145, FKB=0, BKB=32, Size=11.0, X=0.0, Y=10.0, Z=14.5, X2=0.0, Y2=10.0, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         wait(Frames=2)
@@ -1074,7 +1074,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=12)
         if(is_excute){
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=145, KBG=100, FKB=95, BKB=0, Size=5.0, X=0.0, Y=11.5, Z=-12.0, X2=0.0, Y2=11.0, Z2=-9.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=145, KBG=200, FKB=0, BKB=0, Size=11.0, X=0.0, Y=11.5, Z=-12.0, X2=0.0, Y2=11.0, Z2=-9.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 10.0, y: 20.0} as *const Vector2f, 10 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
@@ -1085,7 +1085,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=16)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.5, Angle=367, KBG=100, FKB=107, BKB=0, Size=6.0, X=0.0, Y=6.0, Z=15.0, X2=0.0, Y2=7.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=361, KBG=100, FKB=107, BKB=0, Size=6.0, X=0.0, Y=6.0, Z=15.0, X2=0.0, Y2=7.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         wait(Frames=2)
@@ -1094,7 +1094,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=19)
         if(is_excute){
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.0, Angle=145, KBG=100, FKB=95, BKB=0, Size=5.0, X=0.0, Y=11.5, Z=-12.5, X2=0.0, Y2=11.0, Z2=-9.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=145, KBG=100, FKB=95, BKB=0, Size=5.0, X=0.0, Y=11.5, Z=-12.5, X2=0.0, Y2=11.0, Z2=-9.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 10.0, y: 20.0} as *const Vector2f, 10 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
@@ -1104,7 +1104,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=22)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=83, KBG=100, FKB=71, BKB=0, Size=6.0, X=0.0, Y=10.0, Z=15.0, X2=0.0, Y2=10.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=83, KBG=200, FKB=0, BKB=30, Size=11.0, X=0.0, Y=10.0, Z=15.0, X2=0.0, Y2=10.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         wait(Frames=2)
@@ -1114,7 +1114,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         frame(Frame=26)
         if(is_excute){
             JostleModule::set_status(false)
-            ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=3.0, Angle=150, KBG=100, FKB=95, BKB=0, Size=5.0, X=2.0, Y=0.0, Z=0.0, X2=5.5, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=11.0, Angle=150, KBG=200, FKB=0, BKB=30, Size=11.0, X=2.0, Y=0.0, Z=0.0, X2=5.5, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 10.0, y: 20.0} as *const Vector2f, 10 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
@@ -1124,7 +1124,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=31)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=69, KBG=100, FKB=62, BKB=0, Size=7.0, X=0.0, Y=14.0, Z=12.5, X2=0.0, Y2=12.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=69, KBG=200, FKB=0, BKB=30, Size=11.0, X=0.0, Y=14.0, Z=12.5, X2=0.0, Y2=12.5, Z2=8.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         wait(Frames=2)
@@ -1134,7 +1134,7 @@ unsafe fn link_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=38)
         if(is_excute){
-            ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=3.0, Angle=160, KBG=100, FKB=95, BKB=0, Size=5.0, X=2.0, Y=0.0, Z=0.0, X2=5.5, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=11.0, Angle=361, KBG=200, FKB=0, BKB=30, Size=11.0, X=2.0, Y=0.0, Z=0.0, X2=5.5, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 10.0, y: 20.0} as *const Vector2f, 10 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }

@@ -6,10 +6,13 @@ mod captain;
 mod donkey;
 mod falco;
 mod fox;
+mod ganon;
 mod kirby;
+mod koopa;
 mod link;
 mod luigi;
 mod mario;
+mod marth;
 mod ness;
 mod pikachu;
 mod purin;
@@ -31,6 +34,9 @@ pub fn main() {
     ness::install();
     captain::install();
     purin::install();
+    koopa::install();
+    marth::install();
+    ganon::install();
     falco::install();
     // custom::install();
 }

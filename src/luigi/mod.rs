@@ -340,7 +340,7 @@ unsafe fn luigi_upsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.5)
-        frame(Frame=7)
+        frame(Frame=6)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
         }
