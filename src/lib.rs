@@ -1,6 +1,10 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
 #![feature(asm)]
+#![allow(non_snake_case)]
+
+pub static mut FIGHTER_CUTIN_MANAGER : *mut smash::app::FighterCutInManager = 0 as _;
+use skyline::nn::ro::LookupSymbol;
 
 mod captain;
 mod donkey;
@@ -43,4 +47,9 @@ pub fn main() {
     mariod::install();
     falco::install();
     // custom::install();
+    unsafe {
+        let mut FighterCutinManager = 0usize;
+        LookupSymbol(&mut FighterCutinManager as *mut usize, "_ZN3lib9SingletonIN3app19FighterCutInManagerEE9instance_E\0".as_ptr() as _);
+        FIGHTER_CUTIN_MANAGER = std::mem::transmute(FighterCutinManager);
+    }
 }

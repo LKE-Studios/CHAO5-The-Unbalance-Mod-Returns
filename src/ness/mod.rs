@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "ness", 
@@ -648,7 +650,9 @@ unsafe fn ness_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=26)
         if(is_excute){
             CHECK_FINISH_CAMERA(14, 6)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+            }
         }
         frame(Frame=27)
         if(is_excute){
@@ -677,8 +681,10 @@ unsafe fn ness_throwb(fighter: &mut L2CAgentBase) {
         frame(Frame=26)
         if(is_excute){
             CHECK_FINISH_CAMERA(-5, 18)
-            //FighterCutInManager::set_throw_finish_zoom_rate(2)
-            //FighterCutInManager::set_throw_finish_offset(0, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 2.0);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=27)
         if(is_excute){
@@ -707,8 +713,10 @@ unsafe fn ness_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=35)
         if(is_excute){
             CHECK_FINISH_CAMERA(3, 11)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(0, 3, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 3.0, z: 0.0});
+            }
         }
         frame(Frame=36)
         if(is_excute){
@@ -752,8 +760,10 @@ unsafe fn ness_throwdown(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.5, Angle=361, KBG=100, FKB=0, BKB=0, Size=6.0, X=2.0, Y=2.2, Z=0.0, X2=-2.0, Y2=2.2, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PSI)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(2, 0)
-            // FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            // FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         wait(Frames=1)
         if(is_excute){

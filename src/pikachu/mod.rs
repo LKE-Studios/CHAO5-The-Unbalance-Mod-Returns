@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11
     agent = "pikachu", 
@@ -636,8 +638,10 @@ unsafe fn pikachu_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=29)
         if(is_excute){
             CHECK_FINISH_CAMERA(7, 20)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.7)
-            //FighterCutInManager::set_throw_finish_offset(0, 9, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.7);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 9.0, z: 0.0});
+            }
         }
         frame(Frame=30)
         if(is_excute){
@@ -667,8 +671,10 @@ unsafe fn pikachu_throwb(fighter: &mut L2CAgentBase) {
         frame(Frame=25)
         if(is_excute){
             CHECK_FINISH_CAMERA(-12, 5)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(-2, 2, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: -2.0, y: 2.0, z: 0.0});
+            }
         }
         frame(Frame=26)
         if(is_excute){
@@ -699,8 +705,10 @@ unsafe fn pikachu_throwhi(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=80, KBG=53, FKB=0, BKB=70, Size=5.5, X=0.0, Y=14.0, Z=1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.6, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(1, 25)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(0, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=16)
         if(is_excute){

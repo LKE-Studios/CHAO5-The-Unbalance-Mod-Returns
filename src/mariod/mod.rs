@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack13 
     agent = "mariod", 
@@ -41,7 +43,7 @@ unsafe fn mariod_dashattack(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.8, Angle=90, KBG=66, FKB=0, BKB=100, Size=8.5, X=0.0, Y=1.5, Z=5.4, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=1.875)
             AttackModule::set_attack_height_all(AttackHeight(*ATTACK_HEIGHT_LOW), false)
-            FighterAreaModuleImpl::enable_fix_jostle_area(4, 6)
+            FighterAreaModuleImpl::enable_fix_jostle_area(4.0, 6.0)
         }
         wait(Frames=4)
         if(is_excute){
@@ -55,11 +57,11 @@ unsafe fn mariod_dashattack(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=32)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(4, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(4.0, 4.0)
         }
         frame(Frame=41)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(3, 3)
+            FighterAreaModuleImpl::enable_fix_jostle_area(3.0, 3.0)
         }
     });
 }
@@ -168,8 +170,8 @@ unsafe fn mariod_downtilt(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=10.0, Angle=270, KBG=109, FKB=0, BKB=45, Size=7.5, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.4, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             ATTACK(ID=1, Part=0, Bone=hash40("toel"), Damage=8.0, Angle=270, KBG=109, FKB=0, BKB=45, Size=6.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.4, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             AttackModule::set_attack_height_all(AttackHeight(*ATTACK_HEIGHT_LOW), false)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
         }
         wait(Frames=3)
         if(is_excute){
@@ -604,8 +606,10 @@ unsafe fn mariod_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=12)
         if(is_excute){
             CHECK_FINISH_CAMERA(13, 2)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1)
-            //FighterCutInManager::set_throw_finish_offset(5, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.0);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 5.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=13)
         if(is_excute){
@@ -638,8 +642,10 @@ unsafe fn mariod_throwb(fighter: &mut L2CAgentBase) {
         frame(Frame=29)
         if(is_excute){
             CHECK_FINISH_CAMERA(11, 6)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(5, 2, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 5.0, y: 2.0, z: 0.0});
+            }
         }
         frame(Frame=44)
         if(is_excute){
@@ -668,8 +674,10 @@ unsafe fn mariod_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=17)
         if(is_excute){
             CHECK_FINISH_CAMERA(4, 8)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=18)
         if(is_excute){
@@ -699,8 +707,10 @@ unsafe fn mariod_throwdown(fighter: &mut L2CAgentBase) {
         frame(Frame=17)
         if(is_excute){
             CHECK_FINISH_CAMERA(2, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.7)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.7);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=18)
         if(is_excute){
@@ -816,11 +826,11 @@ unsafe fn mariod_downattacku(fighter: &mut L2CAgentBase) {
 
 
 #[acmd_script(//SpecialN
-    agent = "mario", 
+    agent = "mariod", 
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.3)
@@ -832,11 +842,11 @@ unsafe fn mario_neutralb(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirN
-    agent = "mario", 
+    agent = "mariod", 
     script = "game_specialairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_neutralbair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.3)
@@ -885,7 +895,7 @@ unsafe fn mariod_sideb(fighter: &mut L2CAgentBase) {
         frame(Frame=6)
         if(is_excute){
             SEARCH(0, 0, hash40("top"), 8.0, 0.0, 6.5, 2.5, 0.0, 6.5, 8.0, COLLISION_KIND_MASK_ATTACK, HIT_STATUS_MASK_NORMAL, 60, COLLISION_SITUATION_MASK_GA, COLLISION_CATEGORY_MASK_ALL, COLLISION_PART_MASK_ALL, false)
-            WorkModule::set_float(9, FIGHTER_MARIOD_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
+            WorkModule::set_float(9.0, FIGHTER_MARIOD_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
             SET_SPEED_EX(0.5, 0.859, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=9)
@@ -912,17 +922,17 @@ unsafe fn mariod_sideb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=45)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_MARIOD_GENERATE_ARTICLE_DRMANTLE)
+            ArticleModule::remove_exist(FIGHTER_MARIOD_GENERATE_ARTICLE_DRMANTLE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
 
 #[acmd_script(//SpecialAirS
-    agent = "mario", 
+    agent = "mariod", 
     script = "game_specialairs", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_sidebair(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_sidebair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -932,7 +942,7 @@ unsafe fn mario_sidebair(fighter: &mut L2CAgentBase) {
         frame(Frame=6)
         if(is_excute){
             SEARCH(0, 0, hash40("top"), 8.0, 0.0, 6.5, 2.5, 0.0, 6.5, 8.0, COLLISION_KIND_MASK_ATTACK, HIT_STATUS_MASK_NORMAL, 60, COLLISION_SITUATION_MASK_GA, COLLISION_CATEGORY_MASK_ALL, COLLISION_PART_MASK_ALL, false)
-            WorkModule::set_float(9, FIGHTER_MARIOD_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
+            WorkModule::set_float(9.0, FIGHTER_MARIOD_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
             SET_SPEED_EX(0.5, 0.859, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=9)
@@ -959,7 +969,7 @@ unsafe fn mario_sidebair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=45)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_MARIOD_GENERATE_ARTICLE_DRMANTLE)
+            ArticleModule::remove_exist(FIGHTER_MARIOD_GENERATE_ARTICLE_DRMANTLE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -969,7 +979,7 @@ unsafe fn mario_sidebair(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_upb(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=3)
@@ -1015,11 +1025,11 @@ unsafe fn mariod_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=10)
         if(is_excute){
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
         }
         frame(Frame=20)
         if(is_excute){
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
         }
     });
 }
@@ -1132,7 +1142,7 @@ unsafe fn mariod_uptauntr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ItemModule::have_item(ItemKind(*ITEM_KIND_FOOD), 0, 0, false, false)
+            ItemModule::have_item(ItemKind(*ITEM_KIND_TABEMONO), 0, 0, false, false)
         }
     });
 }
@@ -1146,7 +1156,7 @@ unsafe fn mariod_uptauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ItemModule::have_item(ItemKind(*ITEM_KIND_FOOD), 0, 0, false, false)
+            ItemModule::have_item(ItemKind(*ITEM_KIND_TABEMONO), 0, 0, false, false)
         }
     });
 }
@@ -1166,11 +1176,11 @@ unsafe fn mariod_sidetauntr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealSL
-    agent = "mario", 
+    agent = "mariod", 
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_sidetauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -1194,11 +1204,11 @@ unsafe fn mariod_downtauntr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealLwL
-    agent = "mario", 
+    agent = "mariod", 
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn mario_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn mariod_downtauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -1301,7 +1311,7 @@ unsafe fn mariod_final(fighter: &mut L2CAgentBase) {
         frame(Frame=210)
         if(is_excute){
             AttackModule::clear_all()
-            ArticleModule::remove(WEAPON_MARIOD_HUGECAPSULE_GENERATE_ARTICLE_DRCAPSULE)
+            ArticleModule::remove(WEAPON_MARIOD_HUGECAPSULE_GENERATE_ARTICLE_DRCAPSULE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -1319,9 +1329,6 @@ pub fn install() {
         mariod_sidesmash,
         mariod_sidesmashdown,
         mariod_upsmash,
-        mariod_upsmashsound,
-        mariod_upsmashchargesound,
-        mariod_sidesmashsound,
         mariod_downsmash,
         mariod_nair,
         mariod_fair,
