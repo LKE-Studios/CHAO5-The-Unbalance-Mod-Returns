@@ -1,8 +1,6 @@
-
 use smash::lua2cpp::L2CAgentBase;
 use smash::hash40;
 use smashline::*;
-
 
 #[acmd_script(
 agent = "peach",
@@ -12,10 +10,9 @@ low_priority )]
 unsafe fn effect_peach_kamehameha_fire(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        frame(Frame=7)
+        frame(Frame=8)
         if(is_execute){
-            EFFECT(hash40("sys_genesis_beam"), hash40("top"), 12, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-            //LAST_EFFECT_SET_COLOR(0.8, 0.38, 0.56)
+            EFFECT(hash40("sys_genesis_beam"), hash40("top"), 10, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
         }
         frame(Frame=67)
         if(is_execute){
@@ -24,9 +21,10 @@ unsafe fn effect_peach_kamehameha_fire(fighter: &mut L2CAgentBase) {
     });
 }
 
-
 pub fn install() {
     smashline::install_acmd_scripts!(
-        effect_peach_kamehameha_fire
+        effect_peach_kamehameha_fire,
+    //    effect_peach_kamehameha_charge,
+     //   effect_peach_kamehameha_start
     );
 }
