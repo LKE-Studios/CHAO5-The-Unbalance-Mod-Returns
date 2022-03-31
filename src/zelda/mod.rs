@@ -1,13 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
 use smash::phx::Vector3f;
-use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "zelda", 
@@ -36,10 +36,10 @@ unsafe fn zelda_jab1(fighter: &mut L2CAgentBase) {
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=4.5, Angle=361, KBG=25, FKB=0, BKB=40, Size=6.2, X=0.0, Y=5.5, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
             ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=4.5, Angle=180, KBG=20, FKB=0, BKB=25, Size=6.5, X=0.0, Y=11.5, Z=11.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
             ATTACK(ID=4, Part=0, Bone=hash40("top"), Damage=4.5, Angle=361, KBG=25, FKB=0, BKB=40, Size=6.5, X=0.0, Y=11.5, Z=15.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=1, Frames=2, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=2, Frames=2, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=3, Frames=2, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=2.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=2, Frames=2.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=3, Frames=2.0, Unk=false)
         }
         wait(Frames=1)
         if(is_excute){
@@ -69,8 +69,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -82,8 +82,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -95,8 +95,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -108,8 +108,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -121,8 +121,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -134,8 +134,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -147,8 +147,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -160,8 +160,8 @@ unsafe fn zelda_jab100(fighter: &mut L2CAgentBase) {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
                 ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-                AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
             }
             wait(Frames=1)
@@ -185,8 +185,8 @@ unsafe fn zelda_jab100sub(fighter: &mut L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.4, Angle=361, KBG=20, FKB=0, BKB=7, Size=10.0, X=0.0, Y=8.5, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=1, Frames=3, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
             ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=8)
         }
         wait(Frames=1)
@@ -233,7 +233,7 @@ unsafe fn zelda_dashattack(fighter: &mut L2CAgentBase) {
         wait(Frames=2)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=50, KBG=100, FKB=0, BKB=80, Size=8.0, X=0.0, Y=9.0, Z=13.6, X2=0.0, Y2=9.0, Z2=7.8, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-            AttackModule::clear(ID=1)
+            AttackModule::clear(ID=1, false)
         }
     });
 }
@@ -555,12 +555,11 @@ unsafe fn zelda_fair(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=28.0, Angle=361, KBG=96, FKB=0, BKB=24, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
             ATTACK(ID=2, Part=0, Bone=hash40("hip"), Damage=28.0, Angle=361, KBG=96, FKB=0, BKB=24, Size=6.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
             ATTACK(ID=3, Part=0, Bone=hash40("toel"), Damage=28.0, Angle=361, KBG=96, FKB=0, BKB=24, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
-            methodlib::L2CValue::as_hash()const(0, 0x148397b09f)
-            AttackModule::set_optional_hit_effect()
+            AttackModule::set_optional_hit_effect(0, Hash40::new_raw(0x148397b09f))
         }
         wait(Frames=1)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
         }
         wait(Frames=4)
         if(is_excute){
@@ -591,12 +590,11 @@ unsafe fn zelda_bair(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=25.0, Angle=361, KBG=96, FKB=0, BKB=30, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
             ATTACK(ID=2, Part=0, Bone=hash40("hip"), Damage=25.0, Angle=361, KBG=96, FKB=0, BKB=30, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
             ATTACK(ID=3, Part=0, Bone=hash40("toer"), Damage=25.0, Angle=361, KBG=96, FKB=0, BKB=30, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_KICK)
-            methodlib::L2CValue::as_hash()const(0, 0x1484fa7486)
-            AttackModule::set_optional_hit_effect()
+            AttackModule::set_optional_hit_effect(0, Hash40::new_raw(0x1484fa7486))
         }
         wait(Frames=1)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
         }
         wait(Frames=4)
         if(is_excute){
@@ -801,8 +799,10 @@ unsafe fn zelda_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=29)
         if(is_excute){
             CHECK_FINISH_CAMERA(17, 4)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.25)
-            //FighterCutInManager::set_throw_finish_offset(9, 1, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.25);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 9.0, y: 1.0, z: 0.0});
+            }
         }
         frame(Frame=30)
         if(is_excute){
@@ -832,8 +832,10 @@ unsafe fn zelda_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(11, 7)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.3)
-            //FighterCutInManager::set_throw_finish_offset(-5, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.3);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: -5.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=27)
         if(is_excute){
@@ -863,8 +865,10 @@ unsafe fn zelda_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=29)
         if(is_excute){
             CHECK_FINISH_CAMERA(1, 25)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(0, 10, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 10.0, z: 0.0});
+            }
         }
         frame(Frame=30)
         if(is_excute){
@@ -907,8 +911,10 @@ unsafe fn zelda_throwdown(fighter: &mut L2CAgentBase) {
         frame(Frame=50)
         if(is_excute){
             CHECK_FINISH_CAMERA(2, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(0, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=51)
         if(is_excute){
@@ -1107,6 +1113,7 @@ unsafe fn zelda_neutralbair(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn zelda_fire(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=115, KBG=120, FKB=0, BKB=70, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BOMB)
@@ -1401,12 +1408,12 @@ unsafe fn zelda_final(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_ZELDA_FINAL, ID=0, Damage=100.0, Angle=65, KBG=68, FKB=0, BKB=100, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_POS, Unk=1.0, Unk=true, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_NONE)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, true)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, true)
         }
         frame(Frame=18)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=150.0, Angle=60, KBG=100, FKB=0, BKB=80, Size=40.0, X=0.0, Y=12.0, Z=20.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
         }
         frame(Frame=20)
         if(is_excute){
@@ -1426,12 +1433,12 @@ unsafe fn zelda_finalair(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_ZELDA_FINAL, ID=0, Damage=100.0, Angle=65, KBG=68, FKB=0, BKB=100, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_POS, Unk=1.0, Unk=true, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_NONE)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, true)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, true)
         }
         frame(Frame=18)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=150.0, Angle=60, KBG=100, FKB=0, BKB=80, Size=40.0, X=0.0, Y=12.0, Z=20.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
         }
         frame(Frame=20)
         if(is_excute){
@@ -1461,6 +1468,9 @@ pub fn install() {
         zelda_bair,
         zelda_uair,
         zelda_dair,
+        zelda_grab,
+        zelda_dashgrab,
+        zelda_pivotgrab,
         zelda_pummel,
         zelda_throwf,
         zelda_throwb,

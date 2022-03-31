@@ -28,6 +28,10 @@ mod purin;
 mod samus;
 mod yoshi;
 mod zelda;
+<<<<<<< HEAD
+=======
+mod peach;
+>>>>>>> a7e1434b22331661b1cfb10ffb063699368a9835
 mod utils;
 // mod custom;
 
