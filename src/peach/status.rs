@@ -29,9 +29,7 @@ pub fn peach_frame(fighter : &mut L2CFighterCommon) {
             .contains(&status_kind){
             CHARGE_TIME[entry_id] = 0.0;
         }
-        if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) ||
-            [hash40("special_hi_start"), hash40("special_air_hi_start"), hash40("special_hi_open"), hash40("special_hi_fall"),
-                hash40("special_air_hi_end")].contains(&motion_kind){
+        if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind){
             ModelModule::set_joint_scale(module_accessor, Hash40::new("havel"), &Vector3f{
                 x: 8.0,
                 y: 8.0,
@@ -44,6 +42,9 @@ pub fn peach_frame(fighter : &mut L2CFighterCommon) {
             });
             AttackModule::set_attack_scale(module_accessor, 8.0, true);
         }
+        else{
+            AttackModule::set_attack_scale(module_accessor, 1.0, true);
+        }
     }
 }
 
@@ -53,7 +54,7 @@ pub unsafe fn peach_specialn(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
-//idk why I can't put in the constant as the status.Only the raw i32 or LuaConst works. Smashline issue
+//idk why I can't put in the constant as the status. Only the raw i32 or LuaConst works. Smashline issue
 #[status_script(agent = "peach", status = 0x1eb, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn peach_kamehameha_start_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
