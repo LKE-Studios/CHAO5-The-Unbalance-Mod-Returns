@@ -24,6 +24,7 @@ mod pikachu;
 mod purin;
 mod samus;
 mod yoshi;
+mod zelda;
 // mod custom;
 
 #[skyline::main(name = "smashline_test")]
@@ -45,6 +46,7 @@ pub fn main() {
     ganon::install();
     gamewatch::install();
     mariod::install();
+    zelda::install();
     falco::install();
     // custom::install();
     unsafe {
