@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "donkey", 
@@ -247,9 +249,9 @@ unsafe fn donkey_sidesmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=22)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=26.0, Angle=46, KBG=94, FKB=0, BKB=30, Size=6.4, X=0.0, Y=6.4, Z=24.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=27.5, Angle=361, KBG=94, FKB=0, BKB=35, Size=5.8, X=0.0, Y=6.4, Z=18.0, X2=0.0, Y2=6.4, Z2=10.0, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=25.0, Angle=361, KBG=91, FKB=0, BKB=25, Size=5.1, X=0.0, Y=6.8, Z=3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=28.0, Angle=46, KBG=94, FKB=0, BKB=30, Size=6.4, X=0.0, Y=6.4, Z=24.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=29.0, Angle=361, KBG=94, FKB=0, BKB=35, Size=5.8, X=0.0, Y=6.4, Z=18.0, X2=0.0, Y2=6.4, Z2=10.0, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=26.0, Angle=361, KBG=91, FKB=0, BKB=25, Size=5.1, X=0.0, Y=6.8, Z=3.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=0.0, Angle=361, KBG=95, FKB=0, BKB=60, Size=13.3, X=0.0, Y=7.0, Z=46.0, X2=0.0, Y2=7.0, Z2=28.5, Hitlag=0, SDI=0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_none"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
         }
         wait(Frames=2)
@@ -676,8 +678,10 @@ unsafe fn donkey_throwff(fighter: &mut L2CAgentBase) {
         frame(Frame=14)
         if(is_excute){
             CHECK_FINISH_CAMERA(38, 19)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(12, 6, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 12.0, y: 6.0, z: 0.0});
+            }
         }
         frame(Frame=15)
         if(is_excute){
@@ -707,8 +711,10 @@ unsafe fn donkey_throwfb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(26, 14)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.4)
-            //FighterCutInManager::set_throw_finish_offset(12, 1, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.4);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 12.0, y: 1.0, z: 0.0});
+            }
         }
         frame(Frame=16)
         if(is_excute){
@@ -738,7 +744,9 @@ unsafe fn donkey_throwfhi(fighter: &mut L2CAgentBase) {
         frame(Frame=14)
         if(is_excute){
             CHECK_FINISH_CAMERA(1, 31)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.9)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.9);
+            }
         }
         frame(Frame=15)
         if(is_excute){
@@ -768,7 +776,9 @@ unsafe fn donkey_throwflw(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_THROW_FLAG_STOP)
             CHECK_FINISH_CAMERA(4, 2)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+            }
         }
         frame(Frame=17)
         if(is_excute){
@@ -799,7 +809,9 @@ unsafe fn donkey_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(28, 20)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.6)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.6);
+            }
         }
         frame(Frame=15)
         if(is_excute){
@@ -830,8 +842,10 @@ unsafe fn donkey_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=13)
         if(is_excute){
             CHECK_FINISH_CAMERA(-5, 32)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.6)
-            //FighterCutInManager::set_throw_finish_offset(0, 6, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.6);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 6.0, z: 0.0});
+            }
         }
         frame(Frame=14)
         if(is_excute){
@@ -860,8 +874,10 @@ unsafe fn donkey_throwdown(fighter: &mut L2CAgentBase) {
         frame(Frame=18)
         if(is_excute){
             CHECK_FINISH_CAMERA(10, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.6)
-            //FighterCutInManager::set_throw_finish_offset(7, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.6);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 7.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=19)
         if(is_excute){

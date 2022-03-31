@@ -8,6 +8,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "link", 
@@ -790,8 +791,10 @@ unsafe fn link_throwhi(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=11.0, Angle=20, KBG=110, FKB=0, BKB=50, Size=3.8, X=2.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(6, 28)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.8)
-            //FighterCutInManager::set_throw_finish_offset(0, 12, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.8);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 12.0, z: 0.0});
+            }
         }
         frame(Frame=28)
         if(is_excute){

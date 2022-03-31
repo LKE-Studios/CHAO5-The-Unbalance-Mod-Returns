@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "yoshi", 
@@ -608,8 +610,10 @@ unsafe fn yoshi_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=14)
         if(is_excute){
             CHECK_FINISH_CAMERA(13, 14)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(6, 4.5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 6.0, y: 4.5, z: 0.0});
+            }
         }
         frame(Frame=15)
         if(is_excute){
@@ -640,8 +644,10 @@ unsafe fn yoshi_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(14, 12)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(-6, 4.5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: -6.0, y: 4.5, z: 0.0});
+            }
         }
         frame(Frame=20)
         if(is_excute){
@@ -671,8 +677,10 @@ unsafe fn yoshi_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=12)
         if(is_excute){
             CHECK_FINISH_CAMERA(2, 25)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.3)
-            //FighterCutInManager::set_throw_finish_offset(0, 6, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.3);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 6.0, z: 0.0});
+            }
         }
         frame(Frame=13)
         if(is_excute){
@@ -702,8 +710,10 @@ unsafe fn yoshi_throwdown(fighter: &mut L2CAgentBase) {
         frame(Frame=17)
         if(is_excute){
             CHECK_FINISH_CAMERA(4.0, 0.0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.7)
-            //FighterCutInManager::set_throw_finish_offset(0.0, 0.0, 0.0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.7);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=18)
         if(is_excute){

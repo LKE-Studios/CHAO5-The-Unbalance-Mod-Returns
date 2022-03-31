@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "purin", 
@@ -488,8 +490,10 @@ unsafe fn purin_throwf(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("bust"), Damage=5.0, Angle=361, KBG=110, FKB=0, BKB=40, Size=10.6, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_BODY)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(13, 2)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.4)
-            //FighterCutInManager::set_throw_finish_offset(5, 2, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.4);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 5.0, y: 2.0, z: 0.0});
+            }
         }
         frame(Frame=12)
         if(is_excute){
@@ -520,7 +524,9 @@ unsafe fn purin_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_THROW_FLAG_STOP)
             CHECK_FINISH_CAMERA(-15, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+            }
         }
         frame(Frame=26)
         if(is_excute){
@@ -549,8 +555,10 @@ unsafe fn purin_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=8)
         if(is_excute){
             CHECK_FINISH_CAMERA(-4, 9)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
-            //FighterCutInManager::set_throw_finish_offset(0, 2, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 2.0, z: 0.0});
+            }
         }
         frame(Frame=9)
         if(is_excute){
@@ -581,8 +589,10 @@ unsafe fn purin_throwdown(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=40, KBG=130, FKB=0, BKB=10, Size=6.0, X=0.0, Y=4.0, Z=3.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(3, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=62)
         if(is_excute){

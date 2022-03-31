@@ -1,13 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
 use smash::phx::Vector3f;
-use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "ganon", 
@@ -161,8 +161,8 @@ unsafe fn ganon_sidesmash(fighter: &mut L2CAgentBase) {
         if(is_excute){
             FT_MOTION_RATE(FSM=0.55)
             sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
-            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD)
-            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false)
+            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, -1)
         }
         frame(Frame=15)
         if(is_excute){
@@ -175,13 +175,13 @@ unsafe fn ganon_sidesmash(fighter: &mut L2CAgentBase) {
             HIT_NODE(hash40("head"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=30.0, Angle=40, KBG=79, FKB=0, BKB=66, Size=8.5, X=0.0, Y=4.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=12, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=30.0, Angle=40, KBG=79, FKB=0, BKB=66, Size=8.0, X=0.0, Y=14.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=12, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-        
+        }
         frame(Frame=30)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=30.0, Angle=40, KBG=79, FKB=0, BKB=66, Size=9.0, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=12, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=30.0, Angle=40, KBG=79, FKB=0, BKB=66, Size=9.5, X=0.0, Y=16.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=12, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=30.0, Angle=40, KBG=79, FKB=0, BKB=66, Size=9.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=12, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-            AttackModule::set_attack_height_all(ATTACK_HEIGHT_HIGH, false)
+            AttackModule::set_attack_height_all(AttackHeight(*ATTACK_HEIGHT_HIGH), false)
         }
         wait(Frames=5)
         if(is_excute){
@@ -203,8 +203,8 @@ unsafe fn ganon_upsmash(fighter: &mut L2CAgentBase) {
         if(is_excute){
             FT_MOTION_RATE(FSM=0.575)
             sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
-            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD)
-            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false)
+            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, -1)
         }
         frame(Frame=10)
         if(is_excute){
@@ -239,8 +239,8 @@ unsafe fn ganon_downsmash(fighter: &mut L2CAgentBase) {
         if(is_excute){
             FT_MOTION_RATE(FSM=0.6)
             sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
-            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD)
-            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false)
+            ArticleModule::remove_exist(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::generate_article(FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, -1)
         }
         frame(Frame=5)
         if(is_excute){
@@ -440,7 +440,7 @@ unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 0)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 0.0)
             SET_SPEED_EX(0, 0.65, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=4)
@@ -455,7 +455,7 @@ unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
         wait(Frames=4)
         if(is_excute){
             AttackModule::clear_all()
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 11)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 11.0)
         }
         frame(Frame=32)
         if(is_excute){
@@ -542,7 +542,9 @@ unsafe fn ganon_throwb(fighter: &mut L2CAgentBase) {
             ATTACK(ID=2, Part=0, Bone=hash40("legr"), Damage=5.0, Angle=70, KBG=100, FKB=0, BKB=30, Size=3.7, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(22, 20)
-            //FighterCutInManager::set_throw_finish_offset(5, 2, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 5.0, y: 2.0, z: 0.0});
+            }
         }
         frame(Frame=14)
         if(is_excute){
@@ -577,8 +579,10 @@ unsafe fn ganon_throwup(fighter: &mut L2CAgentBase) {
             ATTACK(ID=2, Part=0, Bone=hash40("shoulderr"), Damage=10.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=3.7, X=-0.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(-1, 28)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
-            //FighterCutInManager::set_throw_finish_offset(0, 4, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 4.0, z: 0.0});
+            }
         }
         frame(Frame=13)
         if(is_excute){
@@ -888,6 +892,8 @@ unsafe fn ganon_neutralbairturn(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ganon_sideb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
         if(is_excute){
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=32.0, Angle=361, KBG=90, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_NONE)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=4.0, Angle=0, KBG=10, FKB=0, BKB=100, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_NONE)
@@ -975,11 +981,11 @@ unsafe fn ganon_downb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=10)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3, 6, 8.5, 9.5)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3.0, 6.0, 8.5, 9.5)
         }
         frame(Frame=13)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(2, 6, 8.5, 10)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(2.0, 6.0, 8.5, 10.0)
         }
         frame(Frame=16)
         if(is_excute){
@@ -993,7 +999,7 @@ unsafe fn ganon_downb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=35)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(8, 8, 8, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(8.0, 8.0, 8.0, 4.0)
         }
         frame(Frame=36)
         if(is_excute){
@@ -1102,11 +1108,11 @@ unsafe fn ganon_downtauntr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealLwL
-    agent = "captain", 
+    agent = "ganon", 
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn captain_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn ganon_downtauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -1125,17 +1131,16 @@ unsafe fn ganon_final(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             QUAKE(CAMERA_QUAKE_KIND_L)
-            methodlib::L2CValue::as_hash()const(hash40("rbkind_23_rush_sp"), 0, true)
-            ControlModule::set_rumble()
+            ControlModule::set_rumble(Hash40::new("rbkind_23_rush_sp"), 0, true, *BATTLE_OBJECT_ID_INVALID as u32)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=20.0, X=0.0, Y=12.0, Z=25.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=25.0, X=0.0, Y=12.0, Z=5.0, X2=0.0, Y2=12.0, Z2=-20.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=28.0, X=0.0, Y=30.0, Z=13.0, X2=0.0, Y2=30.0, Z2=-18.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
             AttackModule::set_force_reaction(2, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(2, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(1, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(2, true, true, -1.0, false)
         }
     });
 }
@@ -1150,17 +1155,16 @@ unsafe fn ganon_finalair(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             QUAKE(CAMERA_QUAKE_KIND_L)
-            methodlib::L2CValue::as_hash()const(hash40("rbkind_23_rush_sp"), 0, true)
-            ControlModule::set_rumble()
+            ControlModule::set_rumble(Hash40::new("rbkind_23_rush_sp"), 0, true, *BATTLE_OBJECT_ID_INVALID as u32)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=20.0, X=0.0, Y=12.0, Z=25.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=25.0, X=0.0, Y=12.0, Z=5.0, X2=0.0, Y2=12.0, Z2=-20.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=666.6, Angle=42, KBG=25, FKB=0, BKB=122, Size=28.0, X=0.0, Y=30.0, Z=13.0, X2=0.0, Y2=30.0, Z2=-18.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
             AttackModule::set_force_reaction(2, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(2, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(1, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(2, true, true, -1.0, false)
         }
     });
 }

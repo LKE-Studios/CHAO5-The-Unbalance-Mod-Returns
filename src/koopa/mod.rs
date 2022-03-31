@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "koopa", 
@@ -350,9 +352,8 @@ unsafe fn koopa_downsmash(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
         }
-        execute(5)
-        WorkModule::is_flag(FIGHTER_STATUS_ATTACK_FLAG_SMASH_SMASH_HOLD_TO_ATTACK)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        frame(Frame=5)
+        if(WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_SMASH_SMASH_HOLD_TO_ATTACK)){
             if(is_excute){
                 sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
             }
@@ -424,7 +425,6 @@ unsafe fn koopa_nair(fighter: &mut L2CAgentBase) {
 unsafe fn koopa_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        if(is_excute){
         FT_MOTION_RATE(FSM=0.4)
         frame(Frame=4)
         if(is_excute){
@@ -818,8 +818,10 @@ unsafe fn koopa_throwdown(fighter: &mut L2CAgentBase) {
         frame(Frame=36)
         if(is_excute){
             CHECK_FINISH_CAMERA(9, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.1)
-            //FighterCutInManager::set_throw_finish_offset(10, -4, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.1);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 10.0, y: -4.0, z: 0.0});
+            }
         }
         frame(Frame=37)
         if(is_excute){
@@ -989,8 +991,10 @@ unsafe fn koopa_sideb2(fighter: &mut L2CAgentBase) {
         frame(Frame=1)
         if(is_excute){
             CHECK_FINISH_CAMERA(3, 9)
-            FighterCutInManager::set_throw_finish_zoom_rate(1.3)
-            FighterCutInManager::set_throw_finish_offset(0, -9, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.3);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: -9.0, z: 0.0});
+            }
         }
         frame(Frame=8)
         if(is_excute){
@@ -1019,7 +1023,7 @@ unsafe fn koopa_sideb3(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn donkey_upb(fighter: &mut L2CAgentBase) {
+unsafe fn koopa_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -1057,7 +1061,7 @@ unsafe fn donkey_upb(fighter: &mut L2CAgentBase) {
         frame(Frame=51)
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_KOOPA_STATUS_SPECIAL_HI_FLAG4)
-            FighterAreaModuleImpl::enable_fix_jostle_area(8, 8)
+            FighterAreaModuleImpl::enable_fix_jostle_area(8.0, 8.0)
         }
     });
 }
@@ -1121,9 +1125,9 @@ unsafe fn koopa_downb(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=80, KBG=100, FKB=60, BKB=0, Size=9.0, X=0.0, Y=1.0, Z=17.0, X2=0.0, Y2=9.0, Z2=17.0, Hitlag=1.0, SDI=0.5, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=4.0, Angle=100, KBG=100, FKB=60, BKB=0, Size=7.0, X=0.0, Y=0.5, Z=22.5, X2=0.0, Y2=9.5, Z2=22.5, Hitlag=1.0, SDI=0.5, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=4.0, Angle=90, KBG=100, FKB=60, BKB=0, Size=9.0, X=0.0, Y=2.5, Z=13.0, X2=0.0, Y2=7.5, Z2=13.0, Hitlag=1.0, SDI=0.5, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=8, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=1, Frames=8, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=2, Frames=8, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=8.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=8.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=2, Frames=8.0, Unk=false)
         }
         frame(Frame=12)
         if(is_excute){
@@ -1315,7 +1319,7 @@ unsafe fn koopa_final(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("rot"), Damage=600.0, Angle=361, KBG=40, FKB=0, BKB=80, Size=20.0, X=0.0, Y=6.0, Z=66.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_PUNCH)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_no_squat_damage_reaction_mul(0, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
             WorkModule::on_flag(Flag=WEAPON_KOOPA_KOOPAG_INSTANCE_WORK_ID_FLAG_REQUEST_RUMBLE)
         }
         frame(Frame=13)

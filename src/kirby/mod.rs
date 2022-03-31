@@ -1,11 +1,13 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack100 
     agent = "kirby", 
@@ -811,8 +813,10 @@ unsafe fn kirby_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=38)
         if(is_excute){
             CHECK_FINISH_CAMERA(7, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.8)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.8);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=45)
         if(is_excute){
@@ -851,8 +855,10 @@ unsafe fn kirby_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             FT_MOTION_RATE(FSM=1.0)
             CHECK_FINISH_CAMERA(-7, 0)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.8)
-            //FighterCutInManager::set_throw_finish_offset(0, -10, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.8);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: -10.0, z: 0.0});
+            }
         }
         frame(Frame=41)
         if(is_excute){
@@ -896,8 +902,10 @@ unsafe fn kirby_throwhi(fighter: &mut L2CAgentBase) {
             WorkModule::set_float(5.0, FIGHTER_INSTANCE_WORK_ID_FLOAT_FINISH_CAMERA_THROW_RAY_LENGTH)
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_RAY_CHECK_FINISH_CAMERA_THROW)
             CHECK_FINISH_CAMERA(15, 7)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.8)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.8);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=51)
         if(is_excute){
@@ -940,8 +948,10 @@ unsafe fn kirby_throwlw(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=90, KBG=120, FKB=0, BKB=30, Size=9.8, X=0.0, Y=4.0, Z=2.4, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(8, 4)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.8)
-            //FighterCutInManager::set_throw_finish_offset(0, 0, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.8);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+            }
         }
         frame(Frame=58)
         if(is_excute){

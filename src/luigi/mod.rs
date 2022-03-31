@@ -1,5 +1,6 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
@@ -7,6 +8,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "luigi", 
@@ -601,8 +603,10 @@ unsafe fn luigi_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=14)
         if(is_excute){
             CHECK_FINISH_CAMERA(18, 4)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1)
-            //FighterCutInManager::set_throw_finish_offset(12, -1, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.0);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 12.0, y: -1.0, z: 0.0});
+            }
             FT_CATCH_STOP(5, 1)
         }
         frame(Frame=15)
@@ -642,8 +646,10 @@ unsafe fn luigi_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(21, 3)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1)
-            //FighterCutInManager::set_throw_finish_offset(10, -1, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.0);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 10.0, y: -1.0, z: 0.0});
+            }
             FT_CATCH_STOP(5, 1)
         }
         frame(Frame=15)
@@ -692,8 +698,10 @@ unsafe fn luigi_throwup(fighter: &mut L2CAgentBase) {
         frame(Frame=17)
         if(is_excute){
             CHECK_FINISH_CAMERA(-2, 24)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.5)
-            //FighterCutInManager::set_throw_finish_offset(0, 7, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.5);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 7.0, z: 0.0});
+            }
         }
         frame(Frame=18)
         if(is_excute){

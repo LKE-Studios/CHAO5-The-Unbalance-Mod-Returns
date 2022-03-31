@@ -1,5 +1,6 @@
 use smash::hash40;
 use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
@@ -7,6 +8,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use crate::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "samus", 
@@ -640,8 +642,10 @@ unsafe fn samus_throwf(fighter: &mut L2CAgentBase) {
         frame(Frame=15)
         if(is_excute){
             CHECK_FINISH_CAMERA(16, 16)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
-            //FighterCutInManager::set_throw_finish_offset(5, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 5.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=16)
         if(is_excute){
@@ -671,8 +675,10 @@ unsafe fn samus_throwb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
             CHECK_FINISH_CAMERA(25, 15)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
-            //FighterCutInManager::set_throw_finish_offset(10, 3, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 10.0, y: 3.0, z: 0.0});
+            }
         }
         frame(Frame=12)
         if(is_excute){
@@ -704,8 +710,10 @@ unsafe fn samus_throwhi(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=80, KBG=100, FKB=0, BKB=10, Size=6.5, X=0.0, Y=23.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_catch_only_all(true, false)
             CHECK_FINISH_CAMERA(1, 32)
-            //FighterCutInManager::set_throw_finish_zoom_rate(1.2)
-            //FighterCutInManager::set_throw_finish_offset(0, 5, 0)
+            rust{
+                lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(FIGHTER_CUTIN_MANAGER, 1.2);
+                lua_bind::FighterCutInManager::set_throw_finish_offset(FIGHTER_CUTIN_MANAGER, Vector3f{x: 0.0, y: 5.0, z: 0.0});
+            }
         }
         frame(Frame=16)
         if(is_excute){
