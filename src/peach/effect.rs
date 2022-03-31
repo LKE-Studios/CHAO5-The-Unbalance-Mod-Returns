@@ -1,14 +1,7 @@
 
-use smash::hash40;
-use smash::phx::Hash40;
-use smash::phx::Vector3f;
-use smash::phx::Vector2f;
-use smash::lib::lua_const::*;
-use smash::app::*;
-use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
+use smash::hash40;
 use smashline::*;
-use smash_script::*;
 
 
 #[acmd_script(

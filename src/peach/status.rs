@@ -1,13 +1,10 @@
 
-use smash::app::FighterEntryID;
-use smash::app::sv_battle_object::module_accessor;
-use smash::lib::{L2CValue, LuaConst};
+use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;
 use crate::utils::*;
 use smashline::*;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
-use smash::hash40;
 use smash::phx::{Vector3f, Hash40};
 
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START: i32 = 0x1eb; //491

@@ -7,7 +7,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-use crate::FIGHTER_CUTIN_MANAGER;
+use crate::utils::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
     agent = "ness", 

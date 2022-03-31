@@ -3,10 +3,7 @@
 #![feature(asm)]
 #![allow(non_snake_case)]
 
-pub static mut FIGHTER_CUTIN_MANAGER : *mut smash::app::FighterCutInManager = 0 as _;
-
 use std::ffi::CStr;
-use skyline::nn::ro::LookupSymbol;
 
 mod captain;
 mod donkey;
@@ -28,10 +25,6 @@ mod purin;
 mod samus;
 mod yoshi;
 mod zelda;
-<<<<<<< HEAD
-=======
-mod peach;
->>>>>>> a7e1434b22331661b1cfb10ffb063699368a9835
 mod utils;
 // mod custom;
 

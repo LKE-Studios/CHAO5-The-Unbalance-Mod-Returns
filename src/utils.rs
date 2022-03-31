@@ -1,15 +1,9 @@
 use smash::{
     *,
-    hash40,
-    phx::{Hash40, Vector3f},
-    lib::{lua_const::*, L2CValue},
-    app::{lua_bind::{*, StatusModule::*}, sv_animcmd::{frame, wait}, BattleObjectModuleAccessor},
-    lua2cpp::{L2CFighterCommon, L2CAgentBase}
+    phx::Hash40,
+    lib::lua_const::*,
+    app::{lua_bind::*, *}
 };
-use smash::app::FighterEntryID;
-use smash::app::sv_system::battle_object_module_accessor;
-use smashline::*;
-use smash::lib::lua_const::*;
 
 extern "C"{
     #[link_name = "_ZN3lib9SingletonIN3app14FighterManagerEE9instance_E"]
@@ -32,11 +26,11 @@ pub fn is_grounded(module_accessor: *mut app::BattleObjectModuleAccessor) -> boo
 }
 
 pub unsafe fn set_position_lock(entry_id: i32){
-    FighterManager::set_position_lock(FIGHTER_MANAGER, FighterEntryID(entry_id), true);
+    lua_bind::FighterManager::set_position_lock(FIGHTER_MANAGER, FighterEntryID(entry_id), true);
 }
 
 pub unsafe fn unset_position_lock(entry_id: i32){
-    FighterManager::set_position_lock(FIGHTER_MANAGER, FighterEntryID(entry_id), false);
+    lua_bind::FighterManager::set_position_lock(FIGHTER_MANAGER, FighterEntryID(entry_id), false);
 }
 
 
