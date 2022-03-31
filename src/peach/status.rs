@@ -1,4 +1,5 @@
-
+use std::ptr::hash;
+use smash::app::enSEType;
 use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;
 use crate::utils::*;
@@ -6,25 +7,33 @@ use smashline::*;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::phx::{Vector3f, Hash40};
+use smash::hash40;
 
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START: i32 = 0x1eb; //491
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE: i32 = 0x1ec; //492
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_FIRE: i32 = 0x1ed; //493
 pub static mut CHARGE_TIME:[f32;8] = [0.0;8];
 
+
 #[fighter_frame(agent = FIGHTER_KIND_PEACH)]
 pub fn peach_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+        let lua_state = fighter.lua_state_agent;
+        let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
         let status_kind = StatusModule::status_kind(module_accessor);
         let entry_id = get_entry_id(module_accessor);
-        if status_kind == FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE{
+        if[FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START].contains(&status_kind){
             CHARGE_TIME[entry_id] += 1.0;
+            acmd!(lua_state, {
+                EFFECT_FOLLOW(hash40("sys_hit_elec"), hash40("haver"), 0, 0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, true)
+                LAST_EFFECT_SET_COLOR(0.2, 0.6, 0.7)
+            });
         }
         if ![FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_FIRE]
             .contains(&status_kind){
             CHARGE_TIME[entry_id] = 0.0;
         }
+
         if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind){
             ModelModule::set_joint_scale(module_accessor, Hash40::new("havel"), &Vector3f{
                 x: 8.0,
@@ -43,6 +52,7 @@ pub fn peach_frame(fighter : &mut L2CFighterCommon) {
         }
     }
 }
+
 
 #[status_script(agent = "peach", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn peach_specialn(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -96,6 +106,7 @@ unsafe extern "C" fn peach_kamehameha_charge_main(fighter: &mut L2CFighterCommon
         set_position_lock(entry_id as i32);
     }
     else{
+        SoundModule::stop_all_sound(fighter.module_accessor);
         fighter.change_status(FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_FIRE.into(), false.into());
     }
     L2CValue::I32(0)
