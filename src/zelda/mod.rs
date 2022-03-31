@@ -1479,7 +1479,7 @@ pub fn install() {
         zelda_phantom2,
         zelda_phantom3,
         zelda_phantom4,
-        zelda_phantom5
+        zelda_phantom5,
         zelda_uptauntr,
         zelda_uptauntl,
         zelda_sidetauntr,
