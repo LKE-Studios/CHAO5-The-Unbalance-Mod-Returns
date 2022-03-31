@@ -17,7 +17,6 @@ pub fn peach_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let status_kind = StatusModule::status_kind(module_accessor);
-        let motion_kind = MotionModule::motion_kind(module_accessor);
         let entry_id = get_entry_id(module_accessor);
         if status_kind == FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE{
             CHARGE_TIME[entry_id] += 1.0;
@@ -53,7 +52,7 @@ pub unsafe fn peach_specialn(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 //idk why I can't put in the constant as the status. Only the raw i32 or LuaConst works. Smashline issue
 #[status_script(agent = "peach", status = 0x1eb, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn peach_kamehameha_start_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn peach_kamehameha_start_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
@@ -80,7 +79,7 @@ pub unsafe fn peach_kamehameha_start_end(fighter: &mut L2CFighterCommon) -> L2CV
 }
 
 #[status_script(agent = "peach", status = 0x1ec, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn peach_kamehameha_charge_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn peach_kamehameha_charge_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
@@ -110,7 +109,7 @@ pub unsafe fn peach_kamehameha_charge_end(fighter: &mut L2CFighterCommon) -> L2C
 }
 
 #[status_script(agent = "peach", status = 0x1ed, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn peach_kamehamehafire_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn peach_kamehamehafire_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 

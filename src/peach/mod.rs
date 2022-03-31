@@ -1,11 +1,10 @@
-mod status;
+pub mod status;
 mod effect;
 
 use smash::hash40;
-use smash::phx::Hash40;
-use smash::phx::Vector3f;
-use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
+use smash::phx::Hash40;
+use smash::phx::Vector2f;
 use smash::app::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
@@ -21,18 +20,16 @@ extern "C" {
 
 //This mod here: https://gamebanana.com/mods/38839
 #[skyline::hook(replace=is_valid_auto_catch_item)]
-unsafe fn is_valid_auto_catch_item_hook(module_accessor: &mut BattleObjectModuleAccessor,x1:bool) -> bool {
+unsafe fn is_valid_auto_catch_item_hook(module_accessor: &mut BattleObjectModuleAccessor, x1:bool) -> bool {
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
     if fighter_kind == *FIGHTER_KIND_PEACH {
         return true;
     }
-    else {
-        return false;
-    }
+    original!()(module_accessor, x1)
 }
 
 #[acmd_script(agent = "peach", script = "game_speciallw", category = ACMD_GAME)]
-unsafe fn peachlwspecial(fighter: &mut L2CAgentBase) {
+unsafe fn peach_speciallw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
     let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_GRASS,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_DAISYDAIKON,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
@@ -113,8 +110,8 @@ unsafe fn peach_sidetilt(fighter: &mut L2CAgentBase) {
         }
         wait(Frames=2)
         if(is_excute){
-            AttackModule::clear(ID=0)
-            AttackModule::clear(ID=1)
+            AttackModule::clear(ID=0, false)
+            AttackModule::clear(ID=1, false)
             ATTACK(ID=2, Part=0, Bone=hash40("kneer"), Damage=11.0, Angle=92, KBG=120, FKB=0, BKB=40, Size=8.0, X=6.0, Y=1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
         }
         frame(Frame=16)
@@ -156,11 +153,11 @@ unsafe fn peach_downtilt(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(1, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(1.0, 4.0)
         }
         frame(Frame=6)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(3, 6)
+            FighterAreaModuleImpl::enable_fix_jostle_area(3.0, 6.0)
         }
         frame(Frame=8)
         if(is_excute){
@@ -171,7 +168,7 @@ unsafe fn peach_downtilt(fighter: &mut L2CAgentBase) {
         frame(Frame=10)
         if(is_excute){
             AttackModule::clear_all()
-            FighterAreaModuleImpl::enable_fix_jostle_area(3, 3)
+            FighterAreaModuleImpl::enable_fix_jostle_area(3.0, 3.0)
         }
     });
 }
@@ -276,8 +273,8 @@ unsafe fn peach_attackhi4(fighter: &mut L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("shoulderr"), Damage=21.0, Angle=85, KBG=100, FKB=0, BKB=60, Size=7.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_MAGIC)
             ATTACK(ID=1, Part=0, Bone=hash40("handr"), Damage=21.0, Angle=85, KBG=100, FKB=0, BKB=60, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_MAGIC)
-            AttackModule::clear(ID=2)
-            AttackModule::clear(ID=3)
+            AttackModule::clear(ID=2, false)
+            AttackModule::clear(ID=3, false)
         }
         wait(Frames=4)
         if(is_excute){
@@ -608,11 +605,13 @@ unsafe fn peach_pummel(fighter: &mut L2CAgentBase) {
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.24, Angle=361, KBG=100, FKB=30, BKB=0, Size=5.5, X=0.0, Y=6.5, Z=6.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_NONE)
             AttackModule::set_catch_only_all(true, false)
         }
-        IS_EXIST_ARTICLE(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        rust{
+            fighter.clear_lua_stack();
+            lua_args!(fighter, FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO);
+        }
+        if(sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, hash40("catch_attack"))
-                ArticleModule::change_motion()
+                ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, Hash40::new("catch_attack"), false, -1.0)
             }
         }
         wait(Frames=2)
@@ -634,11 +633,13 @@ unsafe fn peach_throwf(fighter: &mut L2CAgentBase) {
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=12.0, Angle=45, KBG=89, FKB=0, BKB=48, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
         }
-        IS_EXIST_ARTICLE(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        rust{
+            fighter.clear_lua_stack();
+            lua_args!(fighter, FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO);
+        }
+        if(sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, hash40("throw_f"))
-                ArticleModule::change_motion()
+                ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_f"), false, -1.0)
             }
         }
         frame(Frame=14)
@@ -658,7 +659,7 @@ unsafe fn peach_throwf(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=36)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
+            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -675,11 +676,13 @@ unsafe fn peach_throwb(fighter: &mut L2CAgentBase) {
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=13.0, Angle=140, KBG=97, FKB=0, BKB=35, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
         }
-        IS_EXIST_ARTICLE(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        rust{
+            fighter.clear_lua_stack();
+            lua_args!(fighter, FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO);
+        }
+        if(sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, hash40("throw_b"))
-                ArticleModule::change_motion()
+                ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_b"), false, -1.0)
             }
         }
         frame(Frame=20)
@@ -700,7 +703,7 @@ unsafe fn peach_throwb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=38)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
+            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=45)
         if(is_excute){
@@ -721,11 +724,13 @@ unsafe fn peach_throwup(fighter: &mut L2CAgentBase) {
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=13.0, Angle=88, KBG=95, FKB=0, BKB=72, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
         }
-        IS_EXIST_ARTICLE(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        rust{
+            fighter.clear_lua_stack();
+            lua_args!(fighter, FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO);
+        }
+        if(sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, hash40("throw_hi"))
-                ArticleModule::change_motion()
+                ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_hi"), false, -1.0)
             }
         }
         frame(Frame=19)
@@ -749,7 +754,7 @@ unsafe fn peach_throwup(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=40)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
+            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }      
@@ -766,11 +771,13 @@ unsafe fn peach_throwdown(fighter: &mut L2CAgentBase) {
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=30.0, Angle=106, KBG=95, FKB=0, BKB=90, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_pitfall"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
             ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
         }
-        IS_EXIST_ARTICLE(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        rust{
+            fighter.clear_lua_stack();
+            lua_args!(fighter, FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO);
+        }
+        if(sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, hash40("throw_lw"))
-                ArticleModule::change_motion()
+                ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_lw"), false, -1.0)
             }
         }
         frame(Frame=34)
@@ -794,7 +801,7 @@ unsafe fn peach_throwdown(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=55)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO)
+            ArticleModule::remove_exist(FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
     });
 }
@@ -933,8 +940,6 @@ category = ACMD_GAME,
 low_priority )]
 unsafe fn peach_kamehameha_charge(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    let module_accessor = fighter.module_accessor;
-    let entry_id = get_entry_id(module_accessor);
     acmd!(lua_state, {
         sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_ALWAYS, DamageThreshold=0)
     });
@@ -946,6 +951,7 @@ unsafe fn peach_kamehameha_charge(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn peach_sideb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=42.0, Angle=361, KBG=61, FKB=0, BKB=40, Size=10.7, X=0.0, Y=5.0, Z=4.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=6, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_HIP)
@@ -963,10 +969,10 @@ unsafe fn peach_sideb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn peach_upbopen(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, hash40("special_hi_open"))
-            ArticleModule::change_motion()
+            ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, Hash40::new("special_hi_open"), false, -1.0)
         }
         frame(Frame=8)
         if(is_excute){
@@ -982,12 +988,12 @@ unsafe fn peach_upbopen(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             WHOLE_HIT(HIT_STATUS_XLU)
-            ArticleModule::generate_article(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR)
-            methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, hash40("special_hi_start"))
-            ArticleModule::change_motion()
+            ArticleModule::generate_article(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, false, -1)
+            ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, Hash40::new("special_hi_start"), false, -1.0)
         }
         frame(Frame=6)
         if(is_excute){
@@ -995,8 +1001,7 @@ unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=7)
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=88, KBG=100, FKB=160, BKB=0, Size=5.0, X=0.0, Y=5.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("head"), Damage=3.0, Angle=100, KBG=100, FKB=130, BKB=0, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
@@ -1007,8 +1012,7 @@ unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=11)
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=93, KBG=100, FKB=160, BKB=0, Size=8.0, X=0.0, Y=10.0, Z=8.0, X2=0.0, Y2=8.0, Z2=7.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=87, KBG=100, FKB=80, BKB=0, Size=9.5, X=2.0, Y=5.0, Z=3.5, X2=2.0, Y2=2.5, Z2=3.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=2, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=367, KBG=100, FKB=70, BKB=0, Size=10.0, X=0.0, Y=6.5, Z=0.0, X2=0.0, Y2=-1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
@@ -1016,17 +1020,15 @@ unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=16)
         if(is_excute){
-            AttackModule::clear(ID=0)
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+            AttackModule::clear(ID=0, false)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
         }
         frame(Frame=22)
         if(is_excute){
             ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=368, KBG=100, FKB=80, BKB=0, Size=9.5, X=2.0, Y=5.0, Z=3.5, X2=2.0, Y2=2.5, Z2=3.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=2, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=368, KBG=100, FKB=70, BKB=0, Size=10.0, X=0.0, Y=6.5, Z=0.0, X2=0.0, Y2=-1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
-            methodlib::L2CValue::as_hash()const(1, hash40("top"), 6, 25, 12)
-            AttackModule::set_vec_target_pos()
-            methodlib::L2CValue::as_hash()const(2, hash40("top"), 6, 25, 12)
-            AttackModule::set_vec_target_pos()
+            AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 6.0, y: 25.0} as *const Vector2f, 12 as u32, false)
+            AttackModule::set_vec_target_pos(2, Hash40::new("top"), &Vector2f{x: 6.0, y: 25.0} as *const Vector2f, 12 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         frame(Frame=28)
@@ -1036,8 +1038,7 @@ unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
         frame(Frame=31)
         if(is_excute){
             HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=81, KBG=70, FKB=0, BKB=120, Size=10.2, X=0.0, Y=4.5, Z=-2.0, X2=0.0, Y2=4.5, Z2=2.0, Hitlag=3.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=14.0, Angle=81, KBG=70, FKB=0, BKB=120, Size=10.0, X=0.0, Y=-1.0, Z=0.0, X2=0.0, Y2=1.0, Z2=0.0, Hitlag=3.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
         }
@@ -1054,12 +1055,12 @@ unsafe fn peach_upb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn peach_upbairstart(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             WHOLE_HIT(HIT_STATUS_XLU)
-            ArticleModule::generate_article(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR)
-            methodlib::L2CValue::as_hash()const(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, hash40("special_hi_start"))
-            ArticleModule::change_motion()
+            ArticleModule::generate_article(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, false, -1)
+            ArticleModule::change_motion(FIGHTER_PEACH_GENERATE_ARTICLE_KASSAR, Hash40::new("special_hi_start"), false, -1.0)
         }
         frame(Frame=6)
         if(is_excute){
@@ -1067,8 +1068,7 @@ unsafe fn peach_upbairstart(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=7)
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=88, KBG=100, FKB=160, BKB=0, Size=5.0, X=0.0, Y=5.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("head"), Damage=3.0, Angle=100, KBG=100, FKB=130, BKB=0, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
@@ -1079,8 +1079,7 @@ unsafe fn peach_upbairstart(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=11)
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=93, KBG=100, FKB=160, BKB=0, Size=8.0, X=0.0, Y=10.0, Z=8.0, X2=0.0, Y2=8.0, Z2=7.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=87, KBG=100, FKB=80, BKB=0, Size=9.5, X=2.0, Y=5.0, Z=3.5, X2=2.0, Y2=2.5, Z2=3.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=2, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=367, KBG=100, FKB=70, BKB=0, Size=10.0, X=0.0, Y=6.5, Z=0.0, X2=0.0, Y2=-1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
@@ -1088,17 +1087,15 @@ unsafe fn peach_upbairstart(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=16)
         if(is_excute){
-            AttackModule::clear(ID=0)
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+            AttackModule::clear(ID=0, false)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
         }
         frame(Frame=22)
         if(is_excute){
             ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=368, KBG=100, FKB=80, BKB=0, Size=9.5, X=2.0, Y=5.0, Z=3.5, X2=2.0, Y2=2.5, Z2=3.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=2, Part=0, Bone=hash40("havel"), Damage=1.0, Angle=368, KBG=100, FKB=70, BKB=0, Size=10.0, X=0.0, Y=6.5, Z=0.0, X2=0.0, Y2=-1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
-            methodlib::L2CValue::as_hash()const(1, hash40("top"), 6, 25, 12)
-            AttackModule::set_vec_target_pos()
-            methodlib::L2CValue::as_hash()const(2, hash40("top"), 6, 25, 12)
-            AttackModule::set_vec_target_pos()
+            AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 6.0, y: 25.0} as *const Vector2f, 12 as u32, false)
+            AttackModule::set_vec_target_pos(2, Hash40::new("top"), &Vector2f{x: 6.0, y: 25.0} as *const Vector2f, 12 as u32, false)
             AttackModule::set_no_damage_fly_smoke_all(true, false)
         }
         frame(Frame=28)
@@ -1108,8 +1105,7 @@ unsafe fn peach_upbairstart(fighter: &mut L2CAgentBase) {
         frame(Frame=31)
         if(is_excute){
             HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
-            methodlib::L2CValue::as_hash()const(hash40("haver"), ATTACK_DIRECTION_Y)
-            AttackModule::set_attack_reference_joint_id()
+            AttackModule::set_attack_reference_joint_id(Hash40::new("haver"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_NONE), AttackDirectionAxis(*ATTACK_DIRECTION_NONE))
             ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=81, KBG=70, FKB=0, BKB=120, Size=10.2, X=0.0, Y=4.5, Z=-2.0, X2=0.0, Y2=4.5, Z2=2.0, Hitlag=3.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
             ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=14.0, Angle=81, KBG=70, FKB=0, BKB=120, Size=10.0, X=0.0, Y=-1.0, Z=0.0, X2=0.0, Y2=1.0, Z2=0.0, Hitlag=3.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_magic"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PARASOL)
         }
@@ -1224,6 +1220,7 @@ pub fn install() {
         peach_grab,
         peach_dashgrab,
         peach_pivotgrab,
+        peach_pummel,
         peach_throwf,
         peach_throwb,
         peach_throwup,
@@ -1236,7 +1233,7 @@ pub fn install() {
         peach_kamehameha_charge,
         peach_sideb,
         peach_upbopen,
-        peach_upopen,
+        peach_upb,
         peach_upbairstart,
         peach_speciallw,
         peach_uptauntl,
