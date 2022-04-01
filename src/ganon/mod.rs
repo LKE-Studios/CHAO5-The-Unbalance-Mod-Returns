@@ -888,7 +888,7 @@ unsafe fn ganon_neutralbairturn(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialS
     agent = "ganon", 
-    script = "game_specialss", 
+    script = "game_specials", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ganon_sideb(fighter: &mut L2CAgentBase) {
