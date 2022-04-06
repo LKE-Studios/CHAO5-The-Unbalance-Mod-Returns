@@ -837,6 +837,62 @@ unsafe fn purin_upbl(fighter: &mut L2CAgentBase) {
     });
 }
 
+#[acmd_script(//SpecialHiL GFX
+    agent = "purin", 
+    script = "effect_specialhil", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn purin_upblgfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            EFFECT_FOLLOW(hash40("purin_utau"), hash40("hip"), 2, 0, 0, 0, 0, 0, 2.25, true)
+        }
+    });
+}
+
+#[acmd_script(//SpecialHiR GFX
+    agent = "purin", 
+    script = "effect_specialhir", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn purin_upbrgfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            EFFECT_FOLLOW(hash40("purin_utau"), hash40("hip"), 2, 0, 0, 0, 0, 0, 2.25, true)
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirHiL GFX
+    agent = "purin", 
+    script = "effect_specialairhil", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn purin_upbairlgfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            EFFECT_FOLLOW(hash40("purin_utau"), hash40("hip"), 2, 0, 0, 0, 0, 0, 2.25, true)
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirHiR GFX
+    agent = "purin", 
+    script = "effect_specialairhir", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn purin_upbairrgfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            EFFECT_FOLLOW(hash40("purin_utau"), hash40("hip"), 2, 0, 0, 0, 0, 0, 2.25, true)
+        }
+    });
+}
+
 #[acmd_script(//SpecialHiR
     agent = "purin", 
     script = "game_specialhir", 
@@ -1196,6 +1252,10 @@ pub fn install() {
         purin_upbsub,
         purin_upbairl,
         purin_upbairr,
+        purin_upblgfx,
+        purin_upbrgfx,
+        purin_upbairlgfx,
+        purin_upbairrgfx,
         purin_downbl,
         purin_downbr,
         purin_downbairl,

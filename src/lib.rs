@@ -26,7 +26,7 @@ mod samus;
 mod yoshi;
 mod zelda;
 mod utils;
-// mod custom;
+//mod custom;
 
 static mut CONSTANT_OFFSET : usize = 0x3727390; //13.0.1
 

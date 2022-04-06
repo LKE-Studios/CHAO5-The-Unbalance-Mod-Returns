@@ -434,11 +434,13 @@ unsafe fn gamewatch_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
+            FT_MOTION_RATE(FSM=0.5)
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
             ArticleModule::generate_article(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_BOMB, false, -1)
         }
         frame(Frame=10)
         if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=361, KBG=50, FKB=30, BKB=0, Size=6.0, X=0.0, Y=9.0, Z=11.3, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_NONE)
             AttackModule::set_add_reaction_frame(ID=0, Frames=5.0, Unk=false)
         }
@@ -446,6 +448,11 @@ unsafe fn gamewatch_fair(fighter: &mut L2CAgentBase) {
         if(is_excute){
             AttackModule::clear_all()
             ArticleModule::shoot(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_BOMB, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
+        }
+        frame(Frame=19)
+        if(is_excute){
+            FT_MOTION_RATE(FSM=0.75)
+            CancelModule::enable_cancel()
         }
         frame(Frame=42)
         if(is_excute){
@@ -464,7 +471,7 @@ unsafe fn gamewatch_bomb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             VisibilityModule::set_whole(false)
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=25.0, Angle=45, KBG=101, FKB=0, BKB=30, Size=16.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=25.0, Angle=45, KBG=119, FKB=0, BKB=50, Size=22.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_OBJECT)
             ControlModule::set_rumble(Hash40::new("rbkind_explosion"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32)
         }
         wait(Frames=2)
@@ -1189,34 +1196,321 @@ unsafe fn gamewatch_neutralbair(fighter: &mut L2CAgentBase) {
     });
 }
 
+#[acmd_script(//SpecialS2_Sub
+    agent = "gamewatch", 
+    script = "game_specials2_sub", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sideb2sub(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+    });
+}
+
+#[acmd_script(//SpecialS2
+    agent = "gamewatch", 
+    script = "game_specials2", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sideb2(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS2
+    agent = "gamewatch", 
+    script = "game_specialairs2", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sidebair2(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_script(//SpecialS2SFX
+    agent = "gamewatch", 
+    script = "sound_specials2", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn gamewatch_sideb2sfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            PLAY_SE(hash40("se_gamewatch_special_s01"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS2SFX
+    agent = "gamewatch", 
+    script = "sound_specialairs2", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn gamewatch_sidebair2sfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            PLAY_SE(hash40("se_gamewatch_special_s01"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialS2GFX
+    agent = "gamewatch", 
+    script = "effect_specials2", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn gamewatch_sideb2gfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            LANDING_EFFECT(hash40("sys_action_smoke_h"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false)
+        }
+        for(12 Iterations){
+            wait(Frames=2)
+            if(is_excute){
+                EFFECT(hash40("sys_damage_elec"), hash40("rot"), 0, 2, 0, 0, 0, 0, 1.2, 16, 20, 16, 0, 0, 0, false)
+            }
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS2GFX
+    agent = "gamewatch", 
+    script = "effect_specialairs2", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn gamewatch_sidebair2gfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        for(12 Iterations){
+            wait(Frames=2)
+            if(is_excute){
+                EFFECT(hash40("sys_damage_elec"), hash40("rot"), 0, 2, 0, 0, 0, 0, 1.2, 16, 20, 16, 0, 0, 0, false)
+            }
+        }
+    });
+}
+
+#[acmd_script(//SpecialS7SFX
+    agent = "gamewatch", 
+    script = "sound_specials7", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn gamewatch_sideb7sfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            PLAY_SE(hash40("se_gamewatch_special_s01"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS7
+    agent = "gamewatch", 
+    script = "sound_specialairs7", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn gamewatch_sidebair7sfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            PLAY_SE(hash40("se_gamewatch_special_s01"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialS7GFX
+    agent = "gamewatch", 
+    script = "effect_specials7", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn gamewatch_sideb7gfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            LANDING_EFFECT(hash40("sys_action_smoke_h"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false)
+        }
+        for(12 Iterations){
+            wait(Frames=2)
+            if(is_excute){
+                EFFECT(hash40("sys_damage_elec"), hash40("rot"), 0, 2, 0, 0, 0, 0, 1.2, 16, 20, 16, 0, 0, 0, false)
+            }
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS7GFX
+    agent = "gamewatch", 
+    script = "effect_specialairs7", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn gamewatch_sidebair7gfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        for(12 Iterations){
+            wait(Frames=2)
+            if(is_excute){
+                EFFECT(hash40("sys_damage_elec"), hash40("rot"), 0, 2, 0, 0, 0, 0, 1.2, 16, 20, 16, 0, 0, 0, false)
+            }
+        }
+    });
+}
+
 #[acmd_script(//SpecialS7_Sub
     agent = "gamewatch", 
-    script = "game_specials7sub", 
+    script = "game_specials7_sub", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sideb7sub(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=45, KBG=80, FKB=0, BKB=120, Size=9.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=45, KBG=80, FKB=0, BKB=120, Size=9.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+    });
+}
+
+#[acmd_script(//SpecialS7
+    agent = "gamewatch", 
+    script = "game_specials7", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn gamewatch_sideb7(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+        frame(Frame=16)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=32.0, Angle=45, KBG=80, FKB=0, BKB=120, Size=9.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=32.0, Angle=45, KBG=80, FKB=0, BKB=120, Size=9.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-            DamageModule::heal(-999.0, 0);
-            ItemModule::have_item(ItemKind(*ITEM_KIND_STARMAN), 0, 0, false, false)
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS7
+    agent = "gamewatch", 
+    script = "game_specialairs7", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sidebair7(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
         }
     });
 }
 
 #[acmd_script(//SpecialS9_Sub
     agent = "gamewatch", 
-    script = "game_specials9sub", 
+    script = "game_specials9_sub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn gamewatch_sideb9(fighter: &mut L2CAgentBase) {
+unsafe fn gamewatch_sideb9sub(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+        }
+    });
+}
+
+#[acmd_script(//SpecialS9
+    agent = "gamewatch", 
+    script = "game_specials9", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sideb9(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            DamageModule::heal(-999.0, 0);
+            ItemModule::have_item(ItemKind(*ITEM_KIND_STARMAN), 0, 0, false, false)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirS9
+    agent = "gamewatch", 
+    script = "game_specialairs9", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn gamewatch_sidebair9(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=16)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_GAMEWATCH_STATUS_SPECIAL_S_FLAG_FIX_PANEL)
+	        VisibilityModule::set_default_int64(hash40("panel") as i64)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=8.0, X=0.0, Y=10.6, Z=8.9, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=999.0, Angle=361, KBG=80, FKB=0, BKB=100, Size=7.0, X=0.0, Y=7.0, Z=5.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_OBJECT)
+            DamageModule::heal(-999.0, 0);
+            ItemModule::have_item(ItemKind(*ITEM_KIND_STARMAN), 0, 0, false, false)
+        }
+        frame(Frame=24)
+        if(is_excute){
+            AttackModule::clear_all()
         }
     });
 }
@@ -1584,8 +1878,23 @@ pub fn install() {
         gamewatch_prawns,
         gamewatch_sausage,
         gamewatch_steak,
+        gamewatch_sideb2sub,
+        gamewatch_sideb2,
+        gamewatch_sidebair2,
+        gamewatch_sideb2sfx,
+        gamewatch_sidebair2sfx,
+        gamewatch_sideb2gfx,
+        gamewatch_sidebair2gfx,
+        gamewatch_sideb7sub,
         gamewatch_sideb7,
+        gamewatch_sidebair7,
+        gamewatch_sideb7sfx,
+        gamewatch_sidebair7sfx,
+        gamewatch_sideb7gfx,
+        gamewatch_sidebair7gfx,
+        gamewatch_sideb9sub,
         gamewatch_sideb9,
+        gamewatch_sidebair9,
         gamewatch_upb,
         gamewatch_upbair,
         gamewatch_downb,
