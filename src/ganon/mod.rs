@@ -441,7 +441,7 @@ unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
         frame(Frame=1)
         if(is_excute){
             FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 0.0)
-            SET_SPEED_EX(0, 0.65, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+            SET_SPEED_EX(0, 1.0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=4)
         if(is_excute){

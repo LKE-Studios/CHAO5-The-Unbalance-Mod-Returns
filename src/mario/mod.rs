@@ -312,6 +312,7 @@ unsafe fn mario_upsmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=9)
         if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
 	        ATTACK(ID=0, Part=0, Bone=hash40("head"), Damage=14.0, Angle=83, KBG=106, FKB=0, BKB=35, Size=7.0, X=2.5, Y=1.1, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_HEAD)
 	        ATTACK(ID=1, Part=0, Bone=hash40("bust"), Damage=14.0, Angle=83, KBG=106, FKB=0, BKB=35, Size=5.0, X=1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_HEAD)
 	        HIT_NODE(hash40("head"), HIT_STATUS_XLU)
@@ -324,62 +325,6 @@ unsafe fn mario_upsmash(fighter: &mut L2CAgentBase) {
         frame(Frame=20)
         if(is_excute){
 	        JostleModule::set_status(true)
-        }
-    });
-}
-
-#[acmd_script(//AttackHi4Sound
-    agent = "mario", 
-    script = "sound_attackhi4", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn mario_upsmashsound(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=8)
-        if(is_excute){
-            STOP_SE(hash40("se_common_smash_start"))
-            PLAY_SE(hash40("vc_mario_attack06"))
-        }
-        wait(Frames=1)
-        if(is_excute){
-            PLAY_SE(hash40("se_common_smashswing_03"))
-            PLAY_SE(hash40("se_common_punch_kick_swing_l"))
-        }
-    });
-}
-
-#[acmd_script(//AttackHi4ChargeSound
-    agent = "mario", 
-    script = "sound_attackhi4charge", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn mario_upsmashchargesound(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=2)
-        if(is_excute){
-            PLAY_SE(hash40("se_common_smash_start"))
-        }
-    });
-}
-
-#[acmd_script(//AttackS4Sound
-    agent = "mario", 
-    script = "sound_attacks4", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn mario_sidesmashsound(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=14)
-        if(is_excute){
-            STOP_SE(hash40("se_common_smash_start"))
-            PLAY_SE(hash40("vc_mario_attack05"))
-        }
-        wait(Frames=1)
-        if(is_excute){
-            PLAY_SE(hash40("se_mario_smash_s01"))
         }
     });
 }
@@ -1374,9 +1319,6 @@ pub fn install() {
         mario_sidesmash,
         mario_sidesmashdown,
         mario_upsmash,
-        mario_upsmashsound,
-        mario_upsmashchargesound,
-        mario_sidesmashsound,
         mario_downsmash,
         mario_nair,
         mario_fair,
