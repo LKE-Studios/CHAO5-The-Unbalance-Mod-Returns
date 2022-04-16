@@ -4,10 +4,11 @@
 #![allow(non_snake_case)]
 
 use std::ffi::CStr;
+use skyline::hooks::{getRegionAddress, Region};
 
 mod captain;
 mod donkey;
-mod falco;
+//mod falco;
 mod fox;
 mod gamewatch;
 mod ganon;
@@ -26,12 +27,21 @@ mod samus;
 mod yoshi;
 mod zelda;
 mod utils;
-//mod custom;
+mod custom;
+const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
+    0xfc, 0x67, 0xbb, 0xa9, 0xf8, 0x5f, 0x01, 0xa9, 0xf6, 0x57, 0x02, 0xa9, 0xf4,
+    0x4f, 0x03, 0xa9, 0xfd, 0x7b, 0x04, 0xa9, 0xfd, 0x03, 0x01, 0x91, 0xff, 0x83,
+    0x20, 0xd1, 0x97, 0x10, 0x01, 0xd0, 0xf7, 0xe2, 0x0c, 0x91, 0x16, 0x04, 0x40,
+    0xf9, 0xe8, 0xfe, 0xdf, 0x08, 0xf4, 0x03, 0x02, 0x2a, 0xf5, 0x03, 0x01,
+    0xaa, 0xf3, 0x03, 0x00, 0xaa, 0x88, 0x06, 0x00, 0x36
+];
+static mut DECLARE_CONST_OFFSET : usize = 0x3727390; //13.0.1
 
-static mut CONSTANT_OFFSET : usize = 0x3727390; //13.0.1
+fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
+    haystack.windows(needle.len()).position(|window| window == needle)
+}
 
-
-#[skyline::hook(offset = CONSTANT_OFFSET)]
+#[skyline::hook(offset = DECLARE_CONST_OFFSET)]
 unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     let str = CStr::from_ptr(constant as _).to_str().unwrap();
     if str.contains("FIGHTER_PEACH_STATUS_KIND_MAX") {
@@ -40,8 +50,16 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     original!()(unk,constant,value)
 }
 
-#[skyline::main(name = "smashline_test")]
+#[skyline::main(name = "chao5")]
 pub fn main() {
+    unsafe{
+        let text_ptr = getRegionAddress(Region::Text) as *const u8;
+        let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
+        let text = std::slice::from_raw_parts(text_ptr, text_size);
+        if let Some(offset) = find_subsequence(text, DECLARE_CONST_SEARCH_CODE){
+            DECLARE_CONST_OFFSET = offset;
+        }
+    }
     mario::install();
     donkey::install();
     link::install();
@@ -60,8 +78,8 @@ pub fn main() {
     gamewatch::install();
     mariod::install();
     zelda::install();
-    falco::install();
+    //falco::install();
     peach::install();
     skyline::install_hooks!(declare_const_hook);
-    // custom::install();
+    custom::install();
 }

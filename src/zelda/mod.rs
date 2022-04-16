@@ -1336,7 +1336,7 @@ unsafe fn zelda_uptauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ItemModule::have_item(ItemKind(*ITEM_KIND_EX_BOMB), 0, 0, false, false)
+            ItemModule::have_item(ItemKind(*ITEM_KIND_CHEWING), 0, 0, false, false)
         }
     });
 }

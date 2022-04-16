@@ -9,6 +9,109 @@ use smashline::*;
 use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 
+#[acmd_script(//EntryL
+    agent = "ness", 
+    script = "sound_entryl", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ness_entryl(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appear01"))
+        }
+        wait(Frames=51)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+            PLAY_SE(hash40("vc_ness_heavyget"))
+        }
+    });        
+}
+
+#[acmd_script(//EntryR
+    agent = "ness", 
+    script = "sound_entryr", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ness_entryr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appear01"))
+        }
+        wait(Frames=51)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+        }
+        wait(Frames=6)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_appeal01"))
+            PLAY_SE(hash40("vc_ness_heavyget"))
+        }
+    });        
+}
+
+#[acmd_script(//Win3
+    agent = "ness", 
+    script = "sound_win3", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ness_win(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=37)
+        if(is_excute){
+            PLAY_SE(hash40("se_ness_smash_s02"))
+        }
+        frame(Frame=125)
+        if(is_excute){
+            PLAY_SE(hash40("se_common_swing_04"))
+        }
+        frame(Frame=129)
+        if(is_excute){
+            PLAY_SE(hash40("vc_ness_damage01"))
+        }
+    });        
+}
+
 #[acmd_script(//Attack11 
     agent = "ness", 
     script = "game_attack11", 
@@ -1028,7 +1131,7 @@ unsafe fn ness_upbair(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialLwHold
     agent = "ness", 
-    script = "game_specialwhold", 
+    script = "game_speciallwhold", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ness_downb(fighter: &mut L2CAgentBase) {
@@ -1036,7 +1139,54 @@ unsafe fn ness_downb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         wait_loop_clear()
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=20.0, Angle=361, KBG=100, FKB=40, BKB=0, Size=22.5, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=10, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PSI)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=24.0, Angle=361, KBG=100, FKB=40, BKB=0, Size=22.5, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=10, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PSI)
+            sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 35, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 300, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirLwHold
+    agent = "ness", 
+    script = "game_specialairlwhold", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn ness_downbair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        wait_loop_clear()
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=24.0, Angle=361, KBG=100, FKB=40, BKB=0, Size=22.5, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=10, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bind"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_PSI)
+            sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 35, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 300, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
+        }
+    });
+}
+
+#[acmd_script(//SpecialLwStart
+    agent = "ness", 
+    script = "sound_speciallwstart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ness_downbsfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+            PLAY_SE(hash40("vc_ness_004"))
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirLwStart
+    agent = "ness", 
+    script = "sound_specialairlwstart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ness_downbairsfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=2)
+        if(is_excute){
+            PLAY_SE(hash40("vc_ness_004"))
         }
     });
 }
@@ -1143,6 +1293,9 @@ unsafe fn ness_final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        ness_entryl,
+        ness_entryr,
+        ness_win,
         ness_jab1,
         ness_jab2,
         ness_jab3,
@@ -1182,6 +1335,9 @@ pub fn install() {
         ness_pkthunder2,
         ness_upbair,
         ness_downb,
+        ness_downbair,
+        ness_downbsfx,
+        ness_downbairsfx,
         ness_uptauntr,
         ness_uptauntl,
         ness_sidetauntr,
