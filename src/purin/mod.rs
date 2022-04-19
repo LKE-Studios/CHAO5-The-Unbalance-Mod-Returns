@@ -854,7 +854,7 @@ unsafe fn purin_upblgfx(fighter: &mut L2CAgentBase) {
 #[acmd_script(//SpecialHiR GFX
     agent = "purin", 
     script = "effect_specialhir", 
-    category = ACMD_GAME, 
+    category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn purin_upbrgfx(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -868,7 +868,7 @@ unsafe fn purin_upbrgfx(fighter: &mut L2CAgentBase) {
 #[acmd_script(//SpecialAirHiL GFX
     agent = "purin", 
     script = "effect_specialairhil", 
-    category = ACMD_GAME, 
+    category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn purin_upbairlgfx(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -882,7 +882,7 @@ unsafe fn purin_upbairlgfx(fighter: &mut L2CAgentBase) {
 #[acmd_script(//SpecialAirHiR GFX
     agent = "purin", 
     script = "effect_specialairhir", 
-    category = ACMD_GAME, 
+    category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn purin_upbairrgfx(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -1044,7 +1044,7 @@ unsafe fn purin_downbl(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all()
             JostleModule::set_status(true)
         }
-        frame(Frame=61)
+        frame(Frame=73)
         if(is_excute){
             CancelModule::enable_cancel()
         }
@@ -1071,7 +1071,7 @@ unsafe fn purin_downbr(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all()
             JostleModule::set_status(true)
         }
-        frame(Frame=61)
+        frame(Frame=73)
         if(is_excute){
             CancelModule::enable_cancel()
         }
@@ -1098,7 +1098,7 @@ unsafe fn purin_downbairl(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all()
             JostleModule::set_status(true)
         }
-        frame(Frame=61)
+        frame(Frame=73)
         if(is_excute){
             CancelModule::enable_cancel()
         }
@@ -1125,7 +1125,7 @@ unsafe fn purin_downbairr(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all()
             JostleModule::set_status(true)
         }
-        frame(Frame=61)
+        frame(Frame=73)
         if(is_excute){
             CancelModule::enable_cancel()
         }

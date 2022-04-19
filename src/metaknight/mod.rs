@@ -20,6 +20,7 @@ unsafe fn metaknight_jabstart(fighter: &mut L2CAgentBase) {
         if(is_excute){
             frame(Frame=1)
             FT_MOTION_RATE(FSM=0.4)
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
         }
     });        
 }
@@ -35,8 +36,9 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
         acmd!(lua_state, {
             FT_MOTION_RATE(FSM=0.75)
             if(is_excute){
+                HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=1.5, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -47,7 +49,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=1)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=1.5, Clang_Rebound=ATTACK_SETOFF_KIND_THRU FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -58,7 +60,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=4)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=1.5, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -69,7 +71,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=7)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=1.5, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -80,7 +82,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=10)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=1.5, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -91,7 +93,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=13)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.0, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -102,7 +104,7 @@ unsafe fn metaknight_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=16)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.5, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -124,8 +126,9 @@ unsafe fn metaknight_jab100sub(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.8, Angle=361, KBG=30, FKB=0, BKB=10, Size=12.0, X=0.0, Y=6.5, Z=-9.0, X2=0.0, Y2=6.5, Z2=13.5, Hitlag=0.5, SDI=0.6, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=3, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=2, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
             ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=4)
         }
         wait(Frames=1)
@@ -146,6 +149,7 @@ unsafe fn metaknight_jab100end(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=128, FKB=0, BKB=60, Size=14.0, X=0.0, Y=8.0, Z=11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=128, FKB=0, BKB=60, Size=14.0, X=0.0, Y=8.0, Z=20.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=128, FKB=0, BKB=60, Size=14.0, X=0.0, Y=8.0, Z=25.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
@@ -154,6 +158,7 @@ unsafe fn metaknight_jab100end(fighter: &mut L2CAgentBase) {
         wait(Frames=2)
         if(is_excute){
             AttackModule::clear_all()
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         FT_MOTION_RATE(FSM=0.87)
     });
@@ -194,12 +199,14 @@ unsafe fn metaknight_sidetilt(fighter: &mut L2CAgentBase) {
         frame(Frame=6)
         if(is_excute){
             FT_MOTION_RATE(FSM=1.0)
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=7.0, Angle=68, KBG=14, FKB=0, BKB=22, Size=6.5, X=0.0, Y=7.4, Z=8.0, X2=0.0, Y2=3.5, Z2=8.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=7.0, Angle=88, KBG=14, FKB=0, BKB=22, Size=6.5, X=0.0, Y=5.5, Z=13.0, X2=0.0, Y2=5.5, Z2=8.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         }
         wait(Frames=3)
         if(is_excute){
             AttackModule::clear_all()
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         frame(Frame=11)
         if(is_excute){
@@ -221,12 +228,14 @@ unsafe fn metaknight_sidetilt2(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=2)
         if(is_excute){
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=60, KBG=15, FKB=0, BKB=16, Size=7.0, X=0.0, Y=7.0, Z=9.0, X2=0.0, Y2=3.0, Z2=9.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=85, KBG=15, FKB=0, BKB=16, Size=6.6, X=0.0, Y=5.0, Z=16.5, X2=0.0, Y2=5.0, Z2=9.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
         }
         wait(Frames=1)
         if(is_excute){
             AttackModule::clear_all()
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         frame(Frame=7)
         if(is_excute){
@@ -245,6 +254,7 @@ unsafe fn metaknight_sidetilt3(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=2)
         if(is_excute){
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=112, FKB=0, BKB=80, Size=13.0, X=0.0, Y=15.0, Z=8.0, X2=0.0, Y2=9.0, Z2=14.0, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=50, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=112, FKB=0, BKB=80, Size=13.0, X=0.0, Y=7.2, Z=21.0, X2=0.0, Y2=7.2, Z2=7.0, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=50, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 13, 0, 7.2, 21.0, 0, 7.2, 1.0, 1.2, 1.25, 999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
@@ -252,6 +262,7 @@ unsafe fn metaknight_sidetilt3(fighter: &mut L2CAgentBase) {
         wait(Frames=2)
         if(is_excute){
             AttackModule::clear_all()
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
     });
 }
@@ -265,6 +276,7 @@ unsafe fn metaknight_uptilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.75)
+        HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
         frame(Frame=8)
         if(is_excute){
             FT_MOTION_RATE(FSM=1.0)
@@ -282,6 +294,7 @@ unsafe fn metaknight_uptilt(fighter: &mut L2CAgentBase) {
         }
         wait(Frames=8)
         if(is_excute){
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
             AttackModule::clear_all()
         }
     });
@@ -297,13 +310,15 @@ unsafe fn metaknight_downtilt(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=3)
         if(is_excute){
+            HIT_NODE(hash40("sword"), HIT_STATUS_INVINCIBLE)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=78, FKB=0, BKB=15, Size=6.2, X=0.0, Y=1.3, Z=17.0, X2=0.0, Y2=2.5, Z2=6.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=78, FKB=0, BKB=15, Size=5.5, X=0.0, Y=2.1, Z=8.0, X2=0.0, Y2=2.5, Z2=2.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-            AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
+            ttackModule::set_attack_height_all(AttackHeight(*ATTACK_HEIGHT_LOW), false)
         }
         wait(Frames=2)
         if(is_excute){
             AttackModule::clear_all()
+            HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
         }
         frame(Frame=10)
         FT_MOTION_RATE(FSM=0.75)
@@ -1017,7 +1032,7 @@ unsafe fn metaknight_neutralb1(fighter: &mut L2CAgentBase) {
                 smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             }
             WHOLE_HIT(HIT_STATUS_XLU)
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=24.0, Angle=48, KBG=78, FKB=0, BKB=55, Size=16.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=28.0, Angle=48, KBG=78, FKB=0, BKB=55, Size=16.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=0.0, Angle=180, KBG=120, FKB=0, BKB=60, Size=20.0, X=0.0, Y=10.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_ITEM, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
         }
     });
@@ -1037,8 +1052,42 @@ unsafe fn metaknight_neutralbair(fighter: &mut L2CAgentBase) {
                 smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             }
             WHOLE_HIT(HIT_STATUS_XLU)
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=24.0, Angle=48, KBG=78, FKB=0, BKB=55, Size=16.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=28.0, Angle=48, KBG=78, FKB=0, BKB=55, Size=16.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=25, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=0.0, Angle=180, KBG=120, FKB=0, BKB=60, Size=20.0, X=0.0, Y=10.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_ITEM, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+        }
+    });
+}
+
+#[acmd_script(//SpecialNStartGFX
+    agent = "metaknight", 
+    script = "effect_specialnstart", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn metaknight_neutralb1gfx(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            WorkModule::set_int(10, FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_START_FRAME)
+            EFFECT(hash40("sys_crown"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+        }
+        frame(Frame=10)
+        if(is_excute){
+            LANDING_EFFECT(hash40("metaknight_tornado_smoke_l"), hash40("top"), 0, -4.5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+        }
+    });
+}
+
+#[acmd_script(//SpecialAirNStartGFX
+    agent = "metaknight", 
+    script = "effect_specialairnstart", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn metaknight_neutralbair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            EFFECT(hash40("sys_crown"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+            WorkModule::set_int(10, FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_START_FRAME)
         }
     });
 }

@@ -8,7 +8,7 @@ use skyline::hooks::{getRegionAddress, Region};
 
 mod captain;
 mod donkey;
-//mod falco;
+mod falco;
 mod fox;
 mod gamewatch;
 mod ganon;
@@ -19,19 +19,19 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
+mod mewtwo;
 mod ness;
 mod peach;
 mod pikachu;
 mod purin;
 mod samus;
+mod sheik;
 mod yoshi;
+mod younglink;
 mod zelda;
 mod utils;
 mod custom;
-<<<<<<< HEAD
-=======
 
->>>>>>> d525ca0f284c173495fb1d170965d2cad14f65c8
 const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
     0xfc, 0x67, 0xbb, 0xa9, 0xf8, 0x5f, 0x01, 0xa9, 0xf6, 0x57, 0x02, 0xa9, 0xf4,
     0x4f, 0x03, 0xa9, 0xfd, 0x7b, 0x04, 0xa9, 0xfd, 0x03, 0x01, 0x91, 0xff, 0x83,
@@ -82,8 +82,11 @@ pub fn main() {
     gamewatch::install();
     mariod::install();
     zelda::install();
-    //falco::install();
+    sheik::install();
+    falco::install();
     peach::install();
+    younglink::install();
+    mewtwo::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

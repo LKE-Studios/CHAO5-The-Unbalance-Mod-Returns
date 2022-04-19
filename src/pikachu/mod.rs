@@ -1134,7 +1134,6 @@ pub fn install() {
         pikachu_upb,
         pikachu_upb2,
         pikachu_upbair,
-        pikachu_upbair,
         pikachu_upbair2,
         pikachu_downb,
         pikachu_downbair,
