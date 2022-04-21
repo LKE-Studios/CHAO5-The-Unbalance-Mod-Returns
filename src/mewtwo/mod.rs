@@ -161,10 +161,10 @@ unsafe fn mewtwo_jab1(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=361, KBG=15, FKB=0, BKB=25, Size=6.8, X=0.0, Y=11.8, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=5.0, Angle=180, KBG=15, FKB=0, BKB=20, Size=6.5, X=0.0, Y=9.0, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
             ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=5.0, Angle=361, KBG=15, FKB=0, BKB=20, Size=6.5, X=0.0, Y=9.0, Z=13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=6, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=1, Frames=6, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=2, Frames=6, Unk=false)
-            AttackModule::set_add_reaction_frame(ID=3, Frames=6, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=1, Frames=6.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=2, Frames=6.0, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=3, Frames=6.0, Unk=false)
         }
         wait(Frames=3)
         if(is_excute){
@@ -189,7 +189,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
         acmd!(lua_state, {
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -200,7 +200,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=2)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -211,7 +211,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=5)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -222,7 +222,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=8)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -233,7 +233,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=11)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -244,7 +244,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=14)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -255,7 +255,7 @@ unsafe fn mewtwo_jab100(fighter: &mut L2CAgentBase) {
             frame(Frame=17)
             if(is_excute){
                 ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-                AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+                AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
                 ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
             }
             wait(Frames=1)
@@ -278,7 +278,7 @@ unsafe fn mewtwo_jab100sub(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.4, Angle=361, KBG=10, FKB=0, BKB=8, Size=7.6, X=0.0, Y=9.0, Z=16.0, X2=0.0, Y2=9.0, Z2=11.0, Hitlag=0.5, SDI=0.4, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=3, Unk=false)
+            AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
             ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=4)
         }
         wait(Frames=1)
@@ -556,8 +556,7 @@ unsafe fn mewtwo_upsmash(fighter: &mut L2CAgentBase) {
         frame(Frame=9)
         if(is_excute){
             ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=3.0, Angle=368, KBG=100, FKB=90, BKB=0, Size=6.0, X=0.0, Y=11.7, Z=-6.0, X2=0.0, Y2=11.7, Z2=7.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
-            methodlib::L2CValue::as_hash()const(2, hash40("top"), 0, 24, 7)
-            AttackModule::set_vec_target_pos()
+            AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 0.0, y: 24.0} as *const Vector2f, 7 as u32, false)
         }
         frame(Frame=10)
         for(3 Iterations){
@@ -1358,20 +1357,18 @@ unsafe fn mewtwo_final(fighter: &mut L2CAgentBase) {
         frame(Frame=67)
         if(is_excute){
             SlowModule::clear_whole()
-            methodlib::L2CValue::as_hash()const(hash40("rbkind_erase"), 0, false)
-            ControlModule::set_rumble()
+            ControlModule::set_rumble(Hash40::new("rbkind_erase"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32)
         }
         frame(Frame=68)
         if(is_excute){
-            methodlib::L2CValue::as_hash()const(hash40("rbkind_explosionm"), 0, false)
-            ControlModule::set_rumble()
+            ControlModule::set_rumble(Hash40::new("rbkind_explosionm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32)
         }
         frame(Frame=70)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=800.0, Angle=361, KBG=40, FKB=0, BKB=80, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_invalid_invincible(0, true)
             AttackModule::set_force_reaction(0, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, false, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, false, -1.0, false)
         }
         frame(Frame=71)
         if(is_excute){

@@ -17,9 +17,8 @@ unsafe fn roy_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         FT_MOTION_RATE(FSM=0.4)
-        if(is_excute){
-        FT_MOTION_RATE(FSM=1.0)
         frame(Frame=5)
+        FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             FighterAreaModuleImpl::enable_fix_jostle_area(5.0, 5.0)
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.5, Angle=69, KBG=40, FKB=0, BKB=55, Size=6.7, X=0.0, Y=10.0, Z=7.0, X2=0.0, Y2=10.0, Z2=5.5, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
@@ -66,7 +65,7 @@ unsafe fn roy_sidetilt(fighter: &mut L2CAgentBase) {
         FT_MOTION_RATE(FSM=0.75)
         frame(Frame=6)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(4, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(4.0, 4.0)
         }
         frame(Frame=8)
         if(is_excute){
@@ -103,7 +102,7 @@ unsafe fn roy_uptilt(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=9)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
         }
         frame(Frame=16)
         if(is_excute){
@@ -449,7 +448,7 @@ unsafe fn roy_dashgrab(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=8)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(4, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(4.0, 4.0)
         }
         frame(Frame=9)
         if(is_excute){
@@ -896,7 +895,7 @@ unsafe fn roy_neutralbair3(fighter: &mut L2CAgentBase) {
     script = "game_specialairnendmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn roy_neutralbairmax1(fighter: &mut L2CAgentBase) {
+unsafe fn roy_neutralbairmax(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -1109,7 +1108,7 @@ unsafe fn roy_upb(fighter: &mut L2CAgentBase) {
         frame(Frame=20)
         if(is_excute){
             ATTACK(ID=0, Part=1, Bone=hash40("top"), Damage=21.0, Angle=135, KBG=93, FKB=0, BKB=75, Size=6.5, X=0.0, Y=17.0, Z=10.0, X2=0.0, Y2=12.0, Z2=10.0, Hitlag=2.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
-            AttackModule::clear(ID=1)
+            AttackModule::clear(ID=1, false)
         }
         wait(Frames=10)
         if(is_excute){
@@ -1161,7 +1160,7 @@ unsafe fn roy_upbair(fighter: &mut L2CAgentBase) {
         frame(Frame=20)
         if(is_excute){
             ATTACK(ID=0, Part=1, Bone=hash40("top"), Damage=18.0, Angle=130, KBG=78, FKB=0, BKB=75, Size=6.3, X=0.0, Y=17.0, Z=10.0, X2=0.0, Y2=12.0, Z2=10.0, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
-            AttackModule::clear(ID=1)
+            AttackModule::clear(ID=1, false)
         }
         wait(Frames=5)
         if(is_excute){
@@ -1190,13 +1189,10 @@ unsafe fn roy_downb(fighter: &mut L2CAgentBase) {
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
         }
-        WorkModule::is_flag(FIGHTER_ROY_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT)
-        if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+        if(WorkModule::is_flag(fighter.module_accessor, *FIGHTER_ROY_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT)){
             if(is_excute){
-                methodlib::L2CValue::as_hash()const(0, hash40("se_roy_criticalhit"))
-                AttackModule::set_optional_hit_sound()
-                methodlib::L2CValue::as_hash()const(1, hash40("se_roy_criticalhit"))
-                AttackModule::set_optional_hit_sound()
+                AttackModule::set_optional_hit_sound(0, Hash40::new("se_roy_criticalhit"))
+                AttackModule::set_optional_hit_sound(1, Hash40::new("se_roy_criticalhit"))
             }
         }
         frame(Frame=7)
@@ -1327,8 +1323,8 @@ unsafe fn roy_final(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=700.0, Angle=361, KBG=47, FKB=0, BKB=90, Size=16.0, X=0.0, Y=12.5, Z=17.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(1, true, true, -1.0, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -1359,8 +1355,8 @@ unsafe fn roy_finalcom(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=700.0, Angle=361, KBG=47, FKB=0, BKB=90, Size=16.0, X=0.0, Y=12.5, Z=17.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(1, true, true, -1.0, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -1389,8 +1385,8 @@ unsafe fn roy_finalair(fighter: &mut L2CAgentBase) {
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=700.0, Angle=361, KBG=47, FKB=0, BKB=90, Size=16.0, X=0.0, Y=12.5, Z=17.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
             AttackModule::set_force_reaction(1, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, true, -1.0, false)
+            AttackModule::set_final_finish_cut_in(1, true, true, -1.0, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -1439,12 +1435,8 @@ pub fn install() {
         roy_neutralbair1,
         roy_neutralbair2,
         roy_neutralbair3,
-        roy_neutralbmax1,
-        roy_neutralbmax2,
-        roy_neutralbmax3,
-        roy_neutralbairmax1,
-        roy_neutralbairmax2,
-        roy_neutralbairmax3,
+        roy_neutralbmax,
+        roy_neutralbairmax,
         roy_sideb1,
         roy_sideb2,
         roy_sideb3,
@@ -1453,6 +1445,8 @@ pub fn install() {
         roy_sidebair3,
         roy_upb,
         roy_upbair,
+        roy_downb,
+        roy_downbair,
         roy_uptauntr,
         roy_uptauntl,
         roy_sidetauntr,
