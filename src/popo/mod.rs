@@ -1421,12 +1421,12 @@ unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//DownAttackD
+#[acmd_script(//DownAttackU
     agent = "popo", 
-    script = "game_downattackd", 
+    script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn popo_downattacku(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=16)
@@ -1448,9 +1448,9 @@ unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//DownAttackD_Nana
+#[acmd_script(//DownAttackU_Nana
     agent = "popo", 
-    script = "game_downattackd_nana", 
+    script = "game_downattacku_nana", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
@@ -2797,7 +2797,7 @@ unsafe fn popo_upb(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//SpecialHiThrowNana
+#[acmd_script(//SpecialHiThrowNana_Nana
     agent = "popo", 
     script = "game_specialhithrownana_nana", 
     category = ACMD_GAME, 
