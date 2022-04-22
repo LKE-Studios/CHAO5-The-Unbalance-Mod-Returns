@@ -316,7 +316,7 @@ unsafe fn popo_uptilt(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//AttackHi3
+#[acmd_script(//AttackHi3_Nana
     agent = "popo", 
     script = "game_attackhi3_nana", 
     category = ACMD_GAME, 
@@ -1421,12 +1421,12 @@ unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//DownAttackD
+#[acmd_script(//DownAttackU
     agent = "popo", 
-    script = "game_downattackd", 
+    script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn popo_downattacku(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=16)
@@ -1448,12 +1448,12 @@ unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//DownAttackD_Nana
+#[acmd_script(//DownAttackU_Nana
     agent = "popo", 
-    script = "game_downattackd_nana", 
+    script = "game_downattacku_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn popon_downattacku(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=19)
@@ -1984,7 +1984,7 @@ unsafe fn popo_sidebbothsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackcouplesub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebbothcouplesub(fighter: &mut L2CAgentBase) {
+unsafe fn popo_sidebcouplesub(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
@@ -2975,13 +2975,13 @@ pub fn install() {
         popo_sideb1,
         popo_sideb2,
         popo_sidebsub,
-        popo_sidebbothcouplesub,
         popo_sidebbothsub,
-        popo_sidebcom1,
-        popo_sidebcom2,
+        popo_sidebcouplesub,
         popo_sidebfsub,
         popo_sidebsinglesub,
         popo_sidebsinglefsub,
+        popo_sidebcom1,
+        popo_sidebcom2,
         popo_sidebair1,
         popo_sidebair2,
         popo_upb,
@@ -3015,17 +3015,12 @@ pub fn install() {
         popon_neutralb,
         popon_neutralbair,
         popon_sideb1,
-        popon_sideb2,
         popon_sidebsub,
-        popon_sidebbothcouplesub,
-        popon_sidebbothsub,
-        popon_sidebcom1,
-        popon_sidebcom2,
         popon_sidebfsub,
         popon_sidebsinglesub,
         popon_sidebsinglefsub,
+        popon_sidebcom,
         popon_sidebair1,
-        popon_sidebair2,
         popon_upb
     );
 }
