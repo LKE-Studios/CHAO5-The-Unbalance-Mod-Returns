@@ -77,7 +77,7 @@ unsafe fn pichu_sidetilt(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=10)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
         }
         frame(Frame=13)
         if(is_excute){
@@ -412,7 +412,7 @@ unsafe fn pichu_dair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=18)
         if(is_excute){
-            HitModule::set_status_all(HIT_STATUS_NORMAL)
+            HitModule::set_status_all(HitStatus(*HIT_STATUS_NORMAL), 0)
             ATTACK(ID=0, Part=0, Bone=hash40("neck"), Damage=22.0, Angle=290, KBG=100, FKB=0, BKB=40, Size=9.4, X=4.5, Y=0.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
             ATTACK(ID=1, Part=0, Bone=hash40("hip"), Damage=22.0, Angle=255, KBG=100, FKB=0, BKB=40, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_HEAD)
         }
@@ -1041,7 +1041,7 @@ unsafe fn pichu_uptauntl(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ItemModule::have_item(ItemKind(*ITEM_KIND_MAGICRBALL), 0, 0, false, false)
+            ItemModule::have_item(ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false)
         }
     });
 }
@@ -1124,7 +1124,7 @@ unsafe fn pichu_final2(fighter: &mut L2CAgentBase) {
             DamageModule::heal(-100.0, 0);
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=222.0, Angle=55, KBG=82, FKB=0, BKB=73, Size=32.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
-            AttackModule::set_final_finish_cut_in(1, true, false, -1, false)
+            AttackModule::set_final_finish_cut_in(1, true, false, -1.0, false)
         }
         frame(Frame=12)
         if(is_excute){
@@ -1155,7 +1155,7 @@ unsafe fn pichu_finalair2(fighter: &mut L2CAgentBase) {
             DamageModule::heal(-100.0, 0);
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=222.0, Angle=55, KBG=82, FKB=0, BKB=73, Size=32.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
-            AttackModule::set_final_finish_cut_in(1, true, false, -1, false)
+            AttackModule::set_final_finish_cut_in(1, true, false, -1.0, false)
         }
         frame(Frame=12)
         if(is_excute){
@@ -1194,7 +1194,7 @@ pub fn install() {
         pichu_slipattack,
         pichu_neutralb,
         pichu_neutralbair,
-        pichu_neutralbshoot,
+        pichu_neutralb2,
         pichu_jolt,
         pichu_lightning,
         pichu_sideb,

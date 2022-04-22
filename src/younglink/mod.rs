@@ -44,7 +44,7 @@ unsafe fn younglink_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn young_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn younglink_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=6)
@@ -710,16 +710,15 @@ unsafe fn younglink_tether(fighter: &mut L2CAgentBase) {
         frame(Frame=5)
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
-            ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT)
-            ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND)
+            ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT, false, -1)
+            ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, false, -1)
         }
         frame(Frame=11)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("throw"), Damage=16.0, Angle=25, KBG=66, FKB=0, BKB=70, Size=5.7, X=0.0, Y=0.0, Z=-0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
-            AttackModule::set_add_reaction_frame(ID=0, Frames=4, Unk=false)
-            ArticleModule::change_status(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT, WEAPON_TOONLINK_HOOKSHOT_STATUS_KIND_SHOOT)
-            methodlib::L2CValue::as_hash()const(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, hash40("shoot"))
-            ArticleModule::change_motion()
+            AttackModule::set_add_reaction_frame(ID=0, Frames=4.0, Unk=false)
+            ArticleModule::change_status(*FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT, *WEAPON_TOONLINK_HOOKSHOT_STATUS_KIND_SHOOT, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+            ArticleModule::change_motion(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, Hash40::new("shoot"), false, -1.0)
         }
         frame(Frame=12)
         if(is_excute){
@@ -732,8 +731,7 @@ unsafe fn younglink_tether(fighter: &mut L2CAgentBase) {
         frame(Frame=41)
         if(is_excute){
             ArticleModule::change_status_exist(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT, WEAPON_TOONLINK_HOOKSHOT_STATUS_KIND_REWIND)
-            methodlib::L2CValue::as_hash()const(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, hash40("back"))
-            ArticleModule::change_motion()
+            ArticleModule::change_motion(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, Hash40::new("back"), false, -1.0)
             WorkModule::on_flag(Flag=FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_OFF_MAP_COLL_OFFSET)
         }
         frame(Frame=46)
@@ -746,9 +744,11 @@ unsafe fn younglink_tether(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=72)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT)
-            ArticleModule::remove_exist(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND)
+            ArticleModule::remove_exist(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+            ArticleModule::remove_exist(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_HOOKSHOT_HAND, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
+    });
+}
 
 #[acmd_script(//ThrowF
     agent = "younglink", 
@@ -1194,7 +1194,7 @@ unsafe fn younglink_upbair(fighter: &mut L2CAgentBase) {
         wait(Frames=3)
         if(is_excute){
             AttackModule::clear_all()
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
         }
         frame(Frame=39)
         if(is_excute){
@@ -1313,13 +1313,13 @@ unsafe fn younglink_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalc", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn tounglink_final(fighter: &mut L2CAgentBase) {
+unsafe fn younglink_final(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=90.0, Angle=85, KBG=115, FKB=0, BKB=55, Size=12.0, X=0.0, Y=9.0, Z=20.0, X2=0.0, Y2=9.0, Z2=-16.0, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
             AttackModule::set_force_reaction(0, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, false, -1, false)
+            AttackModule::set_final_finish_cut_in(0, true, false, -1.0, false)
         }
         wait(Frames=2)
         if(is_excute){
@@ -1351,9 +1351,7 @@ pub fn install() {
         younglink_dair,
         younglink_dair2,
         younglink_dairbound,
-        younglink_grab,
-        younglink_dashgrab,
-        younglink_pivotgrab,
+        younglink_tether,
         younglink_pummel,
         younglink_tether,
         younglink_throwf,

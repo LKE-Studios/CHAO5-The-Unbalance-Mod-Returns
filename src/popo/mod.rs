@@ -2797,7 +2797,7 @@ unsafe fn popo_upb(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//SpecialHiThrowNana
+#[acmd_script(//SpecialHiThrowNana_Nana
     agent = "popo", 
     script = "game_specialhithrownana_nana", 
     category = ACMD_GAME, 
