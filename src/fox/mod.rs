@@ -3,6 +3,7 @@ use smash::phx::Hash40;
 use smash::phx::Vector3f;
 use smash::lib::lua_const::*;
 use smash::app::*;
+use smash::app::sv_animcmd::*;
 use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
@@ -845,7 +846,7 @@ unsafe fn fox_throwf(fighter: &mut L2CAgentBase) {
     });
 }    
 
-/*#[acmd_script(//ThrowLw
+#[acmd_script(//ThrowLw
     agent = "fox", 
     script = "game_throwlw", 
     category = ACMD_GAME )]
@@ -855,22 +856,24 @@ unsafe fn fox_throwlw(fighter: &mut L2CAgentBase) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     }
     sv_animcmd::frame(fighter.lua_state_agent, 23.0);
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, FIGHTER_FOX_GENERATE_ARTICLE_BLASTER);
+    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
         if macros::is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, Hash40::new("open"), false, -1.0);
         }
     }
     sv_animcmd::frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, 0);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
     sv_animcmd::frame(fighter.lua_state_agent, 29.0);
     if macros::is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, 0);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
     sv_animcmd::frame(fighter.lua_state_agent, 32.0);
     if macros::is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, 0);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
     sv_animcmd::frame(fighter.lua_state_agent, 33.0);
     if macros::is_excute(fighter) {
@@ -883,7 +886,9 @@ unsafe fn fox_throwlw(fighter: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
     }
     sv_animcmd::frame(fighter.lua_state_agent, 35.0);
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, FIGHTER_FOX_GENERATE_ARTICLE_BLASTER);
+    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
         if macros::is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, Hash40::new("close"), false, 0.0);
         }
@@ -892,7 +897,7 @@ unsafe fn fox_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
-}*/
+}
 
 #[acmd_script(//CliffAttack
     agent = "fox", 
@@ -1421,7 +1426,7 @@ pub fn install() {
         fox_pivotgrab,
         fox_pummel,
         fox_throwf,
-        //fox_throwlw,
+        fox_throwlw,
         fox_cliffattack,
         fox_slipattack,
         fox_downattackd,
