@@ -868,7 +868,7 @@ unsafe fn pichu_jolt(fighter: &mut L2CAgentBase) {
     });
 } 
 
-#[acmd_script(//SpecialS
+/*#[acmd_script(//SpecialS
     agent = "pichu", 
     script = "game_specials", 
     category = ACMD_GAME, 
@@ -896,7 +896,7 @@ unsafe fn pichu_sideb(fighter: &mut L2CAgentBase) {
             WorkModule::on_flag(Flag=FIGHTER_PIKACHU_STATUS_WORK_ID_FLAG_SKULL_BASH_BRAKE_TRIGGER)
         }
     });
-} 
+}*/ 
 
 #[acmd_script(//SpecialHi1
     agent = "pichu", 
@@ -1197,7 +1197,7 @@ pub fn install() {
         pichu_neutralb2,
         pichu_jolt,
         pichu_lightning,
-        pichu_sideb,
+        //pichu_sideb,
         pichu_upb,
         pichu_upb2,
         pichu_upbair,
