@@ -1647,11 +1647,11 @@ unsafe fn gamewatch_downbshoot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_OIL, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             rust {
                 let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
                 smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             }
+            ArticleModule::set_visibility_whole(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_OIL, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=2)
         if(is_excute){
@@ -1724,11 +1724,11 @@ unsafe fn gamewatch_downbairshoot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_OIL, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
             rust {
                 let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
                 smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             }
+            ArticleModule::set_visibility_whole(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_OIL, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
         }
         frame(Frame=2)
         if(is_excute){
