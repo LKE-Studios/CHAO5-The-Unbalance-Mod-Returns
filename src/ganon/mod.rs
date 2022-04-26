@@ -446,6 +446,7 @@ unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
         frame(Frame=4)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+            SET_SPEED_EX(0, 1.2, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=16)
         if(is_excute){
@@ -456,10 +457,6 @@ unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
         if(is_excute){
             AttackModule::clear_all()
             FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.5, 4.5, 12.5, 11.0)
-        }
-        frame(Frame=21)
-        if(is_excute){
-            SET_SPEED_EX(0, 1.2, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
         }
         frame(Frame=32)
         if(is_excute){

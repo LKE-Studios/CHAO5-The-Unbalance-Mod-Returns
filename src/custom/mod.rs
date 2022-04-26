@@ -1,7 +1,6 @@
 use smash::app::lua_bind::*;
-use smash::app::utility::get_kind;
-use smash::lib::lua_const::FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR;
-use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
+use smash::lib::lua_const::*;
+use smash::lua2cpp::{L2CFighterCommon/*, L2CFighterBase*/};
 use smashline::*;
 
 // Use this for general per-frame fighter-level hooks

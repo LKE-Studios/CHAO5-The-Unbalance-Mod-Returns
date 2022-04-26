@@ -1,6 +1,5 @@
 use smash::hash40;
 use smash::phx::Hash40;
-use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
@@ -17,130 +16,142 @@ static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
 static mut FLOAT_MAX : i32 = 300; //Frames this bitch can float (In frames, 300 = 5 seconds)
 static mut X_MAX : f32 = 1.45; //Max Horizontal movespeed
-static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
+// static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
 static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
 static mut Y_MAX : f32 = 1.3; //Max Vertical movespeed
-static mut Y_ACCEL_ADD : f32 = 0.06;
-static mut Y_ACCEL_MUL : f32 = 0.06;
+// static mut Y_ACCEL_ADD : f32 = 0.06;
+// static mut Y_ACCEL_MUL : f32 = 0.06;
 
 #[fighter_frame( agent = FIGHTER_KIND_MEWTWO )]
 fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-			let fighter_kind = smash::app::utility::get_kind(boma);
-			let lua_state = fighter.lua_state_agent;
-			let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
-			let stick_y = ControlModule::get_stick_y(boma);
-			let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-			let speed_y = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
-				FLOAT[ENTRY_ID] = 0;
-				START_FLOAT[ENTRY_ID] = false;
-				CHECK_FLOAT[ENTRY_ID] = 0;
-			};
-			if FLOAT[ENTRY_ID] == 1{
-				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
-				};
-			};
-			if StatusModule::situation_kind(boma) == SITUATION_KIND_AIR {
-				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
-					CHECK_FLOAT[ENTRY_ID] += 1;
-				} else {
-					CHECK_FLOAT[ENTRY_ID] = 0;
-				};
-				if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
-					START_FLOAT[ENTRY_ID] = true;
-				};
-			};
-			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
-				FLOAT[ENTRY_ID] = 1;
-			};
-			if FLOAT[ENTRY_ID] > 1{
-				FLOAT[ENTRY_ID] -= 1;
-				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-				};
-				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL){
-					FLOAT[ENTRY_ID] = 1;
-				};
-				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) {
-					FLOAT[ENTRY_ID] = 1;
-				};
-				let mut y_add = 0.0;
-				let mut x_add = 0.0;
-				if stick_x > 0.2 {
-					x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-					if speed_x > X_MAX || speed_x < -X_MAX{
-						x_add = 0.0;
-					};
-				};
-				if stick_x < -0.2 {
-					x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-					if speed_x > X_MAX || speed_x < -X_MAX{
-						x_add = 0.0;
-					};
-				};
-				if stick_y > 0.2 {
-					y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-					if speed_y > Y_MAX || speed_y < -Y_MAX{
-						y_add = 0.0;
-					};
-				};
-				if stick_y < -0.2 {
-					y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-					if speed_y > Y_MAX || speed_y < -Y_MAX{
-						y_add = 0.0;
-					};
-				};
-				if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
-					if speed_y > 0.0 {
-						y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
-					} else if speed_y < 0.0{
-						y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
-					};
-					let mut x_add = 0.0;
-					if speed_x > 0.0 {
-						x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
-					} else if speed_x < 0.0{
-						x_add = X_ACCEL_MUL + X_ACCEL_ADD;
-					};
-				};
-				x_add = (stick_x)*X_ACCEL_MUL;
-				y_add = (stick_y)*X_ACCEL_MUL;
-				if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
-					x_add = 0.0;
-				};
-				if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
-					x_add = 0.0;
-				};
-				if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
-					y_add = 0.0;
-				};
-				if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
-					y_add = 0.0;
-				};
-				println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-				println!("x_add{}, y_add{}", x_add, y_add);
-				X[ENTRY_ID] += x_add;
-				Y[ENTRY_ID] += y_add;
-				macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-			} else {
-				X[ENTRY_ID] = 0.0;
-				Y[ENTRY_ID] = 0.0;
-			};
-			if START_FLOAT[ENTRY_ID] == true {
-				FLOAT[ENTRY_ID] = FLOAT_MAX;
-				START_FLOAT[ENTRY_ID] = false;
-				if status_kind == *FIGHTER_STATUS_KIND_JUMP {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-				};
-				if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
-				};
-			};
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+        let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+        // let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        // let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if StatusModule::situation_kind(fighter.module_accessor) != SITUATION_KIND_AIR
+        || !sv_information::is_ready_go()
+        || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
+            FLOAT[ENTRY_ID] = 0;
+            START_FLOAT[ENTRY_ID] = false;
+            CHECK_FLOAT[ENTRY_ID] = 0;
+        };
+        if FLOAT[ENTRY_ID] == 1{
+            if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR
+            && [
+                *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S,
+                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END
+            ].contains(&status_kind) == false {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+            };
+        };
+        if StatusModule::situation_kind(fighter.module_accessor) == SITUATION_KIND_AIR {
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                CHECK_FLOAT[ENTRY_ID] += 1;
+            } else {
+                CHECK_FLOAT[ENTRY_ID] = 0;
+            };
+            if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
+                START_FLOAT[ENTRY_ID] = true;
+            };
+        };
+        if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
+        && FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] = 1;
+        };
+        if FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] -= 1;
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            };
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL){
+                FLOAT[ENTRY_ID] = 1;
+            };
+            if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                FLOAT[ENTRY_ID] = 1;
+            };
+            let mut y_add;
+            let mut x_add;
+            // if stick_x > 0.2 {
+            // 	x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            // 	if speed_x > X_MAX || speed_x < -X_MAX{
+            // 		x_add = 0.0;
+            // 	};
+            // };
+            // if stick_x < -0.2 {
+            // 	x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            // 	if speed_x > X_MAX || speed_x < -X_MAX{
+            // 		x_add = 0.0;
+            // 	};
+            // };
+            // if stick_y > 0.2 {
+            // 	y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
+            // 		y_add = 0.0;
+            // 	};
+            // };
+            // if stick_y < -0.2 {
+            // 	y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
+            // 		y_add = 0.0;
+            // 	};
+            // };
+            // if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
+            // 	if speed_y > 0.0 {
+            // 		y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
+            // 	} else if speed_y < 0.0{
+            // 		y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
+            // 	};
+            // 	let mut x_add = 0.0;
+            // 	if speed_x > 0.0 {
+            // 		x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
+            // 	} else if speed_x < 0.0{
+            // 		x_add = X_ACCEL_MUL + X_ACCEL_ADD;
+            // 	};
+            // };
+            x_add = (stick_x)*X_ACCEL_MUL;
+            y_add = (stick_y)*X_ACCEL_MUL;
+            if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
+                x_add = 0.0;
+            };
+            if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
+                x_add = 0.0;
+            };
+            if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                y_add = 0.0;
+            };
+            if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
+                y_add = 0.0;
+            };
+            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            println!("x_add{}, y_add{}", x_add, y_add);
+            X[ENTRY_ID] += x_add;
+            Y[ENTRY_ID] += y_add;
+            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        } else {
+            X[ENTRY_ID] = 0.0;
+            Y[ENTRY_ID] = 0.0;
+        };
+        if START_FLOAT[ENTRY_ID] == true {
+            FLOAT[ENTRY_ID] = FLOAT_MAX;
+            START_FLOAT[ENTRY_ID] = false;
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+                StatusModule::change_status_request_from_script(
+                    fighter.module_accessor,
+                    *FIGHTER_STATUS_KIND_FALL,
+                    true
+                );
+            };
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                StatusModule::change_status_request_from_script(
+                    fighter.module_accessor,
+                    *FIGHTER_STATUS_KIND_FALL_AERIAL,
+                    true
+                );
+            };
+        };
     }
 }
 
@@ -555,7 +566,7 @@ unsafe fn mewtwo_upsmash(fighter: &mut L2CAgentBase) {
         FT_MOTION_RATE(FSM=1.0)
         frame(Frame=9)
         if(is_excute){
-            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=3.0, Angle=368, KBG=100, FKB=90, BKB=0, Size=6.0, X=0.0, Y=11.7, Z=-6.0, X2=0.0, Y2=11.7, Z2=7.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=2.0, Angle=368, KBG=100, FKB=90, BKB=0, Size=6.0, X=0.0, Y=11.7, Z=-6.0, X2=0.0, Y2=11.7, Z2=7.5, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             AttackModule::set_vec_target_pos(1, Hash40::new("top"), &Vector2f{x: 0.0, y: 24.0} as *const Vector2f, 7 as u32, false)
         }
         frame(Frame=10)
@@ -601,8 +612,8 @@ unsafe fn mewtwo_downsmash(fighter: &mut L2CAgentBase) {
         frame(Frame=21)
         if(is_excute){
             FT_MOTION_RATE(FSM=1.0)
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=21.5, Angle=55, KBG=118, FKB=0, BKB=20, Size=15.5, X=0.0, Y=4.0, Z=13.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=8, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=21.5, Angle=55, KBG=118, FKB=0, BKB=20, Size=19.4, X=0.0, Y=4.0, Z=7.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=21.5, Angle=55, KBG=118, FKB=0, BKB=20, Size=15.5, X=0.0, Y=4.0, Z=14.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=8, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=21.5, Angle=55, KBG=118, FKB=0, BKB=20, Size=19.4, X=0.0, Y=4.0, Z=1.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_poison"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
         }
         wait(Frames=6)
         if(is_excute){
@@ -1138,8 +1149,8 @@ unsafe fn mewtwo_ball1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=361, KBG=30, FKB=0, BKB=14, Size=2.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-0.6, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=25.0, Angle=47, KBG=71, FKB=0, BKB=30, Size=2.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=15, FKB=0, BKB=10, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=100.0, Angle=47, KBG=71, FKB=0, BKB=12, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-65, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             sv_module_access::attack(MA_MSC_CMD_ATTACK_SET_LERP, 0, 1)
         }
     });
@@ -1154,14 +1165,14 @@ unsafe fn mewtwo_ball2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=50, FKB=0, BKB=16, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-0.6, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
-            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=100.0, Angle=47, KBG=16, FKB=0, BKB=30, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=50, FKB=0, BKB=16, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-0.6, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=47, KBG=16, FKB=0, BKB=30, Size=5.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
             sv_module_access::attack(MA_MSC_CMD_ATTACK_SET_LERP, 0, 1)
         }
     });
 }
 
-#[acmd_script(//SpecialS
+/*#[acmd_script(//SpecialS
     agent = "mewtwo", 
     script = "game_specials", 
     category = ACMD_GAME, 
@@ -1207,7 +1218,52 @@ unsafe fn mewtwo_sideb(fighter: &mut L2CAgentBase) {
             WorkModule::on_flag(Flag=FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_HIT)
         }
     });
-}   
+}*/
+
+#[acmd_script(//SpecialS
+    agent = "mewtwo", 
+    script = "game_specials", 
+    category = ACMD_GAME )]
+unsafe fn mewtwo_sideb(fighter: &mut L2CAgentBase) {
+    sv_animcmd::frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        MotionModule::set_rate(fighter.module_accessor, 1.3);
+    }
+    sv_animcmd::frame(fighter.lua_state_agent, 9.0);
+    if macros::is_excute(fighter) {
+        MotionModule::set_rate(fighter.module_accessor, 1.0);
+    }
+    sv_animcmd::frame(fighter.lua_state_agent, 12.0);
+    if macros::is_excute(fighter) {
+        macros::CATCH(fighter, 0, Hash40::new("top"), 13.4, 0.0, 8.4, 17.0, None, None, None, *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
+        macros::CATCH(fighter, 1, Hash40::new("top"), 16.2, 0.0, 8.4, 17.0, None, None, None, *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_G);
+        shield!(fighter, *MA_MSC_CMD_SHIELD_ON, *COLLISION_KIND_REFLECTOR, *FIGHTER_MEWTWO_REFLECTOR_KIND_REFLECTOR, *FIGHTER_REFLECTOR_GROUP_EXTEND);
+        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 24.0, 280, 91, 0, 30, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 12.0, 361, 100, 0, 0, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, false, Hash40::new("collision_attr_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, 0, 3.2, 280, 16, 0, 50, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        AttackModule::set_catch_only(fighter.module_accessor, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, true, true);
+    }
+    sv_animcmd::wait(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        GrabModule::clear_all(fighter.module_accessor);
+    }
+    sv_animcmd::frame(fighter.lua_state_agent, 20.0);
+    for _ in 0..7 {
+        sv_animcmd::wait(fighter.lua_state_agent, 2.0);
+        if macros::is_excute(fighter) {
+            macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, Hash40::new("throw"), *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_TARGET_OBJECT_ID as u64, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_GROUP as u64, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_NO as u64);
+        }
+    }
+    sv_animcmd::frame(fighter.lua_state_agent, 36.0);
+    if macros::is_excute(fighter) {
+        shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, *FIGHTER_MEWTWO_REFLECTOR_KIND_REFLECTOR, *FIGHTER_REFLECTOR_GROUP_EXTEND);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_GRAVITY_NORMAL);
+    }
+    sv_animcmd::frame(fighter.lua_state_agent, 40.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_HIT);
+    }
+}
 
 #[acmd_script(//SpecialHi
     agent = "mewtwo", 
