@@ -1,5 +1,3 @@
-use std::ptr::hash;
-use smash::app::enSEType;
 use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;
 use crate::utils::*;

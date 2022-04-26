@@ -1,7 +1,6 @@
 use smash::hash40;
 use smash::phx::Hash40;
 use smash::phx::Vector3f;
-use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
