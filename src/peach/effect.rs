@@ -1,24 +1,23 @@
+use smash::app::sv_animcmd::*;
 use smash::lua2cpp::L2CAgentBase;
-use smash::hash40;
+use smash::phx::Hash40;
+use smash_script::*;
 use smashline::*;
 
 #[acmd_script(
-agent = "peach",
-script = "effect_kamehameha_fire",
-category = ACMD_EFFECT,
+    agent = "peach",
+    script = "effect_kamehameha_fire",
+    category = ACMD_EFFECT,
 low_priority )]
 unsafe fn effect_peach_kamehameha_fire(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=8)
-        if(is_execute){
-            EFFECT(hash40("sys_genesis_beam"), hash40("top"), 10, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-        }
-        frame(Frame=67)
-        if(is_execute){
-            EFFECT_OFF_KIND(hash40("sys_genesis_beam"), true, true)
-        }
-    });
+    frame(fighter.lua_state_agent, 8.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_genesis_beam"), Hash40::new("top"), 10, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 67.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), true, true);
+    }
 }
 
 pub fn install() {

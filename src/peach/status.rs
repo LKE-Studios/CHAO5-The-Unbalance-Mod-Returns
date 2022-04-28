@@ -5,7 +5,7 @@ use smashline::*;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smash::phx::{Vector3f, Hash40};
-use smash::hash40;
+use smash_script::*;
 
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START: i32 = 0x1eb; //491
 pub const FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE: i32 = 0x1ec; //492
@@ -16,37 +16,33 @@ pub static mut CHARGE_TIME:[f32;8] = [0.0;8];
 #[fighter_frame(agent = FIGHTER_KIND_PEACH)]
 pub fn peach_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let lua_state = fighter.lua_state_agent;
-        let module_accessor = smash::app::sv_system::battle_object_module_accessor(lua_state);
-        let status_kind = StatusModule::status_kind(module_accessor);
-        let entry_id = get_entry_id(module_accessor);
-        if[FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START].contains(&status_kind){
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let entry_id = get_entry_id(fighter.module_accessor);
+        if[FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START].contains(&status_kind) {
             CHARGE_TIME[entry_id] += 1.0;
-            acmd!(lua_state, {
-                EFFECT_FOLLOW(hash40("sys_hit_elec"), hash40("haver"), 0, 0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, true)
-                LAST_EFFECT_SET_COLOR(0.2, 0.6, 0.7)
-            });
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_elec"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.3, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.6, 0.7);
         }
         if ![FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_START, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_PEACH_STATUS_KIND_KAMEHAMEHA_FIRE]
-            .contains(&status_kind){
+            .contains(&status_kind) {
             CHARGE_TIME[entry_id] = 0.0;
         }
 
-        if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind){
-            ModelModule::set_joint_scale(module_accessor, Hash40::new("havel"), &Vector3f{
+        if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("havel"), &Vector3f{
                 x: 8.0,
                 y: 8.0,
                 z: 8.0
             });
-            ModelModule::set_joint_scale(module_accessor, Hash40::new("haver"), &Vector3f{
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{
                 x: 8.0,
                 y: 8.0,
                 z: 8.0
             });
-            AttackModule::set_attack_scale(module_accessor, 8.0, true);
+            AttackModule::set_attack_scale(fighter.module_accessor, 8.0, true);
         }
         else{
-            AttackModule::set_attack_scale(module_accessor, 1.0, true);
+            AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
         }
     }
 }
