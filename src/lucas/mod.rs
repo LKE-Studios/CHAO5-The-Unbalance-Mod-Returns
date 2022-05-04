@@ -83,21 +83,18 @@ unsafe fn lucas_win1(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_win3(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=43)
-        if(is_excute){
-            PLAY_SE(hash40("se_lucas_win3"))
-        }
-        frame(Frame=47)
-        if(is_excute){
-            PLAY_SE(hash40("0xe029ae0b3"))
-        }
-        frame(Frame=123)
-        if(is_excute){
-            PLAY_SE(hash40("se_lucas_win3_02"))
-        }
-    });        
+    frame(fighter.lua_state_agent, 43.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_lucas_win3"));
+    }
+    frame(fighter.lua_state_agent, 47.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win03"));
+    }
+    frame(fighter.lua_state_agent, 123.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_lucas_win3_02"));
+    }        
 }
 
 #[acmd_script(//Attack11 
@@ -1396,24 +1393,19 @@ unsafe fn lucas_sidetauntr(fighter: &mut L2CAgentBase) {
         }
     });
 }
-
 #[acmd_script(//AppealSL
     agent = "lucas", 
     script = "sound_appealsl", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=4)
-        if(is_excute){
-            PLAY_STATUS(hash40("se_lucas_appeal03"))
-        }
-        frame(Frame=6)
-        if(is_excute){
-            PLAY_SE(hash40("0x11c0184010"))
-        }
-    });
+    if macros::is_excute(fighter) {
+        macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_appeal02"));
+    }
 }
 
 #[acmd_script(//AppealSR
@@ -1422,17 +1414,13 @@ unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        frame(Frame=4)
-        if(is_excute){
-            PLAY_STATUS(hash40("se_lucas_appeal03"))
-        }
-        frame(Frame=6)
-        if(is_excute){
-            PLAY_SE(hash40("0x11c0184010"))
-        }
-    });
+    if macros::is_excute(fighter) {
+        macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_appeal02"));
+    }
 }
 
 #[acmd_script(//AppealSL
