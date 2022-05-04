@@ -1377,7 +1377,7 @@ unsafe fn lucas_uptauntl(fighter: &mut L2CAgentBase) {
     });
 }
 
-/*#[acmd_script(//AppealSR
+#[acmd_script(//AppealSR
     agent = "lucas", 
     script = "game_appealsr", 
     category = ACMD_GAME, 
@@ -1395,7 +1395,7 @@ unsafe fn lucas_sidetauntr(fighter: &mut L2CAgentBase) {
             ArticleModule::remove_exist(FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI)
         }
     });
-}*/
+}
 
 #[acmd_script(//AppealSL
     agent = "lucas", 
@@ -1435,7 +1435,7 @@ unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
     });
 }
 
-/*#[acmd_script(//AppealSL
+#[acmd_script(//AppealSL
     agent = "lucas", 
     script = "game_appealsl", 
     category = ACMD_GAME, 
@@ -1453,7 +1453,7 @@ unsafe fn lucas_sidetauntl(fighter: &mut L2CAgentBase) {
             ArticleModule::remove_exist(FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI)
         }
     });
-}*/
+}
 
 #[acmd_script(//AppealLwR
     agent = "lucas", 
@@ -1540,9 +1540,9 @@ pub fn install() {
         lucas_pkthunder,
         lucas_pkthunder2,
         lucas_upbair,
-        //lucas_upbair2,
-        //lucas_upbbound1,
-        //lucas_upbbound2,
+        lucas_upbair2,
+        lucas_upbbound1,
+        lucas_upbbound2,
         lucas_downb,
         lucas_downb2,
         lucas_downbair,
@@ -1553,8 +1553,8 @@ pub fn install() {
         lucas_downbairsfx,
         lucas_uptauntr,
         lucas_uptauntl,
-        //lucas_sidetauntr,
-        //lucas_sidetauntl,
+        lucas_sidetauntr,
+        lucas_sidetauntl,
         lucas_sidetauntrsfx,
         lucas_sidetauntlsfx,
         lucas_downtauntr,
