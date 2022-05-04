@@ -1135,7 +1135,7 @@ unsafe fn lucas_upbair(fighter: &mut L2CAgentBase) {
     });
 }
 
-/*#[acmd_script(//SpecialAirHiReflect
+#[acmd_script(//SpecialAirHiReflect
     agent = "lucas", 
     script = "game_specialairhireflect", 
     category = ACMD_GAME, 
@@ -1217,7 +1217,7 @@ unsafe fn lucas_upbbound2(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all()
         }
     });
-}*/
+}
 
 #[acmd_script(//SpecialLwStart
     agent = "lucas", 
