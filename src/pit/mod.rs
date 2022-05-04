@@ -1119,11 +1119,11 @@ unsafe fn pit_downattackd(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//DownAttackU
-    agent = "zelda", 
+    agent = "pit", 
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn zelda_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn pit_downattacku(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=14)
