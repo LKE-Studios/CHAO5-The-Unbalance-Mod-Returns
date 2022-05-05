@@ -1536,7 +1536,7 @@ unsafe fn donkey_win2(fighter: &mut L2CAgentBase) {
 //         if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, false)){
 //             WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
 //             if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-//                 macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
+//                 macros::get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR);
 //                 if(0x11e000(1272456, 0)){
 //                     if macros::is_excute(fighter) {
 //                         PostureModule::scale(fighter.module_accessor, 1, 0);
@@ -1648,7 +1648,7 @@ unsafe fn donkey_win2(fighter: &mut L2CAgentBase) {
 //         if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, false)){
 //             WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
 //             if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-//                 macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
+//                 macros::get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR);
 //                 if(0x11e000(1272456, 0)){
 //                     if macros::is_excute(fighter) {
 //                         PostureModule::scale(fighter.module_accessor, 1, 0);
@@ -1756,7 +1756,7 @@ unsafe fn donkey_win2(fighter: &mut L2CAgentBase) {
 //         }
 //         if(*WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) == false){
 //             if(*WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT)){
-//                 if(macros::get_value_float(fighter, *SO_VAR_FLOAT_LR) == 0.0){
+//                 if(macros::get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) == 0.0){
 //                     if macros::is_excute(fighter) {
 //                         PostureModule::scale(fighter.module_accessor, 1, 0);
 //                         0x11e000(0, 1.5);
