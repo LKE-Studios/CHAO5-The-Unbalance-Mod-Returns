@@ -7,7 +7,7 @@ use std::ffi::CStr;
 use skyline::hooks::{getRegionAddress, Region};
 
 mod captain;
-//mod diddy;
+mod diddy;
 mod donkey;
 mod falco;
 mod fox;
@@ -28,6 +28,7 @@ mod ness;
 mod peach;
 mod pichu;
 mod pikachu;
+mod pit;
 mod popo;
 mod purin;
 mod roy;
@@ -100,8 +101,9 @@ pub fn main() {
     pichu::install();
     roy::install();
     metaknight::install();
+    pit::install();
     wario::install();
-    //diddy::install();
+    diddy::install();
     lucas::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
