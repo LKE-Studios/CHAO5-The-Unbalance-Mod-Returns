@@ -260,6 +260,7 @@ unsafe fn wario_downsmash(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn wario_nair(fighter: &mut L2CAgentBase) {
     macros::SET_SPEED_EX(fighter, 0, 1.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
