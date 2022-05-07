@@ -153,6 +153,16 @@ fn metaknight_float(fighter: &mut L2CFighterCommon) {
                 );
             };
         };
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+            if MotionModule::frame(fighter.module_accessor) > 10.0 {
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+                    fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END.into(), true.into());
+                }
+                else if fighter.global_table[0x1F].get_i32() & *FIGHTER_PAD_FLAG_ATTACK_TRIGGER != 0 {
+                    fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK.into(), true.into());
+                }
+            }
+        }
     }
 }
 
