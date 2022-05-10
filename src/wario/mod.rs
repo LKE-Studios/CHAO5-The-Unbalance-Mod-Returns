@@ -734,6 +734,26 @@ unsafe fn wario_neutralb(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialAirNBite
+    agent = "wario", 
+    script = "game_specialairnbite", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn wario_neutralbair(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 21.0);
+        if macros::is_excute(fighter) {
+            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("head"), /*Damage*/ 999.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 30, /*BKB*/ 0, /*Size*/ 3.0, /*X*/ -0.5, /*Y*/ 2.0, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BITE);
+        }
+        wait(fighter.lua_state_agent, 4.0);
+        AttackModule::clear_all(fighter.module_accessor);
+        fighter.clear_lua_stack();
+        wait_loop(fighter.lua_state_agent);
+        fighter.clear_lua_stack();
+        frame_clear(fighter.lua_state_agent);
+    }
+}
+
 #[acmd_script(//SpecialSDrive
     agent = "wario_wariobike", 
     script = "game_specialsdrive", 
@@ -1131,6 +1151,7 @@ pub fn install() {
         wario_downattackd,
         wario_downattacku,
         wario_neutralb,
+        wario_neutralbair,
         wario_bike1,
         wario_bike2,
         wario_bike3,
