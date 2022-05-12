@@ -80,7 +80,7 @@ unsafe fn lucas_win3(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 47.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win03"));
+        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_008"));
     }
     frame(fighter.lua_state_agent, 123.0);
     if macros::is_excute(fighter) {
@@ -317,6 +317,19 @@ unsafe fn lucas_downtilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//AttackS4Charge
+    agent = "lucas", 
+    script = "sound_attacks4charge", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
+        macros::PLAY_SE(fighter, Hash40::new("vc_lucas_attack003"));
     }
 }
 
@@ -1326,6 +1339,7 @@ pub fn install() {
         lucas_uptilt,
         lucas_downtilt,
         lucas_sidesmash,
+        lucas_sidesmashchargesfx,
         lucas_upsmash,
         lucas_downsmash,
         lucas_nair,
