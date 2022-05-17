@@ -34,7 +34,7 @@ mod purin;
 mod roy;
 mod samus;
 mod sheik;
-mod sonic;
+//mod sonic;
 mod wario;
 mod yoshi;
 mod younglink;
@@ -106,7 +106,7 @@ pub fn main() {
     wario::install();
     diddy::install();
     lucas::install();
-    sonic::install();
+    //sonic::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
