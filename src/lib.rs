@@ -32,6 +32,7 @@ mod pikachu;
 mod pit;
 mod popo;
 mod purin;
+//mod ptrainer;
 //mod pzenigame;
 mod roy;
 mod samus;
@@ -107,8 +108,10 @@ pub fn main() {
     pit::install();
     wario::install();
     diddy::install();
+    //ptrainer::install();
     //pzenigame::install();
     //pfushigisou::install();
+    //plizardon::install();
     lucas::install();
     //sonic::install();
     skyline::install_hooks!(declare_const_hook);
