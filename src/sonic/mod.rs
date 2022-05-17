@@ -1172,6 +1172,38 @@ unsafe fn sonic_sideb5(fighter: &mut L2CAgentBase) {
     });
 }
 
+/*#[acmd_script(//SpecialLwEnd
+    agent = "sonic", 
+    script = "game_specialsspin", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn sonic_sideb5(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            JostleModule::set_status(false)
+            UNABLE_AREA(FIGHTER_AREA_KIND_TREAD_JUMP_CHECK)
+        }
+        frame(Frame=2)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=12.0, Angle=361, KBG=112, FKB=0, BKB=66, Size=12.8, X=0.0, Y=1.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+        }
+        frame(Frame=10)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_SONIC_STATUS_SPIN_JUMP_WORK_ID_FLAG_ENABLE_JUMP_AERIAL)
+            ENABLE_AREA(FIGHTER_AREA_KIND_TREAD_JUMP_CHECK)
+        }
+        frame(Frame=34)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=39)
+        if(is_excute){
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        }
+    });
+}*/
+
 #[acmd_script(//GimmickJump
     agent = "sonic_gimmickjump", 
     script = "game_fall", 
