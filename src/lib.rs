@@ -37,6 +37,7 @@ mod purin;
 mod roy;
 mod samus;
 mod sheik;
+//mod snake;
 //mod sonic;
 mod wario;
 mod yoshi;
@@ -114,6 +115,7 @@ pub fn main() {
     //plizardon::install();
     lucas::install();
     //sonic::install();
+    //snake::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
