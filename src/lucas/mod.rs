@@ -1234,6 +1234,7 @@ unsafe fn lucas_sidetauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, false, -1);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, Hash40::new("appeal_s"), false, -1.0);
+        DamageModule::heal(fighter.module_accessor, -8.0, 0);
     }
     frame(fighter.lua_state_agent, 100.0);
     if macros::is_excute(fighter) {
@@ -1254,6 +1255,10 @@ unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
+    frame(fighter.lua_state_agent, 37.0);
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
+    }
 }
 
 #[acmd_script(//AppealSR
@@ -1269,6 +1274,10 @@ unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
+    frame(fighter.lua_state_agent, 37.0);
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
+    }
 }
 
 #[acmd_script(//AppealSL
@@ -1280,6 +1289,7 @@ unsafe fn lucas_sidetauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, false, -1);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, Hash40::new("appeal_s"), false, -1.0);
+        DamageModule::heal(fighter.module_accessor, -8.0, 0);
     }
     frame(fighter.lua_state_agent, 100.0);
     if macros::is_excute(fighter) {

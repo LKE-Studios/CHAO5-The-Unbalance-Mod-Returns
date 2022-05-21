@@ -80,6 +80,7 @@ unsafe fn sheik_jab100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
+        frame(fighter.lua_state_agent, 10.0);
         fighter.clear_lua_stack();
         lua_args!(fighter, 0);
         wait_loop_clear(fighter.lua_state_agent);

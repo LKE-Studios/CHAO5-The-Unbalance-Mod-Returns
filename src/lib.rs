@@ -7,6 +7,7 @@ use std::ffi::CStr;
 use skyline::hooks::{getRegionAddress, Region};
 
 mod captain;
+//mod dedede;
 mod diddy;
 mod donkey;
 mod falco;
@@ -113,6 +114,7 @@ pub fn main() {
     //pzenigame::install();
     //pfushigisou::install();
     //plizardon::install();
+    //dedede::install();
     lucas::install();
     //sonic::install();
     //snake::install();
