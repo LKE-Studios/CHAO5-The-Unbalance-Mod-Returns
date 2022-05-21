@@ -24,7 +24,7 @@ static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed
 // static mut Y_ACCEL_MUL : f32 = 0.06;
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
-fn metaknight_float(fighter: &mut L2CFighterCommon) {
+fn metaknight_opff(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
@@ -162,6 +162,144 @@ fn metaknight_float(fighter: &mut L2CFighterCommon) {
                     fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK.into(), true.into());
                 }
             }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.sub_air_check_fall_common();
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                CHECK_FLOAT[ENTRY_ID] += 1;
+            } else {
+                CHECK_FLOAT[ENTRY_ID] = 0;
+            };
+            if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
+                START_FLOAT[ENTRY_ID] = true;
+            };
+            if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
+            && FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] = 1;
+            };
+            if FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] -= 1;
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            };
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL){
+                FLOAT[ENTRY_ID] = 1;
+            };
+            if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                FLOAT[ENTRY_ID] = 1;
+            };
+            let mut y_add;
+            let mut x_add;
+            x_add = (stick_x)*X_ACCEL_MUL;
+            y_add = (stick_y)*X_ACCEL_MUL;
+            if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
+                x_add = 0.0;
+            };
+            if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
+                x_add = 0.0;
+            };
+            if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                y_add = 0.0;
+            };
+            if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
+                y_add = 0.0;
+            };
+            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            println!("x_add{}, y_add{}", x_add, y_add);
+            X[ENTRY_ID] += x_add;
+            Y[ENTRY_ID] += y_add;
+            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            } else {
+                X[ENTRY_ID] = 0.0;
+                Y[ENTRY_ID] = 0.0;
+            };
+            if START_FLOAT[ENTRY_ID] == true {
+                FLOAT[ENTRY_ID] = FLOAT_MAX;
+                START_FLOAT[ENTRY_ID] = false;
+                if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+                    StatusModule::change_status_request_from_script(
+                        fighter.module_accessor,
+                        *FIGHTER_STATUS_KIND_FALL,
+                        true
+                    );
+                };
+                if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                    StatusModule::change_status_request_from_script(
+                        fighter.module_accessor,
+                        *FIGHTER_STATUS_KIND_FALL_AERIAL,
+                        true
+                    );
+                };
+            };
+        }
+        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
+            fighter.sub_air_check_fall_common();
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                CHECK_FLOAT[ENTRY_ID] += 1;
+            } else {
+                CHECK_FLOAT[ENTRY_ID] = 0;
+            };
+            if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
+                START_FLOAT[ENTRY_ID] = true;
+            };
+            if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
+            && FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] = 1;
+            };
+            if FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] -= 1;
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            };
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL){
+                FLOAT[ENTRY_ID] = 1;
+            };
+            if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                FLOAT[ENTRY_ID] = 1;
+            };
+            let mut y_add;
+            let mut x_add;
+            x_add = (stick_x)*X_ACCEL_MUL;
+            y_add = (stick_y)*X_ACCEL_MUL;
+            if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
+                x_add = 0.0;
+            };
+            if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
+                x_add = 0.0;
+            };
+            if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                y_add = 0.0;
+            };
+            if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
+                y_add = 0.0;
+            };
+            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            println!("x_add{}, y_add{}", x_add, y_add);
+            X[ENTRY_ID] += x_add;
+            Y[ENTRY_ID] += y_add;
+            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            } else {
+                X[ENTRY_ID] = 0.0;
+                Y[ENTRY_ID] = 0.0;
+            };
+            if START_FLOAT[ENTRY_ID] == true {
+                FLOAT[ENTRY_ID] = FLOAT_MAX;
+                START_FLOAT[ENTRY_ID] = false;
+                if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+                    StatusModule::change_status_request_from_script(
+                        fighter.module_accessor,
+                        *FIGHTER_STATUS_KIND_FALL,
+                        true
+                    );
+                };
+                if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                    StatusModule::change_status_request_from_script(
+                        fighter.module_accessor,
+                        *FIGHTER_STATUS_KIND_FALL_AERIAL,
+                        true
+                    );
+                };
+            };
         }
     }
 }
@@ -1512,6 +1650,10 @@ unsafe fn metaknight_upb(fighter: &mut L2CAgentBase) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("bust"), /*Damage*/ 12.0, /*Angle*/ 45, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     }
+    frame(fighter.lua_state_agent, 25.0);
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:2.7, y:-0.3, z:0.0});
+    }
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         GroundModule::set_passable_check(fighter.module_accessor, false);
@@ -1580,6 +1722,10 @@ unsafe fn metaknight_upbloop(fighter: &mut L2CAgentBase) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 12.0, /*Angle*/ 45, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 7.7, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ -2.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-2.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("bust"), /*Damage*/ 12.0, /*Angle*/ 45, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:2.7, y:-0.3, z:0.0});
     }
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
@@ -2460,6 +2606,6 @@ pub fn install() {
         metaknight_finalfin    
     );
     smashline::install_agent_frames!(
-        metaknight_float
+        metaknight_opff
     );
 }
