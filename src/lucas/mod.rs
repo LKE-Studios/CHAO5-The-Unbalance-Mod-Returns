@@ -1251,11 +1251,11 @@ unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
     }
-    frame(fighter.lua_state_agent, 6.0);
+    frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
-    frame(fighter.lua_state_agent, 37.0);
+    wait(fighter.lua_state_agent, 31.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
@@ -1270,11 +1270,11 @@ unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
     }
-    frame(fighter.lua_state_agent, 6.0);
+    frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
-    frame(fighter.lua_state_agent, 37.0);
+    wait(fighter.lua_state_agent, 31.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
