@@ -1510,7 +1510,7 @@ unsafe fn gamewatch_downbairend(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialAirLwShoot
     agent = "gamewatch", 
-    script = "game_speciallwshoot", 
+    script = "game_specialairlwshoot", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn gamewatch_downbairshoot(fighter: &mut L2CAgentBase) {
