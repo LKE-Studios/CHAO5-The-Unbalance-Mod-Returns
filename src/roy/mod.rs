@@ -979,6 +979,7 @@ unsafe fn roy_upb(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+        CancelModule::enable_cancel(fighter.module_accessor);
     }
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1028,6 +1029,7 @@ unsafe fn roy_upbair(fighter: &mut L2CAgentBase) {
         wait(fighter.lua_state_agent, 5.0);
         if macros::is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
+            CancelModule::enable_cancel(fighter.module_accessor);
         }
         wait(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
