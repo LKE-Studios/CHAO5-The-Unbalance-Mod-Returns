@@ -1083,7 +1083,7 @@ unsafe fn wario_uptauntl(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn wario_sidetauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SMARTBOMB), 0, 0, false, false);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BOMBER), 0, 0, false, false);
     }
 }
 

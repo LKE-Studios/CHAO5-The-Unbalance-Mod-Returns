@@ -1230,7 +1230,7 @@ unsafe fn pit_uptauntr(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn pit_uptauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_KILLSWORD), 0, 0, false, false);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STARROD), 0, 0, false, false);
     }
 }
 

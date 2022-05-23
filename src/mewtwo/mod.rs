@@ -14,7 +14,7 @@ static mut CHECK_FLOAT : [i32; 8] = [0; 8];
 static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
 static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
-static mut FLOAT_MAX : i32 = 300; //Frames this bitch can float (In frames, 300 = 5 seconds)
+static mut FLOAT_MAX : i32 = 1200; //Frames this bitch can float (In frames, 300 = 5 seconds)
 static mut X_MAX : f32 = 1.45; //Max Horizontal movespeed
 // static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
 static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
