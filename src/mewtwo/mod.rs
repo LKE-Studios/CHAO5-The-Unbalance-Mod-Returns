@@ -151,6 +151,9 @@ fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
                     true
                 );
             };
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
+                FLOAT[ENTRY_ID] = 1;
+            };
         };
     }
 }
