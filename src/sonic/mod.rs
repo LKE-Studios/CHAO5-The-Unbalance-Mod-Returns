@@ -1172,9 +1172,9 @@ unsafe fn sonic_sideb5(fighter: &mut L2CAgentBase) {
     });
 }
 
-#[acmd_script(//SpecialLwEnd (Hash: 0x195dc47911)
+#[acmd_script(//SpecialLwEnd? (Hash: 0x195dc47911)
     agent = "sonic", 
-    script = "game_speciallwend", 
+    script = "0x195dc47911", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn sonic_downb(fighter: &mut L2CAgentBase) {
