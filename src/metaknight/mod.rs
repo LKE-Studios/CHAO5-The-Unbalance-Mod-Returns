@@ -349,6 +349,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 if ControlModule::get_stick_y(fighter.module_accessor) >= 0.8 {
                     let rotation = Vector3f{x: -80.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
                 }
+                if MotionModule::frame(fighter.module_accessor) > 750.0 {
+                    MotionModule::set_frame(fighter.module_accessor, 60.0, true);
+                }
             };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
@@ -533,6 +536,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 }
                 if ControlModule::get_stick_y(fighter.module_accessor) >= 0.8 {
                     let rotation = Vector3f{x: -80.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                }
+                if MotionModule::frame(fighter.module_accessor) > 750.0 {
+                    MotionModule::set_frame(fighter.module_accessor, 60.0, true);
                 }
             };
         }
