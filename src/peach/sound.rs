@@ -1,6 +1,6 @@
 use smash::app::sv_animcmd::*;
 use smash::lua2cpp::L2CAgentBase;
-use smash::hash40;
+use smash::phx::Hash40;
 use smash_script::*;
 use smashline::*;
 

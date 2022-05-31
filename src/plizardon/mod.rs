@@ -5,10 +5,162 @@ use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
+use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
+static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
+static mut START_FLOAT : [bool; 8] = [false; 8];
+static mut CHECK_FLOAT : [i32; 8] = [0; 8];
+static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
+static mut X : [f32; 8] = [0.0; 8]; //Logs speed
+static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
+static mut FLOAT_MAX : i32 = 2000; //Frames this bitch can float (In frames, 300 = 5 seconds)
+static mut X_MAX : f32 = 1.85; //Max Horizontal movespeed
+// static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
+static mut X_ACCEL_MUL : f32 = 0.08; //Air Accel Mul
+static mut Y_MAX : f32 = 1.54; //Max Vertical movespeed
+// static mut Y_ACCEL_ADD : f32 = 0.06;
+// static mut Y_ACCEL_MUL : f32 = 0.06;
+
+#[fighter_frame( agent = FIGHTER_KIND_PLIZARDON )]
+fn plizardon_opff(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+        let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+        // let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        // let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if StatusModule::situation_kind(fighter.module_accessor) != SITUATION_KIND_AIR
+        || !sv_information::is_ready_go()
+        || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
+            FLOAT[ENTRY_ID] = 0;
+            START_FLOAT[ENTRY_ID] = false;
+            CHECK_FLOAT[ENTRY_ID] = 0;
+        };
+        if FLOAT[ENTRY_ID] == 1{
+            if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR
+            && [
+                *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S,
+                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END, 
+            ].contains(&status_kind) == false {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+            };
+        };
+        if StatusModule::situation_kind(fighter.module_accessor) == SITUATION_KIND_AIR {
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                CHECK_FLOAT[ENTRY_ID] += 1;
+            } else {
+                CHECK_FLOAT[ENTRY_ID] = 0;
+            };
+            if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
+                START_FLOAT[ENTRY_ID] = true;
+            };
+        };
+        if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
+        && FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] = 1;
+        };
+        if FLOAT[ENTRY_ID] > 1{
+            FLOAT[ENTRY_ID] -= 1;
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            };
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL){
+                FLOAT[ENTRY_ID] = 1;
+            };
+            if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                FLOAT[ENTRY_ID] = 1;
+            };
+            let mut y_add;
+            let mut x_add;
+            // if stick_x > 0.2 {
+            // 	x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            // 	if speed_x > X_MAX || speed_x < -X_MAX{
+            // 		x_add = 0.0;
+            // 	};
+            // };
+            // if stick_x < -0.2 {
+            // 	x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            // 	if speed_x > X_MAX || speed_x < -X_MAX{
+            // 		x_add = 0.0;
+            // 	};
+            // };
+            // if stick_y > 0.2 {
+            // 	y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
+            // 		y_add = 0.0;
+            // 	};
+            // };
+            // if stick_y < -0.2 {
+            // 	y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
+            // 		y_add = 0.0;
+            // 	};
+            // };
+            // if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
+            // 	if speed_y > 0.0 {
+            // 		y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
+            // 	} else if speed_y < 0.0{
+            // 		y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
+            // 	};
+            // 	let mut x_add = 0.0;
+            // 	if speed_x > 0.0 {
+            // 		x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
+            // 	} else if speed_x < 0.0{
+            // 		x_add = X_ACCEL_MUL + X_ACCEL_ADD;
+            // 	};
+            // };
+            x_add = (stick_x)*X_ACCEL_MUL;
+            y_add = (stick_y)*X_ACCEL_MUL;
+            if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
+                x_add = 0.0;
+            };
+            if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
+                x_add = 0.0;
+            };
+            if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                y_add = 0.0;
+            };
+            if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
+                y_add = 0.0;
+            };
+            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            println!("x_add{}, y_add{}", x_add, y_add);
+            X[ENTRY_ID] += x_add;
+            Y[ENTRY_ID] += y_add;
+            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        } else {
+            X[ENTRY_ID] = 0.0;
+            Y[ENTRY_ID] = 0.0;
+        };
+        if START_FLOAT[ENTRY_ID] == true {
+            FLOAT[ENTRY_ID] = FLOAT_MAX;
+            START_FLOAT[ENTRY_ID] = false;
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+                StatusModule::change_status_request_from_script(
+                    fighter.module_accessor,
+                    *FIGHTER_STATUS_KIND_FALL,
+                    true
+                );
+            };
+            if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
+                StatusModule::change_status_request_from_script(
+                    fighter.module_accessor,
+                    *FIGHTER_STATUS_KIND_FALL_AERIAL,
+                    true
+                );
+            };
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
+                FLOAT[ENTRY_ID] = 1;
+            };
+            if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+                fighter.sub_air_check_fall_common();
+            };
+        };
+    }
+}
 
 #[acmd_script(//Attack11 
     agent = "plizardon", 
@@ -824,7 +976,7 @@ unsafe fn plizardon_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialN
+/*#[acmd_script(//SpecialN
     agent = "plizardon", 
     script = "game_specialn", 
     category = ACMD_GAME, 
@@ -844,7 +996,7 @@ unsafe fn plizardon_neutralbair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 367, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(18.0), /*Hitlag*/ 0.0, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
     }
-}
+}*/
 
 #[acmd_script(//Breath
     agent = "plizardon_breath", 
@@ -853,22 +1005,13 @@ unsafe fn plizardon_neutralbair(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn plizardon_fire(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.8, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.8, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 20.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.8, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 40.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 60.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 4, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 80.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 5, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.2, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 100.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 6, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.2, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 120.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 7, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.9, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 140.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 8, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.9, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 160.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 9, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.9, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 180.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
-        macros::ATTACK(fighter, /*ID*/ 10, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.5, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 200.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 0, /*KBG*/ 2, /*FKB*/ 0, /*BKB*/ 1, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(49.9), /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.2, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 50.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(800.0), /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
         AttackModule::enable_safe_pos(fighter.module_accessor);
     }
 }
 
-#[acmd_script(//Breath
+#[acmd_script(//BreathMove
     agent = "plizardon_breath", 
     script = "effect_move", 
     category = ACMD_EFFECT, 
@@ -876,8 +1019,11 @@ unsafe fn plizardon_fire(fighter: &mut L2CAgentBase) {
 unsafe fn plizardon_firegfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        //macros::EFFECT_FOLLOW_RND(fighter, Hash40::new("plizardon_kaenhousya"), Hash40::new("top"), 0, 0, 0, 10, -3, 90, 1, 180, 2, 2, 10, 0, 0, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("plizardon_kaenhousya"), Hash40::new("top"), 0, 10, -2, 90, 0, 180, 1.2, true);
+        fighter.clear_lua_stack();
+        lua_args!(fighter, Hash40::new("plizardon_kaenhousya"), Hash40::new("top"), 0.0, 0.0, 0.0, 10.0, -3.0, 90.0, 1.0, 180.0, 2.0, 2.0, 10.0, 0.0, 0.0, true);
+        smash::app::sv_animcmd::EFFECT_FOLLOW_RND(fighter.lua_state_agent);
+        fighter.pop_lua_stack(1);
+        //macros::EFFECT_FOLLOW(fighter, Hash40::new("plizardon_kaenhousya"), Hash40::new("top"), 0, 10, -2, 90, 0, 180, 1.2, true);
     }
 }
 
@@ -921,8 +1067,8 @@ unsafe fn plizardon_sidebair(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn plizardon_blitz(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-10.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-10.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
     }
 }
 
@@ -973,6 +1119,7 @@ unsafe fn plizardon_upb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 46.0);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
+        CancelModule::enable_cancel(fighter.module_accessor);
     }
 }
 
@@ -1023,6 +1170,7 @@ unsafe fn plizardon_upbair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 46.0);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
+        CancelModule::enable_cancel(fighter.module_accessor);
     }
 }
 
@@ -1147,8 +1295,8 @@ pub fn install() {
         plizardon_slipattack,
         plizardon_downattackd,
         plizardon_downattacku,
-        plizardon_neutralb,
-        plizardon_neutralbair,
+        //plizardon_neutralb,
+        //plizardon_neutralbair,
         plizardon_fire,
         plizardon_firegfx,
         plizardon_sideb,
@@ -1163,5 +1311,8 @@ pub fn install() {
         plizardon_downtauntr,
         plizardon_downtauntl,
         plizardon_final
+    );
+    smashline::install_agent_frames!(
+        plizardon_opff
     );
 }

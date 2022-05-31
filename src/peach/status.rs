@@ -30,16 +30,16 @@ pub fn peach_frame(fighter : &mut L2CFighterCommon) {
 
         if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("havel"), &Vector3f{
-                x: 8.0,
-                y: 8.0,
-                z: 8.0
+                x: 2.0,
+                y: 2.0,
+                z: 2.0
             });
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{
-                x: 8.0,
-                y: 8.0,
-                z: 8.0
+                x: 2.0,
+                y: 2.0,
+                z: 2.0
             });
-            AttackModule::set_attack_scale(fighter.module_accessor, 8.0, true);
+            AttackModule::set_attack_scale(fighter.module_accessor, 2.0, true);
         }
         else{
             AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
