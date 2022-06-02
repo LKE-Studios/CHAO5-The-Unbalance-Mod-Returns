@@ -37,6 +37,7 @@ mod popo;
 mod purin;
 mod ptrainer;
 mod pzenigame;
+//mod robot;
 mod roy;
 mod samus;
 mod sheik;
@@ -123,6 +124,7 @@ pub fn main() {
     sonic::install();
     snake::install();
     wolf::install();
+    //robot::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
