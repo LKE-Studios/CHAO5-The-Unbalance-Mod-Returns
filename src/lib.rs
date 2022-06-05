@@ -14,6 +14,7 @@ mod falco;
 mod fox;
 mod gamewatch;
 mod ganon;
+//mod ike;
 mod kirby;
 mod koopa;
 mod link;
@@ -43,6 +44,7 @@ mod samus;
 mod sheik;
 mod snake;
 mod sonic;
+//mod toonlink;
 mod wario;
 mod wolf;
 mod yoshi;
@@ -125,6 +127,8 @@ pub fn main() {
     snake::install();
     wolf::install();
     //robot::install();
+    //ike::install();
+    //toonlink::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
