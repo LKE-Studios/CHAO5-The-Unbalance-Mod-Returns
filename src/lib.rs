@@ -32,6 +32,7 @@ mod peach;
 mod pfushigisou;
 mod pichu;
 mod pikachu;
+//mod pikmin;
 mod pit;
 mod plizardon;
 mod popo;
@@ -129,6 +130,7 @@ pub fn main() {
     //robot::install();
     //ike::install();
     //toonlink::install();
+    //pikmin::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
