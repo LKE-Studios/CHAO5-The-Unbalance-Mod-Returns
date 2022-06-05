@@ -70,7 +70,7 @@ fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
 unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     let str = CStr::from_ptr(constant as _).to_str().unwrap();
     if str.contains("FIGHTER_PEACH_STATUS_KIND_MAX") {
-        value = 0x1ee //494 for now
+        value = 0x1ee; //494 for now
     }
     original!()(unk,constant,value)
 }
