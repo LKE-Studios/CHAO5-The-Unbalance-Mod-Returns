@@ -146,11 +146,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 if x_add < 2.6 && X[ENTRY_ID] < X_MAX*2.6 {
                     x_add = 2.6;
                 };
-                if y_add > -0.9 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = -0.9;
+                if y_add > -1.1 && Y[ENTRY_ID] > Y_MAX {
+                    y_add = -1.1;
                 };
-                if y_add < -0.9 && Y[ENTRY_ID] < Y_MAX*-0.9 {
-                    y_add = -0.9;
+                if y_add < -1.1 && Y[ENTRY_ID] < Y_MAX*-1.1 {
+                    y_add = -1.1;
                 };
                 println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
                 println!("x_add{}, y_add{}", x_add, y_add);
@@ -349,11 +349,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 if x_add < 2.6 && X[ENTRY_ID] < X_MAX*2.6 {
                     x_add = 2.6;
                 };
-                if y_add > -0.9 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = -0.9;
+                if y_add > -1.1 && Y[ENTRY_ID] > Y_MAX {
+                    y_add = -1.1;
                 };
-                if y_add < -0.9 && Y[ENTRY_ID] < Y_MAX*-0.9 {
-                    y_add = -0.9;
+                if y_add < -1.1 && Y[ENTRY_ID] < Y_MAX*-1.1 {
+                    y_add = -1.1;
                 };
                 println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
                 println!("x_add{}, y_add{}", x_add, y_add);
