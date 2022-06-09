@@ -19,6 +19,10 @@ static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
 static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed
 // static mut Y_ACCEL_ADD : f32 = 0.06;
 // static mut Y_ACCEL_MUL : f32 = 0.06;
+static mut ANGLE : [f32; 8] = [0.0; 8];
+static ANGLE_MAX : f32 = 85.0;
+static ANGLE_LOW_MAX : f32 = -40.0;
+static STICK_ANGLE_MUL : f32 = 12.0;
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_opff(fighter: &mut L2CFighterCommon) {
@@ -129,10 +133,10 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.6, -0.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.6, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 27.0 {
-                static mut Y_ACCEL_ADD : f32 = 4.1;
+                static Y_ACCEL_ADD : f32 = 0.072;
                 static mut X_ACCEL_ADD : f32 = 0.0;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -140,202 +144,46 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 let mut x_add;
                 x_add = (stick_x)*X_ACCEL_ADD;
                 y_add = (stick_y)*Y_ACCEL_ADD;
-                if x_add > 2.6 && X[ENTRY_ID] > X_MAX {
-                    x_add = 2.6;
+                if x_add > 2.5 && X[ENTRY_ID] > X_MAX {
+                    x_add = 2.5;
                 };
-                if x_add < 2.6 && X[ENTRY_ID] < X_MAX*2.6 {
-                    x_add = 2.6;
+                if x_add < 2.5 && X[ENTRY_ID] < X_MAX*2.5 {
+                    x_add = 2.5;
                 };
-                if y_add > -1.1 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = -1.1;
+                if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                    y_add = 0.0;
                 };
-                if y_add < -1.1 && Y[ENTRY_ID] < Y_MAX*-1.1 {
-                    y_add = -1.1;
+                if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*0.0 {
+                    y_add = 0.0;
                 };
                 println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
                 println!("x_add{}, y_add{}", x_add, y_add);
                 X[ENTRY_ID] += x_add;
                 Y[ENTRY_ID] += y_add;
-                macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.02 {
-                    let rotation = Vector3f{x: 2.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
+                    ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
+                    if ANGLE[ENTRY_ID] > ANGLE_MAX {
+                        ANGLE[ENTRY_ID] = ANGLE_MAX;
+                    };
+                    if ANGLE[ENTRY_ID] < ANGLE_LOW_MAX {
+                        ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
+                    };
                 }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.06 {
-                    let rotation = Vector3f{x: 5.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.1 {
-                    let rotation = Vector3f{x: 7.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.14 {
-                    let rotation = Vector3f{x: 10.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.18 {
-                    let rotation = Vector3f{x: 12.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.22 {
-                    let rotation = Vector3f{x: 15.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.26 {
-                    let rotation = Vector3f{x: 17.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.3 {
-                    let rotation = Vector3f{x: 20.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.34 {
-                    let rotation = Vector3f{x: 22.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.38 {
-                    let rotation = Vector3f{x: 25.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.42 {
-                    let rotation = Vector3f{x: 27.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.46 {
-                    let rotation = Vector3f{x: 30.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.5 {
-                    let rotation = Vector3f{x: 32.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.55 {
-                    let rotation = Vector3f{x: 33.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.6 {
-                    let rotation = Vector3f{x: 35.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.65 {
-                    let rotation = Vector3f{x: 36.25, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.7 {
-                    let rotation = Vector3f{x: 37.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.75 {
-                    let rotation = Vector3f{x: 38.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.8 {
-                    let rotation = Vector3f{x: 40.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.85 {
-                    let rotation = Vector3f{x: 41.25, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.9 {
-                    let rotation = Vector3f{x: 42.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.95 {
-                    let rotation = Vector3f{x: 43.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -1.0 {
-                    let rotation = Vector3f{x: 45.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-            }
-            if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.025 {
-                    let rotation = Vector3f{x: -2.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.05 {
-                    let rotation = Vector3f{x: -5.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.075 {
-                    let rotation = Vector3f{x: -7.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.1 {
-                    let rotation = Vector3f{x: -10.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.125 {
-                    let rotation = Vector3f{x: -12.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.15 {
-                    let rotation = Vector3f{x: -15.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.175 {
-                    let rotation = Vector3f{x: -17.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.2 {
-                    let rotation = Vector3f{x: -20.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.225 {
-                    let rotation = Vector3f{x: -22.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.25 {
-                    let rotation = Vector3f{x: -25.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.275 {
-                    let rotation = Vector3f{x: -27.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.3 {
-                    let rotation = Vector3f{x: -30.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.325 {
-                    let rotation = Vector3f{x: -32.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.35 {
-                    let rotation = Vector3f{x: -35.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.375 {
-                    let rotation = Vector3f{x: -37.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.4 {
-                    let rotation = Vector3f{x: -40.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.425 {
-                    let rotation = Vector3f{x: -42.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.45 {
-                    let rotation = Vector3f{x: -45.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.475 {
-                    let rotation = Vector3f{x: -47.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.5 {
-                    let rotation = Vector3f{x: -50.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.52 {
-                    let rotation = Vector3f{x: -52.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.54 {
-                    let rotation = Vector3f{x: -55.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.57 {
-                    let rotation = Vector3f{x: -57.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.6 {
-                    let rotation = Vector3f{x: -60.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.63 {
-                    let rotation = Vector3f{x: -62.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.67 {
-                    let rotation = Vector3f{x: -65.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.72 {
-                    let rotation = Vector3f{x: -67.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.77 {
-                    let rotation = Vector3f{x: -70.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.82 {
-                    let rotation = Vector3f{x: -72.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.88 {
-                    let rotation = Vector3f{x: -75.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.94 {
-                    let rotation = Vector3f{x: -77.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 1.0 {
-                    let rotation = Vector3f{x: -80.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-            }
-            if MotionModule::frame(fighter.module_accessor) > 749.0 {
-                MotionModule::set_frame(fighter.module_accessor, 60.0, true);
+                let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
+                macros::SET_SPEED_EX(fighter, X[ENTRY_ID], -0.44 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            } else {
+                ANGLE[ENTRY_ID] = 0.0;
             };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.6, -0.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.6, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 27.0 {
-                static mut Y_ACCEL_ADD : f32 = 4.1;
+                static Y_ACCEL_ADD : f32 = 0.072;
                 static mut X_ACCEL_ADD : f32 = 0.0;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -343,193 +191,37 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 let mut x_add;
                 x_add = (stick_x)*X_ACCEL_ADD;
                 y_add = (stick_y)*Y_ACCEL_ADD;
-                if x_add > 2.6 && X[ENTRY_ID] > X_MAX {
-                    x_add = 2.6;
+                if x_add > 2.5 && X[ENTRY_ID] > X_MAX {
+                    x_add = 2.5;
                 };
-                if x_add < 2.6 && X[ENTRY_ID] < X_MAX*2.6 {
-                    x_add = 2.6;
+                if x_add < 2.5 && X[ENTRY_ID] < X_MAX*2.5 {
+                    x_add = 2.5;
                 };
-                if y_add > -1.1 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = -1.1;
+                if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+                    y_add = 0.0;
                 };
-                if y_add < -1.1 && Y[ENTRY_ID] < Y_MAX*-1.1 {
-                    y_add = -1.1;
+                if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*0.0 {
+                    y_add = 0.0;
                 };
                 println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
                 println!("x_add{}, y_add{}", x_add, y_add);
                 X[ENTRY_ID] += x_add;
                 Y[ENTRY_ID] += y_add;
-                macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.02 {
-                    let rotation = Vector3f{x: 2.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.06 {
-                    let rotation = Vector3f{x: 5.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.1 {
-                    let rotation = Vector3f{x: 7.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.14 {
-                    let rotation = Vector3f{x: 10.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.18 {
-                    let rotation = Vector3f{x: 12.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.22 {
-                    let rotation = Vector3f{x: 15.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.26 {
-                    let rotation = Vector3f{x: 17.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.3 {
-                    let rotation = Vector3f{x: 20.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.34 {
-                    let rotation = Vector3f{x: 22.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.38 {
-                    let rotation = Vector3f{x: 25.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.42 {
-                    let rotation = Vector3f{x: 27.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.46 {
-                    let rotation = Vector3f{x: 30.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.5 {
-                    let rotation = Vector3f{x: 32.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.55 {
-                    let rotation = Vector3f{x: 33.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.6 {
-                    let rotation = Vector3f{x: 35.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.65 {
-                    let rotation = Vector3f{x: 36.25, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.7 {
-                    let rotation = Vector3f{x: 37.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.75 {
-                    let rotation = Vector3f{x: 38.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.8 {
-                    let rotation = Vector3f{x: 40.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.85 {
-                    let rotation = Vector3f{x: 41.25, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.9 {
-                    let rotation = Vector3f{x: 42.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -0.95 {
-                    let rotation = Vector3f{x: 43.75, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) <= -1.0 {
-                    let rotation = Vector3f{x: 45.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-            }
-            if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.025 {
-                    let rotation = Vector3f{x: -2.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.05 {
-                    let rotation = Vector3f{x: -5.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.075 {
-                    let rotation = Vector3f{x: -7.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.1 {
-                    let rotation = Vector3f{x: -10.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.125 {
-                    let rotation = Vector3f{x: -12.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.15 {
-                    let rotation = Vector3f{x: -15.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.175 {
-                    let rotation = Vector3f{x: -17.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.2 {
-                    let rotation = Vector3f{x: -20.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.225 {
-                    let rotation = Vector3f{x: -22.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.25 {
-                    let rotation = Vector3f{x: -25.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.275 {
-                    let rotation = Vector3f{x: -27.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.3 {
-                    let rotation = Vector3f{x: -30.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.325 {
-                    let rotation = Vector3f{x: -32.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.35 {
-                    let rotation = Vector3f{x: -35.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.375 {
-                    let rotation = Vector3f{x: -37.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.4 {
-                    let rotation = Vector3f{x: -40.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.425 {
-                    let rotation = Vector3f{x: -42.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.45 {
-                    let rotation = Vector3f{x: -45.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.475 {
-                    let rotation = Vector3f{x: -47.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.5 {
-                    let rotation = Vector3f{x: -50.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.52 {
-                    let rotation = Vector3f{x: -52.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.54 {
-                    let rotation = Vector3f{x: -55.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.57 {
-                    let rotation = Vector3f{x: -57.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.6 {
-                    let rotation = Vector3f{x: -60.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.63 {
-                    let rotation = Vector3f{x: -62.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.67 {
-                    let rotation = Vector3f{x: -65.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.72 {
-                    let rotation = Vector3f{x: -67.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.77 {
-                    let rotation = Vector3f{x: -70.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.82 {
-                    let rotation = Vector3f{x: -72.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.88 {
-                    let rotation = Vector3f{x: -75.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 0.94 {
-                    let rotation = Vector3f{x: -77.5, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-                if ControlModule::get_stick_y(fighter.module_accessor) >= 1.0 {
-                    let rotation = Vector3f{x: -80.0, y: 0.0, z: 0.0}; ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                }
-            }
-            if MotionModule::frame(fighter.module_accessor) > 749.0 {
-                MotionModule::set_frame(fighter.module_accessor, 60.0, true);
+                if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
+                    ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
+                    if ANGLE[ENTRY_ID] > ANGLE_MAX {
+                        ANGLE[ENTRY_ID] = ANGLE_MAX;
+                    };
+                    if ANGLE[ENTRY_ID] < ANGLE_LOW_MAX {
+                        ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
+                    };
+                };
+                let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
+                macros::SET_SPEED_EX(fighter, X[ENTRY_ID], -0.44 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            } else {
+                ANGLE[ENTRY_ID] = 0.0;
             };
         }
     }

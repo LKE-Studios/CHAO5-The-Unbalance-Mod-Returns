@@ -1,6 +1,6 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
-#![feature(asm)]
+#![allow(unused_macros)]
 #![allow(non_snake_case)]
 
 use std::ffi::CStr;
