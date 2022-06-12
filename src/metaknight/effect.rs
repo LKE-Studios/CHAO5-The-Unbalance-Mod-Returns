@@ -6,55 +6,6 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//Attack100GFX
-    agent = "metaknight", 
-    script = "effect_attack100", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn metaknight_attack100gfx(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.27, true);
-        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.2, 10, 0, 2, 0, 0, 0, false);
-    }
-    wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.5, 10, 0, 2, 0, 0, 0, false);
-    }
-    wait(fighter.lua_state_agent, 5.0);
-    if macros::is_excute(fighter) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.5, 10, 0, 2, 0, 0, 0, false);
-    }
-    wait(fighter.lua_state_agent, 7.0);
-}
-
-#[acmd_script(//Attack100EndGFX
-    agent = "metaknight", 
-    script = "effect_attack100end", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn metaknight_attack100endgfx(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_attack"), false, false);
-        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack_end"), Hash40::new("haver"), -0.0, 0, 0, 0, 0, 0, 1.36, true);
-        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
-    }
-    frame(fighter.lua_state_agent, 26.0);
-    if macros::is_excute(fighter) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
-}
-
 #[acmd_script(//AttackS4GFX
     agent = "metaknight", 
     script = "effect_attacks4", 
@@ -289,8 +240,6 @@ unsafe fn metaknight_upbloopgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        metaknight_attack100gfx,
-        metaknight_attack100endgfx,
         metaknight_sidesmashgfx,
         metaknight_upsmashgfx,
         metaknight_downsmashgfx,

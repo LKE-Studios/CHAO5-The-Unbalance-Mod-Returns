@@ -1966,6 +1966,10 @@ unsafe fn nana_sidebcom1(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_S_FLAG_NORMAL_FALL);
     }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+    }
 }
 
 #[acmd_script(//SpecialSCommonSingleSub
@@ -2074,6 +2078,10 @@ unsafe fn nana_sidebcom2(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_S_FLAG_NORMAL_FALL);
     }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+    }
 }
 
 #[acmd_script(//SpecialSCommonSingleSub_Nana
@@ -2181,6 +2189,10 @@ unsafe fn nanan_sidebcom(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_S_FLAG_NORMAL_FALL);
+    }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 
@@ -2293,6 +2305,10 @@ unsafe fn nana_sidebair1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_POPO_SPECIAL_S_END);
     }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+    }
 }
 
 #[acmd_script(//SpecialAirS1_Nana
@@ -2404,6 +2420,10 @@ unsafe fn nanan_sidebair1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_POPO_SPECIAL_S_END);
     }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+    }
 }
 
 #[acmd_script(//SpecialAirS2
@@ -2506,6 +2526,10 @@ unsafe fn nana_sidebair2(fighter: &mut L2CAgentBase) {
     }
     if macros::is_excute(fighter) {
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_POPO_SPECIAL_S_END);
+    }
+    frame(fighter.lua_state_agent, 65.0);
+    if macros::is_excute(fighter) {
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 
