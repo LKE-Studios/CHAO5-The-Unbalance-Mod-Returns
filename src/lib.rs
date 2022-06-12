@@ -45,6 +45,7 @@ mod samus;
 mod sheik;
 mod snake;
 mod sonic;
+//mod szerosuit;
 //mod toonlink;
 mod wario;
 mod wolf;
@@ -127,6 +128,7 @@ pub fn main() {
     sonic::install();
     snake::install();
     wolf::install();
+    //szerosuit::install();
     //robot::install();
     //ike::install();
     //toonlink::install();
