@@ -99,7 +99,7 @@ unsafe fn szerosuit_dashattack(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=4)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area(4, 4)
+            FighterAreaModuleImpl::enable_fix_jostle_area(4.0, 4.0)
         }
         frame(Frame=7)
         if(is_excute){
@@ -245,7 +245,7 @@ unsafe fn szerosuit_sidesmashup(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=25)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(2, 7, 5.5, 6)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(2.0, 7.0, 5.5, 6.0)
         }
         frame(Frame=26)
         if(is_excute){
@@ -261,7 +261,7 @@ unsafe fn szerosuit_sidesmashup(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=39)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3, 3, 7.5, 7.5)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3.0, 3.0, 7.5, 7.5)
         }
     });
 }
@@ -281,7 +281,7 @@ unsafe fn szerosuit_sidesmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=12)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4, 5.5, 7, 7)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(4.0, 5.5, 7.0, 7.0)
         }
         frame(Frame=13)
         if(is_excute){
@@ -302,7 +302,7 @@ unsafe fn szerosuit_sidesmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=25)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(0, 7, 6, 5.2)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(0.0, 7.0, 6.0, 5.2)
         }
         frame(Frame=26)
         if(is_excute){
@@ -317,7 +317,7 @@ unsafe fn szerosuit_sidesmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=39)
         if(is_excute){
-            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3, 3, 7.5, 7.5)
+            FighterAreaModuleImpl::enable_fix_jostle_area_xy(3.0, 3.0, 7.5, 7.5)
         }
     });
 }
@@ -353,16 +353,13 @@ unsafe fn szerosuit_sidesmashdown(fighter: &mut L2CAgentBase) {
 unsafe fn szerosuit_upsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        frame(Frame=5)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
-        }
-        WorkModule::is_flag(FIGHTER_STATUS_ATTACK_FLAG_SMASH_SMASH_HOLD_TO_ATTACK)
-        if(0x117080(false, true)){
-            if(is_excute){
-                ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP)
-                methodlib::L2CValue::as_hash()const(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, hash40("attack_hi4"))
-                ArticleModule::change_motion()
+        rust {
+            if macros::is_excute(fighter) {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
+            }
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_SMASH_SMASH_HOLD_TO_ATTACK) {
+                ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, 0);
+                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("attack_hi4"), false, 0.0);
             }
         }
         frame(Frame=10)
@@ -397,7 +394,9 @@ unsafe fn szerosuit_upsmash(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=42)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP)
+            rust {
+                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, smash::app::ArticleOperationTarget(0));
+            }
         }
     });
 }
@@ -436,9 +435,10 @@ unsafe fn szerosuit_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP)
-            methodlib::L2CValue::as_hash()const(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, hash40("attack_air_n"))
-            ArticleModule::change_motion()
+            rust {
+                ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, 0);
+                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("attack_air_n"), false, 0.0);
+            }
             sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 10, 0, 0.0, 10, 0, 0.0, -10, 1.0, 1.0, 50, false, 2.0, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
         }
         frame(Frame=4)
@@ -466,7 +466,9 @@ unsafe fn szerosuit_nair(fighter: &mut L2CAgentBase) {
         frame(Frame=42)
         if(is_excute){
             WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-            ArticleModule::remove_exist(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP)
+            rust {
+                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, smash::app::ArticleOperationTarget(0));
+            }
         }
     });
 }
@@ -632,9 +634,11 @@ unsafe fn szerosuit_zair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         if(is_excute){
-            ArticleModule::generate_article(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2)
-            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false)
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
+            rust {
+                ArticleModule::generate_article(fighter.module_accessor, FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, 0);
+                ArticleModule::set_visibility_whole(fighter.module_accessor, FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, false, smash::app::ArticleOperationTarget(0));
+                WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
+            }
         }
         wait(Frames=5)
         if(is_excute){
@@ -642,8 +646,10 @@ unsafe fn szerosuit_zair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=9)
         if(is_excute){
-            ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, true)
-            ArticleModule::change_status(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, WEAPON_SZEROSUIT_WHIP2_STATUS_KIND_SHOOT)
+            rust {
+                ArticleModule::set_visibility_whole(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, true, smash::app::ArticleOperationTarget(0));
+                ArticleModule::change_status(fighter.module_accessor, FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, WEAPON_SZEROSUIT_WHIP2*_STATUS_KIND_SHOOT);
+            }
             ATTACK(ID=0, Part=0, Bone=hash40("throw"), Damage=17.0, Angle=45, KBG=88, FKB=0, BKB=60, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
         }
         frame(Frame=10)
@@ -656,11 +662,15 @@ unsafe fn szerosuit_zair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=24)
         if(is_excute){
-            ArticleModule::change_status_exist(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, WEAPON_SZEROSUIT_WHIP2_STATUS_KIND_REWIND)
+            rust {
+                ArticleModule::change_status_exist(fighter.module_accessor, FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, WEAPON_SZEROSUIT_WHIP2*_STATUS_KIND_REWIND);
+            }
         }
         frame(Frame=35)
         if(is_excute){
-            ArticleModule::remove_exist(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2)
+            rust {
+                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP2, smash::app::ArticleOperationTarget(0));
+            }
         }
         frame(Frame=40)
         if(is_excute){
@@ -1010,29 +1020,39 @@ unsafe fn szerosuit_sideb(fighter: &mut L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=20, KBG=100, FKB=50, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.2, Angle=10, KBG=100, FKB=80, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=19.0, X2=0.0, Y2=8.0, Z2=17.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=24)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=17, KBG=100, FKB=80, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=2.2, Angle=17, KBG=100, FKB=60, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=23.0, X2=0.0, Y2=8.0, Z2=21.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=26)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
             ATTACK(ID=1, Part=2, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=100, FKB=65, BKB=0, Size=6.7, X=0.0, Y=8.0, Z=27.0, X2=0.0, Y2=8.0, Z2=25.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=28)
         if(is_excute){
             ATTACK(ID=1, Part=3, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=90, FKB=60, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=30.0, X2=0.0, Y2=8.0, Z2=26.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=30)
         if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2)
-            AttackModule::clear_all()
+            rust {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2);
+                AttackModule::clear_all(fighter.module_accessor);
+            }
         }
         frame(Frame=31)
         if(is_excute){
@@ -1056,29 +1076,39 @@ unsafe fn szerosuit_sidebsub(fighter: &mut L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=20, KBG=100, FKB=50, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.2, Angle=10, KBG=100, FKB=80, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=19.0, X2=0.0, Y2=8.0, Z2=17.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=24)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=17, KBG=100, FKB=80, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=2.2, Angle=17, KBG=100, FKB=60, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=23.0, X2=0.0, Y2=8.0, Z2=21.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=26)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
             ATTACK(ID=1, Part=2, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=100, FKB=65, BKB=0, Size=6.7, X=0.0, Y=8.0, Z=27.0, X2=0.0, Y2=8.0, Z2=25.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=28)
         if(is_excute){
             ATTACK(ID=1, Part=3, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=90, FKB=60, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=30.0, X2=0.0, Y2=8.0, Z2=26.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=30)
         if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2)
-            AttackModule::clear_all()
+            rust {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2);
+                AttackModule::clear_all(fighter.module_accessor);
+            }
         }
         frame(Frame=31)
         if(is_excute){
@@ -1148,41 +1178,53 @@ unsafe fn szerosuit_sideb2(fighter: &mut L2CAgentBase) {
 unsafe fn szerosuit_sidebair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        frame(Frame=20)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
-        }
-        frame(Frame=21)
-        if(is_excute){
-            WorkModule::off_flag(Flag=FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK)
+        rust {
+            frame(fighter.lua_state_agent, 20.0);
+            if macros::is_excute(fighter) {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
+            }
+            frame(fighter.lua_state_agent, 21.0);
+            if macros::is_excute(fighter) {
+                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
+            }
         }
         frame(Frame=22)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=20, KBG=100, FKB=50, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.2, Angle=10, KBG=100, FKB=80, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=19.0, X2=0.0, Y2=8.0, Z2=17.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=24)
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=17, KBG=100, FKB=80, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
             ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=2.2, Angle=17, KBG=100, FKB=60, BKB=0, Size=7.5, X=0.0, Y=8.0, Z=23.0, X2=0.0, Y2=8.0, Z2=21.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=26)
         if(is_excute){
-            AttackModule::clear(ID=0)
+            AttackModule::clear(ID=0, false)
             ATTACK(ID=1, Part=2, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=100, FKB=65, BKB=0, Size=6.7, X=0.0, Y=8.0, Z=27.0, X2=0.0, Y2=8.0, Z2=25.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=28)
         if(is_excute){
             ATTACK(ID=1, Part=3, Bone=hash40("top"), Damage=2.2, Angle=15, KBG=90, FKB=60, BKB=0, Size=8.0, X=0.0, Y=8.0, Z=30.0, X2=0.0, Y2=8.0, Z2=26.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_WHIP)
-            AttackModule::set_no_damage_fly_smoke_all(true, false)
+            rust {
+                AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+            }
         }
         frame(Frame=30)
         if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2)
-            AttackModule::clear_all()
+            rust {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SZEROSUIT_STATUS_SPECIAL_S_FLAG_S2);
+                AttackModule::clear_all(fighter.module_accessor);
+            }
         }
         frame(Frame=31)
         if(is_excute){
@@ -1253,9 +1295,9 @@ unsafe fn szerosuit_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=2)
-        FT_MOTION_RATE(FSM=2)
+        FT_MOTION_RATE(FSM=2.0)
         frame(Frame=4)
-        FT_MOTION_RATE(FSM=1)
+        FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             SA_SET(State=SITUATION_KIND_AIR)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=84, KBG=100, FKB=150, BKB=0, Size=10.0, X=0.0, Y=8.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
@@ -1272,7 +1314,7 @@ unsafe fn szerosuit_upb(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=15)
         if(is_excute){
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
         }
         frame(Frame=23)
         if(is_excute){
@@ -1316,9 +1358,9 @@ unsafe fn szerosuit_upbair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
         frame(Frame=2)
-        FT_MOTION_RATE(FSM=2)
+        FT_MOTION_RATE(FSM=2.0)
         frame(Frame=4)
-        FT_MOTION_RATE(FSM=1)
+        FT_MOTION_RATE(FSM=1.0)
         if(is_excute){
             SA_SET(State=SITUATION_KIND_AIR)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=84, KBG=100, FKB=150, BKB=0, Size=10.0, X=0.0, Y=8.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
@@ -1335,7 +1377,7 @@ unsafe fn szerosuit_upbair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=15)
         if(is_excute){
-            notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+            sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
         }
         frame(Frame=23)
         if(is_excute){
@@ -1378,7 +1420,9 @@ unsafe fn szerosuit_upbair(fighter: &mut L2CAgentBase) {
 unsafe fn szerosuit_downbair1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        WHOLE_HIT(HIT_STATUS_XLU)
+        rust {
+            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        }
         frame(Frame=5)
         if(is_excute){
             WorkModule::on_flag(Flag=FIGHTER_SZEROSUIT_STATUS_SPECIAL_LW_FLAG_KICK_REVERSE_ENABLE)
@@ -1392,7 +1436,9 @@ unsafe fn szerosuit_downbair1(fighter: &mut L2CAgentBase) {
         frame(Frame=13)
         if(is_excute){
             AttackModule::clear_all()
-            HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            rust {
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            }
         }
         frame(Frame=17)
         if(is_excute){
@@ -1409,7 +1455,9 @@ unsafe fn szerosuit_downbair1(fighter: &mut L2CAgentBase) {
 unsafe fn szerosuit_downbair2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        WHOLE_HIT(HIT_STATUS_XLU)
+        rust {
+            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        }
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=36.0, Angle=270, KBG=100, FKB=0, BKB=30, Size=8.0, X=0.0, Y=-3.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=36.0, Angle=275, KBG=100, FKB=0, BKB=30, Size=9.0, X=0.0, Y=-3.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G_d, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
@@ -1418,7 +1466,9 @@ unsafe fn szerosuit_downbair2(fighter: &mut L2CAgentBase) {
         frame(Frame=2)
         if(is_excute){
             AttackModule::clear_all()
-            HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            rust {
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            }
         }
     });
 }
@@ -1519,10 +1569,12 @@ unsafe fn szerosuit_finalend(fighter: &mut L2CAgentBase) {
         if(is_excute){
             ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=670.0, Angle=45, KBG=75, FKB=0, BKB=80, Size=50.0, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_death"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_NONE)
             ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=600.0, Angle=45, KBG=85, FKB=0, BKB=60, Size=75.0, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_NONE)
-            AttackModule::set_force_reaction(0, true, false)
-            AttackModule::set_force_reaction(1, true, false)
-            AttackModule::set_final_finish_cut_in(0, true, true, -1, false)
-            AttackModule::set_final_finish_cut_in(1, true, true, -1, false)
+            rust {
+                AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+                AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
+                AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, true, -1.0, false);
+                AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, true, -1.0, false);
+            }
         }
         wait(Frames=18)
         if(is_excute){
