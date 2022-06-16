@@ -108,6 +108,56 @@ unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//AttackAirLwSFX
+    agent = "lucas", 
+    script = "sound_attackairlw", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn lucas_dairsfx(fighter: &mut L2CAgentBase) {
+    let boma = fighter.boma();
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+        frame(lua_state, 1.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l05"));
+        }
+        frame(lua_state, 4.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SEQUENCE(fighter, Hash40::new_raw("seq_lucas_rnd_attack"));
+            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l01"));
+        }
+        wait(lua_state, 7.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l03"));
+        }
+        wait(lua_state, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l04"));
+        }   
+    } else { //Lucas
+        frame(lua_state, 1.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l05"));
+        }
+        wait(lua_state, 7.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l01"));
+        }
+        wait(lua_state, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l02"));
+        }
+        wait(lua_state, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l03"));
+        }
+        wait(lua_state, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l04"));
+        }
+    }
+}
+
 #[acmd_script(//SpecialLwStart
     agent = "lucas", 
     script = "sound_speciallwstart", 
@@ -178,6 +228,7 @@ pub fn install() {
         lucas_win3,
         lucas_jab3sfx,
         lucas_sidesmashchargesfx,
+        lucas_dairsfx,
         lucas_downbsfx,
         lucas_downbairsfx,
         lucas_sidetauntrsfx,

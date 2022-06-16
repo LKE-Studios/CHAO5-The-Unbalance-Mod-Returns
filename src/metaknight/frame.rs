@@ -176,6 +176,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
             };
+            if MotionModule::frame(fighter.module_accessor) > 749.0 {
+                MotionModule::change_motion_inherit_frame(module_accessor, Hash40::new("special_hi"), 60.0, 1.0, 0.0, false, false);
+            };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
             fighter.sub_air_check_fall_common();
@@ -222,6 +225,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
+            };
+            if MotionModule::frame(fighter.module_accessor) > 749.0 {
+                MotionModule::change_motion_inherit_frame(module_accessor, Hash40::new("special_hi_loop"), 60.0, 1.0, 0.0, false, false);
             };
         }
     }
