@@ -21,7 +21,7 @@ static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed
 // static mut Y_ACCEL_MUL : f32 = 0.06;
 static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX : f32 = 85.0;
-static ANGLE_LOW_MAX : f32 = -40.0;
+static ANGLE_LOW_MAX : f32 = -41.0;
 static STICK_ANGLE_MUL : f32 = 12.0;
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
@@ -133,7 +133,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.6, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.5, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 27.0 {
                 static Y_ACCEL_ADD : f32 = 0.072;
@@ -175,15 +175,15 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
-            };
-            if MotionModule::frame(fighter.module_accessor) > 749.0 {
-                MotionModule::change_motion_inherit_frame(module_accessor, Hash40::new("special_hi"), 60.0, 1.0, 0.0, false, false);
+            }
+            if MotionModule::frame(fighter.module_accessor) >= 740.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 120.0, 1.0, false, 0.0, false, false);
             };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.6, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.5, -0.44, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 27.0 {
                 static Y_ACCEL_ADD : f32 = 0.072;
@@ -225,9 +225,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
-            };
-            if MotionModule::frame(fighter.module_accessor) > 749.0 {
-                MotionModule::change_motion_inherit_frame(module_accessor, Hash40::new("special_hi_loop"), 60.0, 1.0, 0.0, false, false);
+            }
+            if MotionModule::frame(fighter.module_accessor) >= 740.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 120.0, 1.0, false, 0.0, false, false);
             };
         }
     }

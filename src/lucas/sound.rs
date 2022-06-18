@@ -1,5 +1,7 @@
 use smash::app::sv_animcmd::*;
 use smash::phx::Hash40;
+use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
@@ -114,44 +116,43 @@ unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_dairsfx(fighter: &mut L2CAgentBase) {
-    let boma = fighter.boma();
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
-        frame(lua_state, 1.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l05"));
-        }
-        frame(lua_state, 4.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SEQUENCE(fighter, Hash40::new_raw("seq_lucas_rnd_attack"));
-            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l01"));
-        }
-        wait(lua_state, 7.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l03"));
-        }
-        wait(lua_state, 8.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new_raw("se_lucas_attackair_l04"));
-        }   
-    } else { //Lucas
-        frame(lua_state, 1.0);
+        frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l05"));
         }
-        wait(lua_state, 7.0);
+        frame(fighter.lua_state_agent, 4.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
             macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l01"));
         }
-        wait(lua_state, 8.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l02"));
-        }
-        wait(lua_state, 8.0);
+        wait(fighter.lua_state_agent, 7.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l03"));
         }
-        wait(lua_state, 8.0);
+        wait(fighter.lua_state_agent, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l04"));
+        }   
+    } else { //Lucas
+        frame(fighter.lua_state_agent, 1.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l05"));
+        }
+        wait(fighter.lua_state_agent, 7.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l01"));
+        }
+        wait(fighter.lua_state_agent, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l02"));
+        }
+        wait(fighter.lua_state_agent, 8.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l03"));
+        }
+        wait(fighter.lua_state_agent, 8.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l04"));
         }

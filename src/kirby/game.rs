@@ -366,7 +366,7 @@ unsafe fn kirby_sidesmashdown(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn kirby_upsmash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3576);
-    frame(fighter.lua_state_agent, 9.0);
+    frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
     }
@@ -406,10 +406,8 @@ unsafe fn kirby_upsmash(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_downsmash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.15);
     frame(fighter.lua_state_agent, 4.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
-    frame(fighter.lua_state_agent, 5.0);
-    execute(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
         macros::HIT_NODE(fighter, Hash40::new("footr"), *HIT_STATUS_XLU);
         macros::HIT_NODE(fighter, Hash40::new("footl"), *HIT_STATUS_XLU);
@@ -1349,10 +1347,10 @@ unsafe fn kirby_upbair(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn kirby_downb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_STONE, Hash40::new("special_lw"), false, -1.0);
     }
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_KIRBY_STATUS_WORK_ID_FLAG_STONE_BLINK_ONOFF);
@@ -1410,6 +1408,7 @@ unsafe fn kirby_downb3(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn kirby_downbair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_STONE, Hash40::new("special_air_lw"), false, -1.0);
     }
     frame(fighter.lua_state_agent, 10.0);
