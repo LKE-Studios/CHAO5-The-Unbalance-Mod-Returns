@@ -1057,7 +1057,7 @@ unsafe fn ike_sideb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=60, KBG=88, FKB=0, BKB=70, Size=12.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=16.0, Angle=60, KBG=88, FKB=0, BKB=70, Size=12.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
             WorkModule::on_flag(Flag=FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_ATTACK_END)
         }
         frame(Frame=4)
@@ -1077,6 +1077,24 @@ unsafe fn ike_sideb(fighter: &mut L2CAgentBase) {
     });
 }
 
+
+#[acmd_script(//SpecialSEnd
+    agent = "ike", 
+    script = "game_specialsend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn ike_sidebend(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_END_NO_LANDING)
+            rust {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+            }
+        }
+    });
+}
+
 #[acmd_script(//SpecialAirSAttack
     agent = "ike", 
     script = "game_specialairsattack", 
@@ -1087,7 +1105,7 @@ unsafe fn ike_sidebair(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
         frame(Frame=1)
         if(is_excute){
-            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=60, KBG=88, FKB=0, BKB=70, Size=12.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=16.0, Angle=60, KBG=88, FKB=0, BKB=70, Size=12.5, X=0.0, Y=8.4, Z=14.8, X2=0.0, Y2=8.4, Z2=10.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
             WorkModule::on_flag(Flag=FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_ATTACK_END)
         }
         frame(Frame=4)
@@ -1109,7 +1127,7 @@ unsafe fn ike_sidebair(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialAirSEnd
     agent = "ike", 
-    script = "game_specialairend", 
+    script = "game_specialairsend", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ike_sidebairend(fighter: &mut L2CAgentBase) {
@@ -1441,6 +1459,7 @@ pub fn install() {
         ike_neutralbair1,
         ike_neutralbair2,
         ike_sideb,
+        ike_sidebend,
         ike_sidebair,
         ike_sidebairend,
         ike_upb2,

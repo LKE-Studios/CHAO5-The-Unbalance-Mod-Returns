@@ -1178,13 +1178,16 @@ unsafe fn szerosuit_sideb2(fighter: &mut L2CAgentBase) {
 unsafe fn szerosuit_sidebair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-        rust {
-            frame(fighter.lua_state_agent, 20.0);
-            if macros::is_excute(fighter) {
+        FT_MOTION_RATE(FSM=0.64)
+        frame(Frame=20)
+        if(is_excute){
+            rust {
                 WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
             }
-            frame(fighter.lua_state_agent, 21.0);
-            if macros::is_excute(fighter) {
+        }
+        frame(Frame=21)
+        if(is_excute){
+            rust {
                 WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
             }
         }
@@ -1228,6 +1231,7 @@ unsafe fn szerosuit_sidebair(fighter: &mut L2CAgentBase) {
         }
         frame(Frame=31)
         if(is_excute){
+            FT_MOTION_RATE(FSM=1.0)
             ATTACK(ID=0, Part=4, Bone=hash40("top"), Damage=30.0, Angle=55, KBG=138, FKB=0, BKB=47, Size=10.0, X=0.0, Y=8.5, Z=38.0, X2=0.0, Y2=8.5, Z2=35.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_WHIP)
         }
         wait(Frames=5)

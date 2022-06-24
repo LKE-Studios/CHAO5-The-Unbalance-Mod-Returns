@@ -3371,36 +3371,13 @@ unsafe fn miifighter_finalattack(fighter: &mut L2CAgentBase) {
     });
 } 
 
-#[acmd_script(//FinalAirEnd
-    agent = "miifighter", 
-    script = "game_finalairend", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn miifighter_finalairend(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-        if(is_excute){
-            ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_miifighter_FINAL, ID=0, Damage=60.0, Angle=361, KBG=60, FKB=0, BKB=100, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_POS, Unk=1.0, Unk=true, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
-            WorkModule::on_flag(Flag=FIGHTER_miifighter_STATUS_WORK_ID_FLAG_FINAL_ABS_SET)
-        }
-        frame(Frame=1)
-        FT_MOTION_RATE(FSM=0.9)
-        frame(Frame=30)
-        if(is_excute){
-            WorkModule::on_flag(Flag=FIGHTER_miifighter_STATUS_WORK_ID_FLAG_FINAL_END_EXIT)
-        }
-        frame(Frame=38)
-        FT_MOTION_RATE(FSM=0.8)
-        frame(Frame=50)
-        FT_MOTION_RATE(FSM=0.85)
-    });
-} 
-
 pub fn install() {
     smashline::install_acmd_scripts!(
         miifighter_jab1,
         miifighter_jab2,
-        miifighter_jab3,
+        miifighter_jab100,
+        miifighter_jab100sub,
+        miifighter_jab100end,
         miifighter_dashattack,
         miifighter_sidetilt,
         miifighter_uptilt,
@@ -3427,23 +3404,53 @@ pub fn install() {
         miifighter_downattackd,
         miifighter_cliffattack,
         miifighter_slipattack,
-        miifighter_sideb1,
-        miifighter_sideb2,
-        miifighter_sidebair1,
-        miifighter_sidebair2,
-        miifighter_upb1,
-        miifighter_upb2,
-        miifighter_upbair,
-        miifighter_downb1,
-        miifighter_downb2,
+        miifighter_neutralb1,
+        miifighter_neutralbair1,
+        miifighter_shotput,
+        miifighter_neutral2b,
+        miifighter_neutral2bstart,
+        miifighter_neutral2bend,
+        miifighter_neutral2bair,
+        miifighter_neutral2bairstart,
+        miifighter_neutral2bairend,
+        miifighter_neutral3b,
+        miifighter_neutral3bturn,
+        miifighter_neutral3bair,
+        miifighter_neutral3bairturn,
+        miifighter_side1bstart
+        miifighter_side1bend,
+        miifighter_side1bairstart,
+        miifighter_side1bairend,
+        miifighter_side2b,
+        miifighter_side3bdash,
+        miifighter_side3bthrow,
+        miifighter_side3bairdash,
+        miifighter_side3bairfall,
+        miifighter_side3bairgrab,
+        miifighter_side3bairland,
+        miifighter_up1b1,
+        miifighter_up1b2,
+        miifighter_up1b3,
+        miifighter_upair1b1,
+        miifighter_upair1b2,
+        miifighter_upair1b3,
+        miifighter_up2b,
+        miifighter_up2bair,
+        miifighter_down1b,
+        miifighter_down1bloop,
+        miifighter_down1blanding,
+        miifighter_down2battack,
+        miifighter_down2bkick,
+        miifighter_down3bthrow,
+        miifighter_down3bairthrow,
         miifighter_sidetauntr,
         miifighter_sidetauntl,
         miifighter_uptauntr,
         miifighter_uptauntl,
         miifighter_downtauntr,
         miifighter_downtauntl,
-        miifighter_finalend,
-        miifighter_finalendcom,
-        miifighter_finalairend
+        miifighter_finalstart,
+        miifighter_finalairstart,
+        miifighter_finalattack
     );
 }

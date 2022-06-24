@@ -1241,7 +1241,7 @@ unsafe fn metaknight_upb(fighter: &mut L2CAgentBase) {
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     }
     frame(fighter.lua_state_agent, 25.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.75);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         GroundModule::set_passable_check(fighter.module_accessor, false);
@@ -1312,7 +1312,7 @@ unsafe fn metaknight_upbloop(fighter: &mut L2CAgentBase) {
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     }
     frame(fighter.lua_state_agent, 25.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.75);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
