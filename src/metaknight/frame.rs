@@ -7,8 +7,8 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 static mut X : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
 static mut Y : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
-static mut X2 : [f32; 8] = [0.0; 8]; //Log speed for Standard Glide 
-static mut Y2 : [f32; 8] = [0.0; 8]; //Log speed for Standard Glide 
+//static mut X2 : [f32; 8] = [0.0; 8]; //Log speed for Standard Glide 
+//static mut Y2 : [f32; 8] = [0.0; 8]; //Log speed for Standard Glide 
 static mut X_MAX : f32 = 0.0; //Max Horizontal movespeed (is needed for both glide variations)
 static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed (is needed for both glide variations)
 static mut ANGLE : [f32; 8] = [0.0; 8];
@@ -99,10 +99,10 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 3.4, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.2, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.058;
+                static Y_ACCEL_ADD : f32 = 0.0566;
                 static mut X_ACCEL_ADD : f32 = 0.0;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -110,14 +110,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 let mut x_add;
                 x_add = (stick_x)*X_ACCEL_ADD;
                 y_add = (stick_y)*Y_ACCEL_ADD;
-                if x_add > 2.3 && X[ENTRY_ID] > X_MAX {
-                    x_add = 2.3;
+                if x_add > 2.2 && X[ENTRY_ID] > X_MAX {
+                    x_add = 2.2;
                 };
-                if x_add < 2.3 && X[ENTRY_ID] < X_MAX+2.3 {
-                    x_add = 2.3;
+                if x_add < 2.2 && X[ENTRY_ID] < X_MAX+2.2 {
+                    x_add = 2.2;
                 };
-                if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = 0.0;
+                if y_add > 2.2 && Y[ENTRY_ID] > Y_MAX {
+                    y_add = 2.2;
                 };
                 if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*0.0 {
                     y_add = 0.0;
@@ -149,16 +149,17 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
+            fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) >= 2.0 && MotionModule::frame(fighter.module_accessor) < 3.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop1"), Hash40::new("top"), 0, -5, 2.5, 4, 0, 0, 1, true);
                 EffectModule::set_disable_render_offset_last(fighter.module_accessor);
                 macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 20, 15, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.3, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.2, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.058;
+                static Y_ACCEL_ADD : f32 = 0.0566;
                 static mut X_ACCEL_ADD : f32 = 0.0;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -166,11 +167,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 let mut x_add;
                 x_add = (stick_x)*X_ACCEL_ADD;
                 y_add = (stick_y)*Y_ACCEL_ADD;
-                if x_add > 2.3 && X[ENTRY_ID] > X_MAX {
-                    x_add = 2.3;
+                if x_add > 2.2 && X[ENTRY_ID] > X_MAX {
+                    x_add = 2.2;
                 };
-                if x_add < 2.3 && X[ENTRY_ID] < X_MAX+2.3 {
-                    x_add = 2.3;
+                if x_add < 2.2 && X[ENTRY_ID] < X_MAX+2.2 {
+                    x_add = 2.2;
                 };
                 if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
                     y_add = 0.0;
