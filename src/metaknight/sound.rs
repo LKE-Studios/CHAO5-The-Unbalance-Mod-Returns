@@ -71,7 +71,7 @@ unsafe fn metaknight_upbsfx(fighter: &mut L2CAgentBase) {
     }*/
 }    
 
-/*#[acmd_script(//SpecialHiLoopSFX
+#[acmd_script(//SpecialHiLoopSFX
     agent = "metaknight", 
     script = "sound_specialhiloop", 
     category = ACMD_SOUND, 
@@ -81,7 +81,7 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_start"));
     }
-    frame(fighter.lua_state_agent, 2.0);
+    /*frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
         macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h02"));
@@ -89,8 +89,8 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
        macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
-    }
-}*/   
+    }*/
+}   
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -98,6 +98,6 @@ pub fn install() {
         //metaknight_neutralbstartsfx,
         //metaknight_neutralbairstartsfx,
         metaknight_upbsfx,
-        //metaknight_upbloopsfx
+        metaknight_upbloopsfx
     );
 }

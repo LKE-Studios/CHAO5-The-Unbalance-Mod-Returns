@@ -27,6 +27,9 @@ mod mariod;
 mod marth;
 mod metaknight;
 mod mewtwo;
+mod miifighter;
+mod miigunner;
+mod miiswordsman;
 mod nana;
 mod ness;
 mod palutena;
@@ -44,6 +47,7 @@ mod pzenigame;
 mod robot;
 mod rockman;
 mod roy;
+mod ryu;
 mod samus;
 mod sheik;
 mod shulk;
@@ -141,6 +145,10 @@ pub fn main() {
     shulk::install();
     palutena::install();
     rockman::install();
+    ryu::install();
+    miifighter::install();
+    miiswordsman::install();
+    miigunner::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
