@@ -1,4 +1,5 @@
 use smash::app::sv_animcmd::*;
+use smash::hash40;
 use smash::phx::Hash40;
 use smash::lib::lua_const::*;
 use smash::app::*;
@@ -1506,118 +1507,113 @@ unsafe fn littlemac_downtauntl(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//FinalAttack
+#[acmd_script(//FinalAttack
     agent = "littlemac", 
     script = "game_finalattack", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn littlemac_finalattack(fighter: &mut L2CAgentBase) {
-        if macros::is_excute(fighter) {
-            macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-        }
-        frame(fighter.lua_state_agent, 1.0);
-        if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter);
-        }
-        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
-        if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-            WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_DEMON_DOJO_ZOOM);
-            if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-                macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
-                if(0x1462c0(0, 0)){
-                    if macros::is_excute(fighter) {
-                        PostureModule::scale(fighter.module_accessor, 300, 0);
-                        0x1462c0(0, 2.5);
-                        macros::CAM_ZOOM_IN_FINAL_arg13(fighter, -15, 10, 0, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, 20, 5);
-                    }
-                    else{
-                        macros::get_value_float(fighter, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
-                        if(0x1462c0(680, 0)){
-                            if macros::is_excute(fighter) {
-                                PostureModule::scale(fighter.module_accessor, 300, 0);
-                                0x1462c0(0, 2.5);
-                                macros::CAM_ZOOM_IN_FINAL_arg13(fighter, -30, 10, -20, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, 20, 5);
-                            }
-                            else{
-                                if macros::is_excute(fighter) {
-                                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300, 0, 2.5, 15, 10, 0, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, -15, 5);
-                                }
-                                else{
-                                    if macros::is_excute(fighter) {
-                                        macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300, 0, 2.5, 30, 10, 20, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, -15, 5);
-                                    }
-                                }
-                            }
-                        }
-                    }
+    if macros::is_excute(fighter) {
+        macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT) {
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_DEMON_DOJO_ZOOM) {
+            if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+                if macros::is_excute(fighter) {
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5, 30, 10, 20, -5, 70, true, id as u32, 0, -15, 5);
                 }
-            }
-        }
-        frame(fighter.lua_state_agent, 2.0);
-        for(47 Iterations){
-            if macros::is_excute(fighter) {
-                macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 315, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 225, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 135, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
-                AttackModule::set_no_uniq_effect_all(fighter.module_accessor, true, false);
-            }
-            wait(fighter.lua_state_agent, 1.0);
-            if macros::is_excute(fighter) {
-                AttackModule::clear_all(fighter.module_accessor);
-            }
-            wait(fighter.lua_state_agent, 2.0);
-        }
-        frame(fighter.lua_state_agent, 143.0);
-        if macros::is_excute(fighter) {
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 40, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 20.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
-            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-            WorkModule::set_int64(fighter.module_accessor, Hash40::new("fall_damage"), *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-        }
-        frame(fighter.lua_state_agent, 144.0);
-        if macros::is_excute(fighter) {
-            AttackModule::clear_all(fighter.module_accessor);
-            WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-        }
-        frame(fighter.lua_state_agent, 149.0);
-        if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter, );
-            macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-            AttackModule::clear_all(fighter.module_accessor);
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 888.0, /*Angle*/ 68, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 40.0, /*X*/ 0.0, /*Y*/ 14.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
-            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_END_HIT);
-            AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1, false);
-        }
-        WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
-        if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-            if macros::is_excute(fighter) {
-                PostureModule::scale(fighter.module_accessor, 2, 0);
-                0x1462c0(-1186192792, 2.5);
-                macros::CAM_ZOOM_IN_arg5(fighter, 0, 0);
-            }
-        }
-        macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
-        if(0x1462c0(1421420, 0)){
-            if macros::is_excute(fighter) {
-                camera(*MA_MSC_CMD_CAMERA_CAM_OFFSET, -10, 10);
             }
             else{
                 if macros::is_excute(fighter) {
-                    camera(*MA_MSC_CMD_CAMERA_CAM_OFFSET, 10, 10);
+                    let scale = PostureModule::scale(fighter.module_accessor);
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, -20, -5, 70, true, id as u32, 0, 20, 5);
                 }
             }
         }
-        frame(fighter.lua_state_agent, 151.0);
+        else {
+            if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+                if macros::is_excute(fighter) {
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5, 15, 10, 0, -5, 70, true, id as u32, 0, -15, 5);
+                }
+            }
+            else{
+                if macros::is_excute(fighter) {
+                    let scale = PostureModule::scale(fighter.module_accessor);
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, 0, -5, 70, true, id as u32, 0, 20, 5);
+                }
+            }
+        }
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    for _ in 0..47 {
+        if macros::is_excute(fighter) {
+            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 315, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 225, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 135, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
+            AttackModule::set_no_uniq_effect_all(fighter.module_accessor, true, false);
+        }
+        wait(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
         }
-        frame(fighter.lua_state_agent, 176.0);
+        wait(fighter.lua_state_agent, 2.0);
+    }
+    frame(fighter.lua_state_agent, 143.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 40, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 20.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+        AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+        WorkModule::set_int64(fighter.module_accessor, hash40("fall_damage") as i64, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+    }
+    frame(fighter.lua_state_agent, 144.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+        WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+    }
+    frame(fighter.lua_state_agent, 149.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter, );
+        macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
+        AttackModule::clear_all(fighter.module_accessor);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 888.0, /*Angle*/ 68, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 40.0, /*X*/ 0.0, /*Y*/ 14.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_END_HIT);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1.0, false);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT) {
         if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter, );
+            let scale = PostureModule::scale(fighter.module_accessor);
+            macros::CAM_ZOOM_IN_arg5(fighter, 2.0, 0.0, 2.5 * scale, 0.0, 0.0);
         }
+        if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+            if macros::is_excute(fighter) {
+                camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 10, 10);
+            }
+        }
+        else{
+            if macros::is_excute(fighter) {
+                camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, -10, 10);
+            }
+        }
+    }
+    frame(fighter.lua_state_agent, 151.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 176.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+    }
 } 
 
 #[acmd_script(//FinalAirAttack
@@ -1626,114 +1622,108 @@ unsafe fn littlemac_finalattack(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn littlemac_finalairattack(fighter: &mut L2CAgentBase) {
-    
-        if macros::is_excute(fighter) {
-            macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-        }
-        frame(fighter.lua_state_agent, 1.0);
-        if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter, );
-        }
-        WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
-        if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-            WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_DEMON_DOJO_ZOOM);
-            if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-                macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
-                if(0x1462c0(0, 0)){
-                    if macros::is_excute(fighter) {
-                        PostureModule::scale(fighter.module_accessor, 300, 0);
-                        0x1462c0(0, 2.5);
-                        macros::CAM_ZOOM_IN_FINAL_arg13(fighter, -15, 10, 0, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, 20, 5);
-                    }
-                    else{
-                        macros::get_value_float(fighter, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
-                        if(0x1462c0(680, 0)){
-                            if macros::is_excute(fighter) {
-                                PostureModule::scale(fighter.module_accessor, 300, 0);
-                                0x1462c0(0, 2.5);
-                                macros::CAM_ZOOM_IN_FINAL_arg13(fighter, -30, 10, -20, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, 20, 5);
-                            }
-                            else{
-                                if macros::is_excute(fighter) {
-                                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300, 0, 2.5, 15, 10, 0, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, -15, 5);
-                                }
-                                else{
-                                    if macros::is_excute(fighter) {
-                                        macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300, 0, 2.5, 30, 10, 20, -5, 70, true, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID, 0, -15, 5);
-                                    }
-                                }
-                            }
-                        }
-                    }
+    if macros::is_excute(fighter) {
+        macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT) {
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_DEMON_DOJO_ZOOM) {
+            if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+                if macros::is_excute(fighter) {
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5, 30, 10, 20, -5, 70, true, id as u32, 0, -15, 5);
                 }
-            }
-        }
-        frame(fighter.lua_state_agent, 2.0);
-        for(47 Iterations){
-            if macros::is_excute(fighter) {
-                macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 315, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 225, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 135, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-                AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
-                AttackModule::set_no_uniq_effect_all(fighter.module_accessor, true, false);
-            }
-            wait(fighter.lua_state_agent, 1.0);
-            if macros::is_excute(fighter) {
-                AttackModule::clear_all(fighter.module_accessor);
-            }
-            wait(fighter.lua_state_agent, 2.0);
-        }
-        frame(fighter.lua_state_agent, 143.0);
-        if macros::is_excute(fighter) {
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 40, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 20.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
-            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-            WorkModule::set_int64(fighter.module_accessor, Hash40::new("fall_damage"), *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-        }
-        frame(fighter.lua_state_agent, 144.0);
-        if macros::is_excute(fighter) {
-            AttackModule::clear_all(fighter.module_accessor);
-            WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
-        }
-        frame(fighter.lua_state_agent, 149.0);
-        if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter, );
-            macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-            AttackModule::clear_all(fighter.module_accessor);
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 888.0, /*Angle*/ 68, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 40.0, /*X*/ 0.0, /*Y*/ 14.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
-            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_END_HIT);
-            AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1, false);
-        }
-        WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT);
-        if(fighter.module_accessor, methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
-            if macros::is_excute(fighter) {
-                PostureModule::scale(fighter.module_accessor, 2, 0);
-                0x1462c0(-1186192792, 2.5);
-                macros::CAM_ZOOM_IN_arg5(fighter, 0, 0);
-            }
-        }
-        macros::get_value_float(fighter, *SO_VAR_FLOAT_LR);
-        if(0x1462c0(1421420, 0)){
-            if macros::is_excute(fighter) {
-                camera(*MA_MSC_CMD_CAMERA_CAM_OFFSET, -10, 10);
             }
             else{
                 if macros::is_excute(fighter) {
-                    camera(*MA_MSC_CMD_CAMERA_CAM_OFFSET, 10, 10);
+                    let scale = PostureModule::scale(fighter.module_accessor);
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, -20, -5, 70, true, id as u32, 0, 20, 5);
                 }
             }
         }
-        frame(fighter.lua_state_agent, 151.0);
+        else {
+            if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+                if macros::is_excute(fighter) {
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5, 15, 10, 0, -5, 70, true, id as u32, 0, -15, 5);
+                }
+            }
+            else{
+                if macros::is_excute(fighter) {
+                    let scale = PostureModule::scale(fighter.module_accessor);
+                    let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, 0, -5, 70, true, id as u32, 0, 20, 5);
+                }
+            }
+        }
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    for _ in 0..47 {
+        if macros::is_excute(fighter) {
+            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 315, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 225, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 20.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 135, /*KBG*/ 100, /*FKB*/ 50, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+            AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
+            AttackModule::set_no_uniq_effect_all(fighter.module_accessor, true, false);
+        }
+        wait(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
         }
-        frame(fighter.lua_state_agent, 176.0);
+        wait(fighter.lua_state_agent, 2.0);
+    }
+    frame(fighter.lua_state_agent, 143.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 40, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 20.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+        AttackModule::set_no_dead_all(fighter.module_accessor, true, false);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+        WorkModule::set_int64(fighter.module_accessor, hash40("fall_damage") as i64, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+    }
+    frame(fighter.lua_state_agent, 144.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+        WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_REQUEST_LOOP_DAMAGE_MOTION);
+    }
+    frame(fighter.lua_state_agent, 149.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter, );
+        macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
+        AttackModule::clear_all(fighter.module_accessor);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 888.0, /*Angle*/ 68, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 40.0, /*X*/ 0.0, /*Y*/ 14.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_NONE);
+        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_ATTACK_END_HIT);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1.0, false);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT) {
         if macros::is_excute(fighter) {
-            macros::CAM_ZOOM_OUT(fighter, );
+            let scale = PostureModule::scale(fighter.module_accessor);
+            macros::CAM_ZOOM_IN_arg5(fighter, 2.0, 0.0, 2.5 * scale, 0.0, 0.0);
         }
-}*/ 
+        if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
+            if macros::is_excute(fighter) {
+                camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 10, 10);
+            }
+        }
+        else{
+            if macros::is_excute(fighter) {
+                camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, -10, 10);
+            }
+        }
+    }
+    frame(fighter.lua_state_agent, 151.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 176.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+    }
+}
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -1790,7 +1780,7 @@ pub fn install() {
         littlemac_uptauntl,
         littlemac_downtauntr,
         littlemac_downtauntl,
-        //littlemac_finalattack,
-        //littlemac_finalairattack
+        littlemac_finalattack,
+        littlemac_finalairattack
     );
 }

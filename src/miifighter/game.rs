@@ -1,4 +1,5 @@
 use smash::app::sv_animcmd::*;
+use smash::hash40;
 use smash::phx::Vector3f;
 use smash::phx::Hash40;
 use smash::lib::lua_const::*;
@@ -2694,7 +2695,7 @@ unsafe fn miifighter_downtauntl(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//FinalStart
+#[acmd_script(//FinalStart
     agent = "miifighter", 
     script = "game_finalstart", 
     category = ACMD_GAME, 
@@ -2702,37 +2703,36 @@ unsafe fn miifighter_downtauntl(fighter: &mut L2CAgentBase) {
 unsafe fn miifighter_finalstart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
-        macros::SLOW_OPPONENT(fighter, 5, 30);
+        macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
     }
-    if WorkModule::is_flag(fighter.module_accessor, *INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) == false {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
         frame(fighter.lua_state_agent, 5.0);
         if macros::is_excute(fighter) {
             macros::FT_SET_FINAL_FEAR_FACE(fighter, 30);
             macros::REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04finalstart.nuanmb"), false);
-            macros::FT_START_CUTIN(fighter, );
+            macros::FT_START_CUTIN(fighter);
+            SlowModule::set_whole(fighter.module_accessor, 2, 0);
+        }
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
+            SlowModule::set_whole(fighter.module_accessor, 3, 0);
+        }
+        frame(fighter.lua_state_agent, 14.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
+            SlowModule::set_whole(fighter.module_accessor, 5, 0);
+        }
+        frame(fighter.lua_state_agent, 18.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
             SlowModule::set_whole(fighter.module_accessor, 2, 0);
         }
     }
-    frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 3, 0);
-    }
-    frame(fighter.lua_state_agent, 14.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 5, 0);
-    }
-    frame(fighter.lua_state_agent, 18.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 2, 0);
-    }
     else{
         if macros::is_excute(fighter) {
-            PostureModule::scale(fighter.module_accessor, 3, 0);
-            0x18bc20(-431126369, 2.4);
-            macros::CAM_ZOOM_IN_arg5(fighter, 0, 0);
+            let scale = PostureModule::scale(fighter.module_accessor);
+            macros::CAM_ZOOM_IN_arg5(fighter, 3.0, 0.0, 2.4 * scale, 0.0, 0.0);
             macros::FT_START_CUTIN(fighter);
         }
     }
@@ -2760,7 +2760,7 @@ unsafe fn miifighter_finalstart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 25.0);
     if macros::is_excute(fighter) {
-        macros::CAM_ZOOM_OUT(fighter, );
+        macros::CAM_ZOOM_OUT(fighter);
     }
     frame(fighter.lua_state_agent, 31.0);
     if macros::is_excute(fighter) {
@@ -2777,38 +2777,37 @@ unsafe fn miifighter_finalstart(fighter: &mut L2CAgentBase) {
 unsafe fn miifighter_finalairstart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
-        macros::SLOW_OPPONENT(fighter, 5, 30);
+        macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
     }
-    if WorkModule::is_flag(fighter.module_accessor, *INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) == false {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
         frame(fighter.lua_state_agent, 5.0);
         if macros::is_excute(fighter) {
             macros::FT_SET_FINAL_FEAR_FACE(fighter, 30);
             macros::REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04finalstart.nuanmb"), false);
-            macros::FT_START_CUTIN(fighter, );
+            macros::FT_START_CUTIN(fighter);
+            SlowModule::set_whole(fighter.module_accessor, 2, 0);
+        }
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
+            SlowModule::set_whole(fighter.module_accessor, 3, 0);
+        }
+        frame(fighter.lua_state_agent, 14.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
+            SlowModule::set_whole(fighter.module_accessor, 5, 0);
+        }
+        frame(fighter.lua_state_agent, 18.0);
+        if macros::is_excute(fighter) {
+            SlowModule::clear_whole(fighter.module_accessor);
             SlowModule::set_whole(fighter.module_accessor, 2, 0);
         }
     }
-    frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 3, 0);
-    }
-    frame(fighter.lua_state_agent, 14.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 5, 0);
-    }
-    frame(fighter.lua_state_agent, 18.0);
-    if macros::is_excute(fighter) {
-        SlowModule::clear_whole(fighter.module_accessor);
-        SlowModule::set_whole(fighter.module_accessor, 2, 0);
-    }
     else{
         if macros::is_excute(fighter) {
-            PostureModule::scale(fighter.module_accessor, 3, 0);
-            0x18bc20(-431126369, 2.4);
-            macros::CAM_ZOOM_IN_arg5(fighter, 0, 0);
-            macros::FT_START_CUTIN(fighter, );
+            let scale = PostureModule::scale(fighter.module_accessor);
+            macros::CAM_ZOOM_IN_arg5(fighter, 3.0, 0.0, 2.4 * scale, 0.0, 0.0);
+            macros::FT_START_CUTIN(fighter);
         }
     }
     frame(fighter.lua_state_agent, 20.0);
@@ -2835,7 +2834,7 @@ unsafe fn miifighter_finalairstart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 25.0);
     if macros::is_excute(fighter) {
-        macros::CAM_ZOOM_OUT(fighter, );
+        macros::CAM_ZOOM_OUT(fighter);
     }
     frame(fighter.lua_state_agent, 31.0);
     if macros::is_excute(fighter) {
@@ -3131,18 +3130,18 @@ unsafe fn miifighter_finalattack(fighter: &mut L2CAgentBase) {
         AttackModule::set_no_uniq_effect_all(fighter.module_accessor, true, false);
         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_FINAL_FLAG_REQUEST_LOOP_DAMAGE_MOTION);
-        WorkModule::set_int64(fighter.module_accessor, Hash40::new("fall_damage"), *FIGHTER_MIIFIGHTER_STATUS_FINAL_WORK_INT_REQUEST_LOOP_DAMAGE_MOTION);
+        WorkModule::set_int64(fighter.module_accessor, hash40("fall_damage") as i64, *FIGHTER_MIIFIGHTER_STATUS_FINAL_WORK_INT_REQUEST_LOOP_DAMAGE_MOTION);
     }
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-        macros::CAM_ZOOM_OUT(fighter, );
+        macros::CAM_ZOOM_OUT(fighter);
     }
     frame(fighter.lua_state_agent, 267.0);
     if macros::is_excute(fighter) {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
-}*/ 
+}
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -3228,8 +3227,8 @@ pub fn install() {
         miifighter_uptauntl,
         miifighter_downtauntr,
         miifighter_downtauntl,
-        //miifighter_finalstart,
-        //miifighter_finalairstart,
-        //miifighter_finalattack
+        miifighter_finalstart,
+        miifighter_finalairstart,
+        miifighter_finalattack
     );
 }
