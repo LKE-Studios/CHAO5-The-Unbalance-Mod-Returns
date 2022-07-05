@@ -18,13 +18,11 @@ pub fn miiswordsman_opff(fighter : &mut L2CFighterCommon) {
         AttackModule::set_attack_scale(fighter.module_accessor, 1.0 * SWORD_MUL[ENTRY_ID], true);
         if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT){
             SWORD_MUL[ENTRY_ID] += 0.05;
-        } else {
-            if sv_information::is_ready_go() == false {
-                ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("haver"), &Vector3f{x: 1.0, y: 1.0, z: 1.0});
-                AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
-            }
         }
-    };
+        if sv_information::is_ready_go() == false {
+            SWORD_MUL[ENTRY_ID] = 1.0;
+        }
+    }
 }
 
 pub fn install() {
