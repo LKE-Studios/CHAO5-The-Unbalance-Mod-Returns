@@ -286,7 +286,7 @@ unsafe fn ryu_sidetiltn(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn ryu_uptiltw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.1);
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 6.0, 4.0);

@@ -7,6 +7,7 @@ use std::ffi::CStr;
 use skyline::hooks::{getRegionAddress, Region};
 
 mod captain;
+mod cloud;
 mod dedede;
 mod diddy;
 mod donkey;
@@ -149,6 +150,7 @@ pub fn main() {
     miifighter::install();
     miiswordsman::install();
     miigunner::install();
+    cloud::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

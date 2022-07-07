@@ -39,11 +39,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     let mut x_add;
                     x_add = (stick_x)*X_ACCEL_ADD2;
                     y_add = (stick_y)*Y_ACCEL_ADD2;
-                    if x_add > 2.4 && X2[ENTRY_ID] > X_MAX {
-                        x_add = 2.4;
+                    if x_add > 2.0 && X2[ENTRY_ID] > X_MAX {
+                        x_add = 2.0;
                     };
-                    if x_add < 2.4 && X2[ENTRY_ID] < X_MAX+2.4 {
-                        x_add = 2.4;
+                    if x_add < 2.0 && X2[ENTRY_ID] < X_MAX+2.0 {
+                        x_add = 2.0;
                     };
                     if y_add > 0.0 && Y2[ENTRY_ID] > Y_MAX {
                         y_add = 0.0;
@@ -102,12 +102,12 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.0, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.0, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.045;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL : f32 = -0.0048; 
+                static X_DECEL : f32 = -0.0061; 
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 let mut y_add;
@@ -143,7 +143,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 };
                 let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
                 let x = ANGLE2[ENTRY_ID] * X_DECEL; //Some Horizontal Air mobility is sacrificed when ascending/descending
-                macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.48 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.4 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
                 let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
@@ -168,12 +168,12 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 2.0, -0.48, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 2.0, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.045;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL : f32 = -0.0048;
+                static X_DECEL : f32 = -0.0061;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 let mut y_add;
@@ -209,7 +209,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 };
                 let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
                 let x = ANGLE2[ENTRY_ID] * X_DECEL; //Some Horizontal Air mobility is sacrificed when ascending/descending
-                macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.48 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.4 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
                 let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
