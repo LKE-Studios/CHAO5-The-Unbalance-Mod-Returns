@@ -7,7 +7,8 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-use crate::utils::FIGHTER_CUTIN_MANAGER;
+use crate::ryu::status::CHARGE_TIME;
+use crate::utils::{FIGHTER_CUTIN_MANAGER, get_entry_id};
 
 #[acmd_script(//Attack11W
     agent = "ryu", 
@@ -1016,10 +1017,38 @@ unsafe fn ryu_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(
+agent = "ryu",
+script = "game_kamehameha_fire",
+category = ACMD_GAME,
+low_priority )]
+unsafe fn ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
+    let entry_id = get_entry_id(fighter.module_accessor);
+    let damage = (CHARGE_TIME[entry_id] * 0.01) + 1.0;
+    damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    frame(fighter.lua_state_agent, 9.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ damage, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 10, /*BKB*/ 10, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 18.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1000.0), /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
+    }
+    frame(fighter.lua_state_agent, 66.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 18.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1000.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
+    }
+}
+
+#[acmd_script(
+agent = "ryu",
+scripts = ["game_kamehameha_start", "game_kamehameha_charge"],
+category = ACMD_GAME,
+low_priority )]
+unsafe fn ryu_kamehameha_charge(fighter: &mut L2CAgentBase) {
+    damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+}
+
 #[acmd_script(//SpecialAirN
-    agent = "ryu", 
-    script = "game_specialairn", 
-    category = ACMD_GAME, 
+    agent = "ryu",
+    script = "game_specialairn",
+    category = ACMD_GAME,
     low_priority )]
 unsafe fn ryu_neutralbair(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -2119,6 +2148,8 @@ pub fn install() {
         ryu_cliffattack,
         ryu_slipattack,
         ryu_neutralbair,
+        ryu_kamehameha_fire,
+        ryu_kamehameha_charge,
         ryu_hadoken1,
         ryu_hadoken2,
         ryu_hadoken3,

@@ -1532,7 +1532,7 @@ unsafe fn littlemac_finalattack(fighter: &mut L2CAgentBase) {
                 if macros::is_excute(fighter) {
                     let scale = PostureModule::scale(fighter.module_accessor);
                     let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
-                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, -20, -5, 70, true, id as u32, 0, 20, 5);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, 20, -5, 70, true, id as u32, 0, 20, 5);
                 }
             }
         }
@@ -1641,7 +1641,7 @@ unsafe fn littlemac_finalairattack(fighter: &mut L2CAgentBase) {
                 if macros::is_excute(fighter) {
                     let scale = PostureModule::scale(fighter.module_accessor);
                     let id = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_LITTLEMAC_STATUS_FINAL_WORK_INT_ATTACK_HIT_OBJECT_ID);
-                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, -20, -5, 70, true, id as u32, 0, 20, 5);
+                    macros::CAM_ZOOM_IN_FINAL_arg13(fighter, 300.0, 0.0, 2.5 * scale, -30, 10, 20, -5, 70, true, id as u32, 0, 20, 5);
                 }
             }
         }

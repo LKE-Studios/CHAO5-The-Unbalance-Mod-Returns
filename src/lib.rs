@@ -79,8 +79,8 @@ fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
 #[skyline::hook(offset = DECLARE_CONST_OFFSET)]
 unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     let str = CStr::from_ptr(constant as _).to_str().unwrap();
-    if str.contains("FIGHTER_PEACH_STATUS_KIND_MAX") {
-        value = 0x1ee; //494 for now
+    if str.contains("FIGHTER_RYU_STATUS_KIND_NUM") {
+        value = 0x205;
     }
     original!()(unk,constant,value)
 }
