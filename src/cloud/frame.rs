@@ -12,9 +12,9 @@ pub fn cloud_opff(fighter : &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
             if MotionModule::frame(fighter.module_accessor) > 1.0 {
                 ModelModule::set_joint_scale(fighter.module_accessor,Hash40::new("haver"), &Vector3f{x:2.0, y:2.0, z:2.0});
-                AttackModule::set_attack_scale(fighter.module_accessor, 1.7, true);
+                AttackModule::set_attack_scale(fighter.module_accessor, 1.8, true);
             };
-            if MotionModule::frame(fighter.module_accessor) > 18.0 {
+            if MotionModule::frame(fighter.module_accessor) > 26.0 {
                 ModelModule::set_joint_scale(fighter.module_accessor,Hash40::new("haver"), &Vector3f{x:1.0, y: 1.0,z: 1.0});         
                 AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
             };

@@ -12,10 +12,10 @@ static mut Y : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
 static mut X_MAX : f32 = 0.0; //Max Horizontal movespeed (is needed for both glide variations)
 static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed (is needed for both glide variations)
 static mut ANGLE : [f32; 8] = [0.0; 8];
-static ANGLE_MAX : f32 = 79.0; //Max Ascent Angle for Glide
+static ANGLE_MAX : f32 = 79.9; //Max Ascent Angle for Glide
 static ANGLE_LOW_MAX : f32 = -80.0; //Max Descent Angle for Glide
 static mut ANGLE2 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX2 : f32 = 79.0; 
+static ANGLE_MAX2 : f32 = 79.9; 
 static ANGLE_LOW_MAX2 : f32 = 80.0; 
 static STICK_ANGLE_MUL : f32 = 9.0; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
 
