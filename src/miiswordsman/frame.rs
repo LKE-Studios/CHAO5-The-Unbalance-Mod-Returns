@@ -1,7 +1,6 @@
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
-use smash::phx::Vector3f;
-use smash::app::{self, sv_information};
+use smash::app::{sv_information};
 use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 static mut SWORD_MUL : [f32; 8] = [1.0; 8];
@@ -11,7 +10,6 @@ pub fn miiswordsman_opff(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let fighter_kind = smash::app::utility::get_kind(boma);
         let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let joint_scale = smash::phx::Vector3f { x: SWORD_MUL[ENTRY_ID], y: SWORD_MUL[ENTRY_ID], z: SWORD_MUL[ENTRY_ID]};
         ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("haver"), &joint_scale);
@@ -20,6 +18,18 @@ pub fn miiswordsman_opff(fighter : &mut L2CFighterCommon) {
             SWORD_MUL[ENTRY_ID] += 0.05;
         }
         if sv_information::is_ready_go() == false {
+            SWORD_MUL[ENTRY_ID] = 1.0;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
+            SWORD_MUL[ENTRY_ID] = 1.0;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+            SWORD_MUL[ENTRY_ID] = 1.0;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_WIN {
+            SWORD_MUL[ENTRY_ID] = 1.0;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_LOSE {
             SWORD_MUL[ENTRY_ID] = 1.0;
         }
     }
