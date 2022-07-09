@@ -2534,6 +2534,25 @@ unsafe fn miifighter_down2bairattack(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialLw3Catch
+    agent = "miifighter", 
+    script = "game_speciallw3catch", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn miifighter_down3bcatch(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        macros::SEARCH(fighter, 0, 0, Hash40::new("top"), 25.0, 0.0, 5.0, 9.0, Some(0.0), Some(5.0), Some(7.5), *COLLISION_KIND_MASK_HIT, *HIT_STATUS_MASK_ALL, 0, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_FIEB, *COLLISION_PART_MASK_ALL, false);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        search!(fighter, MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL);
+    }
+}
+
 #[acmd_script(//SpecialLw3Throw
     agent = "miifighter", 
     script = "game_speciallw3throw", 
@@ -3219,6 +3238,7 @@ pub fn install() {
         miifighter_down2bairattack,
         miifighter_down2bkick,
         miifighter_down2bairkick,
+        miifighter_down3bcatch,
         miifighter_down3bthrow,
         miifighter_down3bairthrow,
         miifighter_sidetauntr,

@@ -6,6 +6,7 @@
 use std::ffi::CStr;
 use skyline::hooks::{getRegionAddress, Region};
 
+mod bayonetta;
 mod captain;
 mod cloud;
 mod dedede;
@@ -151,6 +152,7 @@ pub fn main() {
     miiswordsman::install();
     miigunner::install();
     cloud::install();
+    bayonetta::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
