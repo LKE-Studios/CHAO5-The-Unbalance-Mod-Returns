@@ -16,6 +16,7 @@ mod falco;
 mod fox;
 mod gamewatch;
 mod ganon;
+mod gekkouga;
 mod ike;
 mod kirby;
 mod koopa;
@@ -46,6 +47,7 @@ mod popo;
 mod purin;
 mod ptrainer;
 mod pzenigame;
+mod reflet;
 mod robot;
 mod rockman;
 mod roy;
@@ -153,6 +155,8 @@ pub fn main() {
     miigunner::install();
     cloud::install();
     bayonetta::install();
+    reflet::install();
+    gekkouga::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
