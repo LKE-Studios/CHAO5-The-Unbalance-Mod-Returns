@@ -42,6 +42,7 @@ mod pichu;
 mod pikachu;
 mod pikmin;
 mod pit;
+mod pitb;
 mod plizardon;
 mod popo;
 mod purin;
@@ -157,6 +158,7 @@ pub fn main() {
     bayonetta::install();
     reflet::install();
     gekkouga::install();
+    pitb::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
