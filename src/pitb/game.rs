@@ -1045,8 +1045,8 @@ unsafe fn pitb_upb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 45.0);
     if macros::is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_FIX_ANGLE)
-        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_BACK_ANGLE)
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_FIX_ANGLE);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_BACK_ANGLE);
         JostleModule::set_status(fighter.module_accessor, true)
     }
 }
