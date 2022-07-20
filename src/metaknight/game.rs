@@ -1109,6 +1109,7 @@ unsafe fn metaknight_sidebairstart(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn metaknight_sidebdrill(fighter: &mut L2CAgentBase) {
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         JostleModule::set_status(fighter.module_accessor, false);
@@ -1124,13 +1125,8 @@ unsafe fn metaknight_sidebdrill(fighter: &mut L2CAgentBase) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 1, Hash40::new("top"), 7.6, 0, 0, 6.5, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
-    if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        if DamageModule::damage(fighter.module_accessor, 0) < 1.8 {
-            DamageModule::add_damage(fighter.module_accessor, -1.0 * DamageModule::damage(fighter.module_accessor, 0), 0);
-        }
-        else {
-            DamageModule::add_damage(fighter.module_accessor, -1.8, 0);
-        }
+    if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+        DamageModule::heal(fighter.module_accessor, -1.0, 0);
     }
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
@@ -1194,7 +1190,7 @@ unsafe fn metaknight_sidebairfin(fighter: &mut L2CAgentBase) {
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 142, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-        DamageModule::heal(fighter.module_accessor, -10.0, 0);
+        DamageModule::heal(fighter.module_accessor, -5.0, 0);
     }
     wait(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {

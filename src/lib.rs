@@ -35,6 +35,7 @@ mod miigunner;
 mod miiswordsman;
 mod nana;
 mod ness;
+mod pacman;
 mod palutena;
 mod peach;
 mod pfushigisou;
@@ -159,6 +160,7 @@ pub fn main() {
     reflet::install();
     gekkouga::install();
     pitb::install();
+    pacman::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
