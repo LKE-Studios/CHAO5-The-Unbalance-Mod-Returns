@@ -2608,7 +2608,7 @@ unsafe fn popon_upb(fighter: &mut L2CAgentBase) {
 unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
-    for in _ 0..9 {
+    for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
@@ -2627,7 +2627,7 @@ unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
 unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
-    for in _ 0..9 {
+    for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
@@ -2650,7 +2650,7 @@ unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
 unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
-    for in _ 0..9 {
+    for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
@@ -2669,7 +2669,7 @@ unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
 unsafe fn popon_downbair(fighter: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
-    for in _ 0..9 {
+    for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
