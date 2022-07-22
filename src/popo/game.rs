@@ -2611,9 +2611,6 @@ unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2630,9 +2627,6 @@ unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2653,9 +2647,6 @@ unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2672,9 +2663,6 @@ unsafe fn popon_downbair(fighter: &mut L2CAgentBase) {
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }

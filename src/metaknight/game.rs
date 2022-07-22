@@ -1109,7 +1109,6 @@ unsafe fn metaknight_sidebairstart(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn metaknight_sidebdrill(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         JostleModule::set_status(fighter.module_accessor, false);
@@ -1124,9 +1123,6 @@ unsafe fn metaknight_sidebdrill(fighter: &mut L2CAgentBase) {
         AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 1, Hash40::new("top"), 7.6, 0, 0, 6.5, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-    }
-    if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-        DamageModule::heal(fighter.module_accessor, -1.0, 0);
     }
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
