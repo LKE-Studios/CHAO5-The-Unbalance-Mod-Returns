@@ -1147,7 +1147,7 @@ unsafe fn younglink_sidetauntl(fighter: &mut L2CAgentBase) {
 unsafe fn younglink_downtauntr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 60.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -10.0, 0);
+        DamageModule::heal(fighter.module_accessor, -25.0, 0);
     }
 }
 
@@ -1159,7 +1159,7 @@ unsafe fn younglink_downtauntr(fighter: &mut L2CAgentBase) {
 unsafe fn younglink_downtauntl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 60.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -10.0, 0);
+        DamageModule::heal(fighter.module_accessor, -25.0, 0);
     }
 }
 

@@ -24,6 +24,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         /*let jump_button_on_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_JUMP_WORK_INT_BUTTON_ON_FRAME);
         if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
             println!("jump button on frame: {}", jump_button_on_frame);
@@ -73,6 +74,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 };
             }
         }*/
+        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
+            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -1.0, 0);
+            }
+        };
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
             if MotionModule::frame(fighter.module_accessor) > 10.0 {
                 if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
