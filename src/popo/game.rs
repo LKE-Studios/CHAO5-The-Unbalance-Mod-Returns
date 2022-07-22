@@ -2606,7 +2606,6 @@ unsafe fn popon_upb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2622,7 +2621,6 @@ unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2642,7 +2640,6 @@ unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2658,7 +2655,6 @@ unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn popon_downbair(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {

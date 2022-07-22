@@ -2605,14 +2605,10 @@ unsafe fn nanan_upb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn nana_downb(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2624,14 +2620,10 @@ unsafe fn nana_downb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn nanan_downb(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2647,14 +2639,10 @@ unsafe fn nanan_downb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn nana_downbair(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }
@@ -2666,14 +2654,10 @@ unsafe fn nana_downbair(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn nanan_downbair(fighter: &mut L2CAgentBase) {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_BLIZZARD, false, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
         }
         wait(fighter.lua_state_agent, 5.0);
     }

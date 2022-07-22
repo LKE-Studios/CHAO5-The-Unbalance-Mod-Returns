@@ -2,14 +2,12 @@ use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::hash40;
 use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 //use crate::prelude::*;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
 
-#[skyline::hook(offset=FLOAT_OFFSET)]//Claus exclusive fighter attributes
+#[skyline::hook(offset=FLOAT_OFFSET)] //Claus exclusive fighter attributes
 pub unsafe fn claus_fighterparam(
 boma: u64,
 param_type: u64,
