@@ -25,55 +25,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-        /*let jump_button_on_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_JUMP_WORK_INT_BUTTON_ON_FRAME);
-        if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
-            println!("jump button on frame: {}", jump_button_on_frame);
-            if jump_button_on_frame > 20 {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), -1.0, 1.0, false, 0.0, false, false);
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 1.0, 1.0, false, 0.0, false, false);
-                fighter.sub_air_check_fall_common();
-                    static Y_ACCEL_ADD2 : f32 = 0.0712;
-                    static mut X_ACCEL_ADD2 : f32 = 0.0;
-                    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
-                    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-                    let mut y_add;
-                    let mut x_add;
-                    x_add = (stick_x)*X_ACCEL_ADD2;
-                    y_add = (stick_y)*Y_ACCEL_ADD2;
-                    if x_add > 2.0 && X2[ENTRY_ID] > X_MAX {
-                        x_add = 2.0;
-                    };
-                    if x_add < 2.0 && X2[ENTRY_ID] < X_MAX+2.0 {
-                        x_add = 2.0;
-                    };
-                    if y_add > 0.0 && Y2[ENTRY_ID] > Y_MAX {
-                        y_add = 0.0;
-                    };
-                    if y_add < 0.0 && Y2[ENTRY_ID] < Y_MAX*0.0 {
-                        y_add = 0.0;
-                    };
-                    println!("x{}, y{}", X2[ENTRY_ID], Y2[ENTRY_ID]);
-                    println!("x_add{}, y_add{}", x_add, y_add);
-                    X[ENTRY_ID] += x_add;
-                    Y[ENTRY_ID] += y_add;
-                    if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
-                        ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-                        if ANGLE[ENTRY_ID] > ANGLE_MAX {
-                            ANGLE[ENTRY_ID] = ANGLE_MAX;
-                        };
-                        if ANGLE[ENTRY_ID] < ANGLE_LOW_MAX {
-                            ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
-                        };
-                    }
-                    let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD2;
-                    macros::SET_SPEED_EX(fighter, X2[ENTRY_ID], -0.44 + Y2[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                    let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
-                    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                } else {
-                    ANGLE[ENTRY_ID] = 0.0;
-                };
-            }
-        }*/
+        if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL{
+            //fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
+        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
