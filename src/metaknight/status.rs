@@ -31,7 +31,6 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor){
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 1.0, 1.0, false, 0.0, false, false);
     }
-
     fighter.sub_air_check_fall_common();
     static Y_ACCEL_ADD2: f32 = 0.0712;
     static mut X_ACCEL_ADD2: f32 = 0.0;

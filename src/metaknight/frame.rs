@@ -18,6 +18,7 @@ static mut ANGLE2 : [f32; 8] = [0.0; 8];
 static ANGLE_MAX2 : f32 = 79.9; 
 static ANGLE_LOW_MAX2 : f32 = 80.0; 
 static STICK_ANGLE_MUL : f32 = 9.0; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
+static mut HOLD_TIME : [f32; 8] = [0.0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_opff(fighter: &mut L2CFighterCommon) {
@@ -25,8 +26,16 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-        if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL{
-            //fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
+        if status_kind != *FIGHTER_STATUS_KIND_GLIDE && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
+                HOLD_TIME[ENTRY_ID] +=1.0;
+            }
+            if HOLD_TIME[ENTRY_ID] == 20.0{
+                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
+            }
+        }
+        else{
+            HOLD_TIME[ENTRY_ID] = 0.0;
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
