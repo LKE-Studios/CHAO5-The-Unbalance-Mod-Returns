@@ -75,8 +75,14 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.357 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.0, y: 0.0, z: 0.0 };
     let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*0.22 };
+    let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.12, y: ANGLE[ENTRY_ID]*-0.078, z: ANGLE[ENTRY_ID]*-0.379 };
+    let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.091, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*0.35 };
+    let rotation5 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.13, y: ANGLE[ENTRY_ID]*0.055, z: ANGLE[ENTRY_ID]*0.26 };
     ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation, smash::app::MotionNodeRotateCompose { _address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8 }, smash::app::MotionNodeRotateOrder { _address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8 });
     ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("waist"), &rotation2,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("kneer"), &rotation3,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("kneel"), &rotation4,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("armr"), &rotation5,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
     0.into()
 }
 
