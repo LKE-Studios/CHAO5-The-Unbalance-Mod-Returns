@@ -40,6 +40,86 @@
       "fighter/peach/motion/body/c07/kamehameha_charge.nuanmb",
       "fighter/peach/motion/body/c07/kamehameha_fire.nuanmb"
     ],
+    "fighter/pit/c00": [
+      "fighter/pit/motion/body/c00/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c00/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c01": [
+      "fighter/pit/motion/body/c01/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c01/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c02": [
+      "fighter/pit/motion/body/c02/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c02/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c03": [
+      "fighter/pit/motion/body/c03/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c03/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c04": [
+      "fighter/pit/motion/body/c04/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c04/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c05": [
+      "fighter/pit/motion/body/c05/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c05/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c06": [
+      "fighter/pit/motion/body/c06/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c06/a07glidestart.nuanmb"
+    ],
+    "fighter/pit/c07": [
+      "fighter/pit/motion/body/c07/a07glidewing.nuanmb",
+      "fighter/pit/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c07/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c00": [
+      "fighter/pitb/motion/body/c00/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c00/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c01": [
+      "fighter/pitb/motion/body/c01/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c01/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c02": [
+      "fighter/pitb/motion/body/c02/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c02/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c03": [
+      "fighter/pitb/motion/body/c03/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c03/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c04": [
+      "fighter/pitb/motion/body/c04/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c04/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c05": [
+      "fighter/pitb/motion/body/c05/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c05/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c06": [
+      "fighter/pitb/motion/body/c06/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c06/a07glidestart.nuanmb"
+    ],
+    "fighter/pitb/c07": [
+      "fighter/pitb/motion/body/c07/a07glidewing.nuanmb",
+      "fighter/pitb/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c07/a07glidestart.nuanmb"
+    ],
     "fighter/metaknight/c00": [
       "fighter/metaknight/motion/body/c00/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c00/a07glidedirection.nuanmb",
@@ -87,6 +167,84 @@
       "fighter/metaknight/motion/body/c07/a07glidedirection.nuanmb",
       "fighter/metaknight/motion/body/c07/a07glidedirectionwing.nuanmb",
       "fighter/metaknight/motion/body/c07/a07glidestart.nuanmb"
+    ],
+    "stage/battlefield_s/normal/model/ring_nocastshadow_set": [
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/battingzone_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/grass_layered00_col.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/homeruncontest_ref_01_cube_specular.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone01_col.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone01_nor.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone01_prm.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone02_col.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone02_nor.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/hr_stone02_prm.nutexb",
+      "stage/battlefield_s/normal/model/ring_nocastshadow_set/bg_solar_eclipse_set/water_stadium00c_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_solar_eclipse_set": [
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_set/banner00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_set/battlefield_cloth01.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_set/battlefield_flag01_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_set/stadiumroot_banner_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_set/water_stadium00c_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_skydome_set": [
+      "stage/battlefield_s/normal/model/bg_skydome_set/clouddistortion00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/homeruncontest_ref_01_forlakewater_cube_specular.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/hr_rock00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/hr_rock00_prm.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/rockgrass00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/rockroot00_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/rockroot01_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/lilyflower00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/lilyleaf00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/lupine00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/lysichiton00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/lysichiton01_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_skydome_set/cloudplate01_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_ground_set": [
+      "stage/battlefield_s/normal/model/bg_ground_set/fogcolor_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_ground_set/hmrun_bgmountain_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_ground_set/smoke00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_ground_set/waterbubble00_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_far_skycity_set": [
+      "stage/battlefield_s/normal/model/bg_far_skycity_set/hr_distance01_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_far_skycity_set/hmrun_bgmountain_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_far_skycity_set/smoke00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_far_skycity_set/waterbubble00_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_solar_eclipse_line_set": [
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_line_set/hr_distance01_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_line_set/stadiumroot_water_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_line_set/water_stadium00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_solar_eclipse_line_set/water_stadium00c_col.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_falls_set": [
+      "stage/battlefield_s/normal/model/bg_falls_set/hr_battlefield_watercity_c_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/hr_distance01_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/hr_distance02_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_fauntain_a_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_gate_s_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_symbol_a_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_tower_a_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_tower_b_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_tower_f_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_tower_m_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_tower_s_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_wall_a_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_wall_b_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_falls_set/stadiumroot_wall_c_bake_lit.nutexb"
+    ],
+    "stage/battlefield_s/normal/model/bg_birds_set": [
+      "stage/battlefield_s/normal/model/bg_birds_set/homeruncontest_ref_01_forlakewater_cube_specular.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/homeruncontest_ref_01_forlakewater_loop_cube_specular.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/lakewater00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/lakewater00_nor.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/lakewater00_start_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/loopstadium_water_bake_lit.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/smoke00_col.nutexb",
+      "stage/battlefield_s/normal/model/bg_birds_set/waterbubble00_col.nutexb"
     ]
   }
 }
