@@ -7,8 +7,8 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-use crate::ryu::status::CHARGE_TIME;
-use crate::utils::{FIGHTER_CUTIN_MANAGER, get_entry_id};
+//use crate::ryu::status::CHARGE_TIME;
+use crate::utils::{FIGHTER_CUTIN_MANAGER, /*get_entry_id*/};
 
 #[acmd_script(//Attack11W
     agent = "ryu", 
@@ -1017,7 +1017,7 @@ unsafe fn ryu_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(
+/*#[acmd_script(
 agent = "ryu",
 script = "game_kamehameha_fire",
 category = ACMD_GAME,
@@ -1043,7 +1043,7 @@ category = ACMD_GAME,
 low_priority )]
 unsafe fn ryu_kamehameha_charge(fighter: &mut L2CAgentBase) {
     damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-}
+}*/
 
 #[acmd_script(//SpecialAirN
     agent = "ryu",
@@ -2148,8 +2148,8 @@ pub fn install() {
         ryu_cliffattack,
         ryu_slipattack,
         ryu_neutralbair,
-        ryu_kamehameha_fire,
-        ryu_kamehameha_charge,
+        //ryu_kamehameha_fire,
+        //ryu_kamehameha_charge,
         ryu_hadoken1,
         ryu_hadoken2,
         ryu_hadoken3,
