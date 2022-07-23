@@ -37,8 +37,8 @@ fn pitb_opff(fighter: &mut L2CFighterCommon) {
         else{
             HOLD_TIME[ENTRY_ID] = 0.0;
         };
-        if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1{
-            HOLD_TIME[ENTRY_ID] = 1;
+        if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
+            HOLD_TIME[ENTRY_ID] = 1.0;
         };
     }
 }
