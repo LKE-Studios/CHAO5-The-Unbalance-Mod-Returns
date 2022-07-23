@@ -34,7 +34,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     }
     fighter.sub_air_check_fall_common();
     macros::SET_SPEED_EX(fighter, 2.087, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    static Y_ACCEL_ADD : f32 = 0.0467;
+    static Y_ACCEL_ADD : f32 = 0.0435;
     static X_ACCEL_ADD : f32 = 0.0;
     static X_DECEL : f32 = -0.00516; 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
