@@ -26,7 +26,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-        if status_kind != *FIGHTER_STATUS_KIND_GLIDE && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+        if ![*FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_KIND_SPECIAL_FALL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
@@ -123,8 +123,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 307.0, 1.0, false, 0.0, false, false);
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1{
-                HOLD_TIME[ENTRY_ID] = 1;
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
+                HOLD_TIME[ENTRY_ID] = 1.0;
             };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
@@ -192,8 +192,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 307.0, 1.0, false, 0.0, false, false);
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1{
-                HOLD_TIME[ENTRY_ID] = 1;
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
+                HOLD_TIME[ENTRY_ID] = 1.0;
             };
         }
     }
