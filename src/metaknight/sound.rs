@@ -4,6 +4,22 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//GlideStart
+    agent = "metaknight", 
+    script = "sound_glidestart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn metaknight_glide1sfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_jump04"));
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
+    }
+}
+
 #[acmd_script(//ThrowHiSFX
     agent = "metaknight", 
     script = "sound_throwhi", 
@@ -94,6 +110,7 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        metaknight_glide1sfx,
         metaknight_throwupsfx,
         //metaknight_neutralbstartsfx,
         //metaknight_neutralbairstartsfx,

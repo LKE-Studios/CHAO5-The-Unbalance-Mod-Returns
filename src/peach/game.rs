@@ -1029,6 +1029,19 @@ unsafe fn peach_downtauntl(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Shot
+    agent = "peach_kinopiospore",
+    script = "game_shot",
+    category = ACMD_GAME,
+    low_priority )]
+unsafe fn peach_spore(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 45, /*KBG*/ 185, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 1.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_NONE);
+        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 900, /*Rehit*/ 20, /* Damage*/ 2.8, /*Unk*/ false);  
+        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         peach_attack12,
@@ -1068,7 +1081,8 @@ pub fn install() {
         peach_sidetauntl,
         peach_sidetauntr,
         peach_downtauntl,
-        peach_downtauntr
+        peach_downtauntr,
+        peach_spore
     );
     skyline::install_hooks!(is_valid_auto_catch_item_hook);
 }
