@@ -1,5 +1,4 @@
 mod game;
-//mod status;
 pub mod sound;
 pub mod effect;
 mod status;
