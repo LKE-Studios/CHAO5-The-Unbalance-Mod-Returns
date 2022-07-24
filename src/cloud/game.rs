@@ -3,7 +3,7 @@ use smash::app::sv_animcmd::*;
 use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
+use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
 /*Base script borrowed from TR4SH Rebuffed since our usual methods

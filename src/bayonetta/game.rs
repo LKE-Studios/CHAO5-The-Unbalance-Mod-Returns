@@ -1618,6 +1618,7 @@ unsafe fn bayonetta_sideb1(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BAYONETTA_STATUS_WORK_ID_SPECIAL_S_FLAG_WALL_CHECK);
     }
     frame(fighter.lua_state_agent, 40.0);
+    CancelModule::enable_cancel(fighter.module_accessor);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 }
 
