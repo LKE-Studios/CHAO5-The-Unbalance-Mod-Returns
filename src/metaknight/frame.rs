@@ -37,6 +37,9 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         else{
             HOLD_TIME[ENTRY_ID] = 0.0;
         }
+        if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
+            HOLD_TIME[ENTRY_ID] = 1.0;
+        };
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
