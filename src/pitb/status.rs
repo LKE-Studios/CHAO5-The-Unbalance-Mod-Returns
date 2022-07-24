@@ -14,10 +14,10 @@ static mut Y : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
 static mut X_MAX : f32 = 0.0; //Max Horizontal movespeed (is needed for both glide variations)
 static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed (is needed for both glide variations)
 static mut ANGLE : [f32; 8] = [0.0; 8];
-static ANGLE_MAX : f32 = 74.65; //Max Ascent Angle for Glide
+static ANGLE_MAX : f32 = 72.25; //Max Ascent Angle for Glide
 static ANGLE_LOW_MAX : f32 = -75.0; //Max Descent Angle for Glide
 static mut ANGLE2 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX2 : f32 = 74.65; 
+static ANGLE_MAX2 : f32 = 72.25; 
 static ANGLE_LOW_MAX2 : f32 = 75.0; 
 static STICK_ANGLE_MUL : f32 = 9.0;
 
@@ -75,8 +75,16 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     macros::SET_SPEED_EX(fighter, X[ENTRY_ID] + x, -0.357 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.0, y: 0.0, z: 0.0 };
     let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*0.22 };
+    let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.12, y: ANGLE[ENTRY_ID]*-0.078, z: ANGLE[ENTRY_ID]*-0.379 };
+    let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.091, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*0.35 };
+    let rotation5 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.13, y: ANGLE[ENTRY_ID]*0.055, z: ANGLE[ENTRY_ID]*0.26 };
+    let rotation6 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.031, y: ANGLE[ENTRY_ID]*0.087, z: ANGLE[ENTRY_ID]*-0.066 };
     ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation, smash::app::MotionNodeRotateCompose { _address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8 }, smash::app::MotionNodeRotateOrder { _address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8 });
     ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("waist"), &rotation2,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("kneer"), &rotation3,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("kneel"), &rotation4,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("armr"), &rotation5,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+    ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("legl"), &rotation6,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
     0.into()
 }
 
