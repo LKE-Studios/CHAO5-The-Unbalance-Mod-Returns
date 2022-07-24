@@ -49,7 +49,6 @@ unsafe fn metaknight_throwupsfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn metaknight_neutralbstartsfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_n01"));
     }
@@ -61,7 +60,6 @@ unsafe fn metaknight_neutralbstartsfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn metaknight_neutralbairstartsfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_n01"));
     }
