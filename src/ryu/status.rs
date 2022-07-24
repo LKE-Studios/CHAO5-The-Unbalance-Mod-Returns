@@ -47,7 +47,7 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
 }
 
 
-#[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N_COMMAND, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+#[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn ryu_specialn_command(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.change_status(FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START.into(), false.into());
     L2CValue::I32(0)
