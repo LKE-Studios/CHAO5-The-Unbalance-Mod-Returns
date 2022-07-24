@@ -2,7 +2,6 @@ use smash::lib::lua_const::*;
 use smash::app::*;
 use smash::hash40;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::L2CFighterCommon;
 //use crate::prelude::*;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;

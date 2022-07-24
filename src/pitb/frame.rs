@@ -1,8 +1,6 @@
 use smash::lib::lua_const::*;
-use smash::app::*;
 use smash::app::lua_bind::*;
 use smashline::*;
-use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 /*static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
