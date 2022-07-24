@@ -1,6 +1,4 @@
 use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;

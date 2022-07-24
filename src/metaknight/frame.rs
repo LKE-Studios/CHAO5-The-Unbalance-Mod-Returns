@@ -77,7 +77,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::SET_SPEED_EX(fighter, 2.0, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.045;
+                static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
                 static X_DECEL : f32 = -0.0061; 
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
@@ -159,7 +159,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::SET_SPEED_EX(fighter, 2.0, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.045;
+                static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
                 static X_DECEL : f32 = -0.0061;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);

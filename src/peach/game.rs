@@ -8,7 +8,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-use crate::utils::get_entry_id;
+//use crate::utils::get_entry_id;
 
 extern "C" {
     #[link_name = "\u{1}_ZN3app11FighterUtil24is_valid_auto_catch_itemERNS_26BattleObjectModuleAccessorEb"]
