@@ -1,5 +1,7 @@
 use smash::lib::lua_const::*;
 use smash::app::*;
+use smash::phx::Hash40;
+use smash::phx::Vector3f;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
