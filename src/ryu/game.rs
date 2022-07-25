@@ -7,8 +7,8 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-//use crate::ryu::status::CHARGE_TIME;
-use crate::utils::{FIGHTER_CUTIN_MANAGER, /*get_entry_id*/};
+use crate::ryu::status::CHARGE_TIME;
+use crate::utils::{FIGHTER_CUTIN_MANAGER, get_entry_id};
 
 #[acmd_script(//Attack11W
     agent = "ryu", 
