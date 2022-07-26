@@ -95,6 +95,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn glide_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = get_entry_id(fighter.module_accessor);
     ANGLE[ENTRY_ID] = 0.0;
+    ANGLE2[ENTRY_ID] = 0.0;
     L2CValue::I32(0)
 }
 
