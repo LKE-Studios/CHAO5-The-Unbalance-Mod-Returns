@@ -4,7 +4,7 @@ use crate::utils::*;
 use smashline::*;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
-use smash::phx::{Vector3f, Hash40};
+use smash::phx::Hash40;
 use smash_script::*;
 
 pub const FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START: i32 = 0x202;
