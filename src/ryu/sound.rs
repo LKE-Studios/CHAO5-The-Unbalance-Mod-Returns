@@ -11,7 +11,7 @@ category = ACMD_SOUND,
 low_priority )]
 unsafe fn sound_ryu_kamehameha_start(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n01"));
+        macros::STOP_SE(fighter, Hash40::new("se_ryu_special_n01"));
     }
 }
 
@@ -34,11 +34,11 @@ low_priority )]
 unsafe fn sound_ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n03"));
+        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n01"));
     }
-    frame(fighter.lua_state_agent, 67.0);
+    frame(fighter.lua_state_agent, 84.0);
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ryu_special_n03"));
+        macros::STOP_SE(fighter, Hash40::new("se_ryu_special_n01"));
     }
 }
 
