@@ -22,9 +22,7 @@ static ANGLE_MIN : f32 = 0.0;
 static mut ANGLE3 : [f32; 8] = [0.0; 8];
 static ANGLE_MAX3 : f32 = 80.0; 
 static ANGLE_MIN2 : f32 = 0.0; 
-static STICK_ANGLE_MUL : f32 = 9.0;
-static STICK_ANGLE_MUL2 : f32 = 9.0;
-static STICK_ANGLE_MUL3 : f32 = 9.0;
+static STICK_ANGLE_MUL : f32 = 8.5;
 
 #[status_script(agent = "metaknight", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -41,7 +39,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     macros::SET_SPEED_EX(fighter, 1.7, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     static Y_ACCEL_ADD : f32 = 0.0456;
     static X_ACCEL_ADD : f32 = 0.0;
-    static X_DECEL_MUL : f32 = -0.0069; 
+    static X_DECEL_MUL : f32 = -0.0063; 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let mut y_add;
@@ -74,7 +72,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
         };
     };
     if stick_y >= 0.1 {  
-        ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL2*stick_y;
+        ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
         if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
             ANGLE2[ENTRY_ID] = ANGLE_MAX2;
         };
@@ -83,7 +81,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
         };
     };
     if stick_y <= -0.1 {
-        ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL3*stick_y;
+        ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
         if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
             ANGLE3[ENTRY_ID] = ANGLE_MAX3;
         };

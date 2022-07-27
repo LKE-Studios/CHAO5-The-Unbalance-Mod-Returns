@@ -18,9 +18,7 @@ static ANGLE_MIN : f32 = 0.0;
 static mut ANGLE3 : [f32; 8] = [0.0; 8];
 static ANGLE_MAX3 : f32 = 80.0; 
 static ANGLE_MIN2 : f32 = 0.0; 
-static STICK_ANGLE_MUL : f32 = 9.0; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
-static STICK_ANGLE_MUL2 : f32 = 9.0;
-static STICK_ANGLE_MUL3 : f32 = 9.0;
+static STICK_ANGLE_MUL : f32 = 8.5; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
 static mut HOLD_TIME : [f32; 8] = [0.0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
@@ -85,7 +83,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL_MUL : f32 = -0.0069;
+                static X_DECEL_MUL : f32 = -0.0063;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 let mut y_add;
@@ -118,7 +116,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     };
                 };
                 if stick_y >= 0.1 {  
-                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL2*stick_y;
+                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
                         ANGLE2[ENTRY_ID] = ANGLE_MAX2;
                     };
@@ -127,7 +125,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     };
                 };
                 if stick_y <= -0.1 {
-                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL3*stick_y;
+                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
                         ANGLE3[ENTRY_ID] = ANGLE_MAX3;
                     };
@@ -187,7 +185,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL_MUL : f32 = -0.0069;
+                static X_DECEL_MUL : f32 = -0.0063;
                 let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 let mut y_add;
@@ -220,7 +218,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     };
                 };
                 if stick_y >= 0.1 {  
-                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL2*stick_y;
+                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
                         ANGLE2[ENTRY_ID] = ANGLE_MAX2;
                     };
@@ -229,7 +227,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     };
                 };
                 if stick_y <= -0.1 {
-                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL3*stick_y;
+                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
                         ANGLE3[ENTRY_ID] = ANGLE_MAX3;
                     };
