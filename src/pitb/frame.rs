@@ -44,6 +44,9 @@ fn pitb_opff(fighter: &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
             HOLD_TIME[ENTRY_ID] = 1.0;
         };
+        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
+            HOLD_TIME[ENTRY_ID] = 1.0;
+        };
     }
 }
 

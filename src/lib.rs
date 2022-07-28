@@ -33,6 +33,7 @@ mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
+mod murabito;
 mod nana;
 mod ness;
 mod pacman;
@@ -161,6 +162,7 @@ pub fn main() {
     gekkouga::install();
     pitb::install();
     pacman::install();
+    murabito::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
