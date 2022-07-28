@@ -53,6 +53,7 @@ mod pzenigame;
 mod reflet;
 mod robot;
 mod rockman;
+mod rosetta;
 mod roy;
 mod ryu;
 mod samus;
@@ -163,6 +164,7 @@ pub fn main() {
     pitb::install();
     pacman::install();
     murabito::install();
+    rosetta::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
