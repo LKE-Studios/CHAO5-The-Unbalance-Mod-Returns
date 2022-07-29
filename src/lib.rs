@@ -12,6 +12,7 @@ mod cloud;
 mod dedede;
 mod diddy;
 mod donkey;
+mod duckhunt;
 mod falco;
 mod fox;
 mod gamewatch;
@@ -64,6 +65,7 @@ mod sonic;
 mod szerosuit;
 mod toonlink;
 mod wario;
+mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
@@ -165,6 +167,8 @@ pub fn main() {
     pacman::install();
     murabito::install();
     rosetta::install();
+    wiifit::install();
+    duckhunt::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

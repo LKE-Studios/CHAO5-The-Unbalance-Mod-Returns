@@ -1636,19 +1636,23 @@ unsafe fn cloud_upb_2_smash_script(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 12.0);
+    frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 28.0, 262, 100, 0, 20, 11.0, 0.0, 4.6, 9.4, Some(0.0), Some(4.2), Some(-1.0), 2.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 35, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+    }
+    frame(fighter.lua_state_agent, 60.0);
+    if macros::is_excute(fighter) {
+        CancelModule::enable_cancel(fighter.module_accessor);
     }
 }
 
 #[acmd_script( agent = "cloud", script = "game_specialhi2landing", category = ACMD_GAME )]
 unsafe fn cloud_upb_2_landing_smash_script(fighter: &mut L2CAgentBase) {
-    sv_animcmd::frame(fighter.lua_state_agent, 1.0);
+    frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 19.0, 54, 125, 0, 55, 13.4, 0.0, 8.0, 9.0, Some(0.0), Some(8.0), Some(0.0), 1.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_flower"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CLOUD_HIT, *ATTACK_REGION_SWORD);
     }
-    sv_animcmd::wait(fighter.lua_state_agent, 3.0);
+    wait(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }

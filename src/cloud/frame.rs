@@ -19,6 +19,12 @@ pub fn cloud_opff(fighter : &mut L2CFighterCommon) {
                 AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
             };
         }
+        if status_kind == *FIGHTER_CLOUD_STATUS_KIND_SPECIAL_HI2_FALL {
+            fighter.sub_air_check_fall_common();
+            if MotionModule::frame(fighter.module_accessor) > 60.0 {
+                CancelModule::enable_cancel(fighter.module_accessor);
+            };
+        }
     }
 }
 
