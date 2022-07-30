@@ -21,6 +21,7 @@ mod gekkouga;
 mod ike;
 mod kirby;
 mod koopa;
+mod koopajr;
 mod link;
 mod littlemac;
 mod lucario;
@@ -169,6 +170,7 @@ pub fn main() {
     rosetta::install();
     wiifit::install();
     duckhunt::install();
+    koopajr::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
