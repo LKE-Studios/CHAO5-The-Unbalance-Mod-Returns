@@ -19,6 +19,7 @@ mod gamewatch;
 mod ganon;
 mod gekkouga;
 mod ike;
+mod kamui;
 mod kirby;
 mod koopa;
 mod koopajr;
@@ -26,6 +27,7 @@ mod link;
 mod littlemac;
 mod lucario;
 mod lucas;
+mod lucina;
 mod luigi;
 mod mario;
 mod mariod;
@@ -171,6 +173,8 @@ pub fn main() {
     wiifit::install();
     duckhunt::install();
     koopajr::install();
+    lucina::install();
+    kamui::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
