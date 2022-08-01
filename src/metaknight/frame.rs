@@ -5,20 +5,11 @@ use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
-static mut X : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
-static mut Y : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
-static mut X_MAX : f32 = 0.0; //Max Horizontal movespeed (is needed for both glide variations)
-static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed (is needed for both glide variations)
+
 static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX : f32 = 80.0; //Max Ascent Angle for Glide
 static ANGLE_LOW_MAX : f32 = -80.0; //Max Descent Angle for Glide
-static mut ANGLE2 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX2 : f32 = 80.0; 
-static ANGLE_MIN : f32 = 0.0; 
-static mut ANGLE3 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX3 : f32 = 80.0; 
-static ANGLE_MIN2 : f32 = 0.0; 
-static STICK_ANGLE_MUL : f32 = 8.5; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
+static STICK_ANGLE_MUL : f32 = 7.0; //Controls how much Meta Knight's body rotates according to the control stick (higher value = higher sensitivity)
 static mut HOLD_TIME : [f32; 8] = [0.0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
@@ -31,7 +22,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
-            if HOLD_TIME[ENTRY_ID] == 20.0{
+            if HOLD_TIME[ENTRY_ID] == 20.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
             }
         }
@@ -81,34 +72,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 1.7, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL_MUL : f32 = -0.0063;
-                let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+                static X_DECEL_MUL_UP : f32 = -0.0091; 
+                static X_DECEL_MUL_DOWN : f32 = 0.008875; 
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-                let mut y_add;
-                let mut x_add;
-                x_add = (stick_x)*X_ACCEL_ADD;
-                y_add = (stick_y)*Y_ACCEL_ADD + X_DECEL_MUL;
-                if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
-                    x_add = 0.0;
-                };
-                if x_add < 0.0 && X[ENTRY_ID] < X_MAX * 0.0 {
-                    x_add = 0.0;
-                };
-                if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = 0.0;
-                };
-                if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX * 0.0 {
-                    y_add = 0.0;
-                };
-                println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-                println!("x_add{}, y_add{}", x_add, y_add);
-                X[ENTRY_ID] += x_add;
-                Y[ENTRY_ID] += y_add;
                 if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
                     ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE[ENTRY_ID] > ANGLE_MAX {
@@ -118,28 +89,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                         ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
                     };
                 };
-                if stick_y >= 0.1 {  
-                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-                    if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
-                        ANGLE2[ENTRY_ID] = ANGLE_MAX2;
-                    };
-                    if ANGLE2[ENTRY_ID] < ANGLE_MIN {
-                        ANGLE2[ENTRY_ID] = ANGLE_MIN;
-                    };
-                };
-                if stick_y <= -0.1 {
-                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-                    if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
-                        ANGLE3[ENTRY_ID] = ANGLE_MAX3;
-                    };
-                    if ANGLE3[ENTRY_ID] < ANGLE_MIN2 {
-                        ANGLE3[ENTRY_ID] = ANGLE_MIN2;
-                    };
-                };
                 let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
-                let x = ANGLE2[ENTRY_ID] * X_DECEL_MUL; //Some Horizontal Air mobility is sacrificed when ascending/descending
-                let x2 = ANGLE3[ENTRY_ID] * X_DECEL_MUL;
-                macros::SET_SPEED_EX(fighter, 1.7 + X[ENTRY_ID] + x + x2, -0.4 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] <= -0.1 {
+                    KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
+                };
+                if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] >= 0.1 {
+                    KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
+                };
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
                 let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
                 let rotation3 = Vector3f{x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*0.11, z: ANGLE[ENTRY_ID]*-0.24 };
@@ -150,9 +107,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footl"), &rotation4,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
-                ANGLE2[ENTRY_ID] = 0.0;
-                ANGLE3[ENTRY_ID] = 0.0;
-                macros::SET_SPEED_EX(fighter, 1.7, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 307.0, 1.0, false, 0.0, false, false);
@@ -186,34 +141,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                macros::SET_SPEED_EX(fighter, 1.7, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
                 static Y_ACCEL_ADD : f32 = 0.0456;
                 static X_ACCEL_ADD : f32 = 0.0;
-                static X_DECEL_MUL : f32 = -0.0063;
-                let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+                static X_DECEL_MUL_UP : f32 = -0.0091; 
+                static X_DECEL_MUL_DOWN : f32 = 0.008875; 
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-                let mut y_add;
-                let mut x_add;
-                x_add = (stick_x)*X_ACCEL_ADD;
-                y_add = (stick_y)*Y_ACCEL_ADD + X_DECEL_MUL;
-                if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
-                    x_add = 0.0;
-                };
-                if x_add < 0.0 && X[ENTRY_ID] < X_MAX + 0.0 {
-                    x_add = 0.0;
-                };
-                if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
-                    y_add = 0.0;
-                };
-                if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX * 0.0 {
-                    y_add = 0.0;
-                };
-                println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-                println!("x_add{}, y_add{}", x_add, y_add);
-                X[ENTRY_ID] += x_add;
-                Y[ENTRY_ID] += y_add;
                 if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
                     ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
                     if ANGLE[ENTRY_ID] > ANGLE_MAX {
@@ -223,28 +158,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                         ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
                     };
                 };
-                if stick_y >= 0.1 {  
-                    ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-                    if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
-                        ANGLE2[ENTRY_ID] = ANGLE_MAX2;
-                    };
-                    if ANGLE2[ENTRY_ID] < ANGLE_MIN {
-                        ANGLE2[ENTRY_ID] = ANGLE_MIN;
-                    };
-                };
-                if stick_y <= -0.1 {
-                    ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-                    if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
-                        ANGLE3[ENTRY_ID] = ANGLE_MAX3;
-                    };
-                    if ANGLE3[ENTRY_ID] < ANGLE_MIN2 {
-                        ANGLE3[ENTRY_ID] = ANGLE_MIN2;
-                    };
-                };
                 let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
-                let x = ANGLE2[ENTRY_ID] * X_DECEL_MUL; //Some Horizontal Air mobility is sacrificed when ascending/descending
-                let x2 = ANGLE3[ENTRY_ID] * X_DECEL_MUL;
-                macros::SET_SPEED_EX(fighter, 1.7 + X[ENTRY_ID] + x + x2, -0.4 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                if ANGLE[ENTRY_ID] >= -80.0  && ANGLE[ENTRY_ID] <= -0.1 {
+                    KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
+                };
+                if ANGLE[ENTRY_ID] >= 0.1 && ANGLE[ENTRY_ID] <= 80.0 {
+                    KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
+                };
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 };
                 let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
                 let rotation3 = Vector3f{x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*0.11, z: ANGLE[ENTRY_ID]*-0.24 };
@@ -255,9 +176,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footl"), &rotation4,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
-                ANGLE2[ENTRY_ID] = 0.0;
-                ANGLE3[ENTRY_ID] = 0.0;
-                macros::SET_SPEED_EX(fighter, 1.7, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 307.0, 1.0, false, 0.0, false, false);

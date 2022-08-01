@@ -9,20 +9,10 @@ use smash::hash40;
 use smash::phx::{Vector3f, Hash40};
 use smash_script::*;
 
-static mut X : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
-static mut Y : [f32; 8] = [0.0; 8]; //Log speed for Shuttle Loop Glide
-static mut X_MAX : f32 = 0.0; //Max Horizontal movespeed (is needed for both glide variations)
-static mut Y_MAX : f32 = 1.94; //Max Vertical movespeed (is needed for both glide variations)
 static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX : f32 = 72.25; //Max Ascent Angle for Glide
 static ANGLE_LOW_MAX : f32 = -75.0; //Max Descent Angle for Glide
-static mut ANGLE2 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX2 : f32 = 72.25; 
-static ANGLE_MIN : f32 = 0.0; 
-static mut ANGLE3 : [f32; 8] = [0.0; 8];
-static ANGLE_MAX3 : f32 = 75.0; 
-static ANGLE_MIN2 : f32 = 0.0; 
-static STICK_ANGLE_MUL : f32 = 8.5;
+static STICK_ANGLE_MUL : f32 = 7.5;
 
 #[status_script(agent = "pit", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -36,32 +26,12 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 1.0, 1.0, false, 0.0, false, false);
     }
     fighter.sub_air_check_fall_common();
-    macros::SET_SPEED_EX(fighter, 1.787, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    macros::SET_SPEED_EX(fighter, 1.887, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     static Y_ACCEL_ADD : f32 = 0.0436;
     static X_ACCEL_ADD : f32 = 0.0;
-    static X_DECEL_MUL : f32 = -0.00565; 
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+    static X_DECEL_MUL_UP : f32 = -0.00812; 
+    static X_DECEL_MUL_DOWN : f32 = 0.00805; 
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let mut y_add;
-    let mut x_add;
-    x_add = (stick_x)*X_ACCEL_ADD;
-    y_add = (stick_y)*Y_ACCEL_ADD + X_DECEL_MUL;
-    if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
-        x_add = 0.0;
-    };
-    if x_add < 0.0 && X[ENTRY_ID] < X_MAX * 0.0 {
-        x_add = 0.0;
-    };
-    if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
-        y_add = 0.0;
-    };
-    if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX * 0.0 {
-        y_add = 0.0;
-    };
-    println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-    println!("x_add{}, y_add{}", x_add, y_add);
-    X[ENTRY_ID] += x_add;
-    Y[ENTRY_ID] += y_add;
     if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
         ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
         if ANGLE[ENTRY_ID] > ANGLE_MAX {
@@ -71,28 +41,14 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
             ANGLE[ENTRY_ID] = ANGLE_LOW_MAX;
         };
     };
-    if stick_y >= 0.1 {  
-        ANGLE2[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-        if ANGLE2[ENTRY_ID] > ANGLE_MAX2 {
-            ANGLE2[ENTRY_ID] = ANGLE_MAX2;
-        };
-        if ANGLE2[ENTRY_ID] < ANGLE_MIN {
-            ANGLE2[ENTRY_ID] = ANGLE_MIN;
-        };
-    };
-    if stick_y <= -0.1 {
-        ANGLE3[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
-        if ANGLE3[ENTRY_ID] > ANGLE_MAX3 {
-            ANGLE3[ENTRY_ID] = ANGLE_MAX3;
-        };
-        if ANGLE3[ENTRY_ID] < ANGLE_MIN2 {
-            ANGLE3[ENTRY_ID] = ANGLE_MIN2;
-        };
-    };
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD;
-    let x = ANGLE2[ENTRY_ID] * X_DECEL_MUL; //Some Horizontal Air mobility is sacrificed when ascending/descending
-    let x2 = ANGLE3[ENTRY_ID] * X_DECEL_MUL;
-    macros::SET_SPEED_EX(fighter, 1.787 + X[ENTRY_ID] + x + x2, -0.357 + Y[ENTRY_ID] + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    macros::SET_SPEED_EX(fighter, 1.887, -0.357 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    if ANGLE[ENTRY_ID] >= -75.0 && ANGLE[ENTRY_ID] <= -0.1 {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
+    };
+    if ANGLE[ENTRY_ID] <= 72.25 && ANGLE[ENTRY_ID] >= 0.1 {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
+    };
     let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.0, y: 0.0, z: 0.0 };
     let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*0.22 };
     let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.12, y: ANGLE[ENTRY_ID]*-0.078, z: ANGLE[ENTRY_ID]*-0.379 };
@@ -118,9 +74,7 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn glide_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = get_entry_id(fighter.module_accessor);
     ANGLE[ENTRY_ID] = 0.0;
-    ANGLE2[ENTRY_ID] = 0.0;
-    ANGLE3[ENTRY_ID] = 0.0;
-    macros::SET_SPEED_EX(fighter, 1.787, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    macros::SET_SPEED_EX(fighter, 1.887, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     L2CValue::I32(0)
 }
 

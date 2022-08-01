@@ -1,9 +1,10 @@
 use smash::lib::lua_const::*;
-use smash::app::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::phx::Hash40;
+use smash::app::{sv_information};
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
 static mut START_FLOAT : [bool; 8] = [false; 8];
 static mut CHECK_FLOAT : [i32; 8] = [0; 8];
@@ -17,6 +18,7 @@ static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 1.24; //Max Vertical movespeed
 // static mut Y_ACCEL_ADD : f32 = 0.06;
 // static mut Y_ACCEL_MUL : f32 = 0.06;
+static mut DEFENCE_BOOST : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_PALUTENA )]
 fn palutena_frame(fighter: &mut L2CFighterCommon) {
@@ -70,43 +72,6 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
             };
             let mut y_add;
             let mut x_add;
-            // if stick_x > 0.2 {
-            // 	x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-            // 	if speed_x > X_MAX || speed_x < -X_MAX{
-            // 		x_add = 0.0;
-            // 	};
-            // };
-            // if stick_x < -0.2 {
-            // 	x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-            // 	if speed_x > X_MAX || speed_x < -X_MAX{
-            // 		x_add = 0.0;
-            // 	};
-            // };
-            // if stick_y > 0.2 {
-            // 	y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
-            // 		y_add = 0.0;
-            // 	};
-            // };
-            // if stick_y < -0.2 {
-            // 	y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
-            // 		y_add = 0.0;
-            // 	};
-            // };
-            // if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
-            // 	if speed_y > 0.0 {
-            // 		y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
-            // 	} else if speed_y < 0.0{
-            // 		y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
-            // 	};
-            // 	let mut x_add = 0.0;
-            // 	if speed_x > 0.0 {
-            // 		x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
-            // 	} else if speed_x < 0.0{
-            // 		x_add = X_ACCEL_MUL + X_ACCEL_ADD;
-            // 	};
-            // };
             x_add = (stick_x)*X_ACCEL_MUL;
             y_add = (stick_y)*X_ACCEL_MUL;
             if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
@@ -150,6 +115,40 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
             if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
                 FLOAT[ENTRY_ID] = 1;
             };
+        };
+        if DEFENCE_BOOST[ENTRY_ID] == true {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 6.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("legr"), 0, 0, 0, 0, 0, 0, 3.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("legl"), 0, 0, 0, 0, 0, 0, 3.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 3.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 3.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("head"), 0, 0, 0, 0, 0, 0, 3.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+            /*if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwr") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwl") {
+                DEFENCE_BOOST[ENTRY_ID] = true;
+            };*/
+            DEFENCE_BOOST[ENTRY_ID] = true;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+            DEFENCE_BOOST[ENTRY_ID] = false;
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+        };
+        if sv_information::is_ready_go() == false {
+            DEFENCE_BOOST[ENTRY_ID] = false;
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
+            DEFENCE_BOOST[ENTRY_ID] = false;
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
         };
     }
 }
