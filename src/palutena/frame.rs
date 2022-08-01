@@ -118,19 +118,9 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
         };
         if DEFENCE_BOOST[ENTRY_ID] == true {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
             macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 6.0, true);
             macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("legr"), 0, 0, 0, 0, 0, 0, 3.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("legl"), 0, 0, 0, 0, 0, 0, 3.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 3.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 3.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("head"), 0, 0, 0, 0, 0, 0, 3.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.3, /*B*/ 0.24);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
             /*if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwr") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwl") {

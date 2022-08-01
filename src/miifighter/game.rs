@@ -1285,6 +1285,7 @@ unsafe fn miifighter_neutral2bairend(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn miifighter_neutral3b(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1299,6 +1300,7 @@ unsafe fn miifighter_neutral3b(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 50.0);
     if macros::is_excute(fighter) {
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legl"), /*Damage*/ 50.0, /*Angle*/ 361, /*KBG*/ 49, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 10.0, /*X*/ 6.8, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("legl"), /*Damage*/ 50.0, /*Angle*/ 361, /*KBG*/ 49, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 9.0, /*X*/ -4.7, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(2.2), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
@@ -2661,8 +2663,7 @@ unsafe fn miifighter_down3bairthrow(fighter: &mut L2CAgentBase) {
 unsafe fn miifighter_uptauntr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -10.0, 0);
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.8);
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
     }
 }
 
@@ -2674,8 +2675,7 @@ unsafe fn miifighter_uptauntr(fighter: &mut L2CAgentBase) {
 unsafe fn miifighter_uptauntl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -10.0, 0);
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.8);
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
     }
 }
 
