@@ -14,10 +14,10 @@ fn miifighter_frame(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if DEFENCE_BOOST[ENTRY_ID] == true {
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 6.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.3, /*G*/ 0.035, /*B*/ 0.05);
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
+            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 6.0, true);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 5.3, /*G*/ 0.13, /*B*/ 0.1);
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
             /*if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwr") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwl") {
