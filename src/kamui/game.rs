@@ -292,9 +292,9 @@ unsafe fn kamui_downtilt(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Start
+/*#[acmd_script(//AttackS4Charge
     agent = "kamui", 
-    script = "game_attacks4start", 
+    script = "game_attacks4charge", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn kamui_sidesmashstart(fighter: &mut L2CAgentBase) {
@@ -304,10 +304,10 @@ unsafe fn kamui_sidesmashstart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 3.5, /*Angle*/ 80, /*KBG*/ 1, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.5, /*SDI*/ 1.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 3.5, /*Angle*/ 80, /*KBG*/ 1, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.3, /*SDI*/ 1.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 6.0, /*Unk*/ false);
     }
-}
+}*/
 
 #[acmd_script(//AttackS4
     agent = "kamui_spearhand", 
@@ -1379,6 +1379,7 @@ unsafe fn kamui_upb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 45.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_KAMUI_STATUS_SPECIAL_HI_FLAG_AIR_CONTROL);
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
     frame(fighter.lua_state_agent, 49.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -1441,6 +1442,7 @@ unsafe fn kamui_upbair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 45.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_KAMUI_STATUS_SPECIAL_HI_FLAG_AIR_CONTROL);
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
     frame(fighter.lua_state_agent, 49.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -1712,7 +1714,7 @@ pub fn install() {
         kamui_sidetilt,
         kamui_uptilt,
         kamui_downtilt,
-        kamui_sidesmashstart,
+        //kamui_sidesmashstart,
         kamui_sidesmash,
         kamui_upsmash,
         kamui_downsmash,

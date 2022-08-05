@@ -11,8 +11,8 @@ use smash_script::*;
 
 static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX : f32 = 70.0; //Max Ascent Angle for Glide
-static ANGLE_LOW_MAX : f32 = -75.0; //Max Descent Angle for Glide
-static STICK_ANGLE_MUL : f32 = 6.75; //Controls how much Dark Pit's body rotates according to the control stick (higher value = higher sensitivity)
+static ANGLE_LOW_MAX : f32 = -70.0; //Max Descent Angle for Glide
+static STICK_ANGLE_MUL : f32 = 6.5; //Controls how much Dark Pit's body rotates according to the control stick (higher value = higher sensitivity)
 
 #[status_script(agent = "pitb", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -27,9 +27,9 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     }
     fighter.sub_air_check_fall_common();
     macros::SET_SPEED_EX(fighter, 1.9, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
-    static Y_ACCEL_ADD : f32 = 0.04366; //Ascent/Descent Speed Multiplier
-    static X_DECEL_MUL_UP : f32 = -0.00907; //Horizontal Air Deceleration multiplier when ascending
-    static X_DECEL_MUL_DOWN : f32 = 0.00864; //Horizontal Air Deceleration multiplier when descending
+    static Y_ACCEL_ADD : f32 = 0.0438; //Ascent/Descent Speed Multiplier
+    static X_DECEL_MUL_UP : f32 = -0.0098; //Horizontal Air Deceleration multiplier when ascending
+    static X_DECEL_MUL_DOWN : f32 = 0.0098; //Horizontal Air Deceleration multiplier when descending
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
         ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
@@ -37,12 +37,12 @@ unsafe extern "C" fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
             ANGLE[ENTRY_ID] = ANGLE_MAX;
         };
         if ANGLE[ENTRY_ID] < ANGLE_LOW_MAX {
-            ANGLE[ENTRY_ID] = ANGLE_LOW_MAX; //Caps the max downward value at -75 and prevents it from going beyond. 
+            ANGLE[ENTRY_ID] = ANGLE_LOW_MAX; //Caps the max downward value at 70 and prevents it from going beyond. 
         };
     };
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
     macros::SET_SPEED_EX(fighter, 1.9, -0.357 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    if ANGLE[ENTRY_ID] >= -75.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air multilplier when descending when angle is between -75 and 0.1
+    if ANGLE[ENTRY_ID] >= -70.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air multilplier when descending when angle is between -70 and 0.1
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
     };
     if ANGLE[ENTRY_ID] <= 70.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when descending when angle is between 0.1 and 70
