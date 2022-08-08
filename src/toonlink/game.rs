@@ -933,6 +933,7 @@ unsafe fn toonlink_upbair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 49.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 

@@ -23,7 +23,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let kind = smash::app::utility::get_kind(boma);
         if kind == *FIGHTER_KIND_METAKNIGHT {
-            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
         }
         if ![*FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
@@ -33,7 +33,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
             }
         }
-        else{
+        else {
             HOLD_TIME[ENTRY_ID] = 0.0;
         }
         if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{

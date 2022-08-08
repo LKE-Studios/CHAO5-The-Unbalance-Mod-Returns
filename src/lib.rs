@@ -23,6 +23,7 @@ mod kamui;
 mod kirby;
 mod koopa;
 mod koopajr;
+mod krool;
 mod link;
 mod littlemac;
 mod lucario;
@@ -55,6 +56,7 @@ mod purin;
 mod ptrainer;
 mod pzenigame;
 mod reflet;
+mod ridley;
 mod robot;
 mod rockman;
 mod rosetta;
@@ -175,6 +177,8 @@ pub fn main() {
     koopajr::install();
     lucina::install();
     kamui::install();
+    ridley::install();
+    krool::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
