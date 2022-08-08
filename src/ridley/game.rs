@@ -1504,7 +1504,7 @@ unsafe fn ridley_downtauntl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//FinalEnd
+/*#[acmd_script(//FinalEnd
     agent = "ridley", 
     script = "game_finalend", 
     category = ACMD_GAME, 
@@ -1544,7 +1544,7 @@ unsafe fn ridley_finalair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_VISUAL_SCENE_FLAG_END_EXIT);
     }
-}
+}*/
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -1607,7 +1607,7 @@ pub fn install() {
         ridley_sidetauntl,
         ridley_downtauntr,
         ridley_downtauntl,
-        ridley_final,
-        ridley_finalair
+        //ridley_final,
+        //ridley_finalair
     );
 }
