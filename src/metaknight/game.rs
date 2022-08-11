@@ -2062,7 +2062,7 @@ unsafe fn metaknight_finalfin(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             macros::FT_MOTION_RATE(fighter, /*FSM*/ 3.4);
             macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 2, /*Bone*/ Hash40::new("top"), /*Damage*/ 2147483647.0, /*Angle*/ 160, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 99999.9, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ -11.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 100.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_invalid_xlu(boma, 0, true);
+            AttackModule::is_invalid_xlu(boma, 0, true);
             AttackModule::set_invalid_invincible(fighter.module_accessor, 0, true);
             AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
             DamageModule::heal(fighter.module_accessor, -999.0, 0);
@@ -2072,7 +2072,7 @@ unsafe fn metaknight_finalfin(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             macros::FT_MOTION_RATE(fighter, /*FSM*/ 3.4);
             macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 2, /*Bone*/ Hash40::new("top"), /*Damage*/ 2147483647.0, /*Angle*/ 20, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 99999.9, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ 11.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 100.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
-            AttackModule::set_invalid_xlu(boma, 0, true);
+            AttackModule::is_invalid_xlu(boma, 0, true);
             AttackModule::set_invalid_invincible(fighter.module_accessor, 0, true);
             AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
             DamageModule::heal(fighter.module_accessor, -999.0, 0);
@@ -2089,7 +2089,7 @@ unsafe fn metaknight_finalfin(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 52.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 2, /*Bone*/ Hash40::new("top"), /*Damage*/ 2147483647.0, /*Angle*/ 20, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 99999.9, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ 11.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 100.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
-        AttackModule::set_invalid_xlu(boma, 0, true);
+        AttackModule::is_invalid_xlu(boma, 0, true);
         AttackModule::set_invalid_invincible(fighter.module_accessor, 0, true);
         AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         DamageModule::heal(fighter.module_accessor, -999.0, 0);

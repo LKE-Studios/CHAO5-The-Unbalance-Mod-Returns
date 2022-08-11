@@ -25,7 +25,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         if kind == *FIGHTER_KIND_METAKNIGHT {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
         }
-        if ![*FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+        if ![*FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
@@ -71,6 +71,10 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
                     macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
                     macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * PostureModule::lr(boma));
+                }
+                if MotionModule::frame(fighter.module_accessor) > 25.0 {
+                    CancelModule::enable_cancel(fighter.module_accessor);
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
                 }
             }
             if MotionModule::frame(fighter.module_accessor) >= (CURRENTFRAME[ENTRY_ID] + 1.0) && IS_CRIT[ENTRY_ID] {

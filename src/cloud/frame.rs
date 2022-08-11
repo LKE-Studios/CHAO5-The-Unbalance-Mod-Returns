@@ -22,7 +22,12 @@ pub fn cloud_opff(fighter : &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_CLOUD_STATUS_KIND_SPECIAL_HI2_FALL {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 60.0 {
-                CancelModule::enable_cancel(fighter.module_accessor);
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
+                }
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
+                }
             };
         }
     }

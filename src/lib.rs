@@ -17,6 +17,7 @@ mod falco;
 mod fox;
 mod gamewatch;
 mod ganon;
+mod gaogaen;
 mod gekkouga;
 mod ike;
 mod kamui;
@@ -41,6 +42,7 @@ mod miiswordsman;
 mod murabito;
 mod nana;
 mod ness;
+mod packun;
 mod pacman;
 mod palutena;
 mod peach;
@@ -179,6 +181,8 @@ pub fn main() {
     kamui::install();
     ridley::install();
     krool::install();
+    gaogaen::install();
+    packun::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
