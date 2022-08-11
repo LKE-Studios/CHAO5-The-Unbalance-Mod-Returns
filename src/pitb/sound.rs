@@ -20,8 +20,21 @@ unsafe fn pitb_glide1sfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//GlideAttack
+    agent = "pitb", 
+    script = "sound_glideattack", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn pitb_glideattacksfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pitb_swing_m"));
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
-        pitb_glide1sfx
+        pitb_glide1sfx,
+        pitb_glideattacksfx
     );
 }

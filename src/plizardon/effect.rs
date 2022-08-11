@@ -20,8 +20,26 @@ unsafe fn plizardon_firegfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//GlideAttack
+    agent = "plizardon", 
+    script = "effect_glideattack", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn plizardon_glideattackgfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("fire"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.4)
+    }
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("plizardon_atk_fire_air"), false, false);
+    }
+}  
+
 pub fn install() {
     smashline::install_acmd_scripts!(
-        plizardon_firegfx
+        plizardon_firegfx,
+        plizardon_glideattackgfx
     );
 }

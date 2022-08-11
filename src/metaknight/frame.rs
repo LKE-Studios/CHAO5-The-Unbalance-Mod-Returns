@@ -153,13 +153,16 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("handr"), &rotation5,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("haver"), &rotation6,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderl"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
+                }
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
                 macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
             if MotionModule::frame(fighter.module_accessor) >= 31.0 && MotionModule::frame(fighter.module_accessor) < 32.0 {
                 macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
-            }
+            };
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 307.0, 1.0, false, 0.0, false, false);
             };
@@ -233,13 +236,16 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("handr"), &rotation5,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("haver"), &rotation6,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderl"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
+                }
             } else {
                 ANGLE[ENTRY_ID] = 0.0;
                 macros::SET_SPEED_EX(fighter, 1.8, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
             if MotionModule::frame(fighter.module_accessor) >= 31.0 && MotionModule::frame(fighter.module_accessor) < 32.0 {
                 macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
-            }
+            };
             if MotionModule::frame(fighter.module_accessor) >= 469.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 307.0, 1.0, false, 0.0, false, false);
             };

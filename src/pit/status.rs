@@ -32,6 +32,7 @@ fn pit_glide(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             fighter.sub_air_check_fall_common();
             macros::SET_SPEED_EX(fighter, 1.887, -0.357, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
@@ -74,6 +75,9 @@ fn pit_glide(fighter: &mut L2CFighterCommon) {
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("legr"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderr"), &rotation8,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("arml"), &rotation9,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
+            }
         }
     };
 }
@@ -86,10 +90,31 @@ pub unsafe fn glide_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
+#[status_script(agent = "pit", status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn glide_attacka(fighter: &mut L2CFighterCommon) -> L2CValue {
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_attack"), -1.0, 1.0, false, 0.0, false, false);
+    fighter.sub_shift_status_main(L2CValue::Ptr(glide_attackb as *const () as _))
+}
+
+unsafe extern "C" fn glide_attackb(fighter: &mut L2CFighterCommon) -> L2CValue {
+    fighter.sub_air_check_fall_common();
+    if MotionModule::is_end(fighter.module_accessor) {
+        fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+    }
+    L2CValue::I32(0)
+}
+
+#[status_script(agent = "pit", status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
+pub unsafe fn glide_attackc(fighter: &mut L2CFighterCommon) -> L2CValue {
+    L2CValue::I32(0)
+}
+
 pub fn install() {
     smashline::install_status_scripts!(
         glide_start, 
-        glide_end
+        glide_end,
+        glide_attacka,
+        glide_attackc
     );
     smashline::install_agent_frames!(
         pit_glide

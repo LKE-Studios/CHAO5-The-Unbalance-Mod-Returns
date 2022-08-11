@@ -60,6 +60,9 @@ fn plizardon_opff(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH {
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
         };
+        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
+            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+        };
     }
 }
 

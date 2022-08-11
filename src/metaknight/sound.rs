@@ -20,7 +20,19 @@ unsafe fn metaknight_glide1sfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHiSFX
+#[acmd_script(//GlideAttack
+    agent = "metaknight", 
+    script = "sound_glideattack", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn metaknight_glideattacksfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_attack100_03"));
+    }
+}
+
+#[acmd_script(//ThrowHi
     agent = "metaknight", 
     script = "sound_throwhi", 
     category = ACMD_SOUND, 
@@ -43,7 +55,7 @@ unsafe fn metaknight_throwupsfx(fighter: &mut L2CAgentBase) {
     }
 }   
 
-#[acmd_script(//SpecialNStartSFX
+#[acmd_script(//SpecialNStart
     agent = "metaknight", 
     script = "sound_specialnstart", 
     category = ACMD_SOUND, 
@@ -54,7 +66,7 @@ unsafe fn metaknight_neutralbstartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirNStartSFX
+#[acmd_script(//SpecialAirNStart
     agent = "metaknight", 
     script = "sound_specialairnstart", 
     category = ACMD_SOUND, 
@@ -65,7 +77,7 @@ unsafe fn metaknight_neutralbairstartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiSFX
+#[acmd_script(//SpecialHi
     agent = "metaknight", 
     script = "sound_specialhi", 
     category = ACMD_SOUND, 
@@ -85,7 +97,7 @@ unsafe fn metaknight_upbsfx(fighter: &mut L2CAgentBase) {
     }*/
 }    
 
-#[acmd_script(//SpecialHiLoopSFX
+#[acmd_script(//SpecialHiLoop
     agent = "metaknight", 
     script = "sound_specialhiloop", 
     category = ACMD_SOUND, 
@@ -109,6 +121,7 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         metaknight_glide1sfx,
+        metaknight_glideattacksfx,
         metaknight_throwupsfx,
         metaknight_neutralbstartsfx,
         metaknight_neutralbairstartsfx,

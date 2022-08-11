@@ -20,6 +20,22 @@ unsafe fn plizardon_glide1sfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//GlideAttack
+    agent = "plizardon", 
+    script = "sound_glideattack", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn plizardon_glideattacksfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_plizardon_rnd_attack"));
+    }
+    wait(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_tailswing"));
+    }
+}
+
 #[acmd_script(//Win2
     agent = "plizardon", 
     script = "sound_win2", 
@@ -48,6 +64,7 @@ unsafe fn plizardon_win2sfx(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         plizardon_glide1sfx,
+        plizardon_glideattacksfx,
         plizardon_win2sfx
     );
 }
