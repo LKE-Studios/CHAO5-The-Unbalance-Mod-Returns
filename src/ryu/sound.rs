@@ -157,8 +157,8 @@ pub fn install() {
         sound_hadoken3,
         sound_hadoken4,
         sound_neutralb,
-        sound_ryu_kamehameha_start,
-        sound_ryu_kamehameha_charge,
-        sound_ryu_kamehameha_fire
+        //sound_ryu_kamehameha_start,
+        //sound_ryu_kamehameha_charge,
+        //sound_ryu_kamehameha_fire
     );
 }

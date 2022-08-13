@@ -77,6 +77,8 @@ mod wolf;
 mod yoshi;
 mod younglink;
 mod zelda;
+
+mod ryu;
 mod utils;
 mod custom;
 
@@ -183,6 +185,7 @@ pub fn main() {
     krool::install();
     gaogaen::install();
     packun::install();
+    ryu::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

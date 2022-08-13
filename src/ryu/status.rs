@@ -31,9 +31,19 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
 }
 
 
+#[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+pub unsafe fn ryu_specialn_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    L2CValue::I32(0)
+}
+
 #[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn ryu_specialn_command(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.change_status(FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START.into(), false.into());
+    L2CValue::I32(0)
+}
+
+#[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
+pub unsafe fn ryu_specialn_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
@@ -131,7 +141,7 @@ pub unsafe fn ryu_kamehamehafire_end(fighter: &mut L2CFighterCommon) -> L2CValue
 
 pub fn install() {
     smashline::install_status_scripts!(
-        ryu_specialn_command,
+        ryu_specialn_pre, ryu_specialn_command, ryu_specialn_end,
         ryu_kamehameha_start_pre, ryu_kamehameha_start, ryu_kamehameha_start_end,
         ryu_kamehameha_charge_pre, ryu_kamehameha_charge, ryu_kamehameha_charge_end,
         ryu_kamehamehafire_pre, ryu_kamehamehafire, ryu_kamehamehafire_end);
