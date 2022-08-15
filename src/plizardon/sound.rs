@@ -10,15 +10,27 @@ use smash::lua2cpp::L2CAgentBase;
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn plizardon_glide1sfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 25.0);
+    frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
     }
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h01_win02"));
     }
 }
+
+/*#[acmd_script(//GlideWing
+    agent = "plizardon", 
+    script = "sound_glidewing", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn plizardon_glide2sfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+    }
+}*/
 
 #[acmd_script(//GlideAttack
     agent = "plizardon", 
@@ -35,6 +47,37 @@ unsafe fn plizardon_glideattacksfx(fighter: &mut L2CAgentBase) {
         macros::PLAY_SE(fighter, Hash40::new("se_plizardon_tailswing"));
     }
 }
+
+#[acmd_script(//GlideLanding
+    agent = "plizardon", 
+    script = "sound_glidelanding", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn plizardon_glidelandingsfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+    }
+}
+
+#[acmd_script(//GlideEnd
+    agent = "plizardon", 
+    script = "sound_glideend", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn plizardon_glideendsfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
+    }
+}   
 
 #[acmd_script(//Win2
     agent = "plizardon", 
@@ -64,7 +107,10 @@ unsafe fn plizardon_win2sfx(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         plizardon_glide1sfx,
+        //plizardon_glide2sfx,
         plizardon_glideattacksfx,
+        plizardon_glideendsfx,
+        plizardon_glidelandingsfx,
         plizardon_win2sfx
     );
 }

@@ -24,8 +24,27 @@ unsafe fn donkey_upbairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialLwLoopGFX
+    agent = "donkey", 
+    script = "effect_speciallwloop", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn donkey_downbgfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 2.2, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 2.8, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 2.2, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 2.8, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         donkey_upbairgfx,
+        donkey_downbgfx
     );
 }

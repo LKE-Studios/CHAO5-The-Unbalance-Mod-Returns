@@ -945,10 +945,6 @@ unsafe fn ike_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
-    frame(fighter.lua_state_agent, 26.0);
-    if macros::is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-    }
 }
 
 
@@ -960,7 +956,6 @@ unsafe fn ike_sideb(fighter: &mut L2CAgentBase) {
 unsafe fn ike_sidebend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_END_NO_LANDING);
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 
@@ -983,10 +978,6 @@ unsafe fn ike_sidebair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
-    frame(fighter.lua_state_agent, 26.0);
-    if macros::is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-    }
 }
 
 #[acmd_script(//SpecialAirSEnd
@@ -1001,7 +992,6 @@ unsafe fn ike_sidebairend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_IKE_STATUS_SPECIAL_S_FLAG_END_NO_LANDING);
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 

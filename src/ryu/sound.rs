@@ -1,12 +1,12 @@
 use smash::app::sv_animcmd::*;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
+//use smash::lib::lua_const::*;
+//use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smash::phx::Hash40;
 use smash_script::*;
 use smashline::*;
 
-#[acmd_script(//MoveSpM
+/*#[acmd_script(//MoveSpM
     agent = "ryu_hadoken",
     script = "sound_movespm",
     category = ACMD_SOUND,
@@ -110,7 +110,7 @@ unsafe fn sound_neutralb(fighter: &mut L2CAgentBase) {
             }
         }
     }
-}
+}*/
 
 #[acmd_script(
 agent = "ryu",
@@ -130,7 +130,7 @@ category = ACMD_SOUND,
 low_priority )]
 unsafe fn sound_ryu_kamehameha_charge(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n02"));
+        macros::PLAY_SE(fighter, Hash40::new("se_item_genesis_shot01"));
     }
 }
 
@@ -142,21 +142,21 @@ low_priority )]
 unsafe fn sound_ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n03"));
+        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_item_genesis_shot02"));
     }
     frame(fighter.lua_state_agent, 70.0);
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ryu_special_n03"));
+        macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
     }
 }
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        sound_hadoken1,
+        /*sound_hadoken1,
         sound_hadoken2,
         sound_hadoken3,
         sound_hadoken4,
-        sound_neutralb,
+        sound_neutralb,*/
         sound_ryu_kamehameha_start,
         sound_ryu_kamehameha_charge,
         sound_ryu_kamehameha_fire

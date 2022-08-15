@@ -99,18 +99,10 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
             FLOAT[ENTRY_ID] = FLOAT_MAX;
             START_FLOAT[ENTRY_ID] = false;
             if status_kind == *FIGHTER_STATUS_KIND_JUMP {
-                StatusModule::change_status_request_from_script(
-                    fighter.module_accessor,
-                    *FIGHTER_STATUS_KIND_FALL,
-                    true
-                );
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
             };
             if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
-                StatusModule::change_status_request_from_script(
-                    fighter.module_accessor,
-                    *FIGHTER_STATUS_KIND_FALL_AERIAL,
-                    true
-                );
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
             };
             if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
                 FLOAT[ENTRY_ID] = 1;

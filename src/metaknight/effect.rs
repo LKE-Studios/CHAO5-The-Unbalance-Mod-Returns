@@ -15,6 +15,13 @@ unsafe fn metaknight_glide1gfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -5.3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 5.5, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.2, /*G*/ 2.0, /*B*/ 2.55);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        //macros::FLASH(fighter, /*R*/ 1.2, /*G*/ 2.0, /*B*/ 2.55, /*A*/ 0.88);
     }
 }
 
@@ -26,14 +33,7 @@ unsafe fn metaknight_glide1gfx(fighter: &mut L2CAgentBase) {
 unsafe fn metaknight_glide2gfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
-    }
-    for _ in 0..i32::MAX {
-        if macros::is_excute(fighter) {
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.1, true);
-        }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
 }
 
@@ -245,7 +245,7 @@ unsafe fn metaknight_uairgfx(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.15, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 10.0);
@@ -265,12 +265,47 @@ unsafe fn metaknight_dairgfx(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_lw"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.22, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_lw"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.25, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+    }
+}
+
+#[acmd_script(//ThrowHiGFX
+    agent = "metaknight", 
+    script = "effect_throwhi", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn metaknight_throwhigfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 7.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.8)
+    }
+    frame(fighter.lua_state_agent, 8.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 0, 0, -90, 0, 0, 1.6, 0, 1, 0, 0, 0, 0, true, 0.4);
+        macros::EFFECT(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.6)
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("metaknight_throw_hi_line"), Hash40::new("top"), 0, 8, 2, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 44.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, -3.0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.8);
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0.0, 0.0, 0, 0, 0, false);
+        macros::EFFECT(fighter, Hash40::new("sys_hit_cut"), Hash40::new("top"), 2, 20, 0, 0, 0, -90.0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 46.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 0.0, 0.0, 0, 0, 0, 2.5, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
@@ -366,6 +401,7 @@ pub fn install() {
         metaknight_bairgfx,
         metaknight_uairgfx,
         metaknight_dairgfx,
+        metaknight_throwhigfx,
         metaknight_neutralb1gfx,
         metaknight_neutralbairgfx,
         metaknight_upbgfx,
