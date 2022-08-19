@@ -21,6 +21,7 @@ mod gaogaen;
 mod gekkouga;
 mod ike;
 mod kamui;
+mod ken;
 mod kirby;
 mod koopa;
 mod koopajr;
@@ -78,7 +79,6 @@ mod yoshi;
 mod younglink;
 mod zelda;
 
-mod ryu;
 mod utils;
 mod custom;
 
@@ -185,7 +185,7 @@ pub fn main() {
     krool::install();
     gaogaen::install();
     packun::install();
-    ryu::install();
+    ken::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

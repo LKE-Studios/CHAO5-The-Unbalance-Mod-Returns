@@ -1729,7 +1729,8 @@ unsafe fn donkey_finalairend(fighter: &mut L2CAgentBase) {
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_FINAL_FLAG_HIT_ALL_OPPONENT) {
                 if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
                     if macros::is_excute(fighter) {
-                        let scale = PostureModule::scale(fighter.module_accessor);
+   
+                        
                         macros::CAM_ZOOM_IN_arg5(fighter, 1.0, 0.0, 1.5 * scale, 0.0, 0.0);
                         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, -20, 5);
                     }

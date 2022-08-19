@@ -1123,6 +1123,28 @@ unsafe fn packun_upbair(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialLwCharge
+    agent = "packun", 
+    script = "game_speciallwcharge", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn packun_downbcharge(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
+}
+
+#[acmd_script(//SpecialAirLwCharge
+    agent = "packun", 
+    script = "game_specialairlwcharge", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn packun_downbaircharge(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
+}
+
 #[acmd_script(//SpecialLwBite
     agent = "packun", 
     script = "game_speciallwbite", 
@@ -1445,6 +1467,8 @@ pub fn install() {
         packun_breath4,
         packun_upb,
         packun_upbair,
+        packun_downbcharge,
+        packun_downbaircharge,
         packun_downb1,
         packun_downb2,
         packun_downb3,

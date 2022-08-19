@@ -19,6 +19,11 @@ unsafe fn metaknight_glide1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("mantle") as i64, hash40("mantle_wing") as i64);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_dash"), 0, false, 0);
     }
 }
 
@@ -1094,11 +1099,7 @@ unsafe fn metaknight_neutralbairend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-    }
-    frame(fighter.lua_state_agent, 29.0);
-    if macros::is_excute(fighter) {
-        CancelModule::enable_cancel(fighter.module_accessor);
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     }
 }
 

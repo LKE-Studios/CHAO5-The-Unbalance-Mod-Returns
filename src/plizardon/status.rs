@@ -47,9 +47,13 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             fighter.sub_air_check_fall_common();
             macros::SET_SPEED_EX(fighter, 1.55, -0.53, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
-            static Y_ACCEL_ADD : f32 = 0.064; //Ascent/Descent Speed Multiplier
-            static X_DECEL_MUL_UP : f32 = -0.0082; //Horizontal Air Deceleration multiplier when ascending
-            static X_DECEL_MUL_DOWN : f32 = 0.0082; //Horizontal Air Deceleration multiplier when descending
+            static Y_ACCEL_ADD : f32 = 0.055; //Ascent/Descent Speed Multiplier
+            static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
+            static X_DECEL_MUL_UP_PRE : f32 = -0.05;
+            static X_DECEL_MUL_UP : f32 = -0.008; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
+            static X_ACCEL_MUL_DOWN : f32 = -0.025; //Horizontal Air Acceleration multiplier when descending in between lower angle values
+            static X_DECEL_MUL_DOWN_PRE : f32 = 0.0517; 
+            static X_DECEL_MUL_DOWN : f32 = 0.008; //Horizontal Air Deceleration multiplier when descending in between higher angle values
             let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
             if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
                 ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
@@ -62,24 +66,39 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
             };
             let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
             macros::SET_SPEED_EX(fighter, 1.55, -0.53 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-            if ANGLE[ENTRY_ID] >= -50.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air decel. multilplier when descending when angle is between -55 and 0.1
+            if ANGLE[ENTRY_ID] >= -50.0 && ANGLE[ENTRY_ID] <= -35.1 { //Applies the H Air decel. multilplier when descending when angle is between -50 and -35.1
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
             };
-            if ANGLE[ENTRY_ID] <= 50.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when descending when angle is between 0.1 and 50
+            if ANGLE[ENTRY_ID] >= -35.0 && ANGLE[ENTRY_ID] <= -20.1 {
+                macros::SET_SPEED_EX(fighter, 3.08, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN_PRE, y:0.0, z:0.0});
+            };
+            if ANGLE[ENTRY_ID] >= -20.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air accel. multilplier when descending when angle is between -15 and 0.1
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_ACCEL_MUL_DOWN, y:0.0, z:0.0});
+            };        
+            if ANGLE[ENTRY_ID] <= 50.0 && ANGLE[ENTRY_ID] >= 30.1 { //Applies the H Air decel. multilplier when descending when angle is between 30.1 and 50
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
+            };
+            if ANGLE[ENTRY_ID] <= 30.0 && ANGLE[ENTRY_ID] >= 15.1 { //Applies the H Air decel. multilplier when ascending when angle is between 20.1 and 30
+                macros::SET_SPEED_EX(fighter, 2.8, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP_PRE, y:0.0, z:0.0});
+            };
+            if ANGLE[ENTRY_ID] <= 15.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when ascending when angle is between 0.1 and 20
+                macros::SET_SPEED_EX(fighter, 1.55, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_ACCEL_MUL_UP, y:0.0, z:0.0});
             };
             let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.0, y: 0.0, z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
             let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.007, y: ANGLE[ENTRY_ID]*0.005, z: ANGLE[ENTRY_ID]*0.24 };
-            let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*-0.0, z: ANGLE[ENTRY_ID]*-0.29 };
-            let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.25 };
-            let rotation5 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.45 };
+            let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*-0.0, z: ANGLE[ENTRY_ID]*-0.15 };
+            let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.2 };
+            let rotation5 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.35 };
             let rotation6 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0019, y: ANGLE[ENTRY_ID]*0.0013, z: ANGLE[ENTRY_ID]*0.21 };
             let rotation7 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.22, y: ANGLE[ENTRY_ID]*-0.00063, z: ANGLE[ENTRY_ID]*0.228 };
             let rotation8 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*-0.0007, z: ANGLE[ENTRY_ID]*0.16 };
-            let rotation9 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.15, y: ANGLE[ENTRY_ID]*0.3, z: ANGLE[ENTRY_ID]*-0.31 };
-            let rotation10 = Vector3f{ x: ANGLE[ENTRY_ID]*0.05, y: ANGLE[ENTRY_ID]*0.125, z: ANGLE[ENTRY_ID]*-0.094 };
-            let rotation11 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.01, y: ANGLE[ENTRY_ID]*0.22, z: ANGLE[ENTRY_ID]*-0.078 };
-            let rotation12 = Vector3f{ x: ANGLE[ENTRY_ID]*0.11, y: ANGLE[ENTRY_ID]*0.122, z: ANGLE[ENTRY_ID]*0.064 };
+            let rotation9 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.15, y: ANGLE[ENTRY_ID]*0.3, z: ANGLE[ENTRY_ID]*0.35 };
+            let rotation10 = Vector3f{ x: ANGLE[ENTRY_ID]*0.05, y: ANGLE[ENTRY_ID]*0.28, z: ANGLE[ENTRY_ID]*-0.1 };
+            let rotation11 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.01, y: ANGLE[ENTRY_ID]*0.22, z: ANGLE[ENTRY_ID]*-0.12 };
+            let rotation12 = Vector3f{ x: ANGLE[ENTRY_ID]*0.11, y: ANGLE[ENTRY_ID]*0.2, z: ANGLE[ENTRY_ID]*-0.14 };
             let rotation13 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0054, y: ANGLE[ENTRY_ID]*0.073, z: ANGLE[ENTRY_ID]*-0.28 };
             let rotation14 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0021, y: ANGLE[ENTRY_ID]*-0.0058, z: ANGLE[ENTRY_ID]*-0.28 };
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation, smash::app::MotionNodeRotateCompose { _address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8 }, smash::app::MotionNodeRotateOrder { _address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8 });
