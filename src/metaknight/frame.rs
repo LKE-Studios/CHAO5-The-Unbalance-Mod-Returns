@@ -24,6 +24,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         //let situation_kind = StatusModule::situation_kind(boma);
         let kind = smash::app::utility::get_kind(boma);
+        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         if kind == *FIGHTER_KIND_METAKNIGHT {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
         };
@@ -69,6 +70,12 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         };
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        }
+        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
             if MotionModule::frame(fighter.module_accessor) > 29.0 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
@@ -77,13 +84,18 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 }
             }
         };
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
             }
         };
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_air_check_fall_common();
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 { //SFX Stuff added to prevent them from looping along with the animation
                 macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
                 macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
@@ -97,12 +109,15 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             }
             if MotionModule::frame(fighter.module_accessor) >= 8.0 && MotionModule::frame(fighter.module_accessor) < 9.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop1"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 1.2, true);
+            }          
+            if MotionModule::frame(fighter.module_accessor) > 22.0 {
+                WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
                 macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.0425; //Ascent/Descent Speed Multiplier
+                static Y_ACCEL_ADD : f32 = 0.04125; //Ascent/Descent Speed Multiplier
                 static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
                 static X_DECEL_MUL_UP_PRE : f32 = -0.0473;
                 static X_DECEL_MUL_UP : f32 = -0.013125; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
@@ -198,8 +213,12 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 HOLD_TIME[ENTRY_ID] = 1.0;
             };
         }
+        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_AIR_HI_START {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        };
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
             fighter.sub_air_check_fall_common();
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
                 macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
@@ -211,11 +230,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
                 macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h02"));
             }
+            if MotionModule::frame(fighter.module_accessor) > 22.0 {
+                WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+            }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
                 macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.0425; //Ascent/Descent Speed Multiplier
+                static Y_ACCEL_ADD : f32 = 0.04125; //Ascent/Descent Speed Multiplier
                 static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
                 static X_DECEL_MUL_UP_PRE : f32 = -0.0473;
                 static X_DECEL_MUL_UP : f32 = -0.013125; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
@@ -312,6 +334,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             };
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             if MotionModule::frame(fighter.module_accessor) > 10.0 {
                 if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                     fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END.into(), true.into());

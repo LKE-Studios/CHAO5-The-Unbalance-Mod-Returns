@@ -1,5 +1,5 @@
 use smash::lib::lua_const::*;
-//use smash::app::lua_bind::*;
+use smash::app::lua_bind::*;
 use smashline::*;
 //use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;

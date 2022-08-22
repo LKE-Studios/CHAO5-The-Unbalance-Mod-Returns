@@ -46,7 +46,7 @@ fn metaknight_glide(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             fighter.sub_air_check_fall_common();
             macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
-            static Y_ACCEL_ADD : f32 = 0.0425; //Ascent/Descent Speed Multiplier
+            static Y_ACCEL_ADD : f32 = 0.04125; //Ascent/Descent Speed Multiplier
             static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
             static X_DECEL_MUL_UP_PRE : f32 = -0.0473; 
             static X_DECEL_MUL_UP : f32 = -0.013125; //Horizontal Air Deceleration multiplier when ascending in between higher angle values

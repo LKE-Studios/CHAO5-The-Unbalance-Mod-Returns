@@ -29,11 +29,24 @@ unsafe fn plizardon_glidestartgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("fire"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 1.4)
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 7.0, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.94, /*G*/ 1.0, /*B*/ 0.08);
     }
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("plizardon_atk_fire_air"), false, false);
+    }
+}
+
+#[acmd_script(//GlideWingGFX
+    agent = "plizardon", 
+    script = "effect_glidewing", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn plizardon_glide2gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
 }
 
@@ -46,7 +59,7 @@ unsafe fn plizardon_glideattackgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("fire"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 1.4)
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
     }
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -58,6 +71,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         plizardon_firegfx,
         plizardon_glidestartgfx,
+        plizardon_glide2gfx,
         plizardon_glideattackgfx
     );
 }

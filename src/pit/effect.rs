@@ -15,6 +15,8 @@ unsafe fn pit_glidestartgfx(fighter: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pit_sword"), Hash40::new("swordr2"), -0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pit_sword"), Hash40::new("swordl"), -0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 6.8, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 1.82, /*B*/ 0.04);
     }
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -25,6 +27,17 @@ unsafe fn pit_glidestartgfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_fly_miracle_start"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_sword"), false, false);
+    }
+}
+
+#[acmd_script(//GlideWingGFX
+    agent = "pit", 
+    script = "effect_glidewing", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn pit_glide2gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
 }
 
@@ -82,6 +95,7 @@ unsafe fn pit_glideendgfx(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         pit_glidestartgfx,
+        pit_glide2gfx,
         pit_glideattackgfx,
         pit_glidelandinggfx,
         pit_glideendgfx

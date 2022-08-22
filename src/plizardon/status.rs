@@ -67,6 +67,7 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
             let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
             macros::SET_SPEED_EX(fighter, 1.55, -0.53 + y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             if ANGLE[ENTRY_ID] >= -50.0 && ANGLE[ENTRY_ID] <= -35.1 { //Applies the H Air decel. multilplier when descending when angle is between -50 and -35.1
+                macros::SET_SPEED_EX(fighter, 1.55, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
             };
             if ANGLE[ENTRY_ID] >= -35.0 && ANGLE[ENTRY_ID] <= -20.1 {
@@ -74,9 +75,11 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN_PRE, y:0.0, z:0.0});
             };
             if ANGLE[ENTRY_ID] >= -20.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air accel. multilplier when descending when angle is between -15 and 0.1
+                macros::SET_SPEED_EX(fighter, 1.55, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_ACCEL_MUL_DOWN, y:0.0, z:0.0});
             };        
             if ANGLE[ENTRY_ID] <= 50.0 && ANGLE[ENTRY_ID] >= 30.1 { //Applies the H Air decel. multilplier when descending when angle is between 30.1 and 50
+                macros::SET_SPEED_EX(fighter, 1.55, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
             };
             if ANGLE[ENTRY_ID] <= 30.0 && ANGLE[ENTRY_ID] >= 15.1 { //Applies the H Air decel. multilplier when ascending when angle is between 20.1 and 30

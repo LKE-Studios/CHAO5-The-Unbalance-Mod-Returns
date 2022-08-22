@@ -1,9 +1,13 @@
 mod game;
-//mod frame;
-//mod status;
+mod effect;
+mod frame;
+mod status;
+mod sound;
 
 pub fn install() {
     game::install();
-    //frame::install();
-    //status::install();
+    effect::install();    
+    frame::install();
+    status::install();
+    sound::install();
 }

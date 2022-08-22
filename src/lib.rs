@@ -20,6 +20,7 @@ mod ganon;
 mod gaogaen;
 mod gekkouga;
 mod ike;
+mod inkling;
 mod kamui;
 mod ken;
 mod kirby;
@@ -68,6 +69,7 @@ mod ryu;
 mod samus;
 mod sheik;
 mod shulk;
+mod simon;
 mod snake;
 mod sonic;
 mod szerosuit;
@@ -186,6 +188,8 @@ pub fn main() {
     gaogaen::install();
     packun::install();
     ken::install();
+    inkling::install();
+    simon::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }
