@@ -68,6 +68,7 @@ mod roy;
 mod ryu;
 mod samus;
 mod sheik;
+mod shizue;
 mod shulk;
 mod simon;
 mod snake;
@@ -190,6 +191,7 @@ pub fn main() {
     ken::install();
     inkling::install();
     simon::install();
+    shizue::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

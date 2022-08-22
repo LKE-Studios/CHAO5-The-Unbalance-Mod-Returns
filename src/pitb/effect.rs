@@ -15,7 +15,7 @@ unsafe fn pitb_glidestartgfx(fighter: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordr2"), -0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordl"), -0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 6.8, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 5.8, true);
         macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.14);
     }
     frame(fighter.lua_state_agent, 3.0);
