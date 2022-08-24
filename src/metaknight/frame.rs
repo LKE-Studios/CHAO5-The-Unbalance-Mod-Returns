@@ -117,13 +117,13 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.04125; //Ascent/Descent Speed Multiplier
-                static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
-                static X_DECEL_MUL_UP_PRE : f32 = -0.0473;
+                static Y_ACCEL_ADD : f32 = 0.04; //Ascent/Descent Speed Multiplier
+                static X_ACCEL_MUL_UP : f32 = 0.02; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
+                static X_DECEL_MUL_UP_PRE : f32 = -0.06935;
                 static X_DECEL_MUL_UP : f32 = -0.013125; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
                 static X_ACCEL_MUL_DOWN : f32 = -0.02; //Horizontal Air Acceleration multiplier when descending in between lower angle values
-                static X_DECEL_MUL_DOWN_PRE : f32 = 0.0676; 
-                static X_DECEL_MUL_DOWN : f32 = 0.0127; //Horizontal Air Deceleration multiplier when descending in between higher angle values
+                static X_DECEL_MUL_DOWN_PRE : f32 = 0.06935; 
+                static X_DECEL_MUL_DOWN : f32 = 0.013125; //Horizontal Air Deceleration multiplier when descending in between higher angle values
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
                     ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
@@ -141,7 +141,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
                 };
                 if ANGLE[ENTRY_ID] >= -40.0 && ANGLE[ENTRY_ID] <= -25.1 {
-                    macros::SET_SPEED_EX(fighter, 4.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                    macros::SET_SPEED_EX(fighter, 4.05, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN_PRE, y:0.0, z:0.0});
                 };
                 if ANGLE[ENTRY_ID] >= -25.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air accel. multilplier when descending when angle is between -25 and 0.1
@@ -152,16 +152,16 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     macros::SET_SPEED_EX(fighter, 1.8, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
                 };
-                if ANGLE[ENTRY_ID] <= 35.0 && ANGLE[ENTRY_ID] >= 15.1 { //Applies the H Air decel. multilplier when ascending when angle is between 15.1 and 35
-                    macros::SET_SPEED_EX(fighter, 3.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                if ANGLE[ENTRY_ID] <= 40.0 && ANGLE[ENTRY_ID] >= 25.1 { //Applies the H Air decel. multilplier when ascending when angle is between 15.1 and 35
+                    macros::SET_SPEED_EX(fighter, 4.05, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP_PRE, y:0.0, z:0.0});
                 };
-                if ANGLE[ENTRY_ID] <= 15.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when ascending when angle is between 0.1 and 15
+                if ANGLE[ENTRY_ID] <= 25.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when ascending when angle is between 0.1 and 15
                     macros::SET_SPEED_EX(fighter, 1.8, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_ACCEL_MUL_UP, y:0.0, z:0.0});
                 };
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
-                let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
+                let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.35 };
                 let rotation3 = Vector3f{x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*0.11, z: ANGLE[ENTRY_ID]*-0.24 };
                 let rotation4 = Vector3f{x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*-0.11 };
                 let rotation5 = Vector3f{x: ANGLE[ENTRY_ID]*0.035, y: ANGLE[ENTRY_ID]*-0.006, z: ANGLE[ENTRY_ID]*-0.04 };
@@ -194,8 +194,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), true.into());
                 }
             }
-            if MotionModule::frame(fighter.module_accessor) >= 469.0 {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 307.0, 1.0, false, 0.0, false, false);
+            if MotionModule::frame(fighter.module_accessor) >= 350.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 32.0, 1.0, false, 0.0, false, false);
             };
             if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
                 HOLD_TIME[ENTRY_ID] = 1.0;
@@ -237,13 +237,13 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }  
             if MotionModule::frame(fighter.module_accessor) > 28.0 {
-                static Y_ACCEL_ADD : f32 = 0.04125; //Ascent/Descent Speed Multiplier
-                static X_ACCEL_MUL_UP : f32 = 0.03334; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
-                static X_DECEL_MUL_UP_PRE : f32 = -0.0473;
+                static Y_ACCEL_ADD : f32 = 0.04; //Ascent/Descent Speed Multiplier
+                static X_ACCEL_MUL_UP : f32 = 0.02; //Horizontal Air Acceleration multiplier when ascending in between lower angle values
+                static X_DECEL_MUL_UP_PRE : f32 = -0.06935;
                 static X_DECEL_MUL_UP : f32 = -0.013125; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
                 static X_ACCEL_MUL_DOWN : f32 = -0.02; //Horizontal Air Acceleration multiplier when descending in between lower angle values
-                static X_DECEL_MUL_DOWN_PRE : f32 = 0.0676; 
-                static X_DECEL_MUL_DOWN : f32 = 0.0127; //Horizontal Air Deceleration multiplier when descending in between higher angle values
+                static X_DECEL_MUL_DOWN_PRE : f32 = 0.06935; 
+                static X_DECEL_MUL_DOWN : f32 = 0.013125; //Horizontal Air Deceleration multiplier when descending in between higher angle values
                 let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
                 if stick_y >= 0.1 || stick_y <= -0.1 { //Used to prevent having a stick_y in the middle from changing flight angle
                     ANGLE[ENTRY_ID] += STICK_ANGLE_MUL*stick_y;
@@ -261,7 +261,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
                 };
                 if ANGLE[ENTRY_ID] >= -40.0 && ANGLE[ENTRY_ID] <= -25.1 {
-                    macros::SET_SPEED_EX(fighter, 4.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                    macros::SET_SPEED_EX(fighter, 4.05, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN_PRE, y:0.0, z:0.0});
                 };
                 if ANGLE[ENTRY_ID] >= -25.0 && ANGLE[ENTRY_ID] <= -0.1 { //Applies the H Air accel. multilplier when descending when angle is between -25 and 0.1
@@ -272,16 +272,16 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     macros::SET_SPEED_EX(fighter, 1.8, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
                 };
-                if ANGLE[ENTRY_ID] <= 35.0 && ANGLE[ENTRY_ID] >= 15.1 { //Applies the H Air decel. multilplier when ascending when angle is between 15.1 and 35
-                    macros::SET_SPEED_EX(fighter, 3.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                if ANGLE[ENTRY_ID] <= 40.0 && ANGLE[ENTRY_ID] >= 25.1 { //Applies the H Air decel. multilplier when ascending when angle is between 15.1 and 35
+                    macros::SET_SPEED_EX(fighter, 4.05, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_DECEL_MUL_UP_PRE, y:0.0, z:0.0});
                 };
-                if ANGLE[ENTRY_ID] <= 15.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when ascending when angle is between 0.1 and 15
+                if ANGLE[ENTRY_ID] <= 25.0 && ANGLE[ENTRY_ID] >= 0.1 { //Applies the H Air accel. multilplier when ascending when angle is between 0.1 and 15
                     macros::SET_SPEED_EX(fighter, 1.8, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_ACCEL_MUL_UP, y:0.0, z:0.0});
                 };
                 let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
-                let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.4 };
+                let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.31, y: ANGLE[ENTRY_ID]*0.18, z: ANGLE[ENTRY_ID]*-0.35 };
                 let rotation3 = Vector3f{x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*0.11, z: ANGLE[ENTRY_ID]*-0.24 };
                 let rotation4 = Vector3f{x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*-0.11 };
                 let rotation5 = Vector3f{x: ANGLE[ENTRY_ID]*0.035, y: ANGLE[ENTRY_ID]*-0.006, z: ANGLE[ENTRY_ID]*-0.04 };
@@ -305,17 +305,19 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 ANGLE[ENTRY_ID] = 0.0;
                 macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
+            if MotionModule::frame(fighter.module_accessor) >= 29.0 && MotionModule::frame(fighter.module_accessor) < 30.0 {
+                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
+            }
             if MotionModule::frame(fighter.module_accessor) >= 31.0 && MotionModule::frame(fighter.module_accessor) < 32.0 {
                 macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
-                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
             }
             if MotionModule::frame(fighter.module_accessor) > 55.0 {
                 if is_grounded(fighter.module_accessor) {
                     fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), true.into());
                 }
             }
-            if MotionModule::frame(fighter.module_accessor) >= 469.0 {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 307.0, 1.0, false, 0.0, false, false);
+            if MotionModule::frame(fighter.module_accessor) >= 349.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), 30.0, 1.0, false, 0.0, false, false);
             };
             if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
                 HOLD_TIME[ENTRY_ID] = 1.0;

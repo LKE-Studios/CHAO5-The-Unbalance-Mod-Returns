@@ -139,7 +139,7 @@ unsafe fn metaknight_neutralbairstartsfx(fighter: &mut L2CAgentBase) {
 unsafe fn metaknight_upbsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_start"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
     }
     /*frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -159,7 +159,7 @@ unsafe fn metaknight_upbsfx(fighter: &mut L2CAgentBase) {
 unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_start"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
     }
     /*frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {

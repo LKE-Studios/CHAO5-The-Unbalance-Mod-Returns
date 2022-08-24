@@ -98,12 +98,17 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
             let rotation6 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0019, y: ANGLE[ENTRY_ID]*0.0013, z: ANGLE[ENTRY_ID]*0.21 };
             let rotation7 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.22, y: ANGLE[ENTRY_ID]*-0.00063, z: ANGLE[ENTRY_ID]*0.228 };
             let rotation8 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*-0.0007, z: ANGLE[ENTRY_ID]*0.16 };
-            let rotation9 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.15, y: ANGLE[ENTRY_ID]*0.3, z: ANGLE[ENTRY_ID]*0.35 };
+            let rotation9 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.2, y: ANGLE[ENTRY_ID]*0.3, z: ANGLE[ENTRY_ID]*0.35 };
             let rotation10 = Vector3f{ x: ANGLE[ENTRY_ID]*0.05, y: ANGLE[ENTRY_ID]*0.28, z: ANGLE[ENTRY_ID]*-0.1 };
             let rotation11 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.01, y: ANGLE[ENTRY_ID]*0.22, z: ANGLE[ENTRY_ID]*-0.12 };
             let rotation12 = Vector3f{ x: ANGLE[ENTRY_ID]*0.11, y: ANGLE[ENTRY_ID]*0.2, z: ANGLE[ENTRY_ID]*-0.14 };
             let rotation13 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0054, y: ANGLE[ENTRY_ID]*0.073, z: ANGLE[ENTRY_ID]*-0.28 };
             let rotation14 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0021, y: ANGLE[ENTRY_ID]*-0.0058, z: ANGLE[ENTRY_ID]*-0.28 };
+            //Separate tail movement when ascending 
+            let rotation15 = Vector3f{ x: ANGLE[ENTRY_ID]*0.68, y: ANGLE[ENTRY_ID]*-0.3, z: ANGLE[ENTRY_ID]*-0.0 };
+            let rotation16 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.28, z: ANGLE[ENTRY_ID]*0.48 };
+            let rotation17 = Vector3f{ x: ANGLE[ENTRY_ID]*0.01, y: ANGLE[ENTRY_ID]*-0.22, z: ANGLE[ENTRY_ID]*0.2 };
+            let rotation18 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.11, y: ANGLE[ENTRY_ID]*-0.2, z: ANGLE[ENTRY_ID]*0.14 };
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation, smash::app::MotionNodeRotateCompose { _address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8 }, smash::app::MotionNodeRotateOrder { _address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8 });
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("bust"), &rotation2,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("neck"), &rotation3,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
@@ -112,10 +117,18 @@ fn plizardon_glide(fighter: &mut L2CFighterCommon) {
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderl"), &rotation6,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("armr"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderr"), &rotation8,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail1"), &rotation9,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail2"), &rotation10,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail3"), &rotation11,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail4"), &rotation12,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            if ANGLE[ENTRY_ID] >= -50.0 && ANGLE[ENTRY_ID] <= -0.1 {
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail1"), &rotation9,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail2"), &rotation10,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail3"), &rotation11,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail4"), &rotation12,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            }
+            if ANGLE[ENTRY_ID] <= 50.0 && ANGLE[ENTRY_ID] >= 0.1 {
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail1"), &rotation15,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail2"), &rotation16,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail3"), &rotation17,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("tail4"), &rotation18,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+            }
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("legl"), &rotation13,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("legr"), &rotation14,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             //Cancel Stuff

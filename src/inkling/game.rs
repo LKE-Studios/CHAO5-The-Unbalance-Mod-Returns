@@ -1197,6 +1197,76 @@ unsafe fn inkling_sideb1(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialSDash
+    agent = "inkling", 
+    scripts = ["game_specialsdash", "game_specialairsdash"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn inkling_sideba1(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 8.0);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.8, 0, 2.5, 3.0, 0, 2.0, 10.0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+    }
+}
+
+#[acmd_script(//SpecialSWalk
+    agent = "inkling", 
+    scripts = ["game_specialswalk", "game_specialairswalk"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn inkling_sideba2(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 8.0);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.8, 0, 2.5, 3.0, 0, 2.0, 10.0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+    }
+}
+
+#[acmd_script(//SpecialSRun
+    agent = "inkling", 
+    scripts = ["game_specialsrun", "game_specialairsrun"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn inkling_sideba3(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 8.0);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.8, 0, 2.5, 3.0, 0, 2.0, 10.0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        WorkModule::set_float(fighter.module_accessor, 3.0, *FIGHTER_INKLING_STATUS_SPECIAL_S_WORK_FLOAT_WALK_JOSTLE_FRONT);
+        WorkModule::set_float(fighter.module_accessor, 8.0, *FIGHTER_INKLING_STATUS_SPECIAL_S_WORK_FLOAT_WALK_JOSTLE_BACK);
+    }
+}
+
+#[acmd_script(//SpecialSRunTurn
+    agent = "inkling", 
+    script = "game_specialsrunturn", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn inkling_sideba4(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 8.0);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.8, 0, 2.5, 3.0, 0, 2.0, 10.0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INKLING_STATUS_SPECIAL_S_FLAG_TURN)
+    }
+}
+
+#[acmd_script(//SpecialSTurn
+    agent = "inkling", 
+    script = "game_specialsturn", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn inkling_sideba5(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 8.0);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.8, 0, 2.5, 3.0, 0, 2.0, 10.0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INKLING_STATUS_SPECIAL_S_FLAG_TURN)
+    }
+}
+
 #[acmd_script(//SpecialSDashNoInk
     agent = "inkling_roller", 
     script = "game_specialsdashnoink", 
@@ -1570,6 +1640,11 @@ pub fn install() {
         inkling_sideb4,
         inkling_sideb5,
         inkling_sideb6,
+        inkling_sideba1,
+        inkling_sideba2,
+        inkling_sideba3,
+        inkling_sideba4,
+        inkling_sideba5,
         inkling_sidebair1,
         inkling_sidebair2,
         inkling_sidebair3,
