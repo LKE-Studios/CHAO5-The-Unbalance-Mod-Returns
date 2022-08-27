@@ -18,7 +18,9 @@ use smash::lua2cpp::L2CAgentBase;
 unsafe fn metaknight_glide1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
+        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
         VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("mantle") as i64, hash40("mantle_wing") as i64);
     }
     frame(fighter.lua_state_agent, 18.0);
