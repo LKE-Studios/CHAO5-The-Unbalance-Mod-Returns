@@ -90,7 +90,7 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE [ENTRY_ID] * X_ACCEL_MUL_UP, y:0.0, z:0.0});
             };
             let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.0, y: 0.0, z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
-            let rotation1 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.8, y: 0.0, z: 0.0 };
+            let rotation1 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.85, y: 0.0, z: 0.0 };
             let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*0.22 };
             let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.12, y: ANGLE[ENTRY_ID]*-0.078, z: ANGLE[ENTRY_ID]*-0.379 };
             let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.091, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*0.35 };
@@ -100,7 +100,7 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
             let rotation8 = Vector3f{ x: ANGLE[ENTRY_ID]*0.09, y: ANGLE[ENTRY_ID]*-0.11, z: ANGLE[ENTRY_ID]*0.122 };
             let rotation9 = Vector3f{ x: ANGLE[ENTRY_ID]*0.083, y: ANGLE[ENTRY_ID]*-0.064, z: ANGLE[ENTRY_ID]*-0.19 };
             let rotation10 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.1, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*-0.3 };
-            let rotation11 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*0.14 };
+            let rotation11 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*0.11 };
             if ANGLE[ENTRY_ID] >= -70.0 && ANGLE[ENTRY_ID] <= -0.1 {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation, smash::app::MotionNodeRotateCompose { _address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8 }, smash::app::MotionNodeRotateOrder { _address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8 });
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("waist"), &rotation2,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});

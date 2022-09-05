@@ -11,11 +11,11 @@ use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_jab1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 367, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 15, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 6.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -36,11 +36,11 @@ unsafe fn samus_jab1(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack12 
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_jab2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -56,11 +56,11 @@ unsafe fn samus_jab2(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackDash
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_dashattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 69, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(2.0), /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
@@ -80,11 +80,11 @@ unsafe fn samus_dashattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3Hi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidetiltup(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.5, /*Angle*/ 361, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -99,11 +99,11 @@ unsafe fn samus_sidetiltup(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidetilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -117,11 +117,11 @@ unsafe fn samus_sidetilt(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3Lw
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidetiltdown(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.5, /*Angle*/ 361, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -136,11 +136,11 @@ unsafe fn samus_sidetiltdown(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackHi3
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_uptilt(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     }
@@ -159,11 +159,11 @@ unsafe fn samus_uptilt(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw3
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downtilt(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.721);
     }
@@ -180,11 +180,11 @@ unsafe fn samus_downtilt(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS4Hi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidesmashup(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidesmashup(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 22.0, /*Angle*/ 361, /*KBG*/ 112, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -198,11 +198,11 @@ unsafe fn samus_sidesmashup(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS4
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidesmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -220,11 +220,11 @@ unsafe fn samus_sidesmash(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS4Lw
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacks4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidesmashdown(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidesmashdown(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 20.0, /*Angle*/ 361, /*KBG*/ 112, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -238,11 +238,11 @@ unsafe fn samus_sidesmashdown(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackHi4
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_upsmash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.653);
     }
@@ -319,11 +319,11 @@ unsafe fn samus_upsmash(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw4
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downsmash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     }
@@ -352,11 +352,11 @@ unsafe fn samus_downsmash(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirN
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_nair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_nair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 7.0);
     }
@@ -392,11 +392,11 @@ unsafe fn samus_nair(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirF 
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_fair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_fair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -437,11 +437,11 @@ unsafe fn samus_fair(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirB
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_bair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_bair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     }
@@ -468,11 +468,11 @@ unsafe fn samus_bair(fighter: &mut L2CAgentBase) {
 
 
 #[acmd_script(//AttackAirHi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_uair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_uair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     }
@@ -516,11 +516,11 @@ unsafe fn samus_uair(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirLw
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_dair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 16.0);
     }
@@ -554,11 +554,11 @@ unsafe fn samus_dair(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//CatchAttack
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_pummel(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.3, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 30, /*BKB*/ 0, /*Size*/ 7.2, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -571,11 +571,11 @@ unsafe fn samus_pummel(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//ThrowF
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 14.0, /*Angle*/ 42, /*KBG*/ 79, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -596,11 +596,11 @@ unsafe fn samus_throwf(fighter: &mut L2CAgentBase) {
 }  
 
 #[acmd_script(//ThrowB
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 18.0, /*Angle*/ 30, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -623,11 +623,11 @@ unsafe fn samus_throwb(fighter: &mut L2CAgentBase) {
 }  
 
 #[acmd_script(//ThrowHi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 90, /*KBG*/ 128, /*FKB*/ 0, /*BKB*/ 80, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -651,11 +651,11 @@ unsafe fn samus_throwhi(fighter: &mut L2CAgentBase) {
 }   
 
 #[acmd_script(//ThrowLw
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 13.5, /*Angle*/ 74, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 52, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -679,11 +679,11 @@ unsafe fn samus_throwlw(fighter: &mut L2CAgentBase) {
 }  
 
 #[acmd_script(//CliffAttack
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 25.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 9.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-8.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -695,11 +695,11 @@ unsafe fn samus_cliffattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SlipAttack
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -719,11 +719,11 @@ unsafe fn samus_slipattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//DownAttackD
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 48, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 15.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -743,11 +743,11 @@ unsafe fn samus_downattackd(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//DownAttackU
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 48, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 15.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -767,7 +767,7 @@ unsafe fn samus_downattacku(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Shot
-    agent = "samus_cshot", 
+    agent = "samusd_cshot", 
     script = "game_shoot", 
     category = ACMD_GAME, 
     low_priority )]
@@ -780,11 +780,11 @@ unsafe fn charge_shoot(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Missile
-    agent = "samus_missile", 
+    agent = "samusd_missile", 
     script = "game_homing", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_missile(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_missile(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 17.5, /*Angle*/ 0, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 26, /*Size*/ 4.4, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_jack_final"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
         AttackModule::enable_safe_pos(fighter.module_accessor);
@@ -792,7 +792,7 @@ unsafe fn samus_missile(fighter: &mut L2CAgentBase) {
 }  
 
 #[acmd_script(//SuperMissile
-    agent = "samus_supermissile", 
+    agent = "samusd_supermissile", 
     script = "game_ready", 
     category = ACMD_GAME, 
     low_priority )]
@@ -804,7 +804,7 @@ unsafe fn super_missile(fighter: &mut L2CAgentBase) {
 }   
 
 #[acmd_script(//SuperMissile2
-    agent = "samus_supermissile", 
+    agent = "samusd_supermissile", 
     script = "game_straight", 
     category = ACMD_GAME, 
     low_priority )]
@@ -815,11 +815,11 @@ unsafe fn super_missile2(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialHi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_upb(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_upb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SAMUS_STATUS_SPECIAL_HI_FLAG_DISABLE_LR);
     }
@@ -872,11 +872,11 @@ unsafe fn samus_upb(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirHi
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_upbair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SAMUS_STATUS_SPECIAL_HI_FLAG_DISABLE_LR);
     }
@@ -918,11 +918,11 @@ unsafe fn samus_upbair(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Bomb
-    agent = "samus_bomb", 
+    agent = "samusd_bomb", 
     script = "game_burstattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_bomb(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_bomb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 270, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 10.38, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 6, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_OBJECT);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_explosion"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -951,11 +951,11 @@ unsafe fn samus_bomb(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Bomb2
-    agent = "samus_bomb", 
+    agent = "samusd_bomb", 
     script = "game_fall", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_bomb2(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_bomb2(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 270, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 6, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -963,77 +963,77 @@ unsafe fn samus_bomb2(fighter: &mut L2CAgentBase) {
 
 
 #[acmd_script(//AppealHiR
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_uptauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STEELDIVER), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//AppealHiL
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_uptauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STEELDIVER), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//AppealSR
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidetauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SUPERSCOPE), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//AppealSL
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_sidetauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SUPERSCOPE), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//AppealLwR
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downtauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEALBALL), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//AppealLwL
-    agent = "samus", 
+    agent = "samusd", 
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_downtauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEALBALL), 0, 0, false, false);
     }
 }
 
 #[acmd_script(//Final
-    agent = "samus_laser", 
+    agent = "samusd_laser", 
     script = "game_shoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_final(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_final(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 16, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 10, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
@@ -1053,11 +1053,11 @@ unsafe fn samus_final(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Final2
-    agent = "samus_laser2", 
+    agent = "samusd_laser2", 
     script = "game_lower", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_final2(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_final2(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 24, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 8, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
@@ -1076,11 +1076,11 @@ unsafe fn samus_final2(fighter: &mut L2CAgentBase) {
 }        
 
 #[acmd_script(//Final3
-    agent = "samus_laser3", 
+    agent = "samusd_laser3", 
     script = "game_upper", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn samus_final3(fighter: &mut L2CAgentBase) {
+unsafe fn samusd_final3(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 325, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 8, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
@@ -1100,52 +1100,52 @@ unsafe fn samus_final3(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        samus_jab1,
-        samus_jab2,
-        samus_dashattack,
-        samus_sidetiltup,
-        samus_sidetilt,
-        samus_sidetiltdown,
-        samus_uptilt,
-        samus_downtilt,
-        samus_sidesmashup,
-        samus_sidesmash,
-        samus_sidesmashdown,
-        samus_upsmash,
-        samus_downsmash,
-        samus_nair,
-        samus_fair,
-        samus_bair,
-        samus_uair,
-        samus_dair,
-        //samus_grab,
-        //samus_dashgrab,
-        //samus_pivotgrab,
-        samus_pummel,
-        samus_throwf,
-        samus_throwb,
-        samus_throwhi,
-        samus_throwlw,
-        samus_downattacku,
-        samus_downattackd,
-        samus_cliffattack,
-        samus_slipattack,
+        samusd_jab1,
+        samusd_jab2,
+        samusd_dashattack,
+        samusd_sidetiltup,
+        samusd_sidetilt,
+        samusd_sidetiltdown,
+        samusd_uptilt,
+        samusd_downtilt,
+        samusd_sidesmashup,
+        samusd_sidesmash,
+        samusd_sidesmashdown,
+        samusd_upsmash,
+        samusd_downsmash,
+        samusd_nair,
+        samusd_fair,
+        samusd_bair,
+        samusd_uair,
+        samusd_dair,
+        //samusd_grab,
+        //samusd_dashgrab,
+        //samusd_pivotgrab,
+        samusd_pummel,
+        samusd_throwf,
+        samusd_throwb,
+        samusd_throwhi,
+        samusd_throwlw,
+        samusd_downattacku,
+        samusd_downattackd,
+        samusd_cliffattack,
+        samusd_slipattack,
         charge_shoot,
-        samus_missile,
+        samusd_missile,
         super_missile,
         super_missile2,
-        samus_upb,
-        samus_upbair,
-        samus_bomb,
-        samus_bomb2,
-        samus_sidetauntr,
-        samus_sidetauntl,
-        samus_uptauntr,
-        samus_uptauntl,
-        samus_downtauntr,
-        samus_downtauntl,
-        samus_final,
-        samus_final2,
-        samus_final3
+        samusd_upb,
+        samusd_upbair,
+        samusd_bomb,
+        samusd_bomb2,
+        samusd_sidetauntr,
+        samusd_sidetauntl,
+        samusd_uptauntr,
+        samusd_uptauntl,
+        samusd_downtauntr,
+        samusd_downtauntl,
+        samusd_final,
+        samusd_final2,
+        samusd_final3
     );
 }

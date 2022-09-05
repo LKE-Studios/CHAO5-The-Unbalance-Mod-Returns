@@ -1,9 +1,11 @@
 mod game;
-mod frame;
 mod effect;
+mod sound;
+mod frame;
 
 pub fn install() {
     game::install();
-    frame::install();
     effect::install();
+    sound::install();
+    frame::install();
 }

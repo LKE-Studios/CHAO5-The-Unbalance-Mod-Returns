@@ -9,6 +9,7 @@ use skyline::hooks::{getRegionAddress, Region};
 mod bayonetta;
 mod captain;
 mod cloud;
+mod daisy;
 mod dedede;
 mod diddy;
 mod donkey;
@@ -192,6 +193,7 @@ pub fn main() {
     inkling::install();
     simon::install();
     shizue::install();
+    daisy::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

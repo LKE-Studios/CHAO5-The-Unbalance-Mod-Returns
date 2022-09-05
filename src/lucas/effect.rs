@@ -20,7 +20,7 @@ unsafe fn lucas_uptiltgfx(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 8.0);
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 13.5, 2.0, 0, 45, 90, 0.85, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 0.8, 0.1);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
             macros::LAST_EFFECT_SET_RATE(fighter, 1.0);
             macros::EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_atk"), Hash40::new("kneer"), 4.5, 0.2, 0, 0, 0, 0, 0.5, true);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
@@ -63,7 +63,7 @@ unsafe fn lucas_downtiltgfx(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2.0, 7.0, 0, 20, 0, 0.85, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 0.8, 0.1);
+            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
             macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
             macros::EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_atk"), Hash40::new("kneer"), 4.0, 0.1, -1.0, 0, 0, 0, 0.35, true);
             macros::LAST_EFFECT_SET_RATE(fighter, 1.5);

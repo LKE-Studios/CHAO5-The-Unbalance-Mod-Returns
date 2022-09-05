@@ -871,6 +871,24 @@ unsafe fn link_neutralbair(fighter: &mut L2CAgentBase) {
     }
 }  
 
+#[acmd_script(//Fly 
+    agent = "link_bowarrow", 
+    script = "game_fly", 
+    category = ACMD_GAME )]
+unsafe fn link_arrow(fighter: &mut L2CAgentBase) {
+    if WorkModule::get_int(fighter.module_accessor, *WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_SHOOT_NUM) <= 0 {
+        if macros::is_excute(fighter) {
+            macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 361, 71, 0, 10, 1.35, 0.0, 0.0, 0.0, None, None, None, 0.0, 2.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_OBJECT);
+        }
+        else {
+            if macros::is_excute(fighter) {
+                macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 361, 88, 0, 25, 1.35, 0.0, 0.0, 0.0, None, None, None, 0.0, 2.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_OBJECT);
+                AttackModule::enable_safe_pos(fighter.module_accessor);
+            }
+        }
+    }
+}
+
 #[acmd_script(//SpecialSBoomerangFly
     agent = "link_boomerang", 
     script = "game_fly", 
@@ -1182,6 +1200,7 @@ pub fn install() {
         link_downattacku,
         link_neutralb,
         link_neutralbair,
+        link_arrow,
         link_boomerangfly,
         link_boomerangturn,
         link_upb,
