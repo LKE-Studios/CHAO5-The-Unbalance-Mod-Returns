@@ -1188,6 +1188,7 @@ unsafe fn metaknight_sidebairend(fighter: &mut L2CAgentBase) {
         macros::HIT_NODE(fighter, Hash40::new("handr"), *HIT_STATUS_INVINCIBLE);
         macros::HIT_NODE(fighter, Hash40::new("handl"), *HIT_STATUS_INVINCIBLE);
         macros::SET_SPEED_EX(fighter, -0.54, 3.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
 

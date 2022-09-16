@@ -8,6 +8,7 @@ use skyline::hooks::{getRegionAddress, Region};
 
 mod bayonetta;
 mod captain;
+mod chrom;
 mod cloud;
 mod daisy;
 mod dedede;
@@ -61,6 +62,7 @@ mod purin;
 mod ptrainer;
 mod pzenigame;
 mod reflet;
+mod richter;
 mod ridley;
 mod robot;
 mod rockman;
@@ -68,6 +70,7 @@ mod rosetta;
 mod roy;
 mod ryu;
 mod samus;
+mod samusd;
 mod sheik;
 mod shizue;
 mod shulk;
@@ -194,6 +197,9 @@ pub fn main() {
     simon::install();
     shizue::install();
     daisy::install();
+    samusd::install();
+    richter::install();
+    chrom::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

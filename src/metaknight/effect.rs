@@ -200,6 +200,7 @@ unsafe fn metaknight_downsmashgfx(fighter: &mut L2CAgentBase) {
 unsafe fn metaknight_fairgfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_f"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.38, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 7.0);

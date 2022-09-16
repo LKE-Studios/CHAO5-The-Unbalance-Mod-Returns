@@ -17,6 +17,11 @@ pub fn krool_opff(fighter : &mut L2CFighterCommon) {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
             }
+        }
+        if status_kind == *FIGHTER_KROOL_STATUS_KIND_SPECIAL_LW_HIT {
+            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -40.0, 0);
+            }
         };
     }
 }
