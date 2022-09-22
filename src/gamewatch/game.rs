@@ -413,9 +413,8 @@ unsafe fn gamewatch_fair(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
         ArticleModule::shoot(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_BOMB, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
     }
-    frame(fighter.lua_state_agent, 19.0);
+    frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
         CancelModule::enable_cancel(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 42.0);

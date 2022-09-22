@@ -23,18 +23,21 @@ pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
-    fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
+    if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {   
+        fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
+    }
     L2CValue::I32(0)
 }
 
 #[status_script(agent = "pitb", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 0.0, 1.0, false, 0.0, false, false);
     fighter.sub_shift_status_main(L2CValue::Ptr(glide_core as *const () as _))
 }
 
 unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 0.0, 1.0, false, 0.0, false, false);
+    if is_grounded(fighter.module_accessor) {
+        fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), true.into());
     }
     0.into()
 }
@@ -49,10 +52,9 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
             fighter.sub_air_check_fall_common();
             macros::SET_SPEED_EX(fighter, 1.95, -0.37, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
             static Y_ACCEL_ADD : f32 = 0.04; //Ascent/Descent Speed Multiplier
-            static X_DECEL_MUL_UP : f32 = -0.02214; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
+            static X_DECEL_MUL_UP : f32 = -0.0235; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
             static X_ACCEL_MUL_DOWN : f32 = -0.025; //Horizontal Air Acceleration multiplier when descending in between lower angle values
-            static X_DECEL_MUL_DOWN_PRE : f32 = 0.0673; 
-            static X_DECEL_MUL_DOWN : f32 = 0.015; //Horizontal Air Deceleration multiplier when descending
+            static X_DECEL_MUL_DOWN : f32 = 0.033; //Horizontal Air Deceleration multiplier when descending
             let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
             let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
             let x = MOMENTUM[ENTRY_ID] * X_ACCEL_MUL_DOWN;
@@ -68,13 +70,9 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
                     MOMENTUM[ENTRY_ID] = THRESHOLD_MAX;
                 };
             };
-            if ANGLE[ENTRY_ID] >= -70.0 && ANGLE[ENTRY_ID] <= -35.1 { //Applies the H Air decel. multilplier when descending when angle is between -70 and -35.1
-                macros::SET_SPEED_EX(fighter, 1.95, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            if ANGLE[ENTRY_ID] >= -70.0 && ANGLE[ENTRY_ID] < -20.0 { //Applies the H Air decel. multilplier when descending when angle is between -70 and -35.1
+                macros::SET_SPEED_EX(fighter, 2.61 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
-            };
-            if ANGLE[ENTRY_ID] >= -35.0 && ANGLE[ENTRY_ID] <= -20.1 { //Applies the H Air decel. multilplier when descending when angle is between -35 and -20.1
-                macros::SET_SPEED_EX(fighter, 3.78, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN_PRE, y:0.0, z:0.0});
             };
             if ANGLE[ENTRY_ID] >= -20.0 && ANGLE[ENTRY_ID] < 0.0 { //Applies the H Air accel. multilplier when descending when angle is between -20 and 0.1
                 macros::SET_SPEED_EX(fighter, 1.95 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -87,7 +85,7 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_END.into(), true.into());
             }
             let rotation = Vector3f { x: ANGLE[ENTRY_ID] * -1.15, y: 0.0, z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
-            let rotation1 = Vector3f{ x: ANGLE[ENTRY_ID] * -0.85, y: 0.0, z: 0.0 };
+            let rotation1 = Vector3f{ x: ANGLE[ENTRY_ID] * -0.9, y: 0.0, z: 0.0 };
             let rotation2 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.0, y: ANGLE[ENTRY_ID]*-0.0, z: ANGLE[ENTRY_ID]*0.22 };
             let rotation3 = Vector3f{ x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.81 };
             let rotation4 = Vector3f{ x: ANGLE[ENTRY_ID]*-0.01, y: ANGLE[ENTRY_ID]*-0.0425, z: ANGLE[ENTRY_ID]*0.55 };
@@ -130,9 +128,6 @@ fn pitb_glide(fighter: &mut L2CFighterCommon) {
             WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
-            }
-            if is_grounded(fighter.module_accessor) {
-                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), true.into());
             }
         }
     };
