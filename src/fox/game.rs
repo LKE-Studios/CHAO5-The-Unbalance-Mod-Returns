@@ -637,7 +637,7 @@ unsafe fn fox_grab(fighter: &mut L2CAgentBase) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
     frame(fighter.lua_state_agent, 7.0);
-    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1);
+    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1.0);
     if macros::is_excute(fighter) {
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(10.0), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 2.5, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(11.5), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);
@@ -664,7 +664,7 @@ unsafe fn fox_dashgrab(fighter: &mut L2CAgentBase) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
     frame(fighter.lua_state_agent, 11.0);
-    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1);
+    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1.0);
     if macros::is_excute(fighter) {
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.4, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(11.6), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 3.2, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 2.8, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(12.8), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);
@@ -691,7 +691,7 @@ unsafe fn fox_pivotgrab(fighter: &mut L2CAgentBase) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
     frame(fighter.lua_state_agent, 12.0);
-    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1);
+    macros::FT_START_ADJUST_MOTION_FRAME_arg1(fighter, 1.0);
     if macros::is_excute(fighter) {
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(-16.5), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ -2.5, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(-18.0), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);

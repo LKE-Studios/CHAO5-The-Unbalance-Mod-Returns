@@ -27,6 +27,18 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
             .contains(&status_kind) {
             CHARGE_TIME[entry_id] = 0.0;
         }
+        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        }; 
+        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        }; 
     }
 }
 

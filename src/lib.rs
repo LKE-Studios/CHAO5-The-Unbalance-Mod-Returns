@@ -13,6 +13,7 @@ mod cloud;
 mod daisy;
 mod dedede;
 mod diddy;
+mod dolly;
 mod donkey;
 mod duckhunt;
 mod falco;
@@ -200,6 +201,7 @@ pub fn main() {
     samusd::install();
     richter::install();
     chrom::install();
+    dolly::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

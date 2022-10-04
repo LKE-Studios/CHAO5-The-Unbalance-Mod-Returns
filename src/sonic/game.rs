@@ -1038,6 +1038,16 @@ unsafe fn sonic_sideb5(fighter: &mut L2CAgentBase) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
+#[acmd_script(//SpecialLwHold
+    agent = "sonic", 
+    script = "game_speciallwhold", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn sonic_downbhold(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
+}
 
 #[acmd_script(//SpecialLwEnd? (*Hash: 0x195dc47911);
     agent = "sonic", 
@@ -1048,6 +1058,7 @@ unsafe fn sonic_downb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
         macros::UNABLE_AREA(fighter, *FIGHTER_AREA_KIND_TREAD_JUMP_CHECK);
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -1231,6 +1242,7 @@ pub fn install() {
         sonic_sideb4,
         sonic_sideb5,
         sonic_spring,
+        sonic_downbhold,
         sonic_downb,
         sonic_uptauntr,
         sonic_uptauntl,
