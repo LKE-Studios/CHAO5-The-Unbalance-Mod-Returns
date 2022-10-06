@@ -54,10 +54,10 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
     fighter.sub_air_check_fall_common();
     macros::SET_SPEED_EX(fighter, 1.8, -0.42, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    static Y_ACCEL_ADD : f32 = 0.04; //Ascent/Descent Speed Multiplier
-    static X_DECEL_MUL_UP : f32 = -0.0225; 
+    static Y_ACCEL_ADD : f32 = 0.0375; //Ascent/Descent Speed Multiplier
+    static X_DECEL_MUL_UP : f32 = -0.0235; 
     static X_ACCEL_MUL_DOWN : f32 = -0.02; 
-    static X_DECEL_MUL_DOWN : f32 = 0.03275;
+    static X_DECEL_MUL_DOWN : f32 = 0.0341875;
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
     let x = MOMENTUM[ENTRY_ID] * X_ACCEL_MUL_DOWN;
@@ -76,17 +76,17 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
             ANGLE_FRAME[ENTRY_ID] = DIRECTION_DOWN;
         };
     };
-    if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] > 0.0 {
+    /*if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] > 0.0 {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
         MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, false, false);
     };
     if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] < 0.0 {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
         MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, false, false);    
-    };
+    };*/
     //Forward Speed Stuff
     if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] < -25.0 {
-        macros::SET_SPEED_EX(fighter, 2.62 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::SET_SPEED_EX(fighter, 2.655 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
     };
     if ANGLE[ENTRY_ID] >= -25.0 && ANGLE[ENTRY_ID] < 0.0 { //Applies the H Air accel. multilplier when descending when angle is between -25 and 0.1
@@ -96,7 +96,7 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
         macros::SET_SPEED_EX(fighter, 1.8 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_UP, y:0.0, z:0.0});
     };
-    if speed_x * PostureModule::lr(fighter.module_accessor) < 0.5 {
+    if speed_x * PostureModule::lr(fighter.module_accessor) < 0.4 {
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_END.into(), true.into());
     }
     //Cancel Stuff
@@ -112,9 +112,10 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
-/*#[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
+#[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_glide(fighter: &mut L2CFighterCommon) {
     unsafe {
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);    
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
@@ -147,7 +148,7 @@ fn metaknight_glide(fighter: &mut L2CFighterCommon) {
             ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderl"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
         }
     };
-}*/
+}
 
 #[status_script(agent = "metaknight", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
 pub unsafe fn glide_finish(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -213,7 +214,7 @@ pub fn install() {
         glide_end_a,
         glide_landing_a
     );
-    /*smashline::install_agent_frames!(
+    smashline::install_agent_frames!(
         metaknight_glide
-    );*/
+    );
 }

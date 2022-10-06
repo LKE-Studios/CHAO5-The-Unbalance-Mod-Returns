@@ -16,6 +16,7 @@ mod diddy;
 mod dolly;
 mod donkey;
 mod duckhunt;
+mod edge;
 mod falco;
 mod fox;
 mod gamewatch;
@@ -24,6 +25,7 @@ mod gaogaen;
 mod gekkouga;
 mod ike;
 mod inkling;
+mod jack;
 mod kamui;
 mod ken;
 mod kirby;
@@ -202,6 +204,8 @@ pub fn main() {
     richter::install();
     chrom::install();
     dolly::install();
+    jack::install();
+    edge::install();
     skyline::install_hooks!(declare_const_hook);
     custom::install();
 }

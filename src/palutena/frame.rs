@@ -110,9 +110,11 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
         };
         if DEFENCE_BOOST[ENTRY_ID] == true {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 6.0, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 2.55, /*B*/ 0.48);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.7);
+            if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {  
+                macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 6.0, true);
+                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 2.55, /*B*/ 0.48);
+            }
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
             /*if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwr") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwl") {
@@ -123,14 +125,20 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_DEAD {
             DEFENCE_BOOST[ENTRY_ID] = false;
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         };
         if sv_information::is_ready_go() == false {
             DEFENCE_BOOST[ENTRY_ID] = false;
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         };
         if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
             DEFENCE_BOOST[ENTRY_ID] = false;
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         };
     }
 }

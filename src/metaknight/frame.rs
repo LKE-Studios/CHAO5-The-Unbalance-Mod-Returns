@@ -6,6 +6,7 @@ use smashline::*;
 //use crate::utils::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::app::{sv_information};
 
 /*static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX : f32 = 80.0; //Max Ascent Angle for Glide (degrees)
@@ -17,6 +18,9 @@ static mut HOLD_TIME : [f32; 8] = [0.0; 8]; //Allows Meta Knight to enter the gl
 static mut COUNTER: [i32; 8] = [0; 8];
 static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
+static mut META_POWER : [bool; 8] = [false; 8];
+static mut GFX_COUNTER: [i32; 8] = [0; 8];
+static mut SFX_COUNTER: [i32; 8] = [0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_opff(fighter: &mut L2CFighterCommon) {
@@ -31,6 +35,67 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         if kind == *FIGHTER_KIND_METAKNIGHT {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
+        };
+        if META_POWER[ENTRY_ID] == true {
+            GFX_COUNTER[ENTRY_ID] += 1;
+            SFX_COUNTER[ENTRY_ID] += 1;
+            AttackModule::set_power_up(fighter.module_accessor, 1.2);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.5);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.5);
+            if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {  
+                macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 5.0, true);
+                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.6, /*G*/ 0.57, /*B*/ 2.0);
+            }
+            if SFX_COUNTER[ENTRY_ID] < 2 {
+                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
+                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_final_01"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_metaknight_final03"));
+            };
+            if SFX_COUNTER[ENTRY_ID] >= 100 {
+                SFX_COUNTER[ENTRY_ID] = 2;
+            };
+            if DamageModule::damage(fighter.module_accessor, 0) < 100.0 {
+                SFX_COUNTER[ENTRY_ID] = 0;
+            };
+            if GFX_COUNTER[ENTRY_ID] >= 6 {
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
+                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
+                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
+                GFX_COUNTER[ENTRY_ID] = 0;
+            };
+        };
+        if DamageModule::damage(fighter.module_accessor, 0) >= 100.0 {
+            META_POWER[ENTRY_ID] = true;
+        };   
+        if DamageModule::damage(fighter.module_accessor, 0) < 100.0 {
+            META_POWER[ENTRY_ID] = false;
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+        };     
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+            META_POWER[ENTRY_ID] = false;
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+
+        };
+        if sv_information::is_ready_go() == false {
+            META_POWER[ENTRY_ID] = false;
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
+            META_POWER[ENTRY_ID] = false;
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         };
         if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
@@ -161,16 +226,14 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 { //SFX Stuff added to prevent them from looping along with the animation
-                macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
             }
             if MotionModule::frame(fighter.module_accessor) >= 5.0 && MotionModule::frame(fighter.module_accessor) < 6.0 {
                 macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
             }
-            if MotionModule::frame(fighter.module_accessor) >= 6.0 && MotionModule::frame(fighter.module_accessor) < 7.0 {
+            /*if MotionModule::frame(fighter.module_accessor) >= 6.0 && MotionModule::frame(fighter.module_accessor) < 7.0 {
                 macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h02"));
-            }
+            }*/
             if MotionModule::frame(fighter.module_accessor) >= 8.0 && MotionModule::frame(fighter.module_accessor) < 9.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop1"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 1.2, true);
             }          
@@ -215,14 +278,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
-                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
             }
             if MotionModule::frame(fighter.module_accessor) >= 2.0 && MotionModule::frame(fighter.module_accessor) < 3.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop1"), Hash40::new("top"), 0, -5, 2.5, 4, 0, 0, 1, true);
                 EffectModule::set_disable_render_offset_last(fighter.module_accessor);
                 macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 20, 15, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-                macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h02"));
             }
             if MotionModule::frame(fighter.module_accessor) > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
@@ -259,7 +319,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             if MotionModule::frame(fighter.module_accessor) > 10.0 {
-                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                     fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END.into(), true.into());
                 }
                 else if fighter.global_table[0x1F].get_i32() & *FIGHTER_PAD_FLAG_ATTACK_TRIGGER != 0 {

@@ -31,6 +31,18 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
             macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
         };
+        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+        };
         if status_kind == *FIGHTER_STATUS_KIND_DEAD {
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
             macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
