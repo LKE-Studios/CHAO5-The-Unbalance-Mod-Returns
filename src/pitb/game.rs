@@ -22,9 +22,9 @@ unsafe fn pitb_glidestart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWing
+#[acmd_script(//GlideWing, GlideDirection
     agent = "pitb", 
-    script = "game_glidewing", 
+    scripts = ["game_glidewing", "game_glidedirection"], 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn pitb_glide(fighter: &mut L2CAgentBase) {

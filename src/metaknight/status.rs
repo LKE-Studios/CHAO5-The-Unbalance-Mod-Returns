@@ -34,12 +34,10 @@ unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 #[status_script(agent = "metaknight", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    /*let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] >= -80.0 {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
-        MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
-    };*/
-    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 0.0, 1.0, false, 0.0, false, false);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
+    MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
+    //MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 0.0, 1.0, false, 0.0, false, false);
     fighter.sub_shift_status_main(L2CValue::Ptr(glide_core as *const () as _))
 }
 
@@ -76,14 +74,9 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
             ANGLE_FRAME[ENTRY_ID] = DIRECTION_DOWN;
         };
     };
-    /*if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] > 0.0 {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
-        MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, false, false);
+    if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] >= -80.0 {
+        MotionModule::set_frame(fighter.module_accessor, ANGLE_FRAME[ENTRY_ID], false);
     };
-    if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] < 0.0 {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
-        MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, false, false);    
-    };*/
     //Forward Speed Stuff
     if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] < -25.0 {
         macros::SET_SPEED_EX(fighter, 2.655 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -110,44 +103,6 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), true.into());
     }
     0.into()
-}
-
-#[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
-fn metaknight_glide(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let status_kind = StatusModule::status_kind(fighter.module_accessor);    
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-            let rotation = Vector3f{x: ANGLE[ENTRY_ID]*-1.0, y: 0.0 , z: 0.0 }; //Controls body rotation & model/bone movement when angling the glide
-            let rotation1 = Vector3f{x: ANGLE[ENTRY_ID]*-0.15, y: ANGLE[ENTRY_ID]*0.07, z: ANGLE[ENTRY_ID]*-0.43 };
-            let rotation2 = Vector3f{x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.1, z: ANGLE[ENTRY_ID]*-0.29 };
-            let rotation3 = Vector3f{x: ANGLE[ENTRY_ID]*0.02, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*-0.24 };
-            let rotation4 = Vector3f{x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*-0.11 };
-            let rotation5 = Vector3f{x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.12, z: ANGLE[ENTRY_ID]*0.0 };
-            let rotation6 = Vector3f{x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*0.0 };
-            let rotation7 = Vector3f{x: ANGLE[ENTRY_ID]*-0.26, y: ANGLE[ENTRY_ID]*0.08, z: ANGLE[ENTRY_ID]*0.1 };
-            let rotation8 = Vector3f{x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.0, z: ANGLE[ENTRY_ID]*0.0 };
-            let rotation9 = Vector3f{x: ANGLE[ENTRY_ID]*0.06, y: ANGLE[ENTRY_ID]*0.11, z: ANGLE[ENTRY_ID]*0.28 };
-            let rotation10 = Vector3f{x: ANGLE[ENTRY_ID]*-0.05, y: ANGLE[ENTRY_ID]*-0.042, z: ANGLE[ENTRY_ID]*0.12 };
-            let rotation11 = Vector3f{x: ANGLE[ENTRY_ID]*0.0, y: ANGLE[ENTRY_ID]*0.06, z: ANGLE[ENTRY_ID]*0.0 };
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            if ANGLE[ENTRY_ID] <= 80.0 && ANGLE[ENTRY_ID] >= 0.1 {
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderr"), &rotation1,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("haver"), &rotation6,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footr"), &rotation3,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footl"), &rotation4,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});  
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("handr"), &rotation11,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            }
-            if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] <= -0.1 {
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderr"), &rotation2,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("haver"), &rotation8,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footr"), &rotation9,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("footl"), &rotation10,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});  
-                ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("handr"), &rotation5,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            }
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("shoulderl"), &rotation7,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-        }
-    };
 }
 
 #[status_script(agent = "metaknight", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
@@ -213,8 +168,5 @@ pub fn install() {
         glide_attack_a,
         glide_end_a,
         glide_landing_a
-    );
-    smashline::install_agent_frames!(
-        metaknight_glide
     );
 }

@@ -4,9 +4,13 @@
 #![allow(non_snake_case)]
 
 use std::ffi::CStr;
+use std::os::raw::c_int;
 use skyline::hooks::{getRegionAddress, Region};
+use smash::app::lua_bind::*;
+use smash::app::*;
 
 mod bayonetta;
+mod brave;
 mod captain;
 mod chrom;
 mod cloud;
@@ -114,6 +118,42 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     original!()(unk,constant,value)
 }
 
+#[skyline::hook(replace = MotionModule::remove_motion_partial)]
+pub unsafe fn log_remove_motion_partial(
+    module_accessor: *mut BattleObjectModuleAccessor, 
+    index: c_int, 
+    arg3: bool
+) -> u64 {
+    let module_accessor_ptr = module_accessor as u64;
+    let motion_module = *((module_accessor_ptr + 0x88) as *const u64);
+    let partial_motions = *((motion_module + 0xe8) as *const u64);
+    let data_ptr = (partial_motions + (0x40 * index as u64)) as *const [u8; 0x50];
+    skyline::logging::hex_dump_ptr(data_ptr);
+    original!()(module_accessor, index, arg3)
+}
+
+#[skyline::hook(replace = MotionModule::add_motion_partial)]
+pub unsafe fn log_add_motion_partial(
+    module_accessor: *mut BattleObjectModuleAccessor, 
+    index: c_int, 
+    arg3: u64,
+    arg4: f32,
+    arg5: f32,
+    arg6: bool,
+    arg7: bool,
+    arg8: f32,
+    arg9: bool,
+    arg10: bool,
+    arg11: bool,
+) -> u64 {
+    let module_accessor_ptr = module_accessor as u64;
+    let motion_module = *((module_accessor_ptr + 0x88) as *const u64);
+    let partial_motions = *((motion_module + 0xe8) as *const u64);
+    let data_ptr = (partial_motions + (0x40 * index as u64)) as *const [u8; 0x50];
+    skyline::logging::hex_dump_ptr(data_ptr);
+    original!()(module_accessor, index, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+}
+
 #[skyline::main(name = "chao5")]
 pub fn main() {
     unsafe{
@@ -206,6 +246,11 @@ pub fn main() {
     dolly::install();
     jack::install();
     edge::install();
-    skyline::install_hooks!(declare_const_hook);
+    brave::install();
+    skyline::install_hooks!(
+        declare_const_hook, 
+        log_remove_motion_partial,
+        log_add_motion_partial
+    );
     custom::install();
 }

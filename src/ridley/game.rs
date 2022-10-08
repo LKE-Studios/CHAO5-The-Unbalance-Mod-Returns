@@ -9,9 +9,9 @@ use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//GlideWing
+#[acmd_script(//GlideWing, GlideDirection
     agent = "ridley", 
-    script = "game_glidewing", 
+    scripts = ["game_glidewing", "game_glidedirection"], 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ridley_glide(fighter: &mut L2CAgentBase) {

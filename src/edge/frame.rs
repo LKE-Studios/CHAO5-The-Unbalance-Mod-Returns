@@ -18,6 +18,14 @@ pub fn edge_opff(fighter : &mut L2CFighterCommon) {
         if kind == *FIGHTER_KIND_EDGE {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordl1"), &Vector3f{x:1.15, y:1.0, z:1.0});
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordr1"), &Vector3f{x:1.15, y:1.0, z:1.0});
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) == true {
+                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.65);
+                DamageModule::set_reaction_mul(fighter.module_accessor, 0.65);
+            };
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) == false {
+                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+                DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            };
         }
         if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_N_CANCEL {
             if situation_kind == *SITUATION_KIND_AIR {
