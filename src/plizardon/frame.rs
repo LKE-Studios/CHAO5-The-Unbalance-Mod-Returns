@@ -21,22 +21,11 @@ fn plizardon_opff(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
             }
         }
-        else{
+        else {
             HOLD_TIME[ENTRY_ID] = 0.0;
         };
-        if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
+        if [*FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_WAIT, 
+        *FIGHTER_STATUS_KIND_REBIRTH, *FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
             HOLD_TIME[ENTRY_ID] = 1.0;
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
@@ -46,32 +35,15 @@ fn plizardon_opff(fighter: &mut L2CFighterCommon) {
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         };
-        if status_kind == *FIGHTER_STATUS_KIND_LANDING { 
+        if status_kind == *FIGHTER_STATUS_KIND_LANDING || status_kind == *FIGHTER_STATUS_KIND_LANDING_LIGHT || status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR || status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR || status_kind == *FIGHTER_STATUS_KIND_DEAD ||
+        status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || status_kind == *FIGHTER_STATUS_KIND_DAMAGE || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR || 
+        status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH || status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING { 
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_LANDING_LIGHT { 
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        }; 
-        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        }; 
-        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+            macros::STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+            macros::STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
@@ -79,13 +51,11 @@ fn plizardon_opff(fighter: &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+            macros::STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING {
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
         };
     }
 }

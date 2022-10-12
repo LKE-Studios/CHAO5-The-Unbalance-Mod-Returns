@@ -49,10 +49,22 @@ unsafe fn ridley_glideattackgfx(fighter: &mut L2CAgentBase) {
     }
 }  
 
+#[acmd_script(//GlideLanding
+    agent = "ridley", 
+    script = "effect_glidelanding", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn ridley_glidelandinggfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.48, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         ridley_glidestartgfx,
         ridley_glide2gfx,
-        ridley_glideattackgfx
+        ridley_glideattackgfx,
+        ridley_glidelandinggfx
     );
 }

@@ -76,6 +76,7 @@ unsafe fn pit_glidelandinggfx(fighter: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_fly_miracle_start"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_sword"), false, false);
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
 

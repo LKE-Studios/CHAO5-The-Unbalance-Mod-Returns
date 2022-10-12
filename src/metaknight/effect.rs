@@ -55,6 +55,18 @@ unsafe fn metaknight_glideattackgfx(fighter: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
     }
 }
+
+#[acmd_script(//GlideLanding
+    agent = "metaknight", 
+    script = "effect_glidelanding", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn metaknight_glidelandinggfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 #[acmd_script(//Attack100GFX
     agent = "metaknight", 
     script = "effect_attack100", 
@@ -393,6 +405,7 @@ pub fn install() {
         metaknight_glide1gfx,
         metaknight_glide2gfx,
         metaknight_glideattackgfx,
+        metaknight_glidelandinggfx,
         metaknight_jab100gfx,
         metaknight_sidetilt3gfx,
         metaknight_sidesmashgfx,

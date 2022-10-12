@@ -41,7 +41,7 @@ unsafe fn plizardon_glidestartgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "plizardon", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
@@ -69,11 +69,23 @@ unsafe fn plizardon_glideattackgfx(fighter: &mut L2CAgentBase) {
     }
 }  
 
+#[acmd_script(//GlideLanding
+    agent = "plizardon", 
+    script = "effect_glidelanding", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn plizardon_glidelandinggfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         plizardon_firegfx,
         plizardon_glidestartgfx,
         plizardon_glide2gfx,
-        plizardon_glideattackgfx
+        plizardon_glideattackgfx,
+        plizardon_glidelandinggfx
     );
 }

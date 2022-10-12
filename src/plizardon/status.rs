@@ -10,14 +10,16 @@ use smash::phx::{Vector3f, Hash40};
 use smash_script::*;
 
 static mut ANGLE : [f32; 8] = [0.0; 8];
-static ANGLE_MAX : f32 = 50.0; //Max Ascent Angle for Glide (degrees)
-static ANGLE_LOW_MAX : f32 = -50.0; //Max Descent Angle for Glide (degrees)
+static ANGLE_MAX_UP : f32 = 50.0; //Max Ascent Angle for Glide (degrees)
+static ANGLE_MAX_DOWN : f32 = -50.0; //Max Descent Angle for Glide (degrees)
 static mut MOMENTUM : [f32; 8] = [0.0; 8];
 static THRESHOLD_MAX : f32 = -20.0;
 static mut ANGLE_FRAME : [f32; 8] = [90.0; 8];
 static DIRECTION_UP : f32 = 40.0;
 static DIRECTION_DOWN : f32 = 140.0;
-static STICK_ANGLE_MUL : f32 = 4.0; //Controls how much Charizard's body rotates according to the control stick (higher value = higher sensitivity)
+static STICK_ANGLE_MUL : f32 = 4.0; //Max Angular Speed
+static UP_ANGLE_ACCEL : f32 = 0.8; //Upward angular acceleration
+static DOWN_ANGLE_ACCEL : f32 = 1.0; //Downward angular acceleration
 
 #[status_script(agent = "plizardon", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -47,7 +49,7 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     fighter.sub_air_check_fall_common();
-    macros::SET_SPEED_EX(fighter, 1.55, -0.53, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
+    macros::SET_SPEED_EX(fighter, 1.55, -0.55, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
     macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     macros::EFFECT_OFF_KIND(fighter, Hash40::new("plizardon_atk_fire_air"), false, false);
     static Y_ACCEL_ADD : f32 = 0.05; //Ascent/Descent Speed Multiplier
@@ -59,22 +61,27 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
     let x = MOMENTUM[ENTRY_ID] * X_ACCEL_MUL_DOWN;
     let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);  
-    if stick_y > 0.0 || stick_y < 0.0 { //Used to prevent having a stick_y in the middle from changing flight angle
-        ANGLE[ENTRY_ID] += STICK_ANGLE_MUL * stick_y;
-        ANGLE_FRAME[ENTRY_ID] -= STICK_ANGLE_MUL * stick_y;
-        if ANGLE[ENTRY_ID] > ANGLE_MAX { //Caps the max upward value at 50 and prevents it from going beyond. 
-            ANGLE[ENTRY_ID] = ANGLE_MAX;
+    if stick_y > 0.0 { //Used to prevent having a stick_y in the middle from changing flight angle
+        ANGLE[ENTRY_ID] += (STICK_ANGLE_MUL*UP_ANGLE_ACCEL) * stick_y;
+        ANGLE_FRAME[ENTRY_ID] -= (STICK_ANGLE_MUL*UP_ANGLE_ACCEL) * stick_y;
+        if ANGLE[ENTRY_ID] > ANGLE_MAX_UP { //Caps the max upward value at 50 and prevents it from going beyond. 
+            ANGLE[ENTRY_ID] = ANGLE_MAX_UP;
             MOMENTUM[ENTRY_ID] = THRESHOLD_MAX;
             ANGLE_FRAME[ENTRY_ID] = DIRECTION_UP;
         };
-        if ANGLE[ENTRY_ID] < ANGLE_LOW_MAX {
-            ANGLE[ENTRY_ID] = ANGLE_LOW_MAX; //Caps the max downward value at -50 and prevents it from going beyond. 
+    };
+    if stick_y < 0.0 {
+        ANGLE[ENTRY_ID] += (STICK_ANGLE_MUL*DOWN_ANGLE_ACCEL) * stick_y;
+        ANGLE_FRAME[ENTRY_ID] -= (STICK_ANGLE_MUL*DOWN_ANGLE_ACCEL) * stick_y;
+        if ANGLE[ENTRY_ID] < ANGLE_MAX_DOWN {
+            ANGLE[ENTRY_ID] = ANGLE_MAX_DOWN; //Caps the max downward value at -50 and prevents it from going beyond. 
             MOMENTUM[ENTRY_ID] = THRESHOLD_MAX;
             ANGLE_FRAME[ENTRY_ID] = DIRECTION_DOWN;
         };
     };
     if ANGLE[ENTRY_ID] <= 50.0 && ANGLE[ENTRY_ID] >= -50.0 {
         MotionModule::set_frame(fighter.module_accessor, ANGLE_FRAME[ENTRY_ID], false);
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + ANGLE[ENTRY_ID] * -0.006);
     }
     //Forward Speed Stuff
     if ANGLE[ENTRY_ID] >= -50.0 && ANGLE[ENTRY_ID] < -20.0 {
