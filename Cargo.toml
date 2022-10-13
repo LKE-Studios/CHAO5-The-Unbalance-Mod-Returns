@@ -1,6 +1,6 @@
 [package]
 name = "CHAO5_AnimCMD"
-version = "0.8.0"
+version = "0.9.0"
 authors = ["lkestudios"]
 edition = "2018"
 
@@ -15,6 +15,7 @@ skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
 skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
 smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
 smashline = { git = "https://github.com/blu-dev/smashline.git", branch = "development" }
+smash2 = { package = "smash", git = "https://github.com/blu-dev/smash-rs" }
 
 [profile.dev]
 panic = "abort"
