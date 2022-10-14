@@ -16,6 +16,7 @@ mod chrom;
 mod cloud;
 mod daisy;
 mod dedede;
+mod demon;
 mod diddy;
 mod dolly;
 mod donkey;
@@ -247,6 +248,7 @@ pub fn main() {
     jack::install();
     edge::install();
     brave::install();
+    demon::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,
