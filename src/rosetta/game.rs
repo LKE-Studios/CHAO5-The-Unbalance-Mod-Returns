@@ -1077,7 +1077,7 @@ unsafe fn rosetta_uptauntl(fighter: &mut L2CAgentBase) {
 unsafe fn rosetta_sidetauntr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 44.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -75.0, 0);
+        DamageModule::heal(fighter.module_accessor, -35.0, 0);
     }
 }
 
@@ -1089,7 +1089,7 @@ unsafe fn rosetta_sidetauntr(fighter: &mut L2CAgentBase) {
 unsafe fn rosetta_sidetauntl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 44.0);
     if macros::is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -75.0, 0);
+        DamageModule::heal(fighter.module_accessor, -35.0, 0);
     }
 }
 

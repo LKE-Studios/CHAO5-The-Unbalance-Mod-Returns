@@ -1,10 +1,8 @@
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
-use crate::utils::*;
 use smashline::*;
 use smash::app::*;
 use smash::lua2cpp::L2CFighterCommon;
-use smash::lua2cpp::L2CFighterBase;
 use smash::phx::Vector3f;
 use smash_script::*;
 use smash::phx::Hash40;
@@ -19,13 +17,15 @@ static mut FLOAT_MAX : i32 = 900; //Frames this bitch can float (In frames, 300 
 static mut X_MAX : f32 = 2.2; //Max Horizontal movespeed
 static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 2.15; //Max Vertical movespeed
+static mut COUNTER: [i32; 8] = [0; 8];
+static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
+static mut IS_CRIT: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_DEMON )]
 pub fn demon_opff(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let situation_kind = StatusModule::situation_kind(boma);
         let kind = smash::app::utility::get_kind(boma); 
         if kind == *FIGHTER_KIND_DEMON {
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
@@ -114,7 +114,18 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
                 FLOAT[ENTRY_ID] = 1;
             };
         };
+        if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_CATCH || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_FALL || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_GROUND {
+            damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+            AttackModule::set_power_up(fighter.module_accessor, 3.0);
+            AttackModule::set_reaction_mul(fighter.module_accessor, 1.25);
+        }
+        else {
+            damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            AttackModule::set_reaction_mul(fighter.module_accessor, 1.0);
+        };
         if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L {
+            damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
@@ -144,6 +155,9 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
                 HitModule::set_status_all(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
                 SlowModule::clear_whole(fighter.module_accessor);
             };
+        }
+        else{
+            damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
         }
     }
 }

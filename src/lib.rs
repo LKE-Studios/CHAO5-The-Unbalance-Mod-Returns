@@ -46,6 +46,7 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
+mod master;
 mod metaknight;
 mod mewtwo;
 mod miifighter;
@@ -60,6 +61,7 @@ mod palutena;
 mod peach;
 mod pfushigisou;
 mod pichu;
+mod pickel;
 mod pikachu;
 mod pikmin;
 mod pit;
@@ -249,6 +251,8 @@ pub fn main() {
     edge::install();
     brave::install();
     demon::install();
+    master::install();
+    pickel::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,

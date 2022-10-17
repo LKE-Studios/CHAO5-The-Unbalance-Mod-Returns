@@ -750,7 +750,7 @@ unsafe fn fox_throwf(fighter: &mut L2CAgentBase) {
     }
 }    
 
-#[acmd_script(//ThrowLw
+/*#[acmd_script(//ThrowLw
     agent = "fox", 
     script = "game_throwlw", 
     category = ACMD_GAME )]
@@ -804,7 +804,7 @@ unsafe fn fox_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
-}
+}*/
 
 #[acmd_script(//CliffAttack
     agent = "fox", 
@@ -965,7 +965,7 @@ unsafe fn fox_laser3(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//BlasterBullet
+#[acmd_script(//BlasterBullet
     agent = "fox_blaster_bullet", 
     script = "game_flythrowlw", 
     category = ACMD_GAME, 
@@ -975,7 +975,7 @@ unsafe fn fox_laser4(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.4, /*Angle*/ 361, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.6, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_blaster_throw_down"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FOX_BLASTER, /*Type*/ *ATTACK_REGION_ENERGY);
     }
-}*/
+}
 
 #[acmd_script(//SpecialAirNLoop
     agent = "fox", 
@@ -1274,7 +1274,7 @@ pub fn install() {
         fox_pivotgrab,
         fox_pummel,
         fox_throwf,
-        fox_throwlw,
+        //fox_throwlw,
         fox_cliffattack,
         fox_slipattack,
         fox_downattackd,
@@ -1284,7 +1284,7 @@ pub fn install() {
         fox_laser1,
         fox_laser2,
         fox_laser3,
-        //fox_laser4,
+        fox_laser4,
         fox_sideb,
         fox_sidebair,
         fox_upb,
