@@ -1,5 +1,29 @@
 {
   "new-dir-files": {
+    "fighter/lucas/c00": [
+      "fighter/lucas/motion/body/c00/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c01": [
+      "fighter/lucas/motion/body/c01/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c02": [
+      "fighter/lucas/motion/body/c02/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c03": [
+      "fighter/lucas/motion/body/c03/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c04": [
+      "fighter/lucas/motion/body/c04/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c05": [
+      "fighter/lucas/motion/body/c05/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c06": [
+      "fighter/lucas/motion/body/c06/m01wessdance.nuanmb"
+    ],
+    "fighter/lucas/c07": [
+      "fighter/lucas/motion/body/c07/m01wessdance.nuanmb"
+    ],
     "fighter/peach/c00": [
       "fighter/peach/motion/body/c00/kamehameha_start.nuanmb",
       "fighter/peach/motion/body/c00/kamehameha_charge.nuanmb",
@@ -43,130 +67,362 @@
     "fighter/pit/c00": [
       "fighter/pit/motion/body/c00/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c00/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c00/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c00/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c00/a07glidestart.nuanmb"
     ],
     "fighter/pit/c01": [
       "fighter/pit/motion/body/c01/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c01/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c01/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c01/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c01/a07glidestart.nuanmb"
     ],
     "fighter/pit/c02": [
       "fighter/pit/motion/body/c02/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c02/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c02/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c02/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c02/a07glidestart.nuanmb"
     ],
     "fighter/pit/c03": [
       "fighter/pit/motion/body/c03/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c03/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c03/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c03/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c03/a07glidestart.nuanmb"
     ],
     "fighter/pit/c04": [
       "fighter/pit/motion/body/c04/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c04/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c04/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c04/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c04/a07glidestart.nuanmb"
     ],
     "fighter/pit/c05": [
       "fighter/pit/motion/body/c05/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c05/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c05/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c05/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c05/a07glidestart.nuanmb"
     ],
     "fighter/pit/c06": [
       "fighter/pit/motion/body/c06/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c06/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c06/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c06/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c06/a07glidestart.nuanmb"
     ],
     "fighter/pit/c07": [
       "fighter/pit/motion/body/c07/a07glidewing.nuanmb",
       "fighter/pit/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/pit/motion/body/c07/a07glideattack.nuanmb",
+      "fighter/pit/motion/body/c07/a07glideend.nuanmb",
+      "fighter/pit/motion/body/c07/a07glidelanding.nuanmb",
       "fighter/pit/motion/body/c07/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c00": [
       "fighter/pitb/motion/body/c00/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c00/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c00/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c00/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c00/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c01": [
       "fighter/pitb/motion/body/c01/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c01/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c01/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c01/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c01/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c02": [
       "fighter/pitb/motion/body/c02/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c02/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c02/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c02/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c02/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c03": [
       "fighter/pitb/motion/body/c03/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c03/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c03/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c03/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c03/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c04": [
       "fighter/pitb/motion/body/c04/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c04/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c04/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c04/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c04/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c05": [
       "fighter/pitb/motion/body/c05/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c05/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c05/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c05/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c05/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c06": [
       "fighter/pitb/motion/body/c06/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c06/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c06/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c06/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c06/a07glidestart.nuanmb"
     ],
     "fighter/pitb/c07": [
       "fighter/pitb/motion/body/c07/a07glidewing.nuanmb",
       "fighter/pitb/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/pitb/motion/body/c07/a07glideattack.nuanmb",
+      "fighter/pitb/motion/body/c07/a07glideend.nuanmb",
+      "fighter/pitb/motion/body/c07/a07glidelanding.nuanmb",
       "fighter/pitb/motion/body/c07/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c00": [
+      "fighter/plizardon/motion/body/c00/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c00/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c00/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c00/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c00/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c01": [
+      "fighter/plizardon/motion/body/c01/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c01/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c01/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c01/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c01/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c02": [
+      "fighter/plizardon/motion/body/c02/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c02/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c02/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c02/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c02/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c03": [
+      "fighter/plizardon/motion/body/c03/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c03/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c03/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c03/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c03/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c04": [
+      "fighter/plizardon/motion/body/c04/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c04/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c04/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c04/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c04/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c05": [
+      "fighter/plizardon/motion/body/c05/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c05/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c05/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c05/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c05/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c06": [
+      "fighter/plizardon/motion/body/c06/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c06/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c06/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c06/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c06/a07glidestart.nuanmb"
+    ],
+    "fighter/plizardon/c07": [
+      "fighter/plizardon/motion/body/c07/a07glidewing.nuanmb",
+      "fighter/plizardon/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/plizardon/motion/body/c07/a07glideattack.nuanmb",
+      "fighter/plizardon/motion/body/c07/a07glideend.nuanmb",
+      "fighter/plizardon/motion/body/c07/a07glidelanding.nuanmb",
+      "fighter/plizardon/motion/body/c07/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c00": [
       "fighter/metaknight/motion/body/c00/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c00/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c00/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c00/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c00/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c00/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c00/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c01": [
       "fighter/metaknight/motion/body/c01/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c01/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c01/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c01/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c01/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c01/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c01/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c02": [
       "fighter/metaknight/motion/body/c02/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c02/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c02/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c02/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c02/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c02/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c02/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c03": [
       "fighter/metaknight/motion/body/c03/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c03/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c03/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c03/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c03/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c03/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c03/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c04": [
       "fighter/metaknight/motion/body/c04/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c04/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c04/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c04/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c04/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c04/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c04/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c05": [
       "fighter/metaknight/motion/body/c05/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c05/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c05/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c05/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c05/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c05/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c05/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c06": [
       "fighter/metaknight/motion/body/c06/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c06/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c06/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c06/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c06/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c06/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c06/a07glidestart.nuanmb"
     ],
     "fighter/metaknight/c07": [
       "fighter/metaknight/motion/body/c07/a07glidewing.nuanmb",
       "fighter/metaknight/motion/body/c07/a07glidedirection.nuanmb",
-      "fighter/metaknight/motion/body/c07/a07glidedirectionwing.nuanmb",
+      "fighter/metaknight/motion/body/c07/a07glideend.nuanmb",
+      "fighter/metaknight/motion/body/c07/a07glidelanding.nuanmb",
+      "fighter/metaknight/motion/body/c07/a07glideattack.nuanmb",
       "fighter/metaknight/motion/body/c07/a07glidestart.nuanmb"
+    ],
+    "fighter/ridley/c00": [
+      "fighter/ridley/motion/body/c00/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c00/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c00/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c00/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c00/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c00/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c01": [
+      "fighter/ridley/motion/body/c01/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c01/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c01/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c01/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c01/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c01/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c02": [
+      "fighter/ridley/motion/body/c02/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c02/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c02/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c02/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c02/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c02/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c03": [
+      "fighter/ridley/motion/body/c03/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c03/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c03/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c03/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c03/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c03/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c04": [
+      "fighter/ridley/motion/body/c04/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c04/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c04/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c04/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c04/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c04/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c05": [
+      "fighter/ridley/motion/body/c05/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c05/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c05/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c05/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c05/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c05/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c06": [
+      "fighter/ridley/motion/body/c06/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c06/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c06/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c06/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c06/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c06/a07glidewing.nuanmb"
+    ],
+    "fighter/ridley/c07": [
+      "fighter/ridley/motion/body/c07/a07glidedirection.nuanmb",
+      "fighter/ridley/motion/body/c07/a07glideattack.nuanmb",
+      "fighter/ridley/motion/body/c07/a07glideend.nuanmb",
+      "fighter/ridley/motion/body/c07/a07glidelanding.nuanmb",
+      "fighter/ridley/motion/body/c07/a07glidestart.nuanmb",
+      "fighter/ridley/motion/body/c07/a07glidewing.nuanmb"
+    ],
+    "fighter/ryu/c00": [
+      "fighter/ryu/motion/body/c00/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c00/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c00/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c01": [
+      "fighter/ryu/motion/body/c01/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c01/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c01/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c02": [
+      "fighter/ryu/motion/body/c02/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c02/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c02/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c03": [
+      "fighter/ryu/motion/body/c03/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c03/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c03/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c04": [
+      "fighter/ryu/motion/body/c04/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c04/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c04/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c05": [
+      "fighter/ryu/motion/body/c05/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c05/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c05/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c06": [
+      "fighter/ryu/motion/body/c06/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c06/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c06/kamehameha_fire.nuanmb"
+    ],
+    "fighter/ryu/c07": [
+      "fighter/ryu/motion/body/c07/kamehameha_start.nuanmb",
+      "fighter/ryu/motion/body/c07/kamehameha_charge.nuanmb",
+      "fighter/ryu/motion/body/c07/kamehameha_fire.nuanmb"
     ],
     "stage/battlefield_s/normal/model/ring_nocastshadow_set": [
       "stage/battlefield_s/normal/model/ring_nocastshadow_set/battingzone_bake_lit.nutexb",

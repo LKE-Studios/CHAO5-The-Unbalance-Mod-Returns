@@ -1,0 +1,3161 @@
+<?xml version="1.0" encoding="utf-16"?>
+<material_library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <material name="SFX_PBS_010002000800824f_opaque" label="EyeL">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean6">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector11">
+      <vector4>
+        <X>0.25</X>
+        <Y>0.02</Y>
+        <Z>0.01</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector29">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector30">
+      <vector4>
+        <X>0.5</X>
+        <Y>1.5</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler1">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+    <param name="Texture1">
+      <string>
+        <Text>eye_inkling_c03_b_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010000001800830d_opaque" label="EyeLD">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1.5</X>
+        <Y>0.75</Y>
+        <Z>1.5</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>deyes_eye_inkling_c03_d_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>deyes_eye_inkling_c03_wd_col</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000010008100_opaque" label="EyeLG">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>eye_inkling_c03_g_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010000001800830d_opaque" label="EyeLL">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1.9</X>
+        <Y>0.8</Y>
+        <Z>0.7</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>leyes_eye_inkling_c03_l_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010002000800824f_opaque" label="EyeR">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean6">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector11">
+      <vector4>
+        <X>0.25</X>
+        <Y>0.02</Y>
+        <Z>0.01</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector29">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector30">
+      <vector4>
+        <X>0.5</X>
+        <Y>1.5</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler1">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+    <param name="Texture1">
+      <string>
+        <Text>eye_inkling_c03_b_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010000001800830d_opaque" label="EyeRD">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1.5</X>
+        <Y>0.75</Y>
+        <Z>1.5</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>deyes_eye_inkling_c03_d_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>deyes_eye_inkling_c03_wd_col</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000010008100_opaque" label="EyeRG">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>eye_inkling_c03_g_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010000001800830d_opaque" label="EyeRL">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean11">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1.9</X>
+        <Y>0.8</Y>
+        <Z>0.7</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector31">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler14">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture14">
+      <string>
+        <Text>leyes_eye_inkling_c03_l_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>eye_inkling_c03_w_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>eye_inkling_c03_w_col</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>eye_inkling_c03_w_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000808048100_opaque" label="alp_inkling_boy_003InkEnpty">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector6">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>default_Normal</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>alp_inkling_c03_003_col</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000808048100_opaque" label="alp_inkling_boy_003SubInkEnpty">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector3">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector6">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler5">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>default_Normal</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>alp_inkling_c03_003_col</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008048269_opaque" label="alp_inkling_c03_001">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.4</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.75</X>
+        <Y>0.75</Y>
+        <Z>0.75</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>alp_inkling_c03_001_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>alp_inkling_c03_001_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>alp_inkling_c03_001_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008018241_sort" label="alp_inkling_c03_001_blend">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>6</BlendFactor1>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>6</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean2">
+      <bool>false</bool>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>alp_inkling_c03_001_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>alp_inkling_c03_001_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>alp_inkling_c03_001_prm</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008018279_sort" label="alp_inkling_c03_002">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>6</BlendFactor1>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>6</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean2">
+      <bool>false</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat19">
+      <float>1.25</float>
+    </param>
+    <param name="CustomFloat8">
+      <float>1</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>alp_inkling_c03_002_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>alp_inkling_c03_002_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>alp_inkling_c03_002_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008048269_opaque" label="alp_inkling_c03_002punchThrough">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.7</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.5</X>
+        <Y>0.5</Y>
+        <Z>0.5</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>alp_inkling_c03_002_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>alp_inkling_c03_002_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>alp_inkling_c03_002_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008008269_opaque" label="def_inkling_c03_001">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.4</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.75</X>
+        <Y>0.75</Y>
+        <Z>0.75</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>def_inkling_c03_001_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>def_inkling_c03_001_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>def_inkling_c03_003_col</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>def_inkling_c03_001_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008008269_opaque" label="def_inkling_c03_002">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.4</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>def_inkling_c03_002_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>def_inkling_c03_002_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>def_inkling_c03_002_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008008269_opaque" label="def_inkling_c03_003">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.4</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.75</X>
+        <Y>0.75</Y>
+        <Z>0.75</Z>
+        <W>0.4</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>def_inkling_c03_003_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>def_inkling_c03_003_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>def_inkling_c03_003_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_0100000008008269_opaque" label="def_inkling_c03_004">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>0.4</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.75</X>
+        <Y>0.75</Y>
+        <Z>0.75</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>def_inkling_c03_004_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>def_inkling_c03_004_nor</Text>
+      </string>
+    </param>
+    <param name="Texture5">
+      <string>
+        <Text>def_inkling_c03_003_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>def_inkling_c03_004_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+  <material name="SFX_PBS_010000000800826b_opaque" label="skin_inkling_c03_001">
+    <param name="BlendState0">
+      <blend_state>
+        <Unk1>1</Unk1>
+        <Unk2>0</Unk2>
+        <BlendFactor1>0</BlendFactor1>
+        <Unk4>1</Unk4>
+        <Unk5>0</Unk5>
+        <BlendFactor2>0</BlendFactor2>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>5</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>0</Unk12>
+      </blend_state>
+    </param>
+    <param name="CustomBoolean1">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean3">
+      <bool>true</bool>
+    </param>
+    <param name="CustomBoolean4">
+      <bool>true</bool>
+    </param>
+    <param name="CustomFloat8">
+      <float>1</float>
+    </param>
+    <param name="CustomVector0">
+      <vector4>
+        <X>1</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>0</W>
+      </vector4>
+    </param>
+    <param name="CustomVector11">
+      <vector4>
+        <X>0.2</X>
+        <Y>0.05</Y>
+        <Z>0</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector13">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector14">
+      <vector4>
+        <X>0.5</X>
+        <Y>0.5</Y>
+        <Z>0.5</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector30">
+      <vector4>
+        <X>0.5</X>
+        <Y>1.5</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="CustomVector8">
+      <vector4>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+        <W>1</W>
+      </vector4>
+    </param>
+    <param name="RasterizerState0">
+      <rasterizer_state>
+        <FillMode>1</FillMode>
+        <CullMode>0</CullMode>
+        <Unk3>0</Unk3>
+        <Unk4>0</Unk4>
+        <Unk5>0</Unk5>
+        <Unk6>16777217</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+      </rasterizer_state>
+    </param>
+    <param name="Sampler0">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler4">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>2</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>4</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler6">
+      <sampler>
+        <WrapS>0</WrapS>
+        <WrapT>0</WrapT>
+        <WrapR>0</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Sampler7">
+      <sampler>
+        <WrapS>1</WrapS>
+        <WrapT>1</WrapT>
+        <WrapR>1</WrapR>
+        <Unk4>1</Unk4>
+        <Unk5>1</Unk5>
+        <Unk6>1</Unk6>
+        <Unk7>0</Unk7>
+        <Unk8>0</Unk8>
+        <Unk9>0</Unk9>
+        <Unk10>0</Unk10>
+        <Unk11>0</Unk11>
+        <Unk12>2139095022</Unk12>
+        <Unk13>0</Unk13>
+        <Unk14>2</Unk14>
+      </sampler>
+    </param>
+    <param name="Texture0">
+      <string>
+        <Text>skin_inkling_c03_001_col</Text>
+      </string>
+    </param>
+    <param name="Texture4">
+      <string>
+        <Text>skin_inkling_c03_001_nor</Text>
+      </string>
+    </param>
+    <param name="Texture6">
+      <string>
+        <Text>skin_inkling_c03_001_prm</Text>
+      </string>
+    </param>
+    <param name="Texture7">
+      <string>
+        <Text>#replace_cubemap</Text>
+      </string>
+    </param>
+  </material>
+</material_library>
