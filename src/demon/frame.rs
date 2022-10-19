@@ -31,7 +31,15 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
-        }
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == true {
+                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.25);
+                DamageModule::set_reaction_mul(fighter.module_accessor, 0.25);
+            };
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == false {
+                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+                DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            };
+        };
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
