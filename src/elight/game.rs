@@ -2317,9 +2317,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
         WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
         shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10.0, 0, 17.0, 0.0, 0, 4.0, 8.0, 1.4, 1.6, 1600, false, 4.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 0, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32  <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2339,9 +2339,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 1, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32  <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2350,9 +2350,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::set_int(fighter.module_accessor, 2, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 2, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32  <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2364,9 +2364,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::set_int(fighter.module_accessor, 3, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 3, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32  <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2375,9 +2375,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::set_int(fighter.module_accessor, 4, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 4, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32  <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2386,9 +2386,9 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     }
-    let max_articles = WorkModule::get_int(fighter.module_accessor, 5, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
+    let max_articles = WorkModule::get_int(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
     let article_count = ArticleModule::get_num(fighter.module_accessor, *FIGHTER_ELIGHT_STATUS_SPECIAL_S_WORK_INT_BUNSHIN_NUM);
-    if article_count <= max_articles {    
+    if article_count as i32 <= max_articles {    
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, false, -1);
         }
@@ -2826,7 +2826,6 @@ pub fn install() {
         elight_photon4,
         elight_photon5,
         elight_upbstart,
-        elight_upb,
         elight_upbairjump,
         elight_chroma,
         elight_ray1,
