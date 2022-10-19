@@ -22,6 +22,8 @@ mod dolly;
 mod donkey;
 mod duckhunt;
 mod edge;
+mod eflame;
+mod elight;
 mod falco;
 mod fox;
 mod gamewatch;
@@ -253,6 +255,8 @@ pub fn main() {
     demon::install();
     master::install();
     pickel::install();
+    eflame::install();
+    elight::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,

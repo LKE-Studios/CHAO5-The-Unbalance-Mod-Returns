@@ -1,6 +1,7 @@
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smashline::*;
+use smash_script::*;
 //use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;
 
@@ -9,6 +10,15 @@ pub fn pickel_opff(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma); 
+        if [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, 
+        *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD].contains(&status_kind){
+            if WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_REACTION_FRAME) > 0.1 {
+                macros::FLASH(fighter, 0.65, 0.25, 1.0, 0.55);
+            }
+            else {
+                macros::COL_NORMAL(fighter);
+            }
+        }
         if status_kind == *FIGHTER_PICKEL_STATUS_KIND_SPECIAL_HI_GLIDING {
             fighter.sub_air_check_fall_common();
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {

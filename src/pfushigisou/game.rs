@@ -1042,7 +1042,7 @@ unsafe fn pfushigisou_upb(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn pfushigisou_upbair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::SET_SPEED_EX(fighter, 0, 3.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:3.3, z:0.0});
     }
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, -1);
