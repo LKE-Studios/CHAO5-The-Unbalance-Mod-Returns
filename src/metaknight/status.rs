@@ -54,9 +54,9 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_air_check_fall_common();
     macros::SET_SPEED_EX(fighter, 1.8, -0.45, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     static Y_ACCEL_ADD : f32 = 0.0375; //Ascent/Descent Speed Multiplier
-    static X_DECEL_MUL_UP : f32 = -0.02375; 
+    static X_DECEL_MUL_UP : f32 = -0.0235; 
     static X_ACCEL_MUL_DOWN : f32 = -0.02; 
-    static X_DECEL_MUL_DOWN : f32 = 0.0345625;
+    static X_DECEL_MUL_DOWN : f32 = 0.0341875;
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
     let x = MOMENTUM[ENTRY_ID] * X_ACCEL_MUL_DOWN;
@@ -85,7 +85,7 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     };
     //Forward Speed Stuff
     if ANGLE[ENTRY_ID] >= -80.0 && ANGLE[ENTRY_ID] < -25.0 {
-        macros::SET_SPEED_EX(fighter, 2.665 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::SET_SPEED_EX(fighter, 2.655 + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
     };
     if ANGLE[ENTRY_ID] >= -25.0 && ANGLE[ENTRY_ID] < 0.0 { //Applies the H Air accel. multilplier when descending when angle is between -25 and 0
