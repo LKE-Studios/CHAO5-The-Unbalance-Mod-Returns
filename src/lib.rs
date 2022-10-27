@@ -11,6 +11,7 @@ use smash::app::*;
 
 mod bayonetta;
 mod brave;
+mod buddy;
 mod captain;
 mod chrom;
 mod cloud;
@@ -91,6 +92,7 @@ mod snake;
 mod sonic;
 mod szerosuit;
 mod toonlink;
+mod trail;
 mod wario;
 mod wiifit;
 mod wolf;
@@ -158,6 +160,33 @@ pub unsafe fn log_add_motion_partial(
     skyline::logging::hex_dump_ptr(data_ptr);
     original!()(module_accessor, index, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
+
+/*#[skyline::hook(offset = 0x3310760)]
+pub unsafe fn update_selected_fighter(param_1: u64, player_id: u32, new_selection_info: u64){
+    let ui_chara_hash: u64 = *((new_selection_info + 0x18) as *const u64) & 0xffffffffff;
+    let selected_colour: *mut u8 = (new_selection_info + 0x20) as *mut u8;
+    if ui_chara_hash == 0x0e7bbfb2e4 { //ui_chara_claus
+        if *selected_colour < 8 {
+            *selected_colour = *selected_colour + 8;
+        }
+    }
+    println!("Hash: {:#x} - Colour {}", ui_chara_hash, *selected_colour);
+    call_original!(param_1, player_id, new_selection_info);
+}
+
+#[skyline::hook(offset = 0x3237820)]
+unsafe fn set_chara_colour_ui(param_1: u64, mut colour_slot: u32, param_3: u32) {
+    let ui_chara_hash = param_1 & 0xffffffffff;
+    if ui_chara_hash == 0x0e7bbfb2e4 {
+        if *colour_slot >= 8 {
+            *colour_slot = *colour_slot - 8;
+        }
+    }
+    println!("UI_Hash: {:#x} - UI_Colour: {}", ui_chara_hash, colour_slot);
+    call_original!(param_1, colour_slot, param_3);
+}*/
+
+//0xef9d43e1b = ui_chara_lucas
 
 #[skyline::main(name = "chao5")]
 pub fn main() {
@@ -257,10 +286,14 @@ pub fn main() {
     pickel::install();
     eflame::install();
     elight::install();
+    buddy::install();
+    trail::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,
-        log_add_motion_partial
+        log_add_motion_partial,
+        //update_selected_fighter,
+        //set_chara_colour_ui
     );
     custom::install();
 }
