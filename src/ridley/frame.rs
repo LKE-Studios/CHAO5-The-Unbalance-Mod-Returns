@@ -80,6 +80,9 @@ fn ridley_opff(fighter: &mut L2CFighterCommon) {
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         };
+        if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
     }
 }
 

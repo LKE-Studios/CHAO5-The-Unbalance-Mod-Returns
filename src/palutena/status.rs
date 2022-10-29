@@ -19,7 +19,7 @@ static mut ANGLE_FRAME : [f32; 8] = [90.0; 8]; //Sets GlideDirection Animation t
 static DIRECTION_UP : f32 = 15.0;
 static DIRECTION_DOWN : f32 = 165.0;
 static STICK_ANGLE_MUL : f32 = 6.5; //Max Angular Speed
-static UP_ANGLE_ACCEL : f32 = 1.12; //Upward angular acceleration
+static UP_ANGLE_ACCEL : f32 = 0.86; //Upward angular acceleration
 static DOWN_ANGLE_ACCEL : f32 = 0.95; //Downward angular acceleration
 
 #[status_script(agent = "palutena", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
