@@ -91,6 +91,7 @@ mod simon;
 mod snake;
 mod sonic;
 mod szerosuit;
+mod tantan;
 mod toonlink;
 mod trail;
 mod wario;
@@ -288,6 +289,7 @@ pub fn main() {
     elight::install();
     buddy::install();
     trail::install();
+    tantan::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,

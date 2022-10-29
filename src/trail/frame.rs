@@ -2,14 +2,13 @@
 use smash::lib::lua_const::*;
 use smash::phx::Hash40;
 use smash::hash40;
-use smash::phx::Vector3f;
+//use smash::phx::Vector3f;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 static mut HOLD_TIME : [f32; 8] = [0.0; 8];
-static mut GFX_COUNTER: [i32; 8] = [0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_TRAIL )]
 fn trail_opff(fighter: &mut L2CFighterCommon) {
@@ -48,9 +47,11 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || status_kind == *FIGHTER_STATUS_KIND_DAMAGE || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR ||
         status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH || status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING { 
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
@@ -58,6 +59,7 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
@@ -72,6 +74,7 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
@@ -79,18 +82,17 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         };
         /*if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-            GFX_COUNTER[ENTRY_ID] += 1;
-            if GFX_COUNTER[ENTRY_ID] >= 6 {
-                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_status_attack_up"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 1.0, true, 0, 0, 0, 0, 0, true, true);
-                //macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
-                GFX_COUNTER[ENTRY_ID] = 0;
-            };
+            if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {
+                macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_status_attack_up"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.6, true);
+                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.52);
+            }
         }*/
         if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_S_END {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);

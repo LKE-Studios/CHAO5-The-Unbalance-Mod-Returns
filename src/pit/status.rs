@@ -170,6 +170,7 @@ pub unsafe fn glide_attack_a(fighter: &mut L2CFighterCommon) -> L2CValue {
 unsafe extern "C" fn glide_attack_b(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_air_check_fall_common();
     WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+    WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
     }

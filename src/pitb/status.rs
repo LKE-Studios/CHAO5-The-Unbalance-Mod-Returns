@@ -13,7 +13,7 @@ static mut ANGLE : [f32; 8] = [0.0; 8];
 static ANGLE_MAX_UP : f32 = 70.0; //Max Upward Angle
 static ANGLE_MAX_DOWN : f32 = -70.0; //Max Downward Angle
 static mut MOMENTUM : [f32; 8] = [0.0; 8];
-static THRESHOLD_MAX : f32 = -20.0;
+static THRESHOLD_MAX : f32 = -25.0;
 static mut ANGLE_FRAME : [f32; 8] = [90.0; 8]; //Sets GlideDirection Animation to Frame 90 by default
 static DIRECTION_UP : f32 = 20.0;
 static DIRECTION_DOWN : f32 = 160.0;
@@ -124,6 +124,7 @@ pub unsafe fn glide_attack_a(fighter: &mut L2CFighterCommon) -> L2CValue {
 unsafe extern "C" fn glide_attack_b(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_air_check_fall_common();
     WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+    WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_attack") && MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
     }

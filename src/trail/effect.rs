@@ -1,7 +1,7 @@
 use smash::app::sv_animcmd::*;
 use smash::phx::Hash40;
 use smashline::*;
-//use smash::app::lua_bind::*;
+use smash::app::lua_bind::*;
 use smash_script::*;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CAgentBase;
@@ -13,9 +13,21 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn trail_glidestartgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
-    macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
-    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 4.5, true);
-    macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.53);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 4.5, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.53);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_special_all_up"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.6, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.52);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_status_attack_up"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.6, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.52);
+    }
 }
 
 #[acmd_script(//GlideWingGFX
@@ -58,11 +70,37 @@ unsafe fn trail_glidelandinggfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Fly
+    agent = "trail_ice", 
+    script = "effect_fly", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn trail_ice1gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_ice_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 4.5, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//FlyLast
+    agent = "trail_ice", 
+    script = "effect_flylast", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn trail_ice2gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_ice_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 6.0, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         trail_glidestartgfx,
         trail_glide2gfx,
         trail_glideattackgfx,
-        trail_glidelandinggfx
+        trail_glidelandinggfx,
+        trail_ice1gfx,
+        trail_ice2gfx
     );
 }
