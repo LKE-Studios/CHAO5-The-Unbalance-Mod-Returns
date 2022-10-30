@@ -12,7 +12,8 @@ use smash::lua2cpp::L2CAgentBase;
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn lucas_uptiltgfx(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             macros::FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
@@ -58,7 +59,8 @@ unsafe fn lucas_uptiltgfx(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn lucas_downtiltgfx(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 3.0);
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2.0, 7.0, 0, 20, 0, 0.85, true, *EF_FLIP_YZ);
@@ -88,7 +90,8 @@ unsafe fn lucas_downtiltgfx(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn lucas_nairgfx(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_hold"), Hash40::new("havel"), 0, 0, 1, 0, 0, 0, 0.9, true);
         }
@@ -144,7 +147,8 @@ unsafe fn lucas_nairgfx(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn lucas_dairgfx(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0.0, -4, 0.0, 0, 0, 0, 0.81, 0, 0, 0, 0, 0, 0, true);

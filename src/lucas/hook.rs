@@ -16,7 +16,7 @@ param_hash: u64) -> f32 {
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if fighter_kind == FIGHTER_KIND_LUCAS
-    && color == 1
+    && color >= 8 && color <= 15
     && param_hash == 0 {
         if param_type == hash40("dash_speed") {
             return 2.24; //Lucas 2.15

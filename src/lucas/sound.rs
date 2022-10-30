@@ -116,7 +116,8 @@ unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_dairsfx(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1{ //Claus
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l05"));
