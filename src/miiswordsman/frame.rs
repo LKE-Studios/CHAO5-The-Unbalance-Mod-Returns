@@ -3,6 +3,7 @@ use smash::app::lua_bind::*;
 use smash::app::{sv_information};
 use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
+
 static mut SWORD_MUL : [f32; 8] = [1.0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_MIISWORDSMAN )]

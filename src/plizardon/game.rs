@@ -10,6 +10,21 @@ use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
+    agent = "plizardon", 
+    scripts = ["game_jumpaerialf3", "game_jumpaerialf4", "game_jumpaerialf5", "game_jumpaerialf6"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn plizardon_airjump(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.5, z:0.0});
+    }
+    frame(fighter.lua_state_agent, 32.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
+    }
+}
+
 #[acmd_script(//GlideWing
     agent = "plizardon", 
     script = "game_glidewing", 
@@ -1169,6 +1184,7 @@ unsafe fn plizardon_final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        plizardon_airjump,
         plizardon_glide,
         plizardon_glidedirection,
         plizardon_glideattack,

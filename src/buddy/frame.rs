@@ -17,7 +17,7 @@ fn buddy_opff(fighter: &mut L2CFighterCommon) {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
-        if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+        if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
@@ -85,7 +85,7 @@ fn buddy_opff(fighter: &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             if MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) >= 4.0 && MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) < 5.0 {
-                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_wing"));
+                macros::PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
             }
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
@@ -102,6 +102,13 @@ fn buddy_opff(fighter: &mut L2CFighterCommon) {
             WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_SPECIAL_S_REMAIN);
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -20.0, 0);
+            }
+            if MotionModule::frame(fighter.module_accessor) > 15.0 {
+                if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+                    if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+                        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+                    }
+                }
             }
         };
     }

@@ -4,6 +4,22 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
+    agent = "ridley", 
+    scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6"],
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn ridley_airjumpsfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_ridley_jump02"));
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
+    }
+}
+
 #[acmd_script(//GlideStart
     agent = "ridley", 
     script = "sound_glidestart", 
@@ -43,7 +59,6 @@ unsafe fn ridley_glidesfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn ridley_glideattacksfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ridley_special_s01"));
     }
@@ -82,6 +97,7 @@ unsafe fn ridley_glideendsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        ridley_airjumpsfx,
         ridley_glidestartsfx,
         //ridley_glidesfx,
         ridley_glideattacksfx,

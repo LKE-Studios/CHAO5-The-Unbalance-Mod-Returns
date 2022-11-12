@@ -1,6 +1,7 @@
 //use smash::app::sv_animcmd::*;
 use smash::lib::lua_const::*;
 use smash::phx::Hash40;
+use smash::hash40;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
@@ -66,12 +67,10 @@ fn ridley_opff(fighter: &mut L2CFighterCommon) {
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
             WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
-            macros::STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
+        if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
+            if MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_DEMON_MOTION_PART_SET_KIND_WING) >= 25.0 && MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_DEMON_MOTION_PART_SET_KIND_WING) < 26.0 {
+                macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02"));
+            }
         }
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
             macros::STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));

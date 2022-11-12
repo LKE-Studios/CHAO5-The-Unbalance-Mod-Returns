@@ -4,6 +4,18 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF4, JumpAerialF5, JumpAerialF6, JumpAerialF7
+    agent = "pitb", 
+    scripts = ["sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6", "sound_jumpaerialf7"],
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn pitb_airjumpsfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pitb_jump02"));
+    }
+}
+
 #[acmd_script(//GlideStart
     agent = "pitb", 
     script = "sound_glidestart", 
@@ -114,6 +126,7 @@ unsafe fn pitb_win1(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        pitb_airjumpsfx,
         pitb_glidestartsfx,
         //pitb_glidesfx,
         pitb_glideattacksfx,

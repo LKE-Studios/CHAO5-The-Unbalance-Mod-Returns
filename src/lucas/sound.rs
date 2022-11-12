@@ -5,6 +5,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+//use crate::lucas::frame::*;
 
 #[acmd_script(//EntryL
     agent = "lucas", 
@@ -84,16 +85,25 @@ unsafe fn lucas_win3(fighter: &mut L2CAgentBase) {
     }        
 }
 
-#[acmd_script(//Attack13 SFX
+#[acmd_script(//Attack13
     agent = "lucas", 
     script = "sound_attack13", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn lucas_jab3sfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucas_swing_l"));
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        frame(fighter.lua_state_agent, 6.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_swing_l"));
+            macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+        }
+    } else { //Lucas
+        frame(fighter.lua_state_agent, 6.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_swing_l"));
+            macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+        }
     }
 }
 
@@ -160,7 +170,43 @@ unsafe fn lucas_dairsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwStart
+/*#[acmd_script(//SpecialS, SpecialAirS
+    agent = "lucas", 
+    scripts = ["sound_specials", "sound_specialairs"],
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn lucas_sidebsfx(fighter: &mut L2CAgentBase) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        if CLAUS_PK_BEAM[ENTRY_ID] == true {
+            frame(fighter.lua_state_agent, 12.0);
+            if macros::is_excute(fighter) {
+                if CLAUS_PK_BEAM[ENTRY_ID] {
+                    macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_002"));
+                    macros::PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
+                    SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_lucas_special_s03"), 0.7);
+                    macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_item_revengeshooter_shot"));
+                }
+            }
+        } else if CLAUS_PK_BEAM[ENTRY_ID] == false {
+            frame(fighter.lua_state_agent, 5.0);
+            if macros::is_excute(fighter) {
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_004"));
+                macros::PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
+            }
+        }
+    } else { //Lucas
+        frame(fighter.lua_state_agent, 5.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_004"));
+            macros::PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
+        }
+    }
+}*/
+
+
+/*#[acmd_script(//SpecialLwStart
     agent = "lucas", 
     script = "sound_speciallwstart", 
     category = ACMD_SOUND, 
@@ -182,7 +228,7 @@ unsafe fn lucas_downbairsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_002"));
     }
-}
+}*/
 
 #[acmd_script(//AppealSL
     agent = "lucas", 
@@ -196,10 +242,6 @@ unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
-    }
-    wait(fighter.lua_state_agent, 31.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
 }
 
@@ -216,10 +258,6 @@ unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_win02"));
     }
-    wait(fighter.lua_state_agent, 31.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("vc_lucas_win02"));
-    }
 }
 
 pub fn install() {
@@ -231,8 +269,9 @@ pub fn install() {
         lucas_jab3sfx,
         lucas_sidesmashchargesfx,
         lucas_dairsfx,
-        lucas_downbsfx,
-        lucas_downbairsfx,
+        //lucas_sidebsfx,
+        //lucas_downbsfx,
+        //lucas_downbairsfx,
         lucas_sidetauntrsfx,
         lucas_sidetauntlsfx,
     );

@@ -34,14 +34,14 @@ unsafe fn buddy_glidestartsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"));
     }
-    frame(fighter.lua_state_agent, 17.0);
+    frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_jump03_02"));
     }
-    frame(fighter.lua_state_agent, 18.0);
+    frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_glide_loop"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_buddy_special_h03_vc"));
+        macros::PLAY_SE(fighter, Hash40::new("vc_buddy_special_h03_vc"));
     }
 }
 

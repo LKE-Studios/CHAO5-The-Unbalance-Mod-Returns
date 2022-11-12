@@ -5,6 +5,7 @@ use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
+//use crate::lucas::frame::*;
 
 #[acmd_script(//AttackHi3GFX
     agent = "lucas", 
@@ -140,7 +141,6 @@ unsafe fn lucas_nairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-
 #[acmd_script(//AttackAirLwGFX
     agent = "lucas", 
     script = "effect_attackairlw" , 
@@ -213,11 +213,100 @@ unsafe fn lucas_dairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+/*#[acmd_script(//SpecialS
+    agent = "lucas", 
+    script = "effect_specials" , 
+    category = ACMD_EFFECT , 
+    low_priority)]
+unsafe fn lucas_sidebgfx(fighter: &mut L2CAgentBase) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        if CLAUS_PK_BEAM[ENTRY_ID] == true {
+            frame(fighter.lua_state_agent, 7.0);
+            if macros::is_excute(fighter) {
+                if CLAUS_PK_BEAM[ENTRY_ID] {
+                    macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.6, true, *EF_FLIP_YZ);
+                }
+            }
+            frame(fighter.lua_state_agent, 21.0);
+            if macros::is_excute(fighter) {
+                if CLAUS_PK_BEAM[ENTRY_ID] {
+                    macros::FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.6, 0, 0, 0, 0, 0, 0, false);
+                    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 5, 26, 0, 0, 0, 1.4, true);
+                    macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.1, /*G*/ 0.86, /*B*/ 1.3);
+                    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_staff_shot"), Hash40::new("top"), 0, 5, 10, 0, 0, 0, 1.7, true);                    
+                    macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.1, /*G*/ 1.6, /*B*/ 1.2);
+                }
+            }
+        } else if CLAUS_PK_BEAM[ENTRY_ID] == false {
+            frame(fighter.lua_state_agent, 7.0);
+            if macros::is_excute(fighter) {
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+            }
+            frame(fighter.lua_state_agent, 21.0);
+            if macros::is_excute(fighter) {
+                macros::FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+            }
+        }
+    } else { //Lucas
+        frame(fighter.lua_state_agent, 7.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+        }
+        frame(fighter.lua_state_agent, 21.0);
+        if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+        }
+    }
+}
+
+#[acmd_script(//SpecialAirS
+    agent = "lucas", 
+    script = "effect_specialairs" , 
+    category = ACMD_EFFECT , 
+    low_priority)]
+unsafe fn lucas_sidebairgfx(fighter: &mut L2CAgentBase) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        if CLAUS_PK_BEAM[ENTRY_ID] == true {
+            frame(fighter.lua_state_agent, 7.0);
+            if macros::is_excute(fighter) {
+                if CLAUS_PK_BEAM[ENTRY_ID] {
+                    macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.6, true, *EF_FLIP_YZ);
+                }
+            }
+            frame(fighter.lua_state_agent, 21.0);
+            if macros::is_excute(fighter) {
+                if CLAUS_PK_BEAM[ENTRY_ID] {
+                    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 5, 26, 0, 0, 0, 1.4, true);
+                    macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.1, /*G*/ 0.86, /*B*/ 1.3);
+                    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_staff_shot"), Hash40::new("top"), 0, 5, 10, 0, 0, 0, 1.7, true);                    
+                    macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.1, /*G*/ 1.6, /*B*/ 1.2);
+                }
+            }
+        } else if CLAUS_PK_BEAM[ENTRY_ID] == false {
+            frame(fighter.lua_state_agent, 7.0);
+            if macros::is_excute(fighter) {
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+            }
+        }
+    } else { //Lucas
+        frame(fighter.lua_state_agent, 7.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("lucas_pkfi_start"), Hash40::new("lucas_pkfi_start"), Hash40::new("havel"), -0.5, 0, 0, 0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+        }
+    }
+}*/
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         lucas_uptiltgfx,
         lucas_downtiltgfx,
         lucas_nairgfx,
-        lucas_dairgfx
+        lucas_dairgfx,
+        //lucas_sidebgfx,
+        //lucas_sidebairgfx
     );
 }

@@ -101,8 +101,6 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
-
-
 #[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
 pub unsafe fn glide_finish(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = get_entry_id(fighter.module_accessor);

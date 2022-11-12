@@ -5,6 +5,17 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF4, JumpAerialF5, JumpAerialF6, JumpAerialF7
+    agent = "pitb", 
+    scripts = ["effect_jumpaerialf4", "effect_jumpaerialf5", "effect_jumpaerialf6", "effect_jumpaerialf7"],
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn pitb_airjumpgfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_feather"), Hash40::new("top"), 0, 15, -10, 0, 0, 0, 1, false);
+    }
+}
+
 #[acmd_script(//GlideStart
     agent = "pitb", 
     script = "effect_glidestart", 
@@ -95,6 +106,7 @@ unsafe fn pitb_glideendgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        pitb_airjumpgfx,
         pitb_glidestartgfx,
         pitb_glide2gfx,
         pitb_glideattackgfx,

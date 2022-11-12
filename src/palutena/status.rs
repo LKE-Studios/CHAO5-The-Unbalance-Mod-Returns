@@ -24,8 +24,7 @@ static DOWN_ANGLE_ACCEL : f32 = 0.95; //Downward angular acceleration
 
 #[status_script(agent = "palutena", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let entry_id = get_entry_id(fighter.module_accessor);
-    set_position_lock(entry_id as i32);
+    KineticModule::clear_speed_all(fighter.module_accessor);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
     ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
     ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_start"), false, -1.0);
@@ -33,9 +32,8 @@ pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+    macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {   
-        let entry_id = get_entry_id(fighter.module_accessor) as i32;
-        unset_position_lock(entry_id);
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
     }
     L2CValue::I32(0)

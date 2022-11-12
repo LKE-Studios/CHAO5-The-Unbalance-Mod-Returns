@@ -47,7 +47,7 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     fighter.sub_air_check_fall_common();
     macros::SET_SPEED_EX(fighter, 1.9, -0.41, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
-    static Y_ACCEL_ADD : f32 = 0.044; //Ascent/Descent Speed Multiplier
+    static Y_ACCEL_ADD : f32 = 0.04; //Ascent/Descent Speed Multiplier
     static X_DECEL_MUL_UP : f32 = -0.023; //Horizontal Air Deceleration multiplier when ascending in between higher angle values
     static X_ACCEL_MUL_DOWN : f32 = -0.025; //Horizontal Air Acceleration multiplier when descending in between lower angle values
     static X_DECEL_MUL_DOWN : f32 = 0.0332; //Horizontal Air Deceleration multiplier when descending in between higher angle values

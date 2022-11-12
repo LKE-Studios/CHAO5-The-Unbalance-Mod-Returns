@@ -17,7 +17,7 @@ unsafe fn ridley_glidestartgfx(fighter: &mut L2CAgentBase) {
     macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.39, /*G*/ 0.045, /*B*/ 1.55);
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "ridley", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
@@ -38,11 +38,7 @@ unsafe fn ridley_glideattackgfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("ridley_grabbing_hold"), Hash40::new("havel"), -1.0, 0, 0, 0, 0, 0, 1.0, true);
     }
-    frame(fighter.lua_state_agent, 21.0);
-    if macros::is_excute(fighter) {
-        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), -6.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
-    frame(fighter.lua_state_agent, 39.0);
+    frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("ridley_scratch"), Hash40::new("ridley_scratch"), Hash40::new("top"), -5.0, 8.0, 8.0, -124.0, 72.5, 70, 1, true, *EF_FLIP_YZ);
         macros::LAST_EFFECT_SET_RATE(fighter, 1.5)

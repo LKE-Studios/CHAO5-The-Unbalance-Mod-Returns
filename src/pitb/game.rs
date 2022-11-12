@@ -10,6 +10,21 @@ use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF4, JumpAerialF5, JumpAerialF6, JumpAerialF7
+    agent = "pitb", 
+    scripts = ["game_jumpaerialf4", "game_jumpaerialf5", "game_jumpaerialf6", "game_jumpaerialf7"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn pitb_airjump(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.4, z:0.0});
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
+    }
+}
+
 #[acmd_script(//GlideStart
     agent = "pitb", 
     script = "game_glidestart", 
@@ -1199,6 +1214,7 @@ unsafe fn pitb_downtauntl(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        pitb_airjump,
         pitb_glidestart,
         pitb_glide,
         pitb_glideattack,

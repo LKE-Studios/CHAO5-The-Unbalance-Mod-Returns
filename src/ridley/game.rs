@@ -9,6 +9,21 @@ use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
+    agent = "ridley", 
+    scripts = ["game_jumpaerialf3", "game_jumpaerialf4", "game_jumpaerialf5", "game_jumpaerialf6"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn ridley_airjump(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.5, z:0.0});
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
+    }
+}
+
 #[acmd_script(//GlideWing, GlideDirection
     agent = "ridley", 
     scripts = ["game_glidewing", "game_glidedirection"], 
@@ -30,15 +45,14 @@ unsafe fn ridley_glide(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn ridley_glideattack(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
-    frame(fighter.lua_state_agent, 25.0);
+    frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 70, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 8.9, /*X*/ 0.0, /*Y*/ 2.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(24.0), /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 50, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_HEAD);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 70, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 50, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
         AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 300, /*Rehit*/ 40, /* Damage*/ 1.1, /*Unk*/ false);
         AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 300, /*Rehit*/ 40, /* Damage*/ 1.1, /*Unk*/ false);
     }
-    wait(fighter.lua_state_agent, 8.0);
+    wait(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -995,6 +1009,18 @@ unsafe fn ridley_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialNHold, SpecialAirNHold
+    agent = "ridley", 
+    scripts = ["game_specialnhold", "game_specialairnhold"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn ridley_neutralbhold(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.5, /*Angle*/ 165, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 22.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(200.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA_d, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_STAGE_GIMMICK, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
+    }
+}
+
 #[acmd_script(//SpecialNShoot
     agent = "ridley", 
     script = "game_specialnshoot", 
@@ -1597,6 +1623,7 @@ unsafe fn ridley_finalair(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        ridley_airjump,
         ridley_glideattack,
         ridley_glide,
         ridley_jab1,
@@ -1631,6 +1658,7 @@ pub fn install() {
         ridley_slipattack,
         ridley_downattackd,
         ridley_downattacku,
+        ridley_neutralbhold,
         ridley_neutralb,
         ridley_neutralbair,
         ridley_fire,

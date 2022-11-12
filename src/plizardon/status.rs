@@ -23,13 +23,13 @@ static DOWN_ANGLE_ACCEL : f32 = 1.0; //Downward angular acceleration
 
 #[status_script(agent = "plizardon", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
+    KineticModule::clear_speed_all(fighter.module_accessor);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
     WorkModule::unable_transition_term(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
-    macros::SET_SPEED_EX(fighter, 0.0, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     fighter.sub_shift_status_main(L2CValue::Ptr(glide_start_b as *const () as _))
 }
-
 unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+    macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {   
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
     }
@@ -41,7 +41,6 @@ pub unsafe fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), ANGLE_FRAME[ENTRY_ID], 0.0, true, 0.0, false, false);
     MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
-    //MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_wing"), 0.0, 1.0, false, 0.0, false, false);
     fighter.sub_shift_status_main(L2CValue::Ptr(glide_core as *const () as _))
 }
 

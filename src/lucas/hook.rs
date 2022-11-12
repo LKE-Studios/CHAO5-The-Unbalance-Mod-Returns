@@ -18,6 +18,9 @@ param_hash: u64) -> f32 {
     if fighter_kind == FIGHTER_KIND_LUCAS
     && color >= 8 && color <= 15
     && param_hash == 0 {
+        if param_type == hash40("walk_speed_max") {
+            return 1.47; //Lucas 1.65
+        }
         if param_type == hash40("dash_speed") {
             return 2.24; //Lucas 2.15
         }
@@ -28,7 +31,7 @@ param_hash: u64) -> f32 {
             return 2.048; //Lucas 1.885
         }
         else if param_type == hash40("dive_speed_y") {
-            return 2.3; //Lucas 2.242
+            return 2.35; //Lucas 2.242
         }
     }
 ret

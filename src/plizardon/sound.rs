@@ -4,6 +4,18 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+#[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
+    agent = "plizardon", 
+    scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6"],
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn plizardon_airjumpsfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
+    }
+}
+
 #[acmd_script(//GlideStart
     agent = "plizardon", 
     script = "sound_glidestart", 
@@ -107,6 +119,7 @@ unsafe fn plizardon_win2sfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
+        plizardon_airjumpsfx,
         plizardon_glidestartsfx,
         //plizardon_glidesfx,
         plizardon_glideattacksfx,
