@@ -16,9 +16,11 @@ pub fn elight_opff(fighter : &mut L2CFighterCommon) {
             }
         };
         if status_kind == *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_S_END {
-            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-            if is_grounded(fighter.module_accessor) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+            if MotionModule::frame(fighter.module_accessor) > 21.0 {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+                if is_grounded(fighter.module_accessor) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+                }
             }
         }
     }

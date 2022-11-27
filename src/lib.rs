@@ -1,6 +1,13 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
-#![allow(unused_macros)]
+#![allow(unused_macros,
+    unused_must_use,
+    clippy::borrow_interior_mutable_const,
+    clippy::collapsible_if,
+    clippy::collapsible_else_if,
+    clippy::absurd_extreme_comparisons,
+    clippy::cmp_null,
+    clippy::if_same_then_else)]
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 
@@ -13,53 +20,15 @@ use smash::app::*;
 use smash::hash40;
 use smashline::*;
 use smash::app::sv_animcmd::*;
-use crate::custom::GIGA_GRAB;
-use crate::custom::GIGA_GRABBED;
 use crate::globals::*;
-use crate::custom::{get_player_number, get_attacker_number};
-use crate::custom::get_boma;
-use crate::custom::GIGA_GRAB_TARGET;
-use crate::custom::FIGHTER_BOOL_1;
-use crate::custom::FIGHTER_BOOL_2;
-use crate::custom::FIGHTER_BOOL_3;
+use crate::common::get_player_number;
+use crate::common::FIGHTER_BOOL_1;
+use crate::common::FIGHTER_BOOL_2;
+use crate::common::FIGHTER_BOOL_3;
 
 pub mod globals {
-    pub const UNK1: 				 i32 = 0x0; //void
-    pub const UNK2:                  i32 = 0x1; //i32
-    pub const FIGHTER_KIND:          i32 = 0x2; //i32
-    pub const OBJECT_ID:             i32 = 0x3; //i32
-    pub const UNK3:                  i32 = 0x4; //ptr, very close in value to UNK6 and the last 5 digits of both values don't change on reboot, does NOT change by player number
-    pub const UNK4:                  i32 = 0x5; //ptr
-    pub const UNK5:                  i32 = 0x6; //void
-    pub const INIT_STATUS_FUNC:      i32 = 0x7; //ptr
-    pub const IN_HITLAG:             i32 = 0x8; //bool
-    pub const STATUS_KIND_INTERRUPT: i32 = 0x9; //i32
-    pub const PREV_STATUS_KIND:      i32 = 0xA; //i32
-    pub const STATUS_KIND:           i32 = 0xB; //i32
-    pub const UNK6:                  i32 = 0xC; //i32, varies by fighter_kind but idk what the pattern is. Prints 480 for Falcon, 479 for Giga Bowser, 502 for Ryu
-    pub const UNK7:                  i32 = 0xD; //bool
-    pub const MOTION_FRAME:          i32 = 0xE; //f32
-    pub const MOTION_FRAME_NO_INTERP:i32 = 0xF; //f32
-    pub const UNK8:                  i32 = 0x10; //ptr, pointer to where the status_kind's function is located?
-    pub const UNK9:                  i32 = 0x11; //ptr, equal to UNK10, does NOT change by player number
-    pub const UNK10:                 i32 = 0x12; //ptr
-    pub const UNK11:                 i32 = 0x13; //this changes types (i32/ptr)
-    pub const PREV_SUB_STATUS:       i32 = 0x14; //i32
-    pub const SUB_STATUS:            i32 = 0x15; //i32
-    pub const SITUATION_KIND:        i32 = 0x16; //i32
-    pub const PREV_SITUATION_KIND:   i32 = 0x17; //i32
-    pub const UNK12:				 i32 = 0x18; //f32, status kind related, occasionally matches StatusModule::status_kind_next
-    pub const UNK13:                 i32 = 0x19; //i32
-    pub const STICK_X:               i32 = 0x1A; //f32
-    pub const STICK_Y:               i32 = 0x1B; //f32
-    pub const FLICK_X:               i32 = 0x1C; //i32
-    pub const FLICK_Y:               i32 = 0x1D; //i32
-    pub const FLICK_Y_DIR:           i32 = 0x1E; //f32
     pub const PAD_FLAG:              i32 = 0x1F; //u64
     pub const CMD_CAT1:              i32 = 0x20; //u64
-    pub const CMD_CAT2:              i32 = 0x21; //u64
-    pub const CMD_CAT3:              i32 = 0x22; //u64
-    pub const CMD_CAT4:              i32 = 0x23; //u64
 }
 
 mod bayonetta;
@@ -156,7 +125,7 @@ mod younglink;
 mod zelda;
 
 mod utils;
-mod custom;
+mod common;
 
 const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
     0xfc, 0x67, 0xbb, 0xa9, 0xf8, 0x5f, 0x01, 0xa9, 0xf6, 0x57, 0x02, 0xa9, 0xf4,
@@ -180,48 +149,6 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     original!()(unk,constant,value)
 }
 
-#[skyline::hook(offset=0x67a790)]
-pub unsafe fn notify_log_event_collision_hit_replace(
-    fighter_manager: u64,
-    attacker_object_id: u32,
-    defender_object_id: u32, 
-    move_type: u64,
-    arg5: u64,
-    move_type_again: u64
-) -> u64 {
-    let attacker_boma = &mut *smash::app::sv_battle_object::module_accessor(attacker_object_id);
-    let defender_boma = &mut *smash::app::sv_battle_object::module_accessor(defender_object_id);
-    let attacker_kind = smash::app::utility::get_kind(attacker_boma);
-    let attacker_motion_kind = MotionModule::motion_kind(attacker_boma);
-    if attacker_kind == *FIGHTER_KIND_KOOPAG {
-		if attacker_motion_kind == hash40("catch") {
-			GIGA_GRAB_TARGET[get_player_number(attacker_boma)] = get_player_number(defender_boma);
-		}
-	}
-    original!()(fighter_manager, attacker_object_id, defender_object_id, move_type, arg5, move_type_again)
-}
-
-#[skyline::hook(replace = WorkModule::is_enable_transition_term)]
-pub unsafe fn is_enable_transition_term_replace(
-    module_accessor: &mut smash::app::BattleObjectModuleAccessor,
-    term: i32
-) -> bool {
-	let fighter_kind = smash::app::utility::get_kind(module_accessor);
-	let status_kind = StatusModule::status_kind(module_accessor);
-	let situation_kind = StatusModule::situation_kind(module_accessor);
-	let motion_kind = MotionModule::motion_kind(module_accessor);
-	let ret = original!()(module_accessor, term);
-    if GIGA_GRABBED[get_attacker_number(module_accessor)] > 0 && motion_kind == hash40("capture_wait_hi") {
-        return false;
-    }
-    if fighter_kind == FIGHTER_KIND_KOOPAG && (motion_kind == hash40("catch") || motion_kind == hash40("catch_wait") || motion_kind == hash40("catch_pull") || 
-    motion_kind == hash40("catch_cut") || motion_kind == hash40("catch_attack") || motion_kind == hash40("throw_f") || motion_kind == hash40("throw_b") || 
-    motion_kind == hash40("throw_hi") || motion_kind == hash40("throw_lw") || motion_kind == hash40("throw_lw_2")) {
-        return false;
-    }
-    return ret;
-}
-
 #[skyline::hook(replace = MotionModule::change_motion)]
 pub unsafe fn motionmodule_change_motion_replace(
     module_accessor: &mut smash::app::BattleObjectModuleAccessor,
@@ -234,8 +161,6 @@ pub unsafe fn motionmodule_change_motion_replace(
     arg8: bool
 ) -> u64 {
 	let fighter_kind = smash::app::utility::get_kind(module_accessor);
-	let status_kind = StatusModule::status_kind(module_accessor);
-	let situation_kind = StatusModule::situation_kind(module_accessor);
 
     if fighter_kind == *FIGHTER_KIND_KOOPAG {
 		let GIGA_DTILT = &mut FIGHTER_BOOL_1[get_player_number(module_accessor)];
@@ -248,9 +173,6 @@ pub unsafe fn motionmodule_change_motion_replace(
 			}
 			if *GIGA_DTILT {
 				new_motion = hash40("attack_lw3");
-			}
-			if GIGA_GRAB[get_player_number(module_accessor)] == 1 {
-				new_motion = hash40("catch_pull");
 			}
 			*DTILT_INPUT = false;
 		}
@@ -370,7 +292,7 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();
+    roy::install();*/
     metaknight::install();
     pit::install();
     wario::install();
@@ -440,11 +362,9 @@ pub fn main() {
         declare_const_hook, 
         log_remove_motion_partial,
         log_add_motion_partial,
-        notify_log_event_collision_hit_replace,
-        is_enable_transition_term_replace,
         motionmodule_change_motion_replace
         //update_selected_fighter,
         //set_chara_colour_ui
     );
-    custom::install();
+    common::install();
 }

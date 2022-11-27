@@ -2485,6 +2485,7 @@ unsafe fn dolly_geyser(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.7);
     }
 }
 

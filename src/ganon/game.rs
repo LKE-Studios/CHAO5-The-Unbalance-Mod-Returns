@@ -403,7 +403,7 @@ unsafe fn ganon_uair(fighter: &mut L2CAgentBase) {
 unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.25);
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 4.5, 4.5, 12.5, 0.0);
     }
     frame(fighter.lua_state_agent, 4.0);

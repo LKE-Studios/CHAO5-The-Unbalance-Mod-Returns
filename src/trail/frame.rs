@@ -21,7 +21,7 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
-            if HOLD_TIME[ENTRY_ID] == 22.0 {
+            if HOLD_TIME[ENTRY_ID] == 24.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
             }
         }
@@ -45,7 +45,7 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_STATUS_KIND_LANDING || status_kind == *FIGHTER_STATUS_KIND_LANDING_LIGHT || status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR || status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR || status_kind == *FIGHTER_STATUS_KIND_DEAD ||
         status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || status_kind == *FIGHTER_STATUS_KIND_DAMAGE || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR ||
-        status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH || status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING { 
+        status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH || status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING || status_kind == *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F || status_kind == *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N { 
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
@@ -99,6 +99,9 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_air_check_fall_common();
+            if MotionModule::frame(fighter.module_accessor) > 50.0 {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+            };
         }
         if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_LW_ATTACK {
             if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {

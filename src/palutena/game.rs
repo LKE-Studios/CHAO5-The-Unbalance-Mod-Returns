@@ -27,9 +27,32 @@ unsafe fn palutena_shieldbreak(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWing, GlideDirection
+/*#[acmd_script(//GlideStart
     agent = "palutena", 
-    scripts = ["game_glidewing", "game_glidedirection"], 
+    script = "game_glidestart", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn palutena_glidestart(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_start"), false, -1.0);
+    }
+}
+
+#[acmd_script(//GlideWing
+    agent = "palutena", 
+    script = "game_glidewing", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn palutena_glidewing(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_wing"), false, -1.0);
+    }
+}*/
+
+#[acmd_script(//GlideDirection
+    agent = "palutena", 
+    script = "game_glidedirection", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn palutena_glide(fighter: &mut L2CAgentBase) {
@@ -55,6 +78,36 @@ unsafe fn palutena_glideattack(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//GlideEnd
+    agent = "palutena", 
+    script = "game_glideend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn palutena_glideend(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_end"), false, -1.0);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
+}
+
+#[acmd_script(//GlideLanding
+    agent = "palutena", 
+    script = "game_glidelanding", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn palutena_glideland(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_landing"), false, -1.0);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
 
@@ -1254,8 +1307,12 @@ unsafe fn palutena_final2(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         palutena_shieldbreak,
+        //palutena_glidestart,
+        //palutena_glidewing,
         palutena_glide,
         palutena_glideattack,
+        palutena_glideend,
+        palutena_glideland,
         palutena_jab1,
         palutena_jab100,
         palutena_jab100sub,
