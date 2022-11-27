@@ -2273,7 +2273,7 @@ unsafe fn elight_neutralbhold(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSStart, *SpecialAirSStart
+#[acmd_script(//SpecialSStart, SpecialAirSStart
     agent = "elight", 
     scripts = ["game_specialsstart", "game_specialairsstart"],
     category = ACMD_GAME, 
@@ -2303,7 +2303,7 @@ unsafe fn elight_sidebstart(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
 }
 
-#[acmd_script(//SpecialS, *SpecialAirS
+#[acmd_script(//SpecialS, SpecialAirS
     agent = "elight", 
     scripts = ["game_specials", "game_specialairs"],
     category = ACMD_GAME, 
@@ -2397,6 +2397,45 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialSEnd, SpecialAirSEnd
+    agent = "elight", 
+    scripts = ["game_specialsend", "game_specialairsend"],
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn elight_sidebend(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.1);
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        VisibilityModule::set_whole(fighter.module_accessor, true);
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, smash::app::ArticleOperationTarget(0));
+    }
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) == true {
+        if macros::is_excute(fighter) {
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+        }
+    }
+    if MotionModule::is_changing(fighter.module_accessor) {
+        if macros::is_excute(fighter) {
+            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_ELIGHT_INSTANCE_WORK_ID_FLAG_ADD_PARTIAL_MTION_SWORD_WHEN_CHANGEING);
+        }
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if macros::is_excute(fighter) {
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) == true {
+        if macros::is_excute(fighter) {
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_close"), 3.33, 3.33, false, false, 0.0, false, true, false);
+        }
+    }
+    if MotionModule::is_changing(fighter.module_accessor) {
+        if macros::is_excute(fighter) {
+            WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_ELIGHT_INSTANCE_WORK_ID_FLAG_ADD_PARTIAL_MTION_SWORD_WHEN_CHANGEING);
+        }
+    }
+}
+
 #[acmd_script(//SpecialS1, SpecialAirS1
     agent = "elight_bunshin", 
     scripts = ["game_specials1", "game_specialairs1"],
@@ -2435,7 +2474,7 @@ unsafe fn elight_photon1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS2, *SpecialAirS2
+#[acmd_script(//SpecialS2, SpecialAirS2
     agent = "elight_bunshin", 
     scripts = ["game_specials2", "game_specialairs2"],
     category = ACMD_GAME, 
@@ -2503,7 +2542,7 @@ unsafe fn elight_photon3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS4, *SpecialAirS4
+#[acmd_script(//SpecialS4, SpecialAirS4
     agent = "elight_bunshin", 
     scripts = ["game_specials4", "game_specialairs4"],
     category = ACMD_GAME, 
@@ -2818,6 +2857,7 @@ pub fn install() {
         elight_neutralbhold,
         elight_sidebstart,
         elight_sideb,
+        elight_sidebend,
         elight_photon1,
         elight_photon2,
         elight_photon3,
