@@ -21,17 +21,17 @@ use smash::hash40;
 use smashline::*;
 use smash::app::sv_animcmd::*;
 use crate::globals::*;
-use crate::custom::get_player_number;
-use crate::custom::FIGHTER_BOOL_1;
-use crate::custom::FIGHTER_BOOL_2;
-use crate::custom::FIGHTER_BOOL_3;
+use crate::common::get_player_number;
+use crate::common::FIGHTER_BOOL_1;
+use crate::common::FIGHTER_BOOL_2;
+use crate::common::FIGHTER_BOOL_3;
 
 pub mod globals {
     pub const PAD_FLAG:              i32 = 0x1F; //u64
     pub const CMD_CAT1:              i32 = 0x20; //u64
 }
 
-/*mod bayonetta;
+mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -72,9 +72,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*mod mewtwo;
+mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -122,7 +122,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;*/
+mod zelda;
 
 mod utils;
 mod common;
@@ -266,7 +266,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    /*mario::install();
+    mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -292,9 +292,9 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
-    /*pit::install();
+    pit::install();
     wario::install();
     diddy::install();
     ptrainer::install();
@@ -357,7 +357,7 @@ pub fn main() {
     buddy::install();
     trail::install();
     tantan::install();
-    koopag::install();*/
+    koopag::install();
     skyline::install_hooks!(
         declare_const_hook, 
         log_remove_motion_partial,
