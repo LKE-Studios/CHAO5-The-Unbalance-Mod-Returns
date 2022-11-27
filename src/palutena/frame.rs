@@ -20,7 +20,7 @@ fn palutena_frame(fighter: &mut L2CFighterCommon) {
             if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
                 HOLD_TIME[ENTRY_ID] +=1.0;
             }
-            if HOLD_TIME[ENTRY_ID] == 21.0 {
+            if HOLD_TIME[ENTRY_ID] == 18.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
             }
         }
