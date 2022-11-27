@@ -6,6 +6,8 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
+
+
 #[acmd_script(//AttackLw3
     agent = "koopag", 
     script = "effect_attacklw3", 
