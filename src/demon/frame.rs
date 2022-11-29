@@ -134,7 +134,7 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
                 if COUNTER[ENTRY_ID] < 2 {

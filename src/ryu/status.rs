@@ -56,7 +56,7 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
 
 
 #[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn ryu_specialn_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_specialn_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
@@ -67,13 +67,13 @@ pub unsafe fn ryu_specialn_command(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn ryu_specialn_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_specialn_end(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
 //idk why I can't put in the constant as the status. Only the raw i32 or LuaConst works. Smashline issue
 #[status_script(agent = "ryu", status = 0x202, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn ryu_kamehameha_start_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_kamehameha_start_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 

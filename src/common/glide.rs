@@ -274,25 +274,16 @@ mod kinetic_utility {
 
 #[skyline::hook(replace = L2CFighterCommon_status_GlideStart)]
 pub unsafe fn status_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let params = GlideParams::get(fighter);
-
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-    
-    //Fighter Specific GlideStart Kinetic stuff
-    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
-    if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_GLIDE_START {
-        KineticModule::mul_speed(fighter.module_accessor, &Vector3f{x: params.speed_mul_start, y: params.v_glide_start, z:0.0}, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-    }
+
     fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_GlideStart_Main as *const () as _))
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
 pub unsafe fn status_init_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-    let kind = smash::app::utility::get_kind(boma);
     let lr = PostureModule::lr(fighter.module_accessor);
     let sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let params = GlideParams::get(fighter);
@@ -304,10 +295,6 @@ pub unsafe fn status_init_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-    if kind == *FIGHTER_KIND_PALUTENA {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_wing"), false, -1.0);
-    }
     0.into()
 }
 
@@ -319,13 +306,15 @@ pub unsafe fn status_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), 90.0, 0.0, true, 0.0, false, false);
     MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
+    if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_PALUTENA {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_wing"), false, -1.0);
+    }
     fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_Glide_Main as *const () as _))
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
 unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-    let kind = smash::app::utility::get_kind(boma);
     let params = GlideParams::get(fighter);
     let lr = PostureModule::lr(fighter.module_accessor);
     let _energy_stop = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
@@ -436,10 +425,11 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
     MotionModule::set_frame(fighter.module_accessor, 90.0 - angle, false);
     WorkModule::set_float(fighter.module_accessor, angle, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
-    if ControlModule::check_button_trigger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
         fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
     }
     //Fighter Specific
+    let kind = fighter.global_table[0x2].get_i32();
     if kind == *FIGHTER_KIND_METAKNIGHT {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_jump05_win02"), 1.0 + angle * -0.0035);
     }
@@ -488,11 +478,8 @@ pub unsafe fn bind_address_call_status_end_glide(fighter: &mut L2CFighterCommon,
 
 #[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
 pub unsafe fn status_end_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-    let kind = smash::app::utility::get_kind(boma);
-
     MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    if kind == *FIGHTER_KIND_PALUTENA {
+    if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_PALUTENA {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
     0.into()

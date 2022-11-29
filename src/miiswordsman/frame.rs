@@ -15,7 +15,7 @@ pub fn miiswordsman_opff(fighter : &mut L2CFighterCommon) {
         let joint_scale = smash::phx::Vector3f { x: SWORD_MUL[ENTRY_ID], y: SWORD_MUL[ENTRY_ID], z: SWORD_MUL[ENTRY_ID]};
         ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("haver"), &joint_scale);
         AttackModule::set_attack_scale(fighter.module_accessor, 1.0 * SWORD_MUL[ENTRY_ID], true);
-        if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT){
+        if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT){
             SWORD_MUL[ENTRY_ID] += 0.05;
         }
         if sv_information::is_ready_go() == false {

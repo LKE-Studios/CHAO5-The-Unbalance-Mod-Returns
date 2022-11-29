@@ -8,7 +8,6 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::app::{sv_information};
 
-static mut HOLD_TIME : [f32; 8] = [0.0; 8]; //Allows Meta Knight to enter the glide state when holding the jump button
 static mut COUNTER: [i32; 8] = [0; 8];
 static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
@@ -21,15 +20,11 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-        //let situation_kind = StatusModule::situation_kind(boma);
-        let kind = smash::app::utility::get_kind(boma);
+        //let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
-        if kind == *FIGHTER_KIND_METAKNIGHT {
-            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
-        };
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.14, y:1.14, z:1.14});
         if META_POWER[ENTRY_ID] == true {
             GFX_COUNTER[ENTRY_ID] += 1;
             SFX_COUNTER[ENTRY_ID] += 1;
@@ -64,7 +59,10 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
         };     
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
+        if [
+            *FIGHTER_STATUS_KIND_DEAD,
+            *FIGHTER_STATUS_KIND_MISS_FOOT
+            ].contains(&status_kind) {
             META_POWER[ENTRY_ID] = false;
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
@@ -77,75 +75,24 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
-        if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-            if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
-                HOLD_TIME[ENTRY_ID] +=1.0;
-            }
-            if HOLD_TIME[ENTRY_ID] == 16.0 {
-                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
-            }
-        }
-        else {
-            HOLD_TIME[ENTRY_ID] = 0.0;
-        }
-        if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_END].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0 {
-            HOLD_TIME[ENTRY_ID] = 1.0;
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_LANDING || status_kind == *FIGHTER_STATUS_KIND_LANDING_LIGHT || status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING || status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR || status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR || 
-        status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || status_kind == *FIGHTER_STATUS_KIND_DAMAGE || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY || status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR ||
-        status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL || status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH { 
+        if [
+            *FIGHTER_STATUS_KIND_LANDING,
+            *FIGHTER_STATUS_KIND_LANDING_LIGHT,
+            *FIGHTER_STATUS_KIND_GLIDE_LANDING,
+            *FIGHTER_STATUS_KIND_ATTACK_AIR,
+            *FIGHTER_STATUS_KIND_ESCAPE_AIR,
+            *FIGHTER_STATUS_KIND_DEAD,
+            *FIGHTER_STATUS_KIND_MISS_FOOT,
+            *FIGHTER_STATUS_KIND_DAMAGE,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL,
+            *FIGHTER_STATUS_KIND_CLIFF_CATCH,
+            *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
+            *FIGHTER_STATUS_KIND_GLIDE_END
+        ].contains(&status_kind) { 
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_jump05_win02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_jump05_win02"));
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_jump05_win02"));
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
-            WorkModule::unable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_SPECIAL);
         };
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
@@ -178,7 +125,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
             }
         };
@@ -214,21 +161,6 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) > 32.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_AIR_HI_START {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
@@ -262,21 +194,6 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) > 32.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_JUMP].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
-            if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && HOLD_TIME[ENTRY_ID] > 1.0{
-                HOLD_TIME[ENTRY_ID] = 1.0;
-            };
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
@@ -295,7 +212,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             fighter.sub_air_check_fall_common();
             fighter.sub_wait_ground_check_common(false.into());
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
                 if COUNTER[ENTRY_ID] < 2 {
@@ -304,7 +221,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                     SlowModule::set_whole(fighter.module_accessor, 2, 0);
                     macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
                     macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
-                    macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * PostureModule::lr(boma));
+                    let lr = PostureModule::lr(fighter.module_accessor);
+                    macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * lr);
                 }
                 if MotionModule::frame(fighter.module_accessor) > 10.0 {
                     CancelModule::enable_cancel(fighter.module_accessor);

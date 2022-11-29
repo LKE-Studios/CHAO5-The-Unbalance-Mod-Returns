@@ -52,7 +52,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
 }
 
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
-unsafe fn is_valid_just_shield_reflector(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
     return true;
 }
 
@@ -70,21 +70,19 @@ unsafe fn is_valid_just_shield_reflector(module_accessor: &mut smash::app::Battl
 // }
 
 pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectModuleAccessor) -> usize {
-	let mut player_number = 8;
 	if smash::app::utility::get_kind(module_accessor) == *WEAPON_KIND_PTRAINER_PTRAINER {
-		player_number = WorkModule::get_int(module_accessor, *WEAPON_PTRAINER_PTRAINER_INSTANCE_WORK_ID_INT_FIGHTER_ENTRY_ID) as usize;
+		WorkModule::get_int(module_accessor, *WEAPON_PTRAINER_PTRAINER_INSTANCE_WORK_ID_INT_FIGHTER_ENTRY_ID) as usize
 	}
 	else if smash::app::utility::get_category(module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
-		player_number = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize
 	}
 	else {
 		let mut owner_module_accessor = &mut *smash::app::sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
 		while smash::app::utility::get_category(owner_module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER { //Keep checking the owner of the boma we're working with until we've hit a boma that belongs to a fighter
 			owner_module_accessor = &mut *smash::app::sv_battle_object::module_accessor((WorkModule::get_int(owner_module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
 		}
-		player_number = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize
 	}
-	return player_number;
 }
 
 pub unsafe fn jump_checker_buffer(module_accessor: &mut smash::app::BattleObjectModuleAccessor, cat: i32) -> bool {
@@ -99,7 +97,23 @@ pub unsafe fn jump_checker_buffer(module_accessor: &mut smash::app::BattleObject
 	}
 }
 
+mod jump_aerial;
+mod fly;
 mod glide;
+mod glide_checks;
+
+pub fn is_glider(kind: i32) -> bool {
+    [
+        *FIGHTER_KIND_METAKNIGHT,
+        *FIGHTER_KIND_PIT,
+        *FIGHTER_KIND_PITB,
+        *FIGHTER_KIND_PLIZARDON,
+        *FIGHTER_KIND_RIDLEY,
+        *FIGHTER_KIND_BUDDY,
+        *FIGHTER_KIND_TRAIL,
+        *FIGHTER_KIND_PALUTENA
+    ].contains(&kind)
+}
 
 pub fn install() {
     smashline::install_agent_frame_callbacks!(
@@ -109,5 +123,8 @@ pub fn install() {
     skyline::install_hook!(
         is_valid_just_shield_reflector
     );
+    jump_aerial::install();
+    fly::install();
     glide::install();
+    glide_checks::install();
 }

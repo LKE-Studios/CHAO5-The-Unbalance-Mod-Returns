@@ -19,7 +19,7 @@ pub fn jack_opff(fighter : &mut L2CFighterCommon) {
             }
         };
         if status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_LW2_COUNTER {
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -66.0, 0);
             }
         };
