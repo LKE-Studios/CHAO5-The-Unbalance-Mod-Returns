@@ -47,7 +47,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
             if stick_y > 0.45 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, true);
             }
-        }; 
+        };   
     }
 }
 
@@ -99,7 +99,7 @@ pub unsafe fn jump_checker_buffer(module_accessor: &mut smash::app::BattleObject
 
 mod jump_aerial;
 mod fly;
-mod glide;
+pub mod glide;
 mod glide_checks;
 
 pub fn is_glider(kind: i32) -> bool {

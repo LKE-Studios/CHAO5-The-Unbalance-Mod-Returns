@@ -28,9 +28,9 @@ unsafe fn sub_glide_stick_check_uniq(fighter: &mut L2CFighterCommon) {
 
 #[skyline::hook(replace = L2CFighterCommon_sub_glide_check)]
 unsafe fn sub_glide_check(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE) {
+    /*if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE) {
         return false.into();
-    }
+    }*/
     let jump_button_on_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_JUMP_WORK_INT_BUTTON_ON_FRAME);
     if jump_button_on_frame <= jump_hold_frame(fighter.global_table[0x2].get_i32()) {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_INPUT) {

@@ -8,6 +8,7 @@ use {
     smash_script::*,
     smashline::*
 };
+use smash::phx::Vector3f;
 
 pub struct GlideParams {
     pub angle_max_up : f32, //#0 Max Upward Angle
@@ -38,16 +39,16 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_METAKNIGHT {
             return GlideParams {
                 angle_max_up : 80.0, //#0 Max Upward Angle
-                angle_max_down : -80.0, //#1 Max Downward Angle
+                angle_max_down : -75.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.8, //#5 Base Power/Speed
-                speed_change : 0.01, //#6 Power Rate
+                speed_change : 0.014, //#6 Power Rate
                 max_speed : 2.3, //#7 Maximum Speed
                 end_speed : 0.7, //#8 End Speed
                 gravity_accel : 0.03, //#9 Gravity Acceleration
-                gravity_speed : 0.48, //#10 Gravity Max Speed
+                gravity_speed : 0.5, //#10 Gravity Max Speed
                 angle_extra : 15.0, //#11 Angle stuff but currently unused
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
                 down_speed_add : 0.03, //#13 Max added speed gained aiming downward
@@ -62,19 +63,19 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_PIT {
             return GlideParams {
                 angle_max_up : 65.0, //#0 Max Upward Angle
-                angle_max_down : -65.0, //#1 Max Downward Angle
+                angle_max_down : -60.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.9, //#5 Base Power/Speed
                 speed_change : 0.017, //#6 Power Rate
                 max_speed : 2.4, //#7 Maximum Speed
-                end_speed : 0.9, //#8 End Speed
+                end_speed : 1.0, //#8 End Speed
                 gravity_accel : 0.05, //#9 Gravity Acceleration
                 gravity_speed : 0.4, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.01, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.012, //#13 Max added speed gained aiming downward
                 unknown : 0.1, //#14 Unknown, unused
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 2.0, //#16 Upward angular acceleration
@@ -86,7 +87,7 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_PITB {
             return GlideParams {
                 angle_max_up : 70.0, //#0 Max Upward Angle
-                angle_max_down : -70.0, //#1 Max Downward Angle
+                angle_max_down : -65.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
@@ -98,7 +99,7 @@ impl GlideParams {
                 gravity_speed : 0.4, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.01, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.012, //#13 Max added speed gained aiming downward
                 unknown : 0.1, //#14 Unknown, unused
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 0.7, //#16 Upward angular acceleration
@@ -111,9 +112,9 @@ impl GlideParams {
             return GlideParams {
                 angle_max_up : 50.0, //#0 Max Upward Angle
                 angle_max_down : -50.0, //#1 Max Downward Angle
-                v_glide_start : 0.0, //#2 V Speed added on GlideStart
-                gravity_start : 0.0, //#3 Gravity multiplier on GlideStart
-                speed_mul_start : 0.15, //#4 H speed multiplier on GlideStart
+                v_glide_start : 1.2, //#2 V Speed added on GlideStart
+                gravity_start : 0.15, //#3 Gravity multiplier on GlideStart
+                speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.5, //#5 Base Power/Speed
                 speed_change : 0.02, //#6 Power Rate
                 max_speed : 2.1, //#7 Maximum Speed
@@ -141,7 +142,7 @@ impl GlideParams {
                 base_speed : 1.6, //#5 Base Power/Speed
                 speed_change : 0.02, //#6 Power Rate
                 max_speed : 2.1, //#7 Maximum Speed
-                end_speed : 0.44, //#8 End Speed
+                end_speed : 0.4, //#8 End Speed
                 gravity_accel : 0.06, //#9 Gravity Acceleration
                 gravity_speed : 0.5, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
@@ -186,10 +187,10 @@ impl GlideParams {
                 v_glide_start : 1.5, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
-                base_speed : 1.65, //#5 Base Power/Speed
+                base_speed : 1.5, //#5 Base Power/Speed
                 speed_change : 0.025, //#6 Power Rate
-                max_speed : 2.2, //#7 Maximum Speed
-                end_speed : 0.7, //#8 End Speed
+                max_speed : 2.0, //#7 Maximum Speed
+                end_speed : 0.9, //#8 End Speed
                 gravity_accel : 0.04, //#9 Gravity Acceleration
                 gravity_speed : 0.4, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
@@ -206,7 +207,7 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_PALUTENA {
             return GlideParams {
                 angle_max_up : 75.0, //#0 Max Upward Angle
-                angle_max_down : -75.0, //#1 Max Downward Angle
+                angle_max_down : -70.0, //#1 Max Downward Angle
                 v_glide_start : 0.0, //#2 V Speed added on GlideStart
                 gravity_start : 0.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 0.0, //#4 H speed multiplier on GlideStart
@@ -238,12 +239,12 @@ impl GlideParams {
                 base_speed : 1.7, //#5 Base Power/Speed
                 speed_change : 0.04, //#6 Power Rate
                 max_speed : 2.2, //#7 Maximum Speed
-                end_speed : 0.7, //#8 End Speed
+                end_speed : 0.9, //#8 End Speed
                 gravity_accel : 0.03, //#9 Gravity Acceleration
                 gravity_speed : 0.6, //#10 Gravity Max Speed
                 angle_extra : 15.0, //#11 Angle stuff but unknown what this is for
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.03, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.01, //#13 Max added speed gained aiming downward
                 unknown : 0.15, //#14 Unknown
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 0.55, //#16 Upward angular acceleration
@@ -274,11 +275,14 @@ mod kinetic_utility {
 
 #[skyline::hook(replace = L2CFighterCommon_status_GlideStart)]
 pub unsafe fn status_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let params = GlideParams::get(fighter);
+
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-
+    KineticModule::add_speed(fighter.module_accessor, &Vector3f{ x: params.speed_mul_start, y: params.v_glide_start, z: 0.0 });
+    KineticModule::mul_speed(fighter.module_accessor, &Vector3f{ x: 0.0, y: params.gravity_start, z: 0.0 }, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_GlideStart_Main as *const () as _))
 }
 
@@ -291,7 +295,7 @@ pub unsafe fn status_init_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::set_float(fighter.module_accessor, -sum_speed_y, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
     
     let initial_speed = params.base_speed * lr;
-    kinetic_utility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: initial_speed, y: 0.0}, Vector3f{x: initial_speed, y: 0.0, z: 0.0} /*What is the Vector 3f for?*/);
+    kinetic_utility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: initial_speed, y: 0.0}, Vector3f{x: initial_speed, y: 0.0, z: 0.0});
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
@@ -300,7 +304,7 @@ pub unsafe fn status_init_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 #[skyline::hook(replace = L2CFighterCommon_status_Glide)]
 pub unsafe fn status_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GLIDE_ATTACK);
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
@@ -342,7 +346,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     if stick_magnitude > params.radial_stick {
         let angle_accel = if stick_angle < 0.0 {
             if stick_angle >= -135.0 {
-                -params.down_angle_accel //What is angle_accel here?
+                -params.down_angle_accel
             }
             else {
                 params.up_angle_accel
@@ -400,9 +404,8 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     WorkModule::set_float(fighter.module_accessor, new_gravity, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
 
     //let unrotated = Vector2f { x: power * lr, y: 0.0 };
-    // TODO: probably want to make a new function for this, it doesn't seem like
-    // the vec2_rot function from the game does what we want
-    //let mut angled = smash::app::sv_math::vec2_rot(angle * lr * std::f32::consts::PI / 180.0, unrotated, 0.0 /*There's 3rd arg here*/);
+    /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want
+    let mut angled = smash::app::sv_math::vec2_rot(angle * lr * std::f32::consts::PI / 180.0, unrotated, 0.0);*/
     let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
     angled.y -= new_gravity;
 
@@ -417,9 +420,6 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP);
         WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
     }
-    // TODO: figure out how to set X and Y speed directly in an Energy
-    //energy_stop.speed_x = angled.x;
-    //energy_stop.speed_y = angled.y;
     sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
     sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
     WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
@@ -434,7 +434,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_jump05_win02"), 1.0 + angle * -0.0035);
     }
     if kind == *FIGHTER_KIND_PIT {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_landing02_win01"), 1.0 + angle * -0.0047);
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * -0.0047);
     }
     if kind == *FIGHTER_KIND_PITB {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_landing01_win01"), 1.0 + angle * -0.0043);
