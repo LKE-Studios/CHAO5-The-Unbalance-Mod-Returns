@@ -1013,7 +1013,6 @@ unsafe fn koopa_upbair(fighter: &mut L2CAgentBase) {
     }
     wait(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
-        CancelModule::enable_cancel(fighter.module_accessor);
         AttackModule::clear_all(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 51.0);

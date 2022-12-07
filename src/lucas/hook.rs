@@ -28,7 +28,7 @@ param_hash: u64) -> f32 {
             return 1.9; //Lucas 1.824
         }
         else if param_type == hash40("air_speed_x_stable") {
-            return 2.048; //Lucas 1.885
+            return 2.048; //Lucas 1.724
         }
         else if param_type == hash40("dive_speed_y") {
             return 2.35; //Lucas 2.242
