@@ -437,7 +437,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * -0.0047);
     }
     if kind == *FIGHTER_KIND_PITB {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_landing01_win01"), 1.0 + angle * -0.0043);
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * -0.0043);
     }
     if kind == *FIGHTER_KIND_PLIZARDON {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * -0.006);

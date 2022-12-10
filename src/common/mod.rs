@@ -43,7 +43,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
                 }
             }
         };
-        if MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) <= (9.0) {
+        if MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) <= (14.0) {
             if stick_y > 0.45 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, true);
             }
