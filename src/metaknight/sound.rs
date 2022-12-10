@@ -136,6 +136,22 @@ unsafe fn metaknight_neutralbairstartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialSStart
+    agent = "metaknight", 
+    script = "sound_specialsstart", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn metaknight_sidebstartsfx(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_s01"));
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_jump01"));
+    }
+}
+
 #[acmd_script(//SpecialHi
     agent = "metaknight", 
     script = "sound_specialhi", 
@@ -223,6 +239,7 @@ pub fn install() {
         metaknight_throwupsfx,
         metaknight_neutralbstartsfx,
         metaknight_neutralbairstartsfx,
+        metaknight_sidebstartsfx,
         metaknight_upbsfx,
         metaknight_upbloopsfx,
         metaknight_win2

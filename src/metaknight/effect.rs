@@ -6,7 +6,7 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//GlideStartGFX
+#[acmd_script(//GlideStart
     agent = "metaknight", 
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
@@ -25,7 +25,7 @@ unsafe fn metaknight_glide1gfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "metaknight", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
@@ -67,7 +67,7 @@ unsafe fn metaknight_glidelandinggfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack100GFX
+#[acmd_script(//Attack100
     agent = "metaknight", 
     script = "effect_attack100", 
     category = ACMD_EFFECT, 
@@ -99,7 +99,7 @@ unsafe fn metaknight_jab100gfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3S3GFX
+#[acmd_script(//AttackS3S3
     agent = "metaknight", 
     script = "effect_attacks3s3", 
     category = ACMD_EFFECT, 
@@ -113,7 +113,7 @@ unsafe fn metaknight_sidetilt3gfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_s3_trace"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.2, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 7.2, 35.0, 0, 0, 48.0, 0.9, true);                 
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 7.2, 50.0, 0, 0, 0.0, 0.9, true);                 
         macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_item_revengeshooter_shot"));
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -126,7 +126,7 @@ unsafe fn metaknight_sidetilt3gfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4GFX
+#[acmd_script(//AttackS4
     agent = "metaknight", 
     script = "effect_attacks4", 
     category = ACMD_EFFECT, 
@@ -153,7 +153,7 @@ unsafe fn metaknight_sidesmashgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4GFX
+#[acmd_script(//AttackHi4
     agent = "metaknight", 
     script = "effect_attackhi4", 
     category = ACMD_EFFECT, 
