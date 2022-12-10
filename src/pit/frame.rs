@@ -38,7 +38,7 @@ fn pit_opff(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
             *FIGHTER_STATUS_KIND_GLIDE_END
         ].contains(&status_kind) { 
-            macros::STOP_SE(fighter, Hash40::new("se_pit_landing02_win01"));
+            macros::STOP_SE(fighter, Hash40::new("se_pit_glide_loop"));
         };
     }
 }

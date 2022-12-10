@@ -28,6 +28,10 @@ fn plizardon_opff(fighter: &mut L2CFighterCommon) {
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
             macros::STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
         };
+        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
+            KineticModule::clear_speed_all(fighter.module_accessor);
+            macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        };
     }
 }
 

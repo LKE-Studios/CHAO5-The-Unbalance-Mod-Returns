@@ -46,7 +46,7 @@ unsafe fn plizardon_glidestartgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn plizardon_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn plizardon_glidegfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -84,7 +84,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         plizardon_firegfx,
         plizardon_glidestartgfx,
-        plizardon_glide2gfx,
+        plizardon_glidegfx,
         plizardon_glideattackgfx,
         plizardon_glidelandinggfx
     );

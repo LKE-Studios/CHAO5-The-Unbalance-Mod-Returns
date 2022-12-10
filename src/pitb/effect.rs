@@ -41,12 +41,12 @@ unsafe fn pitb_glidestartgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "pitb", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn pitb_glidegfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -108,7 +108,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         pitb_airjumpgfx,
         pitb_glidestartgfx,
-        pitb_glide2gfx,
+        pitb_glidegfx,
         pitb_glideattackgfx,
         pitb_glidelandinggfx,
         pitb_glideendgfx
