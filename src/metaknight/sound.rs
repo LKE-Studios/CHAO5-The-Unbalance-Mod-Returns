@@ -20,11 +20,11 @@ unsafe fn metaknight_glidestartsfx(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h01"));
+        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
     }
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump05_win02"));
+        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
     }
 }
 
@@ -59,7 +59,8 @@ unsafe fn metaknight_glideattacksfx(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn metaknight_glidelandingsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -78,7 +79,8 @@ unsafe fn metaknight_glidelandingsfx(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn metaknight_glideendsfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
+        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -161,7 +163,7 @@ unsafe fn metaknight_upbsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
+        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
         macros::PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
     }
     frame(fighter.lua_state_agent, 6.0);
@@ -183,7 +185,7 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_h03"));
+        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -195,39 +197,6 @@ unsafe fn metaknight_upbloopsfx(fighter: &mut L2CAgentBase) {
        macros::PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
     }
 }   
-
-#[acmd_script(//Win2
-    agent = "metaknight", 
-    scripts = ["sound_win2", "sound_win2_default", "sound_win2_us_en"],
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn metaknight_win2(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump04"));
-    }
-    frame(fighter.lua_state_agent, 33.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump04"));
-    }
-    frame(fighter.lua_state_agent, 68.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump05"));
-    }
-    frame(fighter.lua_state_agent, 75.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("vc_metaknight_win02"));
-    }
-    frame(fighter.lua_state_agent, 89.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_landing02"));
-    }
-    frame(fighter.lua_state_agent, 124.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_appeal_l01"));
-    }
-}
-
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -241,7 +210,6 @@ pub fn install() {
         metaknight_neutralbairstartsfx,
         metaknight_sidebstartsfx,
         metaknight_upbsfx,
-        metaknight_upbloopsfx,
-        metaknight_win2
+        metaknight_upbloopsfx
     );
 }

@@ -184,7 +184,7 @@ unsafe fn metaknight_upsmashgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4GFX
+#[acmd_script(//AttackLw4
     agent = "metaknight", 
     script = "effect_attacklw4", 
     category = ACMD_EFFECT, 
@@ -206,7 +206,7 @@ unsafe fn metaknight_downsmashgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirFGFX
+#[acmd_script(//AttackAirF
     agent = "metaknight", 
     script = "effect_attackairf", 
     category = ACMD_EFFECT, 
@@ -228,7 +228,7 @@ unsafe fn metaknight_fairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirBGFX
+#[acmd_script(//AttackAirB
     agent = "metaknight", 
     script = "effect_attackairb", 
     category = ACMD_EFFECT, 
@@ -249,7 +249,7 @@ unsafe fn metaknight_bairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHiGFX
+#[acmd_script(//AttackAirHi
     agent = "metaknight", 
     script = "effect_attackairhi", 
     category = ACMD_EFFECT, 
@@ -269,7 +269,7 @@ unsafe fn metaknight_uairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLwGFX
+#[acmd_script(//AttackAirLw
     agent = "metaknight", 
     script = "effect_attackairlw", 
     category = ACMD_EFFECT, 
@@ -289,7 +289,7 @@ unsafe fn metaknight_dairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHiGFX
+#[acmd_script(//ThrowHi
     agent = "metaknight", 
     script = "effect_throwhi", 
     category = ACMD_EFFECT, 
@@ -324,7 +324,7 @@ unsafe fn metaknight_throwhigfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialNStartGFX
+#[acmd_script(//SpecialNStart
     agent = "metaknight", 
     script = "effect_specialnstart", 
     category = ACMD_EFFECT, 
@@ -340,7 +340,7 @@ unsafe fn metaknight_neutralb1gfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirNStartGFX
+#[acmd_script(//SpecialAirNStart
     agent = "metaknight", 
     script = "effect_specialairnstart", 
     category = ACMD_EFFECT, 
@@ -352,7 +352,7 @@ unsafe fn metaknight_neutralbairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiGFX
+#[acmd_script(//SpecialHi
     agent = "metaknight", 
     script = "effect_specialhi", 
     category = ACMD_EFFECT, 
@@ -381,7 +381,7 @@ unsafe fn metaknight_upbgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiLoopGFX
+#[acmd_script(//SpecialHiLoop
     agent = "metaknight", 
     script = "effect_specialhiloop", 
     category = ACMD_EFFECT, 

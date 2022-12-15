@@ -94,8 +94,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
             *FIGHTER_STATUS_KIND_GLIDE_END
         ].contains(&status_kind) { 
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-            macros::STOP_SE(fighter, Hash40::new("se_metaknight_jump05_win02"));
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
@@ -156,8 +156,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: params.speed_mul_start, y: 0.0, z: 0.0});
             }   
             if MotionModule::frame(fighter.module_accessor) >= 29.0 && MotionModule::frame(fighter.module_accessor) < 30.0 {
-                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h01"));
-                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump05_win02"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
             }
             if MotionModule::frame(fighter.module_accessor) > 32.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
@@ -178,8 +178,8 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: params.speed_mul_start, y: 0.0, z: 0.0});
             }    
             if MotionModule::frame(fighter.module_accessor) >= 29.0 && MotionModule::frame(fighter.module_accessor) < 30.0 {
-                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h01"));
-                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_jump05_win02"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
             }
             if MotionModule::frame(fighter.module_accessor) > 31.0 {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), true.into());
