@@ -15,6 +15,7 @@ static mut IS_CRIT : [bool; 8] = [false; 8];
 static mut META_POWER : [bool; 8] = [false; 8];
 static mut GFX_COUNTER : [i32; 8] = [0; 8];
 static mut SFX_COUNTER : [i32; 8] = [0; 8];
+pub static mut USED_SPECIAL_N : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_opff(fighter: &mut L2CFighterCommon) {
@@ -26,6 +27,10 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         let params = GlideParams::get(fighter);
+
+        if situation_kind == *SITUATION_KIND_GROUND {
+            USED_SPECIAL_N[ENTRY_ID] = false;
+        }
 
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
         if META_POWER[ENTRY_ID] == true {
@@ -117,12 +122,12 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
-            /*if MotionModule::frame(fighter.module_accessor) > 29.0 {
+            if MotionModule::frame(fighter.module_accessor) > 29.0 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
                 if situation_kind == *SITUATION_KIND_GROUND {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
                 }
-            }*/
+            }
         };
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
