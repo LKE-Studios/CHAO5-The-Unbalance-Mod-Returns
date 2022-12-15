@@ -5,7 +5,7 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//SpecialAirHiGFX
+#[acmd_script(//SpecialAirHi
     agent = "donkey", 
     script = "effect_specialairhi", 
     category = ACMD_EFFECT, 
@@ -24,7 +24,7 @@ unsafe fn donkey_upbairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwLoopGFX
+#[acmd_script(//SpecialLwLoop
     agent = "donkey", 
     script = "effect_speciallwloop", 
     category = ACMD_EFFECT, 

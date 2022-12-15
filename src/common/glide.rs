@@ -62,7 +62,7 @@ impl GlideParams {
         }
         if kind == *FIGHTER_KIND_PIT {
             return GlideParams {
-                angle_max_up : 65.0, //#0 Max Upward Angle
+                angle_max_up : 70.0, //#0 Max Upward Angle
                 angle_max_down : -60.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
@@ -158,7 +158,7 @@ impl GlideParams {
         }
         if kind == *FIGHTER_KIND_BUDDY {
             return GlideParams {
-                angle_max_up : 55.0, //#0 Max Upward Angle
+                angle_max_up : 65.0, //#0 Max Upward Angle
                 angle_max_down : -55.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
@@ -256,7 +256,7 @@ impl GlideParams {
     }
 }
 
-mod kinetic_utility {
+mod KineticUtility {
     // Resets and enables the kinetic energy type.
     // Unknown why there are two vectors required by reset_energy
     pub unsafe fn reset_enable_energy(module_accessor: *mut smash::app::BattleObjectModuleAccessor, energy_id: i32, energy_reset_type: i32, speed_vec: smash::phx::Vector2f, other_vec: smash::phx::Vector3f) {
@@ -295,10 +295,10 @@ pub unsafe fn status_init_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::set_float(fighter.module_accessor, -sum_speed_y, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
     
     let initial_speed = params.base_speed * lr;
-    kinetic_utility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: initial_speed, y: 0.0}, Vector3f{x: initial_speed, y: 0.0, z: 0.0});
-    kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-    kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-    kinetic_utility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+    KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: initial_speed, y: 0.0}, Vector3f{x: initial_speed, y: 0.0, z: 0.0});
+    KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+    KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+    KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
     0.into()
 }
 
@@ -431,7 +431,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     //Fighter Specific
     let kind = fighter.global_table[0x2].get_i32();
     if kind == *FIGHTER_KIND_METAKNIGHT {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_jump05_win02"), 1.0 + angle * -0.0035);
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * -0.0035);
     }
     if kind == *FIGHTER_KIND_PIT {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * -0.0047);
