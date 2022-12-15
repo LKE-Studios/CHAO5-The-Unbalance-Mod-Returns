@@ -33,6 +33,10 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
+        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
+            KineticModule::clear_speed_all(fighter.module_accessor);
+            macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        }
         /*if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_status_attack_up"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.6, true);

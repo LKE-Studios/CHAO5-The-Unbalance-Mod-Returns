@@ -30,12 +30,12 @@ unsafe fn trail_glidestartgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "trail", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn trail_glidegfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -71,6 +71,30 @@ unsafe fn trail_glidelandinggfx(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Fly
+    agent = "trail_fire", 
+    script = "effect_fly", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn trail_fire1gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_fire_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 4.0, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//Fly
+    agent = "trail_fire", 
+    script = "effect_fly2", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn trail_fire2gfx(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_fire_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.5, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//Fly
     agent = "trail_ice", 
     script = "effect_fly", 
     category = ACMD_EFFECT, 
@@ -97,9 +121,11 @@ unsafe fn trail_ice2gfx(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         trail_glidestartgfx,
-        trail_glide2gfx,
+        trail_glidegfx,
         trail_glideattackgfx,
         trail_glidelandinggfx,
+        trail_fire1gfx,
+        trail_fire2gfx,
         trail_ice1gfx,
         trail_ice2gfx
     );
