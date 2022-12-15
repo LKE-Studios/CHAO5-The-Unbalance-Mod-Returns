@@ -250,7 +250,7 @@ unsafe fn palutena_dashattack(fighter: &mut L2CAgentBase) {
         macros::HIT_NODE(fighter, Hash40::new("kneer"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(fighter, Hash40::new("kneel"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(fighter, Hash40::new("virtualshield"), *HIT_STATUS_INVINCIBLE);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8.5, 0, 0.0, 0.0, 0, 0.0, 16.0, 1.5, 1.0, 300, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8.5, 0, 9.0, 0.0, 0, 9.0, 16.0, 1.5, 1.0, 300, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     if macros::is_excute(fighter) {
         macros::HIT_NODE(fighter, Hash40::new("bust"), *HIT_STATUS_INVINCIBLE);
@@ -385,7 +385,7 @@ unsafe fn palutena_sidesmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("attack_s4s"), false, -1.0);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, 2.0, 0, 0.0, 18.5, 1.5, 1.0, 500, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 9.0, 2.0, 0, 9.0, 18.5, 1.5, 1.0, 500, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
@@ -458,7 +458,7 @@ unsafe fn palutena_downsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("attack_lw4"), false, -1.0);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, -16.0, 0, 0.0, 16.0, 1.5, 1.0, 500, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 4.0, -16.0, 0, 4.0, 16.0, 1.5, 1.0, 500, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
@@ -577,7 +577,7 @@ unsafe fn palutena_bair(fighter: &mut L2CAgentBase) {
         macros::HIT_NODE(fighter, Hash40::new("kneer"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(fighter, Hash40::new("kneel"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(fighter, Hash40::new("virtualshield"), *HIT_STATUS_INVINCIBLE);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, -14.0, 0, 0.0, 0.0, 1.5, 1.0, 300, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 9.0, -14.0, 0, 9.0, 0.0, 1.5, 1.0, 300, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     if macros::is_excute(fighter) {
         macros::HIT_NODE(fighter, Hash40::new("bust"), *HIT_STATUS_INVINCIBLE);

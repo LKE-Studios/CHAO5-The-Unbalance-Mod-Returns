@@ -61,6 +61,7 @@ unsafe fn pitb_glideattackgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordr2"), -0, 0, 0, 0, 90, 0, 1, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_feather"), Hash40::new("top"), 0, 10, -10, 0, 0, 0, 1, false);
     }
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -101,6 +102,7 @@ unsafe fn pitb_glideendgfx(fighter: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_fly_miracle_start"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_sword"), false, false);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_feather"), Hash40::new("top"), 0, 10, -10, 0, 0, 0, 1, false);
     }
 }   
 

@@ -61,6 +61,9 @@ unsafe fn plizardon_glideattackgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("fire"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("mouth2"), 0, 0, 0, 0, 0, 0, 0.35, true);
+        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("wingl1"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("plizardon_atk_fire_air"), Hash40::new("wingr1"), 0, 0, 0, 0, 0, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
     }
     frame(fighter.lua_state_agent, 11.0);
