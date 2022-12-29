@@ -5,12 +5,12 @@ use {
         lib::{lua_const::*, L2CValue}
     },
     smashline::*,
-    super::frame::USED_SPECIAL_N
+    super::frame::FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N
 };
 
 pub unsafe extern "C" fn metaknight_used_special_n(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    (!USED_SPECIAL_N[entry_id]).into()
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    (!FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID]).into()
 }
 
 #[fighter_reset]

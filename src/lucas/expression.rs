@@ -9,8 +9,8 @@ use smash::lua2cpp::L2CAgentBase;
 
 #[acmd_script(//AttackLw4
     agent = "lucas", 
-    script = "effect_attacklw4", 
-    category = ACMD_EFFECT, 
+    script = "expression_attacklw4", 
+    category = ACMD_EXPRESSION, 
     low_priority)]
 unsafe fn lucas_downsmashexp(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 

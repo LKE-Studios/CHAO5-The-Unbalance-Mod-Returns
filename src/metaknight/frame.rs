@@ -12,10 +12,10 @@ use crate::common::glide::*;
 static mut COUNTER : [i32; 8] = [0; 8];
 static mut CURRENTFRAME : [f32; 8] = [0.0; 8];
 static mut IS_CRIT : [bool; 8] = [false; 8];
-static mut META_POWER : [bool; 8] = [false; 8];
+pub static mut META_POWER : [bool; 8] = [false; 8];
 static mut GFX_COUNTER : [i32; 8] = [0; 8];
 static mut SFX_COUNTER : [i32; 8] = [0; 8];
-pub static mut USED_SPECIAL_N : [bool; 8] = [false; 8];
+pub static mut FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn metaknight_opff(fighter: &mut L2CFighterCommon) {
@@ -28,10 +28,28 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         let params = GlideParams::get(fighter);
 
-        if situation_kind == *SITUATION_KIND_GROUND {
-            USED_SPECIAL_N[ENTRY_ID] = false;
+        if situation_kind == *SITUATION_KIND_GROUND || situation_kind == *SITUATION_KIND_CLIFF || 
+        situation_kind == *SITUATION_KIND_WATER || situation_kind == *SITUATION_KIND_LADDER {
+            FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID] = false;
         }
-
+        if [*FIGHTER_STATUS_KIND_DAMAGE, 
+            *FIGHTER_STATUS_KIND_DAMAGE_AIR, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
+            *FIGHTER_STATUS_KIND_DAMAGE_SONG, 
+            *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, 
+            *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, 
+            *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, 
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
+            *FIGHTER_STATUS_KIND_ICE
+            ].contains(&status_kind) {
+            FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID] = false;
+        }
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
         if META_POWER[ENTRY_ID] == true {
             GFX_COUNTER[ENTRY_ID] += 1;

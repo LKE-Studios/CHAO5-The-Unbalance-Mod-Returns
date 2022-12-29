@@ -3,6 +3,10 @@ use smash::phx::Hash40;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
+use smash::app::*;
+use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
+
 
 #[acmd_script(//GlideStart
     agent = "metaknight", 
@@ -78,13 +82,24 @@ unsafe fn metaknight_glidelandingsfx(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn metaknight_glideendsfx(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
-        macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
-    }
-    frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_stop"));
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 8 {//Brawl Meta Knight 
+        if macros::is_excute(fighter) {
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
+        }
+        frame(fighter.lua_state_agent, 2.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_turn"));
+        }
+    } else {
+        if macros::is_excute(fighter) {
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
+        }
+        frame(fighter.lua_state_agent, 2.0);
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_metaknight_dash_stop"));
+        }
     }
 }    
 
