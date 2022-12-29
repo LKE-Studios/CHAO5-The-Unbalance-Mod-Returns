@@ -822,7 +822,7 @@ unsafe fn palutena_throwb(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn palutena_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 18.0, /*Angle*/ 92, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 84, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 18.0, /*Angle*/ 92, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 84, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 16.0);
@@ -1071,7 +1071,7 @@ unsafe fn palutena_downb(fighter: &mut L2CAgentBase) {
         macros::SEARCH(fighter, 0, 0, Hash40::new("top"), 12.3, 0.0, 10.0, 1.5, None, None, None, *COLLISION_KIND_MASK_AH, *HIT_STATUS_MASK_ALL, 1, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false);
     }
     frame(fighter.lua_state_agent, 35.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PALUTENA_STATUS_SPECIAL_LW_FLAG_SHIELD);
         shield!(fighter, MA_MSC_CMD_SHIELD_OFF, COLLISION_KIND_REFLECTOR, FIGHTER_PALUTENA_REFLECTOR_KIND_REFLECTOR, FIGHTER_REFLECTOR_GROUP_EXTEND);
@@ -1099,7 +1099,7 @@ unsafe fn palutena_downbair(fighter: &mut L2CAgentBase) {
         macros::SEARCH(fighter, 0, 0, Hash40::new("top"), 12.3, 0.0, 10.0, 1.5, None, None, None, *COLLISION_KIND_MASK_AH, *HIT_STATUS_MASK_ALL, 1, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false);
     }
     frame(fighter.lua_state_agent, 35.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PALUTENA_STATUS_SPECIAL_LW_FLAG_SHIELD);
         shield!(fighter, MA_MSC_CMD_SHIELD_OFF, COLLISION_KIND_REFLECTOR, FIGHTER_PALUTENA_REFLECTOR_KIND_REFLECTOR, FIGHTER_REFLECTOR_GROUP_EXTEND);
@@ -1122,7 +1122,6 @@ unsafe fn palutena_downb2(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
     }
     frame(fighter.lua_state_agent, 8.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1142,7 +1141,6 @@ unsafe fn palutena_downbair2(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
     }
     frame(fighter.lua_state_agent, 8.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
