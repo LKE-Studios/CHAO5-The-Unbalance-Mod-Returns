@@ -9,6 +9,7 @@ use {
     smashline::*
 };
 use smash::phx::Vector3f;
+use std::f32::consts::PI;
 
 pub struct GlideParams {
     pub angle_max_up : f32, //#0 Max Upward Angle
@@ -333,10 +334,10 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
         if stick_angle > 0.0 {
             above_or_below = 1.0;
         }
-        stick_angle = (180.0 * above_or_below) - (stick_angle * 180.0 / std::f32::consts::PI);
+        stick_angle = (180.0 * above_or_below) - (stick_angle * 180.0 / PI);
     }
     else {
-        stick_angle = stick_angle * 180.0 / std::f32::consts::PI;
+        stick_angle = stick_angle * 180.0 / PI;
     }
 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);

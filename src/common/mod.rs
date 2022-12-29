@@ -3,6 +3,7 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon /*, L2CFighterBase*/};
 use smash_script::*;
 use smashline::*;
+use smash::app::*;
 use smash::hash40;
 use smash::phx::Hash40;
 //use smash::lua2cpp::L2CAgentBase;
@@ -47,7 +48,18 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
             if stick_y > 0.45 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, true);
             }
-        };   
+        }; 
+        if MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) <= (14.0) {
+            if stick_y < -0.45 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, true);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH {
+            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+            if MotionModule::frame(fighter.module_accessor) > 30.0 {
+                HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            }
+        };  
     }
 }
 
