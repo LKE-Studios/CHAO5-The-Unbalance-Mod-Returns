@@ -387,7 +387,6 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     if power < 0.0 {
         power = 0.0
     }
-
     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_RAPID_FALL) {
         if angle < params.angle_more_speed {
             power += params.down_speed_add * (params.angle_more_speed - angle) / (params.angle_more_speed - params.angle_max_down);
@@ -406,7 +405,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
 
     //let unrotated = Vector2f { x: power * lr, y: 0.0 };
     /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want
-    let mut angled = smash::app::sv_math::vec2_rot(angle * lr * std::f32::consts::PI / 180.0, unrotated, 0.0);*/
+    let mut angled = smash::app::sv_math::vec2_rot(angle * lr * PI / 180.0, unrotated, 0.0);*/
     let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
     angled.y -= new_gravity;
 

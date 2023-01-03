@@ -97,18 +97,6 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 	}
 }
 
-pub unsafe fn jump_checker_buffer(module_accessor: &mut smash::app::BattleObjectModuleAccessor, cat: i32) -> bool {
-	if (cat & *FIGHTER_PAD_CMD_CAT1_FLAG_JUMP) != 0 && ControlModule::is_enable_flick_jump(module_accessor){
-		return true;
-	}
-	else if (cat & *FIGHTER_PAD_CMD_CAT1_FLAG_JUMP_BUTTON) != 0 {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 mod jump_aerial;
 mod fly;
 pub mod glide;
