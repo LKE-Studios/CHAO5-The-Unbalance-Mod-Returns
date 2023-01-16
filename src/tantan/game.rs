@@ -6,6 +6,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use smash::phx::Vector3f;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 
 #[acmd_script(//Attack11 
@@ -1615,6 +1616,40 @@ unsafe fn tantan_upb(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialAirHi
+    agent = "tantan", 
+    script = "game_specialairhi", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn tantan_upbair(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:2.8, z:0.0});
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_TANTAN_STATUS_SPECIAL_HI_FLAG_TO_CONTROL_SPEED);
+    }
+}
+
+#[acmd_script(//SpecialAirHi2
+    agent = "tantan", 
+    script = "game_specialairhi2", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn tantan_upbair2(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:2.8, z:0.0});
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+    }
+}
+
 #[acmd_script(//SpecialAirHiAttack
     agent = "tantan_punch1", 
     script = "game_specialairhiattack", 
@@ -1881,6 +1916,8 @@ pub fn install() {
         tantan_neutralbshoot,
         tantan_upb,
         tantan_upbend,
+        tantan_upbair,
+        tantan_upbair2,
         tantan_upbhand1,
         tantan_upbhand2,
         tantan_downb,
