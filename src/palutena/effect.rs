@@ -24,7 +24,7 @@ unsafe fn palutena_glidestartgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "palutena", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
