@@ -21,16 +21,7 @@ unsafe fn status_flysub(fighter: &mut L2CFighterCommon) {
     fighter.sub_air_check_fall_common_pre();
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FLY);
     let mot = fighter.sub_getFlyMotion().get_u64();
-    MotionModule::change_motion(
-        fighter.module_accessor,
-        Hash40::new_raw(mot),
-        0.0,
-        1.0,
-        false,
-        0.0,
-        false,
-        false
-    );
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(mot), 0.0, 1.0, false, 0.0, false, false);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DAMAGE_FLY_AIR);
     if !StopModule::is_stop(fighter.module_accessor) {
         fighter.sub_fly_uniq(false.into());

@@ -1,5 +1,7 @@
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
+use smash::app::*;
+use smash::hash40;
 use smashline::*;
 //use smash::lib::L2CValue;
 use smash::lua2cpp::L2CFighterCommon;
@@ -21,6 +23,16 @@ pub fn elight_opff(fighter : &mut L2CFighterCommon) {
                 if is_grounded(fighter.module_accessor) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
                 }
+            }
+        }
+        if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") {
+            if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
+                ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
+            }
+        }
+        if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_r") {
+            if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
+                ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
             }
         }
     }

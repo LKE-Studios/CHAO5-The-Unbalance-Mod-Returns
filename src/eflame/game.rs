@@ -2705,7 +2705,7 @@ unsafe fn eflame_firepillar(fighter: &mut L2CAgentBase) {
 }
 
 
-#[acmd_script(//AppealHiR
+/*#[acmd_script(//AppealHiR
     agent = "eflame", 
     script = "game_appealhir", 
     category = ACMD_GAME, 
@@ -2733,7 +2733,7 @@ unsafe fn eflame_uptauntl(fighter: &mut L2CAgentBase) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_EFLAME_GENERATE_ARTICLE_DIVER, Hash40::new("f_appeal_hi_l"), false, 0.0);
         }
     }
-}
+}*/
 
 #[acmd_script(//AppealSR
     agent = "eflame", 
@@ -2867,8 +2867,8 @@ pub fn install() {
         eflame_firepillar,
         eflame_sidetauntr,
         eflame_sidetauntl,
-        eflame_uptauntr,
-        eflame_uptauntl,
+        //eflame_uptauntr,
+        //eflame_uptauntl,
         eflame_downtauntr,
         eflame_downtauntl,
         eflame_final

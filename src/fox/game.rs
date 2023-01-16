@@ -1147,6 +1147,15 @@ unsafe fn fox_sidetauntr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BEAMSWORD), 0, 0, false, false);
     }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, true, -1);
+    }
+    frame(fighter.lua_state_agent, 71.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
 }
 
 #[acmd_script(//AppealSL
@@ -1157,6 +1166,15 @@ unsafe fn fox_sidetauntr(fighter: &mut L2CAgentBase) {
 unsafe fn fox_sidetauntl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BEAMSWORD), 0, 0, false, false);
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, true, -1);
+    }
+    frame(fighter.lua_state_agent, 71.0);
+    if macros::is_excute(fighter) {
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
 
@@ -1190,6 +1208,46 @@ unsafe fn fox_downtauntl(fighter: &mut L2CAgentBase) {
 unsafe fn fox_arwingshot(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 17.2, /*Angle*/ 80, /*KBG*/ 100, /*FKB*/ 200, /*BKB*/ 0, /*Size*/ 30.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_FIGHTER, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_NONE);
+    }
+}
+
+#[acmd_script(//FinalEnd
+    agent = "fox", 
+    script = "game_finalend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn fox_finalend(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
+        AttackModule::clear_all(fighter.module_accessor);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_FOX_FINAL, /*ID*/ 0, /*Damage*/ 777.0, /*Angle*/ 55, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_FOX_STATUS_WORK_ID_FLAG_FINAL_ABS_SET);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.85);
+    frame(fighter.lua_state_agent, 30.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_FOX_STATUS_WORK_ID_FLAG_FINAL_END_EXIT);
+    }
+}
+
+#[acmd_script(//FinalAirEnd
+    agent = "fox", 
+    script = "game_finalairend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn fox_finalairend(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
+        AttackModule::clear_all(fighter.module_accessor);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_FOX_FINAL, /*ID*/ 0, /*Damage*/ 777.0, /*Angle*/ 55, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_FOX_STATUS_WORK_ID_FLAG_FINAL_ABS_SET);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_FOX_STATUS_WORK_ID_FLAG_FINAL_END_EXIT);
     }
 }
 
@@ -1248,6 +1306,8 @@ pub fn install() {
         fox_sidetauntl,
         fox_downtauntr,
         fox_downtauntl,
-        fox_arwingshot
+        fox_arwingshot,
+        fox_finalend,
+        fox_finalairend
     );
 }

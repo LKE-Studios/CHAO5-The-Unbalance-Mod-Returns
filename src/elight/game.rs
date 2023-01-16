@@ -2725,7 +2725,7 @@ unsafe fn elight_ray2(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR
+/*#[acmd_script(//AppealHiR
     agent = "elight", 
     script = "game_appealhir", 
     category = ACMD_GAME, 
@@ -2753,7 +2753,7 @@ unsafe fn elight_uptauntl(fighter: &mut L2CAgentBase) {
         }
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
     }
-}
+}*/
 
 #[acmd_script(//AppealSR
     agent = "elight", 
@@ -2870,8 +2870,8 @@ pub fn install() {
         elight_ray2,
         elight_sidetauntr,
         elight_sidetauntl,
-        elight_uptauntr,
-        elight_uptauntl,
+        //elight_uptauntr,
+        //elight_uptauntl,
         elight_downtauntr,
         elight_downtauntl,
         elight_final
