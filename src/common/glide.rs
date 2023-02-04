@@ -240,12 +240,12 @@ impl GlideParams {
                 base_speed : 1.7, //#5 Base Power/Speed
                 speed_change : 0.04, //#6 Power Rate
                 max_speed : 2.2, //#7 Maximum Speed
-                end_speed : 0.9, //#8 End Speed
+                end_speed : 0.7, //#8 End Speed
                 gravity_accel : 0.03, //#9 Gravity Acceleration
                 gravity_speed : 0.6, //#10 Gravity Max Speed
                 angle_extra : 15.0, //#11 Angle stuff but unknown what this is for
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.01, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.03, //#13 Max added speed gained aiming downward
                 unknown : 0.15, //#14 Unknown
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 0.55, //#16 Upward angular acceleration
@@ -284,6 +284,12 @@ pub unsafe fn status_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
     KineticModule::add_speed(fighter.module_accessor, &Vector3f{ x: params.speed_mul_start, y: params.v_glide_start, z: 0.0 });
     KineticModule::mul_speed(fighter.module_accessor, &Vector3f{ x: 0.0, y: params.gravity_start, z: 0.0 }, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+    if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_METAKNIGHT {
+        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
+        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
+        smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
+    }
     fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_GlideStart_Main as *const () as _))
 }
 

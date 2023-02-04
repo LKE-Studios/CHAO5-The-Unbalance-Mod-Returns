@@ -2092,7 +2092,7 @@ unsafe fn bayonetta_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_shootingarml_atkon_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn bayonetta_art1(fighter: &mut L2CAgentBase) {
+unsafe fn bayonetta_art1l(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_BAYONETTA_INSTANCE_WORK_ID_FLAG_SHOOTING_DISABLE_ROOT_ATTACK) == false {
         if macros::is_excute(fighter) {
             macros::ATTACK(fighter, /*ID*/ *FIGHTER_BAYONETTA_SHOOTING_ATTACK_ID_00 as u64, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ 9.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(13.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal_bullet"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_BAYONETTA_HIT_01, /*Type*/ *ATTACK_REGION_NONE);
@@ -2103,6 +2103,25 @@ unsafe fn bayonetta_art1(fighter: &mut L2CAgentBase) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_63_bullet"), 4, true, 0);
     }
 }
+
+#[acmd_script(//ShootingArmL_AtkOn_Attack12
+    agent = "bayonetta", 
+    script = "game_shootingarml_atkon_attack12", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn bayonetta_art2l(fighter: &mut L2CAgentBase) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_BAYONETTA_INSTANCE_WORK_ID_FLAG_SHOOTING_DISABLE_ROOT_ATTACK) == false {
+        if macros::is_excute(fighter) {
+            macros::ATTACK(fighter, /*ID*/ *FIGHTER_BAYONETTA_SHOOTING_ATTACK_ID_00 as u64, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(12.1), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal_bullet"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_BAYONETTA_HIT_01, /*Type*/ *ATTACK_REGION_NONE);
+        }
+    }
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, /*ID*/ *FIGHTER_BAYONETTA_SHOOTING_ATTACK_ID_01 as u64, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(70.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal_bullet"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_BAYONETTA_HIT_01, /*Type*/ *ATTACK_REGION_NONE);
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_63_bullet"), 4, true, 0);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x36db1a34c9), FIGHTER_BAYONETTA_SHOOTING_ATTACK_ID_01, 8, 3.966);
+    }
+}
+
 
 #[acmd_script(//ShootingArmL_AtkOn_Attack13
     agent = "bayonetta", 
@@ -2245,7 +2264,8 @@ pub fn install() {
         bayonetta_uptauntl,
         bayonetta_downtauntr,
         bayonetta_downtauntl,
-        bayonetta_art1,
+        bayonetta_art1l,
+        bayonetta_art2l,
         bayonetta_art3l,
         bayonetta_art3r,
         bayonetta_art100l,

@@ -2013,6 +2013,9 @@ unsafe fn demon_elecwindgodfist(fighter: &mut L2CAgentBase) {
         AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 0, *CAMERA_QUAKE_KIND_L, false);
         AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 1, *CAMERA_QUAKE_KIND_L, false);
         AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 2, *CAMERA_QUAKE_KIND_L, false);
+        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+        AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
+        AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
     }
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -2025,6 +2028,9 @@ unsafe fn demon_elecwindgodfist(fighter: &mut L2CAgentBase) {
         AttackModule::set_invalid_invincible(fighter.module_accessor, 3, true);
         AttackModule::set_invalid_invincible(fighter.module_accessor, 4, true);
         AttackModule::set_invalid_invincible(fighter.module_accessor, 5, true);
+        AttackModule::set_force_reaction(fighter.module_accessor, 3, true, false);
+        AttackModule::set_force_reaction(fighter.module_accessor, 4, true, false);
+        AttackModule::set_force_reaction(fighter.module_accessor, 5, true, false);
         macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 1.2);
         macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 1.2);
         macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 2, /*ShieldstunMul*/ 1.2);

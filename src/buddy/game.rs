@@ -17,6 +17,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
 unsafe fn buddy_airjump(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:1.0, z:0.0});
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 32.0);
     if macros::is_excute(fighter) {
