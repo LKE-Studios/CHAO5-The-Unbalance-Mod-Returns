@@ -890,6 +890,26 @@ unsafe fn mewtwo_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Charge 
+    agent = "mewtwo_shadowball", 
+    script = "game_charge", 
+    category = ACMD_GAME )]
+unsafe fn mewtwo_ballcharge1(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 1.5, 85, 45, 0, 22, 4.4, 0.0, 0.0, 0.0, None, None, None, 0.8, 1.3, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0.5, 0.0, 5, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_purple"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+    }
+}
+
+#[acmd_script(//ChargeMax
+    agent = "mewtwo_shadowball", 
+    script = "game_chargemax", 
+    category = ACMD_GAME )]
+unsafe fn mewtwo_ballcharge2(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 1.6, 85, 45, 0, 22, 4.4, 0.0, 0.0, 0.0, None, None, None, 0.8, 1.3, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0.5, 0.0, 5, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_purple"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+    }
+}
+
 #[acmd_script(//ShadowBall
     agent = "mewtwo_shadowball", 
     script = "game_shoot", 
@@ -1140,6 +1160,8 @@ pub fn install() {
         mewtwo_slipattack,
         mewtwo_downattackd,
         mewtwo_downattacku,
+        mewtwo_ballcharge1,
+        mewtwo_ballcharge2,
         mewtwo_ball1,
         mewtwo_ball2,
         mewtwo_sideb,

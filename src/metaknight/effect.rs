@@ -11,12 +11,12 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn metaknight_glide1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn metaknight_glidestartgfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -5.3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 6.4, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 5.0, 0, 0, 0, 0, 3.2, true);
         macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
     }
     frame(fighter.lua_state_agent, 3.0);
@@ -30,7 +30,7 @@ unsafe fn metaknight_glide1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn metaknight_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn metaknight_glidegfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
@@ -76,6 +76,7 @@ unsafe fn metaknight_jab100gfx(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor); 
         }
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 1.24, true);
@@ -389,6 +390,7 @@ unsafe fn metaknight_upbgfx(fighter: &mut L2CAgentBase) {
 unsafe fn metaknight_upbloopgfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -404,8 +406,8 @@ unsafe fn metaknight_upbloopgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        metaknight_glide1gfx,
-        metaknight_glide2gfx,
+        metaknight_glidestartgfx,
+        metaknight_glidegfx,
         metaknight_glideattackgfx,
         metaknight_glidelandinggfx,
         metaknight_jab100gfx,
@@ -421,6 +423,6 @@ pub fn install() {
         metaknight_neutralb1gfx,
         metaknight_neutralbairgfx,
         metaknight_upbgfx,
-        metaknight_upbloopgfx,
+        metaknight_upbloopgfx
     );
 }
