@@ -27,7 +27,7 @@ unsafe fn plizardon_firegfx(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn plizardon_glidestartgfx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 6.0, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 5.2, 0, 0, 0, 0, 3.4, true);
         macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 0.35, /*B*/ 0.08);
     }
     frame(fighter.lua_state_agent, 3.0);
@@ -89,6 +89,6 @@ pub fn install() {
         plizardon_glidestartgfx,
         plizardon_glidegfx,
         plizardon_glideattackgfx,
-        plizardon_glidelandinggfx
+        plizardon_glidelandinggfx,
     );
 }

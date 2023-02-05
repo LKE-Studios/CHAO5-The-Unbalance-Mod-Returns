@@ -7,6 +7,7 @@ use smash::app::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
+use smash::hash40;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
 use smash::lua2cpp::L2CAgentBase;
 
@@ -18,6 +19,7 @@ use smash::lua2cpp::L2CAgentBase;
 unsafe fn pit_airjump(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.4, z:0.0});
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
@@ -34,6 +36,7 @@ unsafe fn pit_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
     }
 }
 

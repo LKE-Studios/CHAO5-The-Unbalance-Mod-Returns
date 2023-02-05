@@ -17,6 +17,7 @@ use smash::lua2cpp::L2CAgentBase;
 unsafe fn ridley_airjump(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.5, z:0.0});
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
