@@ -1,6 +1,6 @@
 [package]
-name = "CHAO5_AnimCMD"
-version = "1.0.0"
+name = "CHAO5_Prebuilt"
+version = "1.5.0"
 authors = ["lkestudios"]
 edition = "2018"
 
