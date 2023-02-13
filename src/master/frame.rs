@@ -37,13 +37,13 @@ pub fn master_opff(fighter : &mut L2CFighterCommon) {
 }
 
 #[weapon_frame( agent = WEAPON_KIND_MASTER_AXE )]
-pub fn master_axe_opwf(fighter : &mut L2CFighterBase) {
+pub fn master_axe_opwf(weapon : &mut L2CFighterBase) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+        let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
         if status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW || status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW_HIT {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -999.0, 0);
+            if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(weapon.module_accessor, -999.0, 0);
             }
         };
     }

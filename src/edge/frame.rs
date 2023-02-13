@@ -166,23 +166,23 @@ pub fn edge_opff(fighter : &mut L2CFighterCommon) {
 }
 
 #[weapon_frame( agent = WEAPON_KIND_EDGE_FIRE )]
-pub fn edge_gigaflare_opwf(fighter : &mut L2CFighterBase) {
+pub fn edge_gigaflare_opwf(weapon : &mut L2CFighterBase) {
     unsafe {
-        let status = StatusModule::status_kind(fighter.module_accessor);
-        let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        let status = StatusModule::status_kind(weapon.module_accessor);
+        let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
         if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_S].contains(&status) {
             if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_S, false);
+                StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_S, false);
             }
         }
         if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_M].contains(&status) {
             if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_M, false);
+                StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_M, false);
             }
         }
         if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_L].contains(&status) {
             if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_L, false);
+                StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_L, false);
             }
         }
     }
