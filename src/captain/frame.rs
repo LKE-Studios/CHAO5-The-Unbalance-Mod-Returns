@@ -7,7 +7,7 @@ use smash_script::*;
 use crate::globals::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_CAPTAIN )]
-pub fn captain_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_captain(fighter : &mut L2CFighterCommon) {
     unsafe {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_air_lw") {
             let cat = fighter.global_table[CMD_CAT1].get_int() as i32;
@@ -21,6 +21,6 @@ pub fn captain_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        captain_opff
+        frame_captain
     );
 }

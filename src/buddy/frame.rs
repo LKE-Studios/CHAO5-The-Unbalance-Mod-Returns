@@ -7,7 +7,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_BUDDY )]
-fn buddy_opff(fighter: &mut L2CFighterCommon) {
+fn frame_buddy(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
@@ -49,7 +49,7 @@ fn buddy_opff(fighter: &mut L2CFighterCommon) {
             fighter.sub_wait_ground_check_common(false.into());
             WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_SPECIAL_S_REMAIN);
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -20.0, 0);
+                DamageModule::heal(fighter.module_accessor, -10.0, 0);
             }
             if MotionModule::frame(fighter.module_accessor) > 15.0 {
                 if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
@@ -64,6 +64,6 @@ fn buddy_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        buddy_opff
+        frame_buddy
     );
 }

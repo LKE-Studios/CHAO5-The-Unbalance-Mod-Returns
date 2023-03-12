@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn buddy_airjumpsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_buddy_jumpaerial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))
@@ -29,7 +29,7 @@ unsafe fn buddy_airjumpsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn buddy_glidestartsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_buddy_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"));
@@ -45,24 +45,12 @@ unsafe fn buddy_glidestartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//GlideWing
-    agent = "buddy", 
-    script = "sound_glidewing", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn buddy_glidesfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
-    }
-}*/
-
 #[acmd_script(//GlideAttack
     agent = "buddy", 
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn buddy_glideattacksfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_buddy_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_buddy_rnd_attack11"));
@@ -80,7 +68,7 @@ unsafe fn buddy_glideattacksfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn buddy_glidelandingsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_buddy_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
@@ -91,28 +79,27 @@ unsafe fn buddy_glidelandingsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//GlideEnd
+#[acmd_script(//GlideEnd
     agent = "buddy", 
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn buddy_glideendsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_buddy_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_buddy_special_h01_win02"));
+        macros::STOP_SE(fighter, Hash40::new("se_buddy_glide_loop"));
     }
-    frame(fighter.lua_state_agent, 2.0);
+    frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
     }
-}*/   
+}   
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        buddy_airjumpsfx,
-        buddy_glidestartsfx,
-        //buddy_glidesfx,
-        buddy_glideattacksfx,
-        //buddy_glideendsfx,
-        buddy_glidelandingsfx
+        sound_buddy_jumpaerial,
+        sound_buddy_glidestart,
+        sound_buddy_glideattack,
+        sound_buddy_glideend,
+        sound_buddy_glidelanding
     );
 }
