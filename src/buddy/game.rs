@@ -1099,7 +1099,7 @@ unsafe fn game_buddy_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn buddy_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_buddy_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -12.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1123,7 +1123,7 @@ unsafe fn buddy_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn buddy_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_buddy_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -12.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1395,6 +1395,28 @@ unsafe fn game_buddy_specialairsdash(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialSEnd
+    agent = "buddy", 
+    script = "game_specialsend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_buddy_specialsend(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.9);
+}
+
+#[acmd_script(//SpecialAirSEnd
+    agent = "buddy", 
+    script = "game_specialairsend", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_buddy_specialairsend(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.9);
+    frame(fighter.lua_state_agent, 27.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_S_FLAG_LANDING_HEAVY);
+    }
+}
+
 #[acmd_script(//SpecialHiStart
     agent = "buddy", 
     script = "game_specialhistart", 
@@ -1610,8 +1632,8 @@ pub fn install() {
         game_buddy_throwb,
         game_buddy_throwhi,
         game_buddy_throwlw,
-        buddy_downattacku,
-        buddy_downattackd,
+        game_buddy_downattacku,
+        game_buddy_downattackd,
         game_buddy_cliffattack,
         game_buddy_slipattack,
         game_buddy_specialnfire,
@@ -1624,6 +1646,8 @@ pub fn install() {
         game_buddy_specialsstart,
         game_buddy_specialsdash,
         game_buddy_specialairsdash,
+        game_buddy_specialsend,
+        game_buddy_specialairsend,
         game_buddy_specialhistart,
         game_buddy_specialhi,
         game_buddy_pad_fall,

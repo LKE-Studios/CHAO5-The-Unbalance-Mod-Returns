@@ -1,20 +1,21 @@
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
-use smash::lua2cpp::{L2CFighterCommon /*, L2CFighterBase*/};
+use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
 use smash_script::*;
 use smashline::*;
 use smash::app::*;
 use smash::hash40;
 use smash::phx::Hash40;
-//use smash::lua2cpp::L2CAgentBase;
+use smash::lua2cpp::L2CAgentBase;
 use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use smash::lib::L2CValue;
 use std::mem;
+use smash::app::{sv_information};
 
-pub static mut FIGHTER_BOOL_1: [bool;9] = [false;9];
-pub static mut FIGHTER_BOOL_2: [bool;9] = [false;9];
-pub static mut FIGHTER_BOOL_3: [bool;9] = [false;9];
+pub static mut FIGHTER_BOOL_1: [bool; 9] = [false; 9];
+pub static mut FIGHTER_BOOL_2: [bool; 9] = [false; 9];
+pub static mut FIGHTER_BOOL_3: [bool; 9] = [false; 9];
 
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
@@ -59,9 +60,49 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
             if MotionModule::frame(fighter.module_accessor) > 30.0 {
                 HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
             }
-        };  
+        };
     }
 }
+
+/*static mut SFX_COUNTER : [i32; 8] = [0; 8];
+
+#[fighter_frame_callback(main)]
+pub fn loupe_camera(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
+            SFX_COUNTER[ENTRY_ID] += 1;
+            if SFX_COUNTER[ENTRY_ID] == 1 {
+                macros::PLAY_SE(fighter, Hash40::new("se_common_warning_out"));
+            };
+        }
+        else {
+            macros::STOP_SE(fighter, Hash40::new("se_common_warning_out"));
+            SFX_COUNTER[ENTRY_ID] = 0;
+        }
+    }
+}
+
+#[fighter_frame_callback(main)]
+pub fn loupe_off(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        if sv_information::is_ready_go() == false {
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE);
+        }
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
+            macros::STOP_SE(fighter, Hash40::new("se_common_warning_out"));
+        }
+    }
+}
+
+#[fighter_reset]
+pub fn loupe_reset(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        SFX_COUNTER[ENTRY_ID] = 0;
+    }
+}*/
 
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
 unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -97,10 +138,12 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 	}
 }
 
+
 mod jump_aerial;
 mod fly;
 pub mod glide;
 mod glide_checks;
+mod hook;
 
 pub fn is_glider(kind: i32) -> bool {
     [
@@ -127,4 +170,5 @@ pub fn install() {
     fly::install();
     glide::install();
     glide_checks::install();
+    hook::install();
 }

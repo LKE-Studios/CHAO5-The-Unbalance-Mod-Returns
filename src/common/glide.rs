@@ -31,7 +31,7 @@ pub struct GlideParams {
     pub up_angle_accel : f32, //#16 Upward angular acceleration
     pub down_angle_accel : f32, //#17 Downward angular acceleration
     pub max_angle_speed : f32, //#18 Maximum angular speed
-    pub add_angle_speed : f32 //#19 Added angular speed for when stick is center
+    pub add_angle_speed : f32, //#19 Added angular speed for when stick is center
 }
 
 impl GlideParams {
@@ -257,7 +257,7 @@ impl GlideParams {
     }
 }
 
-mod KineticUtility {
+pub mod KineticUtility {
     // Resets and enables the kinetic energy type.
     // Unknown why there are two vectors required by reset_energy
     pub unsafe fn reset_enable_energy(module_accessor: *mut smash::app::BattleObjectModuleAccessor, energy_id: i32, energy_reset_type: i32, speed_vec: smash::phx::Vector2f, other_vec: smash::phx::Vector3f) {
@@ -274,16 +274,26 @@ mod KineticUtility {
     }
 }
 
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
+pub unsafe fn status_init_glide_start(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let params = GlideParams::get(fighter);
+    let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
+    let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
+    let lr = PostureModule::lr(fighter.module_accessor);
+
+    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
+    smash::app::lua_bind::KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -params.gravity_start}, &Vector3f{x: 0.0, y: -params.gravity_start, z: 0.0}, fighter.module_accessor);
+    smash::app::lua_bind::KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: params.speed_mul_start * lr, y: 0.0}, &Vector3f{x: params.speed_mul_start * lr, y: 0.0, z: 0.0}, fighter.module_accessor);
+    KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_GLIDE_START, Vector2f{x: 0.0, y: params.v_glide_start}, Vector3f{x: params.speed_mul_start * lr, y: params.v_glide_start, z: 0.0});
+    0.into()
+}
+
 #[skyline::hook(replace = L2CFighterCommon_status_GlideStart)]
 pub unsafe fn status_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let params = GlideParams::get(fighter);
-
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-    KineticModule::add_speed(fighter.module_accessor, &Vector3f{ x: params.speed_mul_start, y: params.v_glide_start, z: 0.0 });
-    KineticModule::mul_speed(fighter.module_accessor, &Vector3f{ x: 0.0, y: params.gravity_start, z: 0.0 }, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_METAKNIGHT {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
@@ -348,7 +358,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let stick_magnitude = (stick_x * stick_x + stick_y * stick_y).sqrt();
+    let stick_magnitude = (stick_x * stick_x + stick_y * stick_y).sqrt(); //Square Root of Stick X^2 + Stick Y^2
 
     if stick_magnitude > params.radial_stick {
         let angle_accel = if stick_angle < 0.0 {
@@ -409,13 +419,11 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     WorkModule::set_float(fighter.module_accessor, new_gravity, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
 
-    //let unrotated = Vector2f { x: power * lr, y: 0.0 };
-    /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want
-    let mut angled = smash::app::sv_math::vec2_rot(angle * lr * PI / 180.0, unrotated, 0.0);*/
+    /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want*/
     let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
     angled.y -= new_gravity;
 
-    let speed = (angled.x * angled.x + angled.y * angled.y).sqrt();
+    let speed = (angled.x * angled.x + angled.y * angled.y).sqrt(); //Square Root of angled X value + angled Y angle
     let ratio = params.max_speed / speed;
 
     if speed > params.max_speed {
@@ -477,6 +485,12 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     0.into()
 }
 
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
+pub unsafe fn status_exit_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
+    0.into()
+}
+
 #[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
 pub unsafe fn bind_address_call_status_end_glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
     fighter.status_end_Glide()
@@ -503,7 +517,9 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 pub fn install() {
     skyline::nro::add_hook(nro_hook);
     install_status_scripts!(
+        status_init_glide_start,
         status_init_glide,
-        status_exec_glide
+        status_exec_glide,
+        status_exit_glide
     );
 }

@@ -4,12 +4,12 @@ use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
 
-#[acmd_script(//SpecialAirHiSFX
+#[acmd_script(//SpecialAirHi
     agent = "donkey", 
     script = "sound_specialairhi", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn donkey_upbairsound(fighter: &mut L2CAgentBase) {
+unsafe fn sound_donkey_specialairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_donkey_special_h02"));
@@ -54,6 +54,6 @@ unsafe fn donkey_upbairsound(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        donkey_upbairsound,
+        sound_donkey_specialairhi,
     );
 }

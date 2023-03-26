@@ -22,7 +22,7 @@ static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_DEMON )]
-pub fn demon_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_demon(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -172,6 +172,6 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        demon_opff
+        frame_demon
     );
 }

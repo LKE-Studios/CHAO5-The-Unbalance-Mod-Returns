@@ -12,7 +12,7 @@ static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_GANON )]
-fn ganon_opff(fighter: &mut L2CFighterCommon) {
+fn frame_ganon(fighter: &mut L2CFighterCommon) {
     unsafe {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -67,6 +67,6 @@ fn ganon_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        ganon_opff
+        frame_ganon
     );
 }

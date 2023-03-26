@@ -21,7 +21,7 @@ static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 1.24; //Max Vertical movespeed
 
 #[fighter_frame( agent = FIGHTER_KIND_EDGE )]
-pub fn edge_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_edge(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -166,7 +166,7 @@ pub fn edge_opff(fighter : &mut L2CFighterCommon) {
 }
 
 #[weapon_frame( agent = WEAPON_KIND_EDGE_FIRE )]
-pub fn edge_gigaflare_opwf(weapon : &mut L2CFighterBase) {
+pub fn frame_edge_gigaflare(weapon : &mut L2CFighterBase) {
     unsafe {
         let status = StatusModule::status_kind(weapon.module_accessor);
         let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
@@ -190,7 +190,7 @@ pub fn edge_gigaflare_opwf(weapon : &mut L2CFighterBase) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        edge_opff,
-        edge_gigaflare_opwf
+        frame_edge,
+        frame_edge_gigaflare
     );
 }

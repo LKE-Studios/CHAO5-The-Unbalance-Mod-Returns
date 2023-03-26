@@ -1058,7 +1058,7 @@ unsafe fn game_captain_specialsstart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
         let speed_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_s"), hash40("speed_coef"));
-        sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_mul);
+        sv_kinetic_energy!(set_speed_mul, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_mul);
     }
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {

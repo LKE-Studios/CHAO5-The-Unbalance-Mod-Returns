@@ -9,7 +9,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_EFLAME )]
-fn eflame_opff(fighter: &mut L2CFighterCommon) {
+fn frame_eflame(fighter: &mut L2CFighterCommon) {
     unsafe {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") {
             if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
@@ -26,6 +26,6 @@ fn eflame_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        eflame_opff
+        frame_eflame
     );
 }

@@ -10,7 +10,7 @@ use smashline::*;
     script = "effect_superspecial",
     category = ACMD_EFFECT,
     low_priority )]
-unsafe fn dolly_geysergfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_dolly_burst_superspecial(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), -3.0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("dolly_volcano_ground"), Hash40::new("top"), 0, 0, -3.0, 0, 0, 0, 1, true);
@@ -36,6 +36,6 @@ unsafe fn dolly_geysergfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        dolly_geysergfx
+        effect_dolly_burst_superspecial
     );
 }

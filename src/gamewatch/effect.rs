@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_specials6", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn gamewatch_sideb6gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_gamewatch_specials6(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_action_smoke_h"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
@@ -27,7 +27,7 @@ unsafe fn gamewatch_sideb6gfx(fighter: &mut L2CAgentBase) {
     script = "effect_specialairs6", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn gamewatch_sidebair6gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_gamewatch_specialairs6(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..12 {
         wait(fighter.lua_state_agent, 2.0);
@@ -42,7 +42,7 @@ unsafe fn gamewatch_sidebair6gfx(fighter: &mut L2CAgentBase) {
     script = "effect_specials7", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn gamewatch_sideb7gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_gamewatch_specials7(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_action_smoke_h"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
@@ -60,7 +60,7 @@ unsafe fn gamewatch_sideb7gfx(fighter: &mut L2CAgentBase) {
     script = "effect_specialairs7", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn gamewatch_sidebair7gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_gamewatch_specialairs7(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..12 {
         wait(fighter.lua_state_agent, 2.0);
@@ -72,9 +72,9 @@ unsafe fn gamewatch_sidebair7gfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        gamewatch_sideb6gfx,
-        gamewatch_sidebair6gfx,
-        gamewatch_sideb7gfx,
-        gamewatch_sidebair7gfx
+        effect_gamewatch_specials6,
+        effect_gamewatch_specialairs6,
+        effect_gamewatch_specials7,
+        effect_gamewatch_specialairs7
     );
 }

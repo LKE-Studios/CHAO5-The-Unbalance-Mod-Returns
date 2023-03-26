@@ -15,7 +15,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 15, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -43,7 +43,7 @@ unsafe fn elight_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -106,7 +106,7 @@ unsafe fn elight_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab3(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -165,7 +165,7 @@ unsafe fn elight_jab3(fighter: &mut L2CAgentBase) {
     script = "game_attack100", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab100(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack100(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.66);
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 2.0);
@@ -223,7 +223,7 @@ unsafe fn elight_jab100(fighter: &mut L2CAgentBase) {
     script = "game_attack100sub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab100sub(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack100sub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.2, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(26.0), /*Hitlag*/ 0.4, /*SDI*/ 0.7, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 4.0, /*Unk*/ false);
@@ -241,7 +241,7 @@ unsafe fn elight_jab100sub(fighter: &mut L2CAgentBase) {
     script = "game_attack100end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_jab100end(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attack100end(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     wait(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -259,7 +259,7 @@ unsafe fn elight_jab100end(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
     frame(fighter.lua_state_agent, 9.0);
@@ -306,7 +306,7 @@ unsafe fn elight_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 5.0);
@@ -358,7 +358,7 @@ unsafe fn elight_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.35);
     frame(fighter.lua_state_agent, 5.0);
@@ -439,7 +439,7 @@ unsafe fn elight_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.275);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
@@ -488,7 +488,7 @@ unsafe fn elight_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -558,7 +558,7 @@ unsafe fn elight_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_EFLAME_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -649,7 +649,7 @@ unsafe fn elight_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_EFLAME_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -710,7 +710,7 @@ unsafe fn elight_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 3.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_EFLAME_GENERATE_ARTICLE_ESWORD) { 
@@ -768,7 +768,7 @@ unsafe fn elight_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -836,7 +836,7 @@ unsafe fn elight_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 6.0);
@@ -902,7 +902,7 @@ unsafe fn elight_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackairhi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -962,7 +962,7 @@ unsafe fn elight_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_attackairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -1036,7 +1036,7 @@ unsafe fn elight_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, /*CanCatchRebound*/ true);
@@ -1060,7 +1060,7 @@ unsafe fn elight_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 11.0);
@@ -1087,7 +1087,7 @@ unsafe fn elight_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 12.0);
@@ -1114,7 +1114,7 @@ unsafe fn elight_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.25);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1132,7 +1132,7 @@ unsafe fn elight_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 33, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 48, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1160,7 +1160,7 @@ unsafe fn elight_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 12.5, /*Angle*/ 50, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 48, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1192,7 +1192,7 @@ unsafe fn elight_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 88, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1217,7 +1217,7 @@ unsafe fn elight_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_throwlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::FT_LEAVE_NEAR_OTTOTTO(fighter, -2.5, 2.5);
@@ -1276,7 +1276,7 @@ unsafe fn elight_throwlw(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -1314,7 +1314,7 @@ unsafe fn elight_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -1360,7 +1360,7 @@ unsafe fn elight_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -1406,7 +1406,7 @@ unsafe fn elight_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
@@ -1452,7 +1452,7 @@ unsafe fn elight_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -10.0, 0);
@@ -1628,7 +1628,7 @@ unsafe fn elight_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -10.0, 0);
@@ -1809,7 +1809,7 @@ unsafe fn elight_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_specialn2",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_neutralb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialn2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -10.0, 0);
@@ -2035,7 +2035,7 @@ unsafe fn elight_neutralb2(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_neutralbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialairn2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -10.0, 0);
@@ -2266,7 +2266,7 @@ unsafe fn elight_neutralbair2(fighter: &mut L2CAgentBase) {
     scripts = ["game_specialnhold", "game_specialairnhold"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_neutralbhold(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialnhold(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 2.5, /*Angle*/ 320, /*KBG*/ 100, /*FKB*/ 35, /*BKB*/ 0, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 2.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -2289,7 +2289,7 @@ unsafe fn elight_neutralbhold(fighter: &mut L2CAgentBase) {
     scripts = ["game_specialsstart", "game_specialairsstart"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidebstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialsstart(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -2319,7 +2319,7 @@ unsafe fn elight_sidebstart(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials", "game_specialairs"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specials(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         VisibilityModule::set_whole(fighter.module_accessor, false);
@@ -2413,7 +2413,7 @@ unsafe fn elight_sideb(fighter: &mut L2CAgentBase) {
     scripts = ["game_specialsend", "game_specialairsend"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidebend(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialsend(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.1);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -2452,7 +2452,7 @@ unsafe fn elight_sidebend(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials1", "game_specialairs1"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_photon1(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_bunshin_specials1(fighter: &mut L2CAgentBase) {
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
             ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
@@ -2490,7 +2490,7 @@ unsafe fn elight_photon1(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials2", "game_specialairs2"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_photon2(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_bunshin_specials2(fighter: &mut L2CAgentBase) {
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
             ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
@@ -2524,7 +2524,7 @@ unsafe fn elight_photon2(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials3", "game_specialairs3"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_photon3(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_bunshin_specials3(fighter: &mut L2CAgentBase) {
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
             ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
@@ -2558,7 +2558,7 @@ unsafe fn elight_photon3(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials4", "game_specialairs4"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_photon4(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_bunshin_specials4(fighter: &mut L2CAgentBase) {
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if macros::is_excute(fighter) {
             ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
@@ -2590,7 +2590,7 @@ unsafe fn elight_photon4(fighter: &mut L2CAgentBase) {
     scripts = ["game_specials5", "game_specialairs5"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_photon5(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_bunshin_specials5(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("elight"), rand_effect.len() as i32);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
@@ -2616,7 +2616,7 @@ unsafe fn elight_photon5(fighter: &mut L2CAgentBase) {
     scripts = ["game_specialhistart", "specialairhistart"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_upbstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialhistart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
@@ -2645,7 +2645,7 @@ unsafe fn elight_upbstart(fighter: &mut L2CAgentBase) {
     script = "game_specialairhijump",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_upbairjump(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_specialairhijump(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 68, /*KBG*/ 100, /*FKB*/ 85, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(8.0), /*Hitlag*/ 1.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -2706,7 +2706,7 @@ unsafe fn elight_upbairjump(fighter: &mut L2CAgentBase) {
     script = "game_fly",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_chroma(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_spreadbullet_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 52, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
     }
@@ -2717,7 +2717,7 @@ unsafe fn elight_chroma(fighter: &mut L2CAgentBase) {
     script = "game_fly",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_ray1(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_exprosiveshot_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 72, /*KBG*/ 55, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
     }
@@ -2728,7 +2728,7 @@ unsafe fn elight_ray1(fighter: &mut L2CAgentBase) {
     script = "game_burst",
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_ray2(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_exprosiveshot_bust(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_beams"), 0, false, 0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 32.0, /*Angle*/ 56, /*KBG*/ 76, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -2741,7 +2741,7 @@ unsafe fn elight_ray2(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_ENABLE_CHANGE) == true {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_DIVER, false, 0);
@@ -2756,7 +2756,7 @@ unsafe fn elight_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_ENABLE_CHANGE) == true {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_DIVER, false, 0);
@@ -2771,7 +2771,7 @@ unsafe fn elight_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
     }
@@ -2782,7 +2782,7 @@ unsafe fn elight_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
     }
@@ -2793,7 +2793,7 @@ unsafe fn elight_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -2804,7 +2804,7 @@ unsafe fn elight_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -2815,7 +2815,7 @@ unsafe fn elight_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn elight_final(fighter: &mut L2CAgentBase) {
+unsafe fn game_elight_beam_finalattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 1, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 45, /*KBG*/ 83, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 80.0, /*X*/ 0.0, /*Y*/ -85.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(-125.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -2831,60 +2831,60 @@ unsafe fn elight_final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        elight_jab1,
-        elight_jab2,
-        elight_jab3,
-        elight_jab100,
-        elight_jab100sub,
-        elight_jab100end,
-        elight_dashattack,
-        elight_sidetilt,
-        elight_uptilt,
-        elight_downtilt,
-        elight_sidesmash,
-        elight_upsmash,
-        elight_downsmash,
-        elight_nair,
-        elight_fair,
-        elight_bair,
-        elight_uair,
-        elight_dair,
-        elight_grab,
-        elight_dashgrab,
-        elight_pivotgrab,
-        elight_pummel,
-        elight_throwf,
-        elight_throwb,
-        elight_throwhi,
-        elight_throwlw,
-        elight_downattacku,
-        elight_downattackd,
-        elight_cliffattack,
-        elight_slipattack,
-        elight_neutralb,
-        elight_neutralb2,
-        elight_neutralbair,
-        elight_neutralbair2,
-        elight_neutralbhold,
-        elight_sidebstart,
-        elight_sideb,
-        elight_sidebend,
-        elight_photon1,
-        elight_photon2,
-        elight_photon3,
-        elight_photon4,
-        elight_photon5,
-        elight_upbstart,
-        elight_upbairjump,
-        elight_chroma,
-        elight_ray1,
-        elight_ray2,
-        elight_sidetauntr,
-        elight_sidetauntl,
-        //elight_uptauntr,
-        //elight_uptauntl,
-        elight_downtauntr,
-        elight_downtauntl,
-        elight_final
+        game_elight_attack11,
+        game_elight_attack12,
+        game_elight_attack13,
+        game_elight_attack100,
+        game_elight_attack100sub,
+        game_elight_attack100end,
+        game_elight_attackdash,
+        game_elight_attacks3,
+        game_elight_attackhi3,
+        game_elight_attacklw3,
+        game_elight_attacks4,
+        game_elight_attackhi4,
+        game_elight_attacklw4,
+        game_elight_attackairn,
+        game_elight_attackairf,
+        game_elight_attackairb,
+        game_elight_attackairhi,
+        game_elight_attackairlw,
+        game_elight_catch,
+        game_elight_catchdash,
+        game_elight_catchturn,
+        game_elight_catchattack,
+        game_elight_throwf,
+        game_elight_throwb,
+        game_elight_throwhi,
+        game_elight_throwlw,
+        game_elight_downattacku,
+        game_elight_downattackd,
+        game_elight_cliffattack,
+        game_elight_slipattack,
+        game_elight_specialn,
+        game_elight_specialn2,
+        game_elight_specialairn,
+        game_elight_specialairn2,
+        game_elight_specialnhold,
+        game_elight_specialsstart,
+        game_elight_specials,
+        game_elight_specialsend,
+        game_elight_bunshin_specials1,
+        game_elight_bunshin_specials2,
+        game_elight_bunshin_specials3,
+        game_elight_bunshin_specials4,
+        game_elight_bunshin_specials5,
+        game_elight_specialhistart,
+        game_elight_specialairhijump,
+        game_elight_spreadbullet_fly,
+        game_elight_exprosiveshot_fly,
+        game_elight_exprosiveshot_bust,
+        game_elight_appealsr,
+        game_elight_appealsl,
+        //game_elight_appealhir,
+        //game_elight_appealhil,
+        game_elight_appeallwr,
+        game_elight_appeallwl,
+        game_elight_beam_finalattack
     );
 }
