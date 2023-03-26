@@ -1,5 +1,6 @@
 use smash::phx::Hash40;
 use smash::phx::Vector3f;
+use smash::phx::Vector2f;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smashline::*;
@@ -8,6 +9,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::app::{sv_information};
 use crate::common::glide::*;
+use crate::common::glide::KineticUtility;
 
 static mut COUNTER : [i32; 8] = [0; 8];
 static mut CURRENTFRAME : [f32; 8] = [0.0; 8];
@@ -18,7 +20,7 @@ static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
-fn metaknight_opff(fighter: &mut L2CFighterCommon) {
+fn frame_metaknight(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -27,6 +29,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         let params = GlideParams::get(fighter);
+        let lr = PostureModule::lr(fighter.module_accessor);
 
         if situation_kind == *SITUATION_KIND_GROUND || situation_kind == *SITUATION_KIND_CLIFF || 
         situation_kind == *SITUATION_KIND_WATER || situation_kind == *SITUATION_KIND_LADDER {
@@ -119,6 +122,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
         ].contains(&status_kind) { 
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
+            macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h02"));
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
@@ -176,7 +180,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: params.speed_mul_start, y: 0.0, z: 0.0});
+                KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: params.base_speed * lr, y: 0.0}, Vector3f{x: params.base_speed * lr, y: 0.0, z: 0.0});
             }   
             if MotionModule::frame(fighter.module_accessor) >= 29.0 && MotionModule::frame(fighter.module_accessor) < 30.0 {
                 macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
@@ -198,7 +202,7 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
-                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: params.speed_mul_start, y: 0.0, z: 0.0});
+                KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: params.base_speed * lr, y: 0.0}, Vector3f{x: params.base_speed * lr, y: 0.0, z: 0.0});
             }    
             if MotionModule::frame(fighter.module_accessor) >= 29.0 && MotionModule::frame(fighter.module_accessor) < 30.0 {
                 macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
@@ -283,6 +287,6 @@ fn metaknight_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        metaknight_opff
+        frame_metaknight
     );
 }
