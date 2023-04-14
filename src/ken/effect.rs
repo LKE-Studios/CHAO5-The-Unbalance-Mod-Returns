@@ -11,7 +11,7 @@ use smashline::*;
     script = "effect_moves",
     category = ACMD_EFFECT,
     low_priority )]
-unsafe fn ken_hadoken1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ken_moves(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *WEAPON_RYU_HADOKEN_INSTANCE_WORK_ID_FLAG_COMMAND) == false {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_hadoken_bullet"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 3.5, false);
@@ -49,7 +49,7 @@ unsafe fn ken_hadoken1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_movem",
     category = ACMD_EFFECT,
     low_priority )]
-unsafe fn ken_hadoken2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ken_movem(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *WEAPON_RYU_HADOKEN_INSTANCE_WORK_ID_FLAG_COMMAND) == false {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_hadoken_bullet"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 3.5, false);
@@ -87,7 +87,7 @@ unsafe fn ken_hadoken2gfx(fighter: &mut L2CAgentBase) {
     script = "effect_movew",
     category = ACMD_EFFECT,
     low_priority )]
-unsafe fn ken_hadoken3gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ken_movew(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *WEAPON_RYU_HADOKEN_INSTANCE_WORK_ID_FLAG_COMMAND) == false {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_hadoken_bullet"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 3.5, false);
@@ -122,8 +122,8 @@ unsafe fn ken_hadoken3gfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        ken_hadoken1gfx,
-        ken_hadoken2gfx,
-        ken_hadoken3gfx
+        effect_ken_moves,
+        effect_ken_movem,
+        effect_ken_movew
     );
 }

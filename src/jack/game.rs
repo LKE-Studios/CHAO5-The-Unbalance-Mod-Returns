@@ -14,11 +14,12 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attack11(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.44);
+    frame(fighter.lua_state_agent, 3.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 32, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 32, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 180, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 32, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 12.5, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(15.2), /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_FIGHTER, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -42,7 +43,7 @@ unsafe fn jack_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.5, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -71,7 +72,7 @@ unsafe fn jack_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_jab3(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 2.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -113,7 +114,7 @@ unsafe fn jack_jab3(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 35, /*KBG*/ 95, /*FKB*/ 70, /*BKB*/ 0, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 4.0, /*X2*/ Some(3.0), /*Y2*/ Some(9.0), /*Z2*/ Some(5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -173,7 +174,7 @@ unsafe fn jack_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("knife"), /*Damage*/ 5.0, /*Angle*/ 93, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -211,7 +212,7 @@ unsafe fn jack_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("knife"), /*Damage*/ 5.0, /*Angle*/ 93, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -249,7 +250,7 @@ unsafe fn jack_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("knife"), /*Damage*/ 5.0, /*Angle*/ 93, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -287,7 +288,7 @@ unsafe fn jack_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.5);
@@ -349,7 +350,7 @@ unsafe fn jack_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
@@ -403,7 +404,7 @@ unsafe fn jack_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 2.0, 5.0);
@@ -476,7 +477,7 @@ unsafe fn jack_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_XLU);
@@ -554,7 +555,7 @@ unsafe fn jack_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -625,7 +626,7 @@ unsafe fn jack_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -656,7 +657,7 @@ unsafe fn jack_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackairf(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -709,7 +710,7 @@ unsafe fn jack_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -759,7 +760,7 @@ unsafe fn jack_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -795,7 +796,7 @@ unsafe fn jack_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_attackairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -840,7 +841,7 @@ unsafe fn jack_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -864,7 +865,7 @@ unsafe fn jack_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -888,7 +889,7 @@ unsafe fn jack_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -912,7 +913,7 @@ unsafe fn jack_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -932,7 +933,7 @@ unsafe fn jack_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 17.0, /*Angle*/ 45, /*KBG*/ 55, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -957,7 +958,7 @@ unsafe fn jack_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 19.0, /*Angle*/ 131, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 68, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -982,7 +983,7 @@ unsafe fn jack_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 90, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 36, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1007,7 +1008,7 @@ unsafe fn jack_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.5, /*Angle*/ 79, /*KBG*/ 72, /*FKB*/ 0, /*BKB*/ 35, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1033,7 +1034,7 @@ unsafe fn jack_throwlw(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 24.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 26.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(1.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1049,7 +1050,7 @@ unsafe fn jack_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1073,7 +1074,7 @@ unsafe fn jack_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1097,7 +1098,7 @@ unsafe fn jack_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1121,7 +1122,7 @@ unsafe fn jack_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -1174,7 +1175,7 @@ unsafe fn jack_neutralb1(fighter: &mut L2CAgentBase) {
     script = "game_specialn2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -1227,7 +1228,7 @@ unsafe fn jack_neutralb2(fighter: &mut L2CAgentBase) {
     script = "game_specialn3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb3(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -1280,7 +1281,7 @@ unsafe fn jack_neutralb3(fighter: &mut L2CAgentBase) {
     script = "game_specialn1_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb1ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn1_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1367,7 +1368,7 @@ unsafe fn jack_neutralb1ex(fighter: &mut L2CAgentBase) {
     script = "game_specialairn1_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair1ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn1_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1450,7 +1451,7 @@ unsafe fn jack_neutralbair1ex(fighter: &mut L2CAgentBase) {
     script = "game_specialn2_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb2ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn2_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1537,7 +1538,7 @@ unsafe fn jack_neutralb2ex(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair2ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn2_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1620,7 +1621,7 @@ unsafe fn jack_neutralbair2ex(fighter: &mut L2CAgentBase) {
     script = "game_specialn3_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralb3ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialn3_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1696,7 +1697,7 @@ unsafe fn jack_neutralb3ex(fighter: &mut L2CAgentBase) {
     script = "game_specialairn3_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair3ex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn3_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
@@ -1775,7 +1776,7 @@ unsafe fn jack_neutralbair3ex(fighter: &mut L2CAgentBase) {
     script = "game_specialnescapeb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialnescapeb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -1829,7 +1830,7 @@ unsafe fn jack_neutralbb(fighter: &mut L2CAgentBase) {
     script = "game_specialnescapef", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbf(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialnescapef(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -1883,7 +1884,7 @@ unsafe fn jack_neutralbf(fighter: &mut L2CAgentBase) {
     script = "game_specialnescapeb_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbbex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialnescapeb_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -1963,7 +1964,7 @@ unsafe fn jack_neutralbbex(fighter: &mut L2CAgentBase) {
     script = "game_specialnescapef_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbfex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialnescapef_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -2047,7 +2048,7 @@ unsafe fn jack_neutralbfex(fighter: &mut L2CAgentBase) {
     script = "game_specialnjump", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbjump(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialnjump(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -2285,7 +2286,7 @@ unsafe fn jack_neutralbjump(fighter: &mut L2CAgentBase) {
     script = "game_specialairn1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -2338,7 +2339,7 @@ unsafe fn jack_neutralbair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -2391,7 +2392,7 @@ unsafe fn jack_neutralbair2(fighter: &mut L2CAgentBase) {
     script = "game_specialairn3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbair3(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairn3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 9.0, /*X2*/ Some(0.0), /*Y2*/ Some(11.0), /*Z2*/ Some(84.0), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ -12, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_JACK_SHOT, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -2443,7 +2444,7 @@ unsafe fn jack_neutralbair3(fighter: &mut L2CAgentBase) {
     script = "game_specialairndown", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairndown(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 1.0);
     for _ in 0..20 {
@@ -2517,7 +2518,7 @@ unsafe fn jack_neutralbairdown(fighter: &mut L2CAgentBase) {
     script = "game_specialairndownend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairdownend(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairndownend(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -2564,7 +2565,7 @@ unsafe fn jack_neutralbairdownend(fighter: &mut L2CAgentBase) {
     script = "game_specialairnescapeb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairnescapeb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -2626,7 +2627,7 @@ unsafe fn jack_neutralbairb(fighter: &mut L2CAgentBase) {
     script = "game_specialairnescapef", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairf(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairnescapef(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -2688,7 +2689,7 @@ unsafe fn jack_neutralbairf(fighter: &mut L2CAgentBase) {
     script = "game_specialairnescapeb_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairbex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairnescapeb_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -2773,7 +2774,7 @@ unsafe fn jack_neutralbairbex(fighter: &mut L2CAgentBase) {
     script = "game_specialairnescapef_ex", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairfex(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairnescapef_ex(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -2863,7 +2864,7 @@ unsafe fn jack_neutralbairfex(fighter: &mut L2CAgentBase) {
     script = "game_specialairnshoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_neutralbairshoot(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairnshoot(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -3124,7 +3125,7 @@ unsafe fn jack_neutralbairshoot(fighter: &mut L2CAgentBase) {
     script = "game_specials1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sideb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specials1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -3137,7 +3138,7 @@ unsafe fn jack_sideb(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidebair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairs1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -3155,7 +3156,7 @@ unsafe fn jack_sidebair(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_eiha1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_fire_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 5.2, /*X*/ 0.0, /*Y*/ -0.7, /*Z*/ 1.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_MAGIC);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 5.2, /*X*/ 2.4, /*Y*/ -0.7, /*Z*/ 1.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -3171,7 +3172,7 @@ unsafe fn jack_eiha1(fighter: &mut L2CAgentBase) {
     script = "game_hit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_eiha2(fighter: &mut L2CAgentBase) {   
+unsafe fn game_jack_fire_hit(fighter: &mut L2CAgentBase) {   
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.5, /*Angle*/ 75, /*KBG*/ 167, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 16.5, /*X*/ 0.0, /*Y*/ 1.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(0.0), /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_MAGIC);
         AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 960, /*Rehit*/ 40, /*Damage*/ 5.0, /*Unk*/ false);
@@ -3184,7 +3185,7 @@ unsafe fn jack_eiha2(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_eiagon1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_fire2_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 90, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ -0.5, /*Z*/ 0.7, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_MAGIC);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 90, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 7.5, /*X*/ 3.0, /*Y*/ -0.5, /*Z*/ 0.7, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -3200,7 +3201,7 @@ unsafe fn jack_eiagon1(fighter: &mut L2CAgentBase) {
     script = "game_hit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_eiagon2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_fire2_hit(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
@@ -3233,7 +3234,7 @@ unsafe fn jack_eiagon2(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WIREROPE, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WIREROPE, Hash40::new("special_hi"), false, 0.0);
@@ -3287,7 +3288,7 @@ unsafe fn jack_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialhithrow", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upbthrow(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialhithrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WIREROPE, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WIREROPE, Hash40::new("special_hi_throw"), false, 0.0);
@@ -3320,7 +3321,7 @@ unsafe fn jack_upbthrow(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WIREROPE, false, 0);
     }
@@ -3388,7 +3389,7 @@ unsafe fn jack_upbair(fighter: &mut L2CAgentBase) {
     script = "game_specialairhif", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upbairf(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairhif(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WING, Hash40::new("special_hi2_f"), false, 0.0);
@@ -3406,7 +3407,7 @@ unsafe fn jack_upbairf(fighter: &mut L2CAgentBase) {
     script = "game_specialairhib", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_upbairb(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairhib(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_WING, Hash40::new("special_hi2_b"), false, 0.0);
@@ -3424,7 +3425,7 @@ unsafe fn jack_upbairb(fighter: &mut L2CAgentBase) {
     script = "game_speciallwattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_speciallwattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -3448,7 +3449,7 @@ unsafe fn jack_downb1(fighter: &mut L2CAgentBase) {
     script = "game_speciallwcounter", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_speciallwcounter(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 666.0, /*Angle*/ 361, /*KBG*/ 51, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 25.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ -5.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(10.0), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -3463,10 +3464,10 @@ unsafe fn jack_downb2(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialAirLwAttack
     agent = "jack", 
-    script = "game_specialairlwcounter", 
+    script = "game_specialairlwattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downbair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairlwattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -3490,7 +3491,7 @@ unsafe fn jack_downbair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairlwcounter", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_specialairlwcounter(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 666.0, /*Angle*/ 361, /*KBG*/ 51, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 25.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ -5.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(10.0), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -3508,7 +3509,7 @@ unsafe fn jack_downbair2(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);  
     }
@@ -3519,7 +3520,7 @@ unsafe fn jack_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);  
     }
@@ -3530,7 +3531,7 @@ unsafe fn jack_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEATHSCYTHE), 0, 0, false, false);
     }
@@ -3541,7 +3542,7 @@ unsafe fn jack_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEATHSCYTHE), 0, 0, false, false);
     }
@@ -3552,7 +3553,7 @@ unsafe fn jack_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
     }
@@ -3563,7 +3564,7 @@ unsafe fn jack_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
     }
@@ -3574,7 +3575,7 @@ unsafe fn jack_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_final1(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_finalend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CANCEL_FILL_SCREEN(fighter, 0, 0);
         macros::CANCEL_FILL_SCREEN(fighter, 1, 0);
@@ -3596,7 +3597,7 @@ unsafe fn jack_final1(fighter: &mut L2CAgentBase) {
     script = "game_finalairend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn jack_final2(fighter: &mut L2CAgentBase) {
+unsafe fn game_jack_finalairend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CANCEL_FILL_SCREEN(fighter, 0, 0);
         macros::CANCEL_FILL_SCREEN(fighter, 1, 0);
@@ -3615,81 +3616,81 @@ unsafe fn jack_final2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        jack_jab1,
-        jack_jab2,
-        jack_jab3,
-        jack_dashattack,
-        jack_sidetiltup,
-        jack_sidetilt,
-        jack_sidetiltdown,
-        jack_uptilt,
-        jack_downtilt,
-        jack_sidesmash,
-        jack_upsmash,
-        jack_downsmash,
-        jack_nair,
-        jack_fair,
-        jack_bair,
-        jack_uair,
-        jack_dair,
-        jack_grab,
-        jack_dashgrab,
-        jack_pivotgrab,
-        jack_pummel,
-        jack_throwf,
-        jack_throwb,
-        jack_throwhi,
-        jack_throwlw,
-        jack_downattacku,
-        jack_downattackd,
-        jack_cliffattack,
-        jack_slipattack,
-        jack_neutralb1,
-        jack_neutralb2,
-        jack_neutralb3,
-        jack_neutralb1ex,
-        jack_neutralb2ex,
-        jack_neutralb3ex,
-        jack_neutralbb,
-        jack_neutralbbex,
-        jack_neutralbf,
-        jack_neutralbfex,
-        jack_neutralbjump,
-        jack_neutralbair1,
-        jack_neutralbair2,
-        jack_neutralbair3,
-        jack_neutralbair1ex,
-        jack_neutralbair2ex,
-        jack_neutralbair3ex,
-        jack_neutralbairb,
-        jack_neutralbairbex,
-        jack_neutralbairf,
-        jack_neutralbairfex,
-        jack_neutralbairdown,
-        jack_neutralbairdownend,
-        jack_neutralbairshoot,
-        jack_sideb,
-        jack_sidebair,
-        jack_eiha1,
-        jack_eiha2,
-        jack_eiagon1,
-        jack_eiagon2,
-        jack_upb,
-        jack_upbthrow,
-        jack_upbair,
-        jack_upbairf,
-        jack_upbairb,
-        jack_downb1,
-        jack_downb2,
-        jack_downbair1,
-        jack_downbair2,
-        jack_sidetauntr,
-        jack_sidetauntl,
-        jack_uptauntr,
-        jack_uptauntl,
-        jack_downtauntr,
-        jack_downtauntl,
-        jack_final1,
-        jack_final2
+        game_jack_attack11,
+        game_jack_attack12,
+        game_jack_attack13,
+        game_jack_attackdash,
+        game_jack_attacks3hi,
+        game_jack_attacks3,
+        game_jack_attacks3lw,
+        game_jack_attackhi3,
+        game_jack_attacklw3,
+        game_jack_attacks4,
+        game_jack_attackhi4,
+        game_jack_attacklw4,
+        game_jack_attackairn,
+        game_jack_attackairf,
+        game_jack_attackairb,
+        game_jack_attackairhi,
+        game_jack_attackairlw,
+        game_jack_catch,
+        game_jack_catchdash,
+        game_jack_catchturn,
+        game_jack_catchattack,
+        game_jack_throwf,
+        game_jack_throwb,
+        game_jack_throwhi,
+        game_jack_throwlw,
+        game_jack_downattacku,
+        game_jack_downattackd,
+        game_jack_cliffattack,
+        game_jack_slipattack,
+        game_jack_specialn1,
+        game_jack_specialn2,
+        game_jack_specialn3,
+        game_jack_specialn1_ex,
+        game_jack_specialn2_ex,
+        game_jack_specialn3_ex,
+        game_jack_specialnescapeb,
+        game_jack_specialnescapeb_ex,
+        game_jack_specialnescapef,
+        game_jack_specialnescapef_ex,
+        game_jack_specialnjump,
+        game_jack_specialairn1,
+        game_jack_specialairn2,
+        game_jack_specialairn3,
+        game_jack_specialairn1_ex,
+        game_jack_specialairn2_ex,
+        game_jack_specialairn3_ex,
+        game_jack_specialairnescapeb,
+        game_jack_specialairnescapeb_ex,
+        game_jack_specialairnescapef,
+        game_jack_specialairnescapef_ex,
+        game_jack_specialairndown,
+        game_jack_specialairndownend,
+        game_jack_specialairnshoot,
+        game_jack_specials1,
+        game_jack_specialairs1,
+        game_jack_fire_fly,
+        game_jack_fire_hit,
+        game_jack_fire2_fly,
+        game_jack_fire2_hit,
+        game_jack_specialhi,
+        game_jack_specialhithrow,
+        game_jack_specialairhi,
+        game_jack_specialairhif,
+        game_jack_specialairhib,
+        game_jack_speciallwattack,
+        game_jack_speciallwcounter,
+        game_jack_specialairlwattack,
+        game_jack_specialairlwcounter,
+        game_jack_appealsr,
+        game_jack_appealsl,
+        game_jack_appealhir,
+        game_jack_appealhil,
+        game_jack_appeallwr,
+        game_jack_appeallwl,
+        game_jack_finalend,
+        game_jack_finalairend
     );
 }

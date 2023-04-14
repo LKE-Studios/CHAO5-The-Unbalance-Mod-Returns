@@ -5,7 +5,7 @@ use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_JACK )]
-pub fn jack_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_jack(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -29,6 +29,6 @@ pub fn jack_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        jack_opff
+        frame_jack
     );
 }

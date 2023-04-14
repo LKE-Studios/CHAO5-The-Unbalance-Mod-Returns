@@ -13,7 +13,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack11(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("attack_11"), false, 0.0);
@@ -49,7 +49,7 @@ unsafe fn kamui_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 361, /*KBG*/ 22, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -79,7 +79,7 @@ unsafe fn kamui_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab3(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.3, /*Angle*/ 50, /*KBG*/ 170, /*FKB*/ 0, /*BKB*/ 42, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 11.5, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(11.0), /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_darkness"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -96,7 +96,7 @@ unsafe fn kamui_jab3(fighter: &mut L2CAgentBase) {
     script = "game_attack100", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab100(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack100(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_DRAGONHAND, false, 0);
@@ -157,7 +157,7 @@ unsafe fn kamui_jab100(fighter: &mut L2CAgentBase) {
     script = "game_attack100sub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab100sub(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack100sub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.7, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 8.2, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 18.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.0), /*Z2*/ Some(10.0), /*Hitlag*/ 0.3, /*SDI*/ 0.6, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BITE);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 2.0, /*Unk*/ false);
@@ -175,7 +175,7 @@ unsafe fn kamui_jab100sub(fighter: &mut L2CAgentBase) {
     script = "game_attack100end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_jab100end(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attack100end(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::set_rate(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_DRAGONHAND, 1.0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_DRAGONHAND, Hash40::new("attack_end"), false, 0.0);
@@ -200,7 +200,7 @@ unsafe fn kamui_jab100end(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackdash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 12.0);
     for _ in 0..5 {
@@ -232,7 +232,7 @@ unsafe fn kamui_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 16.6, /*Angle*/ 45, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -251,7 +251,7 @@ unsafe fn kamui_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackhi3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.66);
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
@@ -278,7 +278,7 @@ unsafe fn kamui_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 11.5, /*Angle*/ 90, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 5.0, /*X*/ -1.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -297,7 +297,7 @@ unsafe fn kamui_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4charge", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidesmashstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attacks4charge(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("attack_s4_hold"), false, 0.0);
@@ -314,7 +314,7 @@ unsafe fn kamui_sidesmashstart(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_spearhand_attacks4(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
         AttackModule::set_attack_reference_joint_id(fighter.module_accessor, Hash40::new("drag1"), AttackDirectionAxis(*ATTACK_DIRECTION_X), AttackDirectionAxis(*ATTACK_DIRECTION_Z), AttackDirectionAxis(*ATTACK_DIRECTION_Y));
@@ -344,7 +344,7 @@ unsafe fn kamui_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -367,7 +367,7 @@ unsafe fn kamui_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -389,7 +389,7 @@ unsafe fn kamui_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
@@ -429,7 +429,7 @@ unsafe fn kamui_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackairf(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
@@ -458,7 +458,7 @@ unsafe fn kamui_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackairb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.62);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -488,7 +488,7 @@ unsafe fn kamui_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackairhi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.464);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -516,7 +516,7 @@ unsafe fn kamui_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_attackairlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_LANDING_CLEAR_SPEED);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
@@ -560,7 +560,7 @@ unsafe fn kamui_dair(fighter: &mut L2CAgentBase) {
     script = "game_landingairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_dairland(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_landingairlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 55, /*KBG*/ 97, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 55, /*KBG*/ 97, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 14.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
@@ -576,7 +576,7 @@ unsafe fn kamui_dairland(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -600,7 +600,7 @@ unsafe fn kamui_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -624,7 +624,7 @@ unsafe fn kamui_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -648,7 +648,7 @@ unsafe fn kamui_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.66);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -666,7 +666,7 @@ unsafe fn kamui_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("throw_f"), false, 0.0);
@@ -698,7 +698,7 @@ unsafe fn kamui_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("throw_b"), false, 0.0);
@@ -736,7 +736,7 @@ unsafe fn kamui_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_WATERDRAGON, false, 0);
         ArticleModule::set_visibility_whole(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_WATERDRAGON, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -777,7 +777,7 @@ unsafe fn kamui_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_WATERDRAGON, false, 0);
         ArticleModule::set_visibility_whole(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_WATERDRAGON, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -818,7 +818,7 @@ unsafe fn kamui_throwlw(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 12.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -834,7 +834,7 @@ unsafe fn kamui_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 17.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(6.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -858,7 +858,7 @@ unsafe fn kamui_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 17.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(6.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -882,7 +882,7 @@ unsafe fn kamui_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 17.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(6.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
@@ -906,7 +906,7 @@ unsafe fn kamui_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_regular", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_shot1(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_ryusensya_regular(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 45, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 45, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
@@ -922,7 +922,7 @@ unsafe fn kamui_shot1(fighter: &mut L2CAgentBase) {
     script = "game_shotmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_shot2(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_ryusensya_shotmax(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 55, /*KBG*/ 84, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
     }
@@ -933,7 +933,7 @@ unsafe fn kamui_shot2(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialnend1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand1(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialnend1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -982,7 +982,7 @@ unsafe fn kamui_hand1(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialnend2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand2(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialnend2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -1031,7 +1031,7 @@ unsafe fn kamui_hand2(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialnendmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand3(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialnendmax(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -1069,7 +1069,7 @@ unsafe fn kamui_hand3(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialairnend1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand4(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialairnend1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -1118,7 +1118,7 @@ unsafe fn kamui_hand4(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialairnend2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand5(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialairnend2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -1167,7 +1167,7 @@ unsafe fn kamui_hand5(fighter: &mut L2CAgentBase) {
     script = "game_dhspecialairnendmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_hand6(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_dragonhand_dhspecialairnendmax(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.4);
@@ -1205,7 +1205,7 @@ unsafe fn kamui_hand6(fighter: &mut L2CAgentBase) {
     script = "game_specialsattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sideb(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_spearhand_specialsattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::set_attack_reference_joint_id(fighter.module_accessor, Hash40::new("drag1"), AttackDirectionAxis(*ATTACK_DIRECTION_X), AttackDirectionAxis(*ATTACK_DIRECTION_Z), AttackDirectionAxis(*ATTACK_DIRECTION_Y));
     }
@@ -1231,7 +1231,7 @@ unsafe fn kamui_sideb(fighter: &mut L2CAgentBase) {
     script = "game_specialairsattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidebair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_spearhand_specialairsattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::set_attack_reference_joint_id(fighter.module_accessor, Hash40::new("drag1"), AttackDirectionAxis(*ATTACK_DIRECTION_X), AttackDirectionAxis(*ATTACK_DIRECTION_Z), AttackDirectionAxis(*ATTACK_DIRECTION_Y));
     }
@@ -1257,7 +1257,7 @@ unsafe fn kamui_sidebair(fighter: &mut L2CAgentBase) {
     script = "game_specialswallattackf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidebf(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_specialswallattackf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("special_s_wall_attack_f"), false, 0.0);
     }
@@ -1285,7 +1285,7 @@ unsafe fn kamui_sidebf(fighter: &mut L2CAgentBase) {
     script = "game_specialswallattackb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidebb(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_specialswallattackb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, Hash40::new("special_s_wall_attack_b"), false, 0.0);
     }
@@ -1327,7 +1327,7 @@ unsafe fn kamui_sidebb(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_specialhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1390,7 +1390,7 @@ unsafe fn kamui_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_specialairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1453,7 +1453,7 @@ unsafe fn kamui_upbair(fighter: &mut L2CAgentBase) {
     script = "game_speciallwhit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_waterdragon_speciallwhit(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 80, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 100.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-100.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1491,7 +1491,7 @@ unsafe fn kamui_downb1(fighter: &mut L2CAgentBase) {
     script = "game_speciallwhitturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_waterdragon_speciallwhitturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 80, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 100.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-100.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1529,7 +1529,7 @@ unsafe fn kamui_downb2(fighter: &mut L2CAgentBase) {
     script = "game_specialairlwhit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downbair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_waterdragon_specialairlwhit(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 80, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 100.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-100.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1567,7 +1567,7 @@ unsafe fn kamui_downbair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairlwhitturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_waterdragon_specialairlwhitturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 80, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 87, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 100.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-100.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1605,7 +1605,7 @@ unsafe fn kamui_downbair2(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_CLUB), 0, 0, false, false);
     }
@@ -1616,7 +1616,7 @@ unsafe fn kamui_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_CLUB), 0, 0, false, false);
     }
@@ -1627,7 +1627,7 @@ unsafe fn kamui_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BOMBCHU), 0, 0, false, false);
     }
@@ -1638,7 +1638,7 @@ unsafe fn kamui_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BOMBCHU), 0, 0, false, false);
     }
@@ -1649,7 +1649,7 @@ unsafe fn kamui_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_KILLSWORD), 0, 0, false, false);
     }
@@ -1660,7 +1660,7 @@ unsafe fn kamui_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_KILLSWORD), 0, 0, false, false);
     }
@@ -1671,7 +1671,7 @@ unsafe fn kamui_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_finalend(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_finalend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CAM_ZOOM_OUT(fighter, );
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1689,7 +1689,7 @@ unsafe fn kamui_finalend(fighter: &mut L2CAgentBase) {
     script = "game_finalairend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn kamui_finalairend(fighter: &mut L2CAgentBase) {
+unsafe fn game_kamui_finalairend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CAM_ZOOM_OUT(fighter, );
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1704,63 +1704,63 @@ unsafe fn kamui_finalairend(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        kamui_jab1,
-        kamui_jab2,
-        kamui_jab3,
-        kamui_jab100,
-        kamui_jab100sub,
-        kamui_jab100end,
-        kamui_dashattack,
-        kamui_sidetilt,
-        kamui_uptilt,
-        kamui_downtilt,
-        kamui_sidesmashstart,
-        kamui_sidesmash,
-        kamui_upsmash,
-        kamui_downsmash,
-        kamui_nair,
-        kamui_fair,
-        kamui_bair,
-        kamui_uair,
-        kamui_dair,
-        kamui_dairland,
-        kamui_grab,
-        kamui_dashgrab,
-        kamui_pivotgrab,
-        kamui_pummel,
-        kamui_throwf,
-        kamui_throwb,
-        kamui_throwhi,
-        kamui_throwlw,
-        kamui_downattacku,
-        kamui_downattackd,
-        kamui_cliffattack,
-        kamui_slipattack,
-        kamui_shot1,
-        kamui_shot2,
-        kamui_hand1,
-        kamui_hand2,
-        kamui_hand3,
-        kamui_hand4,
-        kamui_hand5,
-        kamui_hand6,
-        kamui_sideb,
-        kamui_sidebair,
-        kamui_sidebf,
-        kamui_sidebb,
-        kamui_upb,
-        kamui_upbair,
-        kamui_downb1,
-        kamui_downb2,
-        kamui_downbair1,
-        kamui_downbair2,
-        kamui_sidetauntr,
-        kamui_sidetauntl,
-        kamui_uptauntr,
-        kamui_uptauntl,
-        kamui_downtauntr,
-        kamui_downtauntl,
-        kamui_finalend,
-        kamui_finalairend
+        game_kamui_attack11,
+        game_kamui_attack12,
+        game_kamui_attack13,
+        game_kamui_attack100,
+        game_kamui_attack100sub,
+        game_kamui_attack100end,
+        game_kamui_attackdash,
+        game_kamui_attacks3,
+        game_kamui_attackhi3,
+        game_kamui_attacklw3,
+        game_kamui_attacks4charge,
+        game_kamui_spearhand_attacks4,
+        game_kamui_attackhi4,
+        game_kamui_attacklw4,
+        game_kamui_attackairn,
+        game_kamui_attackairf,
+        game_kamui_attackairb,
+        game_kamui_attackairhi,
+        game_kamui_attackairlw,
+        game_kamui_landingairlw,
+        game_kamui_catch,
+        game_kamui_catchdash,
+        game_kamui_catchturn,
+        game_kamui_catchattack,
+        game_kamui_throwf,
+        game_kamui_throwb,
+        game_kamui_throwhi,
+        game_kamui_throwlw,
+        game_kamui_downattacku,
+        game_kamui_downattackd,
+        game_kamui_cliffattack,
+        game_kamui_slipattack,
+        game_kamui_ryusensya_regular,
+        game_kamui_ryusensya_shotmax,
+        game_kamui_dragonhand_dhspecialnend1,
+        game_kamui_dragonhand_dhspecialnend2,
+        game_kamui_dragonhand_dhspecialnendmax,
+        game_kamui_dragonhand_dhspecialairnend1,
+        game_kamui_dragonhand_dhspecialairnend2,
+        game_kamui_dragonhand_dhspecialairnendmax,
+        game_kamui_spearhand_specialsattack,
+        game_kamui_spearhand_specialairsattack,
+        game_kamui_specialswallattackf,
+        game_kamui_specialswallattackb,
+        game_kamui_specialhi,
+        game_kamui_specialairhi,
+        game_kamui_waterdragon_speciallwhit,
+        game_kamui_waterdragon_speciallwhitturn,
+        game_kamui_waterdragon_specialairlwhit,
+        game_kamui_waterdragon_specialairlwhitturn,
+        game_kamui_appealsr,
+        game_kamui_appealsl,
+        game_kamui_appealhir,
+        game_kamui_appealhil,
+        game_kamui_appeallwr,
+        game_kamui_appeallwl,
+        game_kamui_finalend,
+        game_kamui_finalairend
     );
 }
