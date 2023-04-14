@@ -12,7 +12,7 @@ use smash::hash40;
 	script = "expression_attackairn", 
 	category = ACMD_EXPRESSION, 
 	low_priority)]
-unsafe fn koopag_attackairnexp(fighter: &mut L2CAgentBase) {
+unsafe fn expression_koopag_attackairn(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 3.0);
 	if macros::is_excute(fighter) {
 		VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_shell") as i64);
@@ -28,7 +28,7 @@ unsafe fn koopag_attackairnexp(fighter: &mut L2CAgentBase) {
 	script = "expression_attackairlw", 
 	category = ACMD_EXPRESSION, 
 	low_priority)]
-unsafe fn koopag_attackairlwexp(fighter: &mut L2CAgentBase) {
+unsafe fn expression_koopag_attackairlw(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 13.0);
 	if macros::is_excute(fighter) {
 		ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("shellmodel"), true);
@@ -44,7 +44,7 @@ unsafe fn koopag_attackairlwexp(fighter: &mut L2CAgentBase) {
 	script = "expression_landingairlw", 
 	category = ACMD_EXPRESSION, 
 	low_priority)]
-unsafe fn koopag_landingairlwexp(fighter: &mut L2CAgentBase) {
+unsafe fn expression_koopag_landingairlw(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 1.0);
 	if macros::is_excute(fighter) {
 		ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("shellmodel"), false);
@@ -53,8 +53,8 @@ unsafe fn koopag_landingairlwexp(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		koopag_attackairnexp,
-        koopag_attackairlwexp,
-		koopag_landingairlwexp
+		expression_koopag_attackairn,
+        expression_koopag_attackairlw,
+		expression_koopag_landingairlw
     );
 }

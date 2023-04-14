@@ -18,7 +18,7 @@ use crate::globals::*;
 use crate::koopag::status::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_KOOPAG )]
-pub fn koopag_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_koopag(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 		let motion_kind = MotionModule::motion_kind(module_accessor);
@@ -168,6 +168,6 @@ pub fn koopag_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        koopag_opff
+        frame_koopag
     );
 }

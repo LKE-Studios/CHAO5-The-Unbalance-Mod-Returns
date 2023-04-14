@@ -8,7 +8,7 @@ use {
 };
 
 #[status_script(agent = "koopag", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)] //Properly allow Giga Bowser to use Nair and Dair
-unsafe fn koopag_attackair_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_koopag_attackair_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 	smash::lua2cpp::L2CFighterCommon_status_AttackAir(fighter)
 }
 
@@ -44,7 +44,7 @@ pub unsafe fn disable_final_smash(
 
 pub fn install() {
     install_status_scripts!(
-        koopag_attackair_main
+        status_koopag_attackair_main
     );
 	skyline::install_hooks!(
 		disable_final_smash
