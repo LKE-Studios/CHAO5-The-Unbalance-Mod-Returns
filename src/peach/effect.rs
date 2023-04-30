@@ -8,7 +8,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_shot", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn peach_spore(fighter: &mut L2CAgentBase) {
+unsafe fn effect_peach_kinopiospore_shot(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("peach_kinopio_bullet"), Hash40::new("top"), 0, 0, 3, 0, 0, 0, 4.0, true);
     }
@@ -16,6 +16,6 @@ unsafe fn peach_spore(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        peach_spore
+        effect_peach_kinopiospore_shot
     );
 }

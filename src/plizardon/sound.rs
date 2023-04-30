@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_airjumpsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
@@ -21,7 +21,7 @@ unsafe fn plizardon_airjumpsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_glidestartsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
@@ -33,24 +33,12 @@ unsafe fn plizardon_glidestartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//GlideWing
-    agent = "plizardon", 
-    script = "sound_glidewing", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn plizardon_glidesfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pickel_special_h02"));
-    }
-}*/
-
 #[acmd_script(//GlideAttack
     agent = "plizardon", 
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_glideattacksfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_plizardon_rnd_attack"));
@@ -66,7 +54,7 @@ unsafe fn plizardon_glideattacksfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_glidelandingsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
@@ -82,7 +70,7 @@ unsafe fn plizardon_glidelandingsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_glideendsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
     }
@@ -97,7 +85,7 @@ unsafe fn plizardon_glideendsfx(fighter: &mut L2CAgentBase) {
     script = "sound_win2", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn plizardon_win2sfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_plizardon_win2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_jump02"));
@@ -119,12 +107,11 @@ unsafe fn plizardon_win2sfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        plizardon_airjumpsfx,
-        plizardon_glidestartsfx,
-        //plizardon_glidesfx,
-        plizardon_glideattacksfx,
-        plizardon_glideendsfx,
-        plizardon_glidelandingsfx,
-        plizardon_win2sfx
+        sound_plizardon_jumpaerialf,
+        sound_plizardon_glidestart,
+        sound_plizardon_glideattack,
+        sound_plizardon_glideend,
+        sound_plizardon_glidelanding,
+        sound_plizardon_win2
     );
 }

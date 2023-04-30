@@ -15,7 +15,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["game_jumpaerialf3", "game_jumpaerialf4", "game_jumpaerialf5", "game_jumpaerialf6"],
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_airjump(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_jumpaerialf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:0.5, z:0.0});
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
@@ -31,7 +31,7 @@ unsafe fn plizardon_airjump(fighter: &mut L2CAgentBase) {
     script = "game_glidestart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_glidestart(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_dash"), 0, false, 0);
@@ -43,7 +43,7 @@ unsafe fn plizardon_glidestart(fighter: &mut L2CAgentBase) {
     script = "game_glidewing", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_glide(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -57,7 +57,7 @@ unsafe fn plizardon_glide(fighter: &mut L2CAgentBase) {
     script = "game_glidedirection", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_glidedirection(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_glidedirection(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_dash"), 0, false, 0);
@@ -72,11 +72,11 @@ unsafe fn plizardon_glidedirection(fighter: &mut L2CAgentBase) {
     script = "game_glideattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_glideattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 45, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.7), /*Z2*/ Some(24.0), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_HEAD);
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 45, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(8.44), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 45, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.7), /*Z2*/ Some(24.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_HEAD);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 45, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(8.44), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
     }
     wait(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
@@ -89,7 +89,7 @@ unsafe fn plizardon_glideattack(fighter: &mut L2CAgentBase) {
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.5, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 6.4, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 4.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -117,7 +117,7 @@ unsafe fn plizardon_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.72, y: 0.0, z: 0.0});
@@ -148,7 +148,7 @@ unsafe fn plizardon_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_jab3(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 60, /*KBG*/ 130, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 6.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(25.0), /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
@@ -166,7 +166,7 @@ unsafe fn plizardon_jab3(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackdash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -192,7 +192,7 @@ unsafe fn plizardon_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ 40, /*KBG*/ 104, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 13.5, /*Z*/ 19.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_TAIL);
@@ -221,7 +221,7 @@ unsafe fn plizardon_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ 40, /*KBG*/ 104, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 6.9, /*Z*/ 21.2, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_TAIL);
@@ -249,7 +249,7 @@ unsafe fn plizardon_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ 40, /*KBG*/ 104, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ 19.1, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_TAIL);
@@ -278,7 +278,7 @@ unsafe fn plizardon_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 1, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 78, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 13.5, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
@@ -297,7 +297,7 @@ unsafe fn plizardon_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacklw3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 11.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -315,7 +315,7 @@ unsafe fn plizardon_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -352,7 +352,7 @@ unsafe fn plizardon_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -405,7 +405,7 @@ unsafe fn plizardon_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -437,7 +437,7 @@ unsafe fn plizardon_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -465,7 +465,7 @@ unsafe fn plizardon_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -495,7 +495,7 @@ unsafe fn plizardon_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackairb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -536,7 +536,7 @@ unsafe fn plizardon_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackairhi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -571,7 +571,7 @@ unsafe fn plizardon_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -602,7 +602,7 @@ unsafe fn plizardon_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -626,7 +626,7 @@ unsafe fn plizardon_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -650,7 +650,7 @@ unsafe fn plizardon_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -674,7 +674,7 @@ unsafe fn plizardon_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -692,7 +692,7 @@ unsafe fn plizardon_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 30.0, /*Angle*/ 40, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -716,7 +716,7 @@ unsafe fn plizardon_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 21.0, /*Angle*/ 361, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -743,7 +743,7 @@ unsafe fn plizardon_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_throwup(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_throwhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::FT_LEAVE_NEAR_OTTOTTO(fighter, -3, 3);
@@ -790,7 +790,7 @@ unsafe fn plizardon_throwup(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_throwdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 6.0, /*Angle*/ 70, /*KBG*/ 114, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -823,7 +823,7 @@ unsafe fn plizardon_throwdown(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 24.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ 45, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.76, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 13.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(-2.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
@@ -839,7 +839,7 @@ unsafe fn plizardon_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -11.5, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-4.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -863,7 +863,7 @@ unsafe fn plizardon_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 11.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -16.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_TAIL);
@@ -887,7 +887,7 @@ unsafe fn plizardon_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 11.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -16.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_TAIL);
@@ -911,7 +911,7 @@ unsafe fn plizardon_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specialn(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 367, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.4, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.4), /*Z2*/ Some(65.0), /*Hitlag*/ 0.0, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
     }
@@ -922,7 +922,7 @@ unsafe fn plizardon_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specialairn(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 367, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.4, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.4), /*Z2*/ Some(65.0), /*Hitlag*/ 0.0, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
     }
@@ -933,7 +933,7 @@ unsafe fn plizardon_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_move", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_fire(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_breath_move(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(50.0), /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.2, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 50.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(800.0), /*Hitlag*/ 0.1, /*SDI*/ 6.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_LIZARDON_FIRE, /*Type*/ *ATTACK_REGION_NONE);
@@ -946,9 +946,10 @@ unsafe fn plizardon_fire(fighter: &mut L2CAgentBase) {
     script = "game_specials", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sideb(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specials(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+        DamageModule::heal(fighter.module_accessor, -10.0, 0);
         JostleModule::set_status(fighter.module_accessor, false);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("neck"), /*Damage*/ 10.0, /*Angle*/ 366, /*KBG*/ 78, /*FKB*/ 46, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 366, /*KBG*/ 78, /*FKB*/ 46, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
@@ -960,10 +961,11 @@ unsafe fn plizardon_sideb(fighter: &mut L2CAgentBase) {
     script = "game_specialairs", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidebair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specialairs(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_NONE);
+        DamageModule::heal(fighter.module_accessor, -10.0, 0);
         JostleModule::set_status(fighter.module_accessor, false);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("neck"), /*Damage*/ 10.0, /*Angle*/ 366, /*KBG*/ 78, /*FKB*/ 46, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 366, /*KBG*/ 78, /*FKB*/ 46, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
@@ -979,7 +981,7 @@ unsafe fn plizardon_sidebair(fighter: &mut L2CAgentBase) {
     script = "game_start", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_blitz(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_explosion_start(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 40, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 45, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-10.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 40, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
@@ -991,7 +993,7 @@ unsafe fn plizardon_blitz(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specialhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1042,7 +1044,7 @@ unsafe fn plizardon_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_specialairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1093,7 +1095,7 @@ unsafe fn plizardon_upbair(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PASARAN), 0, 0, false, false);
     }
@@ -1104,7 +1106,7 @@ unsafe fn plizardon_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PASARAN), 0, 0, false, false);
     }
@@ -1115,7 +1117,7 @@ unsafe fn plizardon_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appealsr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 50.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 55.0, /*Angle*/ 270, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 60.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -1127,7 +1129,7 @@ unsafe fn plizardon_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appealsl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 50.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 55.0, /*Angle*/ 270, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 60.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -1139,7 +1141,7 @@ unsafe fn plizardon_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FIREBAR), 0, 0, false, false);
     }
@@ -1150,7 +1152,7 @@ unsafe fn plizardon_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FIREBAR), 0, 0, false, false);
     }
@@ -1161,7 +1163,7 @@ unsafe fn plizardon_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_move", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn plizardon_final(fighter: &mut L2CAgentBase) {
+unsafe fn game_plizardon_daimonji_final(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *WEAPON_PLIZARDON_DAIMONJI_INSTANCE_WORK_ID_FLAG_LAST) {
         if macros::is_excute(fighter) {
             macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 25.5, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
@@ -1180,54 +1182,54 @@ unsafe fn plizardon_final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        plizardon_airjump,
-        plizardon_glidestart,
-        plizardon_glide,
-        plizardon_glidedirection,
-        plizardon_glideattack,
-        plizardon_jab1,
-        plizardon_jab2,
-        plizardon_jab3,
-        plizardon_dashattack,
-        plizardon_sidetiltup,
-        plizardon_sidetilt,
-        plizardon_sidetiltdown,
-        plizardon_uptilt,
-        plizardon_downtilt,
-        plizardon_sidesmash,
-        plizardon_upsmash,
-        plizardon_downsmash,
-        plizardon_nair,
-        plizardon_fair,
-        plizardon_bair,
-        plizardon_uair,
-        plizardon_dair,
-        plizardon_grab,
-        plizardon_pivotgrab,
-        plizardon_dashgrab,
-        plizardon_pummel,
-        plizardon_throwf,
-        plizardon_throwb,
-        plizardon_throwup,
-        plizardon_throwdown,
-        plizardon_cliffattack,
-        plizardon_slipattack,
-        plizardon_downattackd,
-        plizardon_downattacku,
-        plizardon_neutralb,
-        plizardon_neutralbair,
-        plizardon_fire,
-        plizardon_sideb,
-        plizardon_sidebair,
-        plizardon_blitz,
-        plizardon_upb,
-        plizardon_upbair,
-        plizardon_uptauntr,
-        plizardon_uptauntl,
-        plizardon_sidetauntr,
-        plizardon_sidetauntl,
-        plizardon_downtauntr,
-        plizardon_downtauntl,
-        plizardon_final
+        game_plizardon_jumpaerialf,
+        game_plizardon_glidestart,
+        game_plizardon_glidewing,
+        game_plizardon_glidedirection,
+        game_plizardon_glideattack,
+        game_plizardon_attack11,
+        game_plizardon_attack12,
+        game_plizardon_attack13,
+        game_plizardon_attackdash,
+        game_plizardon_attacks3hi,
+        game_plizardon_attacks3,
+        game_plizardon_attacks3lw,
+        game_plizardon_attackhi3,
+        game_plizardon_attacklw3,
+        game_plizardon_attacks4,
+        game_plizardon_attackhi4,
+        game_plizardon_attacklw4,
+        game_plizardon_attackairn,
+        game_plizardon_attackairf,
+        game_plizardon_attackairb,
+        game_plizardon_attackairhi,
+        game_plizardon_attackairlw,
+        game_plizardon_catch,
+        game_plizardon_catchturn,
+        game_plizardon_catchdash,
+        game_plizardon_catchattack,
+        game_plizardon_throwf,
+        game_plizardon_throwb,
+        game_plizardon_throwhi,
+        game_plizardon_throwlw,
+        game_plizardon_cliffattack,
+        game_plizardon_slipattack,
+        game_plizardon_downattackd,
+        game_plizardon_downattacku,
+        game_plizardon_specialn,
+        game_plizardon_specialairn,
+        game_plizardon_breath_move,
+        game_plizardon_specials,
+        game_plizardon_specialairs,
+        game_plizardon_explosion_start,
+        game_plizardon_specialhi,
+        game_plizardon_specialairhi,
+        game_plizardon_appealhir,
+        game_plizardon_appealhil,
+        game_plizardon_appealsr,
+        game_plizardon_appealsl,
+        game_plizardon_appeallwr,
+        game_plizardon_appeallwl,
+        game_plizardon_daimonji_final
     );
 }

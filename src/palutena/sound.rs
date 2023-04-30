@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn palutena_glidestartsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_palutena_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_palutena_dash_start"));
@@ -30,7 +30,7 @@ unsafe fn palutena_glidestartsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidewing", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn palutena_glidesfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_palutena_glidewing(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_palutena_landing01_win01"));
@@ -42,7 +42,7 @@ unsafe fn palutena_glidesfx(fighter: &mut L2CAgentBase) {
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn palutena_glideattacksfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_palutena_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_palutena_swing_l"));
@@ -55,14 +55,10 @@ unsafe fn palutena_glideattacksfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn palutena_glidelandingsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_palutena_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
-    }
-    frame(fighter.lua_state_agent, 17.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_palutena_landing02"));
     }
 }
 
@@ -71,7 +67,7 @@ unsafe fn palutena_glidelandingsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn palutena_glideendsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_palutena_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_palutena_glide_loop"));
     }
@@ -84,10 +80,10 @@ unsafe fn palutena_glideendsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        palutena_glidestartsfx,
-        //palutena_glidesfx,
-        palutena_glideattacksfx,
-        palutena_glidelandingsfx,
-        palutena_glideendsfx
+        sound_palutena_glidestart,
+        //sound_palutena_glidewing,
+        sound_palutena_glideattack,
+        sound_palutena_glidelanding,
+        sound_palutena_glideend
     );
 }

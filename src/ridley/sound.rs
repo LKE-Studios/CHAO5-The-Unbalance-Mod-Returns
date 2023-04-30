@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ridley_airjumpsfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_ridley_jump02"));
@@ -25,7 +25,7 @@ unsafe fn ridley_airjumpsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ridley_glidestartsfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
@@ -41,24 +41,12 @@ unsafe fn ridley_glidestartsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//GlideWing
-    agent = "ridley", 
-    script = "sound_glidewing", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn ridley_glidesfx(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pickel_special_h02"));
-    }
-}*/
-
 #[acmd_script(//GlideAttack
     agent = "ridley", 
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ridley_glideattacksfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ridley_special_s01"));
     }
@@ -69,7 +57,7 @@ unsafe fn ridley_glideattacksfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ridley_glidelandingsfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
@@ -80,28 +68,27 @@ unsafe fn ridley_glidelandingsfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//GlideEnd
+#[acmd_script(//GlideEnd
     agent = "ridley", 
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ridley_glideendsfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ridley_special_h01_win02"));
+        macros::STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ridley_wing"));
     }
-}*/   
+}
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        ridley_airjumpsfx,
-        ridley_glidestartsfx,
-        //ridley_glidesfx,
-        ridley_glideattacksfx,
-        //ridley_glideendsfx,
-        ridley_glidelandingsfx
+        effect_ridley_jumpaerialf,
+        effect_ridley_glidestart,
+        effect_ridley_glideattack,
+        effect_ridley_glideend,
+        effect_ridley_glidelanding
     );
 }

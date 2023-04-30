@@ -8,15 +8,15 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_PIT )]
-fn pit_opff(fighter: &mut L2CFighterCommon) {
+fn frame_pit(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if [
             *FIGHTER_STATUS_KIND_GLIDE_START,
             *FIGHTER_STATUS_KIND_GLIDE
         ].contains(&status_kind) { 
-            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.25, y:1.25, z:1.25});
-            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.25, y:1.25, z:1.25});
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.2, y:1.2, z:1.2});
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.2, y:1.2, z:1.2});
         }
         else {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.0, y:1.0, z:1.0});
@@ -40,11 +40,16 @@ fn pit_opff(fighter: &mut L2CFighterCommon) {
         ].contains(&status_kind) { 
             macros::STOP_SE(fighter, Hash40::new("se_pit_glide_loop"));
         };
+        if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_S_END || status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -7.5, 0);
+            }
+        }
     }
 }
 
 pub fn install() {
     smashline::install_agent_frames!(
-        pit_opff
+        frame_pit
     );
 }

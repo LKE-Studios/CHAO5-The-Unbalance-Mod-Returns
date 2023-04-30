@@ -14,7 +14,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 6.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -45,7 +45,7 @@ unsafe fn popo_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack11_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attack11_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.8, /*X*/ 3.0, /*Y*/ 5.0, /*Z*/ 7.0, /*X2*/ Some(-3.0), /*Y2*/ Some(5.0), /*Z2*/ Some(7.0), /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -72,7 +72,7 @@ unsafe fn popon_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 45, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 5.2, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -90,7 +90,7 @@ unsafe fn popo_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack12_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attack12_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 45, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 5.0, /*X*/ 3.0, /*Y*/ 5.5, /*Z*/ 5.5, /*X2*/ Some(-3.0), /*Y2*/ Some(5.5), /*Z2*/ Some(5.5), /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -108,7 +108,7 @@ unsafe fn popon_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 13.0, /*Angle*/ 80, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(0.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -125,7 +125,7 @@ unsafe fn popo_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attackdash_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackdash_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(0.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -142,7 +142,7 @@ unsafe fn popon_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 13.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -160,7 +160,7 @@ unsafe fn popo_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3hi_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -3.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -178,7 +178,7 @@ unsafe fn popon_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -196,7 +196,7 @@ unsafe fn popo_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -3.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -214,7 +214,7 @@ unsafe fn popon_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -233,7 +233,7 @@ unsafe fn popo_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks3lw_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -3.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -252,7 +252,7 @@ unsafe fn popon_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     for _ in 0..6{
         if macros::is_excute(fighter) {
@@ -282,7 +282,7 @@ unsafe fn popo_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackhi3_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     for _ in 0..6 {
         if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
@@ -329,11 +329,12 @@ unsafe fn popon_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downtilt(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
+unsafe fn game_popo_attacklw3(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    frame(fighter.lua_state_agent, 7.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 10.0, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 10.0, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 10.0, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -350,11 +351,12 @@ unsafe fn popo_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downtilt(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
+unsafe fn game_popo_attacklw3_nana(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    frame(fighter.lua_state_agent, 7.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 9.5, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 9.5, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 9.5, /*Angle*/ 20, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -371,7 +373,7 @@ unsafe fn popon_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -400,7 +402,7 @@ unsafe fn popo_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attacks4_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacks4_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -450,7 +452,7 @@ unsafe fn popon_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -473,7 +475,7 @@ unsafe fn popo_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackhi4_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -554,7 +556,7 @@ unsafe fn popon_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -577,7 +579,7 @@ unsafe fn popo_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attacklw4_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -600,7 +602,7 @@ unsafe fn popon_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -623,7 +625,7 @@ unsafe fn popo_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairn_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairn_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -646,15 +648,16 @@ unsafe fn popon_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairf(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
+    frame(fighter.lua_state_agent, 18.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 17.0, /*Angle*/ 290, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 17.0, /*Angle*/ 285, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 3.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 17.0, /*Angle*/ 280, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -674,7 +677,7 @@ unsafe fn popo_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairf_nana(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -727,7 +730,7 @@ unsafe fn popon_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -750,7 +753,7 @@ unsafe fn popo_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairb_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -773,7 +776,7 @@ unsafe fn popon_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0, 1.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -796,7 +799,7 @@ unsafe fn popo_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairhi_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0, 1.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -819,7 +822,7 @@ unsafe fn popon_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0, 1, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -850,7 +853,7 @@ unsafe fn popo_dair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_attackairlw_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0, 1, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -881,7 +884,7 @@ unsafe fn popon_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -905,7 +908,7 @@ unsafe fn popo_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -930,7 +933,7 @@ unsafe fn popo_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 11.0);
@@ -957,7 +960,7 @@ unsafe fn popo_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -976,7 +979,7 @@ unsafe fn popo_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1004,7 +1007,7 @@ unsafe fn popo_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 60, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 67, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1034,7 +1037,7 @@ unsafe fn popo_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 9.0, /*Angle*/ 88, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 91, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1062,7 +1065,7 @@ unsafe fn popo_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_throwd(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 80, /*KBG*/ 111, /*FKB*/ 0, /*BKB*/ 30, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1087,7 +1090,7 @@ unsafe fn popo_throwd(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 24.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 13.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(3.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1103,7 +1106,7 @@ unsafe fn popo_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_cliffattack_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 24.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
@@ -1126,7 +1129,7 @@ unsafe fn popon_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -12.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1150,7 +1153,7 @@ unsafe fn popo_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_slipattack_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
@@ -1188,7 +1191,7 @@ unsafe fn popon_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1212,7 +1215,7 @@ unsafe fn popo_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattackd_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_downattackd_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
@@ -1250,7 +1253,7 @@ unsafe fn popon_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1274,7 +1277,7 @@ unsafe fn popo_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_downattacku_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_downattacku_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
@@ -1312,7 +1315,7 @@ unsafe fn popon_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -1329,7 +1332,7 @@ unsafe fn popo_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialn_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialn_nana(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -1350,7 +1353,7 @@ unsafe fn popon_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -1367,7 +1370,7 @@ unsafe fn popo_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_specialairn_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairn_nana(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -1388,7 +1391,7 @@ unsafe fn popon_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_shoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_ice(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_iceshot_shoot(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ *WEAPON_POPO_ICE_SHOT_ATTACK_ID_MAIN as u64, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 15, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 3.4, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_NONE);
         AttackModule::enable_safe_pos(fighter.module_accessor);
@@ -1406,7 +1409,7 @@ unsafe fn popo_ice(fighter: &mut L2CAgentBase) {
     script = "game_specials1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specials1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -1518,7 +1521,7 @@ unsafe fn popo_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specials1_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specials1_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -1630,7 +1633,7 @@ unsafe fn popon_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specials2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sideb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specials2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -1734,7 +1737,7 @@ unsafe fn popo_sideb2(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackbsub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackbsub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1746,7 +1749,7 @@ unsafe fn popo_sidebsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackbsub_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackbsub_nana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1758,7 +1761,7 @@ unsafe fn popon_sidebsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackbothsub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebbothsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackbothsub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.2, /*Angle*/ 25, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.2, /*Angle*/ 32, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1772,7 +1775,7 @@ unsafe fn popo_sidebbothsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackcouplesub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebcouplesub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackcouplesub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.2, /*Angle*/ 25, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.2, /*Angle*/ 32, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1790,7 +1793,7 @@ unsafe fn popo_sidebcouplesub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackfsub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebfsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackfsub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1802,7 +1805,7 @@ unsafe fn popo_sidebfsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattackfsub_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebfsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattackfsub_nana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1814,7 +1817,7 @@ unsafe fn popon_sidebfsub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattacksinglebsub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebsinglesub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattacksinglebsub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1825,12 +1828,12 @@ unsafe fn popo_sidebsinglesub(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSAttackBSingleSub_Nana
+#[acmd_script(//SpecialSAttackSingleBSub_Nana
     agent = "popo", 
-    script = "game_specialsattackbsinglesub_nana", 
+    script = "game_specialsattacksinglebsub_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebsinglesub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattacksinglebsub_nana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1846,7 +1849,7 @@ unsafe fn popon_sidebsinglesub(fighter: &mut L2CAgentBase) {
     script = "game_specialsattacksinglefsub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebsinglefsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattacksinglefsub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.6, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1857,12 +1860,12 @@ unsafe fn popo_sidebsinglefsub(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSAttackFSub_Nana
+#[acmd_script(//SpecialSAttackSingleFSub_Nana
     agent = "popo", 
-    script = "game_specialsattackfsub_nana", 
+    script = "game_specialsattacksinglefsub_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebsinglefsub(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialsattacksinglefsub_nana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 25, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ -3.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.3, /*Angle*/ 32, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 13, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HAMMER);
@@ -1878,7 +1881,7 @@ unsafe fn popon_sidebsinglefsub(fighter: &mut L2CAgentBase) {
     script = "game_specialscommoncouplesub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebcom1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialscommoncouplesub(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 6, 0, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -1983,7 +1986,7 @@ unsafe fn popo_sidebcom1(fighter: &mut L2CAgentBase) {
     script = "game_specialscommonsinglesub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebcom2(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialscommonsinglesub(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -2096,7 +2099,7 @@ unsafe fn popo_sidebcom2(fighter: &mut L2CAgentBase) {
     script = "game_specialscommonsinglesub_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebcom(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialscommonsinglesub_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -2209,7 +2212,7 @@ unsafe fn popon_sidebcom(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairs1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -2325,7 +2328,7 @@ unsafe fn popo_sidebair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_sidebair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairs1_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -2441,7 +2444,7 @@ unsafe fn popon_sidebair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairs2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidebair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairs2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 6, 0, 0, 6, 0, 1.0, 1.0, 900, false, 1.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -2549,7 +2552,7 @@ unsafe fn popo_sidebair2(fighter: &mut L2CAgentBase) {
     script = "game_specialhithrownana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialhithrownana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("head"), /*Damage*/ 50.0, /*Angle*/ 280, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -0.3, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 50, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HEAD);
@@ -2578,7 +2581,7 @@ unsafe fn popo_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialhithrownana_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialhithrownana_nana(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("head"), /*Damage*/ 50.0, /*Angle*/ 250, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -0.3, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 50, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HEAD);
@@ -2607,7 +2610,7 @@ unsafe fn popon_upb(fighter: &mut L2CAgentBase) {
     script = "game_speciallw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_speciallw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2622,7 +2625,7 @@ unsafe fn popo_downb(fighter: &mut L2CAgentBase) {
     script = "game_speciallw_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_speciallw_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2641,7 +2644,7 @@ unsafe fn popon_downb(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2656,7 +2659,7 @@ unsafe fn popo_downbair(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw_nana", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popon_downbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_specialairlw_nana(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     for _ in 0..9 {
         if macros::is_excute(fighter) {
@@ -2675,7 +2678,7 @@ unsafe fn popon_downbair(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_blizzard(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_blizzard_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.8, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(20.0), /*Hitlag*/ 0.5, /*SDI*/ 1.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -2, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_NONE);
     }
@@ -2698,7 +2701,7 @@ unsafe fn popo_blizzard(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -2709,7 +2712,7 @@ unsafe fn popo_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -2720,7 +2723,7 @@ unsafe fn popo_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_UNIRA), 0, 0, false, false);
     }
@@ -2731,7 +2734,7 @@ unsafe fn popo_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_UNIRA), 0, 0, false, false);
     }
@@ -2742,7 +2745,7 @@ unsafe fn popo_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEALBALL), 0, 0, false, false);
     }
@@ -2753,7 +2756,7 @@ unsafe fn popo_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn popo_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_popo_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEALBALL), 0, 0, false, false);
     }
@@ -2761,90 +2764,90 @@ unsafe fn popo_downtauntl(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        popo_jab1,
-        popo_jab2,
-        popo_dashattack,
-        popo_sidetiltup,
-        popo_sidetilt,
-        popo_sidetiltdown,
-        popo_uptilt,
-        popo_downtilt,
-        popo_sidesmash,
-        popo_upsmash,
-        popo_downsmash,
-        popo_nair,
-        popo_fair,
-        popo_bair,
-        popo_uair,
-        popo_dair,
-        popo_grab,
-        popo_dashgrab,
-        popo_pivotgrab,
-        popo_pummel,
-        popo_throwf,
-        popo_throwb,
-        popo_throwhi,
-        popo_throwd,
-        popo_cliffattack,
-        popo_slipattack,
-        popo_downattackd,
-        popo_downattacku,
-        popo_neutralb,
-        popo_neutralbair,
-        popo_ice,
-        popo_sideb1,
-        popo_sideb2,
-        popo_sidebsub,
-        popo_sidebbothsub,
-        popo_sidebcouplesub,
-        popo_sidebfsub,
-        popo_sidebsinglesub,
-        popo_sidebsinglefsub,
-        popo_sidebcom1,
-        popo_sidebcom2,
-        popo_sidebair1,
-        popo_sidebair2,
-        popo_upb,
-        popo_downb,
-        popo_downbair,
-        popo_blizzard,
-        popo_uptauntr,
-        popo_uptauntl,
-        popo_sidetauntr,
-        popo_sidetauntl,
-        popo_downtauntr,
-        popo_downtauntl,
-        popon_jab1,
-        popon_jab2,
-        popon_dashattack,
-        popon_sidetiltup,
-        popon_sidetilt,
-        popon_sidetiltdown,
-        popon_uptilt,
-        popon_downtilt,
-        popon_sidesmash,
-        popon_upsmash,
-        popon_downsmash,
-        popon_nair,
-        popon_fair,
-        popon_bair,
-        popon_uair,
-        popon_dair,
-        popon_cliffattack,
-        popon_slipattack,
-        popon_downattackd,
-        popon_downattacku,
-        popon_neutralb,
-        popon_neutralbair,
-        popon_sideb1,
-        popon_sidebsub,
-        popon_sidebfsub,
-        popon_sidebsinglesub,
-        popon_sidebsinglefsub,
-        popon_sidebcom,
-        popon_sidebair1,
-        popon_upb,
-        popon_downb,
-        popon_downbair
+        game_popo_attack11,
+        game_popo_attack12,
+        game_popo_attackdash,
+        game_popo_attacks3hi,
+        game_popo_attacks3,
+        game_popo_attacks3lw,
+        game_popo_attackhi3,
+        game_popo_attacklw3,
+        game_popo_attacks4,
+        game_popo_attackhi4,
+        game_popo_attacklw4,
+        game_popo_attackairn,
+        game_popo_attackairf,
+        game_popo_attackairb,
+        game_popo_attackairhi,
+        game_popo_attackairlw,
+        game_popo_catch,
+        game_popo_catchdash,
+        game_popo_catchturn,
+        game_popo_catchattack,
+        game_popo_throwf,
+        game_popo_throwb,
+        game_popo_throwhi,
+        game_popo_throwlw,
+        game_popo_cliffattack,
+        game_popo_slipattack,
+        game_popo_downattackd,
+        game_popo_downattacku,
+        game_popo_specialn,
+        game_popo_specialairn,
+        game_popo_iceshot_shoot,
+        game_popo_specials1,
+        game_popo_specials2,
+        game_popo_specialsattackbsub,
+        game_popo_specialsattackbothsub,
+        game_popo_specialsattackcouplesub,
+        game_popo_specialsattackfsub,
+        game_popo_specialsattacksinglebsub,
+        game_popo_specialsattacksinglefsub,
+        game_popo_specialscommoncouplesub,
+        game_popo_specialscommonsinglesub,
+        game_popo_specialairs1,
+        game_popo_specialairs2,
+        game_popo_specialhithrownana,
+        game_popo_speciallw,
+        game_popo_specialairlw,
+        game_popo_blizzard_fly,
+        game_popo_appealhir,
+        game_popo_appealhil,
+        game_popo_appealsr,
+        game_popo_appealsl,
+        game_popo_appeallwr,
+        game_popo_appeallwl,
+        game_popo_attack11_nana,
+        game_popo_attack12_nana,
+        game_popo_attackdash_nana,
+        game_popo_attacks3hi_nana,
+        game_popo_attacks3_nana,
+        game_popo_attacks3lw_nana,
+        game_popo_attackhi3_nana,
+        game_popo_attacklw3_nana,
+        game_popo_attacks4_nana,
+        game_popo_attackhi4_nana,
+        game_popo_attacklw4_nana,
+        game_popo_attackairn_nana,
+        game_popo_attackairf_nana,
+        game_popo_attackairb_nana,
+        game_popo_attackairhi_nana,
+        game_popo_attackairlw_nana,
+        game_popo_cliffattack_nana,
+        game_popo_slipattack_nana,
+        game_popo_downattackd_nana,
+        game_popo_downattacku_nana,
+        game_popo_specialn_nana,
+        game_popo_specialairn_nana,
+        game_popo_specials1_nana,
+        game_popo_specialsattackbsub_nana,
+        game_popo_specialsattackfsub_nana,
+        game_popo_specialsattacksinglebsub_nana,
+        game_popo_specialsattacksinglefsub_nana,
+        game_popo_specialscommonsinglesub_nana,
+        game_popo_specialairs1_nana,
+        game_popo_specialhithrownana_nana,
+        game_popo_speciallw_nana,
+        game_popo_specialairlw_nana
     );
 }

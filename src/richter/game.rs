@@ -14,11 +14,12 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
+unsafe fn game_richter_attack11(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    frame(fighter.lua_state_agent, 4.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.4, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 7.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.4, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 9.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.4, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 15, /*Size*/ 4.7, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 12.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
@@ -49,7 +50,7 @@ unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attackhold", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_hold1(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_whip_attackhold(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         PhysicsModule::set_2nd_status(fighter.module_accessor, *PH2NDARY_CRAW_MOVE as i32);
     }
@@ -67,7 +68,7 @@ unsafe fn richter_hold1(fighter: &mut L2CAgentBase) {
     script = "game_attackairhold", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_hold2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_whip_attackairhold(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         PhysicsModule::set_2nd_status(fighter.module_accessor, *PH2NDARY_CRAW_MOVE as i32);
     }
@@ -85,7 +86,7 @@ unsafe fn richter_hold2(fighter: &mut L2CAgentBase) {
     script = "game_attackhold_attackdata", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_hold3(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_whip_attackhold_attackdata(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hookshot24"), /*Damage*/ 15.0, /*Angle*/ 80, /*KBG*/ 35, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 4.2, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 13, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
@@ -100,7 +101,7 @@ unsafe fn richter_hold3(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.6, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 7.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
@@ -126,7 +127,7 @@ unsafe fn richter_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack100", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_jab100(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attack100(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if macros::is_excute(fighter) {
             FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 5.0);
@@ -208,7 +209,7 @@ unsafe fn richter_jab100(fighter: &mut L2CAgentBase) {
     script = "game_attack100sub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_jab100sub(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attack100sub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.35, /*Angle*/ 361, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 8, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(13.0), /*Hitlag*/ 0.35, /*SDI*/ 0.7, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 6.0, /*Unk*/ false);
@@ -226,7 +227,7 @@ unsafe fn richter_jab100sub(fighter: &mut L2CAgentBase) {
     script = "game_attack100end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_jab100end(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attack100end(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 46, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 12.0, /*X2*/ Some(0.0), /*Y2*/ Some(7.5), /*Z2*/ Some(13.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
@@ -242,7 +243,7 @@ unsafe fn richter_jab100end(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     for _ in 0..5 {
         if macros::is_excute(fighter) {
@@ -271,7 +272,7 @@ unsafe fn richter_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 4.0);
@@ -302,7 +303,7 @@ unsafe fn richter_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 90, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 88, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 55.5, /*Z*/ 3.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_WHIP, /*Type*/ *ATTACK_REGION_WHIP);
@@ -321,7 +322,7 @@ unsafe fn richter_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SIMON_STATUS_ATTACK_FLAG_ENABLE_COMBO);
@@ -349,7 +350,7 @@ unsafe fn richter_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw32", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downtilt2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacklw32(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
@@ -379,7 +380,7 @@ unsafe fn richter_downtilt2(fighter: &mut L2CAgentBase) {
     script = "game_attacks4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidesmashup(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacks4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -408,7 +409,7 @@ unsafe fn richter_sidesmashup(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -437,7 +438,7 @@ unsafe fn richter_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attacks4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidesmashdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacks4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -466,7 +467,7 @@ unsafe fn richter_sidesmashdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.2);
     frame(fighter.lua_state_agent, 5.0);
@@ -503,7 +504,7 @@ unsafe fn richter_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attacklw4(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -538,7 +539,7 @@ unsafe fn richter_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 2.5, 4.5);
@@ -580,7 +581,7 @@ unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
     if macros::is_excute(fighter) {
@@ -618,7 +619,7 @@ unsafe fn richter_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairfhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_fairhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairfhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
     if macros::is_excute(fighter) {
@@ -656,7 +657,7 @@ unsafe fn richter_fairhi(fighter: &mut L2CAgentBase) {
     script = "game_attackairflw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_fairlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairflw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if macros::is_excute(fighter) {
@@ -694,7 +695,7 @@ unsafe fn richter_fairlw(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
@@ -732,7 +733,7 @@ unsafe fn richter_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairbhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_bairhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairbhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
@@ -770,7 +771,7 @@ unsafe fn richter_bairhi(fighter: &mut L2CAgentBase) {
     script = "game_attackairblw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_bairlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairblw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     if macros::is_excute(fighter) {
@@ -808,12 +809,13 @@ unsafe fn richter_bairlw(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.44);
+    frame(fighter.lua_state_agent, 15.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_ATTACK_AIR_CLIFF_RAY_CHECK);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_ATTACK_AIR_LASSO_FLAG_CHECK);
@@ -844,7 +846,7 @@ unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_attackairlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
         macros::SET_SPEED_EX(fighter, 0.0, 0.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -857,9 +859,10 @@ unsafe fn richter_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
+    frame(fighter.lua_state_agent, 14.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
         macros::SET_SPEED_EX(fighter, 1.6, -3.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
@@ -891,7 +894,7 @@ unsafe fn richter_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_catch(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 6.0);
@@ -900,9 +903,9 @@ unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.3, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(13.7), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 4.65, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ 2.35, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(14.35), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);
         macros::game_CaptureCutCommon(fighter);
@@ -920,7 +923,7 @@ unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_catchdash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 6.0, 4.0);
@@ -929,9 +932,9 @@ unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.6, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(15.5), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 4.3, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ 2.7, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(16.8), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);
         macros::game_CaptureCutCommon(fighter);
@@ -949,7 +952,7 @@ unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_catchturn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 6.5, 6.0);
@@ -958,9 +961,9 @@ unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
     }
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::CATCH(fighter, /*ID*/ 0, /*Bone*/ Hash40::new("top"), /*Size*/ 5.3, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(-20.7), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G);
         macros::CATCH(fighter, /*ID*/ 1, /*Bone*/ Hash40::new("top"), /*Size*/ 4.65, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ -2.35, /*X2*/ Some(0.0), /*Y2*/ Some(6.6), /*Z2*/ Some(-21.35), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A);
         macros::game_CaptureCutCommon(fighter);
@@ -978,7 +981,7 @@ unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -996,7 +999,7 @@ unsafe fn richter_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 40, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1019,7 +1022,7 @@ unsafe fn richter_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 134, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1045,7 +1048,7 @@ unsafe fn richter_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 90, /*KBG*/ 82, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1073,7 +1076,7 @@ unsafe fn richter_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 57, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1099,7 +1102,7 @@ unsafe fn richter_throwlw(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 17.0, /*Angle*/ 45, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 12.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1115,7 +1118,7 @@ unsafe fn richter_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1139,7 +1142,7 @@ unsafe fn richter_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1163,7 +1166,7 @@ unsafe fn richter_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-3.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1187,7 +1190,7 @@ unsafe fn richter_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.2);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, false, 0);
@@ -1204,7 +1207,7 @@ unsafe fn richter_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.2);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, false, 0);
@@ -1221,7 +1224,7 @@ unsafe fn richter_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_axe(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_axe_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("axe"), /*Damage*/ 60.0, /*Angle*/ 74, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 22.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 50, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 1.1);
@@ -1246,7 +1249,7 @@ unsafe fn richter_axe(fighter: &mut L2CAgentBase) {
     script = "game_specials1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specials1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
@@ -1271,7 +1274,7 @@ unsafe fn richter_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specials2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sideb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specials2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
@@ -1284,7 +1287,7 @@ unsafe fn richter_sideb2(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidebair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialairs1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
@@ -1296,7 +1299,7 @@ unsafe fn richter_sidebair1(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_CROSS, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_CROSS, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
     }
     frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
@@ -1309,11 +1312,11 @@ unsafe fn richter_sidebair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairs2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidebair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialairs2(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
-        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_CROSS, smash::app::ArticleOperationTarget(0));
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_CROSS, ArticleOperationTarget(0));
     }
 }
 
@@ -1322,7 +1325,7 @@ unsafe fn richter_sidebair2(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_cross1(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_cross_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("rot"), /*Damage*/ 15.0, /*Angle*/ 362, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(-3.7), /*Z2*/ Some(0.0), /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_CROSS, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("rot"), /*Damage*/ 15.0, /*Angle*/ 362, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 3.7, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-3.7), /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_CROSS, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1336,7 +1339,7 @@ unsafe fn richter_cross1(fighter: &mut L2CAgentBase) {
     script = "game_turn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_cross2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_cross_turn(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("rot"), /*Damage*/ 16.0, /*Angle*/ 362, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(-3.7), /*Z2*/ Some(0.0), /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -2.5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_CROSS, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("rot"), /*Damage*/ 16.0, /*Angle*/ 362, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 3.7, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-3.7), /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -2.5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_RICHTER_CROSS, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -1350,7 +1353,7 @@ unsafe fn richter_cross2(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1398,7 +1401,7 @@ unsafe fn richter_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1446,7 +1449,7 @@ unsafe fn richter_upbair(fighter: &mut L2CAgentBase) {
     script = "game_speciallw", 
     category = ACMD_GAME,
     low_priority )]
-unsafe fn richter_downb(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_speciallw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SIMON_STATUS_SPECIAL_LW_FLAG_GENERATE_HOLYWATER);
@@ -1462,7 +1465,7 @@ unsafe fn richter_downb(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_specialairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SIMON_STATUS_SPECIAL_LW_FLAG_GENERATE_HOLYWATER);
@@ -1478,7 +1481,7 @@ unsafe fn richter_downbair(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEATHSCYTHE), 0, 0, false, false);
     }
@@ -1489,7 +1492,7 @@ unsafe fn richter_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEATHSCYTHE), 0, 0, false, false);
     }
@@ -1500,7 +1503,7 @@ unsafe fn richter_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_RAYGUN), 0, 0, false, false);
     }
@@ -1511,7 +1514,7 @@ unsafe fn richter_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_RAYGUN), 0, 0, false, false);
     }
@@ -1522,7 +1525,7 @@ unsafe fn richter_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -1533,7 +1536,7 @@ unsafe fn richter_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_FREEZER), 0, 0, false, false);
     }
@@ -1544,7 +1547,7 @@ unsafe fn richter_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_final1(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_finalend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CAM_ZOOM_OUT(fighter, );
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1562,7 +1565,7 @@ unsafe fn richter_final1(fighter: &mut L2CAgentBase) {
     script = "game_finalairend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn richter_final2(fighter: &mut L2CAgentBase) {
+unsafe fn game_richter_finalairend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CAM_ZOOM_OUT(fighter, );
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1577,65 +1580,65 @@ unsafe fn richter_final2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        richter_jab1,
-        richter_jab2,
-        richter_hold1,
-        richter_hold2,
-        richter_hold3,
-        richter_jab100,
-        richter_jab100sub,
-        richter_jab100end,
-        richter_dashattack,
-        richter_sidetilt,
-        richter_uptilt,
-        richter_downtilt,
-        richter_downtilt2,
-        richter_sidesmashup,
-        richter_sidesmash,
-        richter_sidesmashdown,
-        richter_upsmash,
-        richter_downsmash,
-        richter_nair,
-        richter_fair,
-        richter_fairhi,
-        richter_fairlw,
-        richter_bair,
-        richter_bairhi,
-        richter_bairlw,
-        richter_uair,
-        richter_dair,
-        richter_grab,
-        richter_dashgrab,
-        richter_pivotgrab,
-        richter_pummel,
-        richter_throwf,
-        richter_throwb,
-        richter_throwhi,
-        richter_throwlw,
-        richter_downattacku,
-        richter_downattackd,
-        richter_cliffattack,
-        richter_slipattack,
-        richter_neutralb,
-        richter_neutralbair,
-        richter_axe,
-        richter_sideb1,
-        richter_sideb2,
-        richter_sidebair1,
-        richter_sidebair2,
-        richter_cross1,
-        richter_cross2,
-        richter_upb,
-        richter_upbair,
-        richter_downb,
-        richter_downbair,
-        richter_sidetauntr,
-        richter_sidetauntl,
-        richter_uptauntr,
-        richter_uptauntl,
-        richter_downtauntr,
-        richter_downtauntl,
-        richter_final1,
-        richter_final2
+        game_richter_attack11,
+        game_richter_attack12,
+        game_richter_whip_attackhold,
+        game_richter_whip_attackairhold,
+        game_richter_whip_attackhold_attackdata,
+        game_richter_attack100,
+        game_richter_attack100sub,
+        game_richter_attack100end,
+        game_richter_attackdash,
+        game_richter_attacks3,
+        game_richter_attackhi3,
+        game_richter_attacklw3,
+        game_richter_attacklw32,
+        game_richter_attacks4hi,
+        game_richter_attacks4,
+        game_richter_attacks4lw,
+        game_richter_attackhi4,
+        game_richter_attacklw4,
+        game_richter_attackairn,
+        game_richter_attackairf,
+        game_richter_attackairfhi,
+        game_richter_attackairflw,
+        game_richter_attackairb,
+        game_richter_attackairbhi,
+        game_richter_attackairblw,
+        game_richter_attackairhi,
+        game_richter_attackairlw,
+        game_richter_catch,
+        game_richter_catchdash,
+        game_richter_catchturn,
+        game_richter_catchattack,
+        game_richter_throwf,
+        game_richter_throwb,
+        game_richter_throwhi,
+        game_richter_throwlw,
+        game_richter_downattacku,
+        game_richter_downattackd,
+        game_richter_cliffattack,
+        game_richter_slipattack,
+        game_richter_specialn,
+        game_richter_specialairn,
+        game_richter_axe_fly,
+        game_richter_specials1,
+        game_richter_specials2,
+        game_richter_specialairs1,
+        game_richter_specialairs2,
+        game_richter_cross_fly,
+        game_richter_cross_turn,
+        game_richter_specialhi,
+        game_richter_specialairhi,
+        game_richter_speciallw,
+        game_richter_specialairlw,
+        game_richter_appealsr,
+        game_richter_appealsl,
+        game_richter_appealhir,
+        game_richter_appealhil,
+        game_richter_appeallwr,
+        game_richter_appeallwl,
+        game_richter_finalend,
+        game_richter_finalairend
     );
 }

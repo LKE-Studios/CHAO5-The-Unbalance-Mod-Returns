@@ -10,7 +10,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["effect_jumpaerialf4", "effect_jumpaerialf5", "effect_jumpaerialf6", "effect_jumpaerialf7"],
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_airjumpgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_jumpaerial(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_feather"), Hash40::new("top"), 0, 15, -10, 0, 0, 0, 1, false);
     }
@@ -21,7 +21,7 @@ unsafe fn pitb_airjumpgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glidestartgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_glidestart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("bowr"), -0, 0, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
@@ -45,7 +45,7 @@ unsafe fn pitb_glidestartgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glidegfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -56,7 +56,7 @@ unsafe fn pitb_glidegfx(fighter: &mut L2CAgentBase) {
     script = "effect_glideattack", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glideattackgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("bowr"), -0, 0, 0, 0, 90, 0, 1, true);
@@ -82,7 +82,7 @@ unsafe fn pitb_glideattackgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidelanding", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glidelandinggfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_glidelanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_fly_miracle_start"), true, true);
@@ -96,7 +96,7 @@ unsafe fn pitb_glidelandinggfx(fighter: &mut L2CAgentBase) {
     script = "effect_glideend", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_glideendgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("pit_fly_miracle_start"), true, true);
@@ -110,7 +110,7 @@ unsafe fn pitb_glideendgfx(fighter: &mut L2CAgentBase) {
     script = "effect_fly", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn pitb_arrowgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_pitb_arrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_pa_fly_arrow"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 2.0, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("pitb_pa_fly_arrow2"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 2.2, true);
@@ -119,12 +119,12 @@ unsafe fn pitb_arrowgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        pitb_airjumpgfx,
-        pitb_glidestartgfx,
-        pitb_glidegfx,
-        pitb_glideattackgfx,
-        pitb_glidelandinggfx,
-        pitb_glideendgfx,
-        pitb_arrowgfx
+        effect_pitb_jumpaerial,
+        effect_pitb_glidestart,
+        effect_pitb_glidewing,
+        effect_pitb_glideattack,
+        effect_pitb_glidelanding,
+        effect_pitb_glideend,
+        effect_pitb_arrow
     );
 }

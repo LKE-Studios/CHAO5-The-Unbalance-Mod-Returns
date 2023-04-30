@@ -3,45 +3,45 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//SpecialHiL GFX
+#[acmd_script(//SpecialHiL
     agent = "purin", 
     script = "effect_specialhil", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn purin_upblgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_purin_specialhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("purin_utau"), Hash40::new("hip"), 2, 0, 0, 0, 0, 0, 2.25, true);
     }
 }
 
-#[acmd_script(//SpecialHiR GFX
+#[acmd_script(//SpecialHiR
     agent = "purin", 
     script = "effect_specialhir", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn purin_upbrgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_purin_specialhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("purin_utau"), Hash40::new("hip"), 2, 0, 0, 0, 0, 0, 2.25, true);
     }
 }
 
-#[acmd_script(//SpecialAirHiL GFX
+#[acmd_script(//SpecialAirHiL
     agent = "purin", 
     script = "effect_specialairhil", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn purin_upbairlgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_purin_specialairhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("purin_utau"), Hash40::new("hip"), 2, 0, 0, 0, 0, 0, 2.25, true);
     }
 }
 
-#[acmd_script(//SpecialAirHiR GFX
+#[acmd_script(//SpecialAirHiR
     agent = "purin", 
     script = "effect_specialairhir", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn purin_upbairrgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_purin_specialairhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("purin_utau"), Hash40::new("hip"), 2, 0, 0, 0, 0, 0, 2.25, true);
     }
@@ -49,9 +49,9 @@ unsafe fn purin_upbairrgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        purin_upblgfx,
-        purin_upbrgfx,
-        purin_upbairlgfx,
-        purin_upbairrgfx,
+        effect_purin_specialhil,
+        effect_purin_specialhir,
+        effect_purin_specialairhil,
+        effect_purin_specialairhir,
     );
 }

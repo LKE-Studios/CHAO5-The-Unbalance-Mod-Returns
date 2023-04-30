@@ -8,7 +8,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_RIDLEY )]
-fn ridley_opff(fighter: &mut L2CFighterCommon) {
+fn frame_ridley(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if [
@@ -29,10 +29,6 @@ fn ridley_opff(fighter: &mut L2CFighterCommon) {
         ].contains(&status_kind) { 
             macros::STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
         };
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
-            KineticModule::clear_speed_all(fighter.module_accessor);
-            macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        }
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             if MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) >= 25.0 && MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) < 26.0 {
                 macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02"));
@@ -46,6 +42,6 @@ fn ridley_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        ridley_opff
+        frame_ridley
     );
 }

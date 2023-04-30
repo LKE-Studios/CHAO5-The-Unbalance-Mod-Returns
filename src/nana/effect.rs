@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_fly", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn nana_blizzardgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_nana_blizzard_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("popo_blizzerd_bullet"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, false);
     }
@@ -19,6 +19,6 @@ unsafe fn nana_blizzardgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        nana_blizzardgfx
+        effect_nana_blizzard_fly
     );
 }

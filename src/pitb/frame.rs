@@ -8,7 +8,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_PITB )]
-fn pitb_opff(fighter: &mut L2CFighterCommon) {
+fn frame_pitb(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if [
@@ -45,6 +45,6 @@ fn pitb_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        pitb_opff
+        frame_pitb
     );
 }

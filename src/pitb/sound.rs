@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6", "sound_jumpaerialf7"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn pitb_airjumpsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_pitb_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_pitb_jump02"));
@@ -21,7 +21,7 @@ unsafe fn pitb_airjumpsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn pitb_glidestartsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_pitb_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_pitb_jump02"));
@@ -42,7 +42,7 @@ unsafe fn pitb_glidestartsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn pitb_glideattacksfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_pitb_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_pitb_swing_m"));
@@ -54,14 +54,10 @@ unsafe fn pitb_glideattacksfx(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn pitb_glidelandingsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_pitb_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
-    }
-    frame(fighter.lua_state_agent, 17.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_pitb_landing02"));
     }
 }
 
@@ -70,7 +66,7 @@ unsafe fn pitb_glidelandingsfx(fighter: &mut L2CAgentBase) {
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn pitb_glideendsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_pitb_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_pitb_bowsplit"));
     }
@@ -82,11 +78,11 @@ unsafe fn pitb_glideendsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        pitb_airjumpsfx,
-        pitb_glidestartsfx,
-        //pitb_glidesfx,
-        pitb_glideattacksfx,
-        pitb_glidelandingsfx,
-        pitb_glideendsfx
+        sound_pitb_jumpaerialf,
+        sound_pitb_glidestart,
+        //sound_pitb_glidewing,
+        sound_pitb_glideattack,
+        sound_pitb_glidelanding,
+        sound_pitb_glideend
     );
 }

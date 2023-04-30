@@ -13,7 +13,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 5.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -44,7 +44,7 @@ unsafe fn pacman_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 35, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -66,7 +66,7 @@ unsafe fn pacman_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_jab3(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 361, /*KBG*/ 117, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -85,7 +85,7 @@ unsafe fn pacman_jab3(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackdash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     wait(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -116,7 +116,7 @@ unsafe fn pacman_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 14.0, /*Angle*/ 60, /*KBG*/ 118, /*FKB*/ 0, /*BKB*/ 28, /*Size*/ 8.8, /*X*/ 6.8, /*Y*/ -0.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -134,7 +134,7 @@ unsafe fn pacman_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 13.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 8.8, /*X*/ 7.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -152,7 +152,7 @@ unsafe fn pacman_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 13.8, /*Angle*/ 335, /*KBG*/ 125, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 8.8, /*X*/ 6.5, /*Y*/ -0.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -171,7 +171,7 @@ unsafe fn pacman_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 7.0);
@@ -194,7 +194,7 @@ unsafe fn pacman_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 7.0);
@@ -213,7 +213,7 @@ unsafe fn pacman_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -235,7 +235,7 @@ unsafe fn pacman_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -264,7 +264,7 @@ unsafe fn pacman_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -291,7 +291,7 @@ unsafe fn pacman_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -320,7 +320,7 @@ unsafe fn pacman_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -349,11 +349,12 @@ unsafe fn pacman_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_bair(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+unsafe fn game_pacman_attackairb(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.444);
+    frame(fighter.lua_state_agent, 8.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 18.8, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 8.5, /*X*/ 4.8, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 18.8, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 9.9, /*X*/ 1.6, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -378,15 +379,16 @@ unsafe fn pacman_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_uair(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
+unsafe fn game_pacman_attackairhi(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
+    frame(fighter.lua_state_agent, 8.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 15.0, /*Angle*/ 70, /*KBG*/ 107, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.4, /*X*/ 1.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 15.0, /*Angle*/ 70, /*KBG*/ 107, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 11.5, /*X*/ 2.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
@@ -405,7 +407,7 @@ unsafe fn pacman_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_attackairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -443,7 +445,7 @@ unsafe fn pacman_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -476,7 +478,7 @@ unsafe fn pacman_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -509,7 +511,7 @@ unsafe fn pacman_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -542,7 +544,7 @@ unsafe fn pacman_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -560,7 +562,7 @@ unsafe fn pacman_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 58, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 55, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -584,7 +586,7 @@ unsafe fn pacman_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 17.0, /*Angle*/ 45, /*KBG*/ 66, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -610,7 +612,7 @@ unsafe fn pacman_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_throwup(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 12.0, /*Angle*/ 89, /*KBG*/ 94, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -636,7 +638,7 @@ unsafe fn pacman_throwup(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_throwdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FT_LEAVE_NEAR_OTTOTTO(fighter, -2.5, 2.5);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 43, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -681,7 +683,7 @@ unsafe fn pacman_throwdown(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 13.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-2.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -697,7 +699,7 @@ unsafe fn pacman_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -11.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -721,7 +723,7 @@ unsafe fn pacman_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -745,7 +747,7 @@ unsafe fn pacman_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -770,7 +772,7 @@ unsafe fn pacman_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialnshoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_neutralb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialnshoot(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.55);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -783,7 +785,7 @@ unsafe fn pacman_neutralb(fighter: &mut L2CAgentBase) {
     script = "game_specialairnshoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_neutralbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialairnshoot(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.55);
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
@@ -796,7 +798,7 @@ unsafe fn pacman_neutralbair(fighter: &mut L2CAgentBase) {
     script = "game_specialsstart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialsstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_ESA, false, 0);
@@ -809,7 +811,7 @@ unsafe fn pacman_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specialsmove", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sideb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialsmove(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("pizzapacman"), /*Damage*/ 29.0, /*Angle*/ 45, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 2.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
@@ -821,7 +823,7 @@ unsafe fn pacman_sideb2(fighter: &mut L2CAgentBase) {
     script = "game_specialsdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sideb3(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialsdash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
@@ -842,7 +844,7 @@ unsafe fn pacman_sideb3(fighter: &mut L2CAgentBase) {
     script = "game_specialsloop", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sideb4(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialsloop(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         ArticleModule::shoot(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_ESA, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
@@ -854,7 +856,7 @@ unsafe fn pacman_sideb4(fighter: &mut L2CAgentBase) {
     script = "game_specialairsstart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidebair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialairsstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_ESA, false, 0);
@@ -867,7 +869,7 @@ unsafe fn pacman_sidebair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairsloop", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidebair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialairsloop(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.5, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 1000, false, 2, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         ArticleModule::shoot(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_ESA, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
@@ -879,7 +881,7 @@ unsafe fn pacman_sidebair2(fighter: &mut L2CAgentBase) {
     script = "game_specialairhiloop", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_specialairhiloop(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("pizzapacman"), /*Damage*/ 40.0, /*Angle*/ 92, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.0, /*X*/ -0.5, /*Y*/ 2.0, /*Z*/ 0.0, /*X2*/ Some(0.5), /*Y2*/ Some(2.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
     }
@@ -898,7 +900,7 @@ unsafe fn pacman_upb(fighter: &mut L2CAgentBase) {
     script = "game_break", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_trampoline(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_trampoline_break(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 300.0, /*Angle*/ 270, /*KBG*/ 1, /*FKB*/ 1, /*BKB*/ 0, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.3, /*Z*/ 0.5, /*X2*/ Some(0.0), /*Y2*/ Some(0.3), /*Z2*/ Some(-0.5), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_FIGHTER, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
@@ -916,7 +918,7 @@ unsafe fn pacman_trampoline(fighter: &mut L2CAgentBase) {
     script = "game_down", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_hydrant1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrant_down(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("rot2"), /*Damage*/ 25.0, /*Angle*/ 270, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -2.5, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -927,7 +929,7 @@ unsafe fn pacman_hydrant1(fighter: &mut L2CAgentBase) {
     script = "game_fall", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_hydrant2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrant_fall(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 28.0, /*Angle*/ 270, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(2.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ -2.3, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
         AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
@@ -939,7 +941,7 @@ unsafe fn pacman_hydrant2(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_hydrant3(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrant_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("rot2"), /*Damage*/ 30.0, /*Angle*/ 277, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -3.3, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -950,7 +952,7 @@ unsafe fn pacman_hydrant3(fighter: &mut L2CAgentBase) {
     script = "game_wait", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_hydrant4(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrant_wait(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_search"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -961,19 +963,19 @@ unsafe fn pacman_hydrant4(fighter: &mut L2CAgentBase) {
     script = "game_shoot", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_water1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrantwater_shoot(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.4, /*Angle*/ 361, /*KBG*/ 130, /*FKB*/ 37, /*BKB*/ 0, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ true, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PACMAN_WATER, /*Type*/ *ATTACK_REGION_WATER);
     }
 }
 
-#[acmd_script(//Shoot
+#[acmd_script(//ShootUp
     agent = "pacman_firehydrantwater", 
-    script = "game_shoot", 
+    script = "game_shootup", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_water2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_firehydrantwater_shootup(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.4, /*Angle*/ 90, /*KBG*/ 130, /*FKB*/ 43, /*BKB*/ 0, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ true, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PACMAN_WATER, /*Type*/ *ATTACK_REGION_WATER);
@@ -985,7 +987,7 @@ unsafe fn pacman_water2(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
     }
@@ -996,7 +998,7 @@ unsafe fn pacman_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
     }
@@ -1007,7 +1009,7 @@ unsafe fn pacman_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PITFALL), 0, 0, false, false);
     }
@@ -1018,7 +1020,7 @@ unsafe fn pacman_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PITFALL), 0, 0, false, false);
     }
@@ -1029,7 +1031,7 @@ unsafe fn pacman_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(4.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -40, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sleep"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
@@ -1040,7 +1042,7 @@ unsafe fn pacman_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(4.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -40, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sleep"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
@@ -1051,7 +1053,7 @@ unsafe fn pacman_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_eat", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pacman_final(fighter: &mut L2CAgentBase) {
+unsafe fn game_pacman_bigpacman_eat(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *WEAPON_PACMAN_BIGPACMAN_ATTACK_ABSOLUTE_KIND_EAT, /*ID*/ 0, /*Damage*/ 60.0, /*Angle*/ 45, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 30, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
         macros::ATTACK_ABS(fighter, /*Kind*/ *WEAPON_PACMAN_BIGPACMAN_ATTACK_ABSOLUTE_KIND_FINISH_EAT, /*ID*/ 0, /*Damage*/ 80.0, /*Angle*/ 40, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 30, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
@@ -1061,57 +1063,57 @@ unsafe fn pacman_final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        pacman_jab1,
-        pacman_jab2,
-        pacman_jab3,
-        pacman_dashattack,
-        pacman_sidetiltup,
-        pacman_sidetilt,
-        pacman_sidetiltdown,
-        pacman_uptilt,
-        pacman_downtilt,
-        pacman_sidesmash,
-        pacman_upsmash,
-        pacman_downsmash,
-        pacman_nair,
-        pacman_fair,
-        pacman_bair,
-        pacman_uair,
-        pacman_dair,
-        pacman_grab,
-        pacman_dashgrab,
-        pacman_pivotgrab,
-        pacman_pummel,
-        pacman_throwf,
-        pacman_throwb,
-        pacman_throwup,
-        pacman_throwdown,
-        pacman_cliffattack,
-        pacman_slipattack,
-        pacman_downattackd,
-        pacman_downattacku,
-        pacman_neutralb,
-        pacman_neutralbair,
-        pacman_sideb1,
-        pacman_sideb2,
-        pacman_sideb3,
-        pacman_sideb4,
-        pacman_sidebair1,
-        pacman_sidebair2,
-        pacman_upb,
-        pacman_trampoline,
-        pacman_hydrant1,
-        pacman_hydrant2,
-        pacman_hydrant3,
-        pacman_hydrant4,
-        pacman_water1,
-        pacman_water2,
-        pacman_uptauntr,
-        pacman_uptauntl,
-        pacman_sidetauntr,
-        pacman_sidetauntl,
-        pacman_downtauntr,
-        pacman_downtauntl,
-        pacman_final
+        game_pacman_attack11,
+        game_pacman_attack12,
+        game_pacman_attack13,
+        game_pacman_attackdash,
+        game_pacman_attacks3hi,
+        game_pacman_attacks3,
+        game_pacman_attacks3lw,
+        game_pacman_attackhi3,
+        game_pacman_attacklw3,
+        game_pacman_attacks4,
+        game_pacman_attackhi4,
+        game_pacman_attacklw4,
+        game_pacman_attackairn,
+        game_pacman_attackairf,
+        game_pacman_attackairb,
+        game_pacman_attackairhi,
+        game_pacman_attackairlw,
+        game_pacman_catch,
+        game_pacman_catchdash,
+        game_pacman_catchturn,
+        game_pacman_catchattack,
+        game_pacman_throwf,
+        game_pacman_throwb,
+        game_pacman_throwhi,
+        game_pacman_throwlw,
+        game_pacman_cliffattack,
+        game_pacman_slipattack,
+        game_pacman_downattackd,
+        game_pacman_downattacku,
+        game_pacman_specialnshoot,
+        game_pacman_specialairnshoot,
+        game_pacman_specialsstart,
+        game_pacman_specialsmove,
+        game_pacman_specialsdash,
+        game_pacman_specialsloop,
+        game_pacman_specialairsstart,
+        game_pacman_specialairsloop,
+        game_pacman_specialairhiloop,
+        game_pacman_trampoline_break,
+        game_pacman_firehydrant_down,
+        game_pacman_firehydrant_fall,
+        game_pacman_firehydrant_fly,
+        game_pacman_firehydrant_wait,
+        game_pacman_firehydrantwater_shoot,
+        game_pacman_firehydrantwater_shootup,
+        game_pacman_appealhir,
+        game_pacman_appealhil,
+        game_pacman_appealsr,
+        game_pacman_appealsl,
+        game_pacman_appeallwr,
+        game_pacman_appeallwl,
+        game_pacman_bigpacman_eat
     );
 }

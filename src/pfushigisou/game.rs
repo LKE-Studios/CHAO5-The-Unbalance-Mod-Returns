@@ -15,11 +15,12 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_jab1(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.43);
+unsafe fn game_pfushigisou_attack11(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.38);
+    frame(fighter.lua_state_agent, 6.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 5.3, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 6.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 5.3, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 9.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 5.3, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 12.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -42,11 +43,12 @@ unsafe fn pfushigisou_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_jab2(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
+unsafe fn game_pfushigisou_attack12(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    frame(fighter.lua_state_agent, 4.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 10.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 3.6, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -76,7 +78,7 @@ unsafe fn pfushigisou_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack100", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_jab100(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attack100(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         //macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
         frame(fighter.lua_state_agent, 1.0);
@@ -160,7 +162,7 @@ unsafe fn pfushigisou_jab100(fighter: &mut L2CAgentBase) {
     script = "game_attack100subl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_jab100sub(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attack100subl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.5, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 7, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 17.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(8.0), /*Hitlag*/ 0.5, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATK_SET_SHIELD_SETOFF_MUL_arg3(fighter, /*ID1*/ 0, /*ID2*/ 1, /*ShieldstunMul*/ 3.0);
@@ -177,7 +179,7 @@ unsafe fn pfushigisou_jab100sub(fighter: &mut L2CAgentBase) {
     script = "game_attack100end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_jab100end(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attack100end(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 342, /*KBG*/ 82, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 11.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -195,7 +197,7 @@ unsafe fn pfushigisou_jab100end(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.4, /*Angle*/ 52, /*KBG*/ 83, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 4.3, /*Z*/ 5.6, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
@@ -247,7 +249,7 @@ unsafe fn pfushigisou_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 6.0);
@@ -280,12 +282,13 @@ unsafe fn pfushigisou_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.43);
+    frame(fighter.lua_state_agent, 8.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 16.0, /*Angle*/ 88, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 19.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 16.0, /*Angle*/ 88, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 19.0, /*X*/ 1.4, /*Y*/ -1.5, /*Z*/ -0.1, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 16.0, /*Angle*/ 88, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 19.0, /*X*/ 1.4, /*Y*/ -1.5, /*Z*/ 0.1, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -301,7 +304,7 @@ unsafe fn pfushigisou_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("vinel2"), /*Damage*/ 10.5, /*Angle*/ 30, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.8, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -323,7 +326,7 @@ unsafe fn pfushigisou_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidesmashup(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacks4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -349,7 +352,7 @@ unsafe fn pfushigisou_sidesmashup(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -375,7 +378,7 @@ unsafe fn pfushigisou_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attacks4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidesmashdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacks4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -401,7 +404,7 @@ unsafe fn pfushigisou_sidesmashdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -424,7 +427,7 @@ unsafe fn pfushigisou_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 8.0);
@@ -455,7 +458,7 @@ unsafe fn pfushigisou_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -494,15 +497,16 @@ unsafe fn pfushigisou_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_fair(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
+unsafe fn game_pfushigisou_attackairf(fighter: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
+    frame(fighter.lua_state_agent, 13.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("viner2"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 51, /*Size*/ 13.6, /*X*/ 0.0, /*Y*/ -1.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("viner3"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 81, /*FKB*/ 0, /*BKB*/ 46, /*Size*/ 13.2, /*X*/ 2.0, /*Y*/ -0.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("viner4"), /*Damage*/ 20.0, /*Angle*/ 255, /*KBG*/ 81, /*FKB*/ 0, /*BKB*/ 46, /*Size*/ 13.0, /*X*/ 3.8, /*Y*/ -0.5, /*Z*/ -1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -523,7 +527,7 @@ unsafe fn pfushigisou_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -558,7 +562,7 @@ unsafe fn pfushigisou_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackairhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
         macros::HIT_NODE(fighter, Hash40::new("flower"), *HIT_STATUS_XLU);
@@ -584,7 +588,7 @@ unsafe fn pfushigisou_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -618,7 +622,7 @@ unsafe fn pfushigisou_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -642,7 +646,7 @@ unsafe fn pfushigisou_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -666,7 +670,7 @@ unsafe fn pfushigisou_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -690,12 +694,13 @@ unsafe fn pfushigisou_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.3, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 30, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 13.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
+        DamageModule::heal(fighter.module_accessor, -2.5, 0);
     }
     wait(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -708,7 +713,7 @@ unsafe fn pfushigisou_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 80, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -735,7 +740,7 @@ unsafe fn pfushigisou_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 20.0, /*Angle*/ 135, /*KBG*/ 62, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -760,7 +765,7 @@ unsafe fn pfushigisou_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_throwup(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 9.0, /*Angle*/ 90, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -787,7 +792,7 @@ unsafe fn pfushigisou_throwup(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_throwdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 14.0, /*Angle*/ 80, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 31, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -815,7 +820,7 @@ unsafe fn pfushigisou_throwdown(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -3.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -831,7 +836,7 @@ unsafe fn pfushigisou_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(10.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -855,7 +860,7 @@ unsafe fn pfushigisou_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -9.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-16.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -879,7 +884,7 @@ unsafe fn pfushigisou_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -9.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-16.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -903,7 +908,7 @@ unsafe fn pfushigisou_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialnstart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_neutralb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specialnstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 5.0);
@@ -926,7 +931,7 @@ unsafe fn pfushigisou_neutralb1(fighter: &mut L2CAgentBase) {
     script = "game_specialn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_neutralb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specialn(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
@@ -945,7 +950,7 @@ unsafe fn pfushigisou_neutralb2(fighter: &mut L2CAgentBase) {
     script = "game_move", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_seed1(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_seed_move(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 90, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 15, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 0.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -960,7 +965,7 @@ unsafe fn pfushigisou_seed1(fighter: &mut L2CAgentBase) {
     script = "game_movehard", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_seed2(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_seed_movehard(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 70, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_OBJECT);
     }
@@ -971,7 +976,7 @@ unsafe fn pfushigisou_seed2(fighter: &mut L2CAgentBase) {
     script = "game_specials", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sideb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specials(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 22.0);
@@ -985,7 +990,7 @@ unsafe fn pfushigisou_sideb(fighter: &mut L2CAgentBase) {
     script = "game_specialairs", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidebair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specialairs(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 22.0);
@@ -999,7 +1004,7 @@ unsafe fn pfushigisou_sidebair(fighter: &mut L2CAgentBase) {
     script = "game_move", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_leaf(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_leafcutter_move(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 30, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 54, /*Size*/ 8.6, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -10, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_OBJECT);
         AttackModule::enable_safe_pos(fighter.module_accessor);
@@ -1019,7 +1024,7 @@ unsafe fn pfushigisou_leaf(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specialhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_FLAG_SET_ANGLE);
@@ -1040,7 +1045,7 @@ unsafe fn pfushigisou_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_specialairhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:3.3, z:0.0});
     }
@@ -1081,7 +1086,7 @@ unsafe fn pfushigisou_upbair(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appealhir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -20.0, 0);
@@ -1093,7 +1098,7 @@ unsafe fn pfushigisou_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appealhil(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -20.0, 0);
@@ -1105,7 +1110,7 @@ unsafe fn pfushigisou_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_UNIRA), 0, 0, false, false);
     }
@@ -1116,7 +1121,7 @@ unsafe fn pfushigisou_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_UNIRA), 0, 0, false, false);
     }
@@ -1127,7 +1132,7 @@ unsafe fn pfushigisou_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false);
     }
@@ -1138,7 +1143,7 @@ unsafe fn pfushigisou_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false);
     }
@@ -1149,7 +1154,7 @@ unsafe fn pfushigisou_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_final", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_final(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_final(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
         macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
@@ -1230,7 +1235,7 @@ unsafe fn pfushigisou_final(fighter: &mut L2CAgentBase) {
     script = "game_finalair", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn pfushigisou_finalair(fighter: &mut L2CAgentBase) {
+unsafe fn game_pfushigisou_finalair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
         macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
@@ -1308,53 +1313,53 @@ unsafe fn pfushigisou_finalair(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        pfushigisou_jab1,
-        pfushigisou_jab2,
-        pfushigisou_jab100,
-        pfushigisou_jab100sub,
-        pfushigisou_jab100end,
-        pfushigisou_dashattack,
-        pfushigisou_sidetilt,
-        pfushigisou_uptilt,
-        pfushigisou_downtilt,
-        pfushigisou_sidesmashup,
-        pfushigisou_sidesmash,
-        pfushigisou_sidesmashdown,
-        pfushigisou_upsmash,
-        pfushigisou_downsmash,
-        pfushigisou_nair,
-        pfushigisou_fair,
-        pfushigisou_bair,
-        pfushigisou_uair,
-        pfushigisou_dair,
-        pfushigisou_grab,
-        pfushigisou_pivotgrab,
-        pfushigisou_dashgrab,
-        pfushigisou_pummel,
-        pfushigisou_throwf,
-        pfushigisou_throwb,
-        pfushigisou_throwup,
-        pfushigisou_throwdown,
-        pfushigisou_cliffattack,
-        pfushigisou_slipattack,
-        pfushigisou_downattackd,
-        pfushigisou_downattacku,
-        pfushigisou_neutralb1,
-        pfushigisou_neutralb2,
-        pfushigisou_seed1,
-        pfushigisou_seed2,
-        pfushigisou_sideb,
-        pfushigisou_sidebair,
-        pfushigisou_leaf,
-        pfushigisou_upb,
-        pfushigisou_upbair,
-        pfushigisou_uptauntr,
-        pfushigisou_uptauntl,
-        pfushigisou_sidetauntr,
-        pfushigisou_sidetauntl,
-        pfushigisou_downtauntr,
-        pfushigisou_downtauntl,
-        pfushigisou_final,
-        pfushigisou_finalair
+        game_pfushigisou_attack11,
+        game_pfushigisou_attack12,
+        game_pfushigisou_attack100,
+        game_pfushigisou_attack100subl,
+        game_pfushigisou_attack100end,
+        game_pfushigisou_attackdash,
+        game_pfushigisou_attacks3,
+        game_pfushigisou_attackhi3,
+        game_pfushigisou_attacklw3,
+        game_pfushigisou_attacks4hi,
+        game_pfushigisou_attacks4,
+        game_pfushigisou_attacks4lw,
+        game_pfushigisou_attackhi4,
+        game_pfushigisou_attacklw4,
+        game_pfushigisou_attackairn,
+        game_pfushigisou_attackairf,
+        game_pfushigisou_attackairb,
+        game_pfushigisou_attackairhi,
+        game_pfushigisou_attackairlw,
+        game_pfushigisou_catch,
+        game_pfushigisou_catchturn,
+        game_pfushigisou_catchdash,
+        game_pfushigisou_catchattack,
+        game_pfushigisou_throwf,
+        game_pfushigisou_throwb,
+        game_pfushigisou_throwhi,
+        game_pfushigisou_throwlw,
+        game_pfushigisou_cliffattack,
+        game_pfushigisou_slipattack,
+        game_pfushigisou_downattackd,
+        game_pfushigisou_downattacku,
+        game_pfushigisou_specialnstart,
+        game_pfushigisou_specialn,
+        game_pfushigisou_seed_move,
+        game_pfushigisou_seed_movehard,
+        game_pfushigisou_specials,
+        game_pfushigisou_specialairs,
+        game_pfushigisou_leafcutter_move,
+        game_pfushigisou_specialhi,
+        game_pfushigisou_specialairhi,
+        game_pfushigisou_appealhir,
+        game_pfushigisou_appealhil,
+        game_pfushigisou_appealsr,
+        game_pfushigisou_appealsl,
+        game_pfushigisou_appeallwr,
+        game_pfushigisou_appeallwl,
+        game_pfushigisou_final,
+        game_pfushigisou_finalair
     );
 }
