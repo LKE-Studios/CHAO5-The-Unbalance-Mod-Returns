@@ -71,11 +71,7 @@ unsafe fn sound_buddy_glideattack(fighter: &mut L2CAgentBase) {
 unsafe fn sound_buddy_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
-    }
-    frame(fighter.lua_state_agent, 17.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_buddy_landing02"));
     }
 }
 

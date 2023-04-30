@@ -2,11 +2,14 @@ use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::hash40;
 
 #[fighter_frame( agent = FIGHTER_KIND_FOX )]
 fn frame_fox(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        let frame = MotionModule::frame(fighter.module_accessor);
         
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
@@ -24,6 +27,13 @@ fn frame_fox(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_transition_group_check_air_cliff();
+        }
+        if motion_kind == hash40("appeal_hi_r") || motion_kind == hash40("appeal_hi_l") {
+            if frame > 41.0 && frame < 44.0 {
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH, false);
+                }
+            }
         }
     }
 }

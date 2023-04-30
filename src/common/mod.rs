@@ -109,6 +109,19 @@ unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::Batt
     return true;
 }
 
+#[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_Landing_MainSub)]
+pub unsafe fn status_landing_main_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+    
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+
+    if StatusModule::prev_status_kind(module_accessor, 0) == *FIGHTER_STATUS_KIND_ESCAPE_AIR || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+        ControlModule::clear_command_one(module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE);
+        ControlModule::clear_command_one(module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_F);
+        ControlModule::clear_command_one(module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_B);
+    }
+    original!()(fighter)
+}
+
 // Use this for general per-frame weapon-level hooks
 // #[weapon_frame_callback]
 // pub fn global_weapon_frame(fighter_base : &mut L2CFighterBase) {
@@ -138,11 +151,7 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 	}
 }
 
-
-mod jump_aerial;
-mod fly;
-pub mod glide;
-mod glide_checks;
+pub mod status;
 mod hook;
 
 pub fn is_glider(kind: i32) -> bool {
@@ -158,6 +167,14 @@ pub fn is_glider(kind: i32) -> bool {
     ].contains(&kind)
 }
 
+fn nro_hook(info: &skyline::nro::NroInfo) {
+    if info.name == "common" {
+        skyline::install_hooks!(
+            status_landing_main_sub
+        );
+    }
+}
+
 pub fn install() {
     smashline::install_agent_frame_callbacks!(
         global_fighter_frame,
@@ -166,9 +183,7 @@ pub fn install() {
     skyline::install_hook!(
         is_valid_just_shield_reflector
     );
-    jump_aerial::install();
-    fly::install();
-    glide::install();
-    glide_checks::install();
+    skyline::nro::add_hook(nro_hook);
+    status::install();
     hook::install();
 }

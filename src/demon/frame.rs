@@ -26,19 +26,17 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let kind = smash::app::utility::get_kind(boma); 
-        if kind == *FIGHTER_KIND_DEMON {
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
-            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == true {
-                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.25);
-                DamageModule::set_reaction_mul(fighter.module_accessor, 0.25);
-            };
-            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == false {
-                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-                DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            };
+
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == true {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.25);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.25);
+        };
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == false {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);

@@ -17,6 +17,19 @@ fn frame_ganon(fighter: &mut L2CFighterCommon) {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        let frame = MotionModule::frame(fighter.module_accessor);
+
+        if motion_kind == hash40("appeal_lw_r") || motion_kind == hash40("appeal_lw_l") {
+            if frame > 25.0 && frame < 59.0 {
+                if FighterStopModuleImpl::is_damage_stop(fighter.module_accessor) {
+                    if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
+                        StatusModule::change_status_force(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4_START, false);
+                    }
+                }
+            }
+        }
 
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("attack_air_lw") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             COUNTER[ENTRY_ID] += 1;
