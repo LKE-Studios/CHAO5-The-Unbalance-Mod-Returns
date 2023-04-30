@@ -9,6 +9,7 @@ pub fn frame_ken(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             fighter.sub_wait_ground_check_common(false.into());
             fighter.sub_air_check_fall_common();

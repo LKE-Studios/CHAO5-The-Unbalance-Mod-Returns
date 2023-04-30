@@ -5,7 +5,7 @@ use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_KROOL )]
-pub fn krool_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_krool(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -28,6 +28,6 @@ pub fn krool_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        krool_opff
+        frame_krool
     );
 }

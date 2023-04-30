@@ -9,10 +9,11 @@ use smash::app::{sv_information};
 static mut DEFENCE_BOOST : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_MIIFIGHTER )]
-fn miifighter_frame(fighter: &mut L2CFighterCommon) {
+fn frame_miifighter(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        
         if DEFENCE_BOOST[ENTRY_ID] == true {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.75);
             DamageModule::set_reaction_mul(fighter.module_accessor, 0.75);
@@ -50,6 +51,6 @@ fn miifighter_frame(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        miifighter_frame
+        frame_miifighter
     );
 }

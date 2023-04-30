@@ -10,10 +10,10 @@ use crate::mario::frame::*;
 
 #[acmd_script(//SpecialN, SpecialAirN
     agent = "mario", 
-    script = "sound_specialn", 
+    scripts = ["sound_specialn", "sound_specialairn"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn mario_neutralbsfx(fighter: &mut L2CAgentBase) {
+unsafe fn game_mario_specialn(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 
     if MARIO_GIANT_FIREBALL[ENTRY_ID] == true {
@@ -33,6 +33,6 @@ unsafe fn mario_neutralbsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        mario_neutralbsfx
+        game_mario_specialn
     );
 }

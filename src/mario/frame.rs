@@ -2,15 +2,18 @@ use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
+use smash::lua2cpp::L2CFighterBase;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::phx::Hash40;
 use smash::app::{sv_information};
+use smash::app::*;
+use smash::app::sv_animcmd::*;
 
 pub static mut MARIO_GIANT_FIREBALL : [bool; 8] = [false; 8];
 pub static mut HOLD_TIME : [f32; 8] = [0.0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_MARIO )]
-fn mario_frame(fighter: &mut L2CFighterCommon) {
+fn frame_mario(fighter: &mut L2CFighterCommon) {
     unsafe {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
@@ -37,11 +40,14 @@ fn mario_frame(fighter: &mut L2CFighterCommon) {
             MARIO_GIANT_FIREBALL[ENTRY_ID] = false;
             MotionModule::set_rate(fighter.module_accessor, 1.0);
         };
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 {//Ice Mario Costume c09
+            MARIO_GIANT_FIREBALL[ENTRY_ID] = false;
+        };
     }
 }
 
 pub fn install() {
     smashline::install_agent_frames!(
-        mario_frame
+        frame_mario
     );
 }

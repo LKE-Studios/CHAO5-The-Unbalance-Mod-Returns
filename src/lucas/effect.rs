@@ -5,14 +5,13 @@ use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
-//use crate::lucas::frame::*;
 
 #[acmd_script(//Attack11
     agent = "lucas", 
     script = "effect_attack11" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_jab1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attack11(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
@@ -43,7 +42,7 @@ unsafe fn lucas_jab1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_attack12" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_jab2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attack12(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 3.0);
@@ -76,12 +75,12 @@ unsafe fn lucas_jab2gfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3GFX
+#[acmd_script(//AttackHi3
     agent = "lucas", 
     script = "effect_attackhi3" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_uptiltgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attackhi3(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
@@ -123,12 +122,12 @@ unsafe fn lucas_uptiltgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3GFX
+#[acmd_script(//AttackLw3
     agent = "lucas", 
     script = "effect_attacklw3" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_downtiltgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attacklw3(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 3.0);
@@ -159,7 +158,7 @@ unsafe fn lucas_downtiltgfx(fighter: &mut L2CAgentBase) {
     script = "effect_attacklw4", 
     category = ACMD_EFFECT, 
     low_priority)]
-unsafe fn lucas_downsmashgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attacklw4(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 3.0);
@@ -219,12 +218,12 @@ unsafe fn lucas_downsmashgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirNGFX
+#[acmd_script(//AttackAirN
     agent = "lucas", 
     script = "effect_attackairn" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_nairgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attackairn(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         if macros::is_excute(fighter) {
@@ -275,12 +274,12 @@ unsafe fn lucas_nairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLwGFX
+#[acmd_script(//AttackAirLw
     agent = "lucas", 
     script = "effect_attackairlw" , 
     category = ACMD_EFFECT , 
     low_priority)]
-unsafe fn lucas_dairgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_lucas_attackairlw(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
@@ -444,14 +443,12 @@ unsafe fn lucas_sidebairgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        lucas_jab1gfx,
-        lucas_jab2gfx,
-        lucas_uptiltgfx,
-        lucas_downtiltgfx,
-        lucas_downsmashgfx,
-        lucas_nairgfx,
-        lucas_dairgfx,
-        //lucas_sidebgfx,
-        //lucas_sidebairgfx
+        effect_lucas_attack11,
+        effect_lucas_attack12,
+        effect_lucas_attackhi3,
+        effect_lucas_attacklw3,
+        effect_lucas_attacklw4,
+        effect_lucas_attackairn,
+        effect_lucas_attackairlw
     );
 }

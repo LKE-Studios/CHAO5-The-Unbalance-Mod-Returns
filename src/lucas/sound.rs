@@ -12,7 +12,7 @@ use smash_script::*;
     script = "sound_entryl", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_entryl(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_entryl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_lucas_appear01"));
@@ -33,7 +33,7 @@ unsafe fn lucas_entryl(fighter: &mut L2CAgentBase) {
     script = "sound_entryr", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_entryr(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_entryr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_lucas_appear01"));
@@ -54,7 +54,7 @@ unsafe fn lucas_entryr(fighter: &mut L2CAgentBase) {
     script = "sound_win1", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_win1(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_win1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_lucas_win1"));
@@ -70,7 +70,7 @@ unsafe fn lucas_win1(fighter: &mut L2CAgentBase) {
     script = "sound_win3", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_win3(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 43.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_lucas_win3"));
@@ -90,7 +90,7 @@ unsafe fn lucas_win3(fighter: &mut L2CAgentBase) {
     script = "sound_attack11", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_jab1sfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attack11(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 2.0);
@@ -111,7 +111,7 @@ unsafe fn lucas_jab1sfx(fighter: &mut L2CAgentBase) {
     script = "sound_attack12", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_jab2sfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attack12(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 5.0);
@@ -132,7 +132,7 @@ unsafe fn lucas_jab2sfx(fighter: &mut L2CAgentBase) {
     script = "sound_attack13", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_jab3sfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attack13(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 6.0);
@@ -154,7 +154,7 @@ unsafe fn lucas_jab3sfx(fighter: &mut L2CAgentBase) {
     script = "sound_attacks4charge", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attacks4charge(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
@@ -167,7 +167,7 @@ unsafe fn lucas_sidesmashchargesfx(fighter: &mut L2CAgentBase) {
     script = "sound_attacklw4", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_downsmashsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attacklw4(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 7.0);
@@ -214,7 +214,7 @@ unsafe fn lucas_downsmashsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attackairlw", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_dairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_attackairlw(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         frame(fighter.lua_state_agent, 1.0);
@@ -303,7 +303,7 @@ unsafe fn lucas_sidebsfx(fighter: &mut L2CAgentBase) {
     script = "sound_speciallwstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_downbsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_speciallwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_002"));
@@ -315,7 +315,7 @@ unsafe fn lucas_downbsfx(fighter: &mut L2CAgentBase) {
     script = "sound_specialairlwstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_downbairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_specialairlwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_lucas_002"));
@@ -327,7 +327,7 @@ unsafe fn lucas_downbairsfx(fighter: &mut L2CAgentBase) {
     script = "sound_appealsl", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
     }
@@ -342,7 +342,7 @@ unsafe fn lucas_sidetauntlsfx(fighter: &mut L2CAgentBase) {
     script = "sound_appealsr", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_lucas_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal03"));
     }
@@ -354,20 +354,19 @@ unsafe fn lucas_sidetauntrsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        lucas_entryl,
-        lucas_entryr,
-        lucas_win1,
-        lucas_win3,
-        lucas_jab1sfx,
-        lucas_jab2sfx,
-        lucas_jab3sfx,
-        lucas_sidesmashchargesfx,
-        lucas_downsmashsfx,
-        lucas_dairsfx,
-        //lucas_sidebsfx,
-        lucas_downbsfx,
-        lucas_downbairsfx,
-        lucas_sidetauntrsfx,
-        lucas_sidetauntlsfx,
+        sound_lucas_entryl,
+        sound_lucas_entryr,
+        sound_lucas_win1,
+        sound_lucas_win3,
+        sound_lucas_attack11,
+        sound_lucas_attack12,
+        sound_lucas_attack13,
+        sound_lucas_attacks4charge,
+        sound_lucas_attacklw4,
+        sound_lucas_attackairlw,
+        sound_lucas_speciallwstart,
+        sound_lucas_specialairlwstart,
+        sound_lucas_appealsr,
+        sound_lucas_appealsl
     );
 }

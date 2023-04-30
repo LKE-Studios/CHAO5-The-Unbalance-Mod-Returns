@@ -635,7 +635,7 @@ unsafe fn game_kirby_attackairlw(fighter: &mut L2CAgentBase) {
     script = "game_landingairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_kirby_landingairlwing(fighter: &mut L2CAgentBase) {
+unsafe fn game_kirby_landingairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 60, /*KBG*/ 46, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 15.4, /*X*/ 0.0, /*Y*/ 3.2, /*Z*/ 4.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1715,10 +1715,10 @@ unsafe fn game_kirby_finalattack(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 3, true, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 2, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 3, true, false, -1, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 2, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 3, true, false, -1.0, false);
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
     }
     frame(fighter.lua_state_agent, 179.0);
@@ -1896,10 +1896,10 @@ unsafe fn game_kirby_finalairattack(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 3, true, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 2, true, false, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 3, true, false, -1, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 2, true, false, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 3, true, false, -1.0, false);
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
     }
     frame(fighter.lua_state_agent, 179.0);

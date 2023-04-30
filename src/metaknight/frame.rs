@@ -8,8 +8,9 @@ use smash::app::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::app::{sv_information};
-use crate::common::glide::*;
-use crate::common::glide::KineticUtility;
+use crate::common::status::glide::*;
+use crate::common::status::glide::KineticUtility;
+use smash::hash40;
 
 static mut COUNTER : [i32; 8] = [0; 8];
 static mut CURRENTFRAME : [f32; 8] = [0.0; 8];
@@ -62,7 +63,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             DamageModule::set_reaction_mul(fighter.module_accessor, 0.5);
             if SFX_COUNTER[ENTRY_ID] < 2 {
                 macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
-                macros::PLAY_SE(fighter, Hash40::new("se_metaknight_final_01"));
+                macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_final01"));
                 macros::PLAY_SE_REMAIN(fighter, Hash40::new("vc_metaknight_final03"));
             };
             if SFX_COUNTER[ENTRY_ID] >= 100 {
@@ -113,9 +114,14 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_DEAD,
             *FIGHTER_STATUS_KIND_MISS_FOOT,
             *FIGHTER_STATUS_KIND_DAMAGE,
+            *FIGHTER_STATUS_KIND_DAMAGE_AIR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FALL,
             *FIGHTER_STATUS_KIND_DAMAGE_FLY,
             *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
             *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR,
             *FIGHTER_STATUS_KIND_CLIFF_CATCH,
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
             *FIGHTER_STATUS_KIND_GLIDE_END
@@ -124,6 +130,21 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
             macros::STOP_SE(fighter, Hash40::new("se_metaknight_special_h02"));
         };
+        if [
+            *FIGHTER_STATUS_KIND_DEAD,
+            *FIGHTER_STATUS_KIND_MISS_FOOT,
+            *FIGHTER_STATUS_KIND_DAMAGE,
+            *FIGHTER_STATUS_KIND_DAMAGE_AIR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FALL,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR,
+        ].contains(&status_kind) {
+            macros::STOP_SE(fighter, Hash40::new("vc_metaknight_final03"));
+        }
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);

@@ -8,7 +8,7 @@ use smash::lua2cpp::L2CFighterCommon;
 use smash::lua2cpp::L2CFighterBase;
 
 #[fighter_frame( agent = FIGHTER_KIND_MASTER )]
-pub fn master_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_master(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -37,7 +37,7 @@ pub fn master_opff(fighter : &mut L2CFighterCommon) {
 }
 
 #[weapon_frame( agent = WEAPON_KIND_MASTER_AXE )]
-pub fn master_axe_opwf(weapon : &mut L2CFighterBase) {
+pub fn frame_master_axe(weapon : &mut L2CFighterBase) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -51,7 +51,7 @@ pub fn master_axe_opwf(weapon : &mut L2CFighterBase) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        master_opff,
-        master_axe_opwf
+        frame_master,
+        frame_master_axe
     );
 }

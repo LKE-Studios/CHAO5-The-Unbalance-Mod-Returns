@@ -12,7 +12,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "expression_attacklw4", 
     category = ACMD_EXPRESSION, 
     low_priority)]
-unsafe fn lucas_downsmashexp(fighter: &mut L2CAgentBase) {
+unsafe fn expression_lucas_attacklw4(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         if macros::is_excute(fighter) {
@@ -82,6 +82,6 @@ unsafe fn lucas_downsmashexp(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        lucas_downsmashexp
+        expression_lucas_attacklw4
     );
 }

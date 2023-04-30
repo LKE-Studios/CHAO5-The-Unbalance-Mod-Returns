@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_attacks4hi", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn mariod_sidesmashupgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_mariod_attacks4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 10, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -48,7 +48,7 @@ unsafe fn mariod_sidesmashupgfx(fighter: &mut L2CAgentBase) {
     script = "effect_attacks4", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn mariod_sidesmashgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_mariod_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 10, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -85,7 +85,7 @@ unsafe fn mariod_sidesmashgfx(fighter: &mut L2CAgentBase) {
     script = "effect_attacks4lw", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn mariod_sidesmashdowngfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_mariod_attacks4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 10, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -119,8 +119,8 @@ unsafe fn mariod_sidesmashdowngfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        mariod_sidesmashupgfx,
-        mariod_sidesmashgfx,
-        mariod_sidesmashdowngfx
+        effect_mariod_attacks4hi,
+        effect_mariod_attacks4,
+        effect_mariod_attacks4lw
     );
 }

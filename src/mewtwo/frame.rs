@@ -19,14 +19,13 @@ static mut Y_MAX : f32 = 1.3; //Max Vertical movespeed
 // static mut Y_ACCEL_MUL : f32 = 0.06;
 
 #[fighter_frame( agent = FIGHTER_KIND_MEWTWO )]
-fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
+fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-        // let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        // let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        
         if StatusModule::situation_kind(fighter.module_accessor) != SITUATION_KIND_AIR
         || !sv_information::is_ready_go()
         || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
@@ -34,7 +33,7 @@ fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
             START_FLOAT[ENTRY_ID] = false;
             CHECK_FLOAT[ENTRY_ID] = 0;
         };
-        if FLOAT[ENTRY_ID] == 1{
+        if FLOAT[ENTRY_ID] == 1 {
             if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR
             && [
                 *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S,
@@ -68,45 +67,10 @@ fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
             if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
                 FLOAT[ENTRY_ID] = 1;
             };
+
             let mut y_add;
             let mut x_add;
-            // if stick_x > 0.2 {
-            // 	x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-            // 	if speed_x > X_MAX || speed_x < -X_MAX{
-            // 		x_add = 0.0;
-            // 	};
-            // };
-            // if stick_x < -0.2 {
-            // 	x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-            // 	if speed_x > X_MAX || speed_x < -X_MAX{
-            // 		x_add = 0.0;
-            // 	};
-            // };
-            // if stick_y > 0.2 {
-            // 	y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
-            // 		y_add = 0.0;
-            // 	};
-            // };
-            // if stick_y < -0.2 {
-            // 	y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
-            // 	if speed_y > Y_MAX || speed_y < -Y_MAX{
-            // 		y_add = 0.0;
-            // 	};
-            // };
-            // if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
-            // 	if speed_y > 0.0 {
-            // 		y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
-            // 	} else if speed_y < 0.0{
-            // 		y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
-            // 	};
-            // 	let mut x_add = 0.0;
-            // 	if speed_x > 0.0 {
-            // 		x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
-            // 	} else if speed_x < 0.0{
-            // 		x_add = X_ACCEL_MUL + X_ACCEL_ADD;
-            // 	};
-            // };
+
             x_add = (stick_x)*X_ACCEL_MUL;
             y_add = (stick_y)*X_ACCEL_MUL;
             if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
@@ -156,6 +120,6 @@ fn mewtwo_frame(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        mewtwo_frame
+        frame_mewtwo
     );
 }

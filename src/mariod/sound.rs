@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "sound_attacks4hi", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn mariod_sidesmashupsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_mariod_attacks4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -26,7 +26,7 @@ unsafe fn mariod_sidesmashupsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attacks4", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn mariod_sidesmashsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_mariod_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -43,7 +43,7 @@ unsafe fn mariod_sidesmashsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attacks4lw", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn mariod_sidesmashdownsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_mariod_attacks4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -57,8 +57,8 @@ unsafe fn mariod_sidesmashdownsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        mariod_sidesmashupsfx,
-        mariod_sidesmashsfx,
-        mariod_sidesmashdownsfx
+        sound_mariod_attacks4hi,
+        sound_mariod_attacks4,
+        sound_mariod_attacks4lw
     );
 }
