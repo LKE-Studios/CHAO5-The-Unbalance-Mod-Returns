@@ -17,7 +17,7 @@ mod frame;
 //mod effect;
 //mod sound;
 
-pub const THROW_HI_STATUS_KIND: i32 = 0x47;
+//pub const THROW_HI_STATUS_KIND: i32 = 0x47;
 
 /*pub unsafe fn is_knuckles(boma: *mut BattleObjectModuleAccessor) -> bool {
     WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8

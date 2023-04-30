@@ -9,7 +9,7 @@ use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_TRAIL )]
-fn trail_opff(fighter: &mut L2CFighterCommon) {
+fn frame_trail(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if [
@@ -33,16 +33,6 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
             macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
-            KineticModule::clear_speed_all(fighter.module_accessor);
-            macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        }
-        /*if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-            if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {
-                macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_status_attack_up"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.6, true);
-                macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.52);
-            }
-        }*/
         if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_S_END {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
         }
@@ -76,6 +66,6 @@ fn trail_opff(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        trail_opff
+        frame_trail
     );
 }
