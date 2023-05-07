@@ -45,7 +45,7 @@ impl GlideParams {
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.8, //#5 Base Power/Speed
-                speed_change : 0.014, //#6 Power Rate
+                speed_change : 0.015, //#6 Power Rate
                 max_speed : 2.3, //#7 Maximum Speed
                 end_speed : 0.7, //#8 End Speed
                 gravity_accel : 0.03, //#9 Gravity Acceleration
@@ -69,14 +69,14 @@ impl GlideParams {
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.9, //#5 Base Power/Speed
-                speed_change : 0.017, //#6 Power Rate
+                speed_change : 0.025, //#6 Power Rate
                 max_speed : 2.4, //#7 Maximum Speed
                 end_speed : 1.0, //#8 End Speed
                 gravity_accel : 0.05, //#9 Gravity Acceleration
                 gravity_speed : 0.4, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.012, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.015, //#13 Max added speed gained aiming downward
                 unknown : 0.1, //#14 Unknown, unused
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 2.0, //#16 Upward angular acceleration
@@ -93,14 +93,14 @@ impl GlideParams {
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.9, //#5 Base Power/Speed
-                speed_change : 0.016, //#6 Power Rate
+                speed_change : 0.02, //#6 Power Rate
                 max_speed : 2.4, //#7 Maximum Speed
                 end_speed : 0.95, //#8 End Speed
                 gravity_accel : 0.05, //#9 Gravity Acceleration
                 gravity_speed : 0.4, //#10 Gravity Max Speed
                 angle_extra : 0.0, //#11 Angle stuff but unused
                 angle_more_speed : -25.0, //#12 Angle to gain more speed
-                down_speed_add : 0.012, //#13 Max added speed gained aiming downward
+                down_speed_add : 0.015, //#13 Max added speed gained aiming downward
                 unknown : 0.1, //#14 Unknown, unused
                 radial_stick : 0.25, //#15 Radial Stick Sensitivity
                 up_angle_accel : 0.7, //#16 Upward angular acceleration
@@ -208,12 +208,12 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_PALUTENA {
             return GlideParams {
                 angle_max_up : 75.0, //#0 Max Upward Angle
-                angle_max_down : -70.0, //#1 Max Downward Angle
+                angle_max_down : -65.0, //#1 Max Downward Angle
                 v_glide_start : 0.0, //#2 V Speed added on GlideStart
                 gravity_start : 0.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 0.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.7, //#5 Base Power/Speed
-                speed_change : 0.015, //#6 Power Rate
+                speed_change : 0.02, //#6 Power Rate
                 max_speed : 2.5, //#7 Maximum Speed
                 end_speed : 0.8, //#8 End Speed
                 gravity_accel : 0.035, //#9 Gravity Acceleration

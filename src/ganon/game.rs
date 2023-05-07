@@ -8,6 +8,7 @@ use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
 use crate::utils::FIGHTER_CUTIN_MANAGER;
+use crate::ganon::frame::*;
 
 #[acmd_script(//Attack11 
     agent = "ganon", 
@@ -1047,9 +1048,19 @@ unsafe fn game_ganon_appealsl(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_ganon_appeallwr(fighter: &mut L2CAgentBase) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+
+    if macros::is_excute(fighter) {
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
+    }
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = true;
+    }
+    frame(fighter.lua_state_agent, 59.0);
+    if macros::is_excute(fighter) {
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
     }
 }
 
@@ -1059,9 +1070,19 @@ unsafe fn game_ganon_appeallwr(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_ganon_appeallwl(fighter: &mut L2CAgentBase) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+
+    if macros::is_excute(fighter) {
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
+    }
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = true;
+    }
+    frame(fighter.lua_state_agent, 59.0);
+    if macros::is_excute(fighter) {
+        FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
     }
 }
 

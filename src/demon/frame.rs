@@ -48,11 +48,12 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             START_FLOAT[ENTRY_ID] = false;
             CHECK_FLOAT[ENTRY_ID] = 0;
         };
-        if FLOAT[ENTRY_ID] == 1{
+        if FLOAT[ENTRY_ID] == 1 {
             if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR
             && [
                 *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S,
-                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END
+                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END, 
+                *FIGHTER_DEMON_STATUS_KIND_SPECIAL_HI_RISE, *FIGHTER_DEMON_STATUS_KIND_SPECIAL_HI_FALL
             ].contains(&status_kind) == false {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
             };
@@ -68,10 +69,10 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             };
         };
         if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
-        && FLOAT[ENTRY_ID] > 1{
+        && FLOAT[ENTRY_ID] > 1 {
             FLOAT[ENTRY_ID] = 1;
         };
-        if FLOAT[ENTRY_ID] > 1{
+        if FLOAT[ENTRY_ID] > 1 {
             FLOAT[ENTRY_ID] -= 1;
             if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -116,7 +117,7 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1 {
                 FLOAT[ENTRY_ID] = 1;
             };
         };

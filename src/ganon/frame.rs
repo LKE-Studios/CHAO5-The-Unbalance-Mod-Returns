@@ -10,6 +10,7 @@ use smash::phx::Vector3f;
 static mut COUNTER: [i32; 8] = [0; 8];
 static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
+pub static mut FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_GANON )]
 fn frame_ganon(fighter: &mut L2CFighterCommon) {
@@ -17,19 +18,8 @@ fn frame_ganon(fighter: &mut L2CFighterCommon) {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-        let frame = MotionModule::frame(fighter.module_accessor);
-
-        if motion_kind == hash40("appeal_lw_r") || motion_kind == hash40("appeal_lw_l") {
-            if frame > 25.0 && frame < 59.0 {
-                if FighterStopModuleImpl::is_damage_stop(fighter.module_accessor) {
-                    if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-                        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
-                        StatusModule::change_status_force(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4_START, false);
-                    }
-                }
-            }
-        }
+        //let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        //let frame = MotionModule::frame(fighter.module_accessor);
 
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("attack_air_lw") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             COUNTER[ENTRY_ID] += 1;
@@ -74,9 +64,18 @@ fn frame_ganon(fighter: &mut L2CFighterCommon) {
                 }
             }
         };
+        if FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] {
+            if StopModule::is_hit(fighter.module_accessor) {
+                if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4_START, false);
+                }
+                else {
+                    FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
+                }
+            }
+        };
     }
 }
-
 
 pub fn install() {
     smashline::install_agent_frames!(
