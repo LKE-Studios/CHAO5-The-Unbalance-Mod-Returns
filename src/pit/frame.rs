@@ -11,6 +11,7 @@ use smash::lua2cpp::L2CFighterCommon;
 fn frame_pit(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         if [
             *FIGHTER_STATUS_KIND_GLIDE_START,
             *FIGHTER_STATUS_KIND_GLIDE
@@ -45,6 +46,16 @@ fn frame_pit(fighter: &mut L2CFighterCommon) {
                 DamageModule::heal(fighter.module_accessor, -7.5, 0);
             }
         }
+        if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
+            if situation_kind == *SITUATION_KIND_AIR {
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
+                }
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
+                }
+            }
+        };
     }
 }
 

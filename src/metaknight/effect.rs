@@ -565,21 +565,21 @@ unsafe fn effect_metaknight_speciallwf(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_metaknight_specialairlw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_air"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.3, true);
         }
     }
     else {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_air"), Hash40::new("top"), 0, -2.6, -1, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle"), Hash40::new("top"), 0, -1.4, -0.5, 0, 0, 0, 1.3, true);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         }
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_air"), Hash40::new("top"), 0, -2.6, -1, 0, 0, 0, 1.3, true);
         macros::EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("top"), 0, 12, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_end"), Hash40::new("top"), 0, 8, 0, 0, -90, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
@@ -604,21 +604,21 @@ unsafe fn effect_metaknight_specialairlw(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_metaknight_specialairlwb(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airb"), Hash40::new("top"), 0, -3.7, -17.5, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_b"), Hash40::new("top"), 0, -2.4, -16.5, 0, 0, 0, 1.3, true);
         }
     }
     else {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airb"), Hash40::new("top"), 0, 0, -18, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_b"), Hash40::new("top"), 0, 0, -15, 0, 0, 0, 1.3, true);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         }
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airb"), Hash40::new("top"), 0, 0, -18, 0, 0, 0, 1.3, true);
         macros::EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("top"), 0, 15, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_end"), Hash40::new("top"), 0, 8, 0, 0, -90, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
@@ -643,21 +643,21 @@ unsafe fn effect_metaknight_specialairlwb(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_metaknight_specialairlwf(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airf"), Hash40::new("top"), 0, 2.5, 14.5, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_f"), Hash40::new("top"), 0, 2.6, 14.9, 0, 0, 0, 1.3, true);
         }
     }
     else {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airf"), Hash40::new("top"), 0, 0, 15.3, 0, 0, 0, 1.3, true);
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_f"), Hash40::new("top"), 0, 0, 15.3, 0, 0, 0, 1.3, true);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         }
     }
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_airf"), Hash40::new("top"), 0, 0, 15.3, 0, 0, 0, 1.3, true);
         macros::EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("top"), 0, 16, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_end"), Hash40::new("top"), 0, 8, 0, 0, -90, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
