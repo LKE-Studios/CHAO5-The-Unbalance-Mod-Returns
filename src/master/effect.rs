@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["effect_specialsf", "effect_specialairsf"],
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn master_sidebfgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_master_specialsf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("master_spear_aura"), false, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("master_spear_aura"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, false);
@@ -47,7 +47,7 @@ unsafe fn master_sidebfgfx(fighter: &mut L2CAgentBase) {
     scripts = ["effect_specialsfdash", "effect_specialairsfdash"],
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn master_sidebfdashgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_master_specialsfdash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("master_spear_aura"), false, true);
@@ -101,7 +101,7 @@ unsafe fn master_sidebfdashgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        master_sidebfgfx,
-        master_sidebfdashgfx
+        effect_master_specialsf,
+        effect_master_specialsfdash
     );
 }

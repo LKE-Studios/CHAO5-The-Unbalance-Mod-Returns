@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_fly", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn richter_axegfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_richter_axe_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("richter_ax_blur"), Hash40::new("top"), 0.0, 6.0, 0.0, 0.0, -90.0, 0.0, 3.7, true);
     }
@@ -22,7 +22,7 @@ unsafe fn richter_axegfx(fighter: &mut L2CAgentBase) {
     script = "effect_fly", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn richter_cross1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_richter_cross_fly(fighter: &mut L2CAgentBase) {
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("richter_cross"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, -0.0, 0.0, 2.1, true);
@@ -40,7 +40,7 @@ unsafe fn richter_cross1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_turn", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn richter_cross2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_richter_cross_turn(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("richter_cross"), true, true);
     }
@@ -62,8 +62,8 @@ unsafe fn richter_cross2gfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        richter_axegfx,
-        richter_cross1gfx,
-        richter_cross2gfx
+        effect_richter_axe_fly,
+        effect_richter_cross_fly,
+        effect_richter_cross_turn
     );
 }

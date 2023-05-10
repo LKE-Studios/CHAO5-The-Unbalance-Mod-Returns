@@ -9,7 +9,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "sound_attacklw3", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn daisy_downtiltsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_daisy_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_daisy_rnd_attack"));
@@ -25,7 +25,7 @@ unsafe fn daisy_downtiltsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attackairn", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn daisy_nairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_daisy_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_daisy_rnd_attack"));
@@ -41,7 +41,7 @@ unsafe fn daisy_nairsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attackairf", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn daisy_fairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_daisy_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_daisy_rnd_attack"));
@@ -54,7 +54,7 @@ unsafe fn daisy_fairsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attackairlw", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn daisy_dairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_daisy_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_daisy_rnd_attack"));
@@ -67,9 +67,9 @@ unsafe fn daisy_dairsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        daisy_downtiltsfx,
-        daisy_nairsfx,
-        daisy_fairsfx,
-        daisy_dairsfx
+        sound_daisy_attacklw3,
+        sound_daisy_attackairn,
+        sound_daisy_attackairf,
+        sound_daisy_attackairlw
     );
 }

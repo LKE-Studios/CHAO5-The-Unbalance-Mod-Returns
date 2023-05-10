@@ -27,36 +27,29 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
             .contains(&status_kind) {
             CHARGE_TIME[entry_id] = 0.0;
         }
-        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE {
+        if [
+            *FIGHTER_STATUS_KIND_DAMAGE,
+            *FIGHTER_STATUS_KIND_DAMAGE_AIR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY,
+            *FIGHTER_STATUS_KIND_DAMAGE_FALL,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD,
+            *FIGHTER_STATUS_KIND_DEAD,
+            *FIGHTER_STATUS_KIND_MISS_FOOT
+        ].contains(&status_kind) {
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
             macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
         };
-        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
-        }; 
-        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
-        }; 
     }
 }
 
 
 #[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn ryu_specialn_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_specialn_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
@@ -67,13 +60,13 @@ pub unsafe fn ryu_specialn_command(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ryu", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn ryu_specialn_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_specialn_end(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 
 //idk why I can't put in the constant as the status. Only the raw i32 or LuaConst works. Smashline issue
 #[status_script(agent = "ryu", status = 0x202, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn ryu_kamehameha_start_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn ryu_kamehameha_start_pre(_fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CValue::I32(0)
 }
 

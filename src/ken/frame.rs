@@ -5,10 +5,11 @@ use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_KEN )]
-pub fn ken_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_ken(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             fighter.sub_wait_ground_check_common(false.into());
             fighter.sub_air_check_fall_common();
@@ -41,6 +42,6 @@ pub fn ken_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        ken_opff
+        frame_ken
     );
 }

@@ -9,7 +9,7 @@ use smash_script::*;
     script = "sound_entryl", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ness_entryl(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ness_entryl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
@@ -46,7 +46,7 @@ unsafe fn ness_entryl(fighter: &mut L2CAgentBase) {
     script = "sound_entryr", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ness_entryr(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ness_entryr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
@@ -83,7 +83,7 @@ unsafe fn ness_entryr(fighter: &mut L2CAgentBase) {
     script = "sound_win3", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ness_win(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ness_win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 37.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_ness_smash_s02"));
@@ -103,7 +103,7 @@ unsafe fn ness_win(fighter: &mut L2CAgentBase) {
     script = "sound_speciallwstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ness_downbsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ness_speciallwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_ness_004"));
@@ -115,7 +115,7 @@ unsafe fn ness_downbsfx(fighter: &mut L2CAgentBase) {
     script = "sound_specialairlwstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn ness_downbairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ness_specialairlwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_ness_004"));
@@ -124,10 +124,10 @@ unsafe fn ness_downbairsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        ness_entryl,
-        ness_entryr,
-        ness_win,
-        ness_downbsfx,
-        ness_downbairsfx
+        sound_ness_entryl,
+        sound_ness_entryr,
+        sound_ness_win3,
+        sound_ness_speciallwstart,
+        sound_ness_specialairlwstart
     );
 }

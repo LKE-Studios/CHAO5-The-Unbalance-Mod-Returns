@@ -15,7 +15,7 @@ use crate::utils::FIGHTER_CUTIN_MANAGER;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -43,7 +43,7 @@ unsafe fn miifighter_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 361, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 7.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -72,7 +72,7 @@ unsafe fn miifighter_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attack100", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_jab100(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attack100(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 1.0);
         if macros::is_excute(fighter) {
@@ -166,7 +166,7 @@ unsafe fn miifighter_jab100(fighter: &mut L2CAgentBase) {
     script = "game_attack100sub", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_jab100sub(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attack100sub(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.2, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 7, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(15.5), /*Hitlag*/ 0.2, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
     }
@@ -182,7 +182,7 @@ unsafe fn miifighter_jab100sub(fighter: &mut L2CAgentBase) {
     script = "game_attack100end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_jab100end(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attack100end(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -208,7 +208,7 @@ unsafe fn miifighter_jab100end(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackdash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 5.5, 6.5, 6.5, 1.5);
     }
@@ -239,7 +239,7 @@ unsafe fn miifighter_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 15.5, /*Angle*/ 361, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 44, /*Size*/ 7.5, /*X*/ 3.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -257,7 +257,7 @@ unsafe fn miifighter_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 15.0, /*Angle*/ 30, /*KBG*/ 96, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 7.5, /*X*/ 3.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -275,7 +275,7 @@ unsafe fn miifighter_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 14.5, /*Angle*/ 350, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 36, /*Size*/ 7.5, /*X*/ 3.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -294,7 +294,7 @@ unsafe fn miifighter_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 15.0, /*Angle*/ 96, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 32, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -311,7 +311,7 @@ unsafe fn miifighter_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 0.0, 3.0);
@@ -341,7 +341,7 @@ unsafe fn miifighter_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidesmashup(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks4hi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -351,13 +351,14 @@ unsafe fn miifighter_sidesmashup(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 4.0, 4.0, 5.5, 6.5);
     }
+    frame(fighter.lua_state_agent, 16.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 30.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 14.0, /*X*/ 4.5, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 30.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 13.0, /*X*/ -0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 30.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 12.5, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, 0.0, 0, 0.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 4.0, 0.0, 0, 4.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     wait(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -370,7 +371,7 @@ unsafe fn miifighter_sidesmashup(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks4(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -380,13 +381,14 @@ unsafe fn miifighter_sidesmash(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 4.0, 4.0, 5.5, 6.5);
     }
+    frame(fighter.lua_state_agent, 16.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 29.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 14.0, /*X*/ 4.5, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 29.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 13.0, /*X*/ -0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 29.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 12.5, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, 0.0, 0, 0.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 4.0, 0.0, 0, 4.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     wait(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -399,7 +401,7 @@ unsafe fn miifighter_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attacks4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidesmashdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacks4lw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -409,12 +411,14 @@ unsafe fn miifighter_sidesmashdown(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 4.0, 4.0, 5.5, 6.5);
     }
+    frame(fighter.lua_state_agent, 16.0);
+    macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 28.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 14.0, /*X*/ 4.5, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 28.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 13.0, /*X*/ -0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 28.0, /*Angle*/ 361, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 12.5, /*X*/ -4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 0.0, 0.0, 0, 0.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 10, 0, 4.0, 0.0, 0, 4.0, 10.0, 1.5, 1.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     wait(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -427,7 +431,7 @@ unsafe fn miifighter_sidesmashdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -456,15 +460,15 @@ unsafe fn miifighter_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
     }
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 22, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 14.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(4.5), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 20, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ -15.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(-6.5), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 22, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 14.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(8.5), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 20, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ -15.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(-9.5), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
     wait(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -477,7 +481,7 @@ unsafe fn miifighter_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -506,7 +510,7 @@ unsafe fn miifighter_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackairf(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.67);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -541,7 +545,7 @@ unsafe fn miifighter_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -566,13 +570,13 @@ unsafe fn miifighter_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackairhi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-    frame(fighter.lua_state_agent, 6.0);
+    frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 18.0, /*Angle*/ 75, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 10.0, /*X*/ 3.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -593,7 +597,7 @@ unsafe fn miifighter_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_attackairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.52);
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -624,7 +628,7 @@ unsafe fn miifighter_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -648,7 +652,7 @@ unsafe fn miifighter_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -672,7 +676,7 @@ unsafe fn miifighter_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -698,7 +702,7 @@ unsafe fn miifighter_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -716,9 +720,9 @@ unsafe fn miifighter_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 30.0, /*Angle*/ 42, /*KBG*/ 38, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 30.0, /*Angle*/ 42, /*KBG*/ 21, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 13.0);
@@ -744,9 +748,9 @@ unsafe fn miifighter_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 310, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 310, /*KBG*/ 79, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 9.0);
@@ -776,7 +780,7 @@ unsafe fn miifighter_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_throwhi(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 20.0, /*Angle*/ 93, /*KBG*/ 71, /*FKB*/ 0, /*BKB*/ 100, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -807,9 +811,9 @@ unsafe fn miifighter_throwhi(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_throwlw(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 8.0, /*Angle*/ 80, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 8.0, /*Angle*/ 80, /*KBG*/ 102, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 18.0);
@@ -839,7 +843,7 @@ unsafe fn miifighter_throwlw(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 23.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 45, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 32.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -855,7 +859,7 @@ unsafe fn miifighter_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 14.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -16.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-4.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -879,7 +883,7 @@ unsafe fn miifighter_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 11.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(4.0), /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -903,7 +907,7 @@ unsafe fn miifighter_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 11.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(4.0), /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 30, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -927,7 +931,7 @@ unsafe fn miifighter_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_specialn1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutralb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article_enable(fighter.module_accessor, *FIGHTER_MIIFIGHTER_GENERATE_ARTICLE_IRONBALL, false, 0);
@@ -948,7 +952,7 @@ unsafe fn miifighter_neutralb1(fighter: &mut L2CAgentBase) {
     script = "game_specialairn1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutralbair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn1(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if macros::is_excute(fighter) {
         ArticleModule::generate_article_enable(fighter.module_accessor, *FIGHTER_MIIFIGHTER_GENERATE_ARTICLE_IRONBALL, false, 0);
@@ -969,7 +973,7 @@ unsafe fn miifighter_neutralbair1(fighter: &mut L2CAgentBase) {
     script = "game_fly", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_shotput(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_ironball_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 35.0, /*Angle*/ 166, /*KBG*/ 45, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -25, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 35.0, /*Angle*/ 270, /*KBG*/ 45, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -25, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -982,7 +986,7 @@ unsafe fn miifighter_shotput(fighter: &mut L2CAgentBase) {
     script = "game_specialn2start", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2bstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn2start(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 11.0);
@@ -1049,7 +1053,7 @@ unsafe fn miifighter_neutral2bstart(fighter: &mut L2CAgentBase) {
     script = "game_specialn2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     for _ in 0..7 {
         if macros::is_excute(fighter) {
@@ -1100,7 +1104,7 @@ unsafe fn miifighter_neutral2b(fighter: &mut L2CAgentBase) {
     script = "game_specialn2finish", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2bend(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn2finish(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
     }
@@ -1133,7 +1137,7 @@ unsafe fn miifighter_neutral2bend(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2start", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2bairstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn2start(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 11.0);
@@ -1200,7 +1204,7 @@ unsafe fn miifighter_neutral2bairstart(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     for _ in 0..7 {
         if macros::is_excute(fighter) {
@@ -1251,7 +1255,7 @@ unsafe fn miifighter_neutral2bair(fighter: &mut L2CAgentBase) {
     script = "game_specialairn2finish", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral2bairend(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn2finish(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
     }
@@ -1284,7 +1288,7 @@ unsafe fn miifighter_neutral2bairend(fighter: &mut L2CAgentBase) {
     script = "game_specialn3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral3b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1319,7 +1323,7 @@ unsafe fn miifighter_neutral3b(fighter: &mut L2CAgentBase) {
     script = "game_specialn3turn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral3bturn(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialn3turn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.6);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1350,7 +1354,7 @@ unsafe fn miifighter_neutral3bturn(fighter: &mut L2CAgentBase) {
     script = "game_specialairn3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral3bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1380,10 +1384,10 @@ unsafe fn miifighter_neutral3bair(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(//SpecialAirN3Turn
     agent = "miifighter", 
-    script = "game_specialn3turn", 
+    script = "game_specialairn3turn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_neutral3bairturn(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairn3turn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.6);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1414,7 +1418,7 @@ unsafe fn miifighter_neutral3bairturn(fighter: &mut L2CAgentBase) {
     script = "game_specials1start", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side1bstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specials1start(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.61);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_100KICK_ENABLE_LANDING_MUL_SPEED_X);
@@ -1449,7 +1453,7 @@ unsafe fn miifighter_side1bstart(fighter: &mut L2CAgentBase) {
     script = "game_specials1end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side1bend(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specials1end(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 70, /*KBG*/ 91, /*FKB*/ 11, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1512,7 +1516,7 @@ unsafe fn miifighter_side1bend(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1start", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side1bairstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs1start(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.61);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_100KICK_ENABLE_LANDING_MUL_SPEED_X);
@@ -1553,7 +1557,7 @@ unsafe fn miifighter_side1bairstart(fighter: &mut L2CAgentBase) {
     script = "game_specialairs1end", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side1bairend(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs1end(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 1.0, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_100KICK_ENABLE_LANDING_MUL_SPEED_X);
@@ -1631,7 +1635,7 @@ unsafe fn miifighter_side1bairend(fighter: &mut L2CAgentBase) {
     script = "game_specials2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side2b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specials2(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_NONE);
     }
@@ -1657,7 +1661,7 @@ unsafe fn miifighter_side2b(fighter: &mut L2CAgentBase) {
     script = "game_specials3dash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bdash(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specials3dash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1697,7 +1701,7 @@ unsafe fn miifighter_side3bdash(fighter: &mut L2CAgentBase) {
     script = "game_specials3throw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bthrow(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specials3throw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 0, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 100, /*Hitlag*/ 1.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*Unk*/ 0.0, /*Unk*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -1737,7 +1741,7 @@ unsafe fn miifighter_side3bthrow(fighter: &mut L2CAgentBase) {
     script = "game_specialairs3catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bairgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs3catch(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 0, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 100, /*Hitlag*/ 1.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*Unk*/ 0.0, /*Unk*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -1777,7 +1781,7 @@ unsafe fn miifighter_side3bairgrab(fighter: &mut L2CAgentBase) {
     script = "game_specialairs3dash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bairdash(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs3dash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1823,7 +1827,7 @@ unsafe fn miifighter_side3bairdash(fighter: &mut L2CAgentBase) {
     script = "game_specialairs3fall", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bairfall(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs3fall(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 14.0, /*Angle*/ 0, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 100, /*Hitlag*/ 1.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*Unk*/ 0.0, /*Unk*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -1838,7 +1842,7 @@ unsafe fn miifighter_side3bairfall(fighter: &mut L2CAgentBase) {
     script = "game_specialairs3landing", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_side3bairland(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairs3landing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 65, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 45, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -1880,17 +1884,17 @@ unsafe fn miifighter_side3bairland(fighter: &mut L2CAgentBase) {
     script = "game_specialhi12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up1b1(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialhi12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 86, /*KBG*/ 91, /*FKB*/ 79, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 96, /*KBG*/ 91, /*FKB*/ 79, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 16.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 83, /*KBG*/ 91, /*FKB*/ 63, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 96, /*KBG*/ 91, /*FKB*/ 63, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 16.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 90.0, /*Unk*/ false);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 90.0, /*Unk*/ false);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 2, /*Frames*/ 90.0, /*Unk*/ false);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 3, /*Frames*/ 90.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 40.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 40.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 2, /*Frames*/ 40.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 3, /*Frames*/ 40.0, /*Unk*/ false);
 
     }
     frame(fighter.lua_state_agent, 5.0);
@@ -1917,7 +1921,7 @@ unsafe fn miifighter_up1b1(fighter: &mut L2CAgentBase) {
     script = "game_specialhi13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up1b2(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialhi13(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
         GroundModule::set_passable_check(fighter.module_accessor, true);
@@ -1940,7 +1944,7 @@ unsafe fn miifighter_up1b2(fighter: &mut L2CAgentBase) {
     script = "game_specialhi14", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up1b3(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialhi14(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 152, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 11.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1962,7 +1966,7 @@ unsafe fn miifighter_up1b3(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_upair1b1(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairhi12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 86, /*KBG*/ 100, /*FKB*/ 79, /*BKB*/ 0, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1998,7 +2002,7 @@ unsafe fn miifighter_upair1b1(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi13", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_upair1b2(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairhi13(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
         GroundModule::set_passable_check(fighter.module_accessor, true);
@@ -2021,7 +2025,7 @@ unsafe fn miifighter_upair1b2(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi14", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_upair1b3(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairhi14(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 152, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 11.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -2043,7 +2047,7 @@ unsafe fn miifighter_upair1b3(fighter: &mut L2CAgentBase) {
     script = "game_specialhi2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up2b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialhi2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_SYOTEN_KICK_FLAG_AIR_START);
@@ -2139,7 +2143,7 @@ unsafe fn miifighter_up2b(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up2bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairhi2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::HIT_NODE(fighter, Hash40::new("legr"), *HIT_STATUS_XLU);
@@ -2238,7 +2242,7 @@ unsafe fn miifighter_up2bair(fighter: &mut L2CAgentBase) {
     script = "game_specialhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up3b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialhi3(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
     }
@@ -2311,7 +2315,7 @@ unsafe fn miifighter_up3b(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_up3bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairhi3(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
     }
@@ -2384,7 +2388,7 @@ unsafe fn miifighter_up3bair(fighter: &mut L2CAgentBase) {
     script = "game_speciallw1", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down1b(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_KUIUCHI_HEAD_FLAG_ENABLE_SPEED_X_FLAG);
@@ -2418,7 +2422,7 @@ unsafe fn miifighter_down1b(fighter: &mut L2CAgentBase) {
     script = "game_speciallw1loop", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down1bloop(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw1loop(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 60, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.4, /*Angle*/ 270, /*KBG*/ 90, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.2, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
@@ -2442,16 +2446,16 @@ unsafe fn miifighter_down1bloop(fighter: &mut L2CAgentBase) {
     script = "game_speciallw1landing", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down1blanding(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw1landing(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 5.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-6.0), /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 56, /*FKB*/ 0, /*BKB*/ 122, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
-        macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 5.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-6.0), /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
+        macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
     }
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 5.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-6.0), /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
+        macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 33.0, /*Angle*/ 60, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 5.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(-6.0), /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
         AttackModule::clear(fighter.module_accessor, /*ID*/ 0, false);
         AttackModule::clear(fighter.module_accessor, /*ID*/ 2, false);
     }
@@ -2466,7 +2470,7 @@ unsafe fn miifighter_down1blanding(fighter: &mut L2CAgentBase) {
     script = "game_speciallw2kick", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down2bkick(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw2kick(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0.0, 0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -2490,7 +2494,7 @@ unsafe fn miifighter_down2bkick(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw2kick", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down2bairkick(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairlw2kick(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0.0, 0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -2514,7 +2518,7 @@ unsafe fn miifighter_down2bairkick(fighter: &mut L2CAgentBase) {
     script = "game_speciallw2autoattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down2battack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw2autoattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 290, /*KBG*/ 11, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 300, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -2532,7 +2536,7 @@ unsafe fn miifighter_down2battack(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw2autoattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down2bairattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairlw2autoattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 290, /*KBG*/ 11, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
         macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 300, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(3.5), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -2550,7 +2554,7 @@ unsafe fn miifighter_down2bairattack(fighter: &mut L2CAgentBase) {
     script = "game_speciallw3catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down3bcatch(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw3catch(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
     }
@@ -2569,7 +2573,7 @@ unsafe fn miifighter_down3bcatch(fighter: &mut L2CAgentBase) {
     script = "game_speciallw3throw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down3bthrow(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_speciallw3throw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
         macros::REVERSE_LR(fighter, );
@@ -2614,7 +2618,7 @@ unsafe fn miifighter_down3bthrow(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw3throw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_down3bairthrow(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_specialairlw3throw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIIFIGHTER_STATUS_COUNTER_THROW_FLAG_THROW_AFTER_LANDING);
         macros::WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
@@ -2660,7 +2664,7 @@ unsafe fn miifighter_down3bairthrow(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appealhir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -15.0, 0);
@@ -2672,7 +2676,7 @@ unsafe fn miifighter_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appealhil(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -15.0, 0);
@@ -2684,7 +2688,7 @@ unsafe fn miifighter_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
     }
@@ -2695,7 +2699,7 @@ unsafe fn miifighter_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
     }
@@ -2706,7 +2710,7 @@ unsafe fn miifighter_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_METALBLOCK), 0, 0, false, false);
     }
@@ -2717,7 +2721,7 @@ unsafe fn miifighter_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_METALBLOCK), 0, 0, false, false);
     }
@@ -2728,7 +2732,7 @@ unsafe fn miifighter_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalstart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_finalstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_finalstart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
         macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
@@ -2802,7 +2806,7 @@ unsafe fn miifighter_finalstart(fighter: &mut L2CAgentBase) {
     script = "game_finalairstart", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_finalairstart(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_finalairstart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 1, 20, 0, 0, 0);
         macros::SLOW_OPPONENT(fighter, 5.0, 30.0);
@@ -2876,7 +2880,7 @@ unsafe fn miifighter_finalairstart(fighter: &mut L2CAgentBase) {
     script = "game_finalattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn miifighter_finalattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_miifighter_finalattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
     }
@@ -3173,91 +3177,91 @@ unsafe fn miifighter_finalattack(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        miifighter_jab1,
-        miifighter_jab2,
-        miifighter_jab100,
-        miifighter_jab100sub,
-        miifighter_jab100end,
-        miifighter_dashattack,
-        miifighter_sidetiltup,
-        miifighter_sidetilt,
-        miifighter_sidetiltdown,
-        miifighter_uptilt,
-        miifighter_downtilt,
-        miifighter_sidesmashup,
-        miifighter_sidesmash,
-        miifighter_sidesmashdown,
-        miifighter_upsmash,
-        miifighter_downsmash,
-        miifighter_nair,
-        miifighter_fair,
-        miifighter_bair,
-        miifighter_uair,
-        miifighter_dair,
-        miifighter_grab,
-        miifighter_dashgrab,
-        miifighter_pivotgrab,
-        miifighter_pummel,
-        miifighter_throwf,
-        miifighter_throwb,
-        miifighter_throwhi,
-        miifighter_throwlw,
-        miifighter_downattacku,
-        miifighter_downattackd,
-        miifighter_cliffattack,
-        miifighter_slipattack,
-        miifighter_neutralb1,
-        miifighter_neutralbair1,
-        miifighter_shotput,
-        miifighter_neutral2b,
-        miifighter_neutral2bstart,
-        miifighter_neutral2bend,
-        miifighter_neutral2bair,
-        miifighter_neutral2bairstart,
-        miifighter_neutral2bairend,
-        miifighter_neutral3b,
-        miifighter_neutral3bturn,
-        miifighter_neutral3bair,
-        miifighter_neutral3bairturn,
-        miifighter_side1bstart,
-        miifighter_side1bend,
-        miifighter_side1bairstart,
-        miifighter_side1bairend,
-        miifighter_side2b,
-        miifighter_side3bdash,
-        //miifighter_side3bthrow,
-        miifighter_side3bairdash,
-        //miifighter_side3bairfall,
-        //miifighter_side3bairgrab,
-        miifighter_side3bairland,
-        miifighter_up1b1,
-        miifighter_up1b2,
-        miifighter_up1b3,
-        miifighter_upair1b1,
-        miifighter_upair1b2,
-        miifighter_upair1b3,
-        miifighter_up2b,
-        miifighter_up2bair,
-        miifighter_up3b,
-        miifighter_up3bair,
-        miifighter_down1b,
-        miifighter_down1bloop,
-        miifighter_down1blanding,
-        miifighter_down2battack,
-        miifighter_down2bairattack,
-        miifighter_down2bkick,
-        miifighter_down2bairkick,
-        miifighter_down3bcatch,
-        miifighter_down3bthrow,
-        miifighter_down3bairthrow,
-        miifighter_sidetauntr,
-        miifighter_sidetauntl,
-        miifighter_uptauntr,
-        miifighter_uptauntl,
-        miifighter_downtauntr,
-        miifighter_downtauntl,
-        miifighter_finalstart,
-        miifighter_finalairstart,
-        miifighter_finalattack
+        game_miifighter_attack11,
+        game_miifighter_attack12,
+        game_miifighter_attack100,
+        game_miifighter_attack100sub,
+        game_miifighter_attack100end,
+        game_miifighter_attackdash,
+        game_miifighter_attacks3hi,
+        game_miifighter_attacks3,
+        game_miifighter_attacks3lw,
+        game_miifighter_attackhi3,
+        game_miifighter_attacklw3,
+        game_miifighter_attacks4hi,
+        game_miifighter_attacks4,
+        game_miifighter_attacks4lw,
+        game_miifighter_attackhi4,
+        game_miifighter_attacklw4,
+        game_miifighter_attackairn,
+        game_miifighter_attackairf,
+        game_miifighter_attackairb,
+        game_miifighter_attackairhi,
+        game_miifighter_attackairlw,
+        game_miifighter_catch,
+        game_miifighter_catchdash,
+        game_miifighter_catchturn,
+        game_miifighter_catchattack,
+        game_miifighter_throwf,
+        game_miifighter_throwb,
+        game_miifighter_throwhi,
+        game_miifighter_throwlw,
+        game_miifighter_downattacku,
+        game_miifighter_downattackd,
+        game_miifighter_cliffattack,
+        game_miifighter_slipattack,
+        game_miifighter_specialn1,
+        game_miifighter_specialairn1,
+        game_miifighter_ironball_fly,
+        game_miifighter_specialn2,
+        game_miifighter_specialn2start,
+        game_miifighter_specialn2finish,
+        game_miifighter_specialairn2,
+        game_miifighter_specialairn2start,
+        game_miifighter_specialairn2finish,
+        game_miifighter_specialn3,
+        game_miifighter_specialn3turn,
+        game_miifighter_specialairn3,
+        game_miifighter_specialairn3turn,
+        game_miifighter_specials1start,
+        game_miifighter_specials1end,
+        game_miifighter_specialairs1start,
+        game_miifighter_specialairs1end,
+        game_miifighter_specials2,
+        game_miifighter_specials3dash,
+        //game_miifighter_specials3throw,
+        game_miifighter_specialairs3dash,
+        //game_miifighter_specialairs3fall,
+        //game_miifighter_specialairs3catch,
+        game_miifighter_specialairs3landing,
+        game_miifighter_specialhi12,
+        game_miifighter_specialhi13,
+        game_miifighter_specialhi14,
+        game_miifighter_specialairhi12,
+        game_miifighter_specialairhi13,
+        game_miifighter_specialairhi14,
+        game_miifighter_specialhi2,
+        game_miifighter_specialairhi2,
+        game_miifighter_specialhi3,
+        game_miifighter_specialairhi3,
+        game_miifighter_speciallw1,
+        game_miifighter_speciallw1loop,
+        game_miifighter_speciallw1landing,
+        game_miifighter_speciallw2autoattack,
+        game_miifighter_specialairlw2autoattack,
+        game_miifighter_speciallw2kick,
+        game_miifighter_specialairlw2kick,
+        game_miifighter_speciallw3catch,
+        game_miifighter_speciallw3throw,
+        game_miifighter_specialairlw3throw,
+        game_miifighter_appealsr,
+        game_miifighter_appealsl,
+        game_miifighter_appealhir,
+        game_miifighter_appealhil,
+        game_miifighter_appeallwr,
+        game_miifighter_appeallwl,
+        game_miifighter_finalstart,
+        game_miifighter_finalairstart,
+        game_miifighter_finalattack
     );
 }

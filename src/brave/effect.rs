@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_crash1", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn brave_burst1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_brave_crash1(fighter: &mut L2CAgentBase) {
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("brave_fullburst"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 90.0, 0.0, 3.0, true);
@@ -44,7 +44,7 @@ unsafe fn brave_burst1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_crashend1", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn brave_burst2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_brave_crashend1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("brave_fullburst_end"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, true);
     }
@@ -56,7 +56,7 @@ unsafe fn brave_burst2gfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        brave_burst1gfx,
-        brave_burst2gfx
+        effect_brave_crash1,
+        effect_brave_crashend1
     );
 }

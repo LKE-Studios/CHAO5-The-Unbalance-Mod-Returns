@@ -10,7 +10,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_specialhi",
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn eflame_pillargfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_eflame_specialhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_ground"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.3, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.5, 0, 0, 0, 0, 0, 0, true);
@@ -22,6 +22,6 @@ unsafe fn eflame_pillargfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        eflame_pillargfx
+        effect_eflame_specialhi
     );
 }

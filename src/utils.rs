@@ -6,6 +6,8 @@ use smash::{
     lib::lua_const::*,
     app::{lua_bind::*, *}
 };
+use smash::lib::L2CAgent;
+use smash::lua2cpp::L2CFighterCommon;
 
 // Transition Hook static muts:
 // 0 - Don't change 
@@ -127,6 +129,82 @@ pub unsafe fn disable_gravity(module_accessor: *mut BattleObjectModuleAccessor){
 
 pub unsafe fn enable_gravity(module_accessor: *mut BattleObjectModuleAccessor){
     KineticModule::enable_energy(module_accessor,  *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+}
+
+//BomaExt, helps with various things
+pub trait BomaExt {
+    unsafe fn is_fighter(&mut self) -> bool;
+    unsafe fn is_status_one_of(&mut self, kinds: &[i32]) -> bool;
+    unsafe fn is_weapon(&mut self) -> bool;
+    unsafe fn kind(&mut self) -> i32;
+}
+
+impl BomaExt for BattleObjectModuleAccessor {
+    unsafe fn is_fighter(&mut self) -> bool {
+        return smash::app::utility::get_category(self) == *BATTLE_OBJECT_CATEGORY_FIGHTER;
+    }
+    unsafe fn is_status_one_of(&mut self, kinds: &[i32]) -> bool {
+        let kind = StatusModule::status_kind(self);
+        return kinds.contains(&kind);
+    }
+    unsafe fn is_weapon(&mut self) -> bool {
+        return smash::app::utility::get_category(self) == *BATTLE_OBJECT_CATEGORY_WEAPON;
+    }
+    unsafe fn kind(&mut self) -> i32 {
+        return smash::app::utility::get_kind(self);
+    }
+}
+
+//Frame Info, helps with a few things like Momentum Transfer
+pub struct FrameInfo {
+    pub lua_state: u64,
+    pub agent: *mut L2CAgent,
+    pub boma: *mut smash::app::BattleObjectModuleAccessor,
+    pub fighter_kind: i32,
+    pub status_kind: i32,
+    pub situation_kind: i32,
+    pub motion_kind: smash::phx::Hash40,
+    pub cur_frame: f32,
+    pub frame: f32,
+    pub cat: [i32; 4],
+    pub facing: f32,
+    pub stick_x: f32,
+    pub stick_y: f32,
+    pub id: usize,
+    pub costume_slot_number: i32
+}
+
+impl FrameInfo {
+    pub unsafe fn update_and_get(fighter: &mut L2CFighterCommon) -> Option<Self> {
+        let lua_state = fighter.lua_state_agent;
+        let boma = smash::app::sv_system::battle_object_module_accessor(lua_state);
+        let id = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if !(0..8).contains(&id) {
+            return None;
+        }
+        let cat1 = ControlModule::get_command_flag_cat(boma, 0);
+        let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+        let cat3 = ControlModule::get_command_flag_cat(boma, 2);
+        let cat4 = ControlModule::get_command_flag_cat(boma, 3);
+        let cur_frame = MotionModule::frame(boma);
+        Some(Self {
+            lua_state: lua_state,
+            agent: fighter as *mut L2CFighterCommon as *mut L2CAgent,
+            boma: boma as *mut smash::app::BattleObjectModuleAccessor,
+            fighter_kind: smash::app::utility::get_kind(boma),
+            status_kind: StatusModule::status_kind(boma),
+            situation_kind: StatusModule::situation_kind(boma),
+            motion_kind: Hash40::new_raw(MotionModule::motion_kind(boma)),
+            cur_frame: MotionModule::frame(boma),
+            frame: cur_frame + 1.0,
+            cat: [cat1, cat2, cat3, cat4],
+            facing: PostureModule::lr(boma),
+            stick_x: ControlModule::get_stick_x(boma),
+            stick_y: ControlModule::get_stick_y(boma),
+            id: id,
+            costume_slot_number: WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR)
+        })
+    }
 }
 
 pub fn install() {

@@ -30,17 +30,17 @@ static mut DOWN_ANGLE_ACCEL_MIN : [f32; 8] = [0.45; 8]; //Min Downward angular a
 static DOWN_ANGLE_ACCEL_MAX : f32 = 1.0; //Max Downward angular acceleration
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn glide_start_a(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_main_ridley_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
     KineticModule::clear_speed_all(fighter.module_accessor);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
     if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_GLIDE_START {
         KineticModule::mul_speed(fighter.module_accessor, &Vector3f{x: GLIDE_START_H_SPEED, y:0.0, z:0.0}, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
     }
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(glide_start_b as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_ridley_glidestart_sub as *const () as _))
 }
 
-unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_main_ridley_glidestart_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {   
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
@@ -49,13 +49,13 @@ unsafe extern "C" fn glide_start_b(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn glide_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_main_ridley_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), 90.0, 0.0, true, 0.0, false, false);
     MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(glide_core as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_ridley_glide_sub as *const () as _))
 }
 
-unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_main_ridley_glide_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     fighter.sub_air_check_fall_common();
@@ -122,7 +122,7 @@ unsafe extern "C" fn glide_core(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn glide_finish(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_end_ridley_glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = get_entry_id(fighter.module_accessor);
     ANGLE[ENTRY_ID] = 0.0;
     MOMENTUM[ENTRY_ID] = 0.0;
@@ -131,12 +131,12 @@ pub unsafe fn glide_finish(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn glide_attack_a(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_main_ridley_glideattack(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_attack"), -1.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(glide_attack_b as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_ridley_glideattack_sub as *const () as _))
 }
 
-unsafe extern "C" fn glide_attack_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_main_ridley_glideattack_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_air_check_fall_common();
     WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
@@ -147,12 +147,12 @@ unsafe extern "C" fn glide_attack_b(fighter: &mut L2CFighterCommon) -> L2CValue 
 }
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn glide_end_a(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_main_ridley_glideend(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_end"), -1.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(glide_end_b as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_ridley_glideend_sub as *const () as _))
 }
 
-unsafe extern "C" fn glide_end_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_main_ridley_glideend_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_air_check_fall_common();
     WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_end") && MotionModule::is_end(fighter.module_accessor) {
@@ -162,12 +162,12 @@ unsafe extern "C" fn glide_end_b(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[status_script(agent = "ridley", status = FIGHTER_STATUS_KIND_GLIDE_LANDING, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn glide_landing_a(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_main_ridley_glidelanding(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_landing"), -1.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(glide_landing_b as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_ridley_glidelanding_sub as *const () as _))
 }
 
-unsafe extern "C" fn glide_landing_b(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_main_ridley_glidelanding_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_landing") && MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_DOWN_WAIT.into(), false.into());
     }
@@ -176,11 +176,11 @@ unsafe extern "C" fn glide_landing_b(fighter: &mut L2CFighterCommon) -> L2CValue
 
 pub fn install() {
     smashline::install_status_scripts!(
-        glide_start_a, 
-        glide_main,
-        glide_finish,
-        glide_attack_a,
-        glide_end_a,
-        glide_landing_a
+        status_main_ridley_glidestart, 
+        status_main_ridley_glide,
+        status_end_ridley_glide,
+        status_main_ridley_glideattack,
+        status_main_ridley_glideend,
+        status_main_ridley_glidelanding
     );
 }

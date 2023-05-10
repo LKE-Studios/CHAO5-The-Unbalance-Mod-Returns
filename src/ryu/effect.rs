@@ -23,7 +23,7 @@ unsafe fn effect_ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
         effect_ryu_kamehameha_fire,
-    //    effect_ryu_kamehameha_charge,
-     //   effect_ryu_kamehameha_start
+        //effect_ryu_kamehameha_charge,
+        //effect_ryu_kamehameha_start
     );
 }

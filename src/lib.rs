@@ -2,6 +2,7 @@
 #![feature(proc_macro_hygiene)]
 #![allow(unused_macros,
     unused_must_use,
+    unused_unsafe,
     clippy::borrow_interior_mutable_const,
     clippy::collapsible_if,
     clippy::collapsible_else_if,
@@ -10,10 +11,11 @@
     clippy::if_same_then_else)]
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
+//#[macro_use]
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
-use skyline::hooks::{getRegionAddress, Region};
+use skyline::hooks::{getRegionAddress, Region, InlineCtx};
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::*;
@@ -30,6 +32,7 @@ pub mod globals {
     pub const PAD_FLAG:              i32 = 0x1F; //u64
     pub const CMD_CAT1:              i32 = 0x20; //u64
 }
+pub mod singletons;
 
 mod bayonetta;
 mod brave;
@@ -147,6 +150,12 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
         value = 0x205;
     }
     original!()(unk,constant,value)
+}
+
+#[skyline::hook(offset=0x3f0028, inline)]
+pub unsafe fn offset_dump(ctx: &InlineCtx) {
+	let text = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
+	println!("Function Offset: {:#X}", ctx.registers[8].x.as_ref() - text);
 }
 
 #[skyline::hook(replace = MotionModule::change_motion)]
@@ -292,7 +301,7 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
     pit::install();
     wario::install();
@@ -360,6 +369,7 @@ pub fn main() {
     koopag::install();
     skyline::install_hooks!(
         declare_const_hook, 
+        offset_dump,
         log_remove_motion_partial,
         log_add_motion_partial,
         motionmodule_change_motion_replace

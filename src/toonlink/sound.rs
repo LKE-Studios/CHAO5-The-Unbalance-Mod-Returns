@@ -9,7 +9,7 @@ use smash_script::*;
     script = "sound_attacks4charge", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn toonlink_sidesmashsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_toonlink_attacks4charge(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_02"));
@@ -21,7 +21,7 @@ unsafe fn toonlink_sidesmashsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attackhi4charge", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn toonlink_upsmashsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_toonlink_attackhi4charge(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_02"));
@@ -33,7 +33,7 @@ unsafe fn toonlink_upsmashsfx(fighter: &mut L2CAgentBase) {
     script = "sound_attacklw4charge", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn toonlink_downsmashsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_toonlink_attacklw4charge(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_02"));
@@ -42,8 +42,8 @@ unsafe fn toonlink_downsmashsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        toonlink_sidesmashsfx,
-        toonlink_upsmashsfx,
-        toonlink_downsmashsfx
+        sound_toonlink_attacks4charge,
+        sound_toonlink_attackhi4charge,
+        sound_toonlink_attacklw4charge
     );
 }

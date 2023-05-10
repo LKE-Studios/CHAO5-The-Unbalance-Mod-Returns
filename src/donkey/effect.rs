@@ -5,12 +5,12 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//SpecialAirHiGFX
+#[acmd_script(//SpecialAirHi
     agent = "donkey", 
     script = "effect_specialairhi", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn donkey_upbairgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_donkey_specialairhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
@@ -24,12 +24,12 @@ unsafe fn donkey_upbairgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwLoopGFX
+#[acmd_script(//SpecialLwLoop
     agent = "donkey", 
     script = "effect_speciallwloop", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn donkey_downbgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_donkey_speciallwloop(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 2.2, 0, 0, 0, 0, 0, 0, false);
@@ -44,7 +44,7 @@ unsafe fn donkey_downbgfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        donkey_upbairgfx,
-        donkey_downbgfx
+        effect_donkey_specialairhi,
+        effect_donkey_speciallwloop
     );
 }

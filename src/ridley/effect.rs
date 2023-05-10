@@ -10,10 +10,10 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn ridley_glidestartgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
-    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 7.97, true);
+    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 4.8, 0, 0, 0, 0, 3.5, true);
     macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.39, /*G*/ 0.045, /*B*/ 1.55);
 }
 
@@ -22,7 +22,7 @@ unsafe fn ridley_glidestartgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn ridley_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -33,7 +33,7 @@ unsafe fn ridley_glide2gfx(fighter: &mut L2CAgentBase) {
     script = "effect_glideattack", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn ridley_glideattackgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("ridley_grabbing_hold"), Hash40::new("havel"), -1.0, 0, 0, 0, 0, 0, 1.0, true);
@@ -50,7 +50,7 @@ unsafe fn ridley_glideattackgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidelanding", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn ridley_glidelandinggfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.48, 0, 0, 0, 0, 0, 0, false);
     }
@@ -58,9 +58,9 @@ unsafe fn ridley_glidelandinggfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        ridley_glidestartgfx,
-        ridley_glide2gfx,
-        ridley_glideattackgfx,
-        ridley_glidelandinggfx
+        effect_ridley_glidestart,
+        effect_ridley_glidewing,
+        effect_ridley_glideattack,
+        effect_ridley_glidelanding
     );
 }

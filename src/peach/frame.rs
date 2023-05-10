@@ -6,7 +6,7 @@ use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 
 #[fighter_frame( agent = FIGHTER_KIND_PEACH )]
-fn peach_frame(fighter: &mut L2CFighterCommon) {
+fn frame_peach(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
@@ -22,6 +22,6 @@ fn peach_frame(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        peach_frame
+        frame_peach
     );
 }

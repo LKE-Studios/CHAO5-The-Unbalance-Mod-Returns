@@ -14,7 +14,7 @@ use smash_script::*;
     script = "game_jumpsquat", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_jumpsquat(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_jumpsquat(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 }
@@ -24,7 +24,7 @@ unsafe fn koopag_jumpsquat(fighter: &mut L2CAgentBase) {
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 25.0);
@@ -50,7 +50,7 @@ unsafe fn koopag_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attack12", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 8.0);
@@ -72,7 +72,7 @@ unsafe fn koopag_jab2(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
 		MotionModule::set_rate(fighter.module_accessor, 3.0);
@@ -114,7 +114,7 @@ unsafe fn koopag_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sidetiltup(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 25.0);
@@ -136,7 +136,7 @@ unsafe fn koopag_sidetiltup(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 25.0);
@@ -158,7 +158,7 @@ unsafe fn koopag_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks3lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sidetiltdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 25.0);
@@ -180,7 +180,7 @@ unsafe fn koopag_sidetiltdown(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 18.0);
@@ -212,7 +212,7 @@ unsafe fn koopag_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 0, Hash40::new("footl"), 12.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 0.0, None, None, None, 2.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.4, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_TAIL);
@@ -248,7 +248,7 @@ unsafe fn koopag_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -295,7 +295,7 @@ unsafe fn koopag_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -349,7 +349,7 @@ unsafe fn koopag_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
     frame(fighter.lua_state_agent, 2.0);
@@ -407,7 +407,7 @@ unsafe fn koopag_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
 		MotionModule::set_rate(fighter.module_accessor, 0.6);
@@ -438,7 +438,7 @@ unsafe fn koopag_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackairf(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
@@ -463,7 +463,7 @@ unsafe fn koopag_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
     frame(fighter.lua_state_agent, 10.0);
@@ -486,7 +486,7 @@ unsafe fn koopag_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackairhi(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -513,7 +513,7 @@ unsafe fn koopag_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
 		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -552,7 +552,7 @@ unsafe fn koopag_dair(fighter: &mut L2CAgentBase) {
     script = "game_landingairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_bairland(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_landingairb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 25.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ -12.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_NONE);
@@ -569,7 +569,7 @@ unsafe fn koopag_bairland(fighter: &mut L2CAgentBase) {
     script = "game_landingairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_dairland(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_landingairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 1, Hash40::new("top"), 25.0, 361, 70, 0, 30, 30.6, 0.0, 4.0, 16.0, Some(0.0), Some(4.0), Some(-16.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_NONE);
@@ -585,7 +585,7 @@ unsafe fn koopag_dairland(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -609,7 +609,7 @@ unsafe fn koopag_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_catchattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 0, Hash40::new("head"), 15.0, 361, 0, 0, 0, 15.0, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(0.0), 1.2, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_NONE);
@@ -625,7 +625,7 @@ unsafe fn koopag_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_throwf(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 0, Hash40::new("head"), 30.0, 361, 71, 0, 20, 10.0, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
@@ -641,7 +641,7 @@ unsafe fn koopag_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_throwb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 0, Hash40::new("handr"), 33.0, 361, 73, 0, 20, 10.0, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_purple"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
@@ -657,7 +657,7 @@ unsafe fn koopag_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_throwup(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
 		MotionModule::set_rate(fighter.module_accessor, 1.7);
 	}
@@ -676,7 +676,7 @@ unsafe fn koopag_throwup(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_throwdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_throwlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
 		macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 100.0, 270, 20, 0, 0, 10.0, 0.0, 9.0, 8.8, Some(0.0), Some(9.0), Some(28.8), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_bury"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
@@ -692,7 +692,7 @@ unsafe fn koopag_throwdown(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_cliffattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if macros::is_excute(fighter) {
@@ -710,7 +710,7 @@ unsafe fn koopag_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 28.0, /*Angle*/ 48, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 25.5, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 58.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(5.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
@@ -734,7 +734,7 @@ unsafe fn koopag_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 28.0, /*Angle*/ 48, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 25.5, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 58.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.5), /*Z2*/ Some(5.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
@@ -758,18 +758,18 @@ unsafe fn koopag_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_move", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_fire(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_breath_move(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 45, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 45, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
         AttackModule::enable_safe_pos(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 29.4, /*Angle*/ 45, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 21, /*Size*/ 23.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 29.4, /*Angle*/ 45, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 21, /*Size*/ 23.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
     }
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 28.8, /*Angle*/ 45, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 18, /*Size*/ 27.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 28.8, /*Angle*/ 45, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 18, /*Size*/ 27.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_FLOOR, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_NONE);
     }
 }
 
@@ -778,7 +778,7 @@ unsafe fn koopag_fire(fighter: &mut L2CAgentBase) {
     script = "game_specialscatch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_specialscatch(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialscatch(fighter: &mut L2CAgentBase) {
 	if macros::is_excute(fighter) {
 		MotionModule::set_rate(fighter.module_accessor, 1.0);
 	}
@@ -801,7 +801,7 @@ unsafe fn koopag_specialscatch(fighter: &mut L2CAgentBase) {
     script = "game_specialsaircatch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_specialairscatch(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialairscatch(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
 		MotionModule::set_rate(fighter.module_accessor, 1.0);
 	}
@@ -827,7 +827,7 @@ unsafe fn koopag_specialairscatch(fighter: &mut L2CAgentBase) {
     script = "game_specialsfall", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialsfall(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 361, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 2.0, /*Z*/ 6.5, /*X2*/ Some(0.0), /*Y2*/ Some(2.0), /*Z2*/ Some(-4.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 10, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_BODY);
@@ -839,7 +839,7 @@ unsafe fn koopag_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specialslanding", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_sideb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialslanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 50.0, /*Angle*/ 60, /*KBG*/ 46, /*FKB*/ 0, /*BKB*/ 4, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_NONE);
@@ -856,7 +856,7 @@ unsafe fn koopag_sideb2(fighter: &mut L2CAgentBase) {
     script = "game_specialhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_upb(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
@@ -944,7 +944,7 @@ unsafe fn koopag_upb(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_upbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -986,7 +986,7 @@ unsafe fn koopag_upbair(fighter: &mut L2CAgentBase) {
     script = "game_speciallw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downb(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_speciallw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if macros::is_excute(fighter) {
@@ -1020,7 +1020,7 @@ unsafe fn koopag_downb(fighter: &mut L2CAgentBase) {
     script = "game_specialairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_specialairlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
     }
@@ -1036,7 +1036,7 @@ unsafe fn koopag_downbair(fighter: &mut L2CAgentBase) {
     script = "game_speciallwlanding", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn koopag_downbairland(fighter: &mut L2CAgentBase) {
+unsafe fn game_koopag_speciallwlanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 60, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 36.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -5.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(5.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
     }
@@ -1050,43 +1050,43 @@ unsafe fn koopag_downbairland(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        koopag_jumpsquat,
-        koopag_jab1,
-        koopag_jab2,
-        koopag_dashattack,
-        koopag_sidetiltup,
-        koopag_sidetilt,
-        koopag_sidetiltdown,
-        koopag_uptilt,
-        koopag_downtilt,
-        koopag_sidesmash,
-        koopag_upsmash,
-        koopag_downsmash,
-        koopag_nair,
-        koopag_fair,
-        koopag_bair,
-        koopag_uair,
-        koopag_dair,
-        koopag_bairland,
-        koopag_dairland,
-        koopag_grab,
-        koopag_pummel,
-        koopag_throwf,
-        koopag_throwb,
-        koopag_throwup,
-        koopag_throwdown,
-        koopag_cliffattack,
-        koopag_downattackd,
-        koopag_downattacku,
-        koopag_fire,
-        koopag_sideb1,
-        koopag_specialscatch,
-        koopag_specialairscatch,
-        koopag_sideb2,
-        koopag_upb,
-        koopag_upbair,
-        koopag_downb,
-        koopag_downbair,
-        koopag_downbairland
+        game_koopag_jumpsquat,
+        game_koopag_attack11,
+        game_koopag_attack12,
+        game_koopag_attackdash,
+        game_koopag_attacks3hi,
+        game_koopag_attacks3,
+        game_koopag_attacks3lw,
+        game_koopag_attackhi3,
+        game_koopag_attacklw3,
+        game_koopag_attacks4,
+        game_koopag_attackhi4,
+        game_koopag_attacklw4,
+        game_koopag_attackairn,
+        game_koopag_attackairf,
+        game_koopag_attackairb,
+        game_koopag_attackairhi,
+        game_koopag_attackairlw,
+        game_koopag_landingairb,
+        game_koopag_landingairlw,
+        game_koopag_catch,
+        game_koopag_catchattack,
+        game_koopag_throwf,
+        game_koopag_throwb,
+        game_koopag_throwhi,
+        game_koopag_throwlw,
+        game_koopag_cliffattack,
+        game_koopag_downattackd,
+        game_koopag_downattacku,
+        game_koopag_breath_move,
+        game_koopag_specialsfall,
+        game_koopag_specialscatch,
+        game_koopag_specialairscatch,
+        game_koopag_specialslanding,
+        game_koopag_specialhi,
+        game_koopag_specialairhi,
+        game_koopag_speciallw,
+        game_koopag_specialairlw,
+        game_koopag_speciallwlanding
     );
 }

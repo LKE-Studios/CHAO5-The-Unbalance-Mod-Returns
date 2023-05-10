@@ -9,7 +9,7 @@ use smash_script::*;
     script = "sound_run", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn koopag_runsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_koopag_run(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::PLAY_STATUS(fighter, Hash40::new("se_koopag_001"));
@@ -21,7 +21,7 @@ unsafe fn koopag_runsfx(fighter: &mut L2CAgentBase) {
     script = "sound_specialnstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn koopag_neutralbsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_koopag_specialnstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_koopag_special_n01"));
@@ -38,7 +38,7 @@ unsafe fn koopag_neutralbsfx(fighter: &mut L2CAgentBase) {
     script = "sound_specialairnstart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn koopag_neutralbairsfx(fighter: &mut L2CAgentBase) {
+unsafe fn sound_koopag_specialairnstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_koopag_special_n01"));
@@ -51,8 +51,8 @@ unsafe fn koopag_neutralbairsfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        koopag_neutralbsfx,
-        koopag_neutralbairsfx,
-        koopag_runsfx
+        sound_koopag_specialnstart,
+        sound_koopag_specialairnstart,
+        sound_koopag_run
     );
 }

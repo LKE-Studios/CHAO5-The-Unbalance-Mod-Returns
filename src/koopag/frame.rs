@@ -10,22 +10,20 @@ use smash::phx::Vector3f;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::app::{sv_information};
 use smash::lib::{L2CValueType::*, L2CValueType, L2CAgent, L2CTable, L2CTable_meta, L2CInnerFunctionBase, L2CValueInner};
-use crate::custom::FIGHTER_BOOL_1;
-use crate::custom::FIGHTER_BOOL_2;
-use crate::custom::FIGHTER_BOOL_3;
-use crate::custom::{get_player_number};
-use crate::custom::jump_checker_buffer;
+use crate::common::FIGHTER_BOOL_1;
+use crate::common::FIGHTER_BOOL_2;
+use crate::common::FIGHTER_BOOL_3;
+use crate::common::{get_player_number};
 use crate::globals::*;
 use crate::koopag::status::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_KOOPAG )]
-pub fn koopag_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_koopag(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 		let motion_kind = MotionModule::motion_kind(module_accessor);
 		let status_kind = StatusModule::status_kind(fighter.module_accessor);
 		let situation_kind = StatusModule::situation_kind(module_accessor);
-		let cat = fighter.global_table[CMD_CAT1].get_int() as i32;
 		let mut globals = fighter.globals_mut().clone();
 		let GIGA_DTILT = &mut FIGHTER_BOOL_1[get_player_number(module_accessor)];
 		let GIGA_DASH_ATTACK = &mut FIGHTER_BOOL_2[get_player_number(module_accessor)];
@@ -141,22 +139,12 @@ pub fn koopag_opff(fighter : &mut L2CFighterCommon) {
 		else {
 			globals["giga_neutral_b"] = false.into();
 		}
-		//Up Smash Canceling
-		if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
-			if AttackModule::is_infliction_status(module_accessor, *COLLISION_KIND_MASK_HIT) {
-				if jump_checker_buffer(module_accessor, cat) {
-					if MotionModule::frame(module_accessor) <= 26.0 && MotionModule::frame(module_accessor) >= 18.0 {
-						StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
-					}
-				}
-			}
-		}
 		//Shield
 		if status_kind == *FIGHTER_STATUS_KIND_GUARD_ON && MotionModule::frame(module_accessor) >= 9.0 {
 			StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_GUARD, true);
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_GUARD {
-			MotionModule::set_frame(module_accessor, 0.0, true);
+			MotionModule::set_frame(module_accessor, 180.0, true);
 			if ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
 				if WorkModule::get_float(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD) <= WorkModule::get_float(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MIN) {
 					StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_SHIELD_BREAK_FLY, true);
@@ -180,6 +168,6 @@ pub fn koopag_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        koopag_opff
+        frame_koopag
     );
 }

@@ -11,11 +11,11 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_glidestartgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 4.5, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 4.5, 0, 0, 0, 0, 2.9, true);
         macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.8, /*G*/ 0.13, /*B*/ 0.53);
     }
     frame(fighter.lua_state_agent, 28.0);
@@ -30,12 +30,12 @@ unsafe fn trail_glidestartgfx(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "trail", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -46,7 +46,7 @@ unsafe fn trail_glide2gfx(fighter: &mut L2CAgentBase) {
     script = "effect_glideattack", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_glideattackgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_keyblade_flare"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.2, true);
@@ -64,9 +64,33 @@ unsafe fn trail_glideattackgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidelanding", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_glidelandinggfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_glidelanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.48, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+#[acmd_script(//Fly
+    agent = "trail_fire", 
+    script = "effect_fly", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_trail_fire_fly(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_fire_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 4.0, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//Fly
+    agent = "trail_fire", 
+    script = "effect_fly2", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_trail_fire_fly2(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_fire_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.5, true);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
     }
 }
 
@@ -75,7 +99,7 @@ unsafe fn trail_glidelandinggfx(fighter: &mut L2CAgentBase) {
     script = "effect_fly", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_ice1gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_ice_fly(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_ice_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 4.5, true);
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
@@ -87,7 +111,7 @@ unsafe fn trail_ice1gfx(fighter: &mut L2CAgentBase) {
     script = "effect_flylast", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn trail_ice2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_trail_ice_flylast(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("trail_ice_bullet"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 6.0, true);
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
@@ -96,11 +120,13 @@ unsafe fn trail_ice2gfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        trail_glidestartgfx,
-        trail_glide2gfx,
-        trail_glideattackgfx,
-        trail_glidelandinggfx,
-        trail_ice1gfx,
-        trail_ice2gfx
+        effect_trail_glidestart,
+        effect_trail_glidewing,
+        effect_trail_glideattack,
+        effect_trail_glidelanding,
+        effect_trail_fire_fly,
+        effect_trail_fire_fly2,
+        effect_trail_ice_fly,
+        effect_trail_ice_flylast
     );
 }

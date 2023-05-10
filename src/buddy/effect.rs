@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     scripts = ["effect_jumpaerialf3", "effect_jumpaerialf4", "effect_jumpaerialf5"],
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn buddy_airjumpgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_buddy_jumpaerial(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         macros::EFFECT_FOLLOW_WORK(fighter, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_EFFECT_KIND_FLYING, Hash40::new("k_bust"), 5, -5, 0, 0, 0, 0, 0.85, true);
@@ -35,10 +35,10 @@ unsafe fn buddy_airjumpgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn buddy_glidestartgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_buddy_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
-    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 5.0, true);
+    macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 4.2, 0, 0, 0, 0, 3.0, true);
     macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 0.045, /*B*/ 0.1);
 }
 
@@ -47,7 +47,7 @@ unsafe fn buddy_glidestartgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn buddy_glide2gfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_buddy_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
     }
@@ -58,7 +58,7 @@ unsafe fn buddy_glide2gfx(fighter: &mut L2CAgentBase) {
     script = "effect_glideattack", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn buddy_glideattackgfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_buddy_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
@@ -71,7 +71,7 @@ unsafe fn buddy_glideattackgfx(fighter: &mut L2CAgentBase) {
     script = "effect_glidelanding", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn buddy_glidelandinggfx(fighter: &mut L2CAgentBase) {
+unsafe fn effect_buddy_glidelanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.48, 0, 0, 0, 0, 0, 0, false);
     }
@@ -79,10 +79,10 @@ unsafe fn buddy_glidelandinggfx(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        buddy_airjumpgfx,
-        buddy_glidestartgfx,
-        buddy_glide2gfx,
-        buddy_glideattackgfx,
-        buddy_glidelandinggfx
+        effect_buddy_jumpaerial,
+        effect_buddy_glidestart,
+        effect_buddy_glidewing,
+        effect_buddy_glideattack,
+        effect_buddy_glidelanding
     );
 }

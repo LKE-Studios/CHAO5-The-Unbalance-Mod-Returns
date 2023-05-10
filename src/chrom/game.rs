@@ -12,7 +12,7 @@ use smash_script::*;
     script = "game_attack11", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_jab1(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attack11(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 5.0);
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -33,7 +33,7 @@ unsafe fn chrom_jab1(fighter: &mut L2CAgentBase) {
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_dashattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackdash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
@@ -52,7 +52,7 @@ unsafe fn chrom_dashattack(fighter: &mut L2CAgentBase) {
     script = "game_attacks3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidetilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attacks3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -75,7 +75,7 @@ unsafe fn chrom_sidetilt(fighter: &mut L2CAgentBase) {
     script = "game_attackhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_uptilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 98, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 7.2, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(16.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -102,7 +102,7 @@ unsafe fn chrom_uptilt(fighter: &mut L2CAgentBase) {
     script = "game_attacklw3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downtilt(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attacklw3(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
@@ -121,7 +121,7 @@ unsafe fn chrom_downtilt(fighter: &mut L2CAgentBase) {
     script = "game_attacks4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidesmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attacks4(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -147,7 +147,7 @@ unsafe fn chrom_sidesmash(fighter: &mut L2CAgentBase) {
     script = "game_attackhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_upsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackhi4(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.66);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -194,7 +194,7 @@ unsafe fn chrom_upsmash(fighter: &mut L2CAgentBase) {
     script = "game_attacklw4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downsmash(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attacklw4(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -229,7 +229,7 @@ unsafe fn chrom_downsmash(fighter: &mut L2CAgentBase) {
     script = "game_attackairn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_nair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackairn(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -266,7 +266,7 @@ unsafe fn chrom_nair(fighter: &mut L2CAgentBase) {
     script = "game_attackairf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackairf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -295,7 +295,7 @@ unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
     script = "game_attackairb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -322,7 +322,7 @@ unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
     script = "game_attackairhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -349,7 +349,7 @@ unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
     script = "game_attackairlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_dair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_attackairlw(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.55);
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -377,7 +377,7 @@ unsafe fn chrom_dair(fighter: &mut L2CAgentBase) {
     script = "game_catch", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_grab(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -401,7 +401,7 @@ unsafe fn chrom_grab(fighter: &mut L2CAgentBase) {
     script = "game_catchdash", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 4.0);
@@ -429,7 +429,7 @@ unsafe fn chrom_dashgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchturn", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -453,7 +453,7 @@ unsafe fn chrom_pivotgrab(fighter: &mut L2CAgentBase) {
     script = "game_catchattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_pummel(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_catchattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -471,7 +471,7 @@ unsafe fn chrom_pummel(fighter: &mut L2CAgentBase) {
     script = "game_throwf", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_throwf(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_throwf(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 45, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -494,7 +494,7 @@ unsafe fn chrom_throwf(fighter: &mut L2CAgentBase) {
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_throwb(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_throwb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 16.0, /*Angle*/ 117, /*KBG*/ 96, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -517,9 +517,9 @@ unsafe fn chrom_throwb(fighter: &mut L2CAgentBase) {
     script = "game_throwhi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_throwup(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_throwhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 14.0, /*Angle*/ 97, /*KBG*/ 108, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 14.0, /*Angle*/ 97, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 12.0);
@@ -540,7 +540,7 @@ unsafe fn chrom_throwup(fighter: &mut L2CAgentBase) {
     script = "game_throwlw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_throwdown(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_throwlw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 84, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -563,7 +563,7 @@ unsafe fn chrom_throwdown(fighter: &mut L2CAgentBase) {
     script = "game_cliffattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_cliffattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_cliffattack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 23.0);
     if macros::is_excute(fighter) {
@@ -580,7 +580,7 @@ unsafe fn chrom_cliffattack(fighter: &mut L2CAgentBase) {
     script = "game_slipattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_slipattack(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_slipattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -16.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -604,7 +604,7 @@ unsafe fn chrom_slipattack(fighter: &mut L2CAgentBase) {
     script = "game_downattacku", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downattacku(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 48, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -18.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -628,7 +628,7 @@ unsafe fn chrom_downattacku(fighter: &mut L2CAgentBase) {
     script = "game_downattackd", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downattackd(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 48, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -18.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -652,7 +652,7 @@ unsafe fn chrom_downattackd(fighter: &mut L2CAgentBase) {
     script = "game_specialnend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialnend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -671,7 +671,7 @@ unsafe fn chrom_neutralb1(fighter: &mut L2CAgentBase) {
     script = "game_specialnend2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialnend2(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -690,7 +690,7 @@ unsafe fn chrom_neutralb2(fighter: &mut L2CAgentBase) {
     script = "game_specialnend3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralb3(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialnend3(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -709,7 +709,7 @@ unsafe fn chrom_neutralb3(fighter: &mut L2CAgentBase) {
     script = "game_specialnendmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralbmax(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialnendmax(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -730,7 +730,7 @@ unsafe fn chrom_neutralbmax(fighter: &mut L2CAgentBase) {
     script = "game_specialairnend", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralbair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairnend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -749,7 +749,7 @@ unsafe fn chrom_neutralbair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairnend2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairnend2(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -768,7 +768,7 @@ unsafe fn chrom_neutralbair2(fighter: &mut L2CAgentBase) {
     script = "game_specialairnend3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralbair3(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairnend3(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
@@ -787,7 +787,7 @@ unsafe fn chrom_neutralbair3(fighter: &mut L2CAgentBase) {
     script = "game_specialairnendmax", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_neutralbairmax(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairnendmax(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -808,7 +808,7 @@ unsafe fn chrom_neutralbairmax(fighter: &mut L2CAgentBase) {
     script = "game_specials4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sideb1(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specials4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 25.0, /*Angle*/ 100, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(21.0), /*Z2*/ Some(10.0), /*Hitlag*/ 1.4, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 60, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_SWORD);
@@ -827,7 +827,7 @@ unsafe fn chrom_sideb1(fighter: &mut L2CAgentBase) {
     script = "game_specials4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sideb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specials4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     for _ in 0..4 {
         if macros::is_excute(fighter) {
@@ -858,7 +858,7 @@ unsafe fn chrom_sideb2(fighter: &mut L2CAgentBase) {
     script = "game_specials4s", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sideb3(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specials4s(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 362, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 7.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 60, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_SWORD);
@@ -876,7 +876,7 @@ unsafe fn chrom_sideb3(fighter: &mut L2CAgentBase) {
     script = "game_specialairs4hi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidebair1(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairs4hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 25.0, /*Angle*/ 100, /*KBG*/ 78, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(21.0), /*Z2*/ Some(10.0), /*Hitlag*/ 1.4, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 60, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_SWORD);
@@ -895,7 +895,7 @@ unsafe fn chrom_sidebair1(fighter: &mut L2CAgentBase) {
     script = "game_specialairs4lw", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidebair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairs4lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     for _ in 0..4 {
         if macros::is_excute(fighter) {
@@ -926,7 +926,7 @@ unsafe fn chrom_sidebair2(fighter: &mut L2CAgentBase) {
     script = "game_specialairs4s", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidebair3(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairs4s(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 362, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 7.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 60, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_SWORD);
@@ -944,7 +944,7 @@ unsafe fn chrom_sidebair3(fighter: &mut L2CAgentBase) {
     script = "game_specialhi2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_upb2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialhi2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 91, /*KBG*/ 100, /*FKB*/ 155, /*BKB*/ 0, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -992,7 +992,7 @@ unsafe fn chrom_upb2(fighter: &mut L2CAgentBase) {
     script = "game_specialhi3", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_upb3(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialhi3(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, -20);
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
@@ -1023,9 +1023,9 @@ unsafe fn chrom_upb3(fighter: &mut L2CAgentBase) {
     script = "game_specialhi4", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_upb4(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialhi4(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 265, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 11.8, /*X2*/ Some(0.0), /*Y2*/ Some(11.0), /*Z2*/ Some(38.8), /*Hitlag*/ 2.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 265, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ -38.8, /*X2*/ Some(0.0), /*Y2*/ Some(11.0), /*Z2*/ Some(46.8), /*Hitlag*/ 2.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
     }
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
@@ -1038,7 +1038,7 @@ unsafe fn chrom_upb4(fighter: &mut L2CAgentBase) {
     script = "game_specialairhi2", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_upbair2(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairhi2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 91, /*KBG*/ 100, /*FKB*/ 155, /*BKB*/ 0, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 18.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1086,7 +1086,7 @@ unsafe fn chrom_upbair2(fighter: &mut L2CAgentBase) {
     script = "game_speciallwhit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downb(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_speciallwhit(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 90, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 13.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(3.0), /*Hitlag*/ 1.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1111,7 +1111,7 @@ unsafe fn chrom_downb(fighter: &mut L2CAgentBase) {
     script = "game_specialairlwhit", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downbair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_specialairlwhit(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 90, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 13.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(3.0), /*Hitlag*/ 1.9, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CHROM_HIT, /*Type*/ *ATTACK_REGION_SWORD);
@@ -1130,7 +1130,7 @@ unsafe fn chrom_downbair(fighter: &mut L2CAgentBase) {
     script = "game_appealhir", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_uptauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appealhir(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_KILLSWORD), 0, 0, false, false);
     }
@@ -1141,7 +1141,7 @@ unsafe fn chrom_uptauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealhil", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_uptauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appealhil(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_KILLSWORD), 0, 0, false, false);
     }
@@ -1152,7 +1152,7 @@ unsafe fn chrom_uptauntl(fighter: &mut L2CAgentBase) {
     script = "game_appealsr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidetauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appealsr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
     }
@@ -1163,7 +1163,7 @@ unsafe fn chrom_sidetauntr(fighter: &mut L2CAgentBase) {
     script = "game_appealsl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_sidetauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appealsl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
     }
@@ -1174,7 +1174,7 @@ unsafe fn chrom_sidetauntl(fighter: &mut L2CAgentBase) {
     script = "game_appeallwr", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downtauntr(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appeallwr(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PITFALL), 0, 0, false, false);
     }
@@ -1185,7 +1185,7 @@ unsafe fn chrom_downtauntr(fighter: &mut L2CAgentBase) {
     script = "game_appeallwl", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_downtauntl(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_appeallwl(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_PITFALL), 0, 0, false, false);
     }
@@ -1196,7 +1196,7 @@ unsafe fn chrom_downtauntl(fighter: &mut L2CAgentBase) {
     script = "game_finalattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_final(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_finalattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
         macros::CAM_ZOOM_OUT(fighter);
@@ -1265,7 +1265,7 @@ unsafe fn chrom_final(fighter: &mut L2CAgentBase) {
     script = "game_finalairattack", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn chrom_finalair(fighter: &mut L2CAgentBase) {
+unsafe fn game_chrom_finalairattack(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::WHOLE_HIT(fighter, *HIT_STATUS_XLU);
         macros::CAM_ZOOM_OUT(fighter);
@@ -1331,58 +1331,58 @@ unsafe fn chrom_finalair(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        chrom_jab1,
-        chrom_dashattack,
-        chrom_sidetilt,
-        chrom_uptilt,
-        chrom_downtilt,
-        chrom_sidesmash,
-        chrom_upsmash,
-        chrom_downsmash,
-        chrom_nair,
-        chrom_fair,
-        chrom_bair,
-        chrom_uair,
-        chrom_dair,
-        chrom_grab,
-        chrom_dashgrab,
-        chrom_pivotgrab,
-        chrom_pummel,
-        chrom_throwf,
-        chrom_throwb,
-        chrom_throwup,
-        chrom_throwdown,
-        chrom_cliffattack,
-        chrom_slipattack,
-        chrom_downattacku,
-        chrom_downattackd,
-        chrom_neutralb1,
-        chrom_neutralb2,
-        chrom_neutralb3,
-        chrom_neutralbair1,
-        chrom_neutralbair2,
-        chrom_neutralbair3,
-        chrom_neutralbmax,
-        chrom_neutralbairmax,
-        chrom_sideb1,
-        chrom_sideb2,
-        chrom_sideb3,
-        chrom_sidebair1,
-        chrom_sidebair2,
-        chrom_sidebair3,
-        chrom_upb2,
-        chrom_upb3,
-        chrom_upb4,
-        chrom_upbair2,
-        chrom_downb,
-        chrom_downbair,
-        chrom_uptauntr,
-        chrom_uptauntl,
-        chrom_sidetauntr,
-        chrom_sidetauntl,
-        chrom_downtauntr,
-        chrom_downtauntl,
-        chrom_final,
-        chrom_finalair
+        game_chrom_attack11,
+        game_chrom_attackdash,
+        game_chrom_attacks3,
+        game_chrom_attackhi3,
+        game_chrom_attacklw3,
+        game_chrom_attacks4,
+        game_chrom_attackhi4,
+        game_chrom_attacklw4,
+        game_chrom_attackairn,
+        game_chrom_attackairf,
+        game_chrom_attackairb,
+        game_chrom_attackairhi,
+        game_chrom_attackairlw,
+        game_chrom_catch,
+        game_chrom_catchdash,
+        game_chrom_catchturn,
+        game_chrom_catchattack,
+        game_chrom_throwf,
+        game_chrom_throwb,
+        game_chrom_throwhi,
+        game_chrom_throwlw,
+        game_chrom_cliffattack,
+        game_chrom_slipattack,
+        game_chrom_downattacku,
+        game_chrom_downattackd,
+        game_chrom_specialnend,
+        game_chrom_specialnend2,
+        game_chrom_specialnend3,
+        game_chrom_specialairnend,
+        game_chrom_specialairnend2,
+        game_chrom_specialairnend3,
+        game_chrom_specialnendmax,
+        game_chrom_specialairnendmax,
+        game_chrom_specials4hi,
+        game_chrom_specials4lw,
+        game_chrom_specials4s,
+        game_chrom_specialairs4hi,
+        game_chrom_specialairs4lw,
+        game_chrom_specialairs4s,
+        game_chrom_specialhi2,
+        game_chrom_specialhi3,
+        game_chrom_specialhi4,
+        game_chrom_specialairhi2,
+        game_chrom_speciallwhit,
+        game_chrom_specialairlwhit,
+        game_chrom_appealhir,
+        game_chrom_appealhil,
+        game_chrom_appealsr,
+        game_chrom_appealsl,
+        game_chrom_appeallwr,
+        game_chrom_appeallwl,
+        game_chrom_finalattack,
+        game_chrom_finalairattack
     );
 }

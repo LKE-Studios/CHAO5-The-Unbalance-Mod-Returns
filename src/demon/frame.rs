@@ -22,23 +22,21 @@ static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
 static mut IS_CRIT: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_DEMON )]
-pub fn demon_opff(fighter : &mut L2CFighterCommon) {
+pub fn frame_demon(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let kind = smash::app::utility::get_kind(boma); 
-        if kind == *FIGHTER_KIND_DEMON {
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
-            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == true {
-                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.25);
-                DamageModule::set_reaction_mul(fighter.module_accessor, 0.25);
-            };
-            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == false {
-                DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-                DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            };
+
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == true {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.25);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.25);
+        };
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_RAGE_SYSTEM) == false {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -50,11 +48,12 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
             START_FLOAT[ENTRY_ID] = false;
             CHECK_FLOAT[ENTRY_ID] = 0;
         };
-        if FLOAT[ENTRY_ID] == 1{
+        if FLOAT[ENTRY_ID] == 1 {
             if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR
             && [
                 *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S,
-                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END
+                *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END, 
+                *FIGHTER_DEMON_STATUS_KIND_SPECIAL_HI_RISE, *FIGHTER_DEMON_STATUS_KIND_SPECIAL_HI_FALL
             ].contains(&status_kind) == false {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
             };
@@ -70,10 +69,10 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
             };
         };
         if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind)
-        && FLOAT[ENTRY_ID] > 1{
+        && FLOAT[ENTRY_ID] > 1 {
             FLOAT[ENTRY_ID] = 1;
         };
-        if FLOAT[ENTRY_ID] > 1{
+        if FLOAT[ENTRY_ID] > 1 {
             FLOAT[ENTRY_ID] -= 1;
             if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -118,7 +117,7 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
             if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
             };
-            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
+            if [*FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1 {
                 FLOAT[ENTRY_ID] = 1;
             };
         };
@@ -134,7 +133,7 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-            if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
                 if COUNTER[ENTRY_ID] < 2 {
@@ -172,6 +171,6 @@ pub fn demon_opff(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        demon_opff
+        frame_demon
     );
 }

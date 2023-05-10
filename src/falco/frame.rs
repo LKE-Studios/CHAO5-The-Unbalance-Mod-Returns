@@ -21,6 +21,9 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
         }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.sub_transition_group_check_air_cliff();
+        }
     }
 }
 
