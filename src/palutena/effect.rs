@@ -11,7 +11,7 @@ use smash::lua2cpp::L2CAgentBase;
     script = "effect_glidestart", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pacman_glidestart(fighter: &mut L2CAgentBase) {
+unsafe fn effect_palutena_glidestart(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -5.3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 4.4, 0, 0, 0, 0, 3.0, true);
@@ -29,7 +29,7 @@ unsafe fn effect_pacman_glidestart(fighter: &mut L2CAgentBase) {
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pacman_glidewing(fighter: &mut L2CAgentBase) {
+unsafe fn effect_palutena_glidewing(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), 1.0, 21.0, 2.5, 0, -50.0, 0, 1.0, true);
@@ -41,7 +41,7 @@ unsafe fn effect_pacman_glidewing(fighter: &mut L2CAgentBase) {
     script = "effect_glideattack", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pacman_glideattack(fighter: &mut L2CAgentBase) {
+unsafe fn effect_palutena_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), 1.0, 21.0, 2.5, 0, -50.0, 0, 1.0, true);
@@ -59,7 +59,7 @@ unsafe fn effect_pacman_glideattack(fighter: &mut L2CAgentBase) {
     script = "effect_glidelanding", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pacman_glidelanding(fighter: &mut L2CAgentBase) {
+unsafe fn effect_palutena_glidelanding(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
@@ -70,19 +70,36 @@ unsafe fn effect_pacman_glidelanding(fighter: &mut L2CAgentBase) {
     script = "effect_glideend", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pacman_glideend(fighter: &mut L2CAgentBase) {
+unsafe fn effect_palutena_glideend(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), 1.0, 21.0, 2.5, 0, -50.0, 0, 1.0, true);
         macros::EFFECT(fighter, Hash40::new("palutena_feather"), Hash40::new("top"), 0, 6.0, -6.0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
     }
 }
 
+#[acmd_script(//Explode
+    agent = "palutena_explosiveflame", 
+    script = "effect_explode", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_palutena_explosiveflame_explode(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("palutena_bomb"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT(fighter, Hash40::new("palutena_bomb_appear"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 27.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("palutena_bomb_finish"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
-        effect_pacman_glidestart,
-        effect_pacman_glidewing,
-        effect_pacman_glideattack,
-        effect_pacman_glidelanding,
-        effect_pacman_glideend
+        effect_palutena_glidestart,
+        effect_palutena_glidewing,
+        effect_palutena_glideattack,
+        effect_palutena_glidelanding,
+        effect_palutena_glideend,
+        effect_palutena_explosiveflame_explode
     );
 }

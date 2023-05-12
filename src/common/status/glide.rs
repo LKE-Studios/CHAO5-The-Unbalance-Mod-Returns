@@ -445,6 +445,13 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     //Fighter Specific
     let kind = fighter.global_table[0x2].get_i32();
     if kind == *FIGHTER_KIND_METAKNIGHT {
+        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
+        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
+        let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
+
+        smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
+        smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * -0.0035);
     }
     if kind == *FIGHTER_KIND_PIT {
@@ -455,6 +462,7 @@ unsafe extern "C" fn status_exec_glide(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     if kind == *FIGHTER_KIND_PLIZARDON {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * -0.006);
+        SoundModule::set_se_vol(fighter.module_accessor, 0, 2.0, 0);
     }
     if kind == *FIGHTER_KIND_RIDLEY {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_glide_loop"), 0.8 + angle * -0.005);

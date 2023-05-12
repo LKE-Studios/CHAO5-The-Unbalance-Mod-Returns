@@ -145,11 +145,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         ].contains(&status_kind) {
             macros::STOP_SE(fighter, Hash40::new("vc_metaknight_final03"));
         }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
-            smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
-            smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
-        }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
