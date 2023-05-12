@@ -1,0 +1,163 @@
+{
+  "data": {
+    "Hlpb": {
+      "major_version": 1,
+      "minor_version": 1,
+      "aim_entries": [],
+      "interpolation_entries": [
+        {
+          "name": "nuHelperBoneRotateInterp75",
+          "bone_name": "ArmL",
+          "root_bone_name": "ArmL",
+          "parent_bone_name": "HandL",
+          "driver_bone_name": "H_ArmL",
+          "unk_type": 2,
+          "aoi": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "quat1": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "quat2": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "range_min": {
+            "x": -180.0,
+            "y": -180.0,
+            "z": -180.0
+          },
+          "range_max": {
+            "x": 180.0,
+            "y": 180.0,
+            "z": 180.0
+          }
+        },
+        {
+          "name": "nuHelperBoneRotateInterp76",
+          "bone_name": "ArmR",
+          "root_bone_name": "ArmR",
+          "parent_bone_name": "HandR",
+          "driver_bone_name": "H_ArmR",
+          "unk_type": 2,
+          "aoi": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "quat1": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "quat2": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "range_min": {
+            "x": -180.0,
+            "y": -180.0,
+            "z": -180.0
+          },
+          "range_max": {
+            "x": 180.0,
+            "y": 180.0,
+            "z": 180.0
+          }
+        },
+        {
+          "name": "nuHelperBoneRotateInterp77",
+          "bone_name": "LegL",
+          "root_bone_name": "LegL",
+          "parent_bone_name": "KneeL",
+          "driver_bone_name": "H_KneeL",
+          "unk_type": 2,
+          "aoi": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "quat1": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "quat2": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "range_min": {
+            "x": -180.0,
+            "y": -180.0,
+            "z": -180.0
+          },
+          "range_max": {
+            "x": 180.0,
+            "y": 180.0,
+            "z": 180.0
+          }
+        },
+        {
+          "name": "nuHelperBoneRotateInterp78",
+          "bone_name": "LegR",
+          "root_bone_name": "LegR",
+          "parent_bone_name": "KneeR",
+          "driver_bone_name": "H_KneeR",
+          "unk_type": 2,
+          "aoi": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+          },
+          "quat1": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "quat2": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "range_min": {
+            "x": -180.0,
+            "y": -180.0,
+            "z": -180.0
+          },
+          "range_max": {
+            "x": 180.0,
+            "y": 180.0,
+            "z": 180.0
+          }
+        }
+      ],
+      "list1": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "list2": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}
