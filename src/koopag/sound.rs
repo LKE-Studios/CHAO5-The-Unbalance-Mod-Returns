@@ -3,6 +3,7 @@ use smash::phx::Hash40;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
+use smash::app::lua_bind::*;
 
 #[acmd_script(//Run
     agent = "koopag", 
@@ -49,10 +50,58 @@ unsafe fn sound_koopag_specialairnstart(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//DownBoundD
+    agent = "koopag", 
+    script = "sound_downboundd", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_koopag_downboundd(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_s"));
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_m"));
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_l"));
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_m_01"));
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_common_down_m_01"), 0.75);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_m_02"));
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_common_down_m_02"), 0.75);
+    }
+}
+
+#[acmd_script(//DownBoundU
+    agent = "koopag", 
+    script = "sound_downboundu", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_koopag_downboundu(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_s"));
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_m"));
+        macros::STOP_SE(fighter, Hash40::new("se_common_blowaway_l"));
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_m_01"));
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_common_down_m_01"), 0.75);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_m_02"));
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_common_down_m_02"), 0.75);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         sound_koopag_specialnstart,
         sound_koopag_specialairnstart,
-        sound_koopag_run
+        sound_koopag_run,
+        sound_koopag_downboundd,
+        sound_koopag_downboundu,
     );
 }

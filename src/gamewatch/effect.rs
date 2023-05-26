@@ -4,7 +4,7 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::L2CAgentBase;
 
-#[acmd_script(//SpecialS6GFX
+#[acmd_script(//SpecialS6
     agent = "gamewatch", 
     script = "effect_specials6", 
     category = ACMD_EFFECT, 
@@ -22,7 +22,7 @@ unsafe fn effect_gamewatch_specials6(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS6GFX
+#[acmd_script(//SpecialAirS6
     agent = "gamewatch", 
     script = "effect_specialairs6", 
     category = ACMD_EFFECT, 
@@ -37,7 +37,7 @@ unsafe fn effect_gamewatch_specialairs6(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS7GFX
+#[acmd_script(//SpecialS7
     agent = "gamewatch", 
     script = "effect_specials7", 
     category = ACMD_EFFECT, 
@@ -55,7 +55,7 @@ unsafe fn effect_gamewatch_specials7(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS7GFX
+#[acmd_script(//SpecialAirS7
     agent = "gamewatch", 
     script = "effect_specialairs7", 
     category = ACMD_EFFECT, 

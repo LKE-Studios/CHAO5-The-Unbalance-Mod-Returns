@@ -1088,6 +1088,72 @@ unsafe fn game_kirby_specialairnspit(fighter: &mut L2CAgentBase) {
     }
 }  
 
+#[acmd_script(//BuddySpecialAirNFire
+    agent = "kirby", 
+    script = "game_buddyspecialairnfire", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_kirby_buddy_specialairnfire(fighter: &mut L2CAgentBase) {
+    MotionModule::set_rate(fighter.module_accessor, 5.0);
+    frame(fighter.lua_state_agent, 13.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_GENERATE_BULLET);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_ENABLE_SHOOT);
+    }
+}
+
+#[acmd_script(//BuddySpecialAirNFire2
+    agent = "kirby", 
+    script = "game_buddyspecialairnfire2", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_kirby_buddy_specialairnfire2(fighter: &mut L2CAgentBase) {
+    MotionModule::set_rate(fighter.module_accessor, 5.0);
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_GENERATE_BULLET);
+    }
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_START_PRECEDE_CHECK);
+    }
+}
+
+#[acmd_script(//BuddySpecialAirNFire3
+    agent = "kirby", 
+    script = "game_buddyspecialairnfire3", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_kirby_buddy_specialairnfire3(fighter: &mut L2CAgentBase) {
+    MotionModule::set_rate(fighter.module_accessor, 5.0);
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_GENERATE_BULLET);
+    }
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_START_PRECEDE_CHECK);
+    }
+}
+
+#[acmd_script(//BuddySpecialNUpperFire
+    agent = "kirby", 
+    script = "game_buddyspecialnupperfire", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_kirby_buddy_specialnupperfire(fighter: &mut L2CAgentBase) {
+    MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, 5.0);
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_GENERATE_BULLET);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 78, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(30.0), /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);
+    }
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BUDDY_STATUS_SPECIAL_N_FLAG_START_PRECEDE_CHECK);
+    }
+}
+
 #[acmd_script(//SpecialS
     agent = "kirby", 
     script = "game_specials", 
@@ -1950,6 +2016,10 @@ pub fn install() {
         game_kirby_specialairnloop,
         game_kirby_specialnspit,
         game_kirby_specialairnspit,
+        game_kirby_buddy_specialairnfire,
+        game_kirby_buddy_specialairnfire2,
+        game_kirby_buddy_specialairnfire3,
+        game_kirby_buddy_specialnupperfire,
         game_kirby_specials,
         game_kirby_specialss,
         game_kirby_specialsmax,

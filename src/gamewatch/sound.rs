@@ -4,7 +4,7 @@ use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
 
-#[acmd_script(//SpecialS6SFX
+#[acmd_script(//SpecialS6
     agent = "gamewatch", 
     script = "sound_specials6", 
     category = ACMD_SOUND, 
@@ -16,7 +16,7 @@ unsafe fn sound_gamewatch_specials6(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS6SFX
+#[acmd_script(//SpecialAirS6
     agent = "gamewatch", 
     script = "sound_specialairs6", 
     category = ACMD_SOUND, 
@@ -28,8 +28,8 @@ unsafe fn sound_gamewatch_specialairs6(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS7SFX
-    agent = "gamewatch", 
+#[acmd_script(//SpecialS7
+    agent = "gamewatch",
     script = "sound_specials7", 
     category = ACMD_SOUND, 
     low_priority )]
@@ -40,7 +40,7 @@ unsafe fn sound_gamewatch_specials7(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS7SFX
+#[acmd_script(//SpecialAirS7
     agent = "gamewatch", 
     script = "sound_specialairs7", 
     category = ACMD_SOUND, 

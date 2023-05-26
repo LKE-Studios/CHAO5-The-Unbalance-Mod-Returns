@@ -536,11 +536,11 @@ unsafe fn game_bayonetta_attacklw3(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME,
     low_priority )]
 unsafe fn game_bayonetta_attacks4hi(fighter: &mut L2CAgentBase) {
-    sv_animcmd::frame(fighter.lua_state_agent, 1.0);
+    frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.3333333);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 3.0);
+    frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 700, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -555,7 +555,7 @@ unsafe fn game_bayonetta_attacks4hi(fighter: &mut L2CAgentBase) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2d51fcdb09), *FIGHTER_BAYONETTA_SHOOTING_SLOT_R_ARM, true, true, false, 10, 3, 5, 0, true);
         MotionModule::set_rate(fighter.module_accessor, 1.2);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 22.0);
+    frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         AttackModule::set_power_mul_status(fighter.module_accessor, 1.0);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BAYONETTA_INSTANCE_WORK_ID_FLAG_SHOOTING_ACTION);

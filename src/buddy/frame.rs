@@ -1,4 +1,4 @@
-//use smash::app::sv_animcmd::*;
+use smash::app::sv_animcmd::*;
 use smash::lib::lua_const::*;
 use smash::phx::Hash40;
 use smash::app::lua_bind::*;

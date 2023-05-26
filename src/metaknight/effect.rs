@@ -76,12 +76,10 @@ unsafe fn effect_metaknight_attack100(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
-            macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor); 
         }
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack"), Hash40::new("top"), 0.0, 0, 0, 0, 0, 0, 1.24, true);
-            macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor);        
         }
         wait(fighter.lua_state_agent, 4.0);
@@ -95,6 +93,10 @@ unsafe fn effect_metaknight_attack100(fighter: &mut L2CAgentBase) {
         wait(fighter.lua_state_agent, 5.0);
         if macros::is_excute(fighter) {
             macros::FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.5, 10, 0, 2, 0, 0, 0, false);
+        }
+        frame(fighter.lua_state_agent, 20.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
         }
         fighter.clear_lua_stack();
         lua_args!(fighter, 0);

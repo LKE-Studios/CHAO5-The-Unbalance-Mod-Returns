@@ -1004,6 +1004,7 @@ unsafe fn game_fox_illusion_moveair(fighter: &mut L2CAgentBase) {
 unsafe fn game_fox_specialhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
     }
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
@@ -1021,6 +1022,10 @@ unsafe fn game_fox_specialhi(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_fox_specialhihold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
     frame(fighter.lua_state_agent, 20.0);
     for _ in 0..7 {
         if macros::is_excute(fighter) {
@@ -1040,6 +1045,10 @@ unsafe fn game_fox_specialhihold(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_fox_specialhiholdair(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
     frame(fighter.lua_state_agent, 20.0);
     for _ in 0..7 {
         if macros::is_excute(fighter) {

@@ -5,7 +5,6 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash_script::*;
-//use crate::lucas::frame::*;
 
 #[acmd_script(//EntryL
     agent = "lucas", 
@@ -208,8 +207,7 @@ unsafe fn sound_lucas_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-
-#[acmd_script(//AttackAirLwSFX
+#[acmd_script(//AttackAirLw
     agent = "lucas", 
     script = "sound_attackairlw", 
     category = ACMD_SOUND, 
@@ -352,6 +350,18 @@ unsafe fn sound_lucas_appealsr(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//WessDance
+    agent = "lucas", 
+    script = "sound_wessdance", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_lucas_wessdance(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         sound_lucas_entryl,
@@ -367,6 +377,7 @@ pub fn install() {
         sound_lucas_speciallwstart,
         sound_lucas_specialairlwstart,
         sound_lucas_appealsr,
-        sound_lucas_appealsl
+        sound_lucas_appealsl,
+        sound_lucas_wessdance
     );
 }

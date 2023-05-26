@@ -27,6 +27,14 @@ fn frame_fox(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_transition_group_check_air_cliff();
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -5.0, 0);
+            }
+        }
+        if status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH || status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH_END {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -50.0, 0);
+            }
         }
         if motion_kind == hash40("appeal_hi_r") || motion_kind == hash40("appeal_hi_l") {
             if frame > 41.0 && frame < 44.0 {

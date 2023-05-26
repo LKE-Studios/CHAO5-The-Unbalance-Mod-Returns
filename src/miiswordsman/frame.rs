@@ -22,16 +22,10 @@ pub fn frame_miiswordsman(fighter : &mut L2CFighterCommon) {
         if sv_information::is_ready_go() == false {
             SWORD_MUL[ENTRY_ID] = 1.0;
         }
-        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
-            SWORD_MUL[ENTRY_ID] = 1.0;
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-            SWORD_MUL[ENTRY_ID] = 1.0;
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_WIN {
-            SWORD_MUL[ENTRY_ID] = 1.0;
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_LOSE {
+        if [*FIGHTER_STATUS_KIND_MISS_FOOT, 
+        *FIGHTER_STATUS_KIND_DEAD, 
+        *FIGHTER_STATUS_KIND_WIN, 
+        *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) {
             SWORD_MUL[ENTRY_ID] = 1.0;
         }
     }

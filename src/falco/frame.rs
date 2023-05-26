@@ -23,6 +23,14 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
             fighter.sub_transition_group_check_air_cliff();
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -5.5, 0);
+            }
+        }
+        if status_kind == *FIGHTER_FALCO_STATUS_KIND_SPECIAL_HI_RUSH || status_kind == *FIGHTER_FALCO_STATUS_KIND_SPECIAL_HI_RUSH_END {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -10.0, 0);
+            }
         }
     }
 }

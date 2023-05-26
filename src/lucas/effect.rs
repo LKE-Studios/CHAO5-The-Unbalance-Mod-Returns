@@ -441,6 +441,26 @@ unsafe fn lucas_sidebairgfx(fighter: &mut L2CAgentBase) {
     }
 }*/
 
+#[acmd_script(//WessDance
+    agent = "lucas", 
+    script = "effect_wessdance", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_lucas_wessdance(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1370.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
+    }
+    wait(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
+    }
+    wait(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         effect_lucas_attack11,
@@ -449,6 +469,7 @@ pub fn install() {
         effect_lucas_attacklw3,
         effect_lucas_attacklw4,
         effect_lucas_attackairn,
-        effect_lucas_attackairlw
+        effect_lucas_attackairlw,
+        effect_lucas_wessdance
     );
 }

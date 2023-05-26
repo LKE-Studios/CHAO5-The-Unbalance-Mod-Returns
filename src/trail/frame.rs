@@ -50,14 +50,14 @@ fn frame_trail(fighter: &mut L2CFighterCommon) {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
                 if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                    macros::SLOW_OPPONENT(fighter, 10.0, 150.0);
+                    macros::SLOW_OPPONENT(fighter, 20.0, 240.0);
                 }
             }
         }
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_r") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
                 if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                    macros::SLOW_OPPONENT(fighter, 10.0, 150.0);
+                    macros::SLOW_OPPONENT(fighter, 20.0, 240.0);
                 }
             }
         }

@@ -2,7 +2,8 @@ use smash::phx::Hash40;
 //use smash::lib::lua_const::*;
 //use smash::app::lua_bind::*;
 use smashline::*;
-use smash_script::*;
+use smash_script::*; 
+use smash_script::macros::*;
 use smash::lua2cpp::L2CAgentBase;
 
 #[acmd_script(//SpecialHi
@@ -11,12 +12,12 @@ use smash::lua2cpp::L2CAgentBase;
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_eflame_specialhi(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_ground"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.3, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.5, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
-        macros::EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_impact"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.5, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_ground"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.3, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.4);
+        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_impact"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 3.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.4);
     }
 }
 
