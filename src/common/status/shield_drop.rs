@@ -36,12 +36,7 @@ unsafe fn status_sub_guard_cont_pre(fighter: &mut L2CFighterCommon) {
     for term in transition_terms.iter() {
         WorkModule::enable_transition_term(fighter.module_accessor, *term);
     }
-    if GroundModule::is_passable_ground(fighter.module_accessor) {
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE);
-        }
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_PASS);
-    }
+    WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_PASS);
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_GROUND_JUMP);
 }
 
@@ -94,9 +89,9 @@ unsafe fn status_sub_guard_cont(fighter: &mut L2CFighterCommon) -> L2CValue {
         }
         /* START OF NEW ADDITION */
         //Allows platform drops out of shield
-        if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_PASS)
-        && (fighter.global_table[CMD_CAT2].get_i32() & (*FIGHTER_PAD_CMD_CAT2_FLAG_GUARD_TO_PASS | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_HI | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_LW) != 0) 
-        || (stick_y <= -0.6875 || ((ControlModule::get_flick_y(fighter.module_accessor) >= 3 && ControlModule::get_flick_y(fighter.module_accessor) < 20) || stick_y <= -1.0))
+        if GroundModule::is_passable_ground(fighter.module_accessor)
+        && WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_PASS)
+        && (fighter.global_table[CMD_CAT2].get_i32() & (*FIGHTER_PAD_CMD_CAT2_FLAG_GUARD_TO_PASS | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_HI | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R | *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_LW) != 0)
         && fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             fighter.change_status(FIGHTER_STATUS_KIND_PASS.into(), true.into());
             return true.into();
