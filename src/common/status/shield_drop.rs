@@ -145,8 +145,8 @@ unsafe fn status_sub_guard_cont(fighter: &mut L2CFighterCommon) -> L2CValue {
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
-            status_sub_guard_cont_pre,
-            status_sub_guard_cont
+            sub_guard_cont_pre,
+            sub_guard_cont
         );
     }
 }
