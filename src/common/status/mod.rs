@@ -3,7 +3,10 @@ mod fly;
 pub mod glide;
 mod glide_checks;
 mod catch;
-//mod shield_drop;
+mod guard;
+mod perfect_pivot;
+mod attackdash;
+mod edge_cancel;
 
 pub fn install() {
     jump_aerial::install();
@@ -11,5 +14,8 @@ pub fn install() {
     glide::install();
     glide_checks::install();
     catch::install();
-    //shield_drop::install();
+    guard::install();
+    perfect_pivot::install();
+    attackdash::install();
+    edge_cancel::install();
 }

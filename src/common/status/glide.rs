@@ -40,7 +40,7 @@ impl GlideParams {
         if kind == *FIGHTER_KIND_METAKNIGHT {
             return GlideParams {
                 angle_max_up : 80.0, //#0 Max Upward Angle
-                angle_max_down : -75.0, //#1 Max Downward Angle
+                angle_max_down : -70.0, //#1 Max Downward Angle
                 v_glide_start : 0.75, //#2 V Speed added on GlideStart
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart

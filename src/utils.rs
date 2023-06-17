@@ -8,6 +8,16 @@ use smash::{
 };
 use smash::lib::L2CAgent;
 use smash::lua2cpp::L2CFighterCommon;
+use skyline::{
+    c_str,
+    from_c_str,
+    hooks::{
+        getRegionAddress,
+        InlineCtx,
+        Region
+    },
+    nn::ro::LookupSymbol,
+};
 
 // Transition Hook static muts:
 // 0 - Don't change 
@@ -137,6 +147,7 @@ pub trait BomaExt {
     unsafe fn is_status_one_of(&mut self, kinds: &[i32]) -> bool;
     unsafe fn is_weapon(&mut self) -> bool;
     unsafe fn kind(&mut self) -> i32;
+    unsafe fn down_input(&mut self) -> bool;
 }
 
 impl BomaExt for BattleObjectModuleAccessor {
@@ -152,6 +163,18 @@ impl BomaExt for BattleObjectModuleAccessor {
     }
     unsafe fn kind(&mut self) -> i32 {
         return smash::app::utility::get_kind(self);
+    }
+    unsafe fn down_input(&mut self) -> bool {
+        let stick_y = ControlModule::get_stick_y(self);
+        //Checks if you're holding down the control stick less than the shield drop threshold
+        if stick_y <= -0.6875 {
+            return true;
+        }
+        //Checks if you flick the stick down more than 3 times but less than 20 times, or your stick is less than or equal to -1.0
+        if ControlModule::get_flick_y(self) >= 3 && ControlModule::get_flick_y(self) < 20 || stick_y <= -1.0 {
+            return true;
+        };
+        return false;
     }
 }
 

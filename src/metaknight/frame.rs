@@ -192,6 +192,9 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+                if situation_kind == *SITUATION_KIND_GROUND {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, false);
+                }
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
                 KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: params.base_speed * lr, y: 0.0}, Vector3f{x: params.base_speed * lr, y: 0.0, z: 0.0});
@@ -209,6 +212,9 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+                if situation_kind == *SITUATION_KIND_GROUND {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, false);
+                }
             }
             if MotionModule::frame(fighter.module_accessor) > 25.0 {
                 KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: params.base_speed * lr, y: 0.0}, Vector3f{x: params.base_speed * lr, y: 0.0, z: 0.0});
@@ -293,6 +299,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        frame_metaknight
+        frame_metaknight,
     );
 }

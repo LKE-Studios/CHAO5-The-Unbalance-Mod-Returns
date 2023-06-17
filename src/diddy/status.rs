@@ -1,0 +1,58 @@
+use smash::lib::L2CValue;
+use smash::lua2cpp::L2CFighterCommon;
+use smashline::*;
+use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
+use smash::hash40;
+use smash::phx::{Vector3f, Hash40};
+use smash_script::*;
+
+#[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
+pub unsafe fn status_init_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+
+    if situation_kind == *SITUATION_KIND_GROUND {
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_laugh"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if situation_kind == *SITUATION_KIND_AIR {
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_laugh"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    0.into()
+}
+
+#[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
+pub unsafe extern "C" fn status_exec_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+
+    fighter.sub_wait_ground_check_common(false.into());
+    fighter.sub_air_check_fall_common();
+    notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    if situation_kind == *SITUATION_KIND_GROUND {
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD, false);
+        }
+    }
+    if situation_kind == *SITUATION_KIND_AIR {
+        WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
+        }
+    }
+    if [hash40("special_lw_laugh"), hash40("special_air_lw_laugh")].contains(&motion_kind) && MotionModule::is_end(fighter.module_accessor) {
+        if situation_kind == *SITUATION_KIND_GROUND {
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+        }
+        if situation_kind == *SITUATION_KIND_AIR {
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());
+        }
+    }
+    0.into()
+}
+
+pub fn install() {
+    smashline::install_status_scripts!(
+        status_init_diddy_speciallwlaugh,
+        status_exec_diddy_speciallwlaugh
+    );
+}

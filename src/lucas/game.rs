@@ -687,7 +687,7 @@ unsafe fn game_lucas_attackairn(fighter: &mut L2CAgentBase) {
         }
         frame(fighter.lua_state_agent, 26.0);
         if macros::is_excute(fighter) {
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 120, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 120, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
         }
         wait(fighter.lua_state_agent, 3.0);
         if macros::is_excute(fighter) {
@@ -716,9 +716,11 @@ unsafe fn game_lucas_attackairn(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
         }
+        frame(fighter.lua_state_agent, 25.0);
+        macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         frame(fighter.lua_state_agent, 26.0);
         if macros::is_excute(fighter) {
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.5, /*Angle*/ 60, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.5, /*Angle*/ 60, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
         }
         wait(fighter.lua_state_agent, 3.0);
         if macros::is_excute(fighter) {
@@ -1829,7 +1831,7 @@ unsafe fn game_lucas_appeallwl(fighter: &mut L2CAgentBase) {
 unsafe fn game_lucas_wessdance(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::HIT_NO(fighter, 0, *HIT_STATUS_XLU);
-        macros::HIT_NO(fighter, 1, *HIT_STATUS_NORMAL);
+        macros::HIT_NO(fighter, 1, *HIT_STATUS_XLU);
         macros::HIT_NO(fighter, 2, *HIT_STATUS_XLU);
         macros::HIT_NO(fighter, 3, *HIT_STATUS_XLU);
         macros::HIT_NO(fighter, 4, *HIT_STATUS_XLU);
@@ -1838,7 +1840,7 @@ unsafe fn game_lucas_wessdance(fighter: &mut L2CAgentBase) {
         macros::HIT_NO(fighter, 7, *HIT_STATUS_XLU);
         macros::HIT_NO(fighter, 8, *HIT_STATUS_XLU);
         macros::HIT_NO(fighter, 9, *HIT_STATUS_XLU);
-        macros::HIT_NO(fighter, 10, *HIT_STATUS_XLU);
+        macros::HIT_NO(fighter, 10, *HIT_STATUS_NORMAL);
     }
     frame(fighter.lua_state_agent, 1370.0);
     if macros::is_excute(fighter) {

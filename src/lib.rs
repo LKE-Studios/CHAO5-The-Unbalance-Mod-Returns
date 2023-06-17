@@ -15,6 +15,9 @@
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
+use skyline::{c_str, from_c_str, nn::ro::LookupSymbol};
+use skyline::libc::c_char;
+use skyline::nro::{self, NroInfo};
 use skyline::hooks::{getRegionAddress, Region, InlineCtx};
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
@@ -23,6 +26,7 @@ use smash::hash40;
 use smashline::*;
 use smash::app::sv_animcmd::*;
 use crate::globals::*;
+use crate::utils::*;
 use crate::common::get_player_number;
 use crate::common::FIGHTER_BOOL_1;
 use crate::common::FIGHTER_BOOL_2;
@@ -327,32 +331,21 @@ pub unsafe fn log_add_motion_partial(
     original!()(module_accessor, index, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
-/*#[skyline::hook(offset = 0x3310760)]
-pub unsafe fn update_selected_fighter(param_1: u64, player_id: u32, new_selection_info: u64){
-    let ui_chara_hash: u64 = *((new_selection_info + 0x18) as *const u64) & 0xffffffffff;
-    let selected_colour: *mut u8 = (new_selection_info + 0x20) as *mut u8;
-    if ui_chara_hash == 0x0e7bbfb2e4 { //ui_chara_claus
-        if *selected_colour < 8 {
-            *selected_colour = *selected_colour + 8;
-        }
-    }
-    println!("Hash: {:#x} - Colour {}", ui_chara_hash, *selected_colour);
-    call_original!(param_1, player_id, new_selection_info);
+extern "C" {
+	pub fn change_version_string(arg: u64, string: *const c_char);
 }
 
-#[skyline::hook(offset = 0x3237820)]
-unsafe fn set_chara_colour_ui(param_1: u64, mut colour_slot: u32, param_3: u32) {
-    let ui_chara_hash = param_1 & 0xffffffffff;
-    if ui_chara_hash == 0x0e7bbfb2e4 {
-        if *colour_slot >= 8 {
-            *colour_slot = *colour_slot - 8;
-        }
-    }
-    println!("UI_Hash: {:#x} - UI_Colour: {}", ui_chara_hash, colour_slot);
-    call_original!(param_1, colour_slot, param_3);
-}*/
-
-//0xef9d43e1b = ui_chara_lucas
+#[skyline::hook(replace = change_version_string)]
+fn change_version_string_hook(arg: u64, string: *const c_char) {
+	let original_string = unsafe {from_c_str(string)};
+	if original_string.contains("Ver.") {
+		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.6.0 \0", original_string);
+		call_original!(arg, skyline::c_str(&version_string));
+	}
+	else {
+		call_original!(arg, string);
+	}
+}
 
 #[skyline::main(name = "chao5")]
 pub fn main() {
@@ -461,9 +454,8 @@ pub fn main() {
         offset_dump,
         log_remove_motion_partial,
         log_add_motion_partial,
-        motionmodule_change_motion_replace
-        //update_selected_fighter,
-        //set_chara_colour_ui
+        motionmodule_change_motion_replace,
+        change_version_string_hook
     );
     common::install();
 }
