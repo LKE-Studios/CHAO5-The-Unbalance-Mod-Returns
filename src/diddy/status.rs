@@ -7,8 +7,8 @@ use smash::hash40;
 use smash::phx::{Vector3f, Hash40};
 use smash_script::*;
 
-#[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_init_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
+#[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn status_main_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 
     if situation_kind == *SITUATION_KIND_GROUND {
@@ -17,11 +17,11 @@ pub unsafe fn status_init_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -
     if situation_kind == *SITUATION_KIND_AIR {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_laugh"), 0.0, 1.0, false, 0.0, false, false);
     }
+    fighter.sub_shift_status_main(L2CValue::Ptr(status_main_diddy_speciallwlaugh_loop as *const () as _));
     0.into()
 }
 
-#[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-pub unsafe extern "C" fn status_exec_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_main_diddy_speciallwlaugh_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 
@@ -34,6 +34,7 @@ pub unsafe extern "C" fn status_exec_diddy_speciallwlaugh(fighter: &mut L2CFight
         }
     }
     if situation_kind == *SITUATION_KIND_AIR {
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
         WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
@@ -52,7 +53,6 @@ pub unsafe extern "C" fn status_exec_diddy_speciallwlaugh(fighter: &mut L2CFight
 
 pub fn install() {
     smashline::install_status_scripts!(
-        status_init_diddy_speciallwlaugh,
-        status_exec_diddy_speciallwlaugh
+        status_main_diddy_speciallwlaugh
     );
 }
