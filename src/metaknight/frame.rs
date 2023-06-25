@@ -16,6 +16,10 @@ static mut COUNTER : [i32; 8] = [0; 8];
 static mut CURRENTFRAME : [f32; 8] = [0.0; 8];
 static mut IS_CRIT : [bool; 8] = [false; 8];
 pub static mut META_POWER : [bool; 8] = [false; 8];
+static META_POWER_DAMAGE : f32 = 100.0;
+static META_POWER_ATTACK_MUL : f32 = 1.25;
+static META_POWER_REACTION_MUL : f32 = 0.5;
+static META_POWER_DAMAGE_TAKEN_MUL : f32 = 0.5;
 static mut GFX_COUNTER : [i32; 8] = [0; 8];
 static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
@@ -55,12 +59,13 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID] = false;
         }
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
+        //Inner Meta Mechanic
         if META_POWER[ENTRY_ID] == true {
             GFX_COUNTER[ENTRY_ID] += 1;
             SFX_COUNTER[ENTRY_ID] += 1;
-            AttackModule::set_power_up(fighter.module_accessor, 1.25);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.5);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 0.5);
+            AttackModule::set_power_up(fighter.module_accessor, META_POWER_ATTACK_MUL);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, META_POWER_DAMAGE_TAKEN_MUL);
+            DamageModule::set_reaction_mul(fighter.module_accessor, META_POWER_REACTION_MUL);
             if SFX_COUNTER[ENTRY_ID] < 2 {
                 macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
                 macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_final01"));
@@ -69,7 +74,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             if SFX_COUNTER[ENTRY_ID] >= 100 {
                 SFX_COUNTER[ENTRY_ID] = 2;
             };
-            if DamageModule::damage(fighter.module_accessor, 0) < 80.0 {
+            if DamageModule::damage(fighter.module_accessor, 0) < META_POWER_DAMAGE {
                 SFX_COUNTER[ENTRY_ID] = 0;
             };
             if GFX_COUNTER[ENTRY_ID] >= 6 {
@@ -80,10 +85,10 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 GFX_COUNTER[ENTRY_ID] = 0;
             };
         };
-        if DamageModule::damage(fighter.module_accessor, 0) >= 80.0 {
+        if DamageModule::damage(fighter.module_accessor, 0) >= META_POWER_DAMAGE {
             META_POWER[ENTRY_ID] = true;
         };   
-        if DamageModule::damage(fighter.module_accessor, 0) < 80.0 {
+        if DamageModule::damage(fighter.module_accessor, 0) < META_POWER_DAMAGE {
             META_POWER[ENTRY_ID] = false;
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
@@ -189,6 +194,8 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             }
         };
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+            smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
@@ -210,6 +217,8 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP {
             fighter.sub_air_check_fall_common();
+            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+            smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             if MotionModule::frame(fighter.module_accessor) > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
                 if situation_kind == *SITUATION_KIND_GROUND {
@@ -299,6 +308,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     smashline::install_agent_frames!(
-        frame_metaknight,
+        frame_metaknight
     );
 }

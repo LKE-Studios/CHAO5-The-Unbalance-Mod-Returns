@@ -1,6 +1,7 @@
 use smash::phx::Hash40;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
+use smash::app::*;
 use smashline::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::hash40;
@@ -18,6 +19,7 @@ pub fn frame_donkey(fighter: &mut L2CFighterCommon) {
 
         if DONKEY_64_DANCE[ENTRY_ID] == true {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 0.0, 1.0, false, 0.0, false, false);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL && [hash40("appeal_lw_r"), hash40("appeal_lw_l")].contains(&motion_kind) {
             if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {

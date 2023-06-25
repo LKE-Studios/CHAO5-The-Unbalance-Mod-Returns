@@ -36,7 +36,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 1.9; //Lucas 1.824
                 }
                 if param_type == hash40("air_speed_x_stable") {
-                    return 1.818; //Lucas 1.724
+                    return 1.4883; //Lucas 1.454
                 }
                 if param_type == hash40("dive_speed_y") {
                     return 2.35; //Lucas 2.242

@@ -14,8 +14,8 @@ use smash_script::*;
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_fox_attacklw3(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
-    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Melee Fox
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    if color >= 8 {
         frame(fighter.lua_state_agent, 4.0);
         if macros::is_excute(fighter) {
             macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -24,7 +24,7 @@ unsafe fn effect_fox_attacklw3(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), -1, 4, 2, 7, -40, 170, 1, true);
         }
-    } else { 
+    } else {
         frame(fighter.lua_state_agent, 4.0);
         if macros::is_excute(fighter) {
             macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -32,12 +32,12 @@ unsafe fn effect_fox_attacklw3(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 6.0);
         if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) >= 0.0 {
             if macros::is_excute(fighter) {
-                macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), -1, 4, 2, 7, -40, 170, 1, true, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+                macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), -1, 4, 2, 7, -40, 170, 1, true, color);
             }
         }
         else {
             if macros::is_excute(fighter) {
-                macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), -2, 4, 2, 7, -40, 183, 1, true, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+                macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), -2, 4, 2, 7, -40, 183, 1, true, color);
             }
         }
     }
@@ -49,8 +49,8 @@ unsafe fn effect_fox_attacklw3(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_fox_attackairhi(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
-    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Melee Fox
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    if color >= 8 {
         frame(fighter.lua_state_agent, 8.0);
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), 0, 13.3, -0.5, 100, -30, 150, 0.9, true);
@@ -68,7 +68,7 @@ unsafe fn effect_fox_attackairhi(fighter: &mut L2CAgentBase) {
     } else {
         frame(fighter.lua_state_agent, 8.0);
         if macros::is_excute(fighter) {
-            macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), 0, 13.3, -0.5, 100, -30, 150, 0.9, true, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+            macros::EFFECT_FOLLOW_arg11(fighter, Hash40::new("fox_tail_attack_01"), Hash40::new("top"), 0, 13.3, -0.5, 100, -30, 150, 0.9, true, color);
             macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
         }
         frame(fighter.lua_state_agent, 10.0);
