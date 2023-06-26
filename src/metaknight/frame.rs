@@ -160,7 +160,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
             smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
             smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
-            WorkModule::enable_transition_term(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
+            WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
             smash::app::lua_bind::KineticEnergy::clear_speed(energy);
