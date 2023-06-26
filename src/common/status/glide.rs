@@ -9,6 +9,7 @@ use {
     smashline::*
 };
 use smash::phx::Vector3f;
+use smash::app::lua_bind::KineticEnergy;
 use std::f32::consts::PI;
 
 pub struct GlideParams {
@@ -282,8 +283,8 @@ pub unsafe fn status_init_glide_start(fighter: &mut L2CFighterCommon) -> L2CValu
     let lr = PostureModule::lr(fighter.module_accessor);
 
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
-    smash::app::lua_bind::KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -params.gravity_start}, &Vector3f{x: 0.0, y: -params.gravity_start, z: 0.0}, fighter.module_accessor);
-    smash::app::lua_bind::KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: params.speed_mul_start * lr, y: 0.0}, &Vector3f{x: params.speed_mul_start * lr, y: 0.0, z: 0.0}, fighter.module_accessor);
+    KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -params.gravity_start}, &Vector3f{x: 0.0, y: -params.gravity_start, z: 0.0}, fighter.module_accessor);
+    KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: params.speed_mul_start * lr, y: 0.0}, &Vector3f{x: params.speed_mul_start * lr, y: 0.0, z: 0.0}, fighter.module_accessor);
     KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_GLIDE_START, Vector2f{x: 0.0, y: params.v_glide_start}, Vector3f{x: 0.0, y: params.v_glide_start, z: 0.0});
     0.into()
 }
@@ -297,8 +298,8 @@ pub unsafe fn status_glidestart(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_METAKNIGHT {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-        smash::app::lua_bind::KineticEnergy::clear_speed(energy);
-        smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
+        KineticEnergy::clear_speed(energy);
+        KineticEnergy::clear_speed(anti_wind);
     }
     fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_GlideStart_Main as *const () as _))
 }
@@ -519,7 +520,8 @@ pub unsafe fn status_init_glide_end(fighter: &mut L2CFighterCommon) -> L2CValue 
     let lr = PostureModule::lr(fighter.module_accessor);
 
     KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: 0.0, y: 0.0}, Vector3f{x: 0.0, y: 0.0, z: 0.0});
-    smash::app::lua_bind::KineticEnergy::reset_energy(motion, *ENERGY_STOP_RESET_TYPE_AIR, &Vector2f{x: 0.0 * lr, y: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, fighter.module_accessor);
+    KineticEnergy::reset_energy(motion, *ENERGY_STOP_RESET_TYPE_AIR, &Vector2f{x: 0.0 * lr, y: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, fighter.module_accessor);
+    KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
     0.into()
 }
 

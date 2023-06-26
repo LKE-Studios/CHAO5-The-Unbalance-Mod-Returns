@@ -10,6 +10,7 @@ use {
     smashline::*,
 };
 use crate::globals::*;
+use smash::app::lua_bind::KineticEnergy;
 
 #[status_script( agent = "metaknight", status = FIGHTER_STATUS_KIND_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE )]
 unsafe fn status_metaknight_special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {

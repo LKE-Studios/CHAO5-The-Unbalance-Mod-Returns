@@ -415,6 +415,11 @@ unsafe fn effect_metaknight_specialhi(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 20, 15, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
     }
+    frame(fighter.lua_state_agent, 14.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop2"), Hash40::new("top"), 0, 14.6, 46.3, -102.0, 0, 0, 1.2, true);
+        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+    }
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
@@ -436,6 +441,12 @@ unsafe fn effect_metaknight_specialhiloop(fighter: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop1"), Hash40::new("top"), 0, -5, 2.5, 4, 0, 0, 1, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 20, 15, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_shuttleloop2"), Hash40::new("top"), 0, 10.6, 46.3, -102.0, 0, 0, 1.2, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.7);
+        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 31.0);
     if macros::is_excute(fighter) {
