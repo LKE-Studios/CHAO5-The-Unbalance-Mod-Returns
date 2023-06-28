@@ -104,6 +104,30 @@ unsafe fn effect_metaknight_attack100(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Attack100End
+    agent = "metaknight", 
+    script = "effect_attack100end", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_metaknight_attack100end(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_attack"), false, false);
+        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack_end"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.25, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 7.2, 50.0, 0, 0, 0, 0.9, true);
+        EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if macros::is_excute(fighter) {
+        macros::FOOT_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), -1.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 #[acmd_script(//AttackS3S3
     agent = "metaknight", 
     script = "effect_attacks3s3", 
@@ -300,6 +324,7 @@ unsafe fn effect_metaknight_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.75);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 10.0);
@@ -320,6 +345,7 @@ unsafe fn effect_metaknight_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_lw"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.25, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.75);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 7.0);
@@ -698,6 +724,7 @@ pub fn install() {
         effect_metaknight_glideattack,
         effect_metaknight_glidelanding,
         effect_metaknight_attack100,
+        effect_metaknight_attack100end,
         effect_metaknight_attacks3s3,
         effect_metaknight_attacks4,
         effect_metaknight_attackhi4,

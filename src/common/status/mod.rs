@@ -2,6 +2,7 @@ mod jump_aerial;
 mod fly;
 pub mod glide;
 mod glide_checks;
+pub mod glide_param;
 mod catch;
 mod guard;
 mod perfect_pivot;

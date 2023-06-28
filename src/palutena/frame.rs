@@ -8,7 +8,8 @@ use smash::phx::Hash40;
 use smash::app::{sv_information};
 use crate::utils::*;
 
-static mut DEFENCE_BOOST : [bool; 8] = [false; 8];
+static mut GODDESS_POWER_UP : [bool; 8] = [false; 8];
+static POWER_MUL : f32 = 1.1;
 
 #[fighter_frame( agent = FIGHTER_KIND_PALUTENA )]
 fn frame_palutena(fighter: &mut L2CFighterCommon) {
@@ -62,34 +63,22 @@ fn frame_palutena(fighter: &mut L2CFighterCommon) {
                 ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
             }
         }
-        if DEFENCE_BOOST[ENTRY_ID] == true {
+        if GODDESS_POWER_UP[ENTRY_ID] == true {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
             DamageModule::set_reaction_mul(fighter.module_accessor, 0.7);
+            AttackModule::set_power_up(fighter.module_accessor, POWER_MUL);
             if MotionModule::frame(fighter.module_accessor) >= 0.0 && MotionModule::frame(fighter.module_accessor) < 1.0 {  
                 macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 6.0, true);
                 macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 2.55, /*B*/ 0.48);
             }
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
-            /*if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwr") || MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lwl") {
-                DEFENCE_BOOST[ENTRY_ID] = true;
-            };*/
-            DEFENCE_BOOST[ENTRY_ID] = true;
+            GODDESS_POWER_UP[ENTRY_ID] = true;
         }
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-            DEFENCE_BOOST[ENTRY_ID] = false;
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
-        };
-        if sv_information::is_ready_go() == false {
-            DEFENCE_BOOST[ENTRY_ID] = false;
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
-        };
-        if status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT {
-            DEFENCE_BOOST[ENTRY_ID] = false;
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || 
+        sv_information::is_ready_go() == false {
+            GODDESS_POWER_UP[ENTRY_ID] = false;
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);

@@ -8,7 +8,7 @@ use smash::app::*;
 use smash_script::*;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::app::{sv_information};
-use crate::common::status::glide::*;
+use crate::common::status::glide_param::GlideParams;
 use crate::common::status::glide::KineticUtility;
 use smash::hash40;
 
@@ -97,18 +97,12 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         if [
             *FIGHTER_STATUS_KIND_DEAD,
             *FIGHTER_STATUS_KIND_MISS_FOOT
-            ].contains(&status_kind) {
+            ].contains(&status_kind) || sv_information::is_ready_go() == false {
             META_POWER[ENTRY_ID] = false;
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
 
-        };
-        if sv_information::is_ready_go() == false {
-            META_POWER[ENTRY_ID] = false;
-            AttackModule::set_power_up(fighter.module_accessor, 1.0);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
         if [
             *FIGHTER_STATUS_KIND_LANDING,
@@ -258,7 +252,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
                 if COUNTER[ENTRY_ID] < 2 {
-                    EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_bg_criticalhit"), smash::phx::Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
+                    EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
                     CURRENTFRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
                     SlowModule::set_whole(fighter.module_accessor, 2, 0);
                     macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
@@ -272,7 +266,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 SlowModule::clear_whole(fighter.module_accessor);
                 CameraModule::reset_all(fighter.module_accessor);
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
                 if StatusModule::status_kind(fighter.module_accessor) != 510 {
                     macros::CAM_ZOOM_OUT(fighter);
                 }
@@ -281,7 +275,7 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 macros::CAM_ZOOM_OUT(fighter);
                 IS_CRIT[ENTRY_ID] = false;
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
                 SlowModule::clear_whole(fighter.module_accessor);
             };
             if MotionModule::frame(fighter.module_accessor) > 60.0 {

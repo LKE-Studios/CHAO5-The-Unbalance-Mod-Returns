@@ -15,7 +15,7 @@ use crate::helper;
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_yoshi_entryr(fighter: &mut L2CAgentBase) {
-    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 8 % 9 % 10 % 11 % 12 % 13;
+    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         frame(fighter.lua_state_agent, 25.0);
         if macros::is_excute(fighter) {
@@ -53,7 +53,7 @@ unsafe fn effect_yoshi_entryr(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_yoshi_entryl(fighter: &mut L2CAgentBase) {
-    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 8 % 9 % 10 % 11 % 12 % 13;
+    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         frame(fighter.lua_state_agent, 25.0);
         if macros::is_excute(fighter) {
@@ -85,13 +85,162 @@ unsafe fn effect_yoshi_entryl(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//AttackAirLw
+    agent = "yoshi", 
+    script = "effect_attackairlw", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_yoshi_attackairlw(fighter: &mut L2CAgentBase) {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    if color == 0 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_01"), Hash40::new("top"), 0, -2.0, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_01"), true, true);
+        }
+    }
+    if color == 1 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_02"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_02"), true, true);
+        }
+    }
+    if color == 2 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_03"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_03"), true, true);
+        }
+    }
+    if color == 3 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_04"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_04"), true, true);
+        }
+    }
+    if color == 4 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_05"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_05"), true, true);
+        }
+    }
+    if color == 5 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_06"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_06"), true, true);
+        }
+    }
+    if color == 6 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_07"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_07"), true, true);
+        }
+    }
+    if color == 7 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_08"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_08"), true, true);
+        }
+    }
+    if color == 8 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_01"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_01"), true, true);
+        }
+    }
+    if color == 9 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_03"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_03"), true, true);
+        }
+    }
+    if color == 10 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_05"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_05"), true, true);
+        }
+    }
+    if color == 11 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_01"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_01"), true, true);
+        }
+    }
+    if color == 12 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_06"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_06"), true, true);
+        }
+    }
+    if color == 13 {
+        frame(fighter.lua_state_agent, 10.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("yoshi_air_trace_01"), Hash40::new("top"), 0, -2, 0, 0, 0, 0, 1, true);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if macros::is_excute(fighter) {
+            macros::EFFECT_OFF_KIND(fighter, Hash40::new("yoshi_air_trace_01"), true, true);
+        }
+    }
+}
+
 #[acmd_script(//SpecialSLoop
     agent = "yoshi", 
     script = "effect_specialsloop", 
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_yoshi_specialsloop(fighter: &mut L2CAgentBase) {
-    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 8 % 9 % 10 % 11 % 12 % 13;
+    let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         if macros::is_excute(fighter) {
             macros::EFFECT_FOLLOW(fighter, Hash40::new("yoshi_gorogorotamago_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
@@ -186,6 +335,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         effect_yoshi_entryr,
         effect_yoshi_entryl,
+        effect_yoshi_attackairlw,
         effect_yoshi_specialsloop,
     );
 }

@@ -11,7 +11,6 @@ use smash::hash40;
 fn frame_lucario(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 
         if status_kind == FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH {
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT | *COLLISION_KIND_MASK_SHIELD) {
@@ -22,15 +21,14 @@ fn frame_lucario(fighter: &mut L2CFighterCommon) {
             }
         }
         if status_kind == FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH_END {
+            fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) < 1.0 {
                 MotionModule::set_frame_sync_anim_cmd(fighter.module_accessor, 0.0, true, true, false);
             }
-            if MotionModule::frame(fighter.module_accessor) > 30.0 && situation_kind == *SITUATION_KIND_AIR && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT | *COLLISION_KIND_MASK_SHIELD) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-            }
         }
         if status_kind == FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_BOUND {
-            if MotionModule::frame(fighter.module_accessor) > 34.0 {
+            fighter.sub_air_check_fall_common();
+            if MotionModule::frame(fighter.module_accessor) > 25.0 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
             }
         }
