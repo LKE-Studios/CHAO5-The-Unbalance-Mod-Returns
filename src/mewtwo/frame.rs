@@ -1,9 +1,5 @@
-use smash::lib::lua_const::*;
-use smash::app::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
+
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
 static mut START_FLOAT : [bool; 8] = [false; 8];
 static mut CHECK_FLOAT : [i32; 8] = [0; 8];
@@ -89,7 +85,7 @@ fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
             println!("x_add{}, y_add{}", x_add, y_add);
             X[ENTRY_ID] += x_add;
             Y[ENTRY_ID] += y_add;
-            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         } else {
             X[ENTRY_ID] = 0.0;
             Y[ENTRY_ID] = 0.0;

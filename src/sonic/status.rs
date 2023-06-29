@@ -1,13 +1,5 @@
 use super::*;
-use {
-    smash::{
-        lua2cpp::{L2CFighterCommon, *},
-        app::{lua_bind::*, *},
-        lib::{lua_const::*, L2CValue}
-    },
-    smashline::*
-};
-use smash::phx::Vector3f;
+use crate::imports::BuildImports::*;
 
 #[status_script(agent = "sonic", status = FIGHTER_STATUS_KIND_JUMP_AERIAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn status_sonic_jumpaerial_main(fighter: &mut L2CFighterCommon) -> L2CValue {

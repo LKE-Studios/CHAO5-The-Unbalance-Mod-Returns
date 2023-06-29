@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
     agent = "ridley", 
@@ -11,12 +7,12 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn effect_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ridley_jump02"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_ridley_jump02"));
     }
     frame(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
     }
 }
 
@@ -27,17 +23,17 @@ unsafe fn effect_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
     }
     frame(fighter.lua_state_agent, 27.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_glide_start"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_glide_start"));
     }
     frame(fighter.lua_state_agent, 28.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_special_h01"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_glide_loop"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_special_h01"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ridley_glide_loop"));
     }
 }
 
@@ -47,8 +43,8 @@ unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ridley_special_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ridley_special_s01"));
     }
 }
 
@@ -59,12 +55,12 @@ unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
+    if is_excute(fighter) {
+        PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
     }
     frame(fighter.lua_state_agent, 17.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+    if is_excute(fighter) {
+        PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
     }
 }
 
@@ -74,12 +70,12 @@ unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn effect_ridley_glideend(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
     }
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ridley_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ridley_wing"));
     }
 }
 

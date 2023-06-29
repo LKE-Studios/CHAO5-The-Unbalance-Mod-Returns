@@ -1,15 +1,4 @@
-use {
-    smash::{
-        lua2cpp::*,
-        hash40,
-        phx::*,
-        app::{lua_bind::*, *},
-        lib::{lua_const::*, L2CValue, L2CAgent}
-    },
-    smash_script::*,
-    smashline::*,
-    crate::globals::*,
-};
+use crate::imports::BuildImports::*;
 
 //Sub Status Catch, allows item grabbing from standing grabs
 #[skyline::hook(replace = L2CFighterCommon_sub_status_Catch)]

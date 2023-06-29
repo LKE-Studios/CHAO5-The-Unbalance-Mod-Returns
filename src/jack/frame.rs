@@ -1,14 +1,9 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-//use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_JACK )]
 pub fn frame_jack(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+    unsafe { 
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
         
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) == true {
             DamageModule::set_reaction_mul(fighter.module_accessor, 0.6);

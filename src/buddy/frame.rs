@@ -1,11 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::lib::lua_const::*;
-use smash::phx::Hash40;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_BUDDY )]
 fn frame_buddy(fighter: &mut L2CFighterCommon) {
@@ -14,6 +7,7 @@ fn frame_buddy(fighter: &mut L2CFighterCommon) {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
+        
         if [
             *FIGHTER_STATUS_KIND_LANDING,
             *FIGHTER_STATUS_KIND_LANDING_LIGHT,
@@ -61,14 +55,14 @@ fn frame_buddy(fighter: &mut L2CFighterCommon) {
             MotionModule::set_rate(fighter.module_accessor, 5.0);
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
-            smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
-            smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
+            KineticEnergy::clear_speed(energy);
+            KineticEnergy::clear_speed(anti_wind);
+            KineticEnergy::clear_speed(no_jostle);
         };
         if status_kind == *FIGHTER_BUDDY_STATUS_KIND_SPECIAL_S_DASH {
-            smash::app::lua_bind::KineticEnergy::clear_speed(energy);
-            smash::app::lua_bind::KineticEnergy::clear_speed(anti_wind);
-            smash::app::lua_bind::KineticEnergy::clear_speed(no_jostle);
+            KineticEnergy::clear_speed(energy);
+            KineticEnergy::clear_speed(anti_wind);
+            KineticEnergy::clear_speed(no_jostle);
             fighter.sub_air_check_fall_common();
             fighter.sub_wait_ground_check_common(false.into());
             WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_SPECIAL_S_REMAIN);

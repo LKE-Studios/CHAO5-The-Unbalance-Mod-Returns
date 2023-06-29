@@ -1,17 +1,11 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::phx::Hash40;
-use smash::hash40;
+use crate::imports::BuildImports::*;
 
 static mut FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2 : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_LUCINA )]
 pub fn frame_lucina(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+    unsafe { 
+        let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
         let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;

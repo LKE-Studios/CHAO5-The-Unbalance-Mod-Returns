@@ -1,9 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::phx::Hash40;
-use smash::phx::Vector3f;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_PEACH )]
 fn frame_peach(fighter: &mut L2CFighterCommon) {

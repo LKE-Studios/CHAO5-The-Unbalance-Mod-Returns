@@ -1,10 +1,4 @@
-use {
-    smash::{
-        lua2cpp::*,
-        app::lua_bind::*,
-        lib::{lua_const::*, L2CValue}
-    }
-};
+use crate::imports::BuildImports::*;
 
 #[skyline::hook(replace = L2CFighterCommon_sub_glide_stick_check_uniq)]
 unsafe fn sub_glide_stick_check_uniq(fighter: &mut L2CFighterCommon) {

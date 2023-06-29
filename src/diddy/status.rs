@@ -1,11 +1,4 @@
-use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
-use smashline::*;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smash::hash40;
-use smash::phx::{Vector3f, Hash40};
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[status_script(agent = "diddy", status = FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn status_main_diddy_speciallwlaugh(fighter: &mut L2CFighterCommon) -> L2CValue {

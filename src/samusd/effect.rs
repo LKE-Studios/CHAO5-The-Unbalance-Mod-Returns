@@ -1,9 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-//use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//AttackLw3
     agent = "samusd", 
@@ -11,22 +6,22 @@ use smash::lua2cpp::L2CAgentBase;
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_attacklw3(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    if is_excute(fighter) {
+        FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("armr"), 14.387, -0.341, -0.169, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("armr"), 28.387, -0.341, -0.169, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("armr"), 14.387, -0.341, -0.169, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("armr"), 28.387, -0.341, -0.169, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
     }
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
+    if is_excute(fighter) {
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("samusd_bomb_a"), Hash40::new("samusd_bomb_b"), Hash40::new("top"), 0, 0, 13.4, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
-        smash::app::sv_animcmd::EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
+        EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("samusd_bomb_a"), Hash40::new("samusd_bomb_b"), Hash40::new("top"), 0, 0, 26.8, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
-        smash::app::sv_animcmd::EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
+        EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
     }
 }
 
@@ -36,23 +31,23 @@ unsafe fn effect_samusd_attacklw3(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_attacklw4(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
     }
     frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, 17.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, -19.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, 8.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
-        macros::EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, -9.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, 17.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, -19.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, 8.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("samusd_throw_hi"), Hash40::new("top"), 0, 0, -9.4, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
     }
     frame(fighter.lua_state_agent, 39.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
     }
 }
 
@@ -63,31 +58,31 @@ unsafe fn effect_samusd_attacklw4(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn effect_samusd_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("clavicler"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::BURN_COLOR(fighter, 0.26, 0.71, 1.5, 0.7);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("clavicler"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        BURN_COLOR(fighter, 0.26, 0.71, 1.5, 0.7);
     }
     frame(fighter.lua_state_agent, 7.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 2.3, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
-        macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 2.3, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
-        macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 2.3, true);
+        LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
+        LAST_EFFECT_SET_RATE(fighter, 0.5);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 2.3, true);
+        LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
+        LAST_EFFECT_SET_RATE(fighter, 0.5);
     }
     frame(fighter.lua_state_agent, 37.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
-        macros::BURN_COLOR_FRAME(fighter, 20, 1, 1, 1, 0);
-        macros::BURN_COLOR_NORMAL(fighter);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
+        BURN_COLOR_FRAME(fighter, 20, 1, 1, 1, 0);
+        BURN_COLOR_NORMAL(fighter);
     }
 }
 
@@ -97,24 +92,24 @@ unsafe fn effect_samusd_attackairn(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_attackairlw(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("clavicler"), 0, 0, 0, 0, 0, 0, 1.9, true);
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("shoulderr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("clavicler"), 0, 0, 0, 0, 0, 0, 1.9, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true);
     }
     frame(fighter.lua_state_agent, 15.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 15, 0, 90, 0, 0, 1.7, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 15, 0, 90, 0, 0, 1.7, true);
+        LAST_EFFECT_SET_COLOR(fighter, 3.0 / 255.0, 194.0 / 255.0, 252.0 / 255.0);
     }
     frame(fighter.lua_state_agent, 37.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
     }
 }
 
@@ -124,10 +119,10 @@ unsafe fn effect_samusd_attackairlw(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_missile_hburst(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
+    if is_excute(fighter) {
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("samusd_bomb_a"), Hash40::new("samusd_bomb_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
-        smash::app::sv_animcmd::EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
+        EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
         fighter.pop_lua_stack(1);
     }
 }
@@ -138,10 +133,10 @@ unsafe fn effect_samusd_missile_hburst(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_supermissile_sburst(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
+    if is_excute(fighter) {
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("samusd_bomb_a"), Hash40::new("samusd_bomb_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.04, 0, 0, 0, 0, 0, 0, true);
-        smash::app::sv_animcmd::EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
+        EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
         fighter.pop_lua_stack(1);
     }
 }
@@ -152,13 +147,13 @@ unsafe fn effect_samusd_supermissile_sburst(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_samusd_bomb_burstattack(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
+    if is_excute(fighter) {
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("samusd_bomb_a"), Hash40::new("samusd_bomb_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 2.2, 0, 0, 0, 0, 0, 0, false);
-        smash::app::sv_animcmd::EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
+        EFFECT_BRANCH_SITUATION(fighter.lua_state_agent);
         fighter.pop_lua_stack(1);
-        macros::LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.12, /*G*/ 0.1, /*B*/ 1.85);
-        macros::LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.12, /*G*/ 0.1, /*B*/ 1.85);
+        LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
 

@@ -1,11 +1,4 @@
-//use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::phx::Vector3f;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_PIT )]
 fn frame_pit(fighter: &mut L2CFighterCommon) {
@@ -39,7 +32,7 @@ fn frame_pit(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
             *FIGHTER_STATUS_KIND_GLIDE_END
         ].contains(&status_kind) { 
-            macros::STOP_SE(fighter, Hash40::new("se_pit_glide_loop"));
+            STOP_SE(fighter, Hash40::new("se_pit_glide_loop"));
         };
         if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_S_END || status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {

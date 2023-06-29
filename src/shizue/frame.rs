@@ -1,12 +1,9 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_SHIZUE )]
 pub fn frame_shizue(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {

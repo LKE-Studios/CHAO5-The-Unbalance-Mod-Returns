@@ -1,17 +1,4 @@
-use smash::app::lua_bind::*;
-use smash::lib::lua_const::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
-use smash_script::*;
-use smashline::*;
-use smash::app::*;
-use smash::phx::Hash40;
-use smash::hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smash::phx::Vector3f;
-use smash::phx::Vector2f;
-use smash::lib::L2CValue;
-use crate::globals::*;
-use crate::utils::*;
+use crate::imports::BuildImports::*;
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_AttackDash)]
 unsafe fn status_attackdash(fighter: &mut L2CFighterCommon) -> L2CValue {

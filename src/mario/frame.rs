@@ -1,13 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterBase;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::phx::Hash40;
-use smash::app::{sv_information};
-use smash::app::*;
-use smash::app::sv_animcmd::*;
+use crate::imports::BuildImports::*;
 
 pub static mut MARIO_GIANT_FIREBALL : [bool; 8] = [false; 8];
 pub static mut HOLD_TIME : [f32; 8] = [0.0; 8];

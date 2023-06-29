@@ -1,14 +1,4 @@
-use smash::phx::Hash40;
-use smash::phx::Vector2f;
-use smash::lib::lua_const::*;
-use smash::lib::L2CValue;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::app::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
-use crate::globals::*;
+use crate::imports::BuildImports::*;
 
 #[status_script(agent = "lucario", status = FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn status_lucario_special_hi_rush_end_main(fighter: &mut L2CFighterCommon) -> L2CValue {

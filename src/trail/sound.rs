@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//GlideStart
     agent = "trail", 
@@ -11,18 +7,18 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn sound_trail_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_trail_jump03"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_trail_jump03"));
     }
     frame(fighter.lua_state_agent, 28.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_jump02"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_throw_shiny"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_jump02"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_throw_shiny"));
     }
     frame(fighter.lua_state_agent, 30.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_special_h02"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_glide_loop"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_special_h02"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_trail_glide_loop"));
     }
 }
 
@@ -33,14 +29,14 @@ unsafe fn sound_trail_glidestart(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_trail_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_attack11"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_attack11"));
     }
     frame(fighter.lua_state_agent, 11.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_trail_attackair_b03"));
-        macros::PLAY_SE(fighter, Hash40::new("se_trail_attackhard_l02"));
-        macros::PLAY_SE(fighter, Hash40::new("se_trail_attackhard_s02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_trail_attackair_b03"));
+        PLAY_SE(fighter, Hash40::new("se_trail_attackhard_l02"));
+        PLAY_SE(fighter, Hash40::new("se_trail_attackhard_s02"));
     }
 }
 
@@ -51,8 +47,8 @@ unsafe fn sound_trail_glideattack(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_trail_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_trail_landing02"));
+    if is_excute(fighter) {
+        PLAY_LANDING_SE(fighter, Hash40::new("se_trail_landing02"));
     }
 }
 
@@ -62,12 +58,12 @@ unsafe fn sound_trail_glidelanding(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_trail_glideend(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
     }
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_trail_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_trail_wing"));
     }
 }   
 

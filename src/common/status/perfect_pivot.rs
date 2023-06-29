@@ -1,15 +1,4 @@
-use smash::app::lua_bind::*;
-use smash::lib::lua_const::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
-use smash_script::*;
-use smashline::*;
-use smash::app::*;
-use smash::hash40;
-use smash::phx::Hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smash::phx::Vector3f;
-use smash::phx::Vector2f;
-use smash::lib::L2CValue;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame_callback]
 pub fn frame_perfect_pivot(fighter : &mut L2CFighterCommon) {

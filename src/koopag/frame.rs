@@ -1,20 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smash_script::*;
-use smashline::*;
-use smash::hash40;
-use smash::phx::Hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smash::lib::L2CValue;
-use smash::phx::Vector3f;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::app::{sv_information};
-use smash::lib::{L2CValueType::*, L2CValueType, L2CAgent, L2CTable, L2CTable_meta, L2CInnerFunctionBase, L2CValueInner};
-use crate::common::FIGHTER_BOOL_1;
-use crate::common::FIGHTER_BOOL_2;
-use crate::common::FIGHTER_BOOL_3;
-use crate::common::{get_player_number};
-use crate::globals::*;
+use crate::imports::BuildImports::*;
 use crate::koopag::status::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_KOOPAG )]

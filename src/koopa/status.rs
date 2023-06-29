@@ -1,13 +1,4 @@
-use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
-use crate::utils::*;
-use smashline::*;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-//use smash::app::sv_battle_object::module_accessor;
-use smash::hash40;
-use smash::phx::{Vector3f, Hash40};
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[status_script(agent = "koopa", status = FIGHTER_KOOPA_STATUS_KIND_SPECIAL_LW_G, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn status_koopa_special_lw_g(fighter: &mut L2CFighterCommon) -> L2CValue {

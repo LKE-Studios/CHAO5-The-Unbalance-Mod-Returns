@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::frame;
-use smash::lua2cpp::L2CAgentBase;
-use smash::phx::Hash40;
-use smash_script::*;
-use smashline::*;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(
     agent = "ryu",
@@ -11,12 +7,12 @@ use smashline::*;
 low_priority )]
 unsafe fn effect_ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("sys_genesis_beam"), Hash40::new("top"), 10, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_genesis_beam"), Hash40::new("top"), 10, 9, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
     frame(fighter.lua_state_agent, 67.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), true, true);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), true, true);
     }
 }
 

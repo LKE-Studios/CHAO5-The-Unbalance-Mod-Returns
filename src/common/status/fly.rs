@@ -1,12 +1,5 @@
-use {
-    smash::{
-        lua2cpp::*,
-        phx::*,
-        app::lua_bind::*,
-        lib::{lua_const::*, L2CValue}
-    },
-    super::super::is_glider
-};
+use crate::imports::BuildImports::*;
+use super::super::is_glider;
 
 #[skyline::hook(replace = L2CFighterCommon_status_FlySub)]
 unsafe fn status_flysub(fighter: &mut L2CFighterCommon) {

@@ -1,11 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::app::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::phx::Vector3f;
-use smash_script::*;
-use smash::phx::Hash40;
+use crate::imports::BuildImports::*;
 
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
 static mut START_FLOAT : [bool; 8] = [false; 8];
@@ -24,8 +17,8 @@ static mut IS_CRIT: [bool; 8] = [false; 8];
 #[fighter_frame( agent = FIGHTER_KIND_DEMON )]
 pub fn frame_demon(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let lr = PostureModule::lr(fighter.module_accessor);
 
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
@@ -38,7 +31,7 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
-        let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if StatusModule::situation_kind(fighter.module_accessor) != SITUATION_KIND_AIR
@@ -103,7 +96,7 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             println!("x_add{}, y_add{}", x_add, y_add);
             X[ENTRY_ID] += x_add;
             Y[ENTRY_ID] += y_add;
-            macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         } else {
             X[ENTRY_ID] = 0.0;
             Y[ENTRY_ID] = 0.0;
@@ -137,12 +130,12 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
                 COUNTER[ENTRY_ID] += 1;
                 IS_CRIT[ENTRY_ID] = true;
                 if COUNTER[ENTRY_ID] < 2 {
-                    EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_bg_criticalhit"), smash::phx::Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
+                    EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
                     CURRENTFRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
                     SlowModule::set_whole(fighter.module_accessor, 2, 0);
-                    macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
-                    macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
-                    macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * PostureModule::lr(boma));
+                    PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
+                    QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+                    CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * lr);
                 }
             }
             if MotionModule::frame(fighter.module_accessor) >= (CURRENTFRAME[ENTRY_ID] + 1.0) && IS_CRIT[ENTRY_ID] {
@@ -150,20 +143,20 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
                 SlowModule::clear_whole(fighter.module_accessor);
                 CameraModule::reset_all(fighter.module_accessor);
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
                 if StatusModule::status_kind(fighter.module_accessor) != 510 {
-                    macros::CAM_ZOOM_OUT(fighter);
+                    CAM_ZOOM_OUT(fighter);
                 }
             }
             if IS_CRIT[ENTRY_ID] && MotionModule::frame(fighter.module_accessor) < 2.0 {
-                macros::CAM_ZOOM_OUT(fighter);
+                CAM_ZOOM_OUT(fighter);
                 IS_CRIT[ENTRY_ID] = false;
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
                 SlowModule::clear_whole(fighter.module_accessor);
             };
         }
-        else{
+        else {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
         }
     }

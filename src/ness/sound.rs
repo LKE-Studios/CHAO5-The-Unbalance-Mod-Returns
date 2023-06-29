@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smashline::*;
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//EntryL
     agent = "ness", 
@@ -11,33 +7,33 @@ use smash_script::*;
     low_priority )]
 unsafe fn sound_ness_entryl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
     }
     wait(fighter.lua_state_agent, 51.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
-        macros::PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+        PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
     }
 }
 
@@ -48,33 +44,33 @@ unsafe fn sound_ness_entryl(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_ness_entryr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appear01"));
     }
     wait(fighter.lua_state_agent, 51.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
     }
     wait(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
-        macros::PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
+        PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
     }
 }
 
@@ -85,16 +81,16 @@ unsafe fn sound_ness_entryr(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_ness_win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 37.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ness_smash_s02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_smash_s02"));
     }
     frame(fighter.lua_state_agent, 125.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_common_swing_04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_swing_04"));
     }
     frame(fighter.lua_state_agent, 129.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_ness_damage01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_ness_damage01"));
     }
 }
 
@@ -105,8 +101,8 @@ unsafe fn sound_ness_win3(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_ness_speciallwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_ness_004"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_ness_004"));
     }
 }
 
@@ -117,8 +113,8 @@ unsafe fn sound_ness_speciallwstart(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_ness_specialairlwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_ness_004"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_ness_004"));
     }
 }
 

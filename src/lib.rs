@@ -3,6 +3,10 @@
 #![allow(unused_macros,
     unused_must_use,
     unused_unsafe,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_must_use,
+    unused_mut,
     clippy::borrow_interior_mutable_const,
     clippy::collapsible_if,
     clippy::collapsible_else_if,
@@ -221,6 +225,7 @@ mod zelda;
 
 pub mod singletons;
 pub mod helper;
+pub mod imports;
 mod utils;
 mod common;
 

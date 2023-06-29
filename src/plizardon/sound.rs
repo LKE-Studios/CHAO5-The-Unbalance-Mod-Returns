@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, JumpAerialF6 
     agent = "plizardon", 
@@ -11,8 +7,8 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn sound_plizardon_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
     }
 }
 
@@ -23,13 +19,13 @@ unsafe fn sound_plizardon_jumpaerialf(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_plizardon_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
     }
     frame(fighter.lua_state_agent, 30.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_glide_loop"));        
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_glide_loop"));        
     }
 }
 
@@ -40,12 +36,12 @@ unsafe fn sound_plizardon_glidestart(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_plizardon_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_plizardon_rnd_attack"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_plizardon_rnd_attack"));
     }
     wait(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_tailswing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_plizardon_tailswing"));
     }
 }
 
@@ -56,12 +52,12 @@ unsafe fn sound_plizardon_glideattack(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_plizardon_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
+    if is_excute(fighter) {
+        PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
     }
     frame(fighter.lua_state_agent, 17.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
+    if is_excute(fighter) {
+        PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_ss"));
     }
 }
 
@@ -71,12 +67,12 @@ unsafe fn sound_plizardon_glidelanding(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_plizardon_glideend(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
     }
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_plizardon_wing"));
     }
 }   
 
@@ -87,21 +83,21 @@ unsafe fn sound_plizardon_glideend(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_plizardon_win2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_jump02"));
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_special_h01"));
+    if is_excute(fighter) {
+        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_jump02"));
+        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_special_h01"));
     }
     frame(fighter.lua_state_agent, 49.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_landing02"));
+    if is_excute(fighter) {
+        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_landing02"));
     }
     frame(fighter.lua_state_agent, 53.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("vc_plizardon_win02"));
+    if is_excute(fighter) {
+        PLAY_SE_NO_3D(fighter, Hash40::new("vc_plizardon_win02"));
     }
     frame(fighter.lua_state_agent, 96.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_landing02"));
+    if is_excute(fighter) {
+        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_landing02"));
     }
 }
 

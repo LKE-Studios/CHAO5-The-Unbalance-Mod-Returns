@@ -1,10 +1,4 @@
-//use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-//use smash::lib::lua_const::*;
-//use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//Fly
     agent = "nana_blizzard", 
@@ -12,8 +6,8 @@ use smash::lua2cpp::L2CAgentBase;
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_nana_blizzard_fly(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("popo_blizzerd_bullet"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, false);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("popo_blizzerd_bullet"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, false);
     }
 }
 

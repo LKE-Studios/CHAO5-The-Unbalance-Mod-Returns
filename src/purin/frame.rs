@@ -1,14 +1,10 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-//use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_PURIN )]
 pub fn frame_purin(fighter : &mut L2CFighterCommon) {
     unsafe {
 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
 
         if [
             *FIGHTER_PURIN_STATUS_KIND_SPECIAL_N_HOLD,

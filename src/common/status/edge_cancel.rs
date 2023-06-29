@@ -1,16 +1,4 @@
-use smash::app::lua_bind::*;
-use smash::lib::lua_const::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
-use smash_script::*;
-use smashline::*;
-use smash::app::*;
-use smash::phx::Hash40;
-use smash::hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smash::phx::Vector3f;
-use smash::phx::Vector2f;
-use smash::lib::L2CValue;
-use crate::globals::*;
+use crate::imports::BuildImports::*;
 
 pub fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 	let edge_cancel = [

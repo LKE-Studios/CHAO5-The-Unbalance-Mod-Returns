@@ -1,12 +1,4 @@
-//use smash::app::sv_animcmd::*;
-use smash::lib::lua_const::*;
-use smash::phx::Hash40;
-use smash::hash40;
-//use smash::phx::Vector3f;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_TRAIL )]
 fn frame_trail(fighter: &mut L2CFighterCommon) {
@@ -30,8 +22,8 @@ fn frame_trail(fighter: &mut L2CFighterCommon) {
             *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F,
             *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N
         ].contains(&status_kind) { 
-            macros::STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
+            STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
+            EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
         if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_S_END {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
@@ -50,14 +42,14 @@ fn frame_trail(fighter: &mut L2CFighterCommon) {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
                 if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                    macros::SLOW_OPPONENT(fighter, 20.0, 240.0);
+                    SLOW_OPPONENT(fighter, 20.0, 240.0);
                 }
             }
         }
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_r") && AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
                 if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                    macros::SLOW_OPPONENT(fighter, 20.0, 240.0);
+                    SLOW_OPPONENT(fighter, 20.0, 240.0);
                 }
             }
         }

@@ -1,10 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
-use smash_script::*;
-use crate::globals::*;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_CAPTAIN )]
 pub fn frame_captain(fighter : &mut L2CFighterCommon) {

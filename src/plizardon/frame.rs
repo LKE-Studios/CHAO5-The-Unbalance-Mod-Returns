@@ -1,9 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::phx::Hash40;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_PLIZARDON )]
 fn frame_plizardon(fighter: &mut L2CFighterCommon) {
@@ -25,8 +20,8 @@ fn frame_plizardon(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
             *FIGHTER_STATUS_KIND_GLIDE_END,
         ].contains(&status_kind) { 
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
-            macros::STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
+            STOP_SE(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+            STOP_SE(fighter, Hash40::new("se_plizardon_glide_loop"));
         };
     }
 }

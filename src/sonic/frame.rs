@@ -1,17 +1,9 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lib::L2CValue;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::phx::Hash40;
-use smash::phx::Vector3f;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_SONIC )]
 pub fn frame_sonic(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+    unsafe { 
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
 
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SONIC_INSTANCE_WORK_FLAG_SPECIAL_N_FALL);
         if status_kind == *FIGHTER_SONIC_STATUS_KIND_SPECIAL_N_HIT || status_kind == *FIGHTER_SONIC_STATUS_KIND_SPECIAL_N_HOMING {

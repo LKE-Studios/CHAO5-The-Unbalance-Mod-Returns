@@ -1,18 +1,4 @@
-use {
-    smash::{
-        app::*,
-        lua2cpp::*,
-        phx::*,
-        app::lua_bind::*,
-        lib::{lua_const::*, L2CValue, L2CAgent}
-    },
-    smash_script::*,
-    smashline::*
-};
-use crate::common::status::glide_param::GlideParams;
-use smash::phx::Vector3f;
-use smash::app::lua_bind::KineticEnergy;
-use std::f32::consts::PI;
+use crate::imports::BuildImports::*;
 
 pub mod KineticUtility {
     // Resets and enables the kinetic energy type.

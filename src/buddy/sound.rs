@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//JumpAerialF3, JumpAerialF4, JumpAerialF5, 
     agent = "buddy", 
@@ -11,16 +7,16 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn sound_buddy_jumpaerial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))
     }
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_STATUS(fighter, Hash40::new("vc_buddy_jump02_02"))
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("vc_buddy_jump02_02"))
     }
     frame(fighter.lua_state_agent, 12.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_STATUS(fighter, Hash40::new("se_buddy_jump03_02"))
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_buddy_jump03_02"))
     }
 }
 
@@ -31,17 +27,17 @@ unsafe fn sound_buddy_jumpaerial(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_buddy_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"));
     }
     frame(fighter.lua_state_agent, 15.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_jump03_02"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_jump03_02"));
     }
     frame(fighter.lua_state_agent, 16.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_glide_loop"));
-        macros::PLAY_SE(fighter, Hash40::new("vc_buddy_special_h03_vc"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_buddy_glide_loop"));
+        PLAY_SE(fighter, Hash40::new("vc_buddy_special_h03_vc"));
     }
 }
 
@@ -52,14 +48,14 @@ unsafe fn sound_buddy_glidestart(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_buddy_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_buddy_rnd_attack11"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_buddy_rnd_attack11"));
     }
     frame(fighter.lua_state_agent, 11.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_buddy_attackair_b03"));
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_l02"));
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_s02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_buddy_attackair_b03"));
+        PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_l02"));
+        PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_s02"));
     }
 }
 
@@ -70,8 +66,8 @@ unsafe fn sound_buddy_glideattack(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_buddy_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_buddy_landing02"));
+    if is_excute(fighter) {
+        PLAY_LANDING_SE(fighter, Hash40::new("se_buddy_landing02"));
     }
 }
 
@@ -81,12 +77,12 @@ unsafe fn sound_buddy_glidelanding(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_buddy_glideend(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_buddy_glide_loop"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_buddy_glide_loop"));
     }
     frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
     }
 }   
 

@@ -1,8 +1,4 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_FOX )]
 fn frame_fox(fighter: &mut L2CFighterCommon) {

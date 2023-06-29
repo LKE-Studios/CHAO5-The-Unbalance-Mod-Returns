@@ -1,10 +1,4 @@
-use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smash::app::*;
-use smashline::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
+use crate::imports::BuildImports::*;
 
 pub static mut DONKEY_64_DANCE : [bool; 8] = [false; 8];
 pub static mut HOLD_TIME : [f32; 8] = [0.0; 8];

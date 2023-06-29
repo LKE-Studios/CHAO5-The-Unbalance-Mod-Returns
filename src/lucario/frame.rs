@@ -1,11 +1,4 @@
-use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::app::*;
-use smash_script::*;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::hash40;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_LUCARIO )]
 fn frame_lucario(fighter: &mut L2CFighterCommon) {

@@ -1,13 +1,4 @@
-use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
-use crate::utils::*;
-use smashline::*;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-//use smash::app::sv_battle_object::module_accessor;
-use smash::hash40;
-use smash::phx::{Vector3f, Hash40};
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 static mut ANGLE : [f32; 8] = [0.0; 8];
 static GLIDE_START_H_SPEED : f32 = 0.4; //H speed multiplier on GlideStart
@@ -41,7 +32,7 @@ pub unsafe fn status_main_ridley_glidestart(fighter: &mut L2CFighterCommon) -> L
 }
 
 unsafe extern "C" fn status_main_ridley_glidestart_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
-    macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("glide_start") && MotionModule::is_end(fighter.module_accessor) {   
         fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
     }
@@ -62,7 +53,7 @@ unsafe extern "C" fn status_main_ridley_glide_sub(fighter: &mut L2CFighterCommon
     if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR || KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_GLIDE_START {
         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
     };
-    macros::SET_SPEED_EX(fighter, BASE_H_SPEED, GRAVITY, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
+    SET_SPEED_EX(fighter, BASE_H_SPEED, GRAVITY, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN); //Base horizontal air mobility and normal descent speed.
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);  
     let y = ANGLE[ENTRY_ID] * Y_ACCEL_ADD; //Applies the ascent/descent speed multiplier when angling the glide
@@ -92,16 +83,16 @@ unsafe extern "C" fn status_main_ridley_glide_sub(fighter: &mut L2CFighterCommon
     }
     //Forward Speed Stuff
     if ANGLE[ENTRY_ID] >= ANGLE_MAX_DOWN && ANGLE[ENTRY_ID] < ANGLE_MAX_SPEED { //Applies the H Air decel. multilplier when descending when angle is between -60 and -20
-        macros::SET_SPEED_EX(fighter, DOWN_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        SET_SPEED_EX(fighter, DOWN_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_DOWN, y:0.0, z:0.0});
         MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + ANGLE[ENTRY_ID] * 0.005);
     };
     if ANGLE[ENTRY_ID] >= ANGLE_MAX_SPEED && ANGLE[ENTRY_ID] < 0.0 { //Applies the H Air accel. multilplier when descending when angle is between -20 and 0
-        macros::SET_SPEED_EX(fighter, BASE_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        SET_SPEED_EX(fighter, BASE_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + ANGLE[ENTRY_ID] * 0.005);
     };
     if ANGLE[ENTRY_ID] <= ANGLE_MAX_UP && ANGLE[ENTRY_ID] > 0.0 { //Applies the H Air decel. multilplier when descending when angle is between 0 and 60
-        macros::SET_SPEED_EX(fighter, BASE_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        SET_SPEED_EX(fighter, BASE_H_SPEED + x, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: ANGLE[ENTRY_ID] * X_DECEL_MUL_UP, y:ANGLE[ENTRY_ID] * Y_ACCEL_UP, z:0.0});
         MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + ANGLE[ENTRY_ID] * 0.01);
     };

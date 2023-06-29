@@ -1,11 +1,4 @@
-use {
-    smash::{
-        lua2cpp::{L2CFighterCommon, *},
-        app::{lua_bind::*, *},
-        lib::{lua_const::*, L2CValue}
-    },
-    smashline::*
-};
+use crate::imports::BuildImports::*;
 
 #[status_script(agent = "koopag", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)] //Properly allow Giga Bowser to use Nair and Dair
 unsafe fn status_koopag_attackair_main(fighter: &mut L2CFighterCommon) -> L2CValue {

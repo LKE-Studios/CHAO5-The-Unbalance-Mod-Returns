@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smashline::*;
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//AttackS4ChargeSFX
     agent = "shizue", 
@@ -11,8 +7,8 @@ use smash_script::*;
     low_priority )]
 unsafe fn shizue_sidesmashsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
     }
 }
 
@@ -23,8 +19,8 @@ unsafe fn shizue_sidesmashsfx(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn shizue_upsmashsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
     }
 }
 
@@ -35,8 +31,8 @@ unsafe fn shizue_upsmashsfx(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn shizue_downsmashsfx(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
     }
 }
 

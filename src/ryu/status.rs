@@ -1,11 +1,4 @@
-use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
-use crate::utils::*;
-use smashline::*;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smash::phx::Hash40;
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 pub const FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START: i32 = 0x202;
 pub const FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_CHARGE: i32 = 0x203;
@@ -20,8 +13,8 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
         let entry_id = get_entry_id(fighter.module_accessor);
         if[FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START].contains(&status_kind) {
             CHARGE_TIME[entry_id] += 1.0;
-            macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_elec"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.3, true);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.6, 0.7);
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_elec"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.3, true);
+            LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.6, 0.7);
         }
         if ![FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START, FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_FIRE]
             .contains(&status_kind) {
@@ -41,8 +34,8 @@ pub fn ryu_frame(fighter : &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_DEAD,
             *FIGHTER_STATUS_KIND_MISS_FOOT
         ].contains(&status_kind) {
-            macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
-            macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+            EFFECT_OFF_KIND(fighter, Hash40::new("sys_genesis_beam"), false, false);
+            STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
         };
     }
 }
@@ -141,7 +134,7 @@ unsafe extern "C" fn ryu_kamehamehafire_main(fighter: &mut L2CFighterCommon) -> 
         if is_grounded(fighter.module_accessor){
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
-        else{
+        else {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
     }

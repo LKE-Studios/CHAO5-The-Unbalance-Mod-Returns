@@ -1,14 +1,4 @@
-use {
-    smash::{
-        app::*,
-        lua2cpp::*,
-        phx::*,
-        app::lua_bind::*,
-        lib::{lua_const::*, L2CValue, L2CAgent}
-    },
-    smash_script::*,
-    smashline::*
-};
+use crate::imports::BuildImports::*;
 
 pub struct GlideParams {
     pub angle_max_up : f32, //#0 Max Upward Angle

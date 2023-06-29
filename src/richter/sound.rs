@@ -1,9 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::app::lua_bind::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::{*, macros::*};
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//Fly
     agent = "richter_axe", 

@@ -1,10 +1,4 @@
-use smash::app::sv_animcmd::*;
-//use smash::lib::lua_const::*;
-//use smash::app::lua_bind::*;
-use smash::lua2cpp::L2CAgentBase;
-use smash::phx::Hash40;
-use smash_script::*;
-use smashline::*;
+use crate::imports::BuildImports::*;
 
 /*#[acmd_script(//MoveSpM
     agent = "ryu_hadoken",
@@ -12,8 +6,8 @@ use smashline::*;
     category = ACMD_SOUND,
     low_priority )]
 unsafe fn sound_hadoken1(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
     }
 }
 
@@ -23,8 +17,8 @@ unsafe fn sound_hadoken1(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
     low_priority )]
 unsafe fn sound_hadoken2(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
     }
 }
 
@@ -34,8 +28,8 @@ unsafe fn sound_hadoken2(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
     low_priority )]
 unsafe fn sound_hadoken3(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
     }
 }
 
@@ -45,8 +39,8 @@ unsafe fn sound_hadoken3(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
     low_priority )]
 unsafe fn sound_hadoken4(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
     }
 }
 
@@ -59,54 +53,54 @@ unsafe fn sound_neutralb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_FAILED) == true {
         wait(fighter.lua_state_agent, 10.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
         }
         wait(fighter.lua_state_agent, 2.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("vc_ryu_special_n03"));
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("vc_ryu_special_n03"));
         } 
     }
     else if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_FLAG_COMMAND) == false {
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
         }
         wait(fighter.lua_state_agent, 10.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
         } 
         wait(fighter.lua_state_agent, 2.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("vc_ryu_special_n01"));
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("vc_ryu_special_n01"));
         } 
     }
     else {
         if WorkModule::get_int64(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_INT_TYPE) == 0 {
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_command_success"));
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("se_ryu_command_success"));
+                PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
             }
             wait(fighter.lua_state_agent, 10.0);
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
             }
             wait(fighter.lua_state_agent, 2.0);
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("vc_ryu_special_n01_command"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("vc_ryu_special_n01_command"));
             } 
         }
         else if WorkModule::get_int64(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_INT_TYPE) == 1 {
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_command_success"));
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("se_ryu_command_success"));
+                PLAY_SE(fighter, Hash40::new("se_ryu_special_n04"));
             }
             wait(fighter.lua_state_agent, 3.0);
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("vc_ryu_special_n02_command"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("vc_ryu_special_n02_command"));
             }
             wait(fighter.lua_state_agent, 6.0);
-            if macros::is_excute(fighter) {
-                macros::PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
+            if is_excute(fighter) {
+                PLAY_SE(fighter, Hash40::new("se_ryu_swing_m"));
             }
         }
     }
@@ -118,8 +112,8 @@ script = "sound_kamehameha_start",
 category = ACMD_SOUND,
 low_priority )]
 unsafe fn sound_ryu_kamehameha_start(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_ryu_special_n01"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_ryu_special_n01"));
     }
 }
 
@@ -129,8 +123,8 @@ script = "sound_kamehameha_charge",
 category = ACMD_SOUND,
 low_priority )]
 unsafe fn sound_ryu_kamehameha_charge(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_item_genesis_shot01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_item_genesis_shot01"));
     }
 }
 
@@ -141,12 +135,12 @@ category = ACMD_SOUND,
 low_priority )]
 unsafe fn sound_ryu_kamehameha_fire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_item_genesis_shot02"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_item_genesis_shot02"));
     }
     frame(fighter.lua_state_agent, 70.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_item_genesis_shot02"));
     }
 }
 

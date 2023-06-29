@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smash::lua2cpp::L2CAgentBase;
-use smashline::*;
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//SpecialS6
     agent = "gamewatch", 
@@ -11,8 +7,8 @@ use smash_script::*;
     low_priority )]
 unsafe fn sound_gamewatch_specials6(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
     }
 }
 
@@ -23,8 +19,8 @@ unsafe fn sound_gamewatch_specials6(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_gamewatch_specialairs6(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
     }
 }
 
@@ -35,8 +31,8 @@ unsafe fn sound_gamewatch_specialairs6(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_gamewatch_specials7(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
     }
 }
 
@@ -47,8 +43,8 @@ unsafe fn sound_gamewatch_specials7(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_gamewatch_specialairs7(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_gamewatch_special_s01"));
     }
 }
 

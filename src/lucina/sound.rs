@@ -1,12 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smash::phx::Vector3f;
-use smash::lib::lua_const::*;
-use smash::app::*;
-use smash::app::lua_bind::*;
-use smash::lua2cpp::L2CAgentBase;
-use smashline::*;
-use smash_script::*;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//Attack13
     agent = "lucina", 
@@ -15,12 +7,12 @@ use smash_script::*;
     low_priority )]
 unsafe fn sound_lucina_attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
     }
     frame(fighter.lua_state_agent, 9.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
     }
 }
 
@@ -31,9 +23,9 @@ unsafe fn sound_lucina_attack13(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attacks3hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
     }
 }
 
@@ -44,9 +36,9 @@ unsafe fn sound_lucina_attacks3hi(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
     }
 }
 
@@ -57,9 +49,9 @@ unsafe fn sound_lucina_attacks3(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attacks3lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_attackl_s01"));
     }
 }
 
@@ -70,13 +62,13 @@ unsafe fn sound_lucina_attacks3lw(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
     }
     wait(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_lucina_attack05"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_smash_s01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_lucina_attack05"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_smash_s01"));
     }
 }
 
@@ -87,10 +79,10 @@ unsafe fn sound_lucina_attacks4(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
-        macros::PLAY_SE(fighter, Hash40::new("vc_lucina_attack06"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_smash_h01"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
+        PLAY_SE(fighter, Hash40::new("vc_lucina_attack06"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_smash_h01"));
     }
 }
 
@@ -101,17 +93,17 @@ unsafe fn sound_lucina_attackhi4(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
     }
     wait(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("vc_lucina_attack07"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_smash_l01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_lucina_attack07"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_smash_l01"));
     }
     wait(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_smash_l01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_smash_l01"));
     }
 }
 
@@ -122,17 +114,17 @@ unsafe fn sound_lucina_attacklw4(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
     }
     frame(fighter.lua_state_agent, 14.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
     }
     frame(fighter.lua_state_agent, 23.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_swing_ll"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_swing_ll"));
     }
 }
 
@@ -143,13 +135,13 @@ unsafe fn sound_lucina_attackairn(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_lucina_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_common_swing_09"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_swing_09"));
     }
     wait(fighter.lua_state_agent, 4.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_lucina_swing_l"));
     }
 }
 
@@ -159,13 +151,13 @@ unsafe fn sound_lucina_attackairb(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_lucina_speciallwhit2(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_special_l02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_special_l02"));
     }
     wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_special_l03"));
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_special_l"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_special_l03"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_special_l"));
     }
 }
 
@@ -175,13 +167,13 @@ unsafe fn sound_lucina_speciallwhit2(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_lucina_specialairlwhit2(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_special_l02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_special_l02"));
     }
     wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_lucina_special_l03"));
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_special_l"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucina_special_l03"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_lucina_rnd_special_l"));
     }
 }
 

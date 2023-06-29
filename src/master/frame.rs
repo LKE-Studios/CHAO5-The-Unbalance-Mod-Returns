@@ -1,22 +1,14 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash::phx::Vector3f;
-use smash::phx::Hash40;
-//use smash::lib::L2CValue;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::lua2cpp::L2CFighterBase;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_MASTER )]
 pub fn frame_master(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let situation_kind = StatusModule::situation_kind(boma);
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         if status_kind == *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_CANCEL {
             if situation_kind == *SITUATION_KIND_AIR {
-                if WorkModule::get_int(boma, *FIGHTER_MASTER_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE) == *FIGHTER_MASTER_SPECIAL_N_CANCEL_TYPE_AIR_ESCAPE_AIR {
-                    WorkModule::set_int(boma, *FIGHTER_MASTER_SPECIAL_N_CANCEL_TYPE_NONE, *FIGHTER_MASTER_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_MASTER_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE) == *FIGHTER_MASTER_SPECIAL_N_CANCEL_TYPE_AIR_ESCAPE_AIR {
+                    WorkModule::set_int(fighter.module_accessor, *FIGHTER_MASTER_SPECIAL_N_CANCEL_TYPE_NONE, *FIGHTER_MASTER_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE);
                 }
             }
         }
@@ -38,9 +30,8 @@ pub fn frame_master(fighter : &mut L2CFighterCommon) {
 
 #[weapon_frame( agent = WEAPON_KIND_MASTER_AXE )]
 pub fn frame_master_axe(weapon : &mut L2CFighterBase) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+    unsafe { 
+        let status_kind = StatusModule::status_kind(weapon.module_accessor);
         if status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW || status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW_HIT {
             if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(weapon.module_accessor, -999.0, 0);

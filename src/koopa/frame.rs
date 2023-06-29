@@ -1,16 +1,9 @@
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smashline::*;
-use smash_script::*;
-use smash::hash40;
-use smash::lua2cpp::L2CFighterCommon;
-use smash::phx::Vector3f;
+use crate::imports::BuildImports::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_KOOPA )]
 pub fn frame_koopa(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-        let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
         
         if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
         WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Midbus

@@ -1,8 +1,4 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
-use smashline::*;
-use smash_script::*;
-use smash::lua2cpp::L2CAgentBase;
+use crate::imports::BuildImports::*;
 
 #[acmd_script(//JumpAerialF4, JumpAerialF5, JumpAerialF6, JumpAerialF7
     agent = "pit", 
@@ -11,8 +7,8 @@ use smash::lua2cpp::L2CAgentBase;
     low_priority )]
 unsafe fn sound_pit_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pit_jump02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_jump02"));
     }
 }
 
@@ -23,17 +19,17 @@ unsafe fn sound_pit_jumpaerialf(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_pit_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pit_jump02"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_jump02"));
     }
     frame(fighter.lua_state_agent, 18.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_glide_start"));
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_glide_start"));
     }
     frame(fighter.lua_state_agent, 19.0);
-    if macros::is_excute(fighter) {
-        //macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_bowsplit"));
-        macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_glide_loop"));
+    if is_excute(fighter) {
+        //PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_bowsplit"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_glide_loop"));
     }
 }
 
@@ -44,8 +40,8 @@ unsafe fn sound_pit_glidestart(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_pit_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pit_swing_m"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_swing_m"));
     }
 }
 
@@ -56,8 +52,8 @@ unsafe fn sound_pit_glideattack(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn sound_pit_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_LANDING_SE(fighter, Hash40::new("se_pit_landing02"));
+    if is_excute(fighter) {
+        PLAY_LANDING_SE(fighter, Hash40::new("se_pit_landing02"));
     }
 }
 
@@ -67,12 +63,12 @@ unsafe fn sound_pit_glidelanding(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_pit_glideend(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_pit_bowsplit"));
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_pit_bowsplit"));
     }
     frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pit_jump01"));
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_jump01"));
     }
 }  
 
