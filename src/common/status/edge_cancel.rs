@@ -61,7 +61,7 @@ unsafe fn status_init_settings(module_accessor: &mut smash::app::BattleObjectMod
     }
 }
 
-#[skyline::hook(replace = smash::app::lua_bind::GroundModule::correct)]
+/*#[skyline::hook(replace = smash::app::lua_bind::GroundModule::correct)]
 unsafe fn status_correct(module_accessor: &mut smash::app::BattleObjectModuleAccessor, ground_correct_kind: u32) -> u64 {
     let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
@@ -119,12 +119,12 @@ extern "C" {
 #[skyline::hook(replace=get_ground_correct_kind_air_trans)]
 unsafe fn get_ground_correct_kind_air_trans_hook(_module_accessor: &mut smash::app::BattleObjectModuleAccessor, _something: i32) -> i32 {
     return *GROUND_CORRECT_KIND_AIR;
-}
+}*/
 
 pub fn install() {
 	skyline::install_hooks!(
 		status_init_settings,
-        status_correct,
-        get_ground_correct_kind_air_trans_hook
+        //status_correct,
+        //get_ground_correct_kind_air_trans_hook
     );
 }

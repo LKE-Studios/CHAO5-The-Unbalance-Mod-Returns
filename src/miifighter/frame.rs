@@ -13,7 +13,7 @@ fn frame_miifighter(fighter: &mut L2CFighterCommon) {
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.75);
             DamageModule::set_reaction_mul(fighter.module_accessor, 0.75);
             if GFX_COUNTER[ENTRY_ID] >= 6 {
-                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
                 LAST_EFFECT_SET_COLOR(fighter, /*R*/ 5.3, /*G*/ 0.13, /*B*/ 0.1);
                 GFX_COUNTER[ENTRY_ID] = 0;
             };
