@@ -13,7 +13,7 @@ pub fn frame_diddy(fighter : &mut L2CFighterCommon) {
                 }
             }
         };
-        /*if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH {
+        if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH {
             if frame > 0.0 {
                 CancelModule::enable_cancel(fighter.module_accessor);
             }
@@ -50,7 +50,7 @@ pub fn frame_diddy(fighter : &mut L2CFighterCommon) {
                 (0.0..1.0).contains(&frame_opponent7) {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, false);
             }
-        }*/
+        }
     }
 }
 

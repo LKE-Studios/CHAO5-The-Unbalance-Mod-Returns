@@ -65,6 +65,7 @@ pub mod BuildImports {
         },
         crate::common::status::glide_param::GlideParams,
         crate::common::status::glide::KineticUtility,
+        crate::common::consts::*,
         crate::common::FIGHTER_BOOL_1,
         crate::common::FIGHTER_BOOL_2,
         crate::common::FIGHTER_BOOL_3,

@@ -132,11 +132,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         ].contains(&status_kind) {
             STOP_SE(fighter, Hash40::new("vc_metaknight_final03"));
         }
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            KineticEnergy::clear_speed(no_jostle);
-        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN {
             fighter.sub_air_check_fall_common();
             KineticEnergy::clear_speed(energy);

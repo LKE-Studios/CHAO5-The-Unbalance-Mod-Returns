@@ -131,6 +131,7 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 
 pub mod status;
 mod param;
+pub mod consts;
 
 pub fn is_glider(kind: i32) -> bool {
     [

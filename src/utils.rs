@@ -148,6 +148,7 @@ pub trait BomaExt {
     unsafe fn is_weapon(&mut self) -> bool;
     unsafe fn kind(&mut self) -> i32;
     unsafe fn down_input(&mut self) -> bool;
+    unsafe fn change_status_req(&mut self, kind: i32, repeat: bool) -> i32;
 }
 
 impl BomaExt for BattleObjectModuleAccessor {
@@ -163,6 +164,9 @@ impl BomaExt for BattleObjectModuleAccessor {
     }
     unsafe fn kind(&mut self) -> i32 {
         return smash::app::utility::get_kind(self);
+    }
+    unsafe fn change_status_req(&mut self, kind: i32, repeat: bool) -> i32 {
+        return StatusModule::change_status_request_from_script(self, kind, repeat) as i32;
     }
     unsafe fn down_input(&mut self) -> bool {
         let stick_y = ControlModule::get_stick_y(self);
