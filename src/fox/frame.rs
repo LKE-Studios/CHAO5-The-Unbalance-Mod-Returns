@@ -10,7 +10,7 @@ fn frame_fox(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
             && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-                StatusModule::change_status_request(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, true);
+                StatusModule::change_status_request(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, true);
             }
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);

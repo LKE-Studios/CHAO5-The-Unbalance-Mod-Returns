@@ -1,5 +1,6 @@
 pub mod BuildImports {
     pub use {
+        std::mem,
         smash::app::*,
         smash::phx::Hash40,
         smash::phx::Vector2f,
@@ -70,12 +71,14 @@ pub mod BuildImports {
         crate::common::FIGHTER_BOOL_2,
         crate::common::FIGHTER_BOOL_3,
         crate::common::{get_player_number},
+        crate::common::METAKNIGHT_DISABLE_SPECIAL_N,
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},
         std::f32::consts::PI,
         singletons::*,
         smash::app::lua_bind::FighterCutInManager,
         smash::app::lua_bind::BattleObjectWorld,
+        smash::app::lua_bind::Item,
         smash2,
         smash2::app::BattleObjectModuleAccessor,
     };

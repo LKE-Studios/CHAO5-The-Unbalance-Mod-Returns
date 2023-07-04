@@ -8,7 +8,8 @@ mod guard;
 mod perfect_pivot;
 mod attackdash;
 mod edge_cancel;
-//mod special_hi;
+mod special_hi;
+mod escape_air;
 
 pub fn install() {
     jump_aerial::install();
@@ -20,5 +21,6 @@ pub fn install() {
     perfect_pivot::install();
     attackdash::install();
     edge_cancel::install();
-    //special_hi::install();
+    special_hi::install();
+    escape_air::install();
 }

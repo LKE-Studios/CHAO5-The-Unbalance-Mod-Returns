@@ -10,7 +10,6 @@ static META_POWER_REACTION_MUL : f32 = 0.5;
 static META_POWER_DAMAGE_TAKEN_MUL : f32 = 0.5;
 static mut GFX_COUNTER : [i32; 8] = [0; 8];
 static mut SFX_COUNTER : [i32; 8] = [0; 8];
-pub static mut FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_METAKNIGHT )]
 fn frame_metaknight(fighter: &mut L2CFighterCommon) {
@@ -24,28 +23,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         let params = GlideParams::get(fighter);
         let lr = PostureModule::lr(fighter.module_accessor);
 
-        if situation_kind == *SITUATION_KIND_GROUND || situation_kind == *SITUATION_KIND_CLIFF || 
-        situation_kind == *SITUATION_KIND_WATER || situation_kind == *SITUATION_KIND_LADDER {
-            FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID] = false;
-        }
-        if [*FIGHTER_STATUS_KIND_DAMAGE, 
-            *FIGHTER_STATUS_KIND_DAMAGE_AIR, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_SONG, 
-            *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, 
-            *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
-            *FIGHTER_STATUS_KIND_ICE
-            ].contains(&status_kind) {
-            FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_N[ENTRY_ID] = false;
-        }
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
         //Inner Meta Mechanic
         if META_POWER[ENTRY_ID] == true {

@@ -10,6 +10,20 @@ pub fn frame_lucas(fighter: &mut L2CFighterCommon) {
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
+            && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+                StatusModule::change_status_request(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, true);
+            }
+            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+                if ControlModule::get_command_flag_cat(fighter.module_accessor, 1) & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP != 0
+                    && ControlModule::get_stick_y(fighter.module_accessor) < -0.66
+                    && KineticModule::get_sum_speed_y(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) <= 0.0 {
+                    WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
+            }
+        }
         if LUCAS_WESS_DANCE[ENTRY_ID] == true {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("wess_dance"), 0.0, 1.0, false, 0.0, false, false);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));

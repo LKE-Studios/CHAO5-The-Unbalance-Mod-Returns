@@ -233,6 +233,9 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
     if kind == *FIGHTER_KIND_PALUTENA {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
     }
+    println!("x{}, y{}", angled.x, angled.y);
+    println!("{}", angle);
+    println!("{}", power);
     0.into()
 }
 

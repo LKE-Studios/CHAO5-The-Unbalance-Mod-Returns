@@ -1,3 +1,6 @@
+use crate::imports::BuildImports::*;
+
+//COMMON
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_ASDI_START: i32 = 495;
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_AUTO_COUNTER: i32 = 496;
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_B_CHECK: i32 = 497; //Tracks if a fighter used a certain special move in the air
@@ -21,3 +24,20 @@ pub const FIGHTER_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX: i32 = 514;
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_USED_FS: i32 = 515; //Flags when you just used a Final Smash in Special Smash
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_WAVEDASH_DONE: i32 = 516;
 pub const FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_XLU_FRAME: i32 = 517;
+
+//DIDDY
+pub const FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_SPECIAL_LW_LAUGH_TRIGGER: i32 = 0x200000E4;
+pub const FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_BANANA_ID: i32 = 0x200000E5;
+
+//METAKNIGHT
+pub const FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N: i32 = 0x200000E6;
+
+pub unsafe fn metaknight_special_n_disable (fighter: &mut L2CFighterCommon) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N) {
+            METAKNIGHT_DISABLE_SPECIAL_N[ENTRY_ID] = true;
+        }
+    }
+}

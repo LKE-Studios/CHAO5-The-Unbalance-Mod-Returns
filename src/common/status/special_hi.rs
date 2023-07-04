@@ -8,7 +8,6 @@ pub unsafe fn super_jump_punch_main(fighter: &mut L2CFighterCommon) {
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return;
     }
-    let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     let frame = fighter.global_table[CURRENT_FRAME].get_f32();
     let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
     //Permits Mario to be able to Wall Jump during Up Special
@@ -17,13 +16,13 @@ pub unsafe fn super_jump_punch_main(fighter: &mut L2CFighterCommon) {
             if (19.0..37.0).contains(&frame) {
                 if !SPECIAL_WALL_JUMP {
                     if GroundModule::is_wall_touch_line(fighter.module_accessor, *GROUND_TOUCH_FLAG_RIGHT_SIDE as u32) {
-                        if module_accessor.is_cat_flag(Cat1::TurnDash) {
+                        if fighter.global_table[CMD_CAT1].get_i32() & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH != 0 {
                             SPECIAL_WALL_JUMP = true;
                             fighter.change_status(FIGHTER_STATUS_KIND_WALL_JUMP.into(), true.into());
                         }
                     }
                     if GroundModule::is_wall_touch_line(fighter.module_accessor, *GROUND_TOUCH_FLAG_LEFT_SIDE as u32) {
-                        if module_accessor.is_cat_flag(Cat1::TurnDash) {
+                        if fighter.global_table[CMD_CAT1].get_i32() & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH != 0 {
                             SPECIAL_WALL_JUMP = true;
                             fighter.change_status(FIGHTER_STATUS_KIND_WALL_JUMP.into(), true.into());
                         }

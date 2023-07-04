@@ -4,7 +4,6 @@ mod sound;
 mod expression;
 mod frame;
 mod status;
-mod agent_init;
 
 pub fn install() {
     game::install();
@@ -13,5 +12,4 @@ pub fn install() {
     expression::install();
     frame::install();
     status::install();
-    agent_init::install();
 }
