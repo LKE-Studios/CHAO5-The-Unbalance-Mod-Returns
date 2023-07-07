@@ -11,7 +11,7 @@ unsafe fn effect_lucas_attack11(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
-            EFFECT_FLIP(fighter, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), -4.0, 4.5, 0, 0, 0, 0, 0.8, 0, 1, 0, 0, 0, 0, false, *EF_FLIP_YZ);
+            EFFECT_FLIP(fighter, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), -4.0, 5.1, 0, 0, 0, 0, 0.7, 0, 1, 0, 0, 0, 0, false, *EF_FLIP_YZ);
             LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
         }
         frame(fighter.lua_state_agent, 2.0);
@@ -46,7 +46,7 @@ unsafe fn effect_lucas_attack12(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-            EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 5.3, 4.5, -10.0, -20.0, 185.0, 0.73, true, *EF_FLIP_YZ);
+            EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 5.3, 0.0, -10.0, -20.0, 185.0, 0.7, true, *EF_FLIP_YZ);
             LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
         }
         frame(fighter.lua_state_agent, 7.0);
@@ -67,6 +67,29 @@ unsafe fn effect_lucas_attack12(fighter: &mut L2CAgentBase) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
             EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 5.3, 4.5, 10, -20, 185, 0.75, true, *EF_FLIP_YZ);
             LAST_EFFECT_SET_RATE(fighter, 2.0);
+        }
+    }
+}
+
+#[acmd_script(//Attack13
+    agent = "lucas", 
+    script = "effect_attack13", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_lucas_attack13(fighter: &mut L2CAgentBase) {
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        frame(fighter.lua_state_agent, 5.0);
+        if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 0.0, 5.8, 7.0, -28.0, -45.0, 30.0, 0.9, true, *EF_FLIP_YZ);
+            LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
+        }
+    } else {//Lucas
+        frame(fighter.lua_state_agent, 5.0);
+        if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 0.0, 5.8, 7.0, -28.0, -45.0, 30.0, 0.9, true, *EF_FLIP_YZ);
         }
     }
 }
@@ -461,6 +484,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         effect_lucas_attack11,
         effect_lucas_attack12,
+        effect_lucas_attack13,
         effect_lucas_attackhi3,
         effect_lucas_attacklw3,
         effect_lucas_attacklw4,

@@ -235,7 +235,6 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     println!("x{}, y{}", angled.x, angled.y);
     println!("{}", angle);
-    println!("{}", power);
     0.into()
 }
 

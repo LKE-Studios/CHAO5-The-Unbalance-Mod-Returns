@@ -6,10 +6,9 @@ static mut BANANA_EXIST : [bool; 8] = [false; 8];
 pub fn frame_diddy(fighter : &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let prev_status_kind = fighter.global_table[PREV_STATUS_KIND].get_i32();
         let frame = MotionModule::frame(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        //let item_id = ItemModule::get_have_item_id(fighter.module_accessor, 0) as i32;
-        //let item_module_accessor = sv_battle_object::module_accessor(item_id as u32);
 
         if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_N_SHOOT {
             if frame > 5.0 {
@@ -18,7 +17,6 @@ pub fn frame_diddy(fighter : &mut L2CFighterCommon) {
                 }
             }
         }
-        let prev_status_kind = fighter.global_table[PREV_STATUS_KIND].get_i32();
         let opponent_boma_1 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(1));
         let opponent_status_kind_1 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_1);
         let opponent_boma_2 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(2));

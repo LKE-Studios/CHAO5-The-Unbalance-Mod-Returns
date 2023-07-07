@@ -24,6 +24,8 @@ pub const FIGHTER_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX: i32 = 514;
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_USED_FS: i32 = 515; //Flags when you just used a Final Smash in Special Smash
 pub const FIGHTER_INSTANCE_WORK_ID_FLAG_WAVEDASH_DONE: i32 = 516;
 pub const FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_XLU_FRAME: i32 = 517;
+pub const FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL: i32 = 0x100000B;
+pub const FIGHTER_STATUS_GLIDE_WORK_FLAG_STOP_SE: i32 = 0x11000007;
 
 //DIDDY
 pub const FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_SPECIAL_LW_LAUGH_TRIGGER: i32 = 0x200000E4;
@@ -32,12 +34,6 @@ pub const FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_BANANA_ID: i32 = 0x200000E5;
 //METAKNIGHT
 pub const FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N: i32 = 0x200000E6;
 
-pub unsafe fn metaknight_special_n_disable (fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
-        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N) {
-            METAKNIGHT_DISABLE_SPECIAL_N[ENTRY_ID] = true;
-        }
-    }
-}
+//PLIZARDON
+pub const FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2: i32 = 0x1DB;
+pub const FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING: i32 = 0x1D3;

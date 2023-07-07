@@ -24,7 +24,7 @@ unsafe fn sound_plizardon_glidestart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h01_win02"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_glide_start"));
         PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_glide_loop"));        
     }
 }
@@ -76,6 +76,41 @@ unsafe fn sound_plizardon_glideend(fighter: &mut L2CAgentBase) {
     }
 }   
 
+#[acmd_script(//SpecialAirHi2Start
+    agent = "plizardon", 
+    script = "sound_specialairhi2start", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_plizardon_specialairhi2start(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h02_01"));
+    }
+}
+
+#[acmd_script(//SpecialAirHi2
+    agent = "plizardon", 
+    script = "sound_specialairhi2", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_plizardon_specialairhi2(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_plizardon_special_h02_02"));
+    }
+}
+
+#[acmd_script(//SpecialAirHi2Landing
+    agent = "plizardon", 
+    script = "sound_specialairhi2landing", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_plizardon_specialairhi2landing(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_plizardon_special_h02_02"));
+        PLAY_SE(fighter, Hash40::new("se_plizardon_special_h02_03"));
+    }
+}
+
 #[acmd_script(//Win2
     agent = "plizardon", 
     script = "sound_win2", 
@@ -85,7 +120,7 @@ unsafe fn sound_plizardon_win2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_jump02"));
-        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_special_h01"));
+        PLAY_SE_NO_3D(fighter, Hash40::new("se_plizardon_special_h01_win02"));
     }
     frame(fighter.lua_state_agent, 49.0);
     if is_excute(fighter) {
@@ -108,6 +143,9 @@ pub fn install() {
         sound_plizardon_glideattack,
         sound_plizardon_glideend,
         sound_plizardon_glidelanding,
+        sound_plizardon_specialairhi2start,
+        sound_plizardon_specialairhi2,
+        sound_plizardon_specialairhi2landing,
         sound_plizardon_win2
     );
 }

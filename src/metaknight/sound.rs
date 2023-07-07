@@ -163,6 +163,11 @@ unsafe fn sound_metaknight_specialhi(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
         }
+        frame(fighter.lua_state_agent, 29.0);
+        if is_excute(fighter) {
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
+        }
     } else {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
@@ -177,6 +182,11 @@ unsafe fn sound_metaknight_specialhi(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 16.0);
         if is_excute(fighter) {
             PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
+        }
+        frame(fighter.lua_state_agent, 29.0);
+        if is_excute(fighter) {
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
         }
     }
 }    
@@ -199,6 +209,11 @@ unsafe fn sound_metaknight_specialhiloop(fighter: &mut L2CAgentBase) {
             PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
             PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
         }
+        frame(fighter.lua_state_agent, 29.0);
+        if is_excute(fighter) {
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
+        }
     } else {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
@@ -214,8 +229,44 @@ unsafe fn sound_metaknight_specialhiloop(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
         }
+        frame(fighter.lua_state_agent, 29.0);
+        if is_excute(fighter) {
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
+        }
     }
 }   
+
+#[acmd_script(//SpecialLwStart
+    agent = "metaknight", 
+    script = "sound_speciallwstart", 
+    category = ACMD_SOUND, low_priority )]
+unsafe fn sound_metaknight_speciallwstart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("vc_metaknight_special_l01"));
+    }
+    wait(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_l01"));
+    }
+}
+
+#[acmd_script(//SpecialAirLwStart
+    agent = "metaknight", 
+    script = "sound_specialairlwstart", 
+    category = ACMD_SOUND, low_priority )]
+unsafe fn sound_metaknight_specialairlwstart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_metaknight_special_l01"));
+        STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
+    }
+    wait(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
+    }
+}
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -228,6 +279,8 @@ pub fn install() {
         sound_metaknight_specialairnstart,
         sound_metaknight_specialsstart,
         sound_metaknight_specialhi,
-        sound_metaknight_specialhiloop
+        sound_metaknight_specialhiloop,
+        sound_metaknight_speciallwstart,
+        sound_metaknight_specialairlwstart
     );
 }

@@ -10,9 +10,6 @@ static mut FLOAT_MAX : i32 = 900; //Frames this bitch can float (In frames, 300 
 static mut X_MAX : f32 = 2.2; //Max Horizontal movespeed
 static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 2.15; //Max Vertical movespeed
-static mut COUNTER: [i32; 8] = [0; 8];
-static mut CURRENTFRAME: [f32; 8] = [0.0; 8];
-static mut IS_CRIT: [bool; 8] = [false; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_DEMON )]
 pub fn frame_demon(fighter : &mut L2CFighterCommon) {
@@ -114,7 +111,8 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
                 FLOAT[ENTRY_ID] = 1;
             };
         };
-        if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_CATCH || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_FALL || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_GROUND {
+        if [*FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE, *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_CATCH, 
+        *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_FALL, *FIGHTER_DEMON_STATUS_KIND_ATTACK_RAGE_GROUND].contains(&status_kind) {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
             AttackModule::set_power_up(fighter.module_accessor, 3.0);
             AttackModule::set_reaction_mul(fighter.module_accessor, 1.25);
@@ -124,37 +122,9 @@ pub fn frame_demon(fighter : &mut L2CFighterCommon) {
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
             AttackModule::set_reaction_mul(fighter.module_accessor, 1.0);
         };
-        if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F || status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L {
+        if [*FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S, *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F, 
+        *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L].contains(&status_kind) {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                COUNTER[ENTRY_ID] += 1;
-                IS_CRIT[ENTRY_ID] = true;
-                if COUNTER[ENTRY_ID] < 2 {
-                    EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
-                    CURRENTFRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
-                    SlowModule::set_whole(fighter.module_accessor, 2, 0);
-                    PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
-                    QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
-                    CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * lr);
-                }
-            }
-            if MotionModule::frame(fighter.module_accessor) >= (CURRENTFRAME[ENTRY_ID] + 1.0) && IS_CRIT[ENTRY_ID] {
-                COUNTER[ENTRY_ID] = 0;
-                SlowModule::clear_whole(fighter.module_accessor);
-                CameraModule::reset_all(fighter.module_accessor);
-                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-                if StatusModule::status_kind(fighter.module_accessor) != 510 {
-                    CAM_ZOOM_OUT(fighter);
-                }
-            }
-            if IS_CRIT[ENTRY_ID] && MotionModule::frame(fighter.module_accessor) < 2.0 {
-                CAM_ZOOM_OUT(fighter);
-                IS_CRIT[ENTRY_ID] = false;
-                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
-                HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-                SlowModule::clear_whole(fighter.module_accessor);
-            };
         }
         else {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);

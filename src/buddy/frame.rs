@@ -7,28 +7,20 @@ fn frame_buddy(fighter: &mut L2CFighterCommon) {
         let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
         let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
         let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
-        
+        //SFX Controllers
         if [
-            *FIGHTER_STATUS_KIND_LANDING,
-            *FIGHTER_STATUS_KIND_LANDING_LIGHT,
-            *FIGHTER_STATUS_KIND_ATTACK_AIR,
-            *FIGHTER_STATUS_KIND_ESCAPE_AIR,
-            *FIGHTER_STATUS_KIND_DEAD,
-            *FIGHTER_STATUS_KIND_MISS_FOOT,
-            *FIGHTER_STATUS_KIND_DAMAGE,
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY,
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL,
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR,
-            *FIGHTER_STATUS_KIND_CLIFF_CATCH,
-            *FIGHTER_STATUS_KIND_GLIDE_LANDING,
-            *FIGHTER_STATUS_KIND_GLIDE_ATTACK,
-            *FIGHTER_STATUS_KIND_GLIDE_END
+            *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_GLIDE_LANDING,
+            *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_DEAD,
+            *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_FLY,
+            *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_CLIFF_CATCH,
+            *FIGHTER_STATUS_KIND_GLIDE_ATTACK, *FIGHTER_STATUS_KIND_GLIDE_END
         ].contains(&status_kind)  { 
-            macros::STOP_SE(fighter, Hash40::new("se_buddy_glide_loop"));
+            STOP_SE(fighter, Hash40::new("se_buddy_glide_loop"));
         };
         if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-            if MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) >= 4.0 && MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) < 5.0 {
-                macros::PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
+            if MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) >= 4.0 
+            && MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING) < 5.0 {
+                PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
             }
         }
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("attack_air_lw") {

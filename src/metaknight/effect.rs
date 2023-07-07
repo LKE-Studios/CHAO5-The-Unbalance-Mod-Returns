@@ -233,24 +233,34 @@ unsafe fn effect_metaknight_attacklw4(fighter: &mut L2CAgentBase) {
 unsafe fn effect_metaknight_attackairn(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), -5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90.0, 1.25, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 0.9, /*B*/ 0.04);
     }
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
-        AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_item_killsword1"), Hash40::new("tex_item_killsword2"), 12, Hash40::new("haver"), 0.0, 2.5, 0.0, Hash40::new("haver"), 0.0, 15.5, 0.0, true, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.3, 0.1);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 1.68, /*G*/ 1.2, /*B*/ 0.0);
     }
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 0.8, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 1.1, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.15, /*G*/ 0.2, /*B*/ 2.0);
     }
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 0.82, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 1.0, true);
     }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 0.85, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 1.0, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 0.9, /*B*/ 0.04);
+    }
+    frame(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 0.9, true);
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 0, 0, 0, -90, 0.9, true);
     }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
@@ -287,7 +297,7 @@ unsafe fn effect_metaknight_attackairf(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn effect_metaknight_attackairb(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.38, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         LAST_EFFECT_SET_RATE(fighter, 1.5)
     }
@@ -467,6 +477,24 @@ unsafe fn effect_metaknight_specialhiloop(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+    }
+}
+
+#[acmd_script(//SpecialLwStart
+    agent = "metaknight", 
+    script = "effect_speciallwstart", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_metaknight_speciallwstart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_whirlwind_r"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, true);
+        LAST_EFFECT_SET_RATE(fighter, 2.0);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_start"), Hash40::new("top"), 0, 6, 0, 0, -90, 0, 1, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.5);
     }
 }
 
@@ -729,6 +757,7 @@ pub fn install() {
         effect_metaknight_specialairnstart,
         effect_metaknight_specialhi,
         effect_metaknight_specialhiloop,
+        effect_metaknight_speciallwstart,
         effect_metaknight_speciallw,
         effect_metaknight_speciallwb,
         effect_metaknight_speciallwf,

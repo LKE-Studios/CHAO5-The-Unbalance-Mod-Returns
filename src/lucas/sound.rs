@@ -251,45 +251,6 @@ unsafe fn sound_lucas_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script(//SpecialS, SpecialAirS
-    agent = "lucas", 
-    scripts = ["sound_specials", "sound_specialairs"],
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn lucas_sidebsfx(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
-    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
-        CLAUS_PK_BEAM[ENTRY_ID] = true;
-        frame(fighter.lua_state_agent, 12.0);
-        if is_excute(fighter) {
-            if CLAUS_PK_BEAM[ENTRY_ID] {
-                PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_002"));
-                PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
-                SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_lucas_special_s03"), 0.7);
-                PLAY_SE_REMAIN(fighter, Hash40::new("se_item_revengeshooter_shot"));
-            }
-        }
-        frame(fighter.lua_state_agent, 20.0);
-        if is_excute(fighter) { 
-            CLAUS_PK_BEAM[ENTRY_ID] = false;
-        }
-        else if CLAUS_PK_BEAM[ENTRY_ID] == false {
-            frame(fighter.lua_state_agent, 5.0);
-            if is_excute(fighter) {
-                PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_004"));
-                PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
-            }
-        }
-    } else { //Lucas
-        frame(fighter.lua_state_agent, 5.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("vc_lucas_004"));
-            PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
-        }
-    }
-}*/
-
 #[acmd_script(//SpecialLwStart
     agent = "lucas", 
     script = "sound_speciallwstart", 
@@ -353,6 +314,10 @@ unsafe fn sound_lucas_wessdance(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SEQUENCE(fighter, Hash40::new("seq_lucas_rnd_attack"));
+    }
+    frame(fighter.lua_state_agent, 1370.0);
+    if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_audience_cheer_l"));
     }
 }
 

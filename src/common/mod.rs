@@ -21,7 +21,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
                     ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) || 
                     ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || 
                     ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) {
-                    macros::EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 28, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+                    EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 28, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
                 }
             }
         };
@@ -31,6 +31,10 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
                 HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
             }
         };
+        //Flag Checks
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
+            common_attack_critical_flag(fighter);
+        }
         if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
             if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
             [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
@@ -113,6 +117,7 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 pub mod status;
 mod param;
 pub mod consts;
+pub mod function;
 
 pub fn is_glider(kind: i32) -> bool {
     [

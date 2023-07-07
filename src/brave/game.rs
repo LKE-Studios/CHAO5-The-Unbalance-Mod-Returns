@@ -1628,6 +1628,84 @@ unsafe fn game_brave_sleep_sleep(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialLw8
+    agent = "brave", 
+    script = "game_speciallw8", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_brave_speciallw8(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_INVINCIBLE), 0);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_CRASH, false, -1);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 116.0);
+    if is_excute(fighter) {
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 136.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_ENABLE_GRAVITY);
+    }
+}
+
+#[acmd_script(//SpecialLw8_Com
+    agent = "brave", 
+    script = "game_speciallw8_com", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_brave_speciallw8_com(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_INVINCIBLE), 0);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_CRASH, false, -1);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 116.0);
+    if is_excute(fighter) {
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 136.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_ENABLE_GRAVITY);
+    }
+}
+
+#[acmd_script(//SpecialAirLw8
+    agent = "brave", 
+    script = "game_specialairlw8", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_brave_specialairlw8(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_INVINCIBLE), 0);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_CRASH, false, -1);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 116.0);
+    if is_excute(fighter) {
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_FULLBURST_INTERRUPT);
+    }
+    frame(fighter.lua_state_agent, 136.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_BRAVE_STATUS_SPECIAL_LW_START_FLAG_ENABLE_GRAVITY);
+    }
+}
+
 #[acmd_script(//SpecialLw17, SpecialAirLw17 [Flame Slash]
     agent = "brave", 
     scripts = ["game_speciallw17", "game_specialairlw17"],
@@ -1955,6 +2033,9 @@ pub fn install() {
         game_brave_deathball_deathball2,
         game_brave_flash_flashhit1,
         game_brave_flash_flashhit2,
+        game_brave_speciallw8,
+        game_brave_speciallw8_com,
+        game_brave_specialairlw8,
         game_brave_speciallw17,
         game_brave_sleep_sleep,
         game_brave_speciallw18,
