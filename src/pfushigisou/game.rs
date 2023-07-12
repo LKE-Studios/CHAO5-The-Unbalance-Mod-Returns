@@ -1071,6 +1071,68 @@ unsafe fn game_pfushigisou_specialairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//GuardSpecialCharge
+    agent = "pfushigisou", 
+    script = "game_guardspecialcharge", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pfushigisou_guardspecialcharge(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    for _ in 0..12 {
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -3.5, 0);
+        }
+        wait(fighter.lua_state_agent, 10.0);
+    }    
+}
+
+#[acmd_script(//GuardSpecialShoot
+    agent = "pfushigisou", 
+    script = "game_guardspecialshoot", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pfushigisou_guardspecialshoot(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 50, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 9.5, /*Z*/ 7.7, /*X2*/ Some(0.0), /*Y2*/ Some(120.0), /*Z2*/ Some(120.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_OBJECT);
+    }
+    wait(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+#[acmd_script(//EscapeAirSpecialCharge
+    agent = "pfushigisou", 
+    script = "game_escapeairspecialcharge", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pfushigisou_escapeairspecialcharge(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    for _ in 0..12 {
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -3.5, 0);
+        }
+        wait(fighter.lua_state_agent, 10.0);
+    }    
+}
+
+#[acmd_script(//EscapeAirSpecialShoot
+    agent = "pfushigisou", 
+    script = "game_escapeairspecialshoot", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pfushigisou_escapeairspecialshoot(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 50, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 9.5, /*Z*/ 7.7, /*X2*/ Some(0.0), /*Y2*/ Some(120.0), /*Z2*/ Some(120.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_OBJECT);
+    }
+    wait(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
 #[acmd_script(//AppealHiR
     agent = "pfushigisou", 
     script = "game_appealhir", 
@@ -1343,6 +1405,10 @@ pub fn install() {
         game_pfushigisou_leafcutter_move,
         game_pfushigisou_specialhi,
         game_pfushigisou_specialairhi,
+        game_pfushigisou_guardspecialcharge,
+        game_pfushigisou_guardspecialshoot,
+        game_pfushigisou_escapeairspecialcharge,
+        game_pfushigisou_escapeairspecialshoot,
         game_pfushigisou_appealhir,
         game_pfushigisou_appealhil,
         game_pfushigisou_appealsr,

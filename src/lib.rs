@@ -130,7 +130,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
-mod bayonetta;
+/*mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -171,9 +171,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;
+mod master;*/
 mod metaknight;
-mod mewtwo;
+/*mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -183,20 +183,20 @@ mod ness;
 mod packun;
 mod pacman;
 mod palutena;
-mod peach;
+mod peach;*/
 mod pfushigisou;
-mod pichu;
+/*mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;
+mod pikmin;*/
 mod pit;
 mod pitb;
 mod plizardon;
-mod popo;
-mod purin;
+/*mod popo;
+mod purin;*/
 mod ptrainer;
 mod pzenigame;
-mod reflet;
+/*mod reflet;
 mod richter;
 mod ridley;
 mod robot;
@@ -221,7 +221,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;
+mod zelda;*/
 
 pub mod singletons;
 pub mod helper;
@@ -363,7 +363,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    mario::install();
+    /*mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -389,16 +389,16 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();
+    roy::install();*/
     metaknight::install();
     pit::install();
-    wario::install();
-    diddy::install();
+    /*wario::install();
+    diddy::install();*/
     ptrainer::install();
     pzenigame::install();
     pfushigisou::install();
     plizardon::install();
-    dedede::install();
+    /*dedede::install();
     lucas::install();
     lucario::install();
     sonic::install();
@@ -420,9 +420,9 @@ pub fn main() {
     cloud::install();
     bayonetta::install();
     reflet::install();
-    gekkouga::install();
+    gekkouga::install();*/
     pitb::install();
-    pacman::install();
+    /*pacman::install();
     murabito::install();
     rosetta::install();
     wiifit::install();
@@ -454,7 +454,7 @@ pub fn main() {
     buddy::install();
     trail::install();
     tantan::install();
-    koopag::install();
+    koopag::install();*/
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

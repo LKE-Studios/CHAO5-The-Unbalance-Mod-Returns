@@ -285,7 +285,7 @@ unsafe fn metaknight_special_lw_main_loop(fighter: &mut L2CFighterCommon) -> L2C
     let cliff_stop_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_lw"), hash40("cliff_stop_frame"));
     if move_count == cliff_stop_frame
     && fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
     }
     if MotionModule::is_end(fighter.module_accessor)
     && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_START_FLAG_ADVANCE_STATUS) {

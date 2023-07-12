@@ -85,7 +85,6 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
     let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
     let mut angle_speed = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
     let mut stick_angle = ControlModule::get_stick_angle(fighter.module_accessor);
-
     fighter.sub_air_check_fall_common();
     notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     if lr <= 0.0 {
@@ -133,13 +132,11 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
         WorkModule::set_float(fighter.module_accessor, new_angle_speed, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
         angle += new_angle_speed;
     }
-    
     angle = angle.clamp(params.angle_max_down, params.angle_max_up);
     
     let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
     power -= angle * params.speed_change / 90.0;
-    // instead of setting the status flag for touching a wall,
-    // we can just check it directly in this code
+    //Instead of setting the status flag for touching a wall, we can just check it directly in this code
     if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
         power -= 0.0;
     }
@@ -161,7 +158,6 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
         new_gravity = params.gravity_speed;
     }
     WorkModule::set_float(fighter.module_accessor, new_gravity, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
-
     /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want*/
     let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
     angled.y -= new_gravity;

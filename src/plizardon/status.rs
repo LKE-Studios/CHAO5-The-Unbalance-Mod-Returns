@@ -1,13 +1,13 @@
 use crate::imports::BuildImports::*;
 
 static AIR_SPEED_X : f32 = 0.4;
-static DIVE_SPEED_Y : f32 = 4.2;
+static DIVE_SPEED_Y : f32 = 4.4;
 
 //FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn status_pre_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
-    FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, *FIGHTER_STATUS_ATTR_CLEAR_MOTION_ENERGY as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32, 0);
+    FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, *FIGHTER_STATUS_ATTR_CLEAR_MOTION_ENERGY as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI as u32, 0);
     0.into()
 }
 
@@ -22,8 +22,12 @@ pub unsafe fn status_main_plizardon_special_hi2(fighter: &mut L2CFighterCommon) 
 }
 
 unsafe extern "C" fn plizardon_special_hi2_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-    fighter.sub_wait_ground_check_common(false.into());
-    fighter.sub_air_check_fall_common();
+    if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         sv_kinetic_energy!(clear_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
@@ -87,8 +91,12 @@ pub unsafe fn status_main_plizardon_special_hi2_landing(fighter: &mut L2CFighter
 }
 
 unsafe extern "C" fn plizardon_special_hi2_landing_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-    fighter.sub_wait_ground_check_common(false.into());
-    fighter.sub_air_check_fall_common();
+    if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
     GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());

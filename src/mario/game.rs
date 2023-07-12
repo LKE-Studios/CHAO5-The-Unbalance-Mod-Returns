@@ -518,7 +518,7 @@ unsafe fn game_mario_attackairlw(fighter: &mut L2CAgentBase) {
         }
         wait(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
+            AttackModule::clear_all(fighter.module_accessor);
         }
         wait(fighter.lua_state_agent, 1.0);
     }

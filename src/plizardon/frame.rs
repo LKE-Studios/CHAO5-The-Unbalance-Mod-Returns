@@ -22,7 +22,8 @@ fn frame_plizardon(fighter: &mut L2CFighterCommon) {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-            if MotionModule::frame(fighter.module_accessor) > 50.0 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            if MotionModule::frame(fighter.module_accessor) > 50.0 &&
+            ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, false);
             }
         }
