@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 pub static mut PFUSHIGISOU_SOLAR_BEAM_TIMER : [i32; 8] = [0; 8];
-pub static SOLAR_BEAM_MAX_CHARGE : i32 = 420;
+pub static SOLAR_BEAM_MAX_CHARGE : i32 = 240;
 pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 
 //FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_CHARGE
@@ -176,6 +176,7 @@ unsafe extern "C" fn pfushigisou_special_n2_shoot_loop(fighter: &mut L2CFighterC
 pub unsafe fn status_end_pfushigisou_special_n2_shoot(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
+    EFFECT_OFF_KIND(fighter, Hash40::new("finptrainer_solar_beam"), false, false);
     0.into()
 }
 

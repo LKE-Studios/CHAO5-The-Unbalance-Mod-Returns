@@ -33,7 +33,6 @@ unsafe fn sound_ness_entryl(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
-        PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
     }
 }
 
@@ -70,7 +69,6 @@ unsafe fn sound_ness_entryr(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_appeal01"));
-        PLAY_SE(fighter, Hash40::new("vc_ness_heavyget"));
     }
 }
 

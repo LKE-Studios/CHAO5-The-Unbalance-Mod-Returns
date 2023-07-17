@@ -183,20 +183,20 @@ mod ness;
 mod packun;
 mod pacman;
 mod palutena;
-mod peach;*/
+mod peach;
 mod pfushigisou;
-/*mod pichu;
+mod pichu;
 mod pickel;
 mod pikachu;
 mod pikmin;*/
 mod pit;
-mod pitb;
+/*mod pitb;
 mod plizardon;
-/*mod popo;
-mod purin;*/
+mod popo;
+mod purin;
 mod ptrainer;
 mod pzenigame;
-/*mod reflet;
+mod reflet;
 mod richter;
 mod ridley;
 mod robot;
@@ -393,12 +393,12 @@ pub fn main() {
     metaknight::install();
     pit::install();
     /*wario::install();
-    diddy::install();*/
+    diddy::install();
     ptrainer::install();
     pzenigame::install();
     pfushigisou::install();
     plizardon::install();
-    /*dedede::install();
+    dedede::install();
     lucas::install();
     lucario::install();
     sonic::install();
@@ -420,9 +420,9 @@ pub fn main() {
     cloud::install();
     bayonetta::install();
     reflet::install();
-    gekkouga::install();*/
+    gekkouga::install();
     pitb::install();
-    /*pacman::install();
+    pacman::install();
     murabito::install();
     rosetta::install();
     wiifit::install();

@@ -27,6 +27,11 @@ pub fn frame_donkey(fighter: &mut L2CFighterCommon) {
             HOLD_TIME[ENTRY_ID] = 0.0;
             DONKEY_64_DANCE[ENTRY_ID] = false;
         };
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
+            if ItemModule::is_have_item(fighter.module_accessor, 0) && ItemModule::get_have_item_kind(fighter.module_accessor, 0) == *ITEM_KIND_BARREL {
+                fighter.change_status(FIGHTER_STATUS_KIND_ITEM_HEAVY_PICKUP.into(),false.into());
+            }
+        }
         if motion_kind == hash40("appeal_lw_r_2") {
             if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
                 if frame >= 134.0 {
