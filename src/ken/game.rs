@@ -2094,7 +2094,7 @@ unsafe fn game_ken_finalhit(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         WorkModule::set_int(fighter.module_accessor, *FIGHTER_RYU_FINAL_CAMERA_OFFSET_7, *FIGHTER_RYU_STATUS_WORK_ID_FINAL_INT_CAMERA_OFFSET_TYPE);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_FINAL_FLAG_CAMERA_OFFSET);
-        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0.9, 1.7, *smash::lib::lua_const::EffectScreenLayer::CHAR, *EFFECT_SCREEN_PRIO_FINAL as u32);
+        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0.9, 1.7, 1, *EFFECT_SCREEN_PRIO_FINAL as u32);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -2222,7 +2222,7 @@ unsafe fn game_ken_finalhit_com(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         WorkModule::set_int(fighter.module_accessor, *FIGHTER_RYU_FINAL_CAMERA_OFFSET_7, *FIGHTER_RYU_STATUS_WORK_ID_FINAL_INT_CAMERA_OFFSET_TYPE);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_FINAL_FLAG_CAMERA_OFFSET);
-        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0.9, 1.7, *smash::lib::lua_const::EffectScreenLayer::CHAR, *EFFECT_SCREEN_PRIO_FINAL as u32);
+        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0.9, 1.7, 1, *EFFECT_SCREEN_PRIO_FINAL as u32);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {

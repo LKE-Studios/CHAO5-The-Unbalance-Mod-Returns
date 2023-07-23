@@ -25,7 +25,6 @@ fn frame_pitb(fighter: &mut L2CFighterCommon) {
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.0, y:1.0, z:1.0});
             ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.0, y:1.0, z:1.0});
         };
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_STATUS_GLIDE_WORK_FLAG_STOP_SE);
         if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
             if situation_kind == *SITUATION_KIND_AIR {
                 if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {

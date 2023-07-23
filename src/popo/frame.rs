@@ -1,19 +1,17 @@
 use crate::imports::BuildImports::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_POPO )]
-pub fn frame_popo(fighter : &mut L2CFighterCommon) {
+#[weapon_frame( agent = WEAPON_KIND_POPO_BLIZZARD )]
+pub fn frame_popo_blizzard(weapon : &mut L2CFighterBase) {
     unsafe {
-        let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -3.0, 0);
-            }
-        };
-    }
+        let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) {
+            DamageModule::heal(owner_module_accessor, -3.0, 0);
+        }
+    };
 }
 
 pub fn install() {
     smashline::install_agent_frames!(
-        frame_popo
+        frame_popo_blizzard
     );
 }

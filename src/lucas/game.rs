@@ -1386,7 +1386,6 @@ unsafe fn game_lucas_specialairs(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn game_lucas_pkfire_pillar(fighter: &mut L2CAgentBase) {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-
     if WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
     WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
         if is_excute(fighter) {

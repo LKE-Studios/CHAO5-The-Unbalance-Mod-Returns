@@ -1649,7 +1649,6 @@ unsafe fn game_master_speciallw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 96.0);
     if is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -75.0, 0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MASTER_STATUS_SPECIAL_LW_FLAG_CONTROL_ENERGY);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MASTER_STATUS_SPECIAL_LW_FLAG_REVERT_FALL_SPEED);
     }

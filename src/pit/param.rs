@@ -16,7 +16,7 @@ pub struct SpecialHiFlyParams {
 impl SpecialHiFlyParams {
     pub fn get() -> SpecialHiFlyParams {
         SpecialHiFlyParams {
-            pass_add : 1.0,
+            pass_add : 1.5,
             motion_rate_min : 0.35,
             motion_rate_max : 2.6, 
             gravity_speed : 0.3,

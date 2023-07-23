@@ -130,7 +130,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
-/*mod bayonetta;
+mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -171,9 +171,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*mod mewtwo;
+mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -188,9 +188,9 @@ mod pfushigisou;
 mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;*/
+mod pikmin;
 mod pit;
-/*mod pitb;
+mod pitb;
 mod plizardon;
 mod popo;
 mod purin;
@@ -221,7 +221,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;*/
+mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -363,7 +363,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    /*mario::install();
+    mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -389,10 +389,10 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
     pit::install();
-    /*wario::install();
+    wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
@@ -454,7 +454,7 @@ pub fn main() {
     buddy::install();
     trail::install();
     tantan::install();
-    koopag::install();*/
+    koopag::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,
