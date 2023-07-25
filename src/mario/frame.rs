@@ -8,7 +8,7 @@ fn frame_mario(fighter: &mut L2CFighterCommon) {
     unsafe {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         if MARIO_GIANT_FIREBALL[ENTRY_ID] == true {
             MotionModule::set_rate(fighter.module_accessor, 0.41);
             if MotionModule::frame(fighter.module_accessor) > 14.0 {

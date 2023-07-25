@@ -1543,6 +1543,13 @@ unsafe fn game_buddy_speciallw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BUDDY_STATUS_SPECIAL_LW_FLAG_GENERATE);
     }
+    frame(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        if !ItemModule::is_have_item(fighter.module_accessor, 0) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_BUDDY_GENERATE_ARTICLE_BUDDYBOMB, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+            ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BUDDYBOMB), 0, 0, false, false);
+        }
+    }
     frame(fighter.lua_state_agent, 45.0);
     if is_excute(fighter) {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW);

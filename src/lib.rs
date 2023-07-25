@@ -1,6 +1,7 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
 #![allow(unused_macros,
+    warnings,
     unused_must_use,
     unused_unsafe,
     non_upper_case_globals,

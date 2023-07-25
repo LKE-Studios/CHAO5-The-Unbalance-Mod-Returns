@@ -9,11 +9,10 @@ pub fn frame_lucas(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
             && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-                StatusModule::change_status_request(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, true);
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, true);
             }
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);

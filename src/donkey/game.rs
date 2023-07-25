@@ -1392,6 +1392,13 @@ unsafe fn game_donkey_appeallwr2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 270, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 16.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(10.0), /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 6, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_NONE);
     }
+    frame(fighter.lua_state_agent, 33.0);
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -3.0, 0);
+        }
+        wait(fighter.lua_state_agent, 10.0);
+    }
 }
 
 #[acmd_script(//AppealLwL2
@@ -1402,6 +1409,13 @@ unsafe fn game_donkey_appeallwr2(fighter: &mut L2CAgentBase) {
 unsafe fn game_donkey_appeallwl2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 270, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 16.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -10.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(10.0), /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 6, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_NONE);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -3.0, 0);
+        }
+        wait(fighter.lua_state_agent, 10.0);
     }
 }
 
