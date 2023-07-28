@@ -3,8 +3,6 @@ use crate::imports::BuildImports::*;
 pub static mut FIGHTER_BOOL_1: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_2: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_3: [bool; 9] = [false; 9];
-pub static mut METAKNIGHT_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
-pub static mut LUCARIO_ENABLE_SPECIAL_HI : [bool; 8] = [false; 8];
 
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
@@ -35,64 +33,7 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
             common_attack_critical_flag(fighter);
         }
-        if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
-            if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
-            [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
-            *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
-            *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) {
-                METAKNIGHT_DISABLE_SPECIAL_N[ENTRY_ID] = false;
-            }
-        }
     }
-}
-
-pub unsafe extern "C" fn metaknight_used_special_n(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    (!METAKNIGHT_DISABLE_SPECIAL_N[ENTRY_ID]).into()
-}
-
-#[fighter_reset]
-fn metaknight_agent_reset(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-        if fighter_kind != *FIGHTER_KIND_METAKNIGHT {
-            return;
-        }
-        fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_used_special_n as *const () as _));
-        // 0x38 is for SPECIAL N
-        // 0x39 is for SPECIAL S
-        // 0x3A is for SPECIAL HI
-        // 0x3B is for SPECIAL LW
-    }
-}
-
-#[smashline::fighter_init]
-fn lucario_init(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-        if fighter_kind == *FIGHTER_KIND_LUCARIO {
-            fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(special_hi_callback as *const () as _));  
-            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(change_status_callback as *const () as _));   
-        }
-    }
-}
-
-unsafe extern "C" fn special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI) {
-        false.into()
-    }
-    else {
-        true.into()
-    }
-}
-
-unsafe extern "C" fn change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI);
-    }
-    true.into()
 }
 
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
@@ -207,15 +148,8 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 }
 
 pub fn install() {
-    install_agent_resets!(
-        metaknight_agent_reset,
-    );
-    smashline::install_agent_init_callbacks!(
-        lucario_init
-    );
     smashline::install_agent_frame_callbacks!(
         global_fighter_frame,
-        // global_weapon_frame
     );
     skyline::install_hook!(
         is_valid_just_shield_reflector
@@ -223,4 +157,5 @@ pub fn install() {
     skyline::nro::add_hook(nro_hook);
     status::install();
     param::install();
+    function::install();
 }

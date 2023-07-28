@@ -11,7 +11,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         let frame = MotionModule::frame(fighter.module_accessor);
         let params = GlideParams::get(fighter);
         let lr = PostureModule::lr(fighter.module_accessor);
-
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
         //Inner Meta Mechanic
         FighterSpecializer_MetaKnight::meta_power(fighter);

@@ -41,14 +41,66 @@ pub unsafe fn common_attack_critical_flag (fighter: &mut L2CFighterCommon) {
     };
 } 
 
-pub unsafe fn metaknight_special_n_disable (fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
-        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N) {
-            METAKNIGHT_DISABLE_SPECIAL_N[ENTRY_ID] = true;
+#[smashline::fighter_init]
+fn metaknight_init(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+        if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
+            fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_special_n_callback as *const () as _));
+            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(metaknight_change_status_callback as *const () as _)); 
         }
     }
+}
+
+unsafe extern "C" fn metaknight_special_n_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
+    [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
+    *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
+    *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
+    *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
+    *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N);
+    }
+    true.into()
+}
+
+
+#[smashline::fighter_init]
+fn lucario_init(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+        if fighter_kind == *FIGHTER_KIND_LUCARIO {
+            fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
+            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
+        }
+    }
+}
+
+unsafe extern "C" fn lucario_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn lucario_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI);
+    }
+    true.into()
 }
 
 //Custom Fighter Functions
@@ -58,10 +110,12 @@ pub static META_POWER_DAMAGE : f32 = 100.0;
 pub static META_POWER_ATTACK_MUL : f32 = 1.25;
 pub static META_POWER_REACTION_MUL : f32 = 0.5;
 pub static META_POWER_DAMAGE_TAKEN_MUL : f32 = 0.5;
+pub static mut GODDESS_POWER_UP : [bool; 8] = [false; 8];
+pub static POWER_MUL : f32 = 1.1;
 
 pub mod FighterSpecializer_MetaKnight {
     use crate::imports::BuildImports::*;
-    pub unsafe fn meta_power (fighter: &mut L2CFighterCommon)  {
+    pub unsafe fn meta_power (fighter: &mut L2CFighterCommon) {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         if META_POWER[ENTRY_ID] == true {
@@ -123,4 +177,42 @@ pub mod FighterSpecializer_MetaKnight {
             STOP_SE(fighter, Hash40::new("vc_metaknight_final03"));
         }
     }
+}
+
+pub mod FighterSpecializer_Palutena {
+    use crate::imports::BuildImports::*;
+    pub unsafe fn goddess_power_up (fighter: &mut L2CFighterCommon) {
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        if GODDESS_POWER_UP[ENTRY_ID] == true {
+            GFX_COUNTER[ENTRY_ID] += 1;
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.7);
+            AttackModule::set_power_up(fighter.module_accessor, POWER_MUL);
+            if GFX_COUNTER[ENTRY_ID] >= 20 {
+                EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
+                LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 2.55, /*B*/ 0.48);
+                GFX_COUNTER[ENTRY_ID] = 0;
+            };
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+            GODDESS_POWER_UP[ENTRY_ID] = true;
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || 
+        sv_information::is_ready_go() == false {
+            GODDESS_POWER_UP[ENTRY_ID] = false;
+            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+            EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+        };
+    }
+}
+
+pub fn install() {
+    smashline::install_agent_init_callbacks!(
+        metaknight_init,
+        lucario_init
+    );
 }
