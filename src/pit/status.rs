@@ -99,15 +99,18 @@ unsafe extern "C" fn pit_special_hi_fly_loop(fighter: &mut L2CFighterCommon) -> 
 
 #[status_script(agent = "pit", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
 unsafe extern "C" fn status_exec_pit_special_hi_fly(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let params = SpecialHiFlyParams::get();
-    /*KineticModule::get_kinetic_type(fighter.module_accessor, *);
-    if ControlModule::get_flick_x(fighter.module_accessor) == {
+    /*let params = SpecialHiFlyParams::get();
+    if KineticModule::get_kinetic_type(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+        if ControlModule::get_flick_x(fighter.module_accessor) == 0 {
 
-    }
-    if ControlModule::get_flick_y(fighter.module_accessor) == {
+        }
+        else {
+            0.0
+        }
+        if ControlModule::get_flick_y(fighter.module_accessor) == {
 
-    }
-    */
+        }
+        */
     0.into()
 }
 

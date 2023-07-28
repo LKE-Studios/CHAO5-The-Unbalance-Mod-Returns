@@ -4,15 +4,6 @@ use crate::imports::BuildImports::*;
 fn frame_lucario(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-
-        if status_kind == FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT | *COLLISION_KIND_MASK_SHIELD) {
-                fighter.change_status(FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH_END.into(), true.into())
-            }
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
-            }
-        }
         if status_kind == FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH_END {
             fighter.sub_air_check_fall_common();
             if MotionModule::frame(fighter.module_accessor) < 1.0 {

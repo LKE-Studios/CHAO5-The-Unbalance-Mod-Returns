@@ -97,11 +97,25 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
     else {
         stick_angle = stick_angle * 180.0 / PI;
     }
-
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let stick_magnitude = (stick_x * stick_x + stick_y * stick_y).sqrt(); //Square Root of Stick X^2 + Stick Y^2
-
+    if stick_magnitude <= params.radial_stick {
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
+            if angle_speed < 0.0 {
+                angle_speed = 0.0;
+            }
+            let mut added_angle_speed = angle_speed + params.add_angle_speed;
+            if added_angle_speed < -params.max_angle_speed {
+                added_angle_speed = -params.max_angle_speed;
+            }
+            if added_angle_speed > params.max_angle_speed {
+                added_angle_speed = params.max_angle_speed;
+            }
+            WorkModule::set_float(fighter.module_accessor, added_angle_speed, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
+            angle += added_angle_speed;
+        }
+    }
     if stick_magnitude > params.radial_stick {
         let angle_accel = if stick_angle < 0.0 {
             if stick_angle >= -135.0 {
@@ -119,13 +133,11 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
                 -params.down_angle_accel
             }
         };
-
         let scaled_angle_accel = angle_accel * (stick_magnitude - params.radial_stick) / (1.0 - params.radial_stick);
 
         if angle_speed * scaled_angle_accel < 0.0 {
             angle_speed = 0.0;
         }
-        
         let mut new_angle_speed = angle_speed + scaled_angle_accel;
 
         new_angle_speed = new_angle_speed.clamp(-params.max_angle_speed, params.max_angle_speed);
@@ -134,103 +146,121 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     angle = angle.clamp(params.angle_max_down, params.angle_max_up);
     
-    let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
-    power -= angle * params.speed_change / 90.0;
-    //Instead of setting the status flag for touching a wall, we can just check it directly in this code
-    if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
-        power -= 0.0;
-    }
-    if power < 0.0 {
-        power = 0.0
-    }
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_RAPID_FALL) {
-        if angle < params.angle_more_speed {
-            power += params.down_speed_add * (params.angle_more_speed - angle) / (params.angle_more_speed - params.angle_max_down);
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
+        let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
+        power -= angle * params.speed_change / 90.0;
+        //Instead of setting the status flag for touching a wall, we can just check it directly in this code
+        if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
+            power -= 0.0;
+        }
+        if power < 0.0 {
+            power = 0.0
+        }
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_RAPID_FALL) {
+            if angle < params.angle_more_speed {
+                power += params.down_speed_add * (params.angle_more_speed - angle) / (params.angle_more_speed - params.angle_max_down);
+            }
+        }
+        else if angle > 0.0 {
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_RAPID_FALL);
+        }
+        let gravity = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
+        let mut new_gravity = gravity + params.gravity_accel;
+        if new_gravity > params.gravity_speed {
+            new_gravity = params.gravity_speed;
+        }
+        WorkModule::set_float(fighter.module_accessor, new_gravity, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
+        /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want*/
+        let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
+        angled.y -= new_gravity;
+
+        let speed = (angled.x * angled.x + angled.y * angled.y).sqrt(); //Square Root of angled X value + angled Y angle
+        let ratio = params.max_speed / speed;
+
+        if speed > params.max_speed {
+            angled.x *= ratio;
+            angled.y *= ratio;
+        }
+        if speed < params.end_speed || power <= 0.0 {
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP);
+            WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
+        }
+        sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
+        sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
+        WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
+        println!("x{}, y{}", angled.x, angled.y);
+        println!("{}", angle);
+        //Fighter Specific
+        let kind = fighter.global_table[0x2].get_i32();
+        if kind == *FIGHTER_KIND_METAKNIGHT {
+            let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
+            let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
+            let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
+            KineticEnergy::clear_speed(energy);
+            KineticEnergy::clear_speed(anti_wind);
+            KineticEnergy::clear_speed(no_jostle);
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * -0.0035);
+        }
+        if kind == *FIGHTER_KIND_PIT {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * -0.0047);
+        }
+        if kind == *FIGHTER_KIND_PITB {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * -0.0043);
+        }
+        if kind == *FIGHTER_KIND_PLIZARDON {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * -0.006);
+            SoundModule::set_se_vol(fighter.module_accessor, 0, 2.0 * (power * 0.5), 0);
+        }
+        if kind == *FIGHTER_KIND_RIDLEY {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_glide_loop"), 0.8 + angle * -0.005);
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_jump02"), 1.0 + angle * 0.003);
+            if angle >= params.angle_max_down && angle < 0.0 {
+                MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.005);
+            }
+            if angle <= params.angle_max_up && angle > 0.0 {
+                MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.01);
+            }
+        }
+        if kind == *FIGHTER_KIND_BUDDY {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_buddy_glide_loop"), 1.0 + angle * -0.005);
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_buddy_wing"), 1.0 + angle * 0.0048);
+            if angle >= params.angle_max_down && angle < 0.0 {
+                MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.01);
+            }
+            if angle <= params.angle_max_up && angle > 0.0 {
+                MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.018);
+            }
+        }
+        if kind == *FIGHTER_KIND_TRAIL {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_trail_glide_loop"), 1.1 + angle * -0.0071);
+        }
+        if kind == *FIGHTER_KIND_PALUTENA {
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
         }
     }
-    else if angle > 0.0 {
-        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_RAPID_FALL);
+    else {
+        fighter.clear_lua_stack();
+        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
+        let brake = sv_kinetic_energy::get_brake_x(fighter.pop_lua_stack(0).into());
+        fighter.clear_lua_stack();
+        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
+        let limit = sv_kinetic_energy::get_limit_speed_x(fighter.pop_lua_stack(0).into());
+        let mut brake_speed = Vector2f {x: brake * lr, y: brake};
+        let mut limit_speed = Vector2f {x: limit * lr, y: limit};
+        sv_kinetic_energy!(set_brake, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, brake_speed.x, brake_speed.y);
+        sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, limit_speed.x, limit_speed.y);
+        if params.angle_max_up < params.angle_extra {
+            if params.end_speed < 0.0 {
+                WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
+                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP);
+            }
+        }
     }
-
-    let gravity = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
-    let mut new_gravity = gravity + params.gravity_accel;
-    if new_gravity > params.gravity_speed {
-        new_gravity = params.gravity_speed;
-    }
-    WorkModule::set_float(fighter.module_accessor, new_gravity, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GRAVITY);
-    /*Made a new function for this, it doesn't seem like the vec2_rot function in Ultimate does what we want*/
-    let mut angled = Vector2f {x: power * angle.to_radians().cos() * lr, y: power * angle.to_radians().sin()};
-    angled.y -= new_gravity;
-
-    let speed = (angled.x * angled.x + angled.y * angled.y).sqrt(); //Square Root of angled X value + angled Y angle
-    let ratio = params.max_speed / speed;
-
-    if speed > params.max_speed {
-        angled.x *= ratio;
-        angled.y *= ratio;
-    }
-    if speed < params.end_speed || power <= 0.0 {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP);
-        WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
-    }
-    sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
-    sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
-    WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
     MotionModule::set_frame(fighter.module_accessor, 90.0 - angle, false);
     WorkModule::set_float(fighter.module_accessor, angle, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
         fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
     }
-    //Fighter Specific
-    let kind = fighter.global_table[0x2].get_i32();
-    if kind == *FIGHTER_KIND_METAKNIGHT {
-        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
-        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-        let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
-
-        KineticEnergy::clear_speed(energy);
-        KineticEnergy::clear_speed(anti_wind);
-        KineticEnergy::clear_speed(no_jostle);
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * -0.0035);
-    }
-    if kind == *FIGHTER_KIND_PIT {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * -0.0047);
-    }
-    if kind == *FIGHTER_KIND_PITB {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * -0.0043);
-    }
-    if kind == *FIGHTER_KIND_PLIZARDON {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * -0.006);
-        SoundModule::set_se_vol(fighter.module_accessor, 0, 2.0 * (power * 0.5), 0);
-    }
-    if kind == *FIGHTER_KIND_RIDLEY {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_glide_loop"), 0.8 + angle * -0.005);
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_jump02"), 1.0 + angle * 0.003);
-        if angle >= params.angle_max_down && angle < 0.0 {
-            MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.005);
-        }
-        if angle <= params.angle_max_up && angle > 0.0 {
-            MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.01);
-        }
-    }
-    if kind == *FIGHTER_KIND_BUDDY {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_buddy_glide_loop"), 1.0 + angle * -0.005);
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_buddy_wing"), 1.0 + angle * 0.0048);
-        if angle >= params.angle_max_down && angle < 0.0 {
-            MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.01);
-        }
-        if angle <= params.angle_max_up && angle > 0.0 {
-            MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * 0.018);
-        }
-    }
-    if kind == *FIGHTER_KIND_TRAIL {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_trail_glide_loop"), 1.1 + angle * -0.0071);
-    }
-    if kind == *FIGHTER_KIND_PALUTENA {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
-    }
-    println!("x{}, y{}", angled.x, angled.y);
-    println!("{}", angle);
     0.into()
 }
 

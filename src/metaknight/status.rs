@@ -181,7 +181,6 @@ unsafe fn status_metaknight_special_hi_main(fighter: &mut L2CFighterCommon) -> L
     let ret = original!(fighter);
     let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
     let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-
     KineticEnergy::clear_speed(energy);
     KineticEnergy::clear_speed(anti_wind);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
@@ -194,7 +193,6 @@ unsafe fn status_metaknight_special_hi_loop_main(fighter: &mut L2CFighterCommon)
     let ret = original!(fighter);
     let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
     let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-    
     KineticEnergy::clear_speed(energy);
     KineticEnergy::clear_speed(anti_wind);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);

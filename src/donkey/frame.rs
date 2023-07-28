@@ -31,22 +31,44 @@ pub fn frame_donkey(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_ITEM_HEAVY_PICKUP.into(),false.into());
             }
         }
-        if motion_kind == hash40("appeal_lw_r_2") {
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
-                if frame >= 134.0 {
-                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 33.0, 1.0, false, 0.0, false, false);
-                }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && motion_kind == hash40("special_hi") {
+            if frame <= 10.0 && ControlModule::get_stick_y(fighter.module_accessor) <= -0.5 {
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi_2"), -1.0, 1.0, 0.0, false, false);
             }
         }
-        if motion_kind == hash40("appeal_lw_l_2") {
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
-                if frame >= 134.0 {
-                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_l_2"), 33.0, 1.0, false, 0.0, false, false);
-                }
+        special_hi_2_move(fighter);
+        appeal_lw_2_loop(fighter);
+    }
+}     
+
+unsafe fn special_hi_2_move(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let lr = PostureModule::lr(fighter.module_accessor);
+    let x_acl_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("x_acl_ground"));
+    if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_hi_2") {
+        if ControlModule::get_stick_x(fighter.module_accessor) * lr < 0.0 {
+            KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -x_acl_ground, y: 0.0, z: 0.0});
+        }
+    }
+}
+
+unsafe fn appeal_lw_2_loop(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw_r_2") {
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+            if frame >= 134.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 33.0, 1.0, false, 0.0, false, false);
             }
         }
     }
-}        
+    if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_lw_l_2") {
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+            if frame >= 134.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_l_2"), 33.0, 1.0, false, 0.0, false, false);
+            }
+        }
+    }
+}
 
 pub fn install() {
     smashline::install_agent_frames!(

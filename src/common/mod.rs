@@ -4,6 +4,7 @@ pub static mut FIGHTER_BOOL_1: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_2: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_3: [bool; 9] = [false; 9];
 pub static mut METAKNIGHT_DISABLE_SPECIAL_N : [bool; 8] = [false; 8];
+pub static mut LUCARIO_ENABLE_SPECIAL_HI : [bool; 8] = [false; 8];
 
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
@@ -13,7 +14,6 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
         let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
         if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_ON].contains(&status_kind) {
             if GroundModule::is_passable_ground(fighter.module_accessor) == false {
@@ -54,7 +54,7 @@ pub unsafe extern "C" fn metaknight_used_special_n(fighter: &mut L2CFighterCommo
 }
 
 #[fighter_reset]
-fn agent_reset(fighter: &mut L2CFighterCommon) {
+fn metaknight_agent_reset(fighter: &mut L2CFighterCommon) {
     unsafe {
         let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
         if fighter_kind != *FIGHTER_KIND_METAKNIGHT {
@@ -68,6 +68,33 @@ fn agent_reset(fighter: &mut L2CFighterCommon) {
     }
 }
 
+#[smashline::fighter_init]
+fn lucario_init(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+        if fighter_kind == *FIGHTER_KIND_LUCARIO {
+            fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(special_hi_callback as *const () as _));  
+            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(change_status_callback as *const () as _));   
+        }
+    }
+}
+
+unsafe extern "C" fn special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_ENABLE_SPECIAL_HI);
+    }
+    true.into()
+}
+
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
 unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
     return true;
@@ -76,7 +103,6 @@ unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::Batt
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_Landing_MainSub)]
 pub unsafe fn status_landing_main_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-
     if StatusModule::prev_status_kind(module_accessor, 0) == *FIGHTER_STATUS_KIND_ESCAPE_AIR || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
         ControlModule::clear_command_one(module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE);
         ControlModule::clear_command_one(module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_F);
@@ -182,7 +208,10 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 
 pub fn install() {
     install_agent_resets!(
-        agent_reset
+        metaknight_agent_reset,
+    );
+    smashline::install_agent_init_callbacks!(
+        lucario_init
     );
     smashline::install_agent_frame_callbacks!(
         global_fighter_frame,

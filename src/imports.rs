@@ -6,6 +6,7 @@ pub mod BuildImports {
         smash::app::{*, 
             lua_bind::{*, 
                 KineticEnergy, 
+                KineticEnergyNormal,
                 FighterCutInManager,
                 BattleObjectWorld,
                 AttackData,
@@ -80,6 +81,7 @@ pub mod BuildImports {
             FIGHTER_BOOL_2,
             FIGHTER_BOOL_3,
             METAKNIGHT_DISABLE_SPECIAL_N,
+            LUCARIO_ENABLE_SPECIAL_HI,
             get_player_number,
             status::glide_param::GlideParams,
             status::glide::KineticUtility
