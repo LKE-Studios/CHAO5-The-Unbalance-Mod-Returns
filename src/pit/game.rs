@@ -1065,6 +1065,22 @@ unsafe fn game_pit_specialairsend(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.83);
 }
 
+#[acmd_script(//SpecialHiStart
+    agent = "pit", 
+    script = "game_specialhistart", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pit_specialhistart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        GroundModule::set_passable_check(fighter.module_accessor, true);
+    }
+}
+
 #[acmd_script(//SpecialHi
     agent = "pit", 
     script = "game_specialhi", 
@@ -1301,6 +1317,7 @@ pub fn install() {
         game_pit_specialsend,
         game_pit_specialairsstart,
         game_pit_specialairsend,
+        game_pit_specialhistart,
         game_pit_specialhi,
         game_pit_speciallwhold,
         game_pit_specialairlwhold,

@@ -23,7 +23,6 @@ pub unsafe fn status_init_GlideStart(fighter: &mut L2CFighterCommon) -> L2CValue
     let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
     let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
     let lr = PostureModule::lr(fighter.module_accessor);
-
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
     KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -params.gravity_start}, &Vector3f{x: 0.0, y: -params.gravity_start, z: 0.0}, fighter.module_accessor);
     KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: params.speed_mul_start * lr, y: 0.0}, &Vector3f{x: params.speed_mul_start * lr, y: 0.0, z: 0.0}, fighter.module_accessor);

@@ -1,7 +1,13 @@
 use crate::imports::BuildImports::*;
 
 pub struct SpecialHiFlyParams {
-    pub pass_add : f32, //Grounded Height multiplier
+    pub pass_mul : f32, //Grounded Height multiplier
+    pub lr_stick_x : f32, //H speed multiplier on startup
+    pub dir_stick_x : f32,
+    pub dir_mul : f32, //Ability to angle (degrees)
+    pub accel_y : f32,
+    pub start_x_mul : f32,
+    pub fall_x : f32,
     pub motion_rate_min : f32, //Motion rate when stick y is not held
     pub motion_rate_max : f32, //Motion rate multiplier stick y is held
     pub gravity_speed : f32, //Gravity speed
@@ -16,7 +22,13 @@ pub struct SpecialHiFlyParams {
 impl SpecialHiFlyParams {
     pub fn get() -> SpecialHiFlyParams {
         SpecialHiFlyParams {
-            pass_add : 1.5,
+            pass_mul : 1.5,
+            lr_stick_x : 0.25,
+            dir_stick_x : 0.625,
+            dir_mul : 30.0,
+            accel_y : 0.5,
+            start_x_mul : 0.6,
+            fall_x : 1.0,
             motion_rate_min : 0.35,
             motion_rate_max : 2.6, 
             gravity_speed : 0.3,
