@@ -126,14 +126,14 @@ unsafe extern "C" fn pit_KineticTransactor_exec(fighter: &mut L2CFighterCommon) 
     let mut speed_x = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_SPEED_X);
     let mut speed_y = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_SPEED_Y);
     if stick_x > 0.1 || stick_x < -0.1 {
-        speed_x += 0.5 * stick_x;
+        speed_x += 0.2 * stick_x;
         if speed_x > params.speed_x_max {
             speed_x = params.speed_x_max;
         }  
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: speed_x * params.air_accel_x, y: 0.0, z: 0.0});
     }
     if stick_y > 0.1 || stick_y < -0.1 {
-        speed_y += 0.5 * stick_y;
+        speed_y += 0.2 * stick_y;
         if speed_y > params.speed_y_max {
             speed_y = params.speed_y_max;
         }

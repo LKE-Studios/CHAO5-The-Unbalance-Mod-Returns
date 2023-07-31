@@ -5,9 +5,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
-        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-        let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         let frame = MotionModule::frame(fighter.module_accessor);
         let params = GlideParams::get(fighter);
         let lr = PostureModule::lr(fighter.module_accessor);
@@ -30,36 +27,25 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         //Specials
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN {
             fighter.sub_air_check_fall_common();
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            KineticEnergy::clear_speed(no_jostle);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE);
             WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            if frame > 29.0 {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-                if situation_kind == *SITUATION_KIND_GROUND {
-                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-                }
-            }
+            special_n_end_function(fighter);
         };
         if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_AIR_HI_START].contains(&status_kind) {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            KineticEnergy::clear_speed(no_jostle);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
             }
         };
         if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&status_kind) {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
             fighter.sub_air_check_fall_common();
             if frame > 22.0 {
                 WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
@@ -83,35 +69,46 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             }
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            fighter.sub_air_check_fall_common();
-            fighter.sub_wait_ground_check_common(false.into());
-            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-            if frame > 8.0 {
-                HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-            }
-            if frame > 60.0 {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-                if situation_kind == *SITUATION_KIND_GROUND {
-                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-                }
-            }
+            special_lw_attack_function(fighter);
         }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END {
-            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-            if frame > 8.0 {
-                HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-            }
-            if frame > 32.0 {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-                if situation_kind == *SITUATION_KIND_GROUND {
-                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-                }
-            }
+            special_lw_end_function(fighter);
         };
     }
-}        
+}
+
+unsafe fn special_n_end_function(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+        if motion_kind == hash40("special_air_n_end") && frame >= 52.0 {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
+    }
+}
+
+unsafe fn special_lw_attack_function(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+        if frame > 60.0 {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
+    }
+}
+
+unsafe fn special_lw_end_function(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+        if motion_kind == hash40("special_air_lw_end") && frame >= 34.0 {      
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
+    }
+}
 
 pub fn install() {
     smashline::install_agent_frames!(

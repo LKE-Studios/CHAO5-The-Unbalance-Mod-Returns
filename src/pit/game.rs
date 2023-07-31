@@ -1073,6 +1073,7 @@ unsafe fn game_pit_specialairsend(fighter: &mut L2CAgentBase) {
 unsafe fn game_pit_specialhistart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, false);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
     }
     frame(fighter.lua_state_agent, 14.0);

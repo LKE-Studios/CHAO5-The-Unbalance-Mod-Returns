@@ -63,6 +63,12 @@ unsafe extern "C" fn pfushigisou_special_n2_loop(fighter: &mut L2CFighterCommon)
             PLAY_SE(fighter, Hash40::new("se_pfushigisou_appeal_l03"));
             PLAY_SE(fighter, Hash40::new("se_pfushigisou_special_n01"));
         }
+        if GFX_COUNTER[ENTRY_ID] >= 4 {
+            GFX_COUNTER[ENTRY_ID] += 1;
+            EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 6.5, 4.0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+            LAST_EFFECT_SET_COLOR(fighter, /*R*/ 3.0, /*G*/ 1.5, /*B*/ 0.0);
+            GFX_COUNTER[ENTRY_ID] = 0;
+        }
     }
     if SFX_COUNTER[ENTRY_ID] >= 100 {
         SFX_COUNTER[ENTRY_ID] = 2;

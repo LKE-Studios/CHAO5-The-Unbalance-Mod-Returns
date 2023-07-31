@@ -4,9 +4,6 @@ use crate::imports::BuildImports::*;
 fn frame_buddy(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        let energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
-        let anti_wind = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND) as *mut smash::app::KineticEnergy;
-        let no_jostle = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE) as *mut smash::app::KineticEnergy;
         //SFX Controllers
         if [
             *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_GLIDE_LANDING,
@@ -47,14 +44,12 @@ fn frame_buddy(fighter: &mut L2CFighterCommon) {
             MotionModule::set_rate(fighter.module_accessor, 5.0);
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            KineticEnergy::clear_speed(no_jostle);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         };
         if status_kind == *FIGHTER_BUDDY_STATUS_KIND_SPECIAL_S_DASH {
-            KineticEnergy::clear_speed(energy);
-            KineticEnergy::clear_speed(anti_wind);
-            KineticEnergy::clear_speed(no_jostle);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE);
             fighter.sub_air_check_fall_common();
             fighter.sub_wait_ground_check_common(false.into());
             WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_SPECIAL_S_REMAIN);
