@@ -7,7 +7,7 @@ pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 //FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_CHARGE
 #[status_script(agent = "pfushigisou", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn status_pre_pfushigisou_special_n2(fighter: &mut L2CFighterCommon) -> L2CValue {
-    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_NONE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FALL, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
     0.into()
 }
@@ -15,6 +15,7 @@ pub unsafe fn status_pre_pfushigisou_special_n2(fighter: &mut L2CFighterCommon) 
 #[status_script(agent = "pfushigisou", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn status_main_pfushigisou_special_n2(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+        fighter.set_situation(SITUATION_KIND_AIR.into());
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("escape_air_special_start"), 0.0, 1.0, false, 0.0, false, false);
@@ -37,9 +38,13 @@ unsafe extern "C" fn pfushigisou_special_n2_loop(fighter: &mut L2CFighterCommon)
     }
     notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-        WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
-        if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_DOWN as u32) {
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_start"), -1.0, 1.0, 0.0, false, false);
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+        //WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("escape_air_special_start"), -1.0, 1.0, 0.0, false, false);
         }
         if MotionModule::is_end(fighter.module_accessor) {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("escape_air_special_charge"), 0.0, 1.0, false, 0.0, false, false);
@@ -47,10 +52,18 @@ unsafe extern "C" fn pfushigisou_special_n2_loop(fighter: &mut L2CFighterCommon)
     }
     else {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_start"), -1.0, 1.0, 0.0, false, false);
+            sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, ENERGY_MOTION_RESET_TYPE_GROUND_TRANS, 0.0, 0.0, 0.0, 0.0, 0.0);
+            KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+        }
         if MotionModule::is_end(fighter.module_accessor) {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("guard_special_charge"), 0.0, 1.0, false, 0.0, false, false);
         }
-    } 
+    }     
     PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] += 1;
     if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] >= SOLAR_BEAM_MAX_CHARGE {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
@@ -58,16 +71,11 @@ unsafe extern "C" fn pfushigisou_special_n2_loop(fighter: &mut L2CFighterCommon)
         }
     }
     if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] == SOLAR_BEAM_MAX_CHARGE {
+        gimmick_flash(fighter);
         SFX_COUNTER[ENTRY_ID] += 1;
         if SFX_COUNTER[ENTRY_ID] < 2 {
             PLAY_SE(fighter, Hash40::new("se_pfushigisou_appeal_l03"));
             PLAY_SE(fighter, Hash40::new("se_pfushigisou_special_n01"));
-        }
-        if GFX_COUNTER[ENTRY_ID] >= 4 {
-            GFX_COUNTER[ENTRY_ID] += 1;
-            EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 6.5, 4.0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
-            LAST_EFFECT_SET_COLOR(fighter, /*R*/ 3.0, /*G*/ 1.5, /*B*/ 0.0);
-            GFX_COUNTER[ENTRY_ID] = 0;
         }
     }
     if SFX_COUNTER[ENTRY_ID] >= 100 {
@@ -83,8 +91,10 @@ unsafe extern "C" fn status_exec_fushigisou_special_n2(fighter: &mut L2CFighterC
     let lr = PostureModule::lr(fighter.module_accessor);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("escape_air_special_charge") {
+            fighter.set_situation(SITUATION_KIND_AIR.into());
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+            //WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
             if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                 if frame >= 120.0 {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("escape_air_special_charge"), 0.0, 1.0, false, 0.0, false, false);
@@ -93,10 +103,17 @@ unsafe extern "C" fn status_exec_fushigisou_special_n2(fighter: &mut L2CFighterC
             if ControlModule::check_button_release(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                 fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_END.into(), false.into());
             }
+            if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+                StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
+                GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("escape_air_special_charge"), -1.0, 1.0, 0.0, false, false);
+            }
         }
     }
     else {
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("guard_special_charge") {
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
             if lr * stick_x >= 0.5 {
                 fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_F.into(), false.into());
             }
@@ -112,6 +129,14 @@ unsafe extern "C" fn status_exec_fushigisou_special_n2(fighter: &mut L2CFighterC
             if ControlModule::check_button_release(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) || 
             ControlModule::check_button_release(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
                 fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_END.into(), false.into());
+            }
+            if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+                StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+                GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_charge"), -1.0, 1.0, 0.0, false, false);
+                sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, ENERGY_MOTION_RESET_TYPE_GROUND_TRANS, 0.0, 0.0, 0.0, 0.0, 0.0);
+                KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
             }
         }    
     }
@@ -129,7 +154,7 @@ pub unsafe fn status_end_pfushigisou_special_n2(fighter: &mut L2CFighterCommon) 
 //FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_SHOOT
 #[status_script(agent = "pfushigisou", status = 0x1DA, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn status_pre_pfushigisou_special_n2_shoot(fighter: &mut L2CFighterCommon) -> L2CValue {
-    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_NONE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
     0.into()
 }
@@ -137,6 +162,7 @@ pub unsafe fn status_pre_pfushigisou_special_n2_shoot(fighter: &mut L2CFighterCo
 #[status_script(agent = "pfushigisou", status = 0x1DA, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn status_main_pfushigisou_special_n2_shoot(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+        fighter.set_situation(SITUATION_KIND_AIR.into());
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("escape_air_special_shoot"), 0.0, 1.0, false, 0.0, false, false);
@@ -157,15 +183,18 @@ unsafe extern "C" fn pfushigisou_special_n2_shoot_loop(fighter: &mut L2CFighterC
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
     }
+    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
     notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_KEEP));
-        if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_DOWN as u32) {
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_shoot"), -1.0, 1.0, 0.0, false, false);
-        }
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
             PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
+        }
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("escape_air_special_shoot"), -1.0, 1.0, 0.0, false, false);
         }
     }
     else {
@@ -173,6 +202,12 @@ unsafe extern "C" fn pfushigisou_special_n2_shoot_loop(fighter: &mut L2CFighterC
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
             PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
+        }
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_shoot"), -1.0, 1.0, 0.0, false, false);
         }
     }    
     0.into()
@@ -189,7 +224,7 @@ pub unsafe fn status_end_pfushigisou_special_n2_shoot(fighter: &mut L2CFighterCo
 //FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N2_END
 #[status_script(agent = "pfushigisou", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn status_pre_pfushigisou_special_n2_end(fighter: &mut L2CFighterCommon) -> L2CValue {
-    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_NONE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
     0.into()
 }
@@ -197,6 +232,7 @@ pub unsafe fn status_pre_pfushigisou_special_n2_end(fighter: &mut L2CFighterComm
 #[status_script(agent = "pfushigisou", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn status_main_pfushigisou_special_n2_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+        fighter.set_situation(SITUATION_KIND_AIR.into());
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("escape_air_special_end"), 0.0, 1.0, false, 0.0, false, false);
@@ -215,10 +251,21 @@ unsafe extern "C" fn pfushigisou_special_n2_end_loop(fighter: &mut L2CFighterCom
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("escape_air_special_end"), -1.0, 1.0, 0.0, false, false);
+        }
     } 
     else {
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+        }
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("guard_special_end"), -1.0, 1.0, 0.0, false, false);
         }
     }
     0.into()

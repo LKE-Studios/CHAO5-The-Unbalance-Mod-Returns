@@ -282,7 +282,7 @@ pub fn install() {
         status_metaknight_special_s_end_main,
         status_metaknight_special_hi_main,
         status_metaknight_special_hi_loop_main,
-        status_metaknight_special_lw_main
+        status_metaknight_special_lw_main,
     );
 }
 

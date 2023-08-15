@@ -256,7 +256,7 @@ unsafe fn game_metaknight_attacks3(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
         HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
     }
-    frame(fighter.lua_state_agent, 11.0);
+    frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
@@ -1315,7 +1315,7 @@ unsafe fn game_metaknight_specialsend(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     }
-    wait(fighter.lua_state_agent, 10.0);
+    wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1369,11 +1369,11 @@ unsafe fn game_metaknight_specialairsfinish(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         SET_SPEED_EX(fighter, -1.0, 3.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        AttackModule::clear_all(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-        AttackModule::clear_all(fighter.module_accessor);
     }
 }
 
@@ -1463,6 +1463,7 @@ unsafe fn game_metaknight_specialhiloop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         GroundModule::set_passable_check(fighter.module_accessor, true);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {

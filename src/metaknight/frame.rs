@@ -104,7 +104,7 @@ unsafe fn special_lw_end_function(fighter: &mut L2CFighterCommon) {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-        if motion_kind == hash40("special_air_lw_end") && frame >= 34.0 {      
+        if motion_kind == hash40("special_air_lw_end") && frame >= 33.0 {      
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
         }
     }
