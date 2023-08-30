@@ -74,6 +74,10 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END {
             special_lw_end_function(fighter);
         };
+        /*if status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR && 
+        ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_AIR_DIVE, false);
+        }*/
     }
 }
 

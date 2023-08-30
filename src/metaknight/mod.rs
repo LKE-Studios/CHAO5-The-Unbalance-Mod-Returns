@@ -4,6 +4,7 @@ mod sound;
 mod expression;
 mod frame;
 mod status;
+mod param;
 
 pub fn install() {
     game::install();

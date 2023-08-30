@@ -94,6 +94,63 @@ unsafe fn effect_metaknight_attack100(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Attack100
+    agent = "metaknight", 
+    script = "effect_attack100_brawl", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_metaknight_attack100_brawl(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.0, true);
+        }
+        frame(fighter.lua_state_agent, 1.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 1, 6, -1, 20, 165, 105, 0.6, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 5.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 7, 0, 90, 0, 25, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 8.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 1, 6.5, -1, -165, 20, -80, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 9.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 6, 2, -205, 160, -145, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 12.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 2, 6, 1, 0, -155, 105, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 14.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 0, 7, 0, 90, 0, -45, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 18.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), 2, 4, 4, -165, 20, -95, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+        }
+        frame(fighter.lua_state_agent, 19.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_hi"), Hash40::new("top"), -2, 6, -4, -25, -30, -60, 1.0, true);
+            EffectModule::set_disable_render_offset_last(fighter.module_accessor);
+            EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+        }
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 0);
+        wait_loop_clear(fighter.lua_state_agent);
+    }
+}
+
 #[acmd_script(//Attack100End
     agent = "metaknight", 
     script = "effect_attack100end", 
@@ -742,6 +799,7 @@ pub fn install() {
         effect_metaknight_glideattack,
         effect_metaknight_glidelanding,
         effect_metaknight_attack100,
+        effect_metaknight_attack100_brawl,
         effect_metaknight_attack100end,
         effect_metaknight_attacks3s3,
         effect_metaknight_attacks4,

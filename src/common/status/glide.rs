@@ -130,18 +130,15 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
             }
         };
         let scaled_angle_accel = angle_accel * (stick_magnitude - params.radial_stick) / (1.0 - params.radial_stick);
-
         if angle_speed * scaled_angle_accel < 0.0 {
             angle_speed = 0.0;
         }
         let mut new_angle_speed = angle_speed + scaled_angle_accel;
-
         new_angle_speed = new_angle_speed.clamp(-params.max_angle_speed, params.max_angle_speed);
         WorkModule::set_float(fighter.module_accessor, new_angle_speed, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
         angle += new_angle_speed;
     }
-    angle = angle.clamp(params.angle_max_down, params.angle_max_up);
-    
+    angle = angle.clamp(params.angle_max_down, params.angle_max_up);    
     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
         let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
         power -= angle * params.speed_change / 90.0;

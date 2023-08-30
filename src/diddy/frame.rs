@@ -16,20 +16,25 @@ pub fn frame_diddy(fighter : &mut L2CFighterCommon) {
                 }
             }
         }
+        if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_S_STICK {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -4.0, 0);
+            }
+        }
         let opponent_boma_1 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(1));
-        let opponent_status_kind_1 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_1);
+        let opponent_status_kind_1 = StatusModule::status_kind(opponent_boma_1);
         let opponent_boma_2 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(2));
-        let opponent_status_kind_2 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_2);
+        let opponent_status_kind_2 = StatusModule::status_kind(opponent_boma_2);
         let opponent_boma_3 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(3));
-        let opponent_status_kind_3 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_3);
+        let opponent_status_kind_3 = StatusModule::status_kind(opponent_boma_3);
         let opponent_boma_4 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(4));
-        let opponent_status_kind_4 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_4);
+        let opponent_status_kind_4 = StatusModule::status_kind(opponent_boma_4);
         let opponent_boma_5 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(5));
-        let opponent_status_kind_5 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_5);
+        let opponent_status_kind_5 = StatusModule::status_kind(opponent_boma_5);
         let opponent_boma_6 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(6));
-        let opponent_status_kind_6 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_6);
+        let opponent_status_kind_6 = StatusModule::status_kind(opponent_boma_6);
         let opponent_boma_7 = smash::app::sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(7));
-        let opponent_status_kind_7 = smash::app::lua_bind::StatusModule::status_kind(opponent_boma_7);
+        let opponent_status_kind_7 = StatusModule::status_kind(opponent_boma_7);
         let banana_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_DIDDY_STATUS_SPECIAL_LW_WORK_INT_BANANA_ID);
         if prev_status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW
         && BANANA_EXIST[ENTRY_ID] == false {

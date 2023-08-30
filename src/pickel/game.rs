@@ -1626,6 +1626,20 @@ unsafe fn game_pickel_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialN1
+    agent = "pickel", 
+    script = "game_specialn1", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn game_pickel_specialn1(fighter: &mut L2CAgentBase) {
+    for _ in 0..2 {
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -1.5, 0);
+        }
+        wait(fighter.lua_state_agent, 8.0);
+    }  
+}
+
 #[acmd_script(//SpecialSRide, SpecialSDrive
     agent = "pickel", 
     scripts = ["game_specialsride", "game_specialsdrive"],
@@ -1876,6 +1890,7 @@ pub fn install() {
         game_pickel_slipattack,
         game_pickel_downattacku,
         game_pickel_downattackd,
+        game_pickel_specialn1,
         game_pickel_specialsride,
         game_pickel_specialairsride,
         game_pickel_trolley_specialsdriveemptypartial,
