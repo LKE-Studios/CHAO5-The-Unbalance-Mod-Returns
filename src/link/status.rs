@@ -4,14 +4,14 @@ use crate::imports::BuildImports::*;
 unsafe fn status_link_attach_wall_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let mut start_stamina = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("attach_wall_frame"));
     let cliff_count = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_COUNT);
-    start_stamina -= (cliff_count * 5);
-    WorkModule::set_int(fighter.module_accessor, start_stamina as i32,*FIGHTER_INSTANCE_WORK_ID_INT_NO_ATTACH_WALL_FRAME);
+    start_stamina -= (cliff_count * 0);
+    WorkModule::set_int(fighter.module_accessor, start_stamina as i32 * 3, *FIGHTER_INSTANCE_WORK_ID_INT_NO_ATTACH_WALL_FRAME);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("attach_wall"), 0.0, 1.0, false, 0.0, false, false);
     if !StopModule::is_stop(fighter.module_accessor) {
         attach_wall_substatus(fighter);
     }
     GroundModule::set_cliff_check(fighter.module_accessor, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES));
-    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(attachwall_substatus as *const () as _));
+    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(attach_wall_substatus as *const () as _));
     fighter.sub_shift_status_main(L2CValue::Ptr(attach_wall_main_loop as *const () as _))
 }
 
@@ -42,18 +42,18 @@ unsafe extern "C" fn attach_wall_substatus(fighter: &mut L2CFighterCommon) -> L2
             notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("attach_wall_climb"), 0.0, 1.0, false, 0.0, false, false);
         }
-        let end_frame = MotionModule::end_frame(fighter.module_accessor);
         else if dir < 0.0 && MotionModule::frame(fighter.module_accessor) <= 0.0 {
+            let end_frame = MotionModule::end_frame(fighter.module_accessor);
             MotionModule::set_frame(fighter.module_accessor, end_frame, false);
         }
-        MotionModule::set_rate(fighter.module_accessor, dir*0.2);
+        MotionModule::set_rate(fighter.module_accessor, dir * 0.2);
         //SET_SPEED_EX(fighter, 0.0, dir * 2.0,*KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         PostureModule::add_pos(fighter.module_accessor, &Vector3f{ x: 0.0, y: 0.25 * dir, z: 0.0});
     }
     0.into()
 }
 
-unsafe extern "C" fn attachwall_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn attach_wall_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let lr = PostureModule::lr(fighter.module_accessor);
     let attach_side = if 0.0 <= lr {
         *GROUND_TOUCH_FLAG_LEFT

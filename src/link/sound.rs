@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 #[acmd_script(//AttachWall
     agent = "link", 
-    scripts = "sound_attachwall", 
+    script = "sound_attachwall", 
     category = ACMD_SOUND)]
 unsafe fn sound_link_attachwall(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
