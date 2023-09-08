@@ -47,15 +47,19 @@ unsafe fn sound_buddy_glidestart(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_buddy_glideattack(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 10.0);
+    frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_SEQUENCE(fighter, Hash40::new("seq_buddy_rnd_attack11"));
+        PLAY_SE(fighter, Hash40::new("se_buddy_attackair_b01"));
     }
-    frame(fighter.lua_state_agent, 11.0);
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_buddy_attackair_b02"));
+    }
+    frame(fighter.lua_state_agent, 29.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_buddy_attackair_b03"));
-        PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_l02"));
-        PLAY_SE(fighter, Hash40::new("se_buddy_attackhard_s02"));
+        PLAY_SE(fighter, Hash40::new("se_buddy_attackair_b03"));
     }
 }
 

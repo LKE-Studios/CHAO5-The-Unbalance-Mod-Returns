@@ -36,7 +36,7 @@ unsafe fn effect_buddy_glidestart(fighter: &mut L2CAgentBase) {
     LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.0, /*G*/ 0.045, /*B*/ 0.1);
 }
 
-#[acmd_script(//GlideWingGFX
+#[acmd_script(//GlideWing
     agent = "buddy", 
     script = "effect_glidewing", 
     category = ACMD_EFFECT, 
@@ -53,10 +53,23 @@ unsafe fn effect_buddy_glidewing(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_buddy_glideattack(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 11.0);
+    frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
-        EFFECT_FOLLOW(fighter, Hash40::new("buddy_special_s_wind"), Hash40::new("top"), 2.0, 4.0, 0, 0, 0, 0, 0.8, true);
+        EFFECT_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 14.0, 0.0, -44.0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true, 0.4);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("buddy_attack_line"), Hash40::new("buddy_attack_line"), Hash40::new("top"), 0, 14.4, -5.22, -44.0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+        LAST_EFFECT_SET_RATE(fighter, 2.0);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        EFFECT_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 8.0, 0.0, 45.0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true, 0.4);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("buddy_attack_line"), Hash40::new("buddy_attack_line"), Hash40::new("top"), 0, 11.3, 9.9, 45.0, 0, 0, 1.0, true, *EF_FLIP_YZ);
+        LAST_EFFECT_SET_RATE(fighter, 2.0);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if is_excute(fighter) {
+        EFFECT_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 12.4, 0.0, 25.0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true, 0.4);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("buddy_attack_line"), Hash40::new("buddy_attack_line"), Hash40::new("top"), 0, 14.2, 1.4, 25.0, 0, 0, 1.3, true, *EF_FLIP_YZ);
+        LAST_EFFECT_SET_RATE(fighter, 1.5);
     }
 }  
 
