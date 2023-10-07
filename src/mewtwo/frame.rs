@@ -21,7 +21,6 @@ fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
         let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        
         if StatusModule::situation_kind(fighter.module_accessor) != SITUATION_KIND_AIR
         || !sv_information::is_ready_go()
         || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
@@ -111,8 +110,16 @@ fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
                 FLOAT[ENTRY_ID] = 1;
             };
         };
+        //SILVER
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 128 && 
+        WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 135 {
+
+        }
     }
 }
+
+//SILVER SLOT FUNCTIONS
+
 
 pub fn install() {
     smashline::install_agent_frames!(

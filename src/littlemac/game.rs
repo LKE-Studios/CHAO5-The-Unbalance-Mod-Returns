@@ -1401,10 +1401,6 @@ unsafe fn game_littlemac_specialhi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
-    frame(fighter.lua_state_agent, 30.0);
-    if is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-    }
 }
 
 #[acmd_script(//SpecialLwHit

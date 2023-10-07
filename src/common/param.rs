@@ -3,23 +3,28 @@ use smash::app::*;
 use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
+use crate::silver::frame::SPECIAL_N_ANGLE;
+use crate::silver::frame::SPECIAL_N_GET_ANGLE;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
-//static mut INT_OFFSET : usize = 0x4ded80;
+static mut INT_OFFSET : usize = 0x4ded80;
 
-#[skyline::hook(offset=FLOAT_OFFSET)] //"Custom character" exclusive fighter attributes
+#[skyline::hook(offset=FLOAT_OFFSET)] //"Custom character" exclusive fighter attributes for FLOAT
 pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f32 {
     let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
     let ret = original!()(boma, param_type, param_hash);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let weapon_color = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let boma_reference = &mut *module_accessor;
     let CLAUS = color >= 8 && color <= 15;
-    let KNUCKLES = color >= 8 && color <= 15;
-    let MIDBUS = color >= 8 && color <= 15;
-    
+    let KNUCKLES = color >= 120 && color <= 127;
+    let MIDBUS = color >= 120 && color <= 127;
+    let SILVER = color >= 128 && color <= 135;
+    let WEAPON_CLAUS = weapon_color >= 8 && weapon_color <= 15;
+    let WEAPON_SILVER = weapon_color >= 128 && weapon_color <= 135;
     if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_LUCAS && CLAUS {
             if param_hash == 0 {
@@ -43,17 +48,6 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 }
             }
         }
-    }
-    else if boma_reference.is_weapon() {
-        if fighter_kind == *WEAPON_KIND_LUCAS_PK_FIRE && weapon_color >= 8 && weapon_color <= 15 {
-            if param_type == hash40("param_pkfire") {
-                if param_hash == hash40("speed_ground") {
-                    return 7.5; //Lucas 3.3
-                }
-            }
-        }
-    }
-    if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_KOOPA && MIDBUS {
             if param_hash == 0 {
                 if param_type == hash40("walk_speed_max") {
@@ -142,40 +136,40 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 0.045;
                 }
                 if param_type == hash40("air_accel_x_add") {
-                    return 0.1; //Sonic 0.12
+                    return 0.1; 
                 }
                 if param_type == hash40("air_speed_x_stable") {
-                    return 1.687; //Sonic 1.8164
+                    return 1.687;
                 }
                 if param_type == hash40("dive_speed_y") {
                     return 2.88;
                 }
                 if param_type == hash40("weight") {
-                    return 94.0; //Sonic 0.86
+                    return 94.0;
                 }
                 if param_type == hash40("scale") {
-                    return 0.966; //Sonic 0.84
+                    return 0.966; 
                 }
                 if param_type == hash40("shield_radius") {
                     return 12.8;
                 }
                 if param_type == hash40("landing_attack_air_frame_n") {
-                    return 3.0; //Sonic 1.0
+                    return 2.0; 
                 }
                 if param_type == hash40("landing_attack_air_frame_f") {
-                    return 3.0; //Sonic 1.0
+                    return 4.0;
                 }
                 if param_type == hash40("landing_attack_air_frame_b") {
-                    return 3.0; //Sonic 1.0
+                    return 3.0; 
                 }
                 if param_type == hash40("landing_attack_air_frame_hi") {
-                    return 2.0; //Sonic 1.0
+                    return 2.0;
                 }
                 if param_type == hash40("landing_attack_air_frame_lw") {
-                    return 5.0; //Sonic 3.0
+                    return 5.0;
                 }
                 if param_type == hash40("landing_frame") {
-                    return 3.0; //Sonic 2.0
+                    return 3.0;
                 }
                 if param_type == hash40("landing_heavy_frame") {
                     return 4.0; //Sonic 3.0
@@ -194,12 +188,150 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 return 0.0;
             }
         }
+        if fighter_kind == FIGHTER_KIND_MEWTWO && SILVER {
+            if param_hash == 0 {
+                if param_type == hash40("walk_accel_mul") {
+                    return 0.15;
+                }
+                if param_type == hash40("walk_accel_add") {
+                    return 0.04;
+                }
+                if param_type == hash40("walk_speed_max") {
+                    return 1.52;
+                }
+                if param_type == hash40("ground_brake") {
+                    return 0.084;
+                }
+                if param_type == hash40("dash_speed") {
+                    return 6.91;
+                }
+                if param_type == hash40("run_accel_mul") {
+                    return 0.14;
+                }
+                if param_type == hash40("run_accel_add") {
+                    return 2.25; 
+                }
+                if param_type == hash40("run_speed_max") {
+                    return 6.07; 
+                }
+                if param_type == hash40("air_accel_x_mul") {
+                    return 0.055;
+                }
+                if param_type == hash40("air_accel_x_add") {
+                    return 0.1;
+                }
+                if param_type == hash40("air_speed_x_stable") {
+                    return 1.356;
+                }
+                if param_type == hash40("jump_aerial_y") {
+                    return 38.0;
+                }
+                if param_type == hash40("weight") {
+                    return 82.0;
+                }
+                if param_type == hash40("shield_radius") {
+                    return 12.0;
+                }
+                if param_type == hash40("scale") {
+                    return 0.95; 
+                }
+                if param_type == hash40("jump_speed_x_mul") {
+                    return 0.5;
+                }
+                if param_type == hash40("jump_initial_y") {
+                    return 19.25;
+                }
+                if param_type == hash40("jump_y") {
+                    return 32.0;
+                }
+                if param_type == hash40("landing_attack_air_frame_f") {
+                    return 5.0;
+                }
+                if param_type == hash40("landing_attack_air_frame_n") {
+                    return 2.0;
+                }
+                if param_type == hash40("landing_attack_air_frame_b") {
+                    return 4.0;
+                }
+                if param_type == hash40("landing_attack_air_frame_hi") {
+                    return 3.0; 
+                }
+                if param_type == hash40("landing_attack_air_frame_lw") {
+                    return 7.0;
+                }
+                if param_type == hash40("landing_frame") {
+                    return 3.0; 
+                }
+                if param_type == hash40("mini_jump_y") {
+                    return 12.2;
+                }
+            }
+        }
     }
-ret
+    else if boma_reference.is_weapon() {
+        if fighter_kind == *WEAPON_KIND_LUCAS_PK_FIRE && WEAPON_CLAUS {
+            if param_type == hash40("param_pkfire") {
+                if param_hash == hash40("speed_ground") {
+                    return 7.5; //Lucas 3.3
+                }
+            }
+        }
+        if fighter_kind == *WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
+            if param_type == hash40("param_shadowball") {
+                if param_hash == hash40("angle") {
+                    if SPECIAL_N_ANGLE[ENTRY_ID] == -1.0 && SPECIAL_N_GET_ANGLE[ENTRY_ID] && StatusModule::situation_kind(module_accessor) == *SITUATION_KIND_AIR {
+                        return -30.0;
+                    }
+                    else {
+                        return 0.0;
+                    }
+                }
+                if param_hash == hash40("life") {
+                    return 6000.0;
+                }
+                if param_hash == hash40("flicker_scale_min") {
+                    return 0.0;
+                }
+                if param_hash == hash40("flicker_scale_max") {
+                    return 0.0;
+                }
+            }
+        }
+    }
+    ret
 }
+
+/*#[skyline::hook(offset=INT_OFFSET)] //"Custom character" exclusive fighter attributes for INT
+pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 {
+    let module_accessor = &mut *(*((boma as *mut u64).offset(1)) as *mut BattleObjectModuleAccessor);
+    let ret = original!()(boma, param_type, param_hash);
+    let fighter_kind = smash::app::utility::get_kind(module_accessor);
+    let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let weapon_color = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let boma_reference = &mut *module_accessor;
+    let SILVER = color >= 128 && color <= 135;
+    if boma_reference.is_fighter() {
+        if fighter_kind == FIGHTER_KIND_MEWTWO && SILVER {
+            if param_hash == 0 {
+                if param_type == hash40("landing_heavy_frame") {
+                    return 4; 
+                }
+                if param_type == hash40("attack_combo_max") {
+                    return 1;
+                }
+                if param_type == hash40("jump_count_max") {
+                    return 5;
+                }
+            }
+        }
+    }
+    ret
+}*/
 
 pub fn install() {
     skyline::install_hooks!(
-        get_param_float
+        get_param_float,
+        //get_param_int
     );
 }

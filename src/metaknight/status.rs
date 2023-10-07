@@ -4,6 +4,8 @@ use crate::metaknight::param::SpecialAirDiveParams;
 #[status_script( agent = "metaknight", status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN )]
 unsafe fn status_metaknight_glide_start_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_GLIDE);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     fighter.status_GlideStart()
 }
 
@@ -23,7 +25,7 @@ unsafe fn status_metaknight_special_n_main(fighter: &mut L2CFighterCommon) -> L2
     }
     fighter.set_situation(SITUATION_KIND_AIR.into());
     WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_ATTACK_COUNTER);
-    WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_SPECIAL_N);
+    WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_N);
     ground_kinetic_function(fighter);
     fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_special_n_loop as *const () as _))
 }
@@ -150,8 +152,10 @@ unsafe extern "C" fn metaknight_special_s_end_loop(fighter: &mut L2CFighterCommo
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
     }
-    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-        fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), false.into());
+    if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+            fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), false.into());
+        }
     }
     if situation_kind != *SITUATION_KIND_GROUND {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_S_END_WORK_FLAG_SITUATION_AIR);

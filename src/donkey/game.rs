@@ -1265,7 +1265,6 @@ unsafe fn game_donkey_specialairhi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_XLU);
         HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_XLU);
-        CancelModule::enable_cancel(fighter.module_accessor);
     }
     for _ in 0..24 {
         if is_excute(fighter) {

@@ -2433,7 +2433,7 @@ unsafe fn game_dolly_superspecial(fighter: &mut L2CAgentBase) {
         MotionModule::set_rate(fighter.module_accessor, 0.5);
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 4.0);
     }
-    frame(fighter.lua_state_agent, 4.0);
+    frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
     }

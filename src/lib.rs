@@ -210,6 +210,7 @@ mod samusd;
 mod sheik;
 mod shizue;
 mod shulk;
+mod silver;
 mod simon;
 mod snake;
 mod sonic;
@@ -346,7 +347,7 @@ extern "C" {
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_string = unsafe {from_c_str(string)};
 	if original_string.contains("Ver.") {
-		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.7.0 \0", original_string);
+		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.8.0 \0", original_string);
 		call_original!(arg, skyline::c_str(&version_string));
 	}
 	else {
@@ -456,6 +457,7 @@ pub fn main() {
     trail::install();
     tantan::install();
     koopag::install();
+    silver::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

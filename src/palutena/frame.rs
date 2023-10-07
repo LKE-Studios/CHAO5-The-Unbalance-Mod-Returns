@@ -19,40 +19,6 @@ fn frame_palutena(fighter: &mut L2CFighterCommon) {
         };
         //Protected Goddess Mechanic
         FighterSpecializer_Palutena::goddess_power_up(fighter);
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_START {
-            KineticModule::clear_speed_all(fighter.module_accessor);
-            SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-            if (0.0..1.0).contains(&frame) {  
-                ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_start"), false, -1.0);
-            }
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_ATTACK {
-            if situation_kind == *SITUATION_KIND_GROUND {
-                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-            }
-            if (0.0..1.0).contains(&frame) {   
-                ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_attack"), false, -1.0);
-            }
-            if (0.26..27.0).contains(&frame) {   
-                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-            }
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_END {
-            if situation_kind == *SITUATION_KIND_GROUND {
-                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-            }
-            if (0.0..1.0).contains(&frame) {   
-                ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("glide_end"), false, -1.0);
-            }
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GLIDE_LANDING {
-            if (25.0..26.0).contains(&frame) {   
-                ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-            }
-        }
     }
 }
 

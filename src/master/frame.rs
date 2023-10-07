@@ -22,7 +22,7 @@ pub fn frame_master(fighter : &mut L2CFighterCommon) {
         };
         if status_kind == *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_HIT {
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -300.0, 0);
+                DamageModule::heal(fighter.module_accessor, -35.0, 0);
             }
         };
     }
@@ -35,7 +35,7 @@ pub fn frame_master_axe(weapon : &mut L2CFighterBase) {
         let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
         if status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW || status_kind == *WEAPON_MASTER_AXE_STATUS_KIND_SPECIAL_LW_HIT {
             if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(owner_module_accessor, -150.0, 0);
+                DamageModule::heal(owner_module_accessor, -35.0, 0);
             }
         };
     }

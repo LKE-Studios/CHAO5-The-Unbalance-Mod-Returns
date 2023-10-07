@@ -34,7 +34,7 @@ impl GlideParams {
                 gravity_start : 1.0, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 1.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.8, //#5 Base Power/Speed
-                speed_change : 0.015, //#6 Power Rate
+                speed_change : 0.02, //#6 Power Rate
                 max_speed : 2.3, //#7 Maximum Speed
                 end_speed : 0.7, //#8 End Speed
                 gravity_accel : 0.03, //#9 Gravity Acceleration
@@ -198,8 +198,8 @@ impl GlideParams {
             return GlideParams {
                 angle_max_up : 75.0, //#0 Max Upward Angle
                 angle_max_down : -65.0, //#1 Max Downward Angle
-                v_glide_start : 0.0, //#2 V Speed added on GlideStart
-                gravity_start : 0.0, //#3 Gravity multiplier on GlideStart
+                v_glide_start : 1.4, //#2 V Speed added on GlideStart
+                gravity_start : 0.2, //#3 Gravity multiplier on GlideStart
                 speed_mul_start : 0.0, //#4 H speed multiplier on GlideStart
                 base_speed : 1.7, //#5 Base Power/Speed
                 speed_change : 0.02, //#6 Power Rate

@@ -334,7 +334,7 @@ unsafe fn effect_metaknight_attackairn(fighter: &mut L2CAgentBase) {
 unsafe fn effect_metaknight_attackairf(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("metaknight_air_f"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.38, true);
-        LAST_EFFECT_SET_RATE(fighter, 2.0);
+        LAST_EFFECT_SET_RATE(fighter, 1.4);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 7.0);
