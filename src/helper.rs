@@ -97,3 +97,14 @@ pub unsafe fn DOWN_EFFECT(
     sv_animcmd::DOWN_EFFECT(fighter.lua_state_agent);
     fighter.clear_lua_stack();
 }
+
+pub unsafe fn FT_ATTACK_ABS_CAMERA_QUAKE(
+    fighter: &mut L2CAgentBase,
+    unk1: i32,
+    unk2: i32,
+){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk1, unk2);
+    sv_animcmd::FT_ATTACK_ABS_CAMERA_QUAKE(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}

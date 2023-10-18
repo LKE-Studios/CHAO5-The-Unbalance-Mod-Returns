@@ -23,12 +23,8 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
                 }
             }
         };
-        if status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH {
-            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-            if MotionModule::frame(fighter.module_accessor) > 30.0 {
-                HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
-            }
-        };
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_COUNT);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CLIFF_XLU);
         //Flag Checks
         if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
             common_attack_critical_flag(fighter);

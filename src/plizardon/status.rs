@@ -3,6 +3,8 @@ use crate::imports::BuildImports::*;
 static AIR_SPEED_X : f32 = 0.4;
 static DIVE_SPEED_Y : f32 = 4.4;
 
+static mut PTRAINER_NO_SWAP_DEAD : usize = 0xf96310;
+
 //FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 pub unsafe fn status_pre_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -111,7 +113,14 @@ pub unsafe fn status_end_plizardon_special_hi2_landing(fighter: &mut L2CFighterC
     0.into()
 }
 
+//Removes the death swap from PT
+#[skyline::hook(offset = PTRAINER_NO_SWAP_DEAD)]
+unsafe fn ptrainer_no_swap_dead() {}
+
 pub fn install() {
+    skyline::install_hooks!(
+        ptrainer_no_swap_dead
+    );
     install_status_scripts!(
         status_pre_plizardon_special_hi2,
         status_main_plizardon_special_hi2,

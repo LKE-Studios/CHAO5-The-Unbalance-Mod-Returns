@@ -1,8 +1,8 @@
 use crate::imports::BuildImports::*;
 
 #[acmd_script(//EntryL
-    agent = "claus", 
-    script = "sound_entryl", 
+    agent = "lucas", 
+    script = "sound_entryl_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_entryl(fighter: &mut L2CAgentBase) {
@@ -22,8 +22,8 @@ unsafe fn sound_claus_entryl(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//EntryR
-    agent = "claus", 
-    script = "sound_entryr", 
+    agent = "lucas", 
+    script = "sound_entryr_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_entryr(fighter: &mut L2CAgentBase) {
@@ -43,8 +43,8 @@ unsafe fn sound_claus_entryr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Win1
-    agent = "claus", 
-    script = "sound_win1", 
+    agent = "lucas", 
+    script = "sound_win1_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_win1(fighter: &mut L2CAgentBase) {
@@ -59,8 +59,8 @@ unsafe fn sound_claus_win1(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Win3
-    agent = "claus", 
-    script = "sound_win3", 
+    agent = "lucas", 
+    script = "sound_win3_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_win3(fighter: &mut L2CAgentBase) {
@@ -79,8 +79,8 @@ unsafe fn sound_claus_win3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack11
-    agent = "claus", 
-    script = "sound_attack11", 
+    agent = "lucas", 
+    script = "sound_attack11_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_attack11(fighter: &mut L2CAgentBase) {
@@ -92,8 +92,8 @@ unsafe fn sound_claus_attack11(fighter: &mut L2CAgentBase) {
 } 
 
 #[acmd_script(//Attack12
-    agent = "claus", 
-    script = "sound_attack12", 
+    agent = "lucas", 
+    script = "sound_attack12_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_attack12(fighter: &mut L2CAgentBase) {
@@ -105,8 +105,8 @@ unsafe fn sound_claus_attack12(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack13
-    agent = "claus", 
-    script = "sound_attack13", 
+    agent = "lucas", 
+    script = "sound_attack13_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_attack13(fighter: &mut L2CAgentBase) {
@@ -117,22 +117,9 @@ unsafe fn sound_claus_attack13(fighter: &mut L2CAgentBase) {
     }
 } 
 
-#[acmd_script(//AttackS4Charge
-    agent = "claus", 
-    script = "sound_attacks4charge", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_claus_attacks4charge(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_smash_start_04"));
-        PLAY_SE(fighter, Hash40::new("vc_lucas_attack003"));
-    }
-}
-
 #[acmd_script(//AttackLw4
-    agent = "claus", 
-    script = "sound_attacklw4", 
+    agent = "lucas", 
+    script = "sound_attacklw4_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_attacklw4(fighter: &mut L2CAgentBase) {
@@ -152,8 +139,8 @@ unsafe fn sound_claus_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirLw
-    agent = "claus", 
-    script = "sound_attackairlw", 
+    agent = "lucas", 
+    script = "sound_attackairlw_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_attackairlw(fighter: &mut L2CAgentBase) {
@@ -177,8 +164,8 @@ unsafe fn sound_claus_attackairlw(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialLwStart
-    agent = "claus", 
-    script = "sound_speciallwstart", 
+    agent = "lucas", 
+    script = "sound_speciallwstart_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_speciallwstart(fighter: &mut L2CAgentBase) {
@@ -189,8 +176,8 @@ unsafe fn sound_claus_speciallwstart(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirLwStart
-    agent = "claus", 
-    script = "sound_specialairlwstart", 
+    agent = "lucas", 
+    script = "sound_specialairlwstart_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_specialairlwstart(fighter: &mut L2CAgentBase) {
@@ -201,8 +188,8 @@ unsafe fn sound_claus_specialairlwstart(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealSL
-    agent = "claus", 
-    script = "sound_appealsl", 
+    agent = "lucas", 
+    script = "sound_appealsl_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_appealsl(fighter: &mut L2CAgentBase) {
@@ -216,8 +203,8 @@ unsafe fn sound_claus_appealsl(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealSR
-    agent = "claus", 
-    script = "sound_appealsr", 
+    agent = "lucas", 
+    script = "sound_appealsr_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_appealsr(fighter: &mut L2CAgentBase) {
@@ -231,8 +218,8 @@ unsafe fn sound_claus_appealsr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//WessDance
-    agent = "claus", 
-    script = "sound_wessdance", 
+    agent = "lucas", 
+    script = "sound_wessdance_claus", 
     category = ACMD_SOUND, 
     low_priority )]
 unsafe fn sound_claus_wessdance(fighter: &mut L2CAgentBase) {
@@ -251,7 +238,6 @@ pub fn install() {
         sound_claus_attack11,
         sound_claus_attack12,
         sound_claus_attack13,
-        sound_claus_attacks4charge,
         sound_claus_attacklw4,
         sound_claus_attackairlw,
         sound_claus_speciallwstart,

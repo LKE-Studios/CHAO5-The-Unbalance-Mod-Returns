@@ -1,8 +1,8 @@
 use crate::imports::BuildImports::*;
 
 #[acmd_script(//Attack11
-    agent = "claus", 
-    script = "effect_attack11" , 
+    agent = "lucas", 
+    script = "effect_attack11_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attack11(fighter: &mut L2CAgentBase) {
@@ -23,8 +23,8 @@ unsafe fn effect_claus_attack11(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack12
-    agent = "claus", 
-    script = "effect_attack12" , 
+    agent = "lucas", 
+    script = "effect_attack12_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attack12(fighter: &mut L2CAgentBase) {
@@ -50,9 +50,109 @@ unsafe fn effect_claus_attack12(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//Attack13 
+    agent = "lucas", 
+    script = "effect_attack13_claus", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_claus_attack13(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if is_excute(agent) {
+        FOOT_EFFECT(agent, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 0, 5.8, 7, -28, -45, 30, 0.9, true, *EF_FLIP_YZ);
+    }
+}
+
+#[acmd_script(//AttackS3Hi 
+    agent = "lucas", 
+    script = "effect_attacks3hi_claus", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_claus_attacks3hi(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if is_excute(agent) {
+        EFFECT_FOLLOW(agent, Hash40::new("lucas_psi_hold"), Hash40::new("haver"), -0.2, 0, 0, 0, 0, 0, 0.8, true);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if is_excute(agent) {
+        FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3, 0, 0, 16, 26, 169, 1, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 6.7, 1.8, -25, -45, 45, 0.9, true, *EF_FLIP_YZ);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if is_excute(agent) {
+        EFFECT(agent, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 8.7, 8.5, -20, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_atk"), false, false);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_hold"), false, false);
+    }
+}
+
+#[acmd_script(//AttackS3 
+    agent = "lucas", 
+    script = "effect_attacks3_claus", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_claus_attacks3(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if is_excute(agent) {
+        EFFECT_FOLLOW(agent, Hash40::new("lucas_psi_hold"), Hash40::new("haver"), -0.2, 0, 0, 0, 0, 0, 0.8, true);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if is_excute(agent) {
+        FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 5.3, 2.5, 0, -60, 15, 0.9, true, *EF_FLIP_YZ);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if is_excute(agent) {
+        EFFECT(agent, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 5, 9, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_atk"), false, false);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_hold"), false, false);
+    }
+}
+
+#[acmd_script(//AttackS3Lw 
+    agent = "lucas", 
+    script = "effect_attacks3lw_claus", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_claus_attacks3lw(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if is_excute(agent) {
+        EFFECT_FOLLOW(agent, Hash40::new("lucas_psi_hold"), Hash40::new("haver"), -0.2, 0, 0, 0, 0, 0, 0.8, true);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if is_excute(agent) {
+        FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 2, 4, 1.8, 15, -60, 3, 0.9, true, *EF_FLIP_YZ);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if is_excute(agent) {
+        EFFECT(agent, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 2, 8.5, 20, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_atk"), false, false);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if is_excute(agent) {
+        EFFECT_OFF_KIND(agent, Hash40::new("lucas_psi_hold"), false, false);
+    }
+}
+
 #[acmd_script(//AttackHi3
-    agent = "claus", 
-    script = "effect_attackhi3" , 
+    agent = "lucas", 
+    script = "effect_attackhi3_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attackhi3(fighter: &mut L2CAgentBase) {
@@ -79,8 +179,8 @@ unsafe fn effect_claus_attackhi3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw3
-    agent = "claus", 
-    script = "effect_attacklw3" , 
+    agent = "lucas", 
+    script = "effect_attacklw3_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attacklw3(fighter: &mut L2CAgentBase) {
@@ -100,8 +200,8 @@ unsafe fn effect_claus_attacklw3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw4
-    agent = "claus", 
-    script = "effect_attacklw4", 
+    agent = "lucas", 
+    script = "effect_attacklw4_claus", 
     category = ACMD_EFFECT, 
     low_priority)]
 unsafe fn effect_claus_attacklw4(fighter: &mut L2CAgentBase) {
@@ -126,8 +226,8 @@ unsafe fn effect_claus_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirN
-    agent = "claus", 
-    script = "effect_attackairn" , 
+    agent = "lucas", 
+    script = "effect_attackairn_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attackairn(fighter: &mut L2CAgentBase) {
@@ -156,8 +256,8 @@ unsafe fn effect_claus_attackairn(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirLw
-    agent = "claus", 
-    script = "effect_attackairlw" , 
+    agent = "lucas", 
+    script = "effect_attackairlw_claus" , 
     category = ACMD_EFFECT , 
     low_priority)]
 unsafe fn effect_claus_attackairlw(fighter: &mut L2CAgentBase) {
@@ -190,8 +290,8 @@ unsafe fn effect_claus_attackairlw(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//WessDance
-    agent = "claus", 
-    script = "effect_wessdance", 
+    agent = "lucas", 
+    script = "effect_wessdance_claus", 
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_claus_wessdance(fighter: &mut L2CAgentBase) {
@@ -213,6 +313,10 @@ pub fn install() {
     smashline::install_acmd_scripts!(
         effect_claus_attack11,
         effect_claus_attack12,
+        effect_claus_attack13,
+        effect_claus_attacks3hi,
+        effect_claus_attacks3,
+        effect_claus_attacks3lw,
         effect_claus_attackhi3,
         effect_claus_attacklw3,
         effect_claus_attacklw4,

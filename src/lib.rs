@@ -136,6 +136,7 @@ mod brave;
 mod buddy;
 mod captain;
 mod chrom;
+mod claus;
 mod cloud;
 mod daisy;
 mod dedede;
@@ -355,9 +356,17 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 	}
 }
 
+/*extern "C" { 
+    fn allow_ui_chara_hash_online(ui_chara_hash: u64); 
+}*/
+
 #[skyline::main(name = "chao5")]
 pub fn main() {
-    unsafe{
+    /*unsafe {
+        allow_ui_chara_hash_online(0xfec9738f6);
+        allow_ui_chara_hash_online(0xe7bbfb2e4);
+    }*/
+    unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
         let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
         let text = std::slice::from_raw_parts(text_ptr, text_size);
@@ -456,6 +465,7 @@ pub fn main() {
     buddy::install();
     trail::install();
     tantan::install();
+    claus::install();
     koopag::install();
     silver::install();
     skyline::install_hooks!(

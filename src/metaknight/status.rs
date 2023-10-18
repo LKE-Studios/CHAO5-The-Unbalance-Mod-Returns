@@ -69,32 +69,19 @@ unsafe extern "C" fn metaknight_special_n_loop(fighter: &mut L2CFighterCommon) -
     0.into()
 }
 
-/*#[status_script( agent = "metaknight", status = FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN )]
-unsafe fn status_metaknight_special_n_end_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    WorkModule::set_int64(fighter.module_accessor, hash40("special_n_end") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
-    WorkModule::set_int64(fighter.module_accessor, hash40("special_air_n_end") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
-    WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_WAIT);
-    WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FALL);
-    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_TRANSITION_TERM_ID_MOT_END);
-    WorkModule::set_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_FRAME, 0);
-    let remove_effect_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("remove_effect_frame"));
-    WorkModule::set_int(fighter.module_accessor, remove_effect_frame, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_REMOVE_FRAME);
-    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_FLAG_EFFECT_REMOVE);
-    if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
-    }
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_special_n_end_loop as *const () as _))
+#[status_script( agent = "metaknight", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN )]
+unsafe fn status_metaknight_special_s_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let ret = original!(fighter);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+    PostureModule::set_stick_lr(fighter.module_accessor, 0.0);
+    PostureModule::update_rot_y_lr(fighter.module_accessor);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_S_WORK_FLAG_HIT);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_S_WORK_FLAG_GUARD_OR_INVINCIBLE);
+    WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_S);
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_s_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_air_s_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_AIR_KIND);  
+    ret
 }
-
-unsafe extern "C" fn metaknight_special_n_end_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_FLAG_EFFECT_REMOVE) {
-        let remove_effect_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("remove_effect_frame"));
-        if MotionModule::end_frame(fighter.module_accessor) ;
-    }
-
-    0.into()
-}*/
 
 #[status_script( agent = "metaknight", status = FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN )]
 unsafe fn status_metaknight_special_s_end_main(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -152,10 +139,9 @@ unsafe extern "C" fn metaknight_special_s_end_loop(fighter: &mut L2CFighterCommo
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
     }
-    if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-            fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), false.into());
-        }
+    if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_LW);
     }
     if situation_kind != *SITUATION_KIND_GROUND {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_S_END_WORK_FLAG_SITUATION_AIR);
@@ -194,7 +180,6 @@ unsafe extern "C" fn metaknight_special_s_end_loop(fighter: &mut L2CFighterCommo
 unsafe fn status_metaknight_special_hi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ret = original!(fighter);
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
-    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
     WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_GLIDE);
     ret
@@ -204,10 +189,34 @@ unsafe fn status_metaknight_special_hi_main(fighter: &mut L2CFighterCommon) -> L
 unsafe fn status_metaknight_special_hi_loop_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ret = original!(fighter);
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
-    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
     WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_GLIDE);
     ret
+}
+
+unsafe extern "C" fn metaknight_special_hi_loop_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 0.into();
+    }
+    if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
+    if frame > 22.0 {
+        WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_AIR {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, false);
+            fighter.change_status(FIGHTER_STATUS_KIND_LANDING_LIGHT.into(), false.into());
+        }
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+        WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
+    }
+    0.into()
 }
 
 #[status_script( agent = "metaknight", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN )]
@@ -220,6 +229,7 @@ unsafe fn status_metaknight_special_lw_main(fighter: &mut L2CFighterCommon) -> L
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_FLAG_CONTINUE_MOT);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_START_FLAG_ADVANCE_STATUS);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_ATTACK_FLAG_FB);
+    WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_LW);
     if !StopModule::is_stop(fighter.module_accessor) {
         metaknight_special_lw_substatus(fighter, false.into());
     }
@@ -459,6 +469,7 @@ pub fn install() {
     install_status_scripts!(
         status_metaknight_glide_start_main,
         status_metaknight_special_n_main,
+        status_metaknight_special_s_main,
         status_metaknight_special_s_end_main,
         status_metaknight_special_hi_main,
         status_metaknight_special_hi_loop_main,

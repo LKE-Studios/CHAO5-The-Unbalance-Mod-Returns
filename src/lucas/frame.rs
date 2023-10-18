@@ -39,8 +39,10 @@ pub fn frame_lucas(fighter: &mut L2CFighterCommon) {
             HOLD_TIME[ENTRY_ID] = 0.0;
             LUCAS_WESS_DANCE[ENTRY_ID] = false;
         };
-        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 && 
-        WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 15 { //Claus
+        //CLAUS
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 64 && 
+        WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 71 {
+            
         }
     }
 }        

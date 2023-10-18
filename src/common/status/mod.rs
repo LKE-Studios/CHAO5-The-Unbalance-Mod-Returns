@@ -10,6 +10,7 @@ mod attackdash;
 mod edge_cancel;
 mod special_hi;
 mod escape_air;
+//mod dead;
 
 pub fn install() {
     jump_aerial::install();
@@ -23,4 +24,5 @@ pub fn install() {
     edge_cancel::install();
     special_hi::install();
     escape_air::install();
+    //dead::install();
 }

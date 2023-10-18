@@ -1,5 +1,5 @@
 mod game;
-mod frame;
+pub mod frame;
 mod effect;
 
 pub fn install() {

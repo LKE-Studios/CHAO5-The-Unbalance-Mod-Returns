@@ -1,5 +1,6 @@
 use crate::imports::BuildImports::*;
 use crate::silver::effect::*;
+use crate::mewtwo::frame::*;
 
 pub static mut ESCAPE_AIR_DIR : [i32; 8] = [0; 8];
 static mut BAN_UPB : [bool; 8] = [false; 8];
@@ -11,23 +12,26 @@ static mut HAS_ATTACK_AIR: [bool; 8] = [false; 8];
 static mut HAS_ALREADY_TELECANCEL: [bool; 8] = [false; 8];
 pub static mut SPECIAL_HI_X: [f32; 8] = [0.0; 8];
 pub static mut SPECIAL_HI_DIR: [i32; 8] = [0; 8];
-pub static mut SPECIAL_N_ANGLE : [f32; 8] = [0.0; 8];
+pub static mut SPECIAL_N_ANGLE : [f32; 65544] = [0.0; 65544];
 pub static mut SPECIAL_N_DIR: [i32; 8] = [0; 8];
-pub static mut SPECIAL_N_GET_ANGLE: [bool; 8] = [false; 8];
+pub static mut SPECIAL_N_GET_ANGLE: [bool; 65544] = [false; 65544];
 pub static mut STICK_DIRECTION : [f32; 8] = [0.0; 8];
+pub static mut KILL_EFFECTS : [bool; 8] = [false; 8];
+pub static special_hi_speed_x_min : f32 = 0.6;
+pub static special_hi_speed_x_max : f32 = 1.4;
+pub static special_hi_speed_y_stable : f32 = 1.9;
+pub static special_hi_speed_y_min : f32 = 0.75; 
 
 //MEWTWO is the fighter base for SILVER. Please see mewtwo/frame.rs for his once per frame
 //SILVER SLOT FUNCTIONS are here
 
-unsafe fn scale_silver(fighter: &mut L2CFighterCommon) {
-    if ModelModule::scale(fighter.module_accessor) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
-        ModelModule::set_scale(fighter.module_accessor, 0.95);
-        AttackModule::set_attack_scale(fighter.module_accessor, 0.95, true);
-        GrabModule::set_size_mul(fighter.module_accessor, 0.95);
-    };
+pub unsafe fn scale_silver(fighter: &mut L2CFighterCommon) {
+    ModelModule::set_scale(fighter.module_accessor, 0.865);
+    AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
+    GrabModule::set_size_mul(fighter.module_accessor, 0.865);
 }
 
-unsafe fn special_n_shoot_silver(fighter: &mut L2CFighterCommon) {
+pub unsafe fn special_n_shoot_silver(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
@@ -117,7 +121,7 @@ unsafe fn special_n_shoot_silver(fighter: &mut L2CFighterCommon) {
     }   
 }
 
-unsafe fn motion_main_silver(fighter: &mut L2CFighterCommon) {
+pub unsafe fn motion_main_silver(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if [hash40("special_n_hold"),hash40("special_n_start")].contains(&MotionModule::motion_kind(fighter.module_accessor)) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, true);
@@ -146,10 +150,11 @@ unsafe fn motion_main_silver(fighter: &mut L2CFighterCommon) {
     
 }
 
-unsafe fn special_hi_silver(fighter: &mut L2CFighterCommon) {
+pub unsafe fn special_hi_silver(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+    let lr = PostureModule::lr(fighter.module_accessor);
+    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     if [*FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_2,*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3, true);
@@ -200,34 +205,43 @@ unsafe fn special_hi_silver(fighter: &mut L2CFighterCommon) {
             };
             //SpecialHi Drift
             if SPECIAL_HI_DIR[ENTRY_ID] == 1 {
-                SET_SPEED_EX(fighter, -0.3, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -special_hi_speed_x_min, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 2 {
-                SET_SPEED_EX(fighter, 0.0, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 3 {
-                SET_SPEED_EX(fighter, 0.3, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: special_hi_speed_x_min, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 4 {
-                SET_SPEED_EX(fighter, -0.45, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -special_hi_speed_x_max, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 5 {
-                SET_SPEED_EX(fighter, 0.0, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 6 {
-                SET_SPEED_EX(fighter, 0.45, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: special_hi_speed_x_max, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 7 {
-                SET_SPEED_EX(fighter, -0.3, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -special_hi_speed_x_min, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 8 {
-                SET_SPEED_EX(fighter, 0.0, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_stable, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.0, z: 0.0});
             }
             else if SPECIAL_HI_DIR[ENTRY_ID] == 9 {
-                SET_SPEED_EX(fighter, 0.3, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                SET_SPEED_EX(fighter, 0.0, special_hi_speed_y_min, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: special_hi_speed_x_min, y: 0.0, z: 0.0});
             }
             if MotionModule::frame(fighter.module_accessor) >= 84.0 {
-                SET_SPEED_EX(fighter, 0.0, 0.75, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: special_hi_speed_y_min, z: 0.0});
                 SPECIAL_HI_DIR[ENTRY_ID] = 0;
             };
         };
@@ -262,7 +276,15 @@ unsafe fn special_hi_silver(fighter: &mut L2CFighterCommon) {
     };
 }
 
-unsafe fn misc_silver(fighter: &mut L2CFighterCommon) {
+pub unsafe fn special_lw_silver(fighter: &mut L2CFighterCommon) {
+    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    }
+}
+
+pub unsafe fn misc_silver(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
         SPECIAL_N_HAS_STALL[ENTRY_ID] = true;
@@ -274,8 +296,20 @@ unsafe fn misc_silver(fighter: &mut L2CFighterCommon) {
     };
 }
 
+pub unsafe fn silver_float(fighter: &mut L2CFighterCommon) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if FLOAT[ENTRY_ID] % 5 == 0 && FLOAT[ENTRY_ID] > 1 {
+        BURN_COLOR(fighter, 0.0, 2.55, 2.55, 0.5);
+        FLASH(fighter, 0.3, 0.7, 0.7, 0.3);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), -1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+        PLAY_SE(fighter, Hash40::new("se_mewtwo_special_n09"));
+        KILL_EFFECTS[ENTRY_ID] = true;
+    };
+}
+
 #[weapon_frame( agent = WEAPON_KIND_MEWTWO_SHADOWBALL)]
-fn silver_beam_frame(weapon: &mut L2CFighterBase) {
+pub fn silver_beam_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let owner_target_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(owner_target_id);
@@ -310,10 +344,33 @@ fn silver_beam_frame(weapon: &mut L2CFighterBase) {
 	}
 }
 
+#[fighter_frame_callback]
+pub fn silver_jump_cancel(fighter : &mut L2CFighterCommon) {
+    unsafe {	
+		let lua_state = fighter.lua_state_agent;   
+        let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+		let status_kind = StatusModule::status_kind(fighter.module_accessor);
+		let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let frame = MotionModule::frame(fighter.module_accessor);
+        let SILVER = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 128 && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 135 && fighter_kind == *FIGHTER_KIND_MEWTWO;
+        if SILVER {
+            if is_jc(module_accessor, fighter_kind, status_kind, frame) && check_jump(module_accessor){
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+                };
+                if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+                };
+            };
+        };
+    }
+}
+
 pub fn install() {
-    /*smashline::install_agent_frame_callbacks!(
+    smashline::install_agent_frame_callbacks!(
         silver_jump_cancel
-    );*/
+    );
     smashline::install_agent_frames!(
         silver_beam_frame
     );

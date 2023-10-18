@@ -58,7 +58,6 @@ unsafe fn status_attackdash_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let f21 = [*FIGHTER_KIND_LINK];
     let f22 = [*FIGHTER_KIND_BRAVE];
     let f23 = [*FIGHTER_KIND_DEDEDE];
-
     if CancelModule::is_enable_cancel(fighter.module_accessor) && fighter.sub_wait_ground_check_common(false.into()).get_bool() || fighter.sub_air_check_fall_common().get_bool() {
         return 0.into();
     }

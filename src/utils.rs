@@ -241,6 +241,50 @@ impl FrameInfo {
     }
 }
 
+pub(crate) fn is_jc(module_accessor: &mut smash::app::BattleObjectModuleAccessor, fighter_kind : i32, status_kind : i32, frame : f32) -> bool {
+	unsafe {
+        //[fighter_kind, status_kind, hit_condition, jc_start, jc_end]
+        let jump_cancel = [
+            [*FIGHTER_KIND_MEWTWO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1]
+        ];
+        for i in &jump_cancel {
+            if fighter_kind == i[0] && status_kind == i[1] {
+                println!("jc status");
+                if i[3] != -1 && i[4] != -1 {
+                    if (frame as i32) < i[3] || (frame as i32) >= i[4] {
+                        continue;
+                    };
+                };
+                if i[2] != 0 {
+                    if AttackModule::is_infliction_status(module_accessor, i[2]) {
+                        return true;
+                    };
+                } else {
+                    return true;
+                };
+            };
+        };
+        return false;
+	}
+}
+
+pub(crate) fn check_jump(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+        if ControlModule::check_button_on_trriger(module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+            return true;
+        };
+        if ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+            if ControlModule::get_flick_y(module_accessor) >= 3 && ControlModule::get_stick_y(module_accessor) >= 0.7 {
+                return true;
+            };
+        };
+        if ControlModule::check_button_on_trriger(module_accessor, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+            return true;
+        };
+        return false;
+	}
+}
+
 pub fn install() {
 	skyline::install_hook!(
         is_enable_transition_term_hook

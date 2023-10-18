@@ -1,21 +1,22 @@
 use crate::imports::BuildImports::*;
+use crate::silver::frame::*;
 
-static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
-static mut START_FLOAT : [bool; 8] = [false; 8];
-static mut CHECK_FLOAT : [i32; 8] = [0; 8];
-static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
-static mut X : [f32; 8] = [0.0; 8]; //Logs speed
-static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
-static mut FLOAT_MAX : i32 = 1200; //Frames this bitch can float (In frames, 300 = 5 seconds)
-static mut X_MAX : f32 = 1.45; //Max Horizontal movespeed
+pub static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
+pub static mut START_FLOAT : [bool; 8] = [false; 8];
+pub static mut CHECK_FLOAT : [i32; 8] = [0; 8];
+pub static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
+pub static mut X : [f32; 8] = [0.0; 8]; //Logs speed
+pub static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
+pub static mut FLOAT_MAX : i32 = 1200; //Frames this bitch can float (In frames, 300 = 5 seconds)
+pub static mut X_MAX : f32 = 1.45; //Max Horizontal movespeed
 // static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
-static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
-static mut Y_MAX : f32 = 1.3; //Max Vertical movespeed
+pub static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
+pub static mut Y_MAX : f32 = 1.3; //Max Vertical movespeed
 // static mut Y_ACCEL_ADD : f32 = 0.06;
 // static mut Y_ACCEL_MUL : f32 = 0.06;
 
 #[fighter_frame( agent = FIGHTER_KIND_MEWTWO )]
-fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
+pub fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
@@ -111,15 +112,19 @@ fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
             };
         };
         //SILVER
-        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 128 && 
-        WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 135 {
-
+        let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+        let SILVER = color >= 128 && color <= 135;
+        if SILVER {
+            scale_silver(fighter);
+            special_n_shoot_silver(fighter);
+            motion_main_silver(fighter);
+            special_hi_silver(fighter);
+            misc_silver(fighter);
+            silver_float(fighter);
+            special_lw_silver(fighter);
         }
     }
 }
-
-//SILVER SLOT FUNCTIONS
-
 
 pub fn install() {
     smashline::install_agent_frames!(

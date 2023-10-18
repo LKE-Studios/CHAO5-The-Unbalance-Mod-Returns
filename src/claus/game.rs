@@ -1,8 +1,8 @@
 use crate::imports::BuildImports::*;
 
 #[acmd_script(//Attack11 
-    agent = "claus", 
-    script = "game_attack11", 
+    agent = "lucas", 
+    script = "game_attack11_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attack11(fighter: &mut L2CAgentBase) {
@@ -34,8 +34,8 @@ unsafe fn game_claus_attack11(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack12 
-    agent = "claus", 
-    script = "game_attack12", 
+    agent = "lucas", 
+    script = "game_attack12_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attack12(fighter: &mut L2CAgentBase) {
@@ -56,8 +56,8 @@ unsafe fn game_claus_attack12(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Attack13 
-    agent = "claus", 
-    script = "game_attack13", 
+    agent = "lucas", 
+    script = "game_attack13_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attack13(fighter: &mut L2CAgentBase) {
@@ -73,7 +73,7 @@ unsafe fn game_claus_attack13(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackDash
-    agent = "claus", 
+    agent = "lucas", 
     script = "game_attackdash", 
     category = ACMD_GAME, 
     low_priority )]
@@ -90,8 +90,8 @@ unsafe fn game_claus_attackdash(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3Hi
-    agent = "claus", 
-    script = "game_attacks3hi", 
+    agent = "lucas", 
+    script = "game_attacks3hi_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacks3hi(fighter: &mut L2CAgentBase) {
@@ -115,8 +115,8 @@ unsafe fn game_claus_attacks3hi(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3
-    agent = "claus", 
-    script = "game_attacks3", 
+    agent = "lucas", 
+    script = "game_attacks3_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacks3(fighter: &mut L2CAgentBase) {
@@ -140,8 +140,8 @@ unsafe fn game_claus_attacks3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS3Lw
-    agent = "claus", 
-    script = "game_attacks3lw", 
+    agent = "lucas", 
+    script = "game_attacks3lw_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacks3lw(fighter: &mut L2CAgentBase) {
@@ -165,8 +165,8 @@ unsafe fn game_claus_attacks3lw(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackHi3
-    agent = "claus", 
-    script = "game_attackhi3", 
+    agent = "lucas", 
+    script = "game_attackhi3_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackhi3(fighter: &mut L2CAgentBase) {
@@ -195,8 +195,8 @@ unsafe fn game_claus_attackhi3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw3
-    agent = "claus", 
-    script = "game_attacklw3", 
+    agent = "lucas", 
+    script = "game_attacklw3_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacklw3(fighter: &mut L2CAgentBase) {
@@ -213,8 +213,8 @@ unsafe fn game_claus_attacklw3(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackS4
-    agent = "claus", 
-    script = "game_attacks4", 
+    agent = "lucas", 
+    script = "game_attacks4_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacks4(fighter: &mut L2CAgentBase) {
@@ -248,8 +248,8 @@ unsafe fn game_claus_attacks4(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackHi4
-    agent = "claus", 
-    script = "game_attackhi4", 
+    agent = "lucas", 
+    script = "game_attackhi4_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackhi4(fighter: &mut L2CAgentBase) {
@@ -311,8 +311,8 @@ unsafe fn game_claus_attackhi4(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackLw4
-    agent = "claus", 
-    script = "game_attacklw4", 
+    agent = "lucas", 
+    script = "game_attacklw4_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attacklw4(fighter: &mut L2CAgentBase) {
@@ -342,8 +342,8 @@ unsafe fn game_claus_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirN
-    agent = "claus", 
-    script = "game_attackairn", 
+    agent = "lucas", 
+    script = "game_attackairn_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackairn(fighter: &mut L2CAgentBase) {
@@ -352,20 +352,18 @@ unsafe fn game_claus_attackairn(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
     frame(fighter.lua_state_agent, 6.0);
-    FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 366, /*KBG*/ 66, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 10.9, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 2.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.35, /*Angle*/ 366, /*KBG*/ 66, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 10.9, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 2.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
     }
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
-    frame(fighter.lua_state_agent, 25.0);
-    FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.5, /*Angle*/ 60, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 120, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.2, /*X*/ 0.0, /*Y*/ 3.7, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
     }
     wait(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
@@ -382,8 +380,8 @@ unsafe fn game_claus_attackairn(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirF 
-    agent = "claus", 
-    script = "game_attackairf", 
+    agent = "lucas", 
+    script = "game_attackairf_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackairf(fighter: &mut L2CAgentBase) {
@@ -409,8 +407,8 @@ unsafe fn game_claus_attackairf(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirB
-    agent = "claus", 
-    script = "game_attackairb", 
+    agent = "lucas", 
+    script = "game_attackairb_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackairb(fighter: &mut L2CAgentBase) {
@@ -445,8 +443,8 @@ unsafe fn game_claus_attackairb(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirHi
-    agent = "claus", 
-    script = "game_attackairhi", 
+    agent = "lucas", 
+    script = "game_attackairhi_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackairhi(fighter: &mut L2CAgentBase) {
@@ -476,8 +474,8 @@ unsafe fn game_claus_attackairhi(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AttackAirLw
-    agent = "claus", 
-    script = "game_attackairlw", 
+    agent = "lucas", 
+    script = "game_attackairlw_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_attackairlw(fighter: &mut L2CAgentBase) {
@@ -518,8 +516,8 @@ unsafe fn game_claus_attackairlw(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//CatchAttack
-    agent = "claus", 
-    script = "game_catchattack", 
+    agent = "lucas", 
+    script = "game_catchattack_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_catchattack(fighter: &mut L2CAgentBase) {
@@ -545,8 +543,8 @@ unsafe fn game_claus_catchattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//ThrowF
-    agent = "claus", 
-    script = "game_throwf", 
+    agent = "lucas", 
+    script = "game_throwf_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_throwf(fighter: &mut L2CAgentBase) {
@@ -570,8 +568,8 @@ unsafe fn game_claus_throwf(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//ThrowB
-    agent = "claus", 
-    script = "game_throwb", 
+    agent = "lucas", 
+    script = "game_throwb_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_throwb(fighter: &mut L2CAgentBase) {
@@ -596,8 +594,8 @@ unsafe fn game_claus_throwb(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//ThrowHi
-    agent = "claus", 
-    script = "game_throwhi", 
+    agent = "lucas", 
+    script = "game_throwhi_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_throwhi(fighter: &mut L2CAgentBase) {
@@ -621,8 +619,8 @@ unsafe fn game_claus_throwhi(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//ThrowLw
-    agent = "claus", 
-    script = "game_throwlw", 
+    agent = "lucas", 
+    script = "game_throwlw_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_throwlw(fighter: &mut L2CAgentBase) {
@@ -646,8 +644,8 @@ unsafe fn game_claus_throwlw(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//CliffAttack
-    agent = "claus", 
-    script = "game_cliffattack", 
+    agent = "lucas", 
+    script = "game_cliffattack_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_cliffattack(fighter: &mut L2CAgentBase) {
@@ -662,8 +660,8 @@ unsafe fn game_claus_cliffattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SlipAttack
-    agent = "claus", 
-    script = "game_slipattack", 
+    agent = "lucas", 
+    script = "game_slipattack_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_slipattack(fighter: &mut L2CAgentBase) {
@@ -686,8 +684,8 @@ unsafe fn game_claus_slipattack(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//DownAttackU
-    agent = "claus", 
-    script = "game_downattacku", 
+    agent = "lucas", 
+    script = "game_downattacku_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_downattacku(fighter: &mut L2CAgentBase) {
@@ -710,8 +708,8 @@ unsafe fn game_claus_downattacku(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//DownAttackD
-    agent = "claus", 
-    script = "game_downattackd", 
+    agent = "lucas", 
+    script = "game_downattackd_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_downattackd(fighter: &mut L2CAgentBase) {
@@ -734,21 +732,21 @@ unsafe fn game_claus_downattackd(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialNHold
-    agent = "claus", 
-    script = "game_specialnhold", 
+    agent = "lucas", 
+    script = "game_specialnhold_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialnhold(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 0.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LUCAS_STATUS_SPECIAL_N_FLAG_GENERATE_ARTICLE);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 48, /*KBG*/ 84, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 30, /*KBG*/ 84, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
     }
 }
 
 #[acmd_script(//SpecialS
-    agent = "claus", 
-    script = "game_specials", 
+    agent = "lucas", 
+    script = "game_specials_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specials(fighter: &mut L2CAgentBase) {
@@ -766,8 +764,8 @@ unsafe fn game_claus_specials(fighter: &mut L2CAgentBase) {
 }     
 
 #[acmd_script(//SpecialAirS
-    agent = "claus", 
-    script = "game_specialairs", 
+    agent = "lucas", 
+    script = "game_specialairs_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairs(fighter: &mut L2CAgentBase) {
@@ -785,8 +783,8 @@ unsafe fn game_claus_specialairs(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Pillar
-    agent = "claus_pkfire", 
-    script = "game_pillar", 
+    agent = "lucas_pkfire", 
+    script = "game_pillar_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_pkfire_pillar(fighter: &mut L2CAgentBase) {
@@ -802,8 +800,8 @@ unsafe fn game_claus_pkfire_pillar(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Shoot
-    agent = "claus_pkfire", 
-    script = "game_shoot", 
+    agent = "lucas_pkfire", 
+    script = "game_shoot_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_pkfire_shoot(fighter: &mut L2CAgentBase) {
@@ -814,8 +812,8 @@ unsafe fn game_claus_pkfire_shoot(fighter: &mut L2CAgentBase) {
 } 
 
 #[acmd_script(//Move
-    agent = "claus_pkthunder", 
-    script = "game_move", 
+    agent = "lucas_pkthunder", 
+    script = "game_move_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_pkthunder_move(fighter: &mut L2CAgentBase) {
@@ -825,8 +823,8 @@ unsafe fn game_claus_pkthunder_move(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//MoveChild
-    agent = "claus_pkthunder", 
-    script = "game_movechild", 
+    agent = "lucas_pkthunder", 
+    script = "game_movechild_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_pkthunder_movechild(fighter: &mut L2CAgentBase) {
@@ -837,8 +835,8 @@ unsafe fn game_claus_pkthunder_movechild(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirHi
-    agent = "claus", 
-    script = "game_specialairhi", 
+    agent = "lucas", 
+    script = "game_specialairhi_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairhi(fighter: &mut L2CAgentBase) {
@@ -904,8 +902,8 @@ unsafe fn game_claus_specialairhi(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirHiReflect
-    agent = "claus", 
-    script = "game_specialairhireflect", 
+    agent = "lucas", 
+    script = "game_specialairhireflect_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairhireflect(fighter: &mut L2CAgentBase) {
@@ -928,8 +926,8 @@ unsafe fn game_claus_specialairhireflect(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirHiDownBoundD
-    agent = "claus", 
-    script = "game_specialairhidownboundd", 
+    agent = "lucas", 
+    script = "game_specialairhidownboundd_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairhidownboundd(fighter: &mut L2CAgentBase) {
@@ -952,8 +950,8 @@ unsafe fn game_claus_specialairhidownboundd(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirHiDownBoundU
-    agent = "claus", 
-    script = "game_specialairhidownboundu", 
+    agent = "lucas", 
+    script = "game_specialairhidownboundu_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairhidownboundu(fighter: &mut L2CAgentBase) {
@@ -976,8 +974,8 @@ unsafe fn game_claus_specialairhidownboundu(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialLwStart
-    agent = "claus", 
-    script = "game_speciallwstart", 
+    agent = "lucas", 
+    script = "game_speciallwstart_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_speciallwstart(fighter: &mut L2CAgentBase) {
@@ -988,14 +986,14 @@ unsafe fn game_claus_speciallwstart(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialLwEnd
-    agent = "claus", 
-    script = "game_speciallwend", 
+    agent = "lucas", 
+    script = "game_speciallwend_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_speciallwend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 22.0, /*Angle*/ 45, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 7.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.3), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 45, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 7.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.3), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1004,8 +1002,8 @@ unsafe fn game_claus_speciallwend(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirLwStart
-    agent = "claus", 
-    script = "game_specialairlwstart", 
+    agent = "lucas", 
+    script = "game_specialairlwstart_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairlwstart(fighter: &mut L2CAgentBase) {
@@ -1016,14 +1014,14 @@ unsafe fn game_claus_specialairlwstart(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirLwEnd
-    agent = "claus", 
-    script = "game_specialairlwend", 
+    agent = "lucas", 
+    script = "game_specialairlwend_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairlwend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 22.0, /*Angle*/ 45, /*KBG*/ 89, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 7.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.3), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 45, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 7.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.3), /*Z2*/ Some(9.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1032,14 +1030,15 @@ unsafe fn game_claus_specialairlwend(fighter: &mut L2CAgentBase) {
 } 
 
 #[acmd_script(//SpecialLwHold
-    agent = "claus", 
-    script = "game_speciallwhold", 
+    agent = "lucas", 
+    script = "game_speciallwhold_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_speciallwhold(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 10, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.4, /*Angle*/ 85, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 3.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 180, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 22.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(60.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA_d, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_STAGE_GIMMICK, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
             shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 25, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 400, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         }
         fighter.clear_lua_stack();
@@ -1048,15 +1047,15 @@ unsafe fn game_claus_speciallwhold(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//SpecialAirLwHold
-    agent = "claus", 
-    script = "game_specialairlwhold", 
+    agent = "lucas", 
+    script = "game_specialairlwhold_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_specialairlwhold(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 10, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
-            shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 25, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 400, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.4, /*Angle*/ 85, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.3, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 3.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PSI);
+            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 180, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 22.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(60.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA_d, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_STAGE_GIMMICK, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
         }
         fighter.clear_lua_stack();
         wait_loop_clear(fighter.lua_state_agent);
@@ -1064,8 +1063,8 @@ unsafe fn game_claus_specialairlwhold(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealHiR
-    agent = "claus", 
-    script = "game_appealhir", 
+    agent = "lucas", 
+    script = "game_appealhir_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appealhir(fighter: &mut L2CAgentBase) {
@@ -1080,8 +1079,8 @@ unsafe fn game_claus_appealhir(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealHiL
-    agent = "claus", 
-    script = "game_appealhil", 
+    agent = "lucas", 
+    script = "game_appealhil_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appealhil(fighter: &mut L2CAgentBase) {
@@ -1096,8 +1095,8 @@ unsafe fn game_claus_appealhil(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealSR
-    agent = "claus", 
-    script = "game_appealsr", 
+    agent = "lucas", 
+    script = "game_appealsr_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appealsr(fighter: &mut L2CAgentBase) {
@@ -1113,8 +1112,8 @@ unsafe fn game_claus_appealsr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealSL
-    agent = "claus", 
-    script = "game_appealsl", 
+    agent = "lucas", 
+    script = "game_appealsl_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appealsl(fighter: &mut L2CAgentBase) {
@@ -1130,8 +1129,8 @@ unsafe fn game_claus_appealsl(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealLwR
-    agent = "claus", 
-    script = "game_appeallwr", 
+    agent = "lucas", 
+    script = "game_appeallwr_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appeallwr(fighter: &mut L2CAgentBase) {
@@ -1141,8 +1140,8 @@ unsafe fn game_claus_appeallwr(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//AppealLwL
-    agent = "claus", 
-    script = "game_appeallwl", 
+    agent = "lucas", 
+    script = "game_appeallwl_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_appeallwl(fighter: &mut L2CAgentBase) {
@@ -1152,13 +1151,27 @@ unsafe fn game_claus_appeallwl(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//WessDance
-    agent = "claus", 
-    script = "game_wessdance", 
+    agent = "lucas", 
+    script = "game_wessdance_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_wessdance(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        HIT_NO(fighter, 0, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 1, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 2, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 3, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 4, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 5, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 6, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 7, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 8, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 9, *HIT_STATUS_XLU);
+        HIT_NO(fighter, 10, *HIT_STATUS_NORMAL);
+    }
     frame(fighter.lua_state_agent, 1370.0);
     if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.0, /*Angle*/ 70, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 36.0, /*X*/ 0.0, /*Y*/ 6.6, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PUNCH);
     }
     wait(fighter.lua_state_agent, 3.0);
@@ -1168,8 +1181,8 @@ unsafe fn game_claus_wessdance(fighter: &mut L2CAgentBase) {
 }
 
 #[acmd_script(//Move
-    agent = "claus_pkstarstorm", 
-    script = "game_move", 
+    agent = "lucas_pkstarstorm", 
+    script = "game_move_claus", 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_claus_pkstarstorm_move(fighter: &mut L2CAgentBase) {

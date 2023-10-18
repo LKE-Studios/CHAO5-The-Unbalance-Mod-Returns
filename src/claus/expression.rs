@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 #[acmd_script(//AttackLw4
-    agent = "claus", 
+    agent = "lucas", 
     script = "expression_attacklw4", 
     category = ACMD_EXPRESSION, 
     low_priority)]

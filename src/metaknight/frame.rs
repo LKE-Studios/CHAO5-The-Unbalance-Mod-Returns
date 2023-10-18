@@ -53,9 +53,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, false);
                 }
             }
-            if frame > 25.0 {
-                KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: params.base_speed * lr, y: 0.0}, Vector3f{x: params.base_speed * lr, y: 0.0, z: 0.0});
-            }   
         }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
             if frame > 10.0 {
@@ -99,6 +96,14 @@ unsafe fn special_lw_attack_function(fighter: &mut L2CFighterCommon) {
     if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
         if frame > 60.0 {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
+    }
+    if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_DISABLE_AIR_SPECIAL_LW);
+        if frame > 20.0 {
+            CancelModule::enable_cancel(fighter.module_accessor);
+            MotionModule::set_rate(fighter.module_accessor, 3.0);
         }
     }
 }

@@ -93,6 +93,7 @@ pub mod BuildImports {
             EFFECT_FOLLOW_FLIP_arg13,
             EFFECT_GLOBAL,
             DOWN_EFFECT,
+            FT_ATTACK_ABS_CAMERA_QUAKE,
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},

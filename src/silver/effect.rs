@@ -1076,12 +1076,55 @@ unsafe fn effect_silver_specialhi(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialAirHiStart 
+    agent = "mewtwo", 
+    script = "effect_specialairhistart_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_silver_specialairhistart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent,4.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
+    }
+}
+
+#[acmd_script(//SpecialAirHi 
+    agent = "mewtwo", 
+    script = "effect_specialairhi_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_silver_specialairhi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        FLASH(fighter, 0.0, 1.0, 1.0, 0.45);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield_hit"), Hash40::new("top"), 0, 14, 0, 0, 0, 0, 0.8, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield_hit"), Hash40::new("top"), 0, 14, 0, 90, 0, 0, 0.8, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield_hit"), Hash40::new("top"), 0, 14, 0, 180, 0, 0, 0.8, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_vector"), Hash40::new("top"), 0, 26, 0, 90, 0, 0, 4.0, true);
+        LAST_EFFECT_SET_RATE(fighter, 0.5);
+        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+    }
+    frame(fighter.lua_state_agent, 85.0);
+    if is_excute(fighter) {
+        ColorBlendModule::off_flash(fighter.module_accessor, false);
+        COL_NORMAL(fighter);
+        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_pk_hand"), false, false);
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_vector"), false, false);
+    }
+}
+
 #[acmd_script(//SpecialLw 
     agent = "mewtwo", 
     script = "effect_speciallw_silver", 
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_silver_speciallw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
@@ -1106,6 +1149,10 @@ unsafe fn effect_silver_speciallw(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn effect_silver_specialairlw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
@@ -1196,7 +1243,11 @@ unsafe fn effect_silver_turnrun(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "mewtwo", script = "effect_escapeairslidesilver", category = ACMD_EFFECT, low_priority )]
+#[acmd_script(//EscapeAirSlide 
+    agent = "mewtwo", 
+    script = "effect_escapeairslide_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
 unsafe fn effect_silver_escapeairslide(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
@@ -1659,6 +1710,90 @@ unsafe fn effect_silver_entry(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//WalkSlow 
+    agent = "mewtwo", 
+    script = "effect_walkslow_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_silver_walkslow(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 6.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+        }
+        frame(fighter.lua_state_agent, 30.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 3, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+        }
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 0);
+        wait_loop_clear(fighter.lua_state_agent);
+    }
+}
+
+#[acmd_script(//WalkMiddle 
+    agent = "mewtwo", 
+    script = "effect_walkmiddle_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_silver_walkmiddle(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 4.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+        }
+        frame(fighter.lua_state_agent, 18.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 4, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+        }
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 0);
+        wait_loop_clear(fighter.lua_state_agent);
+    }
+}
+
+#[acmd_script(//WalkFast 
+    agent = "mewtwo", 
+    script = "effect_walkfast_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_silver_walkfast(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 2.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+        frame(fighter.lua_state_agent, 12.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 0);
+        wait_loop_clear(fighter.lua_state_agent);
+    }
+}
+
+#[acmd_script(//Run 
+    agent = "mewtwo", 
+    script = "effect_run_silver", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_run(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 8.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+        }
+        frame(fighter.lua_state_agent, 23.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
+        }
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 0);
+        wait_loop_clear(fighter.lua_state_agent);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         effect_silver_attack11,
@@ -1702,8 +1837,14 @@ pub fn install() {
         effect_silver_specialairs,
         effect_silver_specialhistart,
         effect_silver_specialhi,
+        effect_silver_specialairhistart,
+        effect_silver_specialairhi,
         effect_silver_speciallw,
         effect_silver_specialairlw,
+        effect_silver_dash,
+        effect_silver_run,
+        effect_silver_runbraker,
+        effect_silver_runbrakel,
         effect_silver_turnrun,
         effect_silver_escapeairslide,
         effect_silver_escapen,
@@ -1719,6 +1860,9 @@ pub fn install() {
         effect_silver_appeallwr,
         effect_silver_win1,
         effect_silver_win1wait,
-        effect_silver_entry
+        effect_silver_entry,
+        effect_silver_walkslow,
+        effect_silver_walkmiddle,
+        effect_silver_walkfast,
     );
 }

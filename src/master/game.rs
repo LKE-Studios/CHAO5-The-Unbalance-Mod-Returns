@@ -330,7 +330,6 @@ unsafe fn game_master_attacklw3(fighter: &mut L2CAgentBase) {
 unsafe fn game_master_attacks4hi(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_sting"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("master"), rand_effect.len() as i32);
-    
     FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, 0);
@@ -369,7 +368,6 @@ unsafe fn game_master_attacks4hi(fighter: &mut L2CAgentBase) {
 unsafe fn game_master_attacks4(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_sting"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("master"), rand_effect.len() as i32);
-    
     FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, 0);
@@ -404,7 +402,6 @@ unsafe fn game_master_attacks4(fighter: &mut L2CAgentBase) {
 unsafe fn game_master_attacks4lw(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_sting"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("master"), rand_effect.len() as i32);
-    
     FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, 0);

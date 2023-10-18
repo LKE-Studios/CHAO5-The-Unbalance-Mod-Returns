@@ -935,15 +935,15 @@ unsafe fn game_mewtwo_shadowball_shootthrowf(fighter: &mut L2CAgentBase) {
     script = "game_specials", 
     category = ACMD_GAME )]
 unsafe fn game_mewtwo_specials(fighter: &mut L2CAgentBase) {
-    sv_animcmd::frame(fighter.lua_state_agent, 1.0);
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.3);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 9.0);
+    frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.0);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 12.0);
+    frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         CATCH(fighter, 0, Hash40::new("top"), 13.4, 0.0, 8.4, 17.0, None, None, None, *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
         CATCH(fighter, 1, Hash40::new("top"), 16.2, 0.0, 8.4, 17.0, None, None, None, *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_G);
@@ -953,23 +953,23 @@ unsafe fn game_mewtwo_specials(fighter: &mut L2CAgentBase) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, 0, 3.2, 280, 16, 0, 50, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         AttackModule::set_catch_only(fighter.module_accessor, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, true, true);
     }
-    sv_animcmd::wait(fighter.lua_state_agent, 4.0);
+    wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         GrabModule::clear_all(fighter.module_accessor);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 20.0);
+    frame(fighter.lua_state_agent, 20.0);
     for _ in 0..7 {
-        sv_animcmd::wait(fighter.lua_state_agent, 2.0);
+        wait(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW_MEWTWO, Hash40::new("throw"), *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_TARGET_OBJECT_ID as u64, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_GROUP as u64, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_WORK_INT_THROWN_HIT_NO as u64);
         }
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 36.0);
+    frame(fighter.lua_state_agent, 36.0);
     if is_excute(fighter) {
         shield!(fighter, MA_MSC_CMD_SHIELD_OFF, COLLISION_KIND_REFLECTOR, FIGHTER_MEWTWO_REFLECTOR_KIND_REFLECTOR, FIGHTER_REFLECTOR_GROUP_EXTEND);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_GRAVITY_NORMAL);
     }
-    sv_animcmd::frame(fighter.lua_state_agent, 40.0);
+    frame(fighter.lua_state_agent, 40.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_S_FLAG_HIT);
     }
