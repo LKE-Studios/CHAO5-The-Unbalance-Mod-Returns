@@ -8,6 +8,7 @@ use smash::{
 };
 use smash::lib::L2CAgent;
 use smash::lua2cpp::L2CFighterCommon;
+use smash::phx::Vector2f;
 use skyline::{
     c_str,
     from_c_str,
@@ -36,8 +37,8 @@ pub static mut CAN_RAPID_JAB: [i32; 8] = [0; 8];
 pub static mut CAN_JAB: [i32; 8] = [0; 8];
 
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
-pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {
-    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+pub unsafe fn is_enable_transition_term_hook(module_accessor: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {
+    let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if CAN_UPB[ENTRY_ID] != 0 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI {
         if CAN_UPB[ENTRY_ID] == 1 {
             return false
@@ -93,7 +94,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
             return true 
         }
     } else {
-        original!()(boma, flag)
+        original!()(module_accessor, flag)
     }
 }
 
@@ -285,6 +286,10 @@ pub(crate) fn check_jump(module_accessor: &mut smash::app::BattleObjectModuleAcc
 	}
 }
 
+pub(crate) unsafe fn ray_check_pos(module_accessor: &mut smash::app::BattleObjectModuleAccessor, x_distance : f32, y_distance: f32, ignore_plat: bool) -> u64 {
+	GroundModule::ray_check(module_accessor, &Vector2f{ x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor)} as *const Vector2f, &Vector2f{ x: x_distance, y: y_distance} as *const Vector2f, ignore_plat)
+}
+
 pub fn install() {
 	skyline::install_hook!(
         is_enable_transition_term_hook
@@ -299,8 +304,8 @@ pub unsafe fn get_nearest_opponent(module_accessor: *mut BattleObjectModuleAcces
     let mut lowestavg = 0.0;
     let entry_count = FighterManager::entry_count(FIGHTER_MANAGER);
     for i in 0..entry_count{
-        let curr_boma = get_module_accessor_by_entry_id(i);
-        let avg = (PostureModule::pos_x(curr_boma) + PostureModule::pos_y(curr_boma)) / 2;
+        let curr_module_accessor = get_module_accessor_by_entry_id(i);
+        let avg = (PostureModule::pos_x(curr_module_accessor) + PostureModule::pos_y(curr_module_accessor)) / 2;
     }
 }
  */

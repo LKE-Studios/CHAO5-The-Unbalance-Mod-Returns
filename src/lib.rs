@@ -219,6 +219,7 @@ mod szerosuit;
 mod tantan;
 mod toonlink;
 mod trail;
+mod waluigi;
 mod wario;
 mod wiifit;
 mod wolf;
@@ -468,6 +469,7 @@ pub fn main() {
     claus::install();
     koopag::install();
     silver::install();
+    waluigi::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

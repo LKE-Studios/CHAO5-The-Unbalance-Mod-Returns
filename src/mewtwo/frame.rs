@@ -113,7 +113,7 @@ pub fn frame_mewtwo(fighter: &mut L2CFighterCommon) {
         };
         //SILVER
         let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
-        let SILVER = color >= 128 && color <= 135;
+        let SILVER = color >= 120 && color <= 127;
         if SILVER {
             scale_silver(fighter);
             special_n_shoot_silver(fighter);

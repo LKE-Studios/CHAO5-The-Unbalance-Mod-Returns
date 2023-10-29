@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::waluigi::frame::*;
 
 #[fighter_frame( agent = FIGHTER_KIND_DOLLY )]
 pub fn frame_dolly(fighter : &mut L2CFighterCommon) {
@@ -31,10 +32,9 @@ pub fn frame_dolly(fighter : &mut L2CFighterCommon) {
         //WALUIGI
         let WALUIGI = color >= 120 && color <= 130; 
         if WALUIGI {
-            waluigi_dice_block_visible(fighter);
-            waluigi_dice_block_roll(fighter);
             scale_waluigi(fighter);
             attack_dash_waluigi(fighter);
+            special_n_waluigi(fighter);
             special_s_waluigi(fighter);
             special_lw_waluigi(fighter);
             final_start_waluigi(fighter);

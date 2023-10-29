@@ -754,6 +754,7 @@ unsafe fn game_silver_specialsstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         CATCH(fighter, 0, Hash40::new("top"), 14.4, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
         CATCH(fighter, 1, Hash40::new("top"), 17.2, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_G);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 11.0, 2.5, 2.0, 400, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
     }
     wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
@@ -815,6 +816,7 @@ unsafe fn game_silver_specialairsstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         CATCH(fighter, 0, Hash40::new("top"), 14.4, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
         CATCH(fighter, 1, Hash40::new("top"), 17.2, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_G);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 11.0, 2.5, 2.0, 400, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
     }
     wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
@@ -949,7 +951,7 @@ unsafe fn game_silver_speciallw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_INVINCIBLE), 0);
-        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 0.0, 2.5, 2.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 0.0, 2.5, 2.0, 1000, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
     }
     frame(fighter.lua_state_agent, 19.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.76);
@@ -977,7 +979,7 @@ unsafe fn game_silver_specialairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_INVINCIBLE), 0);
-        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 0.0, 2.5, 2.0, 80, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
+        shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 12.0, 0.0, 9.0, 0.0, 0.0, 0.0, 0.0, 2.5, 2.0, 1000, false, 1.0, *FIGHTER_REFLECTOR_GROUP_EXTEND);
     }
     frame(fighter.lua_state_agent, 19.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);

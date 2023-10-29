@@ -103,7 +103,7 @@ unsafe fn effect_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         fighter.clear_lua_stack();
         lua_args!(fighter, Hash40::new("sys_run_smoke"), Hash40::new("sys_run_smoke"), Hash40::new("top"), -2, 0, -2, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_YZ);
-        FOOT_EFFECT_FLIP(fighter.lua_state_agent);
+        sv_animcmd::FOOT_EFFECT_FLIP(fighter.lua_state_agent);
     }
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
@@ -461,7 +461,7 @@ unsafe fn effect_waluigi_downattackd(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "effect_downattacku_waluigi", 
     category = ACMD_EFFECT, low_priority )]
-unsafe fn effect_downattacku_waluigiffect(fighter: &mut L2CAgentBase) {
+unsafe fn effect_waluigi_downattacku(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("handl"), 0.0, 0.0, 0.0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, true);
@@ -744,7 +744,7 @@ unsafe fn effect_waluigi_specialairlw(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "effect_speciallwstart_waluigi",
     category = ACMD_EFFECT, low_priority)]
-unsafe fn dolly_speciallwstart_effect(fighter: &mut L2CAgentBase) {
+unsafe fn effect_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -0.5, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
@@ -797,7 +797,7 @@ unsafe fn effect_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
@@ -818,7 +818,7 @@ unsafe fn effect_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
@@ -847,7 +847,7 @@ unsafe fn effect_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
@@ -872,7 +872,7 @@ unsafe fn effect_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
@@ -906,7 +906,7 @@ unsafe fn effect_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
 }
 
@@ -921,7 +921,7 @@ unsafe fn effect_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
@@ -945,7 +945,7 @@ unsafe fn effect_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
 }
 
@@ -965,7 +965,7 @@ unsafe fn effect_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
         EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("footr"), 0, 2, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 0, 0, false);
         LAST_EFFECT_SET_RATE(fighter, 1.2);
     }
@@ -982,7 +982,7 @@ unsafe fn effect_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
     }
 }
 
@@ -997,7 +997,28 @@ unsafe fn effect_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);
-        COL_NORMAL(fighter.lua_state_agent);
+        COL_NORMAL(fighter);
+    }
+}
+
+#[acmd_script(//SuperSpecial 
+    agent = "dolly", 
+    script = "effect_superspecial_waluigi", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn effect_waluigi_superspecial(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("dolly_wave_aura"), Hash40::new("handr"), 1, 0, 0, 0, 0, 0, 1, true);
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 10, 13, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        LAST_EFFECT_SET_RATE(fighter, 1.3);
+    }
+    frame(fighter.lua_state_agent, 15.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("dolly_wave_arc"), Hash40::new("dolly_wave_arc"), Hash40::new("top"), 0, 10, 4, 69, -46, -45, 1.2, true, *EF_FLIP_YZ);
     }
 }
 
@@ -1094,6 +1115,70 @@ unsafe fn effect_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SuperSpecial2 
+    agent = "dolly", 
+    script = "effect_superspecial2_waluigi", 
+    category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_waluigi_superspecial2(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("dolly_buster_punch"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("dolly_buster_dash"), false, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, -3, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+        BURN_COLOR(fighter, 2, 0.4, 0.008, 0);
+        BURN_COLOR_FRAME(fighter, 4, 2, 0.4, 0.008, 0.4);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("dolly_buster_ground"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("dolly_buster_ground_blow"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("dolly_buster"), Hash40::new("top"), 0, 11, 4, 90, 0, 0, 1, false);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        CANCEL_FILL_SCREEN(fighter, 1, 20);
+        BURN_COLOR(fighter, 2, 0.4, 0.008, 0.4);
+        BURN_COLOR_FRAME(fighter, 12, 2, 0.4, 0.008, 0);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("dolly_buster_aura"), Hash40::new("handr"), 1, 0, 0, 0, 0, 0, 1, true);
+        EFFECT_DETACH_KIND(fighter, Hash40::new("dolly_buster_ground"), -1);
+        EFFECT_DETACH_KIND(fighter, Hash40::new("dolly_buster_ground_blow"), -1);
+        EFFECT_DETACH_KIND(fighter, Hash40::new("dolly_buster"), -1);
+    }
+    frame(fighter.lua_state_agent, 50.0);
+    if is_excute(fighter) {
+        BURN_COLOR_NORMAL(fighter);
+    }
+}
+
+#[acmd_script(//SuperSpecial2Start 
+    agent = "dolly", 
+    script = "effect_superspecial2start_waluigi", 
+    category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_waluigi_superspecial2start(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -15, 16, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+        LAST_EFFECT_SET_RATE(fighter, 1.1);
+        EFFECT_FOLLOW(fighter, Hash40::new("dolly_wave_hold"), Hash40::new("handr"), 1, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FLW_POS_NO_STOP(fighter, Hash40::new("dolly_buster_punch"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1, false);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("dolly_buster_dash"), Hash40::new("top"), 0, 0, -8, 0, 0, 0, 1, false);
+        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 31.0);
+    if is_excute(fighter) {
+        EFFECT_DETACH_KIND(fighter, Hash40::new("dolly_buster_punch"), 6);
+    }
+    frame(fighter.lua_state_agent, 37.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("dolly_buster_dash"), false, true);
+    }
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
         effect_waluigi_attack11,
@@ -1111,9 +1196,6 @@ pub fn install() {
         effect_waluigi_attackairb,
         effect_waluigi_attackairhi,
         effect_waluigi_attackairlw,
-        effect_waluigi_catch,
-        effect_waluigi_catchdash,
-        effect_waluigi_catchturn,
         effect_waluigi_catchattack,
         effect_waluigi_throwf,
         effect_waluigi_throwb,
@@ -1121,7 +1203,6 @@ pub fn install() {
         effect_waluigi_throwlw,
         effect_waluigi_downattacku,
         effect_waluigi_downattackd,
-        effect_waluigi_cliffattack,
         effect_waluigi_specialn,
         effect_waluigi_specialairn,
         effect_waluigi_specialsbstart,
@@ -1130,8 +1211,8 @@ pub fn install() {
         effect_waluigi_specialairsfend,
         effect_waluigi_specialairsfend2,
         effect_waluigi_specialsfattack,
+        effect_waluigi_specialsfstart,
         effect_waluigi_specialairsfstart,
-        effect_waluigi_specialairsfattack,
         effect_waluigi_specialhi1,
         effect_waluigi_specialairhi1,
         effect_waluigi_speciallwstart,
@@ -1146,7 +1227,11 @@ pub fn install() {
         effect_waluigi_speciallwjump,
         effect_waluigi_speciallwattackair,
         effect_waluigi_speciallwspecialair,
+        effect_waluigi_speciallwspecial,
         effect_waluigi_speciallwjumpair,
+        effect_waluigi_superspecial,
+        effect_waluigi_superspecial2,
+        effect_waluigi_superspecial2start,
         effect_waluigi_entryl,
         effect_waluigi_entryr,
         effect_waluigi_finalstart,

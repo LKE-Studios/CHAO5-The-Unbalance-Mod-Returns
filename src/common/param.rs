@@ -22,10 +22,10 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
     let CLAUS = color >= 64 && color <= 71;
     let KNUCKLES = color >= 120 && color <= 127;
     let MIDBUS = color >= 120 && color <= 127;
-    let SILVER = color >= 128 && color <= 135;
+    let SILVER = color >= 120 && color <= 127;
     let WALUIGI = color >= 120 && color <= 130;
     let WEAPON_CLAUS = weapon_color >= 64 && weapon_color <= 71;
-    let WEAPON_SILVER = weapon_color >= 128 && weapon_color <= 135;
+    let WEAPON_SILVER = weapon_color >= 120 && weapon_color <= 127;
     if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_LUCAS && CLAUS {
             if param_hash == 0 {
@@ -301,7 +301,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 0.062;
                 }
                 if param_type == hash40("dash_speed") {
-                    return 1.58;
+                    return 3.91;
                 }
                 if param_type == hash40("run_accel_mul") {
                     return 0.12;
@@ -310,7 +310,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 0.026;
                 }
                 if param_type == hash40("run_speed_max") {
-                    return 1.67;
+                    return 3.65;
                 }
                 if param_type == hash40("jump_speed_x") {
                     return 0.87;
@@ -370,6 +370,9 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 6.0;
                 }
             }
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_damage") {
+                return 9999.0;
+            }
             if param_type == hash40("param_special_hi") && param_hash == hash40("start_speed_y_mul") {
                 return 0.1;
             }
@@ -386,10 +389,10 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 return 2.0;
             } 
             if param_type == hash40("param_special_hi") && param_hash == hash40("air_speed_y_mul") {
-                return 0.676;
+                return 1.676;
             }
             if param_type == hash40("param_special_hi") && param_hash == hash40("speed_y_mul") {
-                return 0.55;
+                return 1.55;
             }		
             if param_type == hash40("param_special_hi") && param_hash == hash40("lr_stick_x") {
                 return 0.2;
@@ -399,14 +402,14 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
     else if boma_reference.is_weapon() {
         if fighter_kind == *WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
             if param_type == hash40("param_shadowball") {
-                if param_hash == hash40("angle") {
+                /*if param_hash == hash40("angle") {
                     if SPECIAL_N_ANGLE[ENTRY_ID] == -1.0 && SPECIAL_N_GET_ANGLE[ENTRY_ID] && StatusModule::situation_kind(module_accessor) == *SITUATION_KIND_AIR {
                         return -30.0;
                     }
                     else {
                         return 0.0;
                     }
-                }
+                }*/
                 if param_hash == hash40("min_speed") {
                     return 4.0;
                 }
@@ -441,8 +444,9 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let weapon_color = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let boma_reference = &mut *module_accessor;
-    let SILVER = color >= 128 && color <= 135;
-    let WEAPON_SILVER = weapon_color >= 128 && weapon_color <= 135;
+    let SILVER = color >= 120 && color <= 127;
+    let WALUIGI = color >= 120 && color <= 130;
+    let WEAPON_SILVER = weapon_color >= 120 && weapon_color <= 127;
     if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_MEWTWO && SILVER {
             if param_hash == 0 {
@@ -454,6 +458,13 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
                 }
                 if param_type == hash40("jump_count_max") {
                     return 5;
+                }
+            }
+        }
+        if fighter_kind == FIGHTER_KIND_DOLLY && WALUIGI {
+            if param_hash == 0 {
+                if param_type == hash40("attack_combo_max") {
+                    return 2;
                 }
             }
         }

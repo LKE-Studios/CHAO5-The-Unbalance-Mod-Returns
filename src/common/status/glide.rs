@@ -175,7 +175,7 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
         println!("x{}, y{}", angled.x, angled.y);
         println!("{}", angle);
         //Fighter Specific
-        let kind = fighter.global_table[0x2].get_i32();
+        let kind = fighter.global_table[FIGHTER_KIND].get_i32();
         if kind == *FIGHTER_KIND_METAKNIGHT {
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
             SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * -0.0035);
@@ -257,7 +257,7 @@ pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon,
 #[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
 pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    if fighter.global_table[0x2].get_i32() == *FIGHTER_KIND_PALUTENA {
+    if fighter.global_table[FIGHTER_KIND].get_i32() == *FIGHTER_KIND_PALUTENA {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
     0.into()

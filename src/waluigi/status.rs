@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::waluigi::frame::*;
 
 #[status_script( agent = "dolly", status = FIGHTER_STATUS_KIND_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 unsafe fn status_waluigi_wait_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -112,6 +113,249 @@ unsafe fn status_waluigi_special_s_pre(fighter: &mut L2CFighterCommon) -> L2CVal
 	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {	
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, true, *FIGHTER_TREADED_KIND_ENABLE, true, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32, 0);
+        //0.into()
+        original!(fighter)
+    }
+    else {
+        original!(fighter)
+    }
+}
+
+//FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S
+#[status_script( agent = "dolly", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn status_waluigi_special_s2_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {	
+        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+        FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, true, *FIGHTER_TREADED_KIND_ENABLE, true, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32, 0);
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
+#[status_script( agent = "dolly", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn status_waluigi_special_s_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {	
+        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+            fighter.set_situation(SITUATION_KIND_AIR.into());
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            GroundModule::pass_floor(fighter.module_accessor);
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_f_start"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        else {
+            fighter.set_situation(SITUATION_KIND_GROUND.into());
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_f_start"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        fighter.sub_shift_status_main(L2CValue::Ptr(waluigi_special_s_loop as *const () as _))
+    }
+    else {
+        0.into()
+    }
+}
+
+unsafe extern "C" fn waluigi_special_s_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+            return 1.into();
+        }
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
+    if motion_kind == hash40("special_air_f_start") {
+        if ray_check_pos(module_accessor, 0.0, -0.3, false) == 1 {
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("landing_fall_special"), 0.0, 1.0, false, 0.0, false, false);
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            sv_kinetic_energy!(clear_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+            KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+        };
+        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+        }
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            if MotionModule::frame(fighter.module_accessor) >= 75.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_f_start"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if frame >= 19.0 && frame <= 63.0 {
+            if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                fighter.change_status(FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE.into(), false.into());
+            };
+        }
+        if GroundModule::is_wall_touch_line(fighter.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) && frame > 8.0 && frame < 90.0 {
+            fighter.change_status(FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP.into(), false.into());
+        };
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+        };
+    }
+    if motion_kind == hash40("special_f_start") {
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+        };
+    }
+    0.into()
+}
+
+#[status_script( agent = "dolly", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
+unsafe fn status_waluigi_special_s_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
+}
+
+//FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE
+#[status_script( agent = "dolly", status = 0x1D2, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn status_waluigi_special_s_dive_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {	
+        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+        FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, true, *FIGHTER_TREADED_KIND_ENABLE, true, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32, 0);
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
+#[status_script( agent = "dolly", status = 0x1D2, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn status_waluigi_special_s_dive_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {	
+        fighter.set_situation(SITUATION_KIND_AIR.into());
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+        GroundModule::pass_floor(fighter.module_accessor);
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_f_end"), 0.0, 1.0, false, 0.0, false, false);
+        fighter.sub_shift_status_main(L2CValue::Ptr(waluigi_special_s_dive_loop as *const () as _))
+    }
+    else {
+        0.into()
+    }
+}
+
+unsafe extern "C" fn waluigi_special_s_dive_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+            return 1.into();
+        }
+    }
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+    }
+    if ray_check_pos(module_accessor, 0.0, -0.3, false) == 1 {
+        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("landing_fall_special"), 0.0, 1.0, false, 0.0, false, false);
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_CLIFF_GROUND);
+        KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+    };
+    if frame >= 2.0 && frame <= 19.0 {
+        sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, 0.2, 1.7);
+    };
+    if frame >= 20.0 && frame <= 25.0 {
+        sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, dive_speed_x, 0.0);
+    };
+    if MotionModule::is_end(fighter.module_accessor) {
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_f_end_2"), 0.0, 1.0, true, 0.0, false, false);
+    }
+    0.into()
+}
+
+#[status_script( agent = "dolly", status = 0x1D2, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
+unsafe extern "C" fn status_waluigi_special_s_dive_exec(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
+        if motion_kind == hash40("special_air_f_end_2") {
+            if CancelModule::is_enable_cancel(fighter.module_accessor) {
+                if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+                    return 1.into();
+                }
+            }
+            if fighter.sub_transition_group_check_air_cliff().get_bool() {
+                return 1.into();
+            }
+            if fighter.sub_air_check_fall_common().get_bool() {
+                return 1.into();
+            }
+            notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+            if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+                fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+            }
+            if stick_y <= -0.5 {
+                GroundModule::pass_floor(fighter.module_accessor);
+                if ray_check_pos(module_accessor, 0.0, -0.3, false) == 1 {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("landing_fall_special"), 0.0, 1.0, false, 0.0, false, false);
+                    StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+                    KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+                };
+            } 
+            else {
+                GroundModule::clear_pass_floor(fighter.module_accessor);
+                if ray_check_pos(module_accessor, 0.0, -0.3, true) == 1 {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("landing_fall_special"), 0.0, 1.0, false, 0.0, false, false);
+                    StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
+                    KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+                };
+            };
+            if frame >= 0.0 {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+                sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, 0.25, -dive_speed_y);
+                sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, 0.0, -dive_speed_y);
+            };
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                MotionModule::set_frame(fighter.module_accessor, 176.0, true);
+                KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.8, z: 0.0});
+                fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());
+            };
+        }
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
+#[status_script( agent = "dolly", status = 0x1D2, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
+unsafe fn status_waluigi_special_s_dive_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
+}
+
+#[status_script( agent = "dolly", status = FIGHTER_DOLLY_STATUS_KIND_SPECIAL_F_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn status_waluigi_special_sf_attack_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {   
         0.into()
     }
     else {
@@ -146,6 +390,31 @@ unsafe fn status_waluigi_special_s_command_pre(fighter: &mut L2CFighterCommon) -
     }
     else {
         original!(fighter)
+    }
+}
+
+#[status_script(agent = "dolly", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
+unsafe fn status_waluigi_special_lw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        let sum_speed = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        if motion_kind == hash40("special_lw_air_jump") {
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
+            sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
+            sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
+            sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
+            sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, 0.0);
+            sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed, 0.0);
+            sv_kinetic_energy!(controller_set_accel_x_add, fighter, 0.0);
+            KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        }
+        0.into()
+    }
+    else {
+        0.into()
     }
 }
 
@@ -266,8 +535,17 @@ pub fn install() {
         status_waluigi_landing_init,
         status_waluigi_landinglight_init,
         status_waluigi_special_s_pre,
+        status_waluigi_special_s2_pre,
+        status_waluigi_special_s_main,
+        status_waluigi_special_s_end,
+        status_waluigi_special_s_dive_pre,
+        status_waluigi_special_s_dive_main,
+        status_waluigi_special_s_dive_exec,
+        status_waluigi_special_s_dive_end,
+        status_waluigi_special_sf_attack_main,
         status_waluigi_special_sf_pre,
-        status_waluigi_special_s_command_pre
+        status_waluigi_special_s_command_pre,
+        status_waluigi_special_lw_init
     );
     install_agent_init_callbacks!(
         waluigi_agent_init
