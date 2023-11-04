@@ -36,9 +36,8 @@ pub fn frame_dolly(fighter : &mut L2CFighterCommon) {
             attack_dash_waluigi(fighter);
             special_n_waluigi(fighter);
             special_s_waluigi(fighter);
-            special_lw_waluigi(fighter);
             final_start_waluigi(fighter);
-            slap_cancel_waluigi(fighter);
+            //slap_cancel_waluigi(fighter);
         }
     }
 }

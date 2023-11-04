@@ -738,7 +738,7 @@ unsafe fn sound_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
 unsafe fn sound_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {        
-        PLAY_STATUS(fighter, Hash40::new("se_dolly_attackair_h01"));
+        PLAY_SE(fighter, Hash40::new("se_dolly_attackair_h01"));
     }
 }
 
