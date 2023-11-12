@@ -109,9 +109,9 @@ pub fn install() {
     .effect_acmd("effect_jumpaerialf3", effect_buddy_JumpAerialF3)
     .effect_acmd("effect_jumpaerialf4", effect_buddy_JumpAerialF4)
     .effect_acmd("effect_jumpaerialf5", effect_buddy_JumpAerialF5)
-    .effect_acmd("effect_glidestart", effect_brave_GlideStart)
-    .effect_acmd("effect_glidewing", effect_brave_GlideWing)
-    .effect_acmd("effect_glideattack", effect_brave_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_brave_GlideLanding)
+    .effect_acmd("effect_glidestart", effect_buddy_GlideStart)
+    .effect_acmd("effect_glidewing", effect_buddy_GlideWing)
+    .effect_acmd("effect_glideattack", effect_buddy_GlideAttack)
+    .effect_acmd("effect_glidelanding", effect_buddy_GlideLanding)
     .install();
 }

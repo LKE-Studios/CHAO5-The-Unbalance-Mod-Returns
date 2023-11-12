@@ -115,10 +115,10 @@ pub fn install() {
     .sound_acmd("sound_jumpaerialf3", sound_buddy_JumpAerialF3)
     .sound_acmd("sound_jumpaerialf4", sound_buddy_JumpAerialF4)
     .sound_acmd("sound_jumpaerialf5", sound_buddy_JumpAerialF5)
-    .sound_acmd("sound_glidestart", sound_brave_GlideStart)
-    .sound_acmd("sound_glidewing", sound_brave_GlideWing)
-    .sound_acmd("sound_glideattack", sound_brave_GlideAttack)
-    .sound_acmd("sound_glideend", sound_brave_GlideEnd)
-    .sound_acmd("sound_glidelanding", sound_brave_GlideLanding)
+    .sound_acmd("sound_glidestart", sound_buddy_GlideStart)
+    .sound_acmd("sound_glidewing", sound_buddy_GlideWing)
+    .sound_acmd("sound_glideattack", sound_buddy_GlideAttack)
+    .sound_acmd("sound_glideend", sound_buddy_GlideEnd)
+    .sound_acmd("sound_glidelanding", sound_buddy_GlideLanding)
     .install();
 }
