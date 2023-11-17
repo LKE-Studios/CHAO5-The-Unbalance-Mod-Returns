@@ -32,6 +32,9 @@ pub fn frame_dolly(fighter : &mut L2CFighterCommon) {
         //WALUIGI
         let WALUIGI = color >= 120 && color <= 130; 
         if WALUIGI {
+            if is_training_mode() && DamageModule::damage(fighter.module_accessor, 0) >= 100.0 {
+                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_ENABLE_SUPER_SPECIAL);
+            }
             scale_waluigi(fighter);
             attack_dash_waluigi(fighter);
             special_n_waluigi(fighter);

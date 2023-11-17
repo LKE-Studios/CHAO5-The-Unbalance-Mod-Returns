@@ -996,9 +996,12 @@ unsafe fn effect_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 22.5, 0, 0, 0, 0.0, 1.0, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 20.0, 0, 0, 0, 0.0, 1.0, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.9, /*G*/ 0.0, /*B*/ 2.0);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 20.0, -3.0, 0, 0, 0.0, 1.0, true);
+    }
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 19.0, -3.0, 0, 0, 0.0, 1.0, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.4, /*G*/ 0.0, /*B*/ 2.0);
     }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
@@ -1007,15 +1010,21 @@ unsafe fn effect_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 22.5, 0, 0, 0, 0.0, 1.0, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 20.0, 0, 0, 0, 0.0, 1.0, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.9, /*G*/ 0.0, /*B*/ 2.0);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 20.0, -3.0, 0, 0, 0.0, 1.0, true);
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 19.0, -3.0, 0, 0, 0.0, 1.0, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.4, /*G*/ 0.0, /*B*/ 2.0);
     }
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 22.5, 0, 0, 0, 0.0, 1.0, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), -7.0, 20.0, 0, 0, 0, 0.0, 1.0, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.9, /*G*/ 0.0, /*B*/ 2.0);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 20.0, -3.0, 0, 0, 0.0, 1.0, true);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 19.0, -3.0, 0, 0, 0.0, 1.0, true);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.4, /*G*/ 0.0, /*B*/ 2.0);
     }
 }
 

@@ -17,7 +17,7 @@ pub mod KineticUtility {
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_init_GlideStart(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_GlideStart_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let params = GlideParams::get(fighter);
     let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
     let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
@@ -29,17 +29,36 @@ pub unsafe fn status_init_GlideStart(fighter: &mut L2CFighterCommon) -> L2CValue
     0.into()
 }
 
-#[skyline::hook(replace = L2CFighterCommon_status_GlideStart)]
-pub unsafe fn status_GlideStart(fighter: &mut L2CFighterCommon) -> L2CValue {
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn status_GlideStart_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(L2CFighterCommon_bind_address_call_status_GlideStart_Main as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideStart_Main_Sub as *const () as _))
+}
+
+unsafe extern "C" fn GlideStart_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE) || 
+    WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING) {
+        if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), false.into());
+            return 0.into();
+        }
+        if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR && 
+        MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_GLIDE.into(), false.into());
+            return 0.into();
+        }
+    }
+    0.into()
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_init_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_Glide_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let lr = PostureModule::lr(fighter.module_accessor);
     let sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let params = GlideParams::get(fighter);
@@ -54,7 +73,7 @@ pub unsafe fn status_init_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn status_main_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_Glide_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GLIDE_ATTACK);
@@ -104,7 +123,7 @@ unsafe extern "C" fn Glide_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let params = GlideParams::get(fighter);
     let lr = PostureModule::lr(fighter.module_accessor);
     let _energy_stop = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
@@ -280,7 +299,7 @@ unsafe extern "C" fn status_exec_Glide(fighter: &mut L2CFighterCommon) -> L2CVal
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-pub unsafe fn status_exit_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
     0.into()
 }
@@ -292,15 +311,40 @@ pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon,
 
 #[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
 pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    if fighter.global_table[FIGHTER_KIND].get_i32() == *FIGHTER_KIND_PALUTENA {
-        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    0.into()
+}
+
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn status_GlideAttack_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_attack"), 0.0, 1.0, false, 0.0, false, false);
+    if !StopModule::is_stop(fighter.module_accessor) {
+        fighter.sub_fall_common_uniq(false.into());
+    }
+    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(L2CFighterCommon_bind_address_call_sub_fall_common_uniq as *const () as _));
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideAttack_Main_Sub as *const () as _))
+}
+
+unsafe extern "C" fn GlideAttack_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.sub_transition_group_check_air_landing().get_bool() {
+        return 0.into();
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+        let jump_count = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+        let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);
+        let status = if jump_count >= jump_count_max {
+            FIGHTER_STATUS_KIND_FALL_SPECIAL
+        }
+        else {
+            FIGHTER_STATUS_KIND_FALL_AERIAL
+        };
+        fighter.change_status(status.into(), false.into());
     }
     0.into()
 }
 
 #[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_init_GlideEnd(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_GlideEnd_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
     let lr = PostureModule::lr(fighter.module_accessor);
     KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: 0.0, y: 0.0}, Vector3f{x: 0.0, y: 0.0, z: 0.0});
@@ -309,10 +353,81 @@ pub unsafe fn status_init_GlideEnd(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn status_GlideEnd_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+    MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_end"), 0.0, 1.0, false, 0.0, false, false);
+    if !StopModule::is_stop(fighter.module_accessor) {
+        fighter.sub_fall_common_uniq(false.into());
+    }
+    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(L2CFighterCommon_bind_address_call_sub_fall_common_uniq as *const () as _));
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideEnd_Main_Sub as *const () as _))
+}
+
+unsafe extern "C" fn GlideEnd_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_transition_group_check_air_landing().get_bool() {
+        return 0.into();
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+        let jump_count = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+        let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);
+        let status = if jump_count >= jump_count_max {
+            FIGHTER_STATUS_KIND_FALL_SPECIAL
+        }
+        else {
+            FIGHTER_STATUS_KIND_FALL_AERIAL
+        };
+        fighter.change_status(status.into(), false.into());
+    }
+    0.into()
+}
+
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_LANDING, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn status_GlideLanding_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if !MotionModule::is_anim_resource(fighter.module_accessor, Hash40::new("glide_landing")) {
+        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_STAND);
+    }
+    else {
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_landing"), 0.0, 1.0, false, 0.0, false, false);
+        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_WAIT);
+    }
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideLanding_Main_Sub as *const () as _))
+}
+
+unsafe extern "C" fn GlideLanding_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_AIR {
+        if !MotionModule::is_anim_resource(fighter.module_accessor, Hash40::new("glide_landing")) {
+            if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_STAND)
+            || fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+                fighter.change_status(FIGHTER_STATUS_KIND_DOWN_STAND.into(), false.into());
+            }
+            else {
+                return 0.into();
+            }
+        }
+        else {
+            if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_WAIT)
+            && MotionModule::is_end(fighter.module_accessor)
+            && fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+                fighter.change_status(FIGHTER_STATUS_KIND_DOWN_WAIT.into(), false.into());
+            }
+            else {
+                return 0.into();
+            }
+        }
+    }
+    else {
+        fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+    }
+    0.into()
+}
+
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
-            status_GlideStart,
             bind_address_call_status_end_Glide, 
             status_end_Glide
         );
@@ -322,12 +437,15 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 pub fn install() {
     skyline::nro::add_hook(nro_hook);
     install_status_scripts!(
-        status_init_GlideStart,
-        status_init_Glide,
-        status_exec_Glide,
-        status_exec_Glide,
-        status_main_Glide,
-        status_exit_Glide,
-        status_init_GlideEnd
+        status_GlideStart_Init,
+        status_GlideStart_Main,
+        status_Glide_Init,
+        status_Glide_Exec,
+        status_Glide_Main,
+        status_Glide_Exit,
+        status_GlideAttack_Main,
+        status_GlideEnd_Init,
+        status_GlideEnd_Main,
+        status_GlideLanding_Main
     );
 }

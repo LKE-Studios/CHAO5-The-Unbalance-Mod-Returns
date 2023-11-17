@@ -31,9 +31,9 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE);
             WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
         }
-        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
+        /*if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END {
             special_n_end_function(fighter);
-        };
+        };*/
         if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_AIR_HI_START].contains(&status_kind) {
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
@@ -44,16 +44,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
             }
         };
-        if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&status_kind) {
-            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
-            fighter.sub_air_check_fall_common();
-            if frame > 22.0 {
-                WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
-                if situation_kind == *SITUATION_KIND_GROUND {
-                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_LIGHT, false);
-                }
-            }
-        }
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
             if frame > 10.0 {
                 if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) || 

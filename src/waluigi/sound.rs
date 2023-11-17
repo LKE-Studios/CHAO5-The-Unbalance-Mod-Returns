@@ -777,9 +777,17 @@ unsafe fn sound_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_stage_mariobros_09"));
     }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_waluigi_special_l01_jump_air")); //Index 140
+    }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_stage_mariobros_09"));
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_waluigi_special_l02_jump_air")); //Index 141
     }
 }
 

@@ -1,8 +1,9 @@
 pub mod BuildImports {
     pub use {
         std::mem,
-        smashline::*,        
+        smashline::*,    
         smash_script::{*, macros::*},
+        smash::app::smashball::is_training_mode,
         smash::app::{*, 
             lua_bind::{*, 
                 KineticEnergy, 
@@ -27,7 +28,7 @@ pub mod BuildImports {
                 GimmickEventTornadoMoveInfo,
                 GimmickEventBarrel,
                 GimmickEventDrumRelease,
-                GimmickEventLadder
+                GimmickEventLadder,
             },
             Fighter, 
             sv_information    

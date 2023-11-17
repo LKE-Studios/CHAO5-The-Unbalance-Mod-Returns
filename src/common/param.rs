@@ -3,8 +3,7 @@ use smash::app::*;
 use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
-use crate::silver::frame::SPECIAL_N_ANGLE;
-use crate::silver::frame::SPECIAL_N_GET_ANGLE;
+use smash::app::smashball::is_training_mode;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
 static mut INT_OFFSET : usize = 0x4e5380;
@@ -287,6 +286,18 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
             }
         }
         if fighter_kind == FIGHTER_KIND_DOLLY && WALUIGI {
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_damage") {
+                return 9999.0;
+            }
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_rate") {
+                return 0.0;
+            }
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_min") {
+                return 0.0;
+            }
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_max") {
+                return 0.0;
+            }
             if param_hash == 0 {
                 if param_type == hash40("walk_accel_mul") {
                     return 0.097;
@@ -370,9 +381,6 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 6.0;
                 }
             }
-            if param_type == hash40("param_private") && param_hash == hash40("super_special_damage") {
-                return 9999.0;
-            }
             if param_type == hash40("param_special_hi") && param_hash == hash40("start_speed_y_mul") {
                 return 0.1;
             }
@@ -380,7 +388,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 return 0.1;
             }
             if param_type == hash40("param_special_hi") && param_hash == hash40("stick_x_max") {
-                return 0.1;
+                return 1.0;
             }
             if param_type == hash40("param_special_hi") && param_hash == hash40("stick_x_speed_mul_max") {
                 return 0.1;
