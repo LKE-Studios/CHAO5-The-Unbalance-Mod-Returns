@@ -979,6 +979,11 @@ unsafe fn effect_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FLASH(fighter, 2.55, 0.0, 0.0, 0.55);
     }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) { 
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 12.5, 0, 180, 90, 20, 1.2, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 6.0, 0, 180, 90, 20, 0.95, true);
+    }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ColorBlendModule::off_flash(fighter.module_accessor, false);

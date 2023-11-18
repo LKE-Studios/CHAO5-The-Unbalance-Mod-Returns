@@ -4,6 +4,8 @@ use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
 use smash::app::smashball::is_training_mode;
+use crate::silver::frame::SPECIAL_N_ANGLE;
+use crate::silver::frame::SPECIAL_N_GET_ANGLE;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
 static mut INT_OFFSET : usize = 0x4e5380;

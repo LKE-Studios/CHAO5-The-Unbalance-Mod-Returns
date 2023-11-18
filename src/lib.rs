@@ -131,7 +131,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
-/*mod bayonetta;
+mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -173,9 +173,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*mod mewtwo;
+mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -225,7 +225,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;*/
+mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -357,16 +357,15 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 	}
 }
 
-/*extern "C" { 
-    fn allow_ui_chara_hash_online(ui_chara_hash: u64); 
-}*/
 
 #[skyline::main(name = "chao5")]
 pub fn main() {
-    /*unsafe {
-        allow_ui_chara_hash_online(0xfec9738f6);
-        allow_ui_chara_hash_online(0xe7bbfb2e4);
-    }*/
+    unsafe {
+        extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
+        allow_ui_chara_hash_online(0xe7bbfb2e4); //Claus
+        allow_ui_chara_hash_online(0xfec9738f6); //Silver
+        allow_ui_chara_hash_online(0x108658e080); //Waluigi
+    }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
         let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
@@ -375,7 +374,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    /*mario::install();
+    mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -401,9 +400,9 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
-    /*pit::install();
+    pit::install();
     wario::install();
     diddy::install();
     ptrainer::install();
@@ -469,7 +468,7 @@ pub fn main() {
     claus::install();
     koopag::install();
     silver::install();
-    waluigi::install();*/
+    waluigi::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

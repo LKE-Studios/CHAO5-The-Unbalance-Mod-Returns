@@ -100,7 +100,8 @@ unsafe fn metaknight_special_n_end_motion_handler(fighter: &mut L2CFighterCommon
         let air_end_speed_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("air_end_speed_x_mul"));
         let air_end_brake_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("air_end_brake_x"));
         let air_end_max_speed_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("air_end_max_speed_x"));
-        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, air_end_speed_x_mul * air_end_brake_x, 0.0);
+        let get_sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, get_sum_speed_x * air_end_speed_x_mul, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, air_end_max_speed_x, 0.0);
         sv_kinetic_energy!(set_brake, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, air_end_brake_x, 0.0);
     }
@@ -111,7 +112,8 @@ unsafe fn metaknight_special_n_end_motion_handler(fighter: &mut L2CFighterCommon
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
         let ground_end_speed_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("ground_end_speed_x_mul"));
         let ground_end_brake_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("ground_end_brake_x"));
-        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, ground_end_speed_x_mul * ground_end_brake_x, 0.0);
+        let get_sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, get_sum_speed_x * ground_end_speed_x_mul, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, -1.0, 0.0);
         sv_kinetic_energy!(set_brake, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, ground_end_brake_x, 0.0);
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_WAIT);
