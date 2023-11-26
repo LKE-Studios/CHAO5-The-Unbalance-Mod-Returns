@@ -9,4 +9,5 @@ unsafe fn status_cloud_special_hi2_fall_main(fighter: &mut L2CFighterCommon) -> 
     }
     fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(L2CFighterCommon_bind_address_call_sub_fall_common_uniq as *const () as _));
     KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, *ENERGY_STOP_RESET_TYPE_GRAVITY, Vector2f{x: 0.0, y: 0.0}, Vector3f{x: 0.0, y: 0.0, z: 0.0});
+
 }

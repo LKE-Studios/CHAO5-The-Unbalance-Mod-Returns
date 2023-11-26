@@ -6,7 +6,7 @@ fn frame_fox(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let frame = MotionModule::frame(fighter.module_accessor);
-        
+        platform_cancel_function(fighter);
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
             && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
@@ -36,6 +36,26 @@ fn frame_fox(fighter: &mut L2CFighterCommon) {
             if frame > 41.0 && frame < 44.0 {
                 if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH, false);
+                }
+            }
+        }
+    }
+}
+
+unsafe fn platform_cancel_function(fighter: &mut L2CFighterCommon) {
+    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let flick_y = ControlModule::get_flick_y(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    if [hash40("special_s_end"), hash40("special_air_s_end"), hash40("special_lw_end"), hash40("special_air_lw_end")].contains(&motion_kind) || 
+    status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_END || status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH_END {
+        if situation_kind == *SITUATION_KIND_GROUND {
+            if GroundModule::is_passable_ground(fighter.module_accessor) {
+                WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_GROUND_SPECIAL);
+                WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_GROUND_ATTACK);
+                WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_GROUND_JUMP);
+                if flick_y < -1 {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
                 }
             }
         }

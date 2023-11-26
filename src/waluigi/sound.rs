@@ -264,6 +264,10 @@ unsafe fn sound_waluigi_throwf(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_special_h09_command_s"));
     }
+    frame(fighter.lua_state_agent, 50.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
+    }
 }
 
 #[acmd_script(//ThrowB 
@@ -311,6 +315,10 @@ unsafe fn sound_waluigi_throwlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
+    }
+    frame(fighter.lua_state_agent, 67.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
     }
 }
 

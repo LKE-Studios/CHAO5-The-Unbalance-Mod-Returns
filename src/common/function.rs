@@ -6,6 +6,22 @@ pub static mut COUNTER : [i32; 8] = [0; 8];
 pub static mut CURRENT_ON_FRAME : [f32; 8] = [0.0; 8];
 pub static mut IS_CRIT : [bool; 8] = [false; 8];
 
+pub mod KineticUtility {
+    // Resets and enables the kinetic energy type.
+    // Unknown why there are two vectors required by reset_energy
+    pub unsafe fn reset_enable_energy(module_accessor: *mut smash::app::BattleObjectModuleAccessor, energy_id: i32, energy_reset_type: i32, speed_vec: smash::phx::Vector2f, other_vec: smash::phx::Vector3f) {
+        let energy = smash::app::lua_bind::KineticModule::get_energy(module_accessor, energy_id) as *mut smash::app::KineticEnergy;
+        smash::app::lua_bind::KineticEnergy::reset_energy(energy, energy_reset_type, &speed_vec, &other_vec, module_accessor);
+        smash::app::lua_bind::KineticEnergy::enable(energy);
+    }
+    // Clears and disables the kinetic energy type
+    pub unsafe fn clear_unable_energy(module_accessor: *mut smash::app::BattleObjectModuleAccessor, energy_id: i32) {
+        let energy = smash::app::lua_bind::KineticModule::get_energy(module_accessor, energy_id) as *mut smash::app::KineticEnergy;
+        smash::app::lua_bind::KineticEnergy::clear_speed(energy);
+        smash::app::lua_bind::KineticEnergy::unable(energy);
+    }
+}
+
 //Const Functions
 pub unsafe fn common_attack_critical_flag (fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -225,6 +241,14 @@ pub mod FighterSpecializer_MetaKnight {
             STOP_SE(fighter, Hash40::new("vc_metaknight_final03"));
         }
     }
+}
+
+pub mod FighterSpecializer_Metaknight {
+    use crate::imports::BuildImports::*;
+    extern "C" {
+        #[link_name = "_ZN3app29FighterSpecializer_Metaknight21check_edge_special_lwERNS_21FighterModuleAccessorE"]
+        pub fn check_edge_special_lw(module_accessor: *mut BattleObjectModuleAccessor);
+    } 
 }
 
 pub mod FighterSpecializer_Palutena {

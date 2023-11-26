@@ -6,9 +6,8 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         let frame = MotionModule::frame(fighter.module_accessor);
-        let params = GlideParams::get(fighter);
         let lr = PostureModule::lr(fighter.module_accessor);
-        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.1, y:1.1, z:1.1});
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.05, y:1.05, z:1.05});
         //Inner Meta Mechanic
         FighterSpecializer_MetaKnight::meta_power(fighter);
         //SFX Controllers
@@ -41,17 +40,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
                 DamageModule::heal(fighter.module_accessor, -1.0, 0);
             }
         };
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
-            if frame > 10.0 {
-                if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) || 
-                ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
-                    fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END.into(), true.into());
-                }
-                else if fighter.global_table[PAD_FLAG].get_i32() & *FIGHTER_PAD_FLAG_SPECIAL_TRIGGER != 0 {
-                    fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK.into(), true.into());
-                }
-            }
-        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK {
             special_lw_attack_function(fighter);
         }

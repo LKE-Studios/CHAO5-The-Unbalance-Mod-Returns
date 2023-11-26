@@ -3,8 +3,9 @@ pub mod BuildImports {
         std::mem,
         smashline::*,    
         smash_script::{*, macros::*},
-        smash::app::smashball::is_training_mode,
         smash::app::{*, 
+            stage::get_stage_id,
+            smashball::is_training_mode,
             lua_bind::{*, 
                 KineticEnergy, 
                 KineticEnergyNormal,
@@ -38,7 +39,7 @@ pub mod BuildImports {
         smash::lib::{
             L2CAgent,
             L2CValue,
-            lua_const::*,
+            lua_const::*, 
             L2CValueType::*, 
             L2CValueType, 
             L2CTable, 
@@ -47,6 +48,7 @@ pub mod BuildImports {
             L2CValueInner
         },
         smash::lib::lua_const::EffectScreenLayer::GROUND,
+        smash::lib::lua_const::StageID::BonusGame,
         smash::lua2cpp::{*, L2CAgentBase, L2CFighterCommon, L2CFighterBase},
         singletons::*,
         smash::app::sv_animcmd::{
@@ -78,13 +80,12 @@ pub mod BuildImports {
         crate::globals::*,
         crate::common::{*,
             consts::*,
-            function::*,
+            function::{*, KineticUtility},
             FIGHTER_BOOL_1,
             FIGHTER_BOOL_2,
             FIGHTER_BOOL_3,
             get_player_number,
             status::glide_param::GlideParams,
-            status::glide::KineticUtility
         },
         crate::utils::{*, FIGHTER_CUTIN_MANAGER, get_entry_id},
         crate::helper::{
@@ -99,6 +100,7 @@ pub mod BuildImports {
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},
         std::f32::consts::PI,
+        std::fs::{metadata, rename},
         smash2,
         smash2::app::BattleObjectModuleAccessor,
     };
