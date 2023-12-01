@@ -129,6 +129,17 @@ unsafe fn sound_metaknight_specialairnstart(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//SpecialNAddHit
+    agent = "metaknight", 
+    script = "sound_specialnaddhit", 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn sound_metaknight_specialnaddhit(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_swish08"));
+    }
+}
+
 #[acmd_script(//SpecialSStart
     agent = "metaknight", 
     script = "sound_specialsstart", 
@@ -277,6 +288,7 @@ pub fn install() {
         sound_metaknight_throwhi,
         sound_metaknight_specialnstart,
         sound_metaknight_specialairnstart,
+        sound_metaknight_specialnaddhit,
         sound_metaknight_specialsstart,
         sound_metaknight_specialhi,
         sound_metaknight_specialhiloop,

@@ -76,12 +76,12 @@ unsafe extern "C" fn Glide_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
 unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let params = GlideParams::get(fighter);
     let lr = PostureModule::lr(fighter.module_accessor);
-    let _energy_stop = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+    let energy_stop = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
     let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
     let mut angle_speed = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE_SPEED);
     let mut stick_angle = ControlModule::get_stick_angle(fighter.module_accessor);
     fighter.sub_air_check_fall_common();
-    notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    fighter.sub_fighter_cliff_check(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES.into());
     if lr <= 0.0 {
         let mut above_or_below = -1.0;
         if stick_angle > 0.0 {
@@ -207,6 +207,22 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
     0.into()
 }
 
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
+pub unsafe fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
+    0.into()
+}
+
+#[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
+pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
+    fighter.status_end_Glide()
+}
+
+#[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
+pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
+}
+
 pub unsafe fn glide_fighter_specific(fighter : &mut L2CFighterCommon) {
 //Fighter Specific
     let kind = fighter.global_table[FIGHTER_KIND].get_i32();
@@ -251,22 +267,6 @@ pub unsafe fn glide_fighter_specific(fighter : &mut L2CFighterCommon) {
     if kind == *FIGHTER_KIND_PALUTENA {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
     }
-}
-
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-pub unsafe fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
-    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    0.into()
-}
-
-#[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
-pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
-    fighter.status_end_Glide()
-}
-
-#[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
-pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    0.into()
 }
 
 fn nro_hook(info: &skyline::nro::NroInfo) {
