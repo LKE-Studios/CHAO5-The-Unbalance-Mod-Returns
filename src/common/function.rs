@@ -243,14 +243,6 @@ pub mod FighterSpecializer_MetaKnight {
     }
 }
 
-pub mod FighterSpecializer_Metaknight {
-    use crate::imports::BuildImports::*;
-    extern "C" {
-        #[link_name = "_ZN3app29FighterSpecializer_Metaknight21check_edge_special_lwERNS_21FighterModuleAccessorE"]
-        pub fn check_edge_special_lw(module_accessor: *mut BattleObjectModuleAccessor);
-    } 
-}
-
 pub mod FighterSpecializer_Palutena {
     use crate::imports::BuildImports::*;
     pub unsafe fn goddess_power_up (fighter: &mut L2CFighterCommon) {

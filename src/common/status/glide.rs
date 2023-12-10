@@ -207,24 +207,8 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-pub unsafe fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
-    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    0.into()
-}
-
-#[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
-pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
-    fighter.status_end_Glide()
-}
-
-#[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
-pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
-    0.into()
-}
-
 pub unsafe fn glide_fighter_specific(fighter : &mut L2CFighterCommon) {
-//Fighter Specific
+    //Fighter Specific
     let kind = fighter.global_table[FIGHTER_KIND].get_i32();
     let params = GlideParams::get(fighter);
     let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
@@ -239,7 +223,7 @@ pub unsafe fn glide_fighter_specific(fighter : &mut L2CFighterCommon) {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * -0.0043);
     }
     if kind == *FIGHTER_KIND_PLIZARDON {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * -0.006);
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 1.0 + angle * -0.006);
     }
     if kind == *FIGHTER_KIND_RIDLEY {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_ridley_glide_loop"), 0.8 + angle * -0.005);
@@ -267,6 +251,22 @@ pub unsafe fn glide_fighter_specific(fighter : &mut L2CFighterCommon) {
     if kind == *FIGHTER_KIND_PALUTENA {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
     }
+}
+
+#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
+pub unsafe fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
+    0.into()
+}
+
+#[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
+pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
+    fighter.status_end_Glide()
+}
+
+#[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
+pub unsafe fn status_end_Glide(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
 }
 
 fn nro_hook(info: &skyline::nro::NroInfo) {

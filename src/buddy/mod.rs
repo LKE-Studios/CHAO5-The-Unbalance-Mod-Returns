@@ -3,6 +3,7 @@ mod effect;
 mod frame;
 mod sound;
 mod expression;
+mod status;
 
 pub fn install() {
     game::install();
@@ -10,4 +11,5 @@ pub fn install() {
     frame::install();
     sound::install();
     expression::install();
+    status::install();
 }

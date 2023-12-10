@@ -5,7 +5,7 @@ use crate::imports::BuildImports::*;
     scripts = ["sound_jumpaerialf3", "sound_jumpaerialf4", "sound_jumpaerialf5", "sound_jumpaerialf6"],
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn effect_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_ridley_jump02"));
@@ -21,7 +21,7 @@ unsafe fn effect_ridley_jumpaerialf(fighter: &mut L2CAgentBase) {
     script = "sound_glidestart", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ridley_glidestart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ridley_jump02_02"));
@@ -42,7 +42,7 @@ unsafe fn effect_ridley_glidestart(fighter: &mut L2CAgentBase) {
     script = "sound_glideattack", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ridley_glideattack(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ridley_special_s01"));
     }
@@ -53,7 +53,7 @@ unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
     script = "sound_glidelanding", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
@@ -69,7 +69,7 @@ unsafe fn effect_ridley_glidelanding(fighter: &mut L2CAgentBase) {
     script = "sound_glideend", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn effect_ridley_glideend(fighter: &mut L2CAgentBase) {
+unsafe fn sound_ridley_glideend(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_ridley_glide_loop"));
     }
@@ -81,10 +81,10 @@ unsafe fn effect_ridley_glideend(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-        effect_ridley_jumpaerialf,
-        effect_ridley_glidestart,
-        effect_ridley_glideattack,
-        effect_ridley_glideend,
-        effect_ridley_glidelanding
+        sound_ridley_jumpaerialf,
+        sound_ridley_glidestart,
+        sound_ridley_glideattack,
+        sound_ridley_glideend,
+        sound_ridley_glidelanding
     );
 }

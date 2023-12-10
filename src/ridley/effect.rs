@@ -36,7 +36,8 @@ unsafe fn effect_ridley_glideattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("ridley_scratch"), Hash40::new("ridley_scratch"), Hash40::new("top"), -5.0, 8.0, 8.0, -124.0, 72.5, 70, 1, true, *EF_FLIP_YZ);
-        LAST_EFFECT_SET_RATE(fighter, 1.5)
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("ridley_scratch"), Hash40::new("ridley_scratch"), Hash40::new("top"), 0, 17, 4, -24.6, -5, 209, 2.0, true, *EF_FLIP_YZ);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.5, /*G*/ 0.045, /*B*/ 0.65);
     }
 }  
 

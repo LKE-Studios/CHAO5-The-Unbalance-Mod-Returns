@@ -42,7 +42,7 @@ pub mod globals {
     pub const UNK2: i32 = 0x1; //void value
     pub const FIGHTER_KIND: i32 = 0x2; //fighter kind
     pub const OBJECT_ID: i32 = 0x3; //object id
-    pub const UNK3: i32 = 0x4; //ptr value, very similar to 0x6
+    pub const FIGHTER: i32 = 0x4; //ptr value, very similar to 0x6
     pub const MODULE_ACCESSOR: i32 = 0x5; //module accessor
     pub const UNK4: i32 = 0x6; //void value
     pub const INIT_STATUS_FUNC: i32 = 0x7; //init status func

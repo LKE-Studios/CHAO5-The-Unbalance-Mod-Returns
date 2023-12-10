@@ -24,12 +24,6 @@ fn frame_metaknight(fighter: &mut L2CFighterCommon) {
             STOP_SE(fighter, Hash40::new("se_metaknight_special_h02"));
         };
         //Specials
-        if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN {
-            fighter.sub_air_check_fall_common();
-            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
-            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE);
-            WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
-        }
         if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {

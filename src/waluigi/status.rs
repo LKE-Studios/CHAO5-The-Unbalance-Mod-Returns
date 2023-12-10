@@ -593,6 +593,7 @@ unsafe fn status_waluigi_special_lw_shield_main(fighter: &mut L2CFighterCommon) 
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let WALUIGI = color >= 120 && color <= 130;
 	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
+        JostleModule::set_status(fighter.module_accessor, false);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             fighter.set_situation(SITUATION_KIND_AIR.into());
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
@@ -648,6 +649,7 @@ unsafe fn status_waluigi_special_lw_shield_end(fighter: &mut L2CFighterCommon) -
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let WALUIGI = color >= 120 && color <= 130;
 	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
+        JostleModule::set_status(fighter.module_accessor, true);
         0.into()
     }
     else {
@@ -686,6 +688,7 @@ unsafe fn status_waluigi_special_lw_attack_main(fighter: &mut L2CFighterCommon) 
         }
         else {
             fighter.set_situation(SITUATION_KIND_GROUND.into());
+            MotionModule::set_rate(fighter.module_accessor, 2.5);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_attack_1"), 0.0, 1.0, false, 0.0, false, false);
@@ -730,6 +733,7 @@ unsafe extern "C" fn status_waluigi_special_lw_attack_exec(fighter: &mut L2CFigh
     let WALUIGI = color >= 120 && color <= 130;
 	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
         if motion_kind == hash40("special_lw_attack_1") {
+            MotionModule::set_rate(fighter.module_accessor, 2.5);
             if frame >= 20.0 && frame < 28.0 {
                 if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_attack_2"), 0.0, 1.0, false, 0.0, false, false);
@@ -740,6 +744,7 @@ unsafe extern "C" fn status_waluigi_special_lw_attack_exec(fighter: &mut L2CFigh
             }
         }
         if motion_kind == hash40("special_lw_attack_2") {
+            MotionModule::set_rate(fighter.module_accessor, 2.5);
             if MotionModule::is_end(fighter.module_accessor) {
                 if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
                     fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
@@ -758,6 +763,7 @@ unsafe extern "C" fn status_waluigi_special_lw_attack_exec(fighter: &mut L2CFigh
             }
         }
         if [hash40("special_lw_attack_3"), hash40("special_lw_attack_special_1"), hash40("special_lw_attack_special_2")].contains(&motion_kind) {
+            MotionModule::set_rate(fighter.module_accessor, 2.5);
             if MotionModule::is_end(fighter.module_accessor) {
                 if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
                     fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
@@ -768,6 +774,7 @@ unsafe extern "C" fn status_waluigi_special_lw_attack_exec(fighter: &mut L2CFigh
             }
         }
         if motion_kind == hash40("special_lw_air_attack") {
+            MotionModule::set_rate(fighter.module_accessor, 1.0);
             if frame >= 1.0 {
                 sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, 0.8, 0.0);
                 sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, 0.8, 0.0);

@@ -4,8 +4,6 @@ use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
 use smash::app::smashball::is_training_mode;
-use crate::silver::frame::SPECIAL_N_ANGLE;
-use crate::silver::frame::SPECIAL_N_GET_ANGLE;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
 static mut INT_OFFSET : usize = 0x4e5380;
@@ -480,7 +478,7 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
         }
     }
     else if boma_reference.is_weapon() {
-        if fighter_kind == *WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
+        if fighter_kind == WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
             if param_type == hash40("param_shadowball") {
                 if param_hash == hash40("life") {
                     return 600;

@@ -8,6 +8,13 @@ use {
     smashline::*
 };
 
+pub unsafe fn REG_LANDING_SE(fighter: &mut L2CAgentBase, se: Hash40){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, se);
+    sv_animcmd::REG_LANDING_SE(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
 pub unsafe fn LAST_EFFECT_SET_WORK_INT(fighter: &mut L2CAgentBase, unk: i32){
     fighter.clear_lua_stack();
     lua_args!(fighter, unk);

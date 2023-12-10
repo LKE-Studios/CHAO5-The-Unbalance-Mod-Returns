@@ -96,10 +96,12 @@ pub mod BuildImports {
             EFFECT_GLOBAL,
             DOWN_EFFECT,
             FT_ATTACK_ABS_CAMERA_QUAKE,
+            REG_LANDING_SE
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},
         std::f32::consts::PI,
+        std::str::FromStr,
         std::fs::{metadata, rename},
         smash2,
         smash2::app::BattleObjectModuleAccessor,

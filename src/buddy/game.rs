@@ -1639,7 +1639,7 @@ unsafe fn game_buddy_appealsl(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn game_buddy_appeallwr(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -25.0, 0);
+        DamageModule::heal(fighter.module_accessor, -10.0, 0);
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BADGE), 0, 0, false, false);
     }
 }
@@ -1651,7 +1651,7 @@ unsafe fn game_buddy_appeallwr(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn game_buddy_appeallwl(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        DamageModule::heal(fighter.module_accessor, -25.0, 0);
+        DamageModule::heal(fighter.module_accessor, -10.0, 0);
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BADGE), 0, 0, false, false);
     }
 }

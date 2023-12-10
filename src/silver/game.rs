@@ -994,6 +994,28 @@ unsafe fn game_silver_specialairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
+#[acmd_script(//AppealLwL
+    agent = "mewtwo",
+    script =  "game_appeallwl_silver",
+    category = ACMD_GAME, low_priority)]
+unsafe fn game_silver_appeallwl(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
+    }
+}
+
+#[acmd_script(//AppealLwR
+    agent = "mewtwo",
+    script =  "game_appeallwr_silver",
+    category = ACMD_GAME, low_priority)]
+unsafe fn game_silver_appeallwr(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
+    }
+}
+
 //Misc Scripts
 #[acmd_script(//TurnRun 
     agent = "mewtwo", 
@@ -1101,6 +1123,8 @@ pub fn install() {
         game_silver_specialairhi,
         game_silver_speciallw,
         game_silver_specialairlw,
+        game_silver_appeallwl,
+        game_silver_appeallwr,
         game_silver_turnrun,
         game_silver_escapeair,
         game_silver_escapeairslide,
