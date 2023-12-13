@@ -1045,9 +1045,9 @@ unsafe fn game_captain_specialsstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     FT_MOTION_RATE(fighter, 1.0);
     if is_excute(fighter) {
+        let speed_coef = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_s"), hash40("speed_coef"));
+        sv_kinetic_energy!(set_speed_mul, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_coef);
         JostleModule::set_status(fighter.module_accessor, false);
-        let speed_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_s"), hash40("speed_coef"));
-        sv_kinetic_energy!(set_speed_mul, fighter, *FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_mul);
     }
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
@@ -1162,10 +1162,6 @@ unsafe fn game_captain_specialairsend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, true);
-    }
-    frame(fighter.lua_state_agent, 70.0);
-    if is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 

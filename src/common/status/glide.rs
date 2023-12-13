@@ -34,16 +34,17 @@ unsafe fn status_Glide_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn Glide_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let params = GlideParams::get(fighter);
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
         let frame = MotionModule::frame(fighter.module_accessor);
         let glide_landing_frame = WorkModule::get_param_float(fighter.module_accessor, hash40("common"), hash40("glide_landing_frame"));
-        if glide_landing_frame <= frame {
+        if params.glide_landing_frame <= frame {
             let sum_speed_length = KineticModule::get_sum_speed_length(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             let glide_landing_speed = WorkModule::get_param_float(fighter.module_accessor, hash40("common"), hash40("glide_landing_speed"));
-            if glide_landing_speed <= sum_speed_length {
+            if params.glide_landing_speed <= sum_speed_length {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_LANDING.into(), false.into());
                 return 0.into();
             }
@@ -94,7 +95,7 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let stick_magnitude = (stick_x * stick_x + stick_y * stick_y).sqrt(); //Square Root of Stick X^2 + Stick Y^2
+    let stick_magnitude = (stick_x.powi(2) + stick_y.powi(2)).sqrt(); //Square Root of Stick X^2 + Stick Y^2
     if stick_magnitude <= params.radial_stick {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
             if angle_speed < 0.0 {
@@ -181,8 +182,8 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
         WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
         glide_fighter_specific(fighter);
-        println!("x{}, y{}", angled.x, angled.y);
-        println!("{}", angle);
+        println!("glide_power{}", power);
+        println!("current_angle{}", angle);
     }
     else {
         fighter.clear_lua_stack();

@@ -21,11 +21,13 @@ pub struct GlideParams {
     pub down_angle_accel : f32, //#17 Downward angular acceleration
     pub max_angle_speed : f32, //#18 Maximum angular speed
     pub add_angle_speed : f32, //#19 Added angular speed for when stick is center
+    pub glide_landing_frame : f32, //#20 Minimum Gliding frames required to go to GlideLanding
+    pub glide_landing_speed : f32 //#21 Minimum Gliding speed upon landing for GlideLanding
 }
 
 impl GlideParams {
     pub fn get(fighter: &mut L2CFighterCommon) -> GlideParams {
-        let kind = fighter.global_table[0x2].get_i32();
+        let kind = fighter.global_table[FIGHTER_KIND].get_i32();
         if kind == *FIGHTER_KIND_METAKNIGHT {
             return GlideParams {
                 angle_max_up : 80.0, //#0 Max Upward Angle
@@ -47,7 +49,9 @@ impl GlideParams {
                 up_angle_accel : 0.55, //#16 Upward angular acceleration
                 down_angle_accel : 0.75, //#17 Downward angular acceleration
                 max_angle_speed : 7.0, //#18 Maximum angular speed
-                add_angle_speed : 1.0 //#19 Added angular speed for when stick is center
+                add_angle_speed : 1.0, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_PIT {
@@ -71,7 +75,9 @@ impl GlideParams {
                 up_angle_accel : 2.0, //#16 Upward angular acceleration
                 down_angle_accel : 0.5, //#17 Downward angular acceleration
                 max_angle_speed : 6.0, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_PITB {
@@ -95,7 +101,9 @@ impl GlideParams {
                 up_angle_accel : 0.7, //#16 Upward angular acceleration
                 down_angle_accel : 1.0, //#17 Downward angular acceleration
                 max_angle_speed : 6.5, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_PLIZARDON {
@@ -119,7 +127,9 @@ impl GlideParams {
                 up_angle_accel : 0.8, //#16 Upward angular acceleration
                 down_angle_accel : 0.4, //#17 Downward angular acceleration
                 max_angle_speed : 4.0, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_RIDLEY {
@@ -143,7 +153,9 @@ impl GlideParams {
                 up_angle_accel : 0.65, //#16 Upward angular acceleration
                 down_angle_accel : 0.8, //#17 Downward angular acceleration
                 max_angle_speed : 5.0, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_BUDDY {
@@ -167,7 +179,9 @@ impl GlideParams {
                 up_angle_accel : 0.8, //#16 Upward angular acceleration
                 down_angle_accel : 0.75, //#17 Downward angular acceleration
                 max_angle_speed : 4.5, //#18 Maximum angular speed
-                add_angle_speed : 0.2 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.2, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_TRAIL {
@@ -191,7 +205,9 @@ impl GlideParams {
                 up_angle_accel : 1.3, //#16 Upward angular acceleration
                 down_angle_accel : 0.95, //#17 Downward angular acceleration
                 max_angle_speed : 3.0, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         if kind == *FIGHTER_KIND_PALUTENA {
@@ -215,7 +231,9 @@ impl GlideParams {
                 up_angle_accel : 1.6, //#16 Upward angular acceleration
                 down_angle_accel : 0.65, //#17 Downward angular acceleration
                 max_angle_speed : 6.5, //#18 Maximum angular speed
-                add_angle_speed : 0.15 //#19 Added angular speed for when stick is center
+                add_angle_speed : 0.15, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
         else {
@@ -240,7 +258,9 @@ impl GlideParams {
                 up_angle_accel : 0.55, //#16 Upward angular acceleration
                 down_angle_accel : 0.75, //#17 Downward angular acceleration
                 max_angle_speed : 7.0, //#18 Maximum angular speed
-                add_angle_speed : 1.0 //#19 Added angular speed for when stick is center
+                add_angle_speed : 1.0, //#19 Added angular speed for when stick is center
+                glide_landing_frame : 60.0, //#20 Minimum Gliding frames required to go to GlideLanding
+                glide_landing_speed : 1.0 //#21 Minimum Gliding speed upon landing for GlideLanding
             };
         }
     }

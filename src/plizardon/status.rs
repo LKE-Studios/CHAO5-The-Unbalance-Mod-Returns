@@ -3,18 +3,55 @@ use crate::imports::BuildImports::*;
 static AIR_SPEED_X : f32 = 0.4;
 static DIVE_SPEED_Y : f32 = 4.4;
 
-static mut PTRAINER_NO_SWAP_DEAD : usize = 0xf96310;
+#[status_script(agent = "plizardon", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn status_plizardon_special_hi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let lr_stick_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("lr_stick_x"));
+    let dir_stick_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("dir_stick_x"));
+    let dir_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("dir_mul"));
+    let pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("pass_mul"));
+    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_accel_y"));
+    let air_start_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_start_x_mul"));
+    let air_pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_pass_mul"));
+    let fall_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("fall_x_mul"));
+    let landing_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi"), hash40("landing_frame"));
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_hi") as i64, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_air_hi") as i64, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND_AIR);
+    WorkModule::set_float(fighter.module_accessor, lr_stick_x, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_LR_STICK_X);
+    WorkModule::set_float(fighter.module_accessor, dir_stick_x, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_STICK_X);
+    WorkModule::set_float(fighter.module_accessor, dir_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_DIR_MUL);
+    WorkModule::set_float(fighter.module_accessor, pass_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_PASS_MUL);
+    WorkModule::set_float(fighter.module_accessor, air_accel_y, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_ACCEL_Y);
+    WorkModule::set_float(fighter.module_accessor, air_start_x_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
+    WorkModule::set_float(fighter.module_accessor, air_pass_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_PASS_MUL);
+    WorkModule::set_float(fighter.module_accessor, fall_x_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_FALL_X_MUL);
+    WorkModule::set_int(fighter.module_accessor, landing_frame, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_CONST_LANDING_FRAME);
+    WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
+    fighter.super_jump_punch(L2CValue::Void());
+    WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FALL);
+    fighter.sub_shift_status_main(L2CValue::Ptr(plizardon_special_hi_main_loop as *const () as _))
+}
+
+unsafe extern "C" fn plizardon_special_hi_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    fighter.super_jump_punch_main();
+    if frame >= 50.0 {
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            fighter.change_status(FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2.into(), true.into());
+        }
+    }
+    0.into()
+}
 
 //FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn status_pre_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_plizardon_special_hi2_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, *FIGHTER_STATUS_ATTR_CLEAR_MOTION_ENERGY as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI as u32, 0);
     0.into()
 }
 
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn status_main_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_plizardon_special_hi2_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.set_situation(SITUATION_KIND_AIR.into());
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_2_start"), 0.0, 1.0, false, 0.0, false, false);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_STOP);
@@ -48,9 +85,9 @@ unsafe extern "C" fn plizardon_special_hi2_loop(fighter: &mut L2CFighterCommon) 
 }
 
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-unsafe extern "C" fn status_exec_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_plizardon_special_hi2_exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_air_hi_2") {
-        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+        fighter.sub_fighter_cliff_check(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES.into());
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: AIR_SPEED_X, y: -DIVE_SPEED_Y, z: 0.0});
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
@@ -62,7 +99,7 @@ unsafe extern "C" fn status_exec_plizardon_special_hi2(fighter: &mut L2CFighterC
 }
 
 #[status_script(agent = "plizardon", status = 0x1DB, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn status_end_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_plizardon_special_hi2_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     if situation_kind != *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
@@ -77,14 +114,14 @@ pub unsafe fn status_end_plizardon_special_hi2(fighter: &mut L2CFighterCommon) -
 
 //FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING
 #[status_script(agent = "plizardon", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn status_pre_plizardon_special_hi2_landing(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_plizardon_special_hi2_landing_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_NONE, *GROUND_CORRECT_KIND_GROUND as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, *FIGHTER_STATUS_ATTR_CLEAR_MOTION_ENERGY as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI as u32, 0);
     0.into()
 }
 
 #[status_script(agent = "plizardon", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn status_main_plizardon_special_hi2_landing(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_plizardon_special_hi2_landing_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.set_situation(SITUATION_KIND_GROUND.into());
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_2_landing"), 0.0, 1.0, false, 0.0, false, false);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
@@ -107,27 +144,19 @@ unsafe extern "C" fn plizardon_special_hi2_landing_loop(fighter: &mut L2CFighter
 }
 
 #[status_script(agent = "plizardon", status = 0x1D3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn status_end_plizardon_special_hi2_landing(fighter: &mut L2CFighterCommon) -> L2CValue {
-    fighter.sub_wait_ground_check_common(false.into());
-    GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+pub unsafe fn status_plizardon_special_hi2_landing_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
-//Removes the death swap from PT
-#[skyline::hook(offset = PTRAINER_NO_SWAP_DEAD)]
-unsafe fn ptrainer_no_swap_dead() {}
-
 pub fn install() {
-    skyline::install_hooks!(
-        ptrainer_no_swap_dead
-    );
     install_status_scripts!(
-        status_pre_plizardon_special_hi2,
-        status_main_plizardon_special_hi2,
-        status_exec_plizardon_special_hi2,
-        status_end_plizardon_special_hi2,
-        status_pre_plizardon_special_hi2_landing,
-        status_main_plizardon_special_hi2_landing,
-        status_end_plizardon_special_hi2_landing
+        status_plizardon_special_hi_main,
+        status_plizardon_special_hi2_pre,
+        status_plizardon_special_hi2_main,
+        status_plizardon_special_hi2_exec,
+        status_plizardon_special_hi2_end,
+        status_plizardon_special_hi2_landing_pre,
+        status_plizardon_special_hi2_landing_main,
+        status_plizardon_special_hi2_landing_end
     );
 }

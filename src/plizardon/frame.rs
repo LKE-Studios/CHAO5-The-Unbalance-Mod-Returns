@@ -17,12 +17,6 @@ fn frame_plizardon(fighter: &mut L2CFighterCommon) {
             STOP_SE(fighter, Hash40::new("se_plizardon_special_h02_02"));
             WorkModule::off_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL);
         };
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-            if MotionModule::frame(fighter.module_accessor) > 50.0 &&
-            ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, false);
-            }
-        }
     }
 }
 
