@@ -12,6 +12,10 @@ pub fn frame_murabito(fighter : &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
         }
+        if status_kind == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_DEFOREST {
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("havel"), &Vector3f{x: 2.0, y: 2.0, z: 2.0});
+            ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x: 2.0, y: 2.0, z: 2.0});
+        }
         if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_AIR, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_DASH_B, 
             *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_DASH_F, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP,
             *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP_SQUAT,  *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING,

@@ -4,8 +4,7 @@ use crate::imports::BuildImports::*;
 pub fn frame_elight(fighter : &mut L2CFighterCommon) {
     unsafe {
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N || status_kind == *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_HOLD || status_kind == *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_END {
+        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_END].contains(&status_kind) {
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -4.0, 0);
             }
@@ -18,14 +17,11 @@ pub fn frame_elight(fighter : &mut L2CFighterCommon) {
                 }
             }
         }
-        if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_l") {
-            if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
-                ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
-            }
-        }
-        if MotionModule::motion_kind(fighter.module_accessor) == hash40("appeal_hi_r") {
-            if MotionModule::frame(fighter.module_accessor) >= 1.0 && MotionModule::frame(fighter.module_accessor) < 2.0 {
-                ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
+        if status_kind == *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_HI_JUMP {
+            let stick_x = fighter.global_table[STICK_X].get_f32();
+            let lr = PostureModule::lr(fighter.module_accessor);
+            if stick_x * lr < -0.75 {
+                PostureModule::reverse_lr(fighter.module_accessor);
             }
         }
     }

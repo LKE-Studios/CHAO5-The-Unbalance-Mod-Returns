@@ -19,13 +19,13 @@ unsafe fn status_flysub(fighter: &mut L2CFighterCommon) {
     if !StopModule::is_stop(fighter.module_accessor) {
         fighter.sub_fly_uniq(false.into());
     }
-    fighter.global_table[0x15].assign(&L2CValue::Ptr(L2CFighterCommon_sub_fly_uniq as *const () as _));
+    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(L2CFighterCommon_sub_fly_uniq as *const () as _));
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_MINI_ATTACK) {
         FighterControlModuleImpl::reserve_on_attack_button(fighter.module_accessor);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_MINI_ATTACK);
     }
     // Enable Gliding
-    if is_glider(fighter.global_table[0x2].get_i32()) {
+    if is_glider(fighter.global_table[FIGHTER_KIND].get_i32()) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_AVAILABLE_GLIDE);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE);
     }

@@ -1996,6 +1996,9 @@ unsafe fn game_demon_attackstep2f(fighter: &mut L2CAgentBase) {
         ATK_SET_SHIELD_SETOFF_MUL_arg3(fighter, /*ID1*/ 0, /*ID2*/ 1.2, /*ShieldstunMul*/ 5.0);
         ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 1.2);
         ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 2, /*ShieldstunMul*/ 1.2);
+        AttackModule::set_invalid_invincible(fighter.module_accessor, 0, true);
+        AttackModule::set_invalid_invincible(fighter.module_accessor, 1, true);
+        AttackModule::set_invalid_invincible(fighter.module_accessor, 2, true);
         AttackModule::set_attack_level(fighter.module_accessor, 0, *FIGHTER_RYU_SAVING_LV_3 as u8);
         AttackModule::set_attack_level(fighter.module_accessor, 1, *FIGHTER_RYU_SAVING_LV_3 as u8);
         AttackModule::set_attack_level(fighter.module_accessor, 2, *FIGHTER_RYU_SAVING_LV_3 as u8);
@@ -2008,30 +2011,6 @@ unsafe fn game_demon_attackstep2f(fighter: &mut L2CAgentBase) {
         AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
-    }
-    frame(fighter.lua_state_agent, 11.0);
-    if is_excute(fighter) {
-        AttackModule::clear(fighter.module_accessor, /*ID*/ 0, false);
-        AttackModule::clear(fighter.module_accessor, /*ID*/ 1, false);
-        AttackModule::clear(fighter.module_accessor, /*ID*/ 2, false);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handr"), /*Damage*/ 50.0, /*Angle*/ 88, /*KBG*/ 22, /*FKB*/ 0, /*BKB*/ 18, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DEMON_PUNCH01, /*Type*/ *ATTACK_REGION_PUNCH);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 88, /*KBG*/ 22, /*FKB*/ 0, /*BKB*/ 18, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 18.0, /*Z*/ 5.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DEMON_PUNCH01, /*Type*/ *ATTACK_REGION_PUNCH);
-        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 88, /*KBG*/ 22, /*FKB*/ 0, /*BKB*/ 18, /*Size*/ 12.0, /*X*/ -1.0, /*Y*/ 13.0, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DEMON_PUNCH01, /*Type*/ *ATTACK_REGION_PUNCH);
-        AttackModule::set_invalid_invincible(fighter.module_accessor, 0, true);
-        AttackModule::set_invalid_invincible(fighter.module_accessor, 1, true);
-        AttackModule::set_invalid_invincible(fighter.module_accessor, 2, true);
-        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
-        AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
-        AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
-        ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 1.2);
-        ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 1.2);
-        ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 2, /*ShieldstunMul*/ 1.2);
-        AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 19.0, false);
-        AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 1, 19.0, false);
-        AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 2, 19.0, false);
-        AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 0, *CAMERA_QUAKE_KIND_L, false);
-        AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 1, *CAMERA_QUAKE_KIND_L, false);
-        AttackModule::set_attack_camera_quake_forced(fighter.module_accessor, 2, *CAMERA_QUAKE_KIND_L, false);
     }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {

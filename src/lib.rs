@@ -182,6 +182,7 @@ mod miiswordsman;
 mod murabito;
 mod nana;
 mod ness;
+mod ninten;
 mod packun;
 mod pacman;
 mod palutena;
@@ -469,6 +470,7 @@ pub fn main() {
     koopag::install();
     silver::install();
     waluigi::install();
+    ninten::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

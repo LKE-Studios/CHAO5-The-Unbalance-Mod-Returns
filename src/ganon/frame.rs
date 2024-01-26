@@ -24,7 +24,7 @@ fn frame_ganon(fighter: &mut L2CFighterCommon) {
             }
         };
         if FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] {
-            if StopModule::is_hit(fighter.module_accessor) {
+            if fighter.is_in_hitlag() {
                 if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4_START, false);
                 }

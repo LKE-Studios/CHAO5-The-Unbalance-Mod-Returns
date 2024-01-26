@@ -14,6 +14,7 @@ mod AttackDash;
 mod edge_cancel;
 mod SpecialHi;
 mod EscapeAir;
+mod Damage;
 //mod dead;
 
 pub fn install() {
@@ -32,5 +33,6 @@ pub fn install() {
     edge_cancel::install();
     SpecialHi::install();
     EscapeAir::install();
+    Damage::install();
     //dead::install();
 }

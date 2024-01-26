@@ -970,7 +970,7 @@ unsafe fn game_gamewatch_downattacku(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_gamewatch_specialn(fighter: &mut L2CAgentBase) {
-    FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_SHOOT);
@@ -992,7 +992,6 @@ unsafe fn game_gamewatch_specialn(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_LOOP_CHECK);
     }
     frame(fighter.lua_state_agent, 48.0);
-    FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_COUNT_CHECK);
     }
@@ -1048,7 +1047,7 @@ unsafe fn game_gamewatch_food_steak(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn game_gamewatch_specialairn(fighter: &mut L2CAgentBase) {
-    FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_SHOOT);
@@ -1070,7 +1069,6 @@ unsafe fn game_gamewatch_specialairn(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_LOOP_CHECK);
     }
     frame(fighter.lua_state_agent, 48.0);
-    FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_GAMEWATCH_STATUS_SPECIAL_N_FLAG_COUNT_CHECK);
     }

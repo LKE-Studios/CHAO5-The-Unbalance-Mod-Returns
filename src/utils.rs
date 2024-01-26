@@ -150,6 +150,7 @@ pub trait BomaExt {
     unsafe fn kind(&mut self) -> i32;
     unsafe fn down_input(&mut self) -> bool;
     unsafe fn change_status_req(&mut self, kind: i32, repeat: bool) -> i32;
+    unsafe fn is_in_hitlag(&mut self) -> bool;
 }
 
 impl BomaExt for BattleObjectModuleAccessor {
@@ -179,6 +180,13 @@ impl BomaExt for BattleObjectModuleAccessor {
         if ControlModule::get_flick_y(self) >= 3 && ControlModule::get_flick_y(self) < 20 || stick_y <= -1.0 {
             return true;
         };
+        return false;
+    }
+    unsafe fn is_in_hitlag(&mut self) -> bool {
+        let hitlag_frame = WorkModule::get_int(self, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME);
+        if hitlag_frame > 0 {
+            return true;
+        }
         return false;
     }
 }

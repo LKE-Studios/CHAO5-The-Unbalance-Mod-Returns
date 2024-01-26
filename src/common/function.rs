@@ -23,7 +23,7 @@ pub mod KineticUtility {
 }
 
 //Const Functions
-pub unsafe fn common_attack_critical_flag (fighter: &mut L2CFighterCommon) {
+pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
         COUNTER[ENTRY_ID] += 1;

@@ -74,7 +74,6 @@ pub fn is_glider(kind: i32) -> bool {
 pub fn loupe_camera(fighter : &mut L2CFighterCommon) {
     unsafe {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
             SFX_COUNTER[ENTRY_ID] += 1;
             if SFX_COUNTER[ENTRY_ID] == 1 {

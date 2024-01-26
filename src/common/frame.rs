@@ -28,6 +28,9 @@ pub fn global_fighter_frame(fighter : &mut L2CFighterCommon) {
         if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
             common_attack_critical_flag(fighter);
         }
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
+            SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), 0);
+        }
     }
 }
 
@@ -133,8 +136,26 @@ pub unsafe fn platform_frame(fighter : &mut L2CFighterCommon) {
     }
 }
 
+#[weapon_frame_callback]
+pub fn global_weapon_frame(weapon: &mut L2CFighterBase) {
+    unsafe {}
+}
+
+#[smashline::fighter_init]
+fn global_fighter_init(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
+        }
+    }
+}
+
 pub fn install() {
     smashline::install_agent_frame_callbacks!(
-        global_fighter_frame
+        global_fighter_frame,
+        //global_weapon_frame,
+    );
+    smashline::install_agent_init_callbacks!(
+        global_fighter_init
     );
 }

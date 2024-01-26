@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//AttackS4ChargeSFX
+#[acmd_script(//AttackS4Charge
     agent = "toonlink", 
     script = "sound_attacks4charge", 
     category = ACMD_SOUND, 
@@ -12,7 +12,7 @@ unsafe fn sound_toonlink_attacks4charge(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4ChargeSFX
+#[acmd_script(//AttackHi4Charge
     agent = "toonlink", 
     script = "sound_attackhi4charge", 
     category = ACMD_SOUND, 
@@ -24,7 +24,7 @@ unsafe fn sound_toonlink_attackhi4charge(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4ChargeSFX
+#[acmd_script(//AttackLw4Charge
     agent = "toonlink", 
     script = "sound_attacklw4charge", 
     category = ACMD_SOUND, 

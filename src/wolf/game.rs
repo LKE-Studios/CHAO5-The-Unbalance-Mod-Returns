@@ -914,10 +914,6 @@ unsafe fn game_wolf_specialsend(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, true);
     }
-    frame(fighter.lua_state_agent, 20.0);
-    if is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
-    }
 }
 
 #[acmd_script(//SpecialAirSEnd
@@ -942,10 +938,6 @@ unsafe fn game_wolf_specialairsend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, true);
-    }
-    frame(fighter.lua_state_agent, 20.0);
-    if is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 

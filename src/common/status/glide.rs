@@ -182,8 +182,8 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
         WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
         glide_fighter_specific(fighter);
-        println!("glide_power{}", power);
-        println!("current_angle{}", angle);
+        println!("glide_power {}", power);
+        println!("current_angle {}", angle);
     }
     else {
         fighter.clear_lua_stack();

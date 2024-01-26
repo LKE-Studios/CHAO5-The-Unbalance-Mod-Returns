@@ -4,7 +4,6 @@ use crate::imports::BuildImports::*;
 pub fn frame_sonic(fighter : &mut L2CFighterCommon) {
     unsafe { 
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
-
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SONIC_INSTANCE_WORK_FLAG_SPECIAL_N_FALL);
         if status_kind == *FIGHTER_SONIC_STATUS_KIND_SPECIAL_N_HIT || status_kind == *FIGHTER_SONIC_STATUS_KIND_SPECIAL_N_HOMING {
             damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);

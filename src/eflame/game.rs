@@ -2703,7 +2703,7 @@ unsafe fn game_eflame_firepillar_specialhi(fighter: &mut L2CAgentBase) {
 }
 
 
-/*#[acmd_script(//AppealHiR
+#[acmd_script(//AppealHiR
     agent = "eflame", 
     script = "game_appealhir", 
     category = ACMD_GAME, 
@@ -2731,7 +2731,7 @@ unsafe fn game_eflame_appealhil(fighter: &mut L2CAgentBase) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_EFLAME_GENERATE_ARTICLE_DIVER, Hash40::new("f_appeal_hi_l"), false, 0.0);
         }
     }
-}*/
+}
 
 #[acmd_script(//AppealSR
     agent = "eflame", 
@@ -2865,8 +2865,8 @@ pub fn install() {
         game_eflame_firepillar_specialhi,
         game_eflame_appealsr,
         game_eflame_appealsl,
-        //game_eflame_appealhir,
-        //game_eflame_appealhil,
+        game_eflame_appealhir,
+        game_eflame_appealhil,
         game_eflame_appeallwr,
         game_eflame_appeallwl,
         game_eflame_blazepillar_finalattack
