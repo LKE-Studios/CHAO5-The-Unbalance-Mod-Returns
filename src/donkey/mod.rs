@@ -1,13 +1,5 @@
-mod game;
-mod sound;
-mod effect;
-mod expression;
-mod frame;
+mod donkey;
 
 pub fn install() {
-    game::install();
-    sound::install();
-    effect::install();
-    frame::install();
-    expression::install();
+    donkey::install(); 
 }

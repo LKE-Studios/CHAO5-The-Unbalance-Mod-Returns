@@ -1,11 +1,7 @@
-mod game;
-mod frame;
-mod effect;
-//mod status;
+mod cloud;
+mod cloud_wave;
 
 pub fn install() {
-    game::install(); 
-    frame::install();
-    effect::install();
-    //status::install();
+    cloud::install(&mut Agent::new("cloud")); 
+    claus_wave::install(&mut Agent::new("cloud_wave")); 
 }

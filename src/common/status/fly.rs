@@ -2,13 +2,13 @@ use crate::imports::BuildImports::*;
 use super::super::is_glider;
 
 #[skyline::hook(replace = L2CFighterCommon_status_FlySub)]
-unsafe fn status_flysub(fighter: &mut L2CFighterCommon) {
+unsafe fn status_FlySub(fighter: &mut L2CFighterCommon) {
     ControlModule::reset_flick_x(fighter.module_accessor);
     ControlModule::reset_flick_sub_x(fighter.module_accessor);
-    fighter.global_table[0x1C].assign(&L2CValue::I32(0xfe));
+    fighter.global_table[FLICK_X].assign(&L2CValue::I32(0xfe));
     ControlModule::reset_flick_y(fighter.module_accessor);
     ControlModule::reset_flick_sub_y(fighter.module_accessor);
-    fighter.global_table[0x1D].assign(&L2CValue::I32(0xfe));
+    fighter.global_table[FLICK_Y].assign(&L2CValue::I32(0xfe));
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::inc_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
     fighter.sub_air_check_fall_common_pre();
@@ -32,7 +32,7 @@ unsafe fn status_flysub(fighter: &mut L2CFighterCommon) {
 }
 
 #[skyline::hook(replace = L2CFighterCommon_status_Fly_Main)]
-unsafe fn status_fly_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_Fly_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.sub_glide_check().get_bool() {
         return 0.into();
     }
@@ -47,22 +47,20 @@ unsafe fn status_fly_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     else {
         FIGHTER_STATUS_KIND_FALL_AERIAL
     };
-    
     if MotionModule::is_end(fighter.module_accessor) {
-        if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
+        if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
             fighter.change_status(status.into(), false.into());
             return 0.into();
         }
     }
-
     0.into()
 }
 
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
-            status_flysub,
-            status_fly_main
+            status_FlySub,
+            status_Fly_main
         );
     }
 }

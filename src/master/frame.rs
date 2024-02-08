@@ -25,30 +25,6 @@ pub fn frame_master(fighter : &mut L2CFighterCommon) {
                 DamageModule::heal(fighter.module_accessor, -35.0, 0);
             }
         };
-        if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_LW,
-        *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_TURN, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT,
-        *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_CANCEL, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_MAX_SHOOT, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_S_FRONT,
-        *FIGHTER_MASTER_STATUS_KIND_SPECIAL_S_FRONT_DASH, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_HI_WALL_JUMP, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_TURN,
-        *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_CANCEL].contains(&status_kind) {
-            if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
-                fighter.sub_air_check_dive();
-                if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
-                    if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR || 
-                    KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR_ANGLE {
-                        fighter.clear_lua_stack();
-                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION);
-                        let speed_y = sv_kinetic_energy::get_speed_y(fighter.lua_state_agent);
-                        fighter.clear_lua_stack();
-                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
-                        sv_kinetic_energy::reset_energy(fighter.lua_state_agent);
-                        fighter.clear_lua_stack();
-                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-                        sv_kinetic_energy::enable(fighter.lua_state_agent);
-                        KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-                    }
-                }
-            }
-        }
     }
 }
 

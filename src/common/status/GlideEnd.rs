@@ -1,14 +1,12 @@
 use crate::imports::BuildImports::*;
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn status_GlideEnd_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideEnd_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), *FIGHTER_KINETIC_TYPE_MOTION_FALL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_ENABLE, true, false, true, 0, *FIGHTER_STATUS_ATTR_INTO_DOOR as u32, 0, 0);
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_GlideEnd_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideEnd_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
     let lr = PostureModule::lr(fighter.module_accessor);
     KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_FREE, Vector2f{x: 0.0, y: 0.0}, Vector3f{x: 0.0, y: 0.0, z: 0.0});
@@ -17,8 +15,7 @@ pub unsafe fn status_GlideEnd_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn status_GlideEnd_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideEnd_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_end"), 0.0, 1.0, false, 0.0, false, false);
     if !StopModule::is_stop(fighter.module_accessor) {
@@ -49,16 +46,15 @@ unsafe extern "C" fn GlideEnd_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CVal
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn status_GlideEnd_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideEnd_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
 pub fn install() {
-    install_status_scripts!(
-        status_GlideEnd_Pre,
-        status_GlideEnd_Init,
-        status_GlideEnd_Main,
-        status_GlideEnd_End,
-    );
+    Agent::new("common")
+    .status(Pre, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Pre)
+    .status(Init, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Init)
+    .status(Main, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Main)
+    .status(End, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_End)
+    .install();
 }

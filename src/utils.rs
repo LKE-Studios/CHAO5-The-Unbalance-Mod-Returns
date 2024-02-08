@@ -98,6 +98,151 @@ pub unsafe fn is_enable_transition_term_hook(module_accessor: &mut smash::app::B
     }
 }
 
+#[skyline::from_offset(crate::offsets::get_battle_object_from_id())]
+pub fn get_battle_object_from_id(id: u32) -> *mut BattleObject;
+
+pub fn get_battle_object_from_accessor(boma: *mut BattleObjectModuleAccessor) -> *mut BattleObject {
+    unsafe {
+        get_battle_object_from_id((*boma).battle_object_id)
+    }
+}
+
+pub fn get_fighter_common_from_accessor<'a>(boma: &'a mut BattleObjectModuleAccessor) -> &'a mut L2CFighterCommon {
+    unsafe {
+        let lua_module = *(boma as *mut BattleObjectModuleAccessor as *mut u64).add(0x190 / 8);
+        std::mem::transmute(*((lua_module + 0x1D8) as *mut *mut L2CFighterCommon))
+    }
+}
+
+pub fn get_fighter_common_from_entry_id(entry_id: u32) -> Option<&'static mut L2CFighterCommon> {
+    if let Some(object) = get_battle_object_from_entry_id(entry_id) {
+        unsafe {
+            Some(get_fighter_common_from_accessor(std::mem::transmute((*object).module_accessor)))
+        }
+    } else {
+        None
+    }
+}
+
+pub fn get_lua_state_from_entry_id(entry_id: u32) -> Option<u64> {
+    get_fighter_common_from_entry_id(entry_id).map(|x| x.lua_state_agent)
+}
+
+pub fn get_active_battle_object_id_from_entry_id(entry_id: u32) -> Option<u32> {
+    use smash::lib::lua_const::*;
+    use smash::app::lua_bind::*;
+    let object = get_battle_object_from_entry_id(entry_id)?;
+    if object.is_null() { return None; }
+    let object = unsafe { &mut *object };
+    let kind = object.kind as i32;
+    let status = unsafe {
+        StatusModule::status_kind(object.module_accessor)
+    };
+    if status != *FIGHTER_STATUS_KIND_NONE && status != *FIGHTER_STATUS_KIND_STANDBY {
+        return Some(object.battle_object_id);
+    }
+    if kind == *FIGHTER_KIND_ELIGHT || kind == *FIGHTER_KIND_EFLAME {
+        Some(object.battle_object_id + 0x10000)
+    } 
+    else if kind == *FIGHTER_KIND_PZENIGAME || kind == *FIGHTER_KIND_PFUSHIGISOU || kind == *FIGHTER_KIND_PLIZARDON {
+        let next_id = object.battle_object_id + 0x10000;
+        let next_object = unsafe { &mut *get_battle_object_from_id(next_id) };
+        let next_status = unsafe {
+            StatusModule::status_kind(next_object.module_accessor)
+        };
+        if next_status != *FIGHTER_STATUS_KIND_NONE && next_status != *FIGHTER_STATUS_KIND_STANDBY {
+            Some(next_id)
+        } 
+        else {
+            Some(next_id + 0x10000)
+        }
+    } 
+    else {
+        Some(object.battle_object_id)
+    }
+}
+
+///This gets ALL active battle object IDs, including both Ice Climbers, and only the ACTIVE character of Pokemon Trainer and Aegis.
+pub unsafe fn get_all_active_battle_object_ids() -> Vec<u32> {
+    let mut vec: Vec<u32> = Vec::new();
+    for entry_id in 0..8 {
+        //Get the active battle object id and add it to the list
+        let id = get_active_battle_object_id_from_entry_id(entry_id).unwrap_or(*BATTLE_OBJECT_ID_INVALID as u32);
+        vec.push(id);
+        //From here on out, we are doing this to account for both ice climbers
+        //Get the object back from the id
+        let object = get_battle_object_from_id(id);
+        if object.is_null() { 
+            continue; 
+        }
+        let object = unsafe { 
+            &mut *object 
+        };
+        //Get the fighter kind - check if it is popo
+        let kind = object.kind as i32;
+        if kind != *FIGHTER_KIND_POPO { 
+            continue; 
+        }
+        //If it is popo, get nana and add her to the list too
+        let boma = &mut *(*object).module_accessor;
+        let nana_id = WorkModule::get_int(boma, *FIGHTER_POPO_INSTANCE_WORK_ID_INT_PARTNER_OBJECT_ID) as u32;
+        let nana_object = get_battle_object_from_id(nana_id);
+        if nana_object.is_null() { 
+            continue; 
+        }
+        let nana_object = unsafe { 
+            &mut *nana_object 
+        };
+        vec.push(nana_object.battle_object_id);
+    }
+    return vec;
+}
+
+pub fn byte_search<T: Eq>(needle: &[T]) -> Option<usize> {   
+    let text = unsafe {
+        let start = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *const T;
+        let end = skyline::hooks::getRegionAddress(skyline::hooks::Region::Rodata) as *const T;
+        let length = end.offset_from(start) as usize;
+        std::slice::from_raw_parts(start, length)
+    };
+
+    text.windows(needle.len()).position(|window| window == needle)
+}
+
+pub fn byte_search_rodata<T: Eq>(needle: &[T]) -> Option<usize> {
+    const RODATA_LEN: usize = 0xCC8C9B;
+    let (rodata, text_len) = unsafe {
+        let start = skyline::hooks::getRegionAddress(skyline::hooks::Region::Rodata) as *const T;
+        let end = (skyline::hooks::getRegionAddress(skyline::hooks::Region::Rodata) as usize + RODATA_LEN) as *const T;
+        let text = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *const T;
+        let length = end.offset_from(start) as usize;
+        (std::slice::from_raw_parts(start, length), start.offset_from(text) as usize)
+    };
+    rodata.windows(needle.len()).position(|window| window == needle).map(|x| x + text_len)
+}
+
+pub fn offset_to_addr<T>(offset: usize) -> *const T {
+    unsafe {
+        (skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *const u8).add(offset) as _
+    }
+}
+
+extern "C" {
+    #[link_name = "\u{1}_ZN3app8lua_bind38FighterManager__get_fighter_entry_implEPNS_14FighterManagerENS_14FighterEntryIDE"]
+    fn get_fighter_entry(manager: *mut smash::app::FighterManager, entry_id: u32) -> *mut u8;
+}
+
+pub fn get_battle_object_from_entry_id(entry_id: u32) -> Option<*mut BattleObject> {
+    unsafe {
+        let entry = get_fighter_entry(singletons::FighterManager(), entry_id);
+        if entry.is_null() {
+            None
+        } else {
+            Some(*(entry.add(0x4160) as *mut *mut BattleObject))
+        }
+    }
+}
+
 extern "C"{
     #[link_name = "_ZN3lib9SingletonIN3app14FighterManagerEE9instance_E"]
     pub static FIGHTER_MANAGER: *mut smash::app::FighterManager;
@@ -150,7 +295,6 @@ pub trait BomaExt {
     unsafe fn kind(&mut self) -> i32;
     unsafe fn down_input(&mut self) -> bool;
     unsafe fn change_status_req(&mut self, kind: i32, repeat: bool) -> i32;
-    unsafe fn is_in_hitlag(&mut self) -> bool;
 }
 
 impl BomaExt for BattleObjectModuleAccessor {
@@ -181,20 +325,6 @@ impl BomaExt for BattleObjectModuleAccessor {
             return true;
         };
         return false;
-    }
-    unsafe fn is_in_hitlag(&mut self) -> bool {
-        let hitlag_frame = WorkModule::get_int(self, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME);
-        if hitlag_frame > 0 {
-            return true;
-        }
-        return false;
-    }
-}
-
-pub fn get_fighter_common_from_accessor<'a>(boma: &'a mut BattleObjectModuleAccessor) -> &'a mut L2CFighterCommon {
-    unsafe {
-        let lua_module = *(boma as *mut BattleObjectModuleAccessor as *mut u64).add(0x190 / 8);
-        std::mem::transmute(*((lua_module + 0x1D8) as *mut *mut L2CFighterCommon))
     }
 }
 

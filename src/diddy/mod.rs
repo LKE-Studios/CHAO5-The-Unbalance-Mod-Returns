@@ -1,11 +1,7 @@
-mod game;
-mod sound;
-mod frame;
-mod status;
+mod diddy;
+mod diddy_barreljet;
 
 pub fn install() {
-    game::install(); 
-    sound::install(); 
-    frame::install();  
-    status::install();
+    diddy::install(&mut Agent::new("diddy")); 
+    diddy_barreljet::install(&mut Agent::new("diddy_barreljet"));
 }

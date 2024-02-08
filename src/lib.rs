@@ -16,7 +16,6 @@
     clippy::if_same_then_else)]
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
-//#[macro_use]
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
@@ -132,7 +131,7 @@ pub mod globals {
 }
 
 mod bayonetta;
-mod brave;
+/*mod brave;
 mod buddy;
 mod captain;
 mod chrom;
@@ -142,11 +141,11 @@ mod daisy;
 mod dedede;
 mod demon;
 mod diddy;
-mod dolly;
+mod dolly;*/
 mod donkey;
-mod duckhunt;
+//mod duckhunt;
 mod edge;
-mod eflame;
+/*mod eflame;
 mod elight;
 mod falco;
 mod fox;
@@ -173,16 +172,15 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;
+mod master;*/
 mod metaknight;
-mod mewtwo;
+/*mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
 mod nana;
 mod ness;
-mod ninten;
 mod packun;
 mod pacman;
 mod palutena;
@@ -191,11 +189,11 @@ mod pfushigisou;
 mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;
+mod pikmin;*/
 mod pit;
-mod pitb;
+//mod pitb;
 mod plizardon;
-mod popo;
+/*mod popo;
 mod purin;
 mod ptrainer;
 mod pzenigame;
@@ -226,12 +224,13 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;
+mod zelda;*/
 
 pub mod singletons;
 pub mod helper;
 pub mod imports;
 mod utils;
+mod offsets;
 mod common;
 
 const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
@@ -358,7 +357,6 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 	}
 }
 
-
 #[skyline::main(name = "chao5")]
 pub fn main() {
     unsafe {
@@ -375,9 +373,9 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    mario::install();
+    //mario::install();
     donkey::install();
-    link::install();
+    /*link::install();
     samus::install();
     yoshi::install();
     kirby::install();
@@ -401,16 +399,16 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();
+    roy::install();*/
     metaknight::install();
     pit::install();
-    wario::install();
+    /*wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
-    pfushigisou::install();
+    pfushigisou::install();*/
     plizardon::install();
-    dedede::install();
+    /*dedede::install();
     lucas::install();
     lucario::install();
     sonic::install();
@@ -429,9 +427,9 @@ pub fn main() {
     miifighter::install();
     miiswordsman::install();
     miigunner::install();
-    cloud::install();
+    cloud::install();*/
     bayonetta::install();
-    reflet::install();
+    /*reflet::install();
     gekkouga::install();
     pitb::install();
     pacman::install();
@@ -455,9 +453,9 @@ pub fn main() {
     richter::install();
     chrom::install();
     dolly::install();
-    jack::install();
+    jack::install();*/
     edge::install();
-    brave::install();
+    /*brave::install();
     demon::install();
     master::install();
     pickel::install();
@@ -469,8 +467,7 @@ pub fn main() {
     claus::install();
     koopag::install();
     silver::install();
-    waluigi::install();
-    ninten::install();
+    waluigi::install();*/
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

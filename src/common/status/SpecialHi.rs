@@ -10,7 +10,6 @@ pub unsafe fn super_jump_punch_main(fighter: &mut L2CFighterCommon) {
     }
     let frame = fighter.global_table[CURRENT_FRAME].get_f32();
     let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
-    //Permits Mario to be able to Wall Jump during Up Special
     if [*FIGHTER_KIND_MARIO, *FIGHTER_KIND_LUIGI, *FIGHTER_KIND_MARIOD].contains(&fighter_kind) {
         if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR {
             if frame > 5.0 {

@@ -1,21 +1,20 @@
 mod JumpAerial;
 mod Fly;
+pub mod GlideStart;
 pub mod Glide;
-mod GlideStart;
-mod GlideAttack;
-mod GlideEnd;
-mod GlideLanding;
-mod glide_checks;
-pub mod glide_param;
+pub mod GlideAttack;
+pub mod GlideEnd;
+pub mod GlideLanding;
+mod Sub_Glide_checks;
 mod Catch;
 mod Guard;
-mod PerfectPivot;
+mod Dash;
 mod AttackDash;
-mod edge_cancel;
+mod Edge_Cancel;
 mod SpecialHi;
 mod EscapeAir;
-mod Damage;
-//mod dead;
+mod Rebirth;
+//mod Dead;
 
 pub fn install() {
     JumpAerial::install();
@@ -25,14 +24,14 @@ pub fn install() {
     GlideAttack::install();
     GlideEnd::install();
     GlideLanding::install();
-    glide_checks::install();
+    Sub_Glide_checks::install();
     Catch::install();
     Guard::install();
-    PerfectPivot::install();
+    Dash::install();
     AttackDash::install();
-    edge_cancel::install();
+    Edge_Cancel::install();
     SpecialHi::install();
     EscapeAir::install();
-    Damage::install();
-    //dead::install();
+    Rebirth::install();
+    //Dead::install();
 }

@@ -1,16 +1,7 @@
-mod game;
-mod effect;
-mod sound;
-mod expression;
-mod frame;
-mod status;
-mod param;
+mod metaknight;
 
 pub fn install() {
-    game::install();
-    effect::install();
-    sound::install();
-    expression::install();
-    frame::install();
-    status::install();
+    metaknight::install(); 
+    smashline::add_param_object("metaknight", "param_glide");
+    smashline::add_param_object("metaknight", "param_meta_power");
 }

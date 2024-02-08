@@ -1,7 +1,6 @@
 use crate::imports::BuildImports::*;
 use super::super::is_glider;
 
-
 #[skyline::hook(replace = L2CFighterCommon_status_JumpAerialSub)]
 unsafe fn status_jumpaerialsub(fighter: &mut L2CFighterCommon, motion: L2CValue, keep_jump: L2CValue) -> L2CValue {
     let ret = call_original!(fighter, motion, keep_jump);

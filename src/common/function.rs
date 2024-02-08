@@ -73,17 +73,14 @@ pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
     LAST_EFFECT_SET_COLOR(fighter, 0.831, 0.686, 0.216);
 }
 
-#[smashline::fighter_init]
-fn metaknight_init(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-        if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
-            fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_special_n_callback as *const () as _));
-            fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_special_s_callback as *const () as _));
-            fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(metaknight_special_hi_callback as *const () as _));
-            fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(metaknight_special_lw_callback as *const () as _));
-            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(metaknight_change_status_callback as *const () as _)); 
-        }
+unsafe extern "C" fn metaknight_init(fighter: &mut L2CFighterCommon) {
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
+        fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_special_n_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_special_s_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(metaknight_special_hi_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(metaknight_special_lw_callback as *const () as _));
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(metaknight_change_status_callback as *const () as _)); 
     }
 }
 
@@ -140,14 +137,11 @@ unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterC
     true.into()
 }
 
-#[smashline::fighter_init]
-fn lucario_init(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-        if fighter_kind == *FIGHTER_KIND_LUCARIO {
-            fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
-            fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
-        }
+unsafe extern "C" fn lucario_init(fighter: &mut L2CFighterCommon) {
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_LUCARIO {
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
     }
 }
 
@@ -170,24 +164,24 @@ unsafe extern "C" fn lucario_change_status_callback(fighter: &mut L2CFighterComm
 //Custom Fighter Functions
 
 pub static mut META_POWER : [bool; 8] = [false; 8];
-pub static META_POWER_DAMAGE : f32 = 100.0;
-pub static META_POWER_ATTACK_MUL : f32 = 1.25;
-pub static META_POWER_REACTION_MUL : f32 = 0.5;
-pub static META_POWER_DAMAGE_TAKEN_MUL : f32 = 0.5;
 pub static mut GODDESS_POWER_UP : [bool; 8] = [false; 8];
 pub static POWER_MUL : f32 = 1.1;
 
 pub mod FighterSpecializer_MetaKnight {
     use crate::imports::BuildImports::*;
-    pub unsafe fn meta_power (fighter: &mut L2CFighterCommon) {
+    pub unsafe fn meta_power(fighter: &mut L2CFighterCommon) {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let meta_power_damage = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("meta_power_damage"));
+        let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("attack_mul"));
+        let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("reaction_mul"));
+        let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
         if META_POWER[ENTRY_ID] == true {
             GFX_COUNTER[ENTRY_ID] += 1;
             SFX_COUNTER[ENTRY_ID] += 1;
-            AttackModule::set_power_up(fighter.module_accessor, META_POWER_ATTACK_MUL);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, META_POWER_DAMAGE_TAKEN_MUL);
-            DamageModule::set_reaction_mul(fighter.module_accessor, META_POWER_REACTION_MUL);
+            AttackModule::set_power_up(fighter.module_accessor, attack_mul);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
+            DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
             if SFX_COUNTER[ENTRY_ID] < 2 {
                 PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
                 PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_final01"));
@@ -196,7 +190,7 @@ pub mod FighterSpecializer_MetaKnight {
             if SFX_COUNTER[ENTRY_ID] >= 100 {
                 SFX_COUNTER[ENTRY_ID] = 2;
             };
-            if DamageModule::damage(fighter.module_accessor, 0) < META_POWER_DAMAGE {
+            if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage {
                 SFX_COUNTER[ENTRY_ID] = 0;
             };
             if GFX_COUNTER[ENTRY_ID] >= 6 {
@@ -207,24 +201,16 @@ pub mod FighterSpecializer_MetaKnight {
                 GFX_COUNTER[ENTRY_ID] = 0;
             };
         };
-        if DamageModule::damage(fighter.module_accessor, 0) >= META_POWER_DAMAGE {
+        if DamageModule::damage(fighter.module_accessor, 0) >= meta_power_damage {
             META_POWER[ENTRY_ID] = true;
         };   
-        if DamageModule::damage(fighter.module_accessor, 0) < META_POWER_DAMAGE {
+        if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT].contains(&status_kind) 
+        || sv_information::is_ready_go() == false{
             META_POWER[ENTRY_ID] = false;
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
         };     
-        if [
-            *FIGHTER_STATUS_KIND_DEAD,
-            *FIGHTER_STATUS_KIND_MISS_FOOT
-            ].contains(&status_kind) || sv_information::is_ready_go() == false {
-            META_POWER[ENTRY_ID] = false;
-            AttackModule::set_power_up(fighter.module_accessor, 1.0);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-        };
         if [
             *FIGHTER_STATUS_KIND_DEAD,
             *FIGHTER_STATUS_KIND_MISS_FOOT,
@@ -248,11 +234,14 @@ pub mod FighterSpecializer_Palutena {
     pub unsafe fn goddess_power_up (fighter: &mut L2CFighterCommon) {
         let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("attack_mul"));
+        let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("reaction_mul"));
+        let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("hit_damage_mul"));
         if GODDESS_POWER_UP[ENTRY_ID] == true {
             GFX_COUNTER[ENTRY_ID] += 1;
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.7);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 0.7);
-            AttackModule::set_power_up(fighter.module_accessor, POWER_MUL);
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
+            DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
+            AttackModule::set_power_up(fighter.module_accessor, attack_mul);
             if GFX_COUNTER[ENTRY_ID] >= 20 {
                 EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
                 EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
@@ -330,9 +319,48 @@ pub unsafe fn waluigi_dice_block_visible(fighter: &mut L2CFighterCommon) {
     }
 }
 
+pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleObjectModuleAccessor) -> bool {
+    if utility::get_kind(&mut *object_boma) == *WEAPON_KIND_SHEIK_NEEDLE 
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOOMERANG {
+        let owner_id = WorkModule::get_int(object_boma, *WEAPON_INSTANCE_WORK_ID_INT_ACTIVATE_FOUNDER_ID) as u32;
+        let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
+        let owner_kind = utility::get_kind(&mut *owner_boma);
+        if owner_kind == *FIGHTER_KIND_PLIZARDON {
+            return true;
+        }
+    }
+    return false;
+}
+
+pub unsafe extern "C" fn ac_update(fighter: &mut L2CFighterCommon) {
+    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if status_kind == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH {
+        let object_id = WorkModule::get_int(fighter.module_accessor,*FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_TARGET_OBJECT_ID) as u32;
+        if object_id == 0 || object_id == 0x50000000 {return;}
+        let object_boma = sv_battle_object::module_accessor(object_id);
+        if is_cloned_article(object_boma) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_FAILURE, false);
+            WorkModule::set_int(fighter.module_accessor, 0x50000000, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_TARGET_OBJECT_ID);
+            let weapon = get_fighter_common_from_accessor(&mut *object_boma);
+            notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+            let pos = *PostureModule::pos(object_boma);
+            EffectModule::req(object_boma, Hash40::new("sys_erace_smoke"), &Vector3f{x: pos.x, y: pos.y + 2.0, z: pos.z}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.625, 0, -1, false, 0);
+        }
+    }
+}
+
 pub fn install() {
-    smashline::install_agent_init_callbacks!(
-        metaknight_init,
-        lucario_init
-    );
+    /*Agent::new("common")
+    .on_init(metaknight_init)
+    .on_init(lucario_init)
+    .install();*/
+    smashline::api::install_line_callback(None, StatusLine::Init, metaknight_init as _);
+    smashline::api::install_line_callback(None, StatusLine::Init, lucario_init as _);
+    Agent::new("murabito")
+    .on_line(Main, ac_update)
+    .install();
+    Agent::new("shizue")
+    .on_line(Main, ac_update)
+    .install();
 }

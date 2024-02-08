@@ -1,27 +1,26 @@
 use crate::imports::BuildImports::*;
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn status_GlideStart_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideStart_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), *FIGHTER_KINETIC_TYPE_GLIDE_START, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_ENABLE, false, false, false, 0, *FIGHTER_STATUS_ATTR_INTO_DOOR as u32, 0, 0);
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn status_GlideStart_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let params = GlideParams::get(fighter);
+pub unsafe extern "C" fn status_GlideStart_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
     let motion = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION) as *mut smash::app::KineticEnergy;
     let lr = PostureModule::lr(fighter.module_accessor);
+    let glide_start_air_accel_y_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("glide_start_air_accel_y_mul"));
+    let glide_start_speed_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("glide_start_speed_x_mul"));
+    let glide_start_speed_y_add = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("glide_start_speed_y_add"));
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GLIDE_START);
-    KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -params.gravity_start}, &Vector3f{x: 0.0, y: -params.gravity_start, z: 0.0}, fighter.module_accessor);
-    KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: params.speed_mul_start * lr, y: 0.0}, &Vector3f{x: params.speed_mul_start * lr, y: 0.0, z: 0.0}, fighter.module_accessor);
-    KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_GLIDE_START, Vector2f{x: 0.0, y: params.v_glide_start}, Vector3f{x: 0.0, y: params.v_glide_start, z: 0.0});
+    KineticEnergy::reset_energy(gravity, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: 0.0, y: -glide_start_air_accel_y_mul}, &Vector3f{x: 0.0, y: -glide_start_air_accel_y_mul, z: 0.0}, fighter.module_accessor);
+    KineticEnergy::reset_energy(motion, *ENERGY_GRAVITY_RESET_TYPE_GLIDE_START, &Vector2f{x: glide_start_speed_x_mul * lr, y: 0.0}, &Vector3f{x: glide_start_speed_x_mul * lr, y: 0.0, z: 0.0}, fighter.module_accessor);
+    KineticUtility::reset_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP, *ENERGY_STOP_RESET_TYPE_GLIDE_START, Vector2f{x: 0.0, y: glide_start_speed_y_add}, Vector3f{x: 0.0, y: glide_start_speed_y_add, z: 0.0});
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn status_GlideStart_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideStart_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
@@ -48,16 +47,15 @@ unsafe extern "C" fn GlideStart_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CV
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_START, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn status_GlideStart_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideStart_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
 pub fn install() {
-    install_status_scripts!(
-        status_GlideStart_Pre,
-        status_GlideStart_Init,
-        status_GlideStart_Main,
-        status_GlideStart_End,
-    );
+    Agent::new("common")
+    .status(Pre, *FIGHTER_STATUS_KIND_GLIDE_START, status_GlideStart_Pre)
+    .status(Init, *FIGHTER_STATUS_KIND_GLIDE_START, status_GlideStart_Init)
+    .status(Main, *FIGHTER_STATUS_KIND_GLIDE_START, status_GlideStart_Main)
+    .status(End, *FIGHTER_STATUS_KIND_GLIDE_START, status_GlideStart_End)
+    .install();
 }

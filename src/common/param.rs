@@ -3,7 +3,6 @@ use smash::app::*;
 use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
-use smash::app::smashball::is_training_mode;
 
 static mut FLOAT_OFFSET : usize = 0x4e53c0;
 static mut INT_OFFSET : usize = 0x4e5380;
@@ -23,10 +22,8 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
     let MIDBUS = color >= 120 && color <= 127;
     let SILVER = color >= 120 && color <= 127;
     let WALUIGI = color >= 120 && color <= 130;
-    let NINTEN = color >= 120 && color <= 127;
     let WEAPON_CLAUS = weapon_color >= 64 && weapon_color <= 71;
     let WEAPON_SILVER = weapon_color >= 120 && weapon_color <= 127;
-    let WEAPON_NINTEN = weapon_color >= 120 && weapon_color <= 127;
     if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_LUCAS && CLAUS {
             if param_hash == 0 {
@@ -288,18 +285,6 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
             }
         }
         if fighter_kind == FIGHTER_KIND_DOLLY && WALUIGI {
-            if param_type == hash40("param_private") && param_hash == hash40("super_special_damage") {
-                return 9999.0;
-            }
-            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_rate") {
-                return 0.0;
-            }
-            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_min") {
-                return 0.0;
-            }
-            if param_type == hash40("param_private") && param_hash == hash40("super_special_hp_max") {
-                return 0.0;
-            }
             if param_hash == 0 {
                 if param_type == hash40("walk_accel_mul") {
                     return 0.097;
@@ -362,7 +347,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 2.2;
                 }
                 if param_type == hash40("weight") {
-                    return 95.0;
+                    return 93.0;
                 }
                 if param_type == hash40("shield_radius") {
                     return 11.8;
@@ -383,6 +368,9 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                     return 6.0;
                 }
             }
+            if param_type == hash40("param_private") && param_hash == hash40("super_special_damage") {
+                return 9999.0;
+            }
             if param_type == hash40("param_special_hi") && param_hash == hash40("start_speed_y_mul") {
                 return 0.1;
             }
@@ -390,7 +378,7 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 return 0.1;
             }
             if param_type == hash40("param_special_hi") && param_hash == hash40("stick_x_max") {
-                return 1.0;
+                return 0.1;
             }
             if param_type == hash40("param_special_hi") && param_hash == hash40("stick_x_speed_mul_max") {
                 return 0.1;
@@ -406,52 +394,6 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
             }		
             if param_type == hash40("param_special_hi") && param_hash == hash40("lr_stick_x") {
                 return 0.2;
-            }
-        }
-        if fighter_kind == FIGHTER_KIND_NESS && NINTEN {
-            if param_hash == 0 {
-                if param_type == hash40("walk_accel_mul") {
-                    return 0.78; //Ness 0.84
-                }
-                if param_type == hash40("walk_speed_max") {
-                    return 1.463; //Ness 2.357
-                }
-                if param_type == hash40("ground_brake") {
-                    return 0.065; //Ness 0.131
-                }
-                if param_type == hash40("dash_speed") {
-                    return 2.26; //Ness 2.2
-                }
-                if param_type == hash40("run_speed_max") {
-                    return 1.885; //Ness 1.759
-                }
-                if param_type == hash40("air_accel_x_add") {
-                    return 0.012; //Ness 0.01
-                }
-                if param_type == hash40("air_speed_x_stable") {
-                    return 1.3867; //Ness 1.41
-                }
-                if param_type == hash40("dive_speed_y") {
-                    return 2.21; //Ness 2.296
-                }
-                if param_type == hash40("weight") {
-                    return 82.0; //Ness 84
-                }
-                if param_type == hash40("landing_attack_air_frame_n") {
-                    return 2.0;
-                }
-                if param_type == hash40("landing_attack_air_frame_f") {
-                    return 6.0;
-                }
-                if param_type == hash40("landing_attack_air_frame_b") {
-                    return 4.0;
-                }
-                if param_type == hash40("landing_attack_air_frame_hi") {
-                    return 5.0;
-                }
-                if param_type == hash40("landing_attack_air_frame_lw") {
-                    return 6.0;
-                }
             }
         }
     }
@@ -487,39 +429,6 @@ pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f3
                 }
             }
         }
-        if fighter_kind == *WEAPON_KIND_NESS_PK_FIRE && WEAPON_NINTEN {
-            if param_type == hash40("param_pkfire") {
-                if param_hash == hash40("angle_air") {
-                    return -20.0;
-                }
-                if param_hash == hash40("speed_air") {
-                    return 5.0;
-                }
-                if param_hash == hash40("pillar_damage_mul") {
-                    return 1.0;
-                }
-                if param_hash == hash40("pillar_offset_y") {
-                    return 0.0;
-                }
-                if param_hash == hash40("pillar_accel_y") {
-                    return 0.0;
-                }
-                if param_hash == hash40("pillar_speed_max_y") {
-                    return 0.0;
-                }
-                if param_hash == hash40("pillar_scale_min") {
-                    return 0.5;
-                }
-            }
-            if param_type == hash40("param_special_lw") {
-                if param_hash == hash40("phy_magnet_size") {
-                    return 14.0;
-                }
-                if param_hash == hash40("phy_magnet_effect_scale") {
-                    return 1.0;
-                }
-            }
-        }
     }
     ret
 }
@@ -535,8 +444,6 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
     let boma_reference = &mut *module_accessor;
     let SILVER = color >= 120 && color <= 127;
     let WALUIGI = color >= 120 && color <= 130;
-    let NINTEN = color >= 120 && color <= 127;
-    let WEAPON_NINTEN = weapon_color >= 120 && weapon_color <= 127;
     let WEAPON_SILVER = weapon_color >= 120 && weapon_color <= 127;
     if boma_reference.is_fighter() {
         if fighter_kind == FIGHTER_KIND_MEWTWO && SILVER {
@@ -561,22 +468,10 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
         }
     }
     else if boma_reference.is_weapon() {
-        if fighter_kind == WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
+        if fighter_kind == *WEAPON_KIND_MEWTWO_SHADOWBALL && WEAPON_SILVER {
             if param_type == hash40("param_shadowball") {
                 if param_hash == hash40("life") {
                     return 600;
-                }
-            }
-        }
-        if fighter_kind == *WEAPON_KIND_NESS_PK_FIRE && WEAPON_NINTEN {
-            if param_type == hash40("param_pkfire") {
-                if param_hash == hash40("pillar_life") {
-                    return 10;
-                }
-            }
-            if param_type == hash40("param_special_lw") {
-                if param_hash == hash40("time") {
-                    return 38;
                 }
             }
         }

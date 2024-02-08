@@ -1,7 +1,9 @@
-mod game;
-mod frame;
+mod demon;
+mod demon_blaster;
+mod demon_blasterchest;
 
 pub fn install() {
-    game::install();
-    frame::install();
+    demon::install(&mut Agent::new("demon")); 
+    demon_blaster::install(&mut Agent::new("demon_blaster"));
+    demon_blasterchest::install(&mut Agent::new("demon_blasterchest"));
 }

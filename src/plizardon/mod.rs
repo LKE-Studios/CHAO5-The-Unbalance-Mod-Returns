@@ -1,15 +1,22 @@
-mod game;
-mod effect;
-mod frame;
-mod sound;
-mod status;
-mod expression;
+mod plizardon;
+mod plizardon_breath;
+mod plizardon_daimonji;
+mod plizardon_explosion;
+mod plizardon_rock;
+mod plizardon_rockstone;
 
 pub fn install() {
-    game::install();
-    effect::install();    
-    frame::install();
-    sound::install();
-    status::install();
-    expression::install();
+    plizardon::install(); 
+    plizardon_breath::install();
+    plizardon_daimonji::install();
+    plizardon_explosion::install();
+    plizardon_rock::install();
+    plizardon_rockstone::install();
+    smashline::add_param_object("plizardon", "param_glide");
+    smashline::add_param_object("plizardon", "param_special_hi_2");
+    smashline::add_param_object("plizardon", "param_special_guard");
+    smashline::add_param_object("plizardon", "param_rock");
+    smashline::add_param_object("plizardon", "param_rockstone");
+    smashline::clone_weapon("link", "boomerang", "plizardon", "rock", false);
+    smashline::clone_weapon("sheik", "needle", "plizardon", "rockstone", false);
 }

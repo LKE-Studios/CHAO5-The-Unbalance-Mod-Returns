@@ -15,6 +15,13 @@ pub unsafe fn REG_LANDING_SE(fighter: &mut L2CAgentBase, se: Hash40){
     fighter.clear_lua_stack();
 }
 
+pub unsafe fn ADD_SPEED_NO_LIMIT(fighter: &mut L2CAgentBase, x_speed: f32, y_speed: f32){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, x_speed, y_speed);
+    sv_animcmd::ADD_SPEED_NO_LIMIT(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
 pub unsafe fn LAST_EFFECT_SET_WORK_INT(fighter: &mut L2CAgentBase, unk: i32){
     fighter.clear_lua_stack();
     lua_args!(fighter, unk);
@@ -29,6 +36,20 @@ pub unsafe fn EFFECT_OFF_HANDLE(fighter: &mut L2CAgentBase, unk: i32){
     fighter.clear_lua_stack();
 }
 
+pub unsafe fn FT_CATCH_STOP(fighter: &mut L2CAgentBase, unk1: f32, unk2: f32){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk1, unk2);
+    sv_animcmd::FT_CATCH_STOP(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn FT_REMOVE_FINAL_AURA(fighter: &mut L2CAgentBase, unk: bool){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk);
+    sv_animcmd::FT_REMOVE_FINAL_AURA(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
 pub unsafe fn FT_IS_SAME_FIGHTER_CATEGORY(fighter: &mut L2CAgentBase, unk: i32) -> bool
 {
     fighter.clear_lua_stack();
@@ -36,6 +57,31 @@ pub unsafe fn FT_IS_SAME_FIGHTER_CATEGORY(fighter: &mut L2CAgentBase, unk: i32) 
     sv_animcmd::FT_IS_SAME_FIGHTER_CATEGORY(fighter.lua_state_agent);
     let ret = fighter.pop_lua_stack(1).get_bool();
     ret
+}
+
+pub unsafe fn EFFECT_FOLLOW_RND(
+    fighter: &mut L2CAgentBase, 
+    effect_type: Hash40, 
+    bone: Hash40,
+    x_pos: f32,
+    y_pos: f32,
+    z_pos: f32,
+    x_rot: f32,
+    y_rot: f32,
+    z_rot: f32,
+    unk1: f32,
+    unk2: f32,
+    unk3: f32,
+    unk4: f32,
+    unk5: f32,
+    unk6: f32,
+    unk7: f32,
+    unk8: bool
+) {
+    fighter.clear_lua_stack();
+    lua_args!(fighter, effect_type, bone, x_pos, y_pos, z_pos, x_rot, y_rot, z_rot, unk1, unk2, unk3, unk4, unk5, unk6, unk7, unk8);
+    sv_animcmd::EFFECT_FOLLOW_RND(fighter.lua_state_agent);
+    fighter.pop_lua_stack(1).get_bool();
 }
 
 pub unsafe fn EFFECT_FOLLOW_FLIP_arg13(
@@ -113,5 +159,26 @@ pub unsafe fn FT_ATTACK_ABS_CAMERA_QUAKE(
     fighter.clear_lua_stack();
     lua_args!(fighter, unk1, unk2);
     sv_animcmd::FT_ATTACK_ABS_CAMERA_QUAKE(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn IS_EXIST_ARTICLE(fighter: &mut L2CAgentBase, article: i32){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, article);
+    sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn SET_RATE_ARTICLE(fighter: &mut L2CAgentBase, article: i32, rate: f32){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, article, rate);
+    sv_animcmd::SET_RATE_ARTICLE(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn CLR_SPEED(fighter: &mut L2CAgentBase, _type: i32){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, _type);
+    sv_animcmd::CLR_SPEED(fighter.lua_state_agent);
     fighter.clear_lua_stack();
 }

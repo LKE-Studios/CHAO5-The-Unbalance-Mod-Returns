@@ -1,9 +1,5 @@
-mod game;
-mod frame;
-mod status;
+mod captain;
 
 pub fn install() {
-    game::install();   
-    frame::install(); 
-    status::install();
+    captain::install(); 
 }

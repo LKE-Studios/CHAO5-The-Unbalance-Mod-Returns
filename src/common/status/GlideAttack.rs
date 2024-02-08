@@ -1,14 +1,12 @@
 use crate::imports::BuildImports::*;
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn status_GlideAttack_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideAttack_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), *FIGHTER_KINETIC_TYPE_AIR_STOP, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_ENABLE, false, false, false, *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK as u64, 0, 0, 0);
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn status_GlideAttack_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_GlideAttack_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_attack"), 0.0, 1.0, false, 0.0, false, false);
     if !StopModule::is_stop(fighter.module_accessor) {
@@ -36,15 +34,14 @@ unsafe extern "C" fn GlideAttack_Main_Sub(fighter: &mut L2CFighterCommon) -> L2C
     0.into()
 }
 
-#[common_status_script( status = FIGHTER_STATUS_KIND_GLIDE_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-pub unsafe fn status_GlideAttack_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_GlideAttack_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 
 pub fn install() {
-    install_status_scripts!(
-        status_GlideAttack_Pre,
-        status_GlideAttack_Main,
-        status_GlideAttack_End,
-    );
+    Agent::new("common")
+    .status(Pre, *FIGHTER_STATUS_KIND_GLIDE_ATTACK, status_GlideAttack_Pre)
+    .status(Main, *FIGHTER_STATUS_KIND_GLIDE_ATTACK, status_GlideAttack_Main)
+    .status(End, *FIGHTER_STATUS_KIND_GLIDE_ATTACK, status_GlideAttack_End)
+    .install();
 }

@@ -4,11 +4,6 @@ pub static mut FIGHTER_BOOL_1: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_2: [bool; 9] = [false; 9];
 pub static mut FIGHTER_BOOL_3: [bool; 9] = [false; 9];
 
-#[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
-unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
-    return true;
-}
-
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_Landing_MainSub)]
 pub unsafe fn status_landing_main_sub(fighter: &mut L2CFighterCommon) -> L2CValue {
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
@@ -19,19 +14,6 @@ pub unsafe fn status_landing_main_sub(fighter: &mut L2CFighterCommon) -> L2CValu
     }
     original!()(fighter)
 }
-
-// Use this for general per-frame weapon-level hooks
-// #[weapon_frame_callback]
-// pub fn global_weapon_frame(fighter_base : &mut L2CFighterBase) {
-//     unsafe {
-//         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter_base.lua_state_agent);
-//         let frame = smash::app::lua_bind::MotionModule::frame(module_accessor) as i32;
-
-//         if frame % 10 == 0 {
-//             println!("[Weapon Hook] Frame : {}", frame);
-//         }
-//     }
-// }
 
 pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectModuleAccessor) -> usize {
 	if smash::app::utility::get_kind(module_accessor) == *WEAPON_KIND_PTRAINER_PTRAINER {
@@ -50,10 +32,10 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 }
 
 pub mod status;
-pub mod frame;
 mod param;
 pub mod consts;
 pub mod function;
+pub mod frame;
 
 pub fn is_glider(kind: i32) -> bool {
     [
@@ -68,45 +50,6 @@ pub fn is_glider(kind: i32) -> bool {
     ].contains(&kind)
 }
 
-/*static mut SFX_COUNTER : [i32; 8] = [0; 8];
-
-#[fighter_frame_callback(main)]
-pub fn loupe_camera(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
-            SFX_COUNTER[ENTRY_ID] += 1;
-            if SFX_COUNTER[ENTRY_ID] == 1 {
-                macros::PLAY_SE(fighter, Hash40::new("se_common_warning_out"));
-            };
-        }
-        else {
-            macros::STOP_SE(fighter, Hash40::new("se_common_warning_out"));
-            SFX_COUNTER[ENTRY_ID] = 0;
-        }
-    }
-}
-
-#[fighter_frame_callback(main)]
-pub fn loupe_off(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        if sv_information::is_ready_go() == false {
-            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE);
-        }
-        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
-            macros::STOP_SE(fighter, Hash40::new("se_common_warning_out"));
-        }
-    }
-}
-
-#[fighter_reset]
-pub fn loupe_reset(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        SFX_COUNTER[ENTRY_ID] = 0;
-    }
-}*/
-
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
@@ -116,12 +59,10 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 }
 
 pub fn install() {
-    skyline::install_hook!(
-        is_valid_just_shield_reflector
-    );
     skyline::nro::add_hook(nro_hook);
     status::install();
     frame::install();
     param::install();
     function::install();
 }
+
