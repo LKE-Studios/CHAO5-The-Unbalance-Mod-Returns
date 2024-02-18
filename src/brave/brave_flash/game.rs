@@ -1,10 +1,6 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//FlashHit1 [Sizz]
-    agent = "brave_flash", 
-    script = "game_flashhit1", 
-    category = ACMD_GAME, 
-    low_priority )]
+//FlashHit1 [Sizz]
 unsafe extern "C" fn game_brave_flash_FlashHit1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::disable_tip(fighter.module_accessor);
@@ -25,11 +21,7 @@ unsafe extern "C" fn game_brave_flash_FlashHit1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//FlashHit2 [Sizzle]
-    agent = "brave_flash", 
-    script = "game_flashhit2", 
-    category = ACMD_GAME, 
-    low_priority )]
+//FlashHit2 [Sizzle]
 unsafe extern "C" fn game_brave_flash_FlashHit2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::disable_tip(fighter.module_accessor);

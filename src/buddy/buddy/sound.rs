@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //JumpAerialF3 
-unsafe extern "C" fn sound_buddy_JumpAerial3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_buddy_JumpAerialF3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))
@@ -17,7 +17,7 @@ unsafe extern "C" fn sound_buddy_JumpAerial3(fighter: &mut L2CAgentBase) {
 }
 
 //JumpAerialF4
-unsafe extern "C" fn sound_buddy_JumpAerial4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_buddy_JumpAerialF4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))
@@ -33,7 +33,7 @@ unsafe extern "C" fn sound_buddy_JumpAerial4(fighter: &mut L2CAgentBase) {
 }
 
 //JumpAerialF5
-unsafe extern "C" fn sound_buddy_JumpAerial5(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_buddy_JumpAerialF5(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_buddy_jump03_01"))

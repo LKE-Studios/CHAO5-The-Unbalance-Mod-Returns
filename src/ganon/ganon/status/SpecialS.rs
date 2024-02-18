@@ -12,9 +12,9 @@ unsafe extern "C" fn status_ganon_Special_S_Main(fighter: &mut L2CFighterCommon)
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
         if !StopModule::is_stop(fighter.module_accessor) {
-            ganon_special_s_substatus(fighter, false.into());
+            ganon_SpecialS_Sub_Status(fighter, false.into());
         }
-        fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(ganon_Special_S_Sub_Status as *const () as _));
+        fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(ganon_SpecialS_Sub_Status as *const () as _));
     }
     else {
         WorkModule::set_int(fighter.module_accessor, *SITUATION_KIND_GROUND, *FIGHTER_GANON_STATUS_WORK_ID_INT_EXPLOSION_START_SITUATION);
@@ -26,7 +26,7 @@ unsafe extern "C" fn status_ganon_Special_S_Main(fighter: &mut L2CFighterCommon)
     fighter.sub_shift_status_main(L2CValue::Ptr(ganon_Special_S_Main_Sub as *const () as _))
 }
 
-unsafe extern "C" fn ganon_Special_S_Sub_Status(fighter: &mut L2CFighterCommon, param_1: L2CValue) -> L2CValue {
+unsafe extern "C" fn ganon_SpecialS_Sub_Status(fighter: &mut L2CFighterCommon, param_1: L2CValue) -> L2CValue {
     if !param_1.get_bool() {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_GANON_STATUS_WORK_ID_FLAG_EXPLOSION_GRAVITY_ONOFF) {
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);

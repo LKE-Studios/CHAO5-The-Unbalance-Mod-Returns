@@ -5,7 +5,7 @@ use crate::imports::BuildImports::*;
     script = "game_final", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_ptrainer_fushigisou_final(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_ptrainer_fushigisou_final(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.2, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 45, /*BKB*/ 5, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 200.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(200.0), /*Hitlag*/ 0.9, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
@@ -34,7 +34,7 @@ unsafe fn game_ptrainer_fushigisou_final(fighter: &mut L2CAgentBase) {
     script = "game_finalair", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_ptrainer_fushigisou_finalair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_ptrainer_fushigisou_finalair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.2, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 45, /*BKB*/ 5, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 200.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(200.0), /*Hitlag*/ 0.9, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 5, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
@@ -63,7 +63,7 @@ unsafe fn game_ptrainer_fushigisou_finalair(fighter: &mut L2CAgentBase) {
     script = "game_final", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_ptrainer_zenigane_final(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_ptrainer_zenigane_final(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 30, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 25.0, /*X2*/ Some(0.0), /*Y2*/ Some(-8.0), /*Z2*/ Some(40.0), /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 7, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_NONE);
@@ -107,7 +107,7 @@ unsafe fn game_ptrainer_zenigane_final(fighter: &mut L2CAgentBase) {
     script = "game_finalair", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_ptrainer_zenigane_finalair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_ptrainer_zenigane_finalair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.5, /*Angle*/ 30, /*KBG*/ 100, /*FKB*/ 20, /*BKB*/ 0, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 25.0, /*X2*/ Some(0.0), /*Y2*/ Some(-8.0), /*Z2*/ Some(40.0), /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 7, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_NONE);
@@ -144,6 +144,15 @@ unsafe fn game_ptrainer_zenigane_finalair(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
+}
+
+pub fn install() {
+    Agent::new("plizardon")
+    .game_acmd("game_jumpaerialf3", game_plizardon_JumpAerialF3)
+    .game_acmd("game_jumpaerialf4", game_plizardon_JumpAerialF4)
+    .game_acmd("game_jumpaerialf5", game_plizardon_JumpAerialF5)
+    .game_acmd("game_jumpaerialf6", game_plizardon_JumpAerialF6)
+    .install();
 }
 
 pub fn install() {

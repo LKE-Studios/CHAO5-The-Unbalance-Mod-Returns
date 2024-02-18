@@ -1,9 +1,10 @@
 use crate::imports::BuildImports::*;
 
 //JumpAerialF2
-unsafe extern "C" fn game_buddy_JumpAerial2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_buddy_JumpAerialF2(fighter: &mut L2CAgentBase) {
+    let speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("speed_y_table"), 1);
     if is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:1.0, z:0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: speed_y, z: 0.0});
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 32.0);
@@ -14,8 +15,9 @@ unsafe extern "C" fn game_buddy_JumpAerial2(fighter: &mut L2CAgentBase) {
 
 //JumpAerialF3
 unsafe extern "C" fn game_buddy_JumpAerialF3(fighter: &mut L2CAgentBase) {
+    let speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("speed_y_table"), 1);
     if is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:1.0, z:0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: speed_y, z: 0.0});
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 32.0);
@@ -26,8 +28,9 @@ unsafe extern "C" fn game_buddy_JumpAerialF3(fighter: &mut L2CAgentBase) {
 
 //JumpAerialF4
 unsafe extern "C" fn game_buddy_JumpAerialF4(fighter: &mut L2CAgentBase) {
+    let speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("speed_y_table"), 1);
     if is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:1.0, z:0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: speed_y, z: 0.0});
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 32.0);
@@ -38,8 +41,9 @@ unsafe extern "C" fn game_buddy_JumpAerialF4(fighter: &mut L2CAgentBase) {
 
 //JumpAerialF5
 unsafe extern "C" fn game_buddy_JumpAerialF5(fighter: &mut L2CAgentBase) {
+    let speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("speed_y_table"), 1);
     if is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x:0.0, y:1.0, z:0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: speed_y, z: 0.0});
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_jump"), 0, false, 0);
     }
     frame(fighter.lua_state_agent, 32.0);
@@ -301,7 +305,7 @@ unsafe extern "C" fn game_buddy_Attack100 (fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -1324,14 +1328,14 @@ unsafe extern "C" fn game_buddy_SpecialAirLw(fighter: &mut L2CAgentBase) {
 }
 
 //AppealHiR
-unsafe extern "C" fn game_buddy_appealhir(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_buddy_AppealHiR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
     }
 }
 
 //AppealHiL
-unsafe extern "C" fn game_buddy_appealhil(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_buddy_AppealHiL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
     }

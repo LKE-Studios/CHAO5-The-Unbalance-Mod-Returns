@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn status_diddy_SpecialLwLaugh(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_diddy_SpecialLwLaugh_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         fighter.set_situation(SITUATION_KIND_AIR.into());
@@ -53,6 +53,6 @@ pub unsafe extern "C" fn diddy_SpecialLwLaugh_Main_Sub(fighter: &mut L2CFighterC
 
 pub fn install() {
     Agent::new("diddy")
-    .status(Main, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, status_diddy_SpecialLwLaugh)
+    .status(Main, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, status_diddy_SpecialLwLaugh_Main)
     .install();
 }

@@ -1,6 +1,7 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn frame_captain(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn frame_captain_Main(fighter : &mut L2CFighterCommon) {
+    frame_common(fighter);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_air_lw") {
         let cat = fighter.global_table[CMD_CAT1].get_int() as i32;
         if (cat & *FIGHTER_PAD_CMD_CAT1_FLAG_WALL_JUMP_LEFT) != 0 && GroundModule::get_touch_flag(fighter.module_accessor) == *GROUND_TOUCH_FLAG_LEFT as u64 || 
@@ -12,12 +13,6 @@ unsafe extern "C" fn frame_captain(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("captain")
-    .on_line(Main, frame_captain)
+    .on_line(Main, frame_captain_Main)
     .install();
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        frame_captain
-    );
 }

@@ -185,9 +185,7 @@ unsafe extern "C" fn game_duckhunt_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }      
 }
 
@@ -267,11 +265,7 @@ unsafe extern "C" fn game_duckhunt_AttackS3(fighter: &mut L2CAgentBase) {
 }
 
 //AttackS3Lw
-    agent = "duckhunt", 
-    script = "game_attacks3lw", 
-    category = ACMD_GAME, 
-    
-unsafe extern "C" fn game_duckhunt_attacks3lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_duckhunt_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("duckhead"), /*Damage*/ 11.5, /*Angle*/ 5, /*KBG*/ 114, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 6.5, /*X*/ 2.5, /*Y*/ 1.0, /*Z*/ 0.0, /*X2*/ Some(-4.0), /*Y2*/ Some(-2.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_HEAD);
@@ -696,7 +690,7 @@ unsafe extern "C" fn game_duckhunt_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_IGNORE_THROW(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 50, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 12.0, None, None, None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_THROW);
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
-        FT_CATCH_STOP(fighter, 8, 1);
+        FT_CATCH_STOP(fighter, 8.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 10, 0);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.5);
         FighterCutInManager::set_throw_finish_offset(FighterCutInManager(),Vector3f{x:6.0,y:-3.0,z:0.0});

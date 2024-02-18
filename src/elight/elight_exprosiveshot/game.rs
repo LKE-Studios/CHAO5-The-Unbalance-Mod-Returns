@@ -11,6 +11,6 @@ unsafe extern "C" fn game_elight_exprosiveshot_Burst(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("elight_exprosiveshot")
-    game_acmd("game_burst", game_elight_exprosiveshot_Burst)
+    .game_acmd("game_burst", game_elight_exprosiveshot_Burst)
     .install();
 }

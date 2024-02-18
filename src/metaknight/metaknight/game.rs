@@ -1741,6 +1741,34 @@ unsafe extern "C" fn game_metaknight_SpecialAirLwEnd(fighter: &mut L2CAgentBase)
     }
 }
 
+//SpecialZ
+unsafe extern "C" fn game_metaknight_SpecialZ(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_METAKNIGHT_GENERATE_ARTICLE_GALAXIA_BEAM, false, -1);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_METAKNIGHT_GENERATE_ARTICLE_GALAXIA_BEAM, false, -1);
+    }
+}
+
+//SpecialAirZ
+unsafe extern "C" fn game_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_METAKNIGHT_GENERATE_ARTICLE_GALAXIA_BEAM, false, -1);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_METAKNIGHT_GENERATE_ARTICLE_GALAXIA_BEAM, false, -1);
+    }
+    frame(fighter.lua_state_agent, 36.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_METAKNIGHT_GENERATE_ARTICLE_GALAXIA_BEAM, false, -1);
+    }
+}
+
 //AppealHiR
 unsafe extern "C" fn game_metaknight_AppealHiR(fighter: &mut L2CAgentBase) {
     let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
@@ -2011,6 +2039,8 @@ pub fn install() {
     .game_acmd("game_speciallwsubairb", game_metaknight_SpecialLwSubAirB)
     .game_acmd("game_speciallwsubairf", game_metaknight_SpecialLwSubAirF)
     .game_acmd("game_specialairlwend", game_metaknight_SpecialAirLwEnd)
+    .game_acmd("game_specialz", game_metaknight_SpecialZ)
+    .game_acmd("game_specialairz", game_metaknight_SpecialAirZ)
     .game_acmd("game_appealsr", game_metaknight_AppealSR)
     .game_acmd("game_appealsl", game_metaknight_AppealSL)
     .game_acmd("game_appealhir", game_metaknight_AppealHiR)

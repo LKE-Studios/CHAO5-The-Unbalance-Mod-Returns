@@ -30,9 +30,9 @@ unsafe extern "C" fn game_gamewatch_food_Steak(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("gamewatch_food")
-    game_acmd("game_fish", game_gamewatch_food_Fish)
-    game_acmd("game_friedprawns", game_gamewatch_food_FriedPrawns)
-    game_acmd("game_sausage", game_gamewatch_food_Sausage)
-    game_acmd("game_steak", game_gamewatch_food_Steak)
+    .game_acmd("game_fish", game_gamewatch_food_Fish)
+    .game_acmd("game_friedprawns", game_gamewatch_food_FriedPrawns)
+    .game_acmd("game_sausage", game_gamewatch_food_Sausage)
+    .game_acmd("game_steak", game_gamewatch_food_Steak)
     .install();
 }

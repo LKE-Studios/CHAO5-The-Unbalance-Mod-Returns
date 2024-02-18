@@ -103,7 +103,7 @@ unsafe extern "C" fn game_fox_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -514,9 +514,6 @@ unsafe extern "C" fn game_fox_LandingAirLw(fighter: &mut L2CAgentBase) {
 }
 
 //LandingAirF
-    agent = "fox", 
-    script = "game_landingairf", 
-
 unsafe extern "C" fn game_fox_LandingAirF(fighter: &mut L2CAgentBase) {
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FOX_STATUS_ATTACK_AIR_FLAG_LANDING_DISABLE_ATTACK) {
         if is_excute(fighter) {
@@ -724,9 +721,7 @@ unsafe extern "C" fn game_fox_SpecialNLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_FOX_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, Hash40::new("loop"), false, -1.0);
         }
@@ -748,9 +743,7 @@ unsafe extern "C" fn game_fox_SpecialAirNLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_FOX_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FOX_GENERATE_ARTICLE_BLASTER, Hash40::new("loop"), false, -1.0);
         }
@@ -982,9 +975,7 @@ pub fn install() {
     .game_acmd("game_downattacku", game_fox_DownAttackU)
     .game_acmd("game_cliffattack", game_fox_CliffAttack)
     .game_acmd("game_slipattack", game_fox_SlipAttack)
-    .game_acmd("game_specialnstart", game_fox_SpecialNStart)
     .game_acmd("game_specialnloop", game_fox_SpecialNLoop)
-    .game_acmd("game_specialairnstart", game_fox_SpecialAirNStart)
     .game_acmd("game_specialairnloop", game_fox_SpecialAirNLoop)
     .game_acmd("game_specialhi", game_fox_SpecialHi)
     .game_acmd("game_specialhihold", game_fox_SpecialHiHold)

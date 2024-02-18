@@ -592,7 +592,7 @@ unsafe extern "C" fn game_brave_ThrowLw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
-        FT_CATCH_STOP(fighter, 9, 1);
+        FT_CATCH_STOP(fighter, 9.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 3, 0);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.2);
         FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:2.5,y:0.5,z:0.0});

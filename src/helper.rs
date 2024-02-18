@@ -8,6 +8,42 @@ use {
     smashline::*
 };
 
+pub trait ToF32 {
+    fn to_f32(self) -> f32;
+}
+
+impl ToF32 for i32 {
+    fn to_f32(self) -> f32 {
+        self as f32
+    }
+}
+
+impl ToF32 for u32 {
+    fn to_f32(self) -> f32 {
+        self as f32
+    }
+}
+
+impl ToF32 for i64 {
+    fn to_f32(self) -> f32 {
+        self as f32
+    }
+}
+
+impl ToF32 for u64 {
+    fn to_f32(self) -> f32 {
+        self as f32
+    }
+}
+
+impl ToF32 for f32 {
+    fn to_f32(self) -> f32 { self }
+}
+
+impl ToF32 for f64 {
+    fn to_f32(self) -> f32 { self as f32 }
+}
+
 pub unsafe fn REG_LANDING_SE(fighter: &mut L2CAgentBase, se: Hash40){
     fighter.clear_lua_stack();
     lua_args!(fighter, se);
@@ -181,4 +217,25 @@ pub unsafe fn CLR_SPEED(fighter: &mut L2CAgentBase, _type: i32){
     lua_args!(fighter, _type);
     sv_animcmd::CLR_SPEED(fighter.lua_state_agent);
     fighter.clear_lua_stack();
+}
+
+pub unsafe fn REQ_MOTION_CAMERA(fighter: &mut L2CAgentBase, camera: Hash40, unk: bool) {
+    fighter.clear_lua_stack();
+    lua_args!(fighter, camera, unk);
+    sv_animcmd::REQ_MOTION_CAMERA(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn CHECK_VALID_START_CAMERA<A: ToF32, B: ToF32, C: ToF32, D: ToF32, E: ToF32, F: ToF32>(fighter: &mut L2CAgentBase, unk1: A, unk2: B, unk3: C, unk4: D, unk5: E, unk6: F, unk7: bool) {
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk1.to_f32(), unk2.to_f32(), unk3.to_f32(), unk4.to_f32(), unk5.to_f32(), unk6.to_f32(), unk7);
+    sv_animcmd::CHECK_VALID_START_CAMERA(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}
+
+pub unsafe fn SET_TAKEOUT_SE_STATUS(agent: &mut L2CAgentBase, se: Hash40) {
+    agent.clear_lua_stack();
+    lua_args!(agent, se);
+    sv_animcmd::SET_TAKEOUT_SE_STATUS(agent.lua_state_agent);
+    agent.clear_lua_stack();
 }

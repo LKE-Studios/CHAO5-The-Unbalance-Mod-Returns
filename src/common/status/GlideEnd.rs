@@ -51,7 +51,7 @@ pub unsafe extern "C" fn status_GlideEnd_End(fighter: &mut L2CFighterCommon) -> 
 }
 
 pub fn install() {
-    Agent::new("common")
+    Agent::new("fighter")
     .status(Pre, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Pre)
     .status(Init, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Init)
     .status(Main, *FIGHTER_STATUS_KIND_GLIDE_END, status_GlideEnd_Main)

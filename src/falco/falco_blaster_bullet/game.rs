@@ -35,9 +35,9 @@ unsafe extern "C" fn game_falco_blaster_bullet_FlyThrowLw(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("falco_blaster_bullet")
-    game_acmd("game_fly", game_falco_blaster_bullet_Fly)
-    game_acmd("game_flythrowb", game_falco_blaster_bullet_FlyThrowB)
-    game_acmd("game_flythrowhi", game_falco_blaster_bullet_FlyThrowHi)
-    game_acmd("game_flythrowlw", game_falco_blaster_bullet_FlyThrowLw)
+    .game_acmd("game_fly", game_falco_blaster_bullet_Fly)
+    .game_acmd("game_flythrowb", game_falco_blaster_bullet_FlyThrowB)
+    .game_acmd("game_flythrowhi", game_falco_blaster_bullet_FlyThrowHi)
+    .game_acmd("game_flythrowlw", game_falco_blaster_bullet_FlyThrowLw)
     .install();
 }

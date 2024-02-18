@@ -48,30 +48,6 @@ unsafe fn sub_glide_check(fighter: &mut L2CFighterCommon) -> L2CValue {
     false.into()
 }
 
-/*pub unsafe fn jump_hold_frame(kind: i32) -> i32 {
-    if kind == *FIGHTER_KIND_BUDDY {
-        return 22;
-    }
-    if kind == *FIGHTER_KIND_METAKNIGHT {
-        return 16;
-    }
-    if kind == *FIGHTER_KIND_PALUTENA {
-        return 18;
-    }
-    if kind == *FIGHTER_KIND_PLIZARDON {
-        return 28;
-    }
-    if kind == *FIGHTER_KIND_RIDLEY {
-        return 25;
-    }
-    if kind == *FIGHTER_KIND_TRAIL {
-        return 24;
-    }
-    else {
-        return 20;
-    }
-}*/
-
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(

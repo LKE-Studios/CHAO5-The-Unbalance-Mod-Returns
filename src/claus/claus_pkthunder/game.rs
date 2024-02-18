@@ -16,8 +16,8 @@ unsafe extern "C" fn game_claus_pkthunder_MoveChild(fighter: &mut L2CAgentBase) 
 }
 
 pub fn install() {
-    Agent::new("lucas_pkfire")
-    game_acmd("game_move_claus", game_claus_pkthunder_Move)
-    game_acmd("game_movechild_claus", game_claus_pkthunder_MoveChild)
+    Agent::new("lucas_pkthunder")
+    .game_acmd("game_move_claus", game_claus_pkthunder_Move)
+    .game_acmd("game_movechild_claus", game_claus_pkthunder_MoveChild)
     .install();
 }

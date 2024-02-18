@@ -76,6 +76,41 @@ unsafe extern "C" fn sound_pit_GlideEnd(fighter: &mut L2CAgentBase) {
     }
 }  
 
+//SpecialHiStart
+unsafe extern "C" fn sound_pit_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_bowsplit"));
+        PLAY_SE(fighter, Hash40::new("se_pit_special_h01"));
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_special_h02"));
+    }
+}
+
+//SpecialAirHiStart
+unsafe extern "C" fn sound_pit_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_pit_bowsplit"));
+        PLAY_SE(fighter, Hash40::new("se_pit_special_h01"));
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_special_h02"));
+    }
+}
+
+//SpecialHiFly
+unsafe extern "C" fn sound_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_pit_jump02"));
+            PLAY_SE(fighter, Hash40::new("se_pit_special_h03"));
+        }
+        wait_loop_clear(fighter);
+    }
+}
+
 pub fn install() {
     Agent::new("pit")
     .sound_acmd("sound_jumpaerialf4", sound_pit_JumpAerialF4)
@@ -86,5 +121,8 @@ pub fn install() {
     .sound_acmd("sound_glideattack", sound_pit_GlideAttack)
     .sound_acmd("sound_glidelanding", sound_pit_GlideLanding)
     .sound_acmd("sound_glideend", sound_pit_GlideEnd)
+    .sound_acmd("sound_specialhistart", sound_pit_SpecialHiStart)
+    .sound_acmd("sound_specialairhistart", sound_pit_SpecialAirHiStart)
+    .sound_acmd("sound_specialhifly", sound_pit_SpecialHiFly)
     .install();
 }

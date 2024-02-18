@@ -4,8 +4,8 @@ mod eflame_blazepillar;
 mod eflame_firepillar;
 
 pub fn install() {
-    eflame::install(&mut Agent::new("eflame")); 
-    eflame_esword::install(&mut Agent::new("eflame_esword")); 
-    eflame_blazepillar::install(&mut Agent::new("eflame_blazepillar")); 
-    eflame_firepillar::install(&mut Agent::new("eflame_firepillar")); 
+    eflame::install(); 
+    eflame_esword::install(); 
+    eflame_blazepillar::install(); 
+    eflame_firepillar::install(); 
 }

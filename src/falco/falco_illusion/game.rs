@@ -24,7 +24,7 @@ unsafe extern "C" fn game_falco_illusion_MoveAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("falco_illusion")
-    game_acmd("game_moveground", game_falco_illusion_MoveGround)
-    game_acmd("game_moveair", game_falco_illusion_MoveAir)
+    .game_acmd("game_moveground", game_falco_illusion_MoveGround)
+    .game_acmd("game_moveair", game_falco_illusion_MoveAir)
     .install();
 }

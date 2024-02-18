@@ -5,9 +5,9 @@ mod gamewatch_food;
 mod gamewatch_octopus;
 
 pub fn install() {
-    gamewatch::install(&mut Agent::new("gamewatch")); 
-    gamewatch_bomb::install(&mut Agent::new("gamewatch_bomb"));
-    gamewatch_breath::install(&mut Agent::new("gamewatch_breath"));
-    gamewatch_food::install(&mut Agent::new("gamewatch_food"));
-    gamewatch_octopus::install(&mut Agent::new("gamewatch_octopus"));
+    gamewatch::install(); 
+    gamewatch_bomb::install();
+    gamewatch_breath::install();
+    gamewatch_food::install();
+    gamewatch_octopus::install();
 }

@@ -252,6 +252,30 @@ unsafe extern "C" fn sound_metaknight_SpecialAirLwStart(fighter: &mut L2CAgentBa
     }
 }
 
+//SpecialZ
+unsafe extern "C" fn sound_metaknight_SpecialZ(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_jump01"));
+    } 
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_special_l03"));
+    }
+}
+
+//SpecialAirZ
+unsafe extern "C" fn sound_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_attackdash"));
+    } 
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_special_l03"));
+    }
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .sound_acmd("sound_shieldbreakfly", sound_metaknight_ShieldBreakFly)
@@ -269,5 +293,7 @@ pub fn install() {
     .sound_acmd("sound_specialhiloop", sound_metaknight_SpecialHiLoop)
     .sound_acmd("sound_speciallwstart", sound_metaknight_SpecialLwStart)
     .sound_acmd("sound_specialairlwstart", sound_metaknight_SpecialAirLwStart)
+    .sound_acmd("sound_specialz", sound_metaknight_SpecialZ)
+    .sound_acmd("sound_specialairz", sound_metaknight_SpecialAirZ)
     .install();
 }

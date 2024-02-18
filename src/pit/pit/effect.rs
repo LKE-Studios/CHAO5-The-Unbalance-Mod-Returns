@@ -116,6 +116,35 @@ unsafe extern "C" fn effect_pit_SpecialHiStart(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialHiFly
+unsafe extern "C" fn effect_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, false);
+            LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.1, /*B*/ 2.2);
+            EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, false);
+            LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.1, /*B*/ 2.2);
+        }
+        frame(fighter.lua_state_agent, 40.0);
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle"), Hash40::new("bust"), 0, 0, 0, 0, 0, 0, 1, false);
+        }
+        wait_loop_clear(fighter);
+    }
+}
+
+//SpecialHiFlyTurn
+unsafe extern "C" fn effect_pit_SpecialHiFlyTurn(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("pit_feather"), Hash40::new("top"), 0, 15, 0, 0, 0, 0, 1, false);
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle"), Hash40::new("bust"), 0, 0, 0, 0, 0, 0, 1, false);
+    }
+}
+
 //SpecialAirHiStart 
 unsafe extern "C" fn effect_pit_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -144,6 +173,8 @@ pub fn install() {
     .effect_acmd("effect_glideattack", effect_pit_GlideAttack)
     .effect_acmd("effect_glidelanding", effect_pit_GlideLanding)
     .effect_acmd("effect_specialhistart", effect_pit_SpecialHiStart)
+    .effect_acmd("effect_specialhifly", effect_pit_SpecialHiFly)
+    .effect_acmd("effect_specialhiflyturn", effect_pit_SpecialHiFlyTurn)
     .effect_acmd("effect_specialairhistart", effect_pit_SpecialAirHiStart)
     .install();
 }

@@ -418,9 +418,7 @@ unsafe extern "C" fn game_daisy_CatchAttack(fighter: &mut L2CAgentBase) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.9, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 30, /*BKB*/ 0, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 6.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_NONE);
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO, Hash40::new("catch_attack"), false, -1.0);
         }
@@ -437,9 +435,7 @@ unsafe extern "C" fn game_daisy_ThrowF(fighter: &mut L2CAgentBase) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_f"), false, -1.0);
         }
@@ -469,9 +465,7 @@ unsafe extern "C" fn game_daisy_ThrowB(fighter: &mut L2CAgentBase) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 97, /*FKB*/ 0, /*BKB*/ 35, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_b"), false, -1.0);
         }
@@ -506,9 +500,7 @@ unsafe extern "C" fn game_daisy_ThrowHi(fighter: &mut L2CAgentBase) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.0, /*Angle*/ 88, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 65, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_hi"), false, -1.0);
         }
@@ -542,9 +534,7 @@ unsafe extern "C" fn game_daisy_ThrowLw(fighter: &mut L2CAgentBase) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 20.0, /*Angle*/ 106, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KINOPIO, Hash40::new("throw_lw"), false, -1.0);
         }
@@ -879,49 +869,4 @@ pub fn install() {
     .game_acmd("game_appeallwr", game_daisy_AppealLwR)
     .game_acmd("game_appeallwl", game_daisy_AppealLwL)
     .install();
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_daisy_attack11,
-        game_daisy_attack12,
-        game_daisy_attackdash,
-        game_daisy_attacks3,
-        game_daisy_attackhi3,
-        game_daisy_attacklw3,
-        game_daisy_attacks4hi,
-        game_daisy_attacks4,
-        game_daisy_attacks4lw,
-        game_daisy_attackhi4,
-        game_daisy_attacklw4,
-        game_daisy_attackairn,
-        game_daisy_attackairf,
-        game_daisy_attackairb,
-        game_daisy_attackairhi,
-        game_daisy_attackairlw,
-        game_daisy_catch,
-        game_daisy_catchdash,
-        game_daisy_catchturn,
-        game_daisy_catchattack,
-        game_daisy_throwf,
-        game_daisy_throwb,
-        game_daisy_throwhi,
-        game_daisy_throwlw,
-        game_daisy_cliffattack,
-        game_daisy_slipattack,
-        game_daisy_downattackd,
-        game_daisy_downattacku,
-        game_daisy_specialshitend,
-        game_daisy_specialhiopen,
-        game_daisy_specialhistart,
-        game_daisy_specialairhistart,
-        game_daisy_speciallw,
-        game_daisy_appealhil,
-        game_daisy_appealhir,
-        game_daisy_appealsl,
-        game_daisy_appealsr,
-        game_daisy_appeallwl,
-        game_daisy_appeallwr,
-        game_daisy_kinopiospore_shot
-    );
 }

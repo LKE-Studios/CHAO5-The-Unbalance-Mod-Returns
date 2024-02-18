@@ -18,7 +18,5 @@ pub unsafe extern "C" fn frame_common_dash(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    Agent::new("common")
-    .on_line(Main, frame_common_dash)
-    .install();
+    smashline::api::install_line_callback(None, StatusLine::Main, frame_common_dash as _);
 }

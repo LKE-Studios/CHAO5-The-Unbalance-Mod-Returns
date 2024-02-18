@@ -2,6 +2,7 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn frame_buddy(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    frame_common(fighter);
     //SFX Controllers
     if [
         *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_GLIDE_LANDING,
@@ -51,6 +52,10 @@ unsafe extern "C" fn frame_buddy(fighter: &mut L2CFighterCommon) {
         }
         if angle <= angle_up_max && angle > 0.0 {
             MotionModule::set_rate_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, 1.0 + angle * angle_up_set_motion_rate_partial);
+        }
+        let frame_partial = MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING);
+        if frame_partial >= 4.0 && frame_partial < 5.0 {
+            PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
         }
     }
     if status_kind == *FIGHTER_BUDDY_STATUS_KIND_SPECIAL_S_DASH {

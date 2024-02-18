@@ -13,6 +13,6 @@ unsafe extern "C" fn effect_eflame_firepillar_SpecialHi(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("eflame_firepillar")
-    effect_acmd("effect_specialhi", effect_eflame_firepillar_SpecialHi)
+    .effect_acmd("effect_specialhi", effect_eflame_firepillar_SpecialHi)
     .install();
 }

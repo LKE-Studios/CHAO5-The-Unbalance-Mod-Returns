@@ -579,7 +579,7 @@ unsafe extern "C" fn game_cloud_ThrowLw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
-        FT_CATCH_STOP(fighter, 10, 1);
+        FT_CATCH_STOP(fighter, 10.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 0, 0);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.3);
     }
@@ -1793,68 +1793,4 @@ pub fn install() {
     .game_acmd("game_finalend", game_cloud_FinalEnd)
     .game_acmd("game_final2end", game_cloud_Final2End)
     .install();
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_cloud_attack11,
-        game_cloud_attack12,
-        game_cloud_attack13,
-        game_cloud_attackdash,
-        game_cloud_attacks3,
-        game_cloud_attackhi3,
-        game_cloud_attacklw3,
-        game_cloud_attacks4,
-        game_cloud_attackhi4,
-        game_cloud_attacklw4,
-        game_cloud_attackairn,
-        game_cloud_attackairf,
-        game_cloud_attackairb,
-        game_cloud_attackairhi,
-        game_cloud_attackairlw,
-        game_cloud_catch,
-        game_cloud_catchdash,
-        game_cloud_catchturn,
-        game_cloud_catchattack,
-        game_cloud_throwf,
-        game_cloud_throwb,
-        game_cloud_throwhi,
-        game_cloud_throwlw,
-        game_cloud_downattacku,
-        game_cloud_downattackd,
-        game_cloud_cliffattack,
-        game_cloud_slipattack,
-        game_cloud_specialn,
-        game_cloud_specialairn,
-        game_cloud_specialn_lb,
-        game_cloud_specialairn_lb,
-        game_cloud_wave_regular,
-        game_cloud_wave_regularair,
-        game_cloud_wave_hit_lb,
-        game_cloud_wave_hitair_lb,
-        game_cloud_specials1,
-        game_cloud_specialairs1,
-        game_cloud_specials1_lb,
-        game_cloud_specialairs1_lb,
-        game_cloud_specials2,
-        game_cloud_specialairs2,
-        game_cloud_specials2_lb,
-        game_cloud_specialairs2_lb,
-        game_cloud_specials3,
-        game_cloud_specialairs3,
-        game_cloud_specials3_lb,
-        game_cloud_specialairs3_lb,
-        game_cloud_specialhi,
-        game_cloud_specialairhi,
-        game_cloud_specialhi_lb,
-        game_cloud_specialairhi_lb,
-        game_cloud_specialhi2,
-        game_cloud_specialhi2landing,
-        game_cloud_speciallw,
-        game_cloud_specialairlw,
-        game_cloud_appealhi,
-        game_cloud_appeals,
-        game_cloud_appeallw,
-        game_cloud_finalend
-    );
 }

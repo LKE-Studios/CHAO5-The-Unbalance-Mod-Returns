@@ -1,7 +1,5 @@
-mod game;
-mod frame;
+mod gaogaen;
 
 pub fn install() {
-    game::install();  
-    frame::install(); 
+    gaogaen::install();
 }

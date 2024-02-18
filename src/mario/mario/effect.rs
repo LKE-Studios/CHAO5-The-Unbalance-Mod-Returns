@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script( //AttackS4
-    agent = "mario", 
-    script = "effect_attacks4", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_mario_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn effect_mario_AttackS4(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 { //Ice Mario on c09
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
@@ -28,7 +24,8 @@ unsafe fn effect_mario_attacks4(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             EFFECT_OFF_KIND(fighter, Hash40::new("mario_fb_shoot"), false, true);
         }
-    } else {
+    } 
+    else {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 2.0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -53,12 +50,8 @@ unsafe fn effect_mario_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( //AttackS4Hi
-    agent = "mario", 
-    script = "effect_attacks4hi", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_mario_attacks4hi(fighter: &mut L2CAgentBase) {
+//AttackS4Hi
+unsafe extern "C" fn effect_mario_AttackS4Hi(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 { //Ice Mario on c09
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
@@ -81,7 +74,8 @@ unsafe fn effect_mario_attacks4hi(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             EFFECT_OFF_KIND(fighter, Hash40::new("mario_fb_shoot"), false, true);
         }
-    } else {
+    } 
+    else {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 2.0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -106,12 +100,8 @@ unsafe fn effect_mario_attacks4hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( //AttackS4Lw
-    agent = "mario", 
-    script = "effect_attacks4lw", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_mario_attacks4lw(fighter: &mut L2CAgentBase) {
+//AttackS4Lw
+unsafe extern "C" fn effect_mario_AttackS4Lw(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 { //Ice Mario on c09
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
@@ -134,7 +124,8 @@ unsafe fn effect_mario_attacks4lw(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             EFFECT_OFF_KIND(fighter, Hash40::new("mario_fb_shoot"), false, true);
         }
-    } else {
+    } 
+    else {
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 2.0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -160,9 +151,9 @@ unsafe fn effect_mario_attacks4lw(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        effect_mario_attacks4,
-        effect_mario_attacks4hi,
-        effect_mario_attacks4lw,
-    );
+    Agent::new("mario")
+    .effect_acmd("effect_attacks3s3", effect_mario_AttackS4Hi)
+    .effect_acmd("effect_attacks4", effect_mario_AttackS4)
+    .effect_acmd("effect_attackhi4", effect_mario_AttackS4Lw)
+    .install();
 }

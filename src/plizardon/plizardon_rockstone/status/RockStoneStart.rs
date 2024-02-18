@@ -8,9 +8,10 @@ pub unsafe extern "C" fn status_plizardon_RockStoneStart_Pre(weapon: &mut L2CWea
 pub unsafe extern "C" fn status_plizardon_RockStoneStart_Init(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     //Angle
-    let rock_count = WorkModule::get_param_int(owner_module_accessor, hash40("param_rockstone"), hash40("rock_count"));
+    let rock_count = WorkModule::get_param_int(weapon.module_accessor, hash40("param_rockstone"), hash40("rock_count"));
+    let blast_angle = WorkModule::get_param_float(weapon.module_accessor, hash40("param_rockstone"), hash40("blast_angle"));
     let rand_angle = sv_math::rand(hash40("fighter"), 30);
-    let mut angle = (rock_count as f32 * 110.0) - 45.0 + rand_angle as f32;
+    let mut angle = ((rock_count as f32 * blast_angle) - 45.0) + rand_angle as f32;
     //Prevent going too far behind
     while angle > 100.0 && angle < 260.0 {
         angle += 25.0;

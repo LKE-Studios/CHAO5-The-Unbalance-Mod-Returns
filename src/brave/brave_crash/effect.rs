@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //Crash1
-unsafe extern "C" fn effect_brave_Crash1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_brave_crash_Crash1(fighter: &mut L2CAgentBase) {
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) <= 0.0 {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("brave_fullburst"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 90.0, 0.0, 4.5, true);
@@ -30,7 +30,7 @@ unsafe extern "C" fn effect_brave_Crash1(fighter: &mut L2CAgentBase) {
 }
 
 //CrashEnd1
-unsafe extern "C" fn effect_brave_CrashEnd1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_brave_crash_CrashEnd1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("brave_fullburst_end"), Hash40::new("top"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, true);
     }
@@ -42,7 +42,7 @@ unsafe extern "C" fn effect_brave_CrashEnd1(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_crash")
-    .effect_acmd("effect_crash1", effect_brave_Crash1)
-    .effect_acmd("effect_crashend1", effect_brave_CrashEnd1)
+    .effect_acmd("effect_crash1", effect_brave_crash_Crash1)
+    .effect_acmd("effect_crashend1", effect_brave_crash_CrashEnd1)
     .install();
 }

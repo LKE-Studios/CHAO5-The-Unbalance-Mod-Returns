@@ -9,6 +9,7 @@ mod SpecialHiLoop;
 mod SpecialLw;
 mod SpecialLwAttack;
 mod SpecialLwEnd;
+mod SpecialGuard;
 
 pub fn install() {
     GlideStart::install();
@@ -21,5 +22,6 @@ pub fn install() {
     SpecialHiLoop::install(); 
     SpecialLw::install(); 
     SpecialLwAttack::install();
-    SpecialLwEnd::install(); 
+    SpecialLwEnd::install();
+    SpecialGuard::install(); 
 }

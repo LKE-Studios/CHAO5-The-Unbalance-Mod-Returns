@@ -597,8 +597,8 @@ unsafe extern "C" fn effect_duckhunt_GenesisAerialLegs(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("duckhunt")
-    .effect_acmd("effect_jumpaerialfront", effect_duckhunt_JumpaAerialFront)
-    .effect_acmd("effect_jumpaerialback", effect_duckhunt_JumpaAerialBack)
+    .effect_acmd("effect_jumpaerialfront", effect_duckhunt_JumpAerialFront)
+    .effect_acmd("effect_jumpaerialback", effect_duckhunt_JumpAerialBack)
     .effect_acmd("effect_attack100end", effect_duckhunt_Attack100End)
     .effect_acmd("effect_attacks3hi", effect_duckhunt_AttackS3Hi)
     .effect_acmd("effect_attacks3", effect_duckhunt_AttackS3)

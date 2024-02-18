@@ -131,7 +131,7 @@ pub mod globals {
 }
 
 mod bayonetta;
-/*mod brave;
+mod brave;
 mod buddy;
 mod captain;
 mod chrom;
@@ -141,11 +141,11 @@ mod daisy;
 mod dedede;
 mod demon;
 mod diddy;
-mod dolly;*/
+//mod dolly;
 mod donkey;
-//mod duckhunt;
+mod duckhunt;
 mod edge;
-/*mod eflame;
+mod eflame;
 mod elight;
 mod falco;
 mod fox;
@@ -153,7 +153,7 @@ mod gamewatch;
 mod ganon;
 mod gaogaen;
 mod gekkouga;
-mod ike;
+/*mod ike;
 mod inkling;
 mod jack;
 mod kamui;
@@ -168,9 +168,9 @@ mod littlemac;
 mod lucario;
 mod lucas;
 mod lucina;
-mod luigi;
+mod luigi;*/
 mod mario;
-mod mariod;
+/*mod mariod;
 mod marth;
 mod master;*/
 mod metaknight;
@@ -188,8 +188,8 @@ mod peach;
 mod pfushigisou;
 mod pichu;
 mod pickel;
-mod pikachu;
-mod pikmin;*/
+mod pikachu;*/
+mod pikmin;
 mod pit;
 //mod pitb;
 mod plizardon;
@@ -373,27 +373,27 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    //mario::install();
+    mario::install();
     donkey::install();
     /*link::install();
     samus::install();
     yoshi::install();
     kirby::install();
-    pikachu::install();
+    pikachu::install();*/
     fox::install();
-    luigi::install();
-    ness::install();
+    /*luigi::install();
+    ness::install();*/
     captain::install();
-    purin::install();
+    /*purin::install();
     koopa::install();
-    marth::install();
+    marth::install();*/
     ganon::install();
     gamewatch::install();
-    mariod::install();
+    /*mariod::install();
     zelda::install();
-    sheik::install();
+    sheik::install();*/
     falco::install();
-    peach::install();
+    /*peach::install();
     popo::install();
     nana::install();
     younglink::install();
@@ -402,14 +402,14 @@ pub fn main() {
     roy::install();*/
     metaknight::install();
     pit::install();
-    /*wario::install();
+    //wario::install();
     diddy::install();
-    ptrainer::install();
+    /*ptrainer::install();
     pzenigame::install();
     pfushigisou::install();*/
     plizardon::install();
-    /*dedede::install();
-    lucas::install();
+    dedede::install();
+    /*lucas::install();
     lucario::install();
     sonic::install();
     snake::install();
@@ -417,55 +417,55 @@ pub fn main() {
     szerosuit::install();
     robot::install();
     ike::install();
-    toonlink::install();
+    toonlink::install();*/
     pikmin::install();
-    littlemac::install();
+    /*littlemac::install();
     shulk::install();
     palutena::install();
     rockman::install();
     ryu::install();
     miifighter::install();
     miiswordsman::install();
-    miigunner::install();
-    cloud::install();*/
+    miigunner::install();*/
+    cloud::install();
     bayonetta::install();
-    /*reflet::install();
+    //reflet::install();
     gekkouga::install();
-    pitb::install();
+    /*pitb::install();
     pacman::install();
     murabito::install();
     rosetta::install();
-    wiifit::install();
+    wiifit::install();*/
     duckhunt::install();
-    koopajr::install();
+    /*koopajr::install();
     lucina::install();
     kamui::install();
     ridley::install();
-    krool::install();
+    krool::install();*/
     gaogaen::install();
-    packun::install();
+    /*packun::install();
     ken::install();
     inkling::install();
     simon::install();
-    shizue::install();
+    shizue::install();*/
     daisy::install();
-    samusd::install();
-    richter::install();
+    /*samusd::install();
+    richter::install();*/
     chrom::install();
-    dolly::install();
-    jack::install();*/
+    //dolly::install();
+    //jack::install();
     edge::install();
-    /*brave::install();
+    brave::install();
     demon::install();
-    master::install();
-    pickel::install();
+    /*master::install();
+    pickel::install();*/
     eflame::install();
     elight::install();
     buddy::install();
-    trail::install();
-    tantan::install();
+    /*trail::install();
+    tantan::install();*/
     claus::install();
-    koopag::install();
+    /*koopag::install();
     silver::install();
     waluigi::install();*/
     skyline::install_hooks!(

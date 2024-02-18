@@ -1155,7 +1155,7 @@ pub fn install() {
     .game_acmd("game_appealhil", game_chrom_AppealHiL)
     .game_acmd("game_appeallwr", game_chrom_AppealLwR)
     .game_acmd("game_appeallwl", game_chrom_AppealLwL)
-    .game_acmd("game_finalend", game_chrom_FinalEnd)
-    .game_acmd("game_finalairend", game_chrom_FinalAirEnd)
+    .game_acmd("game_finalend", game_chrom_FinalAttack)
+    .game_acmd("game_finalairend", game_chrom_FinalAirAttack)
     .install();
 }

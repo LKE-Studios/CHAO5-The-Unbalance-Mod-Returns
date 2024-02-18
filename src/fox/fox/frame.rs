@@ -1,9 +1,10 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn frame_fox(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn frame_fox_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
+    frame_common(fighter);
     platform_cancel_function(fighter);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
@@ -28,6 +29,9 @@ unsafe extern "C" fn frame_fox(fighter: &mut L2CFighterCommon) {
     if status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH || status_kind == *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH_END {
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -50.0, 0);
+        }
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
         }
     }
     if motion_kind == hash40("appeal_hi_r") || motion_kind == hash40("appeal_hi_l") {
@@ -61,6 +65,6 @@ unsafe fn platform_cancel_function(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("fox")
-    .on_line(Main, frame_fox)
+    .on_line(Main, frame_fox_Main)
     .install();
 }

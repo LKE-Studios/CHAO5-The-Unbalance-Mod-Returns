@@ -50,7 +50,7 @@ pub unsafe extern "C" fn status_GlideLanding_End(fighter: &mut L2CFighterCommon)
 }
 
 pub fn install() {
-    Agent::new("common")
+    Agent::new("fighter")
     .status(Pre, *FIGHTER_STATUS_KIND_GLIDE_LANDING, status_GlideLanding_Pre)
     .status(Main, *FIGHTER_STATUS_KIND_GLIDE_LANDING, status_GlideLanding_Main)
     .status(End, *FIGHTER_STATUS_KIND_GLIDE_LANDING, status_GlideLanding_End)

@@ -16,6 +16,6 @@ unsafe extern "C" fn game_diddy_barreljet_Explosion(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("diddy_barreljet")
-    game_acmd("game_explosion", game_diddy_barreljet_Explosion)
+    .game_acmd("game_explosion", game_diddy_barreljet_Explosion)
     .install();
 }

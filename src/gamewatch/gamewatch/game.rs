@@ -25,6 +25,7 @@ unsafe extern "C" fn game_gamewatch_Attack11(fighter: &mut L2CAgentBase) {
 
 //Attack100 
 unsafe extern "C" fn game_gamewatch_Attack100(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
             ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.4, /*Angle*/ 361, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 12, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 14.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.7, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -34,7 +35,7 @@ unsafe extern "C" fn game_gamewatch_Attack100(fighter: &mut L2CAgentBase) {
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 10);
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 10);
         }
-        wait(fighter.lua_state_agent, 1.0);
+        wait(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
@@ -51,7 +52,7 @@ unsafe extern "C" fn game_gamewatch_Attack100(fighter: &mut L2CAgentBase) {
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 10);
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 10);
         }
-        wait(fighter.lua_state_agent, 1.0);
+        wait(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
@@ -65,12 +66,12 @@ unsafe extern "C" fn game_gamewatch_Attack100(fighter: &mut L2CAgentBase) {
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 10);
             ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 10);
         }
-        wait(fighter.lua_state_agent, 1.0);
+        wait(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -84,7 +85,7 @@ unsafe extern "C" fn game_gamewatch_Attack100Sub(fighter: &mut L2CAgentBase) {
         ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 10);
         ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 10);
     }
-    wait(fighter.lua_state_agent, 1.0);
+    wait(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
@@ -113,9 +114,10 @@ unsafe extern "C" fn game_gamewatch_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 9.0, 4.0);
     }
+    frame(fighter.lua_state_agent, 5.0);
+    FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
-        FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         JostleModule::set_status(fighter.module_accessor, false);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 25, /*KBG*/ 94, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 5.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.9, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_HEAD);
     }

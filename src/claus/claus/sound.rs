@@ -46,7 +46,7 @@ unsafe extern "C" fn sound_claus_Win1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#//Win3
+//Win3
 unsafe extern "C" fn sound_claus_Win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 43.0);
     if is_excute(fighter) {

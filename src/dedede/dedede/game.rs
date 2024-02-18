@@ -493,7 +493,7 @@ unsafe extern "C" fn game_dedede_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -1011,9 +1011,7 @@ unsafe extern "C" fn game_dedede_ThrowLw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 24.0);
     if is_excute(fighter) {
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 8, 1);
-        FT_CATCH_STOP(fighter.lua_state_agent);
+        FT_CATCH_STOP(fighter, 8.0, 1.0);
     }
     frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {

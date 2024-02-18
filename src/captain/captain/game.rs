@@ -174,7 +174,7 @@ unsafe extern "C" fn game_captain_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -582,6 +582,66 @@ unsafe extern "C" fn game_captain_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 39.0);
     if is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+    }
+}
+
+//Catch
+unsafe extern "C" fn game_captain_Catch(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        GrabModule::set_rebound(fighter.module_accessor, true);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        CATCH(fighter, 0, Hash40::new("top"), 5.3, 0.0, 8.0, 4.0, Some(0.0), Some(8.0), Some(11.7), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_G);
+        CATCH(fighter, 1, Hash40::new("top"), 3.65, 0.0, 8.0, 2.35, Some(0.0), Some(8.0), Some(13.35), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_A);
+    }
+    game_CaptureCutCommon(fighter);
+    wait(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT);
+        GrabModule::set_rebound(fighter.module_accessor, false);
+    }
+}
+
+//CatchDash
+unsafe extern "C" fn game_captain_CatchDash(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        GrabModule::set_rebound(fighter.module_accessor, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        CATCH(fighter, 0, Hash40::new("top"), 5.6, 0.0, 8.0, 4.0, Some(0.0), Some(8.0), Some(16.6), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_G);
+        CATCH(fighter, 1, Hash40::new("top"), 3.3, 0.0, 8.0, 2.7, Some(0.0), Some(8.0), Some(17.9), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_A);
+    }
+    game_CaptureCutCommon(fighter);
+    wait(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT);
+        GrabModule::set_rebound(fighter.module_accessor, false);
+    }
+}
+
+//CatchTurn
+unsafe extern "C" fn game_captain_CatchTurn(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        GrabModule::set_rebound(fighter.module_accessor, true);
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        CATCH(fighter, 0, Hash40::new("top"), 5.3, 0.0, 8.0, -4.0, Some(0.0), Some(8.0), Some(-22.2), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_G);
+        CATCH(fighter, 1, Hash40::new("top"), 3.65, 0.0, 8.0, -2.35, Some(0.0), Some(8.0), Some(-23.85), *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_A);
+    }
+    game_CaptureCutCommon(fighter);
+    wait(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT);
+        GrabModule::set_rebound(fighter.module_accessor, false);
     }
 }
 
@@ -1003,10 +1063,6 @@ unsafe extern "C" fn game_captain_SpecialAirSEnd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         JostleModule::set_status(fighter.module_accessor, true);
-    }
-    frame(fighter.lua_state_agent, 70.0);
-    if is_excute(fighter) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
 }
 

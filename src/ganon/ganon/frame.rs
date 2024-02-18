@@ -2,10 +2,11 @@ use crate::imports::BuildImports::*;
 
 pub static mut FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER: [bool; 8] = [false; 8];
 
-unsafe extern "C" fn frame_ganon(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn frame_ganon_Main(fighter: &mut L2CFighterCommon) {
     let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    frame_common(fighter);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         fighter.sub_air_check_fall_common();
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
@@ -34,6 +35,6 @@ unsafe extern "C" fn frame_ganon(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("ganon")
-    .on_line(Main, frame_ganon)
+    .on_line(Main, frame_ganon_Main)
     .install();
 }

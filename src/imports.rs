@@ -60,8 +60,6 @@ pub mod BuildImports {
             wait_loop_sync_mot, 
             frame_clear,
             FT_START_CUTIN_arg1,
-            REQ_MOTION_CAMERA,
-            CHECK_VALID_START_CAMERA,
             SET_SPEED,
             CHECK_FINISH_CAMERA_IF_NOT_HP_MODE,
             EFFECT_FOLLOW_COLOR,
@@ -72,6 +70,7 @@ pub mod BuildImports {
         crate::common::{*,
             consts::*,
             function::{*, KineticUtility},
+            frame::frame_common,
             FIGHTER_BOOL_1,
             FIGHTER_BOOL_2,
             FIGHTER_BOOL_3,
@@ -93,7 +92,10 @@ pub mod BuildImports {
             CLR_SPEED,
             REG_LANDING_SE,
             SET_RATE_ARTICLE,
-            EFFECT_FOLLOW_RND
+            EFFECT_FOLLOW_RND,
+            REQ_MOTION_CAMERA,
+            CHECK_VALID_START_CAMERA,
+            SET_TAKEOUT_SE_STATUS
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},

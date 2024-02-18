@@ -78,7 +78,7 @@ unsafe extern "C" fn game_brave_crash_Crash2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_crash")
-    .game_acmd("game_crash1", effect_brave_Crash1)
-    .game_acmd("game_crash2", effect_brave_Crash2)
+    .game_acmd("game_crash1", game_brave_crash_Crash1)
+    .game_acmd("game_crash2", game_brave_crash_Crash2)
     .install();
 }

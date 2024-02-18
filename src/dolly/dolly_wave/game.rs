@@ -129,9 +129,9 @@ unsafe extern "C" fn game_dolly_wave_NormalAirW(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("dolly_wave")
-    game_acmd("game_normal", game_dolly_wave_Normal)
-    game_acmd("game_normalw", game_dolly_wave_NormalW)
-    game_acmd("game_normalair", game_dolly_wave_NormalAir)
-    game_acmd("game_normalairw", game_dolly_wave_NormalAirW)
+    .game_acmd("game_normal", game_dolly_wave_Normal)
+    .game_acmd("game_normalw", game_dolly_wave_NormalW)
+    .game_acmd("game_normalair", game_dolly_wave_NormalAir)
+    .game_acmd("game_normalairw", game_dolly_wave_NormalAirW)
     .install();
 }

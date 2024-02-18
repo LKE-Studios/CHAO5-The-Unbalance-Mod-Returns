@@ -5,6 +5,7 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
+    frame_common(fighter);
     //Inner Meta Mechanic
     FighterSpecializer_MetaKnight::meta_power(fighter);
     //SFX Controllers
@@ -33,6 +34,10 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
             DamageModule::heal(fighter.module_accessor, -1.0, 0);
         }
     };
+    /*if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) && 
+    ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+        fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD.into(), true.into());
+    }*/
 }
 
 unsafe extern "C" fn frame_metaknight_Exec(fighter: &mut L2CFighterCommon) {

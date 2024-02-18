@@ -17,6 +17,6 @@ unsafe extern "C" fn game_elight_beam_FinalAttack(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("elight_beam")
-    game_acmd("game_finalattack", game_elight_beam_FinalAttack)
+    .game_acmd("game_finalattack", game_elight_beam_FinalAttack)
     .install();
 }

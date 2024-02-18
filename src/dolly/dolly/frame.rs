@@ -1,8 +1,7 @@
 use crate::imports::BuildImports::*;
 use crate::waluigi::frame::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_DOLLY )]
-pub unsafe extern "C" fn frame_dolly(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_dolly_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let DOLLY = color >= 0 && color <= 16; 
@@ -42,6 +41,6 @@ pub unsafe extern "C" fn frame_dolly(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("dolly")
-    .on_line(Main, frame_dolly)
+    .on_line(Main, frame_dolly_Main)
     .install();
 }

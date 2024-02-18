@@ -1,6 +1,7 @@
 use crate::imports::BuildImports::*;
 
-pub unsafe extern "C" fn frame_gamewatch(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_gamewatch_Main(fighter : &mut L2CFighterCommon) {
+    frame_common(fighter);
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
@@ -16,16 +17,10 @@ pub unsafe extern "C" fn frame_gamewatch(fighter : &mut L2CFighterCommon) {
             KineticModule::mul_speed(fighter.module_accessor, &Vector3f{x: 0.9, y: 1.0, z: 1.0}, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
         }
     }
-    if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW || status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_CATCH || status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_SHOOT ||
-    status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_REFLECT || status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_WAIT || 
-    status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_END || status_kind == *FIGHTER_GAMEWATCH_STATUS_KIND_SPECIAL_LW_WAIT_START {
-        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
-        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
-    };
 }
 
 pub fn install() {
     Agent::new("gamewatch")
-    .on_line(Main, frame_gamewatch)
+    .on_line(Main, frame_gamewatch_Main)
     .install();
 }

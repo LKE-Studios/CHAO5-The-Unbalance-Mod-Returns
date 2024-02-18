@@ -400,9 +400,7 @@ unsafe extern "C" fn game_demon_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -2300,16 +2298,12 @@ unsafe extern "C" fn game_demon_ThrowF(fighter: &mut L2CAgentBase) {
             }
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_THROW_MOTION_CAMERA) {
                 if is_excute(fighter) {
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, 0, 0, 0, 0, 0, 0, false);
-                    CHECK_VALID_START_CAMERA(fighter.lua_state_agent);
+                    CHECK_VALID_START_CAMERA(fighter, 0, 0, 0, 0, 0, 0, false);
                 }
                 if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_THROW_MOTION_CAMERA) {
                     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
                         if is_excute(fighter) {
-                            fighter.clear_lua_stack();
-                            lua_args!(fighter, Hash40::new("e01throwf.nuanmb"), false);
-                            REQ_MOTION_CAMERA(fighter.lua_state_agent);
+                            REQ_MOTION_CAMERA(fighter, Hash40::new("e01throwf.nuanmb"), false);
                         }
                     }
                 }
@@ -2400,16 +2394,12 @@ unsafe extern "C" fn game_demon_ThrowB(fighter: &mut L2CAgentBase) {
             }
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_THROW_MOTION_CAMERA) {
                 if is_excute(fighter) {
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, 0, 7, 0, 35, 0, 0, false);
-                    CHECK_VALID_START_CAMERA(fighter.lua_state_agent);
+                    CHECK_VALID_START_CAMERA(fighter, 0, 7, 0, 35, 0, 0, false);
                 }
                 if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_THROW_MOTION_CAMERA) {
                     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
                         if is_excute(fighter) {
-                            fighter.clear_lua_stack();
-                            lua_args!(fighter, Hash40::new("e01throwb.nuanmb"), false);
-                            REQ_MOTION_CAMERA(fighter.lua_state_agent);
+                            REQ_MOTION_CAMERA(fighter, Hash40::new("e01throwb.nuanmb"), false);
                         }
                     }
                 }
@@ -2498,16 +2488,12 @@ unsafe extern "C" fn game_demon_ThrowLw(fighter: &mut L2CAgentBase) {
             }
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_THROW_MOTION_CAMERA) {
                 if is_excute(fighter) {
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, 0, 0, 0, 0, 0, 0, false);
-                    CHECK_VALID_START_CAMERA(fighter.lua_state_agent);
+                    CHECK_VALID_START_CAMERA(fighter, 0, 0, 0, 0, 0, 0, false);
                 }
                 if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_THROW_MOTION_CAMERA) {
                     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
                         if is_excute(fighter) {
-                            fighter.clear_lua_stack();
-                            lua_args!(fighter, Hash40::new("e01throwlw.nuanmb"), false);
-                            REQ_MOTION_CAMERA(fighter.lua_state_agent);
+                            REQ_MOTION_CAMERA(fighter, Hash40::new("e01throwlw.nuanmb"), false);
                         }
                     }
                 }
@@ -2549,16 +2535,13 @@ unsafe extern "C" fn game_demon_ThrowCommand(fighter: &mut L2CAgentBase) {
             }
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_ENABLE_THROW_MOTION_CAMERA) {
                 if is_excute(fighter) {
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, 0, 7, 0, 50, 30, 0, false);
-                    CHECK_VALID_START_CAMERA(fighter.lua_state_agent);
+                    CHECK_VALID_START_CAMERA(fighter, 0, 7, 0, 50, 30, 0, false);
                 }
                 if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DEMON_INSTANCE_WORK_ID_FLAG_DISABLE_THROW_MOTION_CAMERA) {
                     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
                         if is_excute(fighter) {
-                            fighter.clear_lua_stack();
-                            lua_args!(fighter, Hash40::new("e01throwcommand.nuanmb"), false);
-                            REQ_MOTION_CAMERA(fighter.lua_state_agent);
+
+                            REQ_MOTION_CAMERA(fighter, Hash40::new("e01throwcommand.nuanmb"), false);
                         }
                     }
                 }

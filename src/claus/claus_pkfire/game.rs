@@ -23,7 +23,7 @@ unsafe extern "C" fn game_claus_pkfire_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucas_pkfire")
-    game_acmd("game_pillar_claus", game_claus_pkfire_Pillar)
-    game_acmd("game_shoot_claus", game_claus_pkfire_Shoot)
+    .game_acmd("game_pillar_claus", game_claus_pkfire_Pillar)
+    .game_acmd("game_shoot_claus", game_claus_pkfire_Shoot)
     .install();
 }

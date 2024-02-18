@@ -34,6 +34,6 @@ unsafe extern "C" fn game_dolly_burst_SuperSpecial(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("dolly_burst")
-    game_acmd("game_superspecial", game_diddy_barreljet_SuperSpecial)
+    .game_acmd("game_superspecial", game_dolly_burst_SuperSpecial)
     .install();
 }

@@ -8,6 +8,7 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
+    frame_common(fighter);
     if DONKEY_64_DANCE[ENTRY_ID] == true {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 0.0, 1.0, false, 0.0, false, false);
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));

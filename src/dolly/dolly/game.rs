@@ -591,9 +591,7 @@ unsafe extern "C" fn game_dolly_ThrowLw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 10, 1);
-        FT_CATCH_STOP(fighter.lua_state_agent);
+        FT_CATCH_STOP(fighter, 10.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 0, 10);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.2);
         FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:0.0,y:-1.0,z:0.0});      

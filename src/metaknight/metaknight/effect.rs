@@ -696,6 +696,57 @@ unsafe extern "C" fn effect_metaknight_SpecialAirLwF(fighter: &mut L2CAgentBase)
     }
 }
 
+//SpecialZ
+unsafe extern "C" fn effect_metaknight_SpecialZ(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_action_smoke_h"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_whirlwind_r"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 12.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("top"), 0, 16, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_end"), Hash40::new("top"), 0, 8, 0, 0, -90, 0, 1, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.5);
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("metaknight_attack_smoke"), Hash40::new("top"), -22, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_mantle_end"), false, false);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+    }
+}
+
+//SpecialAirZ
+unsafe extern "C" fn effect_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 12.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("top"), 0, 16, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("metaknight_mantle_end"), Hash40::new("top"), 0, 8, 0, 0, -90, 0, 1, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.5);
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_mantle_end"), false, false);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
+    }
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .effect_acmd("effect_shieldbreakfly", effect_metaknight_ShieldBreakFly)
@@ -728,5 +779,7 @@ pub fn install() {
     .effect_acmd("effect_specialairlw", effect_metaknight_SpecialAirLw)
     .effect_acmd("effect_specialairlwb", effect_metaknight_SpecialAirLwB)
     .effect_acmd("effect_specialairlwf", effect_metaknight_SpecialAirLwF)
+    .effect_acmd("effect_specialz", effect_metaknight_SpecialZ)
+    .effect_acmd("effect_specialairz", effect_metaknight_SpecialAirZ)
     .install();
 }

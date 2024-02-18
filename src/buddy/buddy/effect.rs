@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //JumpAerialF3 
-unsafe extern "C" fn effect_buddy_JumpAerial3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_buddy_JumpAerialF3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         EFFECT_FOLLOW_WORK(fighter, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_EFFECT_KIND_FLYING, Hash40::new("k_bust"), 5, -5, 0, 0, 0, 0, 0.85, true);
@@ -21,7 +21,7 @@ unsafe extern "C" fn effect_buddy_JumpAerial3(fighter: &mut L2CAgentBase) {
 }
 
 //JumpAerialF4
-unsafe extern "C" fn effect_buddy_JumpAerial4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_buddy_JumpAerialF4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         EFFECT_FOLLOW_WORK(fighter, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_EFFECT_KIND_FLYING, Hash40::new("k_bust"), 5, -5, 0, 0, 0, 0, 0.85, true);
@@ -41,7 +41,7 @@ unsafe extern "C" fn effect_buddy_JumpAerial4(fighter: &mut L2CAgentBase) {
 }
 
 //JumpAerialF5
-unsafe extern "C" fn effect_buddy_JumpAerial5(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_buddy_JumpAerialF5(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         EFFECT_FOLLOW_WORK(fighter, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_EFFECT_KIND_FLYING, Hash40::new("k_bust"), 5, -5, 0, 0, 0, 0, 0.85, true);

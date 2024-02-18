@@ -186,7 +186,7 @@ unsafe extern "C" fn game_elight_Attack100(fighter: &mut L2CAgentBase) {
             AttackModule::clear_all(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_100_CONTINUE_CHECK);
         }
-        wait_loop_clear(fighter, 0);
+        wait_loop_clear(fighter);
     }      
 }
 
@@ -2178,7 +2178,7 @@ unsafe extern "C" fn game_elight_SpecialSStart(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirSStart
-unsafe extern "C" fn game_elight_SpecialAirStart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_elight_SpecialAirSStart(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {

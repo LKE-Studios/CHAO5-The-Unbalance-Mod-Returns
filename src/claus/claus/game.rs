@@ -450,13 +450,9 @@ unsafe extern "C" fn game_claus_AttackAirLw(fighter: &mut L2CAgentBase) {
 //CatchAttack
 unsafe extern "C" fn game_claus_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
-    if is_excute(fighter) {
-        fighter.clear_lua_stack();
-        lua_args!(fighter, FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI);
-        if sv_animcmd::IS_EXIST_ARTICLE(fighter.lua_state_agent) {
-            if is_excute(fighter) {
-                ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, Hash40::new("catch_attack"), false, -1.0);
-            }
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI) {
+        if is_excute(fighter) {
+            ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, Hash40::new("catch_attack"), false, -1.0);
         }
     }
     frame(fighter.lua_state_agent, 1.0);
@@ -847,7 +843,7 @@ unsafe extern "C" fn game_claus_SpecialLwHold(fighter: &mut L2CAgentBase) {
             shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 25, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 400, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         }
         fighter.clear_lua_stack();
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -859,7 +855,7 @@ unsafe extern "C" fn game_claus_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
             ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 180, /*KBG*/ 100, /*FKB*/ 40, /*BKB*/ 0, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 22.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(60.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ true, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA_d, /*Hitbits*/ *COLLISION_CATEGORY_MASK_NO_STAGE_GIMMICK, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
         }
         fighter.clear_lua_stack();
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
@@ -972,9 +968,6 @@ pub fn install() {
     .game_acmd("game_attackairb_claus", game_claus_AttackAirB)
     .game_acmd("game_attackairhi_claus", game_claus_AttackAirHi)
     .game_acmd("game_attackairlw_claus", game_claus_AttackAirLw)
-    .game_acmd("game_catch_claus", game_claus_Catch)
-    .game_acmd("game_catchdash_claus", game_claus_CatchDash)
-    .game_acmd("game_catchturn_claus", game_claus_CatchTurn)
     .game_acmd("game_catchattack_claus", game_claus_CatchAttack)
     .game_acmd("game_throwf_claus", game_claus_ThrowF)
     .game_acmd("game_throwb_claus", game_claus_ThrowB)
@@ -986,8 +979,8 @@ pub fn install() {
     .game_acmd("game_slipattack_claus", game_claus_SlipAttack)
     .game_acmd("game_specialnhold_claus", game_claus_SpecialNHold)
     .game_acmd("game_specialairnhold_claus", game_claus_SpecialAirNHold)
-    .game_acmd("game_specials", game_claus_SpecialS)
-    .game_acmd("game_specialairs", game_claus_SpecialAirS)
+    .game_acmd("game_specials_claus", game_claus_SpecialS)
+    .game_acmd("game_specialairs_claus", game_claus_SpecialAirS)
     .game_acmd("game_specialairhi_claus", game_claus_SpecialAirHi)
     .game_acmd("game_specialairhireflect_claus", game_claus_SpecialAirHiReflect)
     .game_acmd("game_specialairhidownboundd_claus", game_claus_SpecialAirHiDownBoundD)
@@ -1005,6 +998,5 @@ pub fn install() {
     .game_acmd("game_appeallwr_claus", game_claus_AppealLwR)
     .game_acmd("game_appeallwl_claus", game_claus_AppealLwL)
     .game_acmd("game_wessdance_claus", game_claus_WessDance)
-    .game_acmd("game_finalairend", game_claus_FinalAirEnd)
     .install();
 }

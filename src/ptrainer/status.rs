@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-static mut PTRAINER_NO_SWAP_DEAD : usize = 0xf96310;
+static mut PTRAINER_NO_SWAP_DEAD : usize = 0xf96330;
 
 //Removes the death swap from PT
 #[skyline::hook(offset = PTRAINER_NO_SWAP_DEAD)]

@@ -751,8 +751,7 @@ unsafe extern "C" fn game_diddy_SpecialSStick(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
         }
-        fighter.clear_lua_stack();
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 

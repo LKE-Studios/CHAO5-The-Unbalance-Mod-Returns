@@ -1,7 +1,8 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn falco_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn falco_frame_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    frame_common(fighter);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
         && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
@@ -26,11 +27,14 @@ unsafe extern "C" fn falco_frame(fighter: &mut L2CFighterCommon) {
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -10.0, 0);
         }
+        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
+        }
     }
 }
 
 pub fn install() {
     Agent::new("falco")
-    .on_line(Main, frame_falco)
+    .on_line(Main, frame_falco_Main)
     .install();
 }
