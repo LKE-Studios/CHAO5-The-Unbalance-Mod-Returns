@@ -5,7 +5,6 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
-    frame_common(fighter);
     //Inner Meta Mechanic
     FighterSpecializer_MetaKnight::meta_power(fighter);
     //SFX Controllers
@@ -41,7 +40,7 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
 }
 
 unsafe extern "C" fn frame_metaknight_Exec(fighter: &mut L2CFighterCommon) {
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x:1.05, y:1.05, z:1.05});
+    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x: 1.05, y: 1.05, z: 1.05});
 }
 
 pub fn install() {

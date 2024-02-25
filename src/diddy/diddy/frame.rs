@@ -7,7 +7,6 @@ pub unsafe extern "C" fn frame_diddy(fighter : &mut L2CFighterCommon) {
     let prev_status_kind = fighter.global_table[PREV_STATUS_KIND].get_i32();
     let frame = MotionModule::frame(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    frame_common(fighter);
     if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_N_SHOOT {
         if frame > 5.0 {
             if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {

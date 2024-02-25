@@ -2,9 +2,9 @@ use crate::imports::BuildImports::*;
 
 //SpecialS1
 unsafe extern "C" fn game_elight_bunshin_SpecialS1(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -36,9 +36,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialS1(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS1
 unsafe extern "C" fn game_elight_bunshin_SpecialAirS1(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -70,9 +70,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialAirS1(fighter: &mut L2CAgentBase
 
 //SpecialS2
 unsafe extern "C" fn game_elight_bunshin_SpecialS2(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -100,9 +100,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialS2(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS2
 unsafe extern "C" fn game_elight_bunshin_SpecialAirS2(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -130,9 +130,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialAirS2(fighter: &mut L2CAgentBase
 
 //SpecialS3
 unsafe extern "C" fn game_elight_bunshin_SpecialS3(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -160,9 +160,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialS3(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS3
 unsafe extern "C" fn game_elight_bunshin_SpecialAirS3(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -190,9 +190,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialAirS3(fighter: &mut L2CAgentBase
 
 //SpecialS4
 unsafe extern "C" fn game_elight_bunshin_SpecialS4(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -218,9 +218,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialS4(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS4
 unsafe extern "C" fn game_elight_bunshin_SpecialAirS4(fighter: &mut L2CAgentBase) {
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 4.0);
@@ -248,9 +248,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialAirS4(fighter: &mut L2CAgentBase
 unsafe extern "C" fn game_elight_bunshin_SpecialS5(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("elight"), rand_effect.len() as i32);
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 5.0);
@@ -270,9 +270,9 @@ unsafe extern "C" fn game_elight_bunshin_SpecialS5(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_elight_bunshin_SpecialAirS5(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
     let rng = smash::app::sv_math::rand(hash40("elight"), rand_effect.len() as i32);
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin) { 
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN) { 
         if is_excute(fighter) {
-            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_bunshin, *WEAPON_ELIGHT_bunshin_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
+            ArticleModule::add_motion_partial(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_BUNSHIN, *WEAPON_ELIGHT_ESWORD_MOTION_PART_SET_KIND_OPEM_CLOSE, Hash40::new("to_open"), 10.0, 10.0, false, false, 0.0, false, true, false);
         }
     }
     frame(fighter.lua_state_agent, 5.0);

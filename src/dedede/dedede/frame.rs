@@ -3,7 +3,6 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn frame_dedede_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    frame_common(fighter);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("jump_aerial_f9") {
         if MotionModule::frame(fighter.module_accessor) == 55.0 {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());

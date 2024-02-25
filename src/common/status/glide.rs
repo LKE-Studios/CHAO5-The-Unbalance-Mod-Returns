@@ -221,14 +221,8 @@ pub unsafe fn fighter_glide_specifics_function(fighter: &mut L2CFighterCommon) {
     let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
     let se_volume_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("se_volume_max"));
     let kind = fighter.global_table[FIGHTER_KIND].get_i32();
-    if kind == *FIGHTER_KIND_PIT {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pit_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
-    }
     if kind == *FIGHTER_KIND_PITB {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
-    }
-    if kind == *FIGHTER_KIND_PLIZARDON {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_plizardon_glide_loop"), 0.85 + angle * angle_se_pitch_ratio);
     }
     if kind == *FIGHTER_KIND_TRAIL {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_trail_glide_loop"), 1.1 + angle * -0.0071);

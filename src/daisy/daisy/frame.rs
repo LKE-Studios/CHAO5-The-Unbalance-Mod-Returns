@@ -1,7 +1,6 @@
 use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn frame_daisy_Main(fighter: &mut L2CFighterCommon) {
-    frame_common(fighter);
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_ATTACK_S4_START,*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("havel"), &Vector3f{ x: 4.0, y: 4.0, z: 4.0 });

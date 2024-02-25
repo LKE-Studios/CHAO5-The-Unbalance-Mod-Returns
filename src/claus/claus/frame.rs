@@ -10,7 +10,6 @@ pub unsafe extern "C" fn frame_claus_Main(fighter: &mut L2CFighterCommon) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let CLAUS = color >= 64 && color <= 71;
     if CLAUS {
-        frame_common(fighter);
         if CLAUS_WESS_DANCE[ENTRY_ID] == true {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("wess_dance"), 0.0, 1.0, false, 0.0, false, false);
         }

@@ -14,7 +14,6 @@ static mut Y_MAX : f32 = 1.24; //Max Vertical movespeed
 pub unsafe extern "C" fn frame_edge_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    frame_common(fighter);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) == true {
         DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.65);
         DamageModule::set_reaction_mul(fighter.module_accessor, 0.65);

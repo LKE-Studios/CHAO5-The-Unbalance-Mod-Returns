@@ -1566,6 +1566,30 @@ unsafe extern "C" fn game_cloud_SpecialHi2Landing(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialLwLoop
+unsafe extern "C" fn game_cloud_SpecialLwLoop(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 1.0);
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -8.0, 0);
+        }
+        wait(fighter.lua_state_agent, 12.0);
+        wait_loop_clear(fighter);
+    } 
+}
+
+//SpecialAirLwLoop
+unsafe extern "C" fn game_cloud_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        frame(fighter.lua_state_agent, 1.0);
+        if is_excute(fighter) {
+            DamageModule::heal(fighter.module_accessor, -8.0, 0);
+        }
+        wait(fighter.lua_state_agent, 12.0);
+        wait_loop_clear(fighter);
+    } 
+}
+
 //SpecialLw
 unsafe extern "C" fn game_cloud_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
@@ -1782,6 +1806,8 @@ pub fn install() {
     .game_acmd("game_specialairhi_lb", game_cloud_SpecialAirHi_LB)
     .game_acmd("game_specialhi2", game_cloud_SpecialHi2)
     .game_acmd("game_specialhi2landing", game_cloud_SpecialHi2Landing)
+    .game_acmd("game_speciallwloop", game_cloud_SpecialLwLoop)
+    .game_acmd("game_specialairlwloop", game_cloud_SpecialAirLwLoop)
     .game_acmd("game_speciallw", game_cloud_SpecialLw)
     .game_acmd("game_specialairlw", game_cloud_SpecialAirLw)
     .game_acmd("game_appealsr", game_cloud_AppealSR)

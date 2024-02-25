@@ -9,6 +9,6 @@ unsafe extern "C" fn game_fox_arwingshot_Main(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("falco_arwingshot")
-    .game_acmd("game_main", game_falco_arwingshot_Main)
+    .game_acmd("game_main", game_fox_arwingshot_Main)
     .install();
 }

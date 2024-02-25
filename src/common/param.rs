@@ -481,7 +481,7 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
 
 pub fn install() {
     skyline::install_hooks!(
-        get_param_float,
-        get_param_int
+        //get_param_float,
+        //get_param_int
     );
 }

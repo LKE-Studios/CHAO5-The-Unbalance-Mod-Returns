@@ -153,13 +153,13 @@ mod gamewatch;
 mod ganon;
 mod gaogaen;
 mod gekkouga;
-/*mod ike;
+mod ike;
 mod inkling;
 mod jack;
 mod kamui;
 mod ken;
 mod kirby;
-mod koopa;
+/*mod koopa;
 mod koopag;
 mod koopajr;
 mod krool;
@@ -240,7 +240,8 @@ const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
     0xf9, 0xe8, 0xfe, 0xdf, 0x08, 0xf4, 0x03, 0x02, 0x2a, 0xf5, 0x03, 0x01,
     0xaa, 0xf3, 0x03, 0x00, 0xaa, 0x88, 0x06, 0x00, 0x36
 ];
-static mut DECLARE_CONST_OFFSET : usize = 0x3727390; //13.0.1
+
+static mut DECLARE_CONST_OFFSET : usize = 0x3728010; //13.0.2
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
     haystack.windows(needle.len()).position(|window| window == needle)
@@ -255,7 +256,7 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     original!()(unk,constant,value)
 }
 
-#[skyline::hook(offset=0x3f0028, inline)]
+#[skyline::hook(offset=0x3f003c, inline)]
 pub unsafe fn offset_dump(ctx: &InlineCtx) {
 	let text = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
 	println!("Function Offset: {:#X}", ctx.registers[8].x.as_ref() - text);
@@ -369,7 +370,7 @@ pub fn main() {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
         let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
         let text = std::slice::from_raw_parts(text_ptr, text_size);
-        if let Some(offset) = find_subsequence(text, DECLARE_CONST_SEARCH_CODE){
+        if let Some(offset) = find_subsequence(text, DECLARE_CONST_SEARCH_CODE) {
             DECLARE_CONST_OFFSET = offset;
         }
     }
@@ -377,9 +378,9 @@ pub fn main() {
     donkey::install();
     /*link::install();
     samus::install();
-    yoshi::install();
+    yoshi::install();*/
     kirby::install();
-    pikachu::install();*/
+    //pikachu::install();
     fox::install();
     /*luigi::install();
     ness::install();*/
@@ -415,9 +416,9 @@ pub fn main() {
     snake::install();
     wolf::install();
     szerosuit::install();
-    robot::install();
+    robot::install();*/
     ike::install();
-    toonlink::install();*/
+    //toonlink::install();
     pikmin::install();
     /*littlemac::install();
     shulk::install();
@@ -438,22 +439,22 @@ pub fn main() {
     wiifit::install();*/
     duckhunt::install();
     /*koopajr::install();
-    lucina::install();
+    lucina::install();*/
     kamui::install();
-    ridley::install();
+    /*ridley::install();
     krool::install();*/
     gaogaen::install();
-    /*packun::install();
+    //packun::install();
     ken::install();
     inkling::install();
-    simon::install();
+    /*simon::install();
     shizue::install();*/
     daisy::install();
     /*samusd::install();
     richter::install();*/
     chrom::install();
     //dolly::install();
-    //jack::install();
+    jack::install();
     edge::install();
     brave::install();
     demon::install();

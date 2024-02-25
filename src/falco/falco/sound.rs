@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //SpecialLw
-unsafe fn sound_falco_SpecialLw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_falco_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_falco_special_l01"));
@@ -18,7 +18,7 @@ unsafe fn sound_falco_SpecialLw(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirLw
-unsafe fn sound_falco_SpecialAirLw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_falco_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_falco_special_l01"));

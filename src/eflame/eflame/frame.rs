@@ -3,7 +3,6 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn frame_eflame(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    frame_common(fighter);
     if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_S_CATCH].contains(&status_kind) {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {

@@ -451,7 +451,7 @@ unsafe extern "C" fn game_gamewatch_AttackAirHi(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_BREATH, *ARTICLE_OPE_TARGET_ALL, false);
+        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_BREATH, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
     }
     frame(fighter.lua_state_agent, 41.0);
     FT_MOTION_RATE(fighter, 2.0);
@@ -493,7 +493,7 @@ unsafe extern "C" fn game_gamewatch_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 //LandingAirB
 unsafe extern "C" fn game_gamewatch_LandingAirB(fighter: &mut L2CAgentBase) {
-    if IS_EXIST_ARTICLE(fighter, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON, Hash40::new("landing_air_b"), false, -1.0);
         }

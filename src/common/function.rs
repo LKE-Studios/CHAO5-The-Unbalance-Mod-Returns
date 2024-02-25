@@ -351,12 +351,12 @@ pub unsafe extern "C" fn ac_update(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    /*Agent::new("common")
-    .on_init(metaknight_init)
-    .on_init(lucario_init)
-    .install();*/
-    smashline::api::install_line_callback(None, StatusLine::Init, metaknight_init as _);
-    smashline::api::install_line_callback(None, StatusLine::Init, lucario_init as _);
+    Agent::new("fighter")
+    .on_start(metaknight_init)
+    .on_start(lucario_init)
+    .install();
+    //smashline::api::install_line_callback(None, StatusLine::Init, metaknight_init as _);
+    //smashline::api::install_line_callback(None, StatusLine::Init, lucario_init as _);
     Agent::new("murabito")
     .on_line(Main, ac_update)
     .install();

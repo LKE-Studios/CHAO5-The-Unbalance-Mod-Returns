@@ -1,7 +1,6 @@
 use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn frame_gamewatch_Main(fighter : &mut L2CFighterCommon) {
-    frame_common(fighter);
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND

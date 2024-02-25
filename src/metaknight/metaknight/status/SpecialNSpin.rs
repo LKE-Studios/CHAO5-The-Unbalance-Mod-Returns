@@ -8,10 +8,10 @@ unsafe extern "C" fn status_metaknight_SpecialNSpin_Main(fighter: &mut L2CFighte
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_spin"), 0.0, 1.0, false, 0.0, false, false);
     MotionModule::set_rate(fighter.module_accessor, start_rot_speed);
     if !StopModule::is_stop(fighter.module_accessor) {
-        metaknight_special_n_spin_sound_handler(fighter, false.into());
+        metaknight_SpecialNSpin_sound_handler(fighter, false.into());
     }
-    metaknight_special_n_spin_handler(fighter);
-    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(metaknight_special_n_spin_sound_handler as *const () as _));
+    metaknight_SpecialNSpin_handler(fighter);
+    fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(metaknight_SpecialNSpin_sound_handler as *const () as _));
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let add_speed_stick = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("add_speed_stick"));
     let start_stick_speed = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("start_stick_speed"));
@@ -20,10 +20,10 @@ unsafe extern "C" fn status_metaknight_SpecialNSpin_Main(fighter: &mut L2CFighte
         let speed_x = start_stick_speed * stick_x * lr;
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: speed_x, y: 0.0, z: 0.0});
     }
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialNSpin_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialNSpin_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn metaknight_special_n_spin_handler(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn metaknight_SpecialNSpin_handler(fighter: &mut L2CFighterCommon) {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_METAKNIGHT_SPECIAL_AIR_N);
@@ -36,7 +36,7 @@ unsafe extern "C" fn metaknight_special_n_spin_handler(fighter: &mut L2CFighterC
     return;
 }
 
-unsafe extern "C" fn metaknight_special_n_spin_sound_handler(fighter: &mut L2CFighterCommon, param_3: L2CValue) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialNSpin_sound_handler(fighter: &mut L2CFighterCommon, param_3: L2CValue) -> L2CValue {
     if param_3.get_bool() {
         WorkModule::inc_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_HOP_COUNT);
         WorkModule::dec_int(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_START_SE);
@@ -74,7 +74,7 @@ unsafe extern "C" fn metaknight_special_n_spin_sound_handler(fighter: &mut L2CFi
     0.into()
 }
 
-unsafe extern "C" fn metaknight_SpecialNSpin_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialNSpin_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
@@ -87,7 +87,7 @@ unsafe extern "C" fn metaknight_SpecialNSpin_Main_Sub(fighter: &mut L2CFighterCo
         fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_END.into(), false.into())
     }
     if !StatusModule::is_changing(fighter.module_accessor) && StatusModule::is_situation_changed(fighter.module_accessor) {
-        metaknight_special_n_spin_handler(fighter);
+        metaknight_SpecialNSpin_handler(fighter);
         return 0.into();
     }
     return 0.into()

@@ -1,5 +1,7 @@
-mod game;
+mod kirby;
+mod kirby_finalcuttershot;
 
 pub fn install() {
-    game::install();    
+    kirby::install();
+    kirby_finalcuttershot::install();
 }

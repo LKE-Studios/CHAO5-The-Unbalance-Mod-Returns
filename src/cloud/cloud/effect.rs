@@ -21,8 +21,38 @@ unsafe extern "C" fn effect_cloud_AttackAirF(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialLwLoop
+unsafe extern "C" fn effect_cloud_SpecialLwLoop(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            EFFECT_OFF_KIND(fighter, Hash40::new("cloud_limitcharge_hold"), false, false);
+            EFFECT_FOLLOW(fighter, Hash40::new("cloud_limitcharge_hold"), Hash40::new("top"), 1, 10, 0, 0, 0, 0, 1, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+        }
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("cloud_limitcharge_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+        wait(fighter.lua_state_agent, 9.0);
+        wait_loop_clear(fighter);
+    }
+}
+
+//SpecialAirLwLoop
+unsafe extern "C" fn effect_cloud_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            EFFECT_FOLLOW(fighter, Hash40::new("cloud_limitcharge_hold"), Hash40::new("top"), 1, 10, 0, 0, 0, 0, 1, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+        }
+        wait(fighter.lua_state_agent, 9.0);
+        wait_loop_clear(fighter);
+    }
+}
+
 pub fn install() {
     Agent::new("cloud")
     .effect_acmd("effect_attackairf", effect_cloud_AttackAirF)
+    .effect_acmd("effect_speciallwloop", effect_cloud_SpecialLwLoop)
+    .effect_acmd("effect_specialairlwloop", effect_cloud_SpecialAirLwLoop)
     .install();
 }

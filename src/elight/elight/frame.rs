@@ -2,7 +2,6 @@ use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn frame_elight_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    frame_common(fighter);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_N_END].contains(&status_kind) {
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -4.0, 0);

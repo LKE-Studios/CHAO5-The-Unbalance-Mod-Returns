@@ -2,7 +2,6 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn frame_buddy(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    frame_common(fighter);
     //SFX Controllers
     if [
         *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_GLIDE_LANDING,

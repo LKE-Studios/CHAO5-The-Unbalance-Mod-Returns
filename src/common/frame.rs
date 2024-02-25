@@ -38,8 +38,7 @@ pub unsafe extern "C" fn loupe_camera_exit(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    /*Agent::new("fighter")
+    Agent::new("fighter")
     .on_line(Main, frame_common)
-    .install();*/
-    smashline::api::install_line_callback(None, StatusLine::Main, frame_common as _);
+    .install();
 }

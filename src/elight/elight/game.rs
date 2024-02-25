@@ -1274,7 +1274,7 @@ unsafe extern "C" fn game_elight_DownAttackD(fighter: &mut L2CAgentBase) {
 }
 
 //DownAttackU
-unsafe extern "c" fn game_elight_DownAttackU(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_elight_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) { 
         if is_excute(fighter) {

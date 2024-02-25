@@ -1621,5 +1621,6 @@ pub fn install() {
     .game_acmd("game_finalend", game_donkey_FinalEnd)
     .game_acmd("game_finalend_com", game_donkey_FinalEnd_Com)
     .game_acmd("game_finalairend", game_donkey_FinalAirEnd)
+    .game_acmd("game_win2", game_donkey_Win2)
     .install();
 }

@@ -10,6 +10,7 @@ pub mod BuildImports {
                 KineticEnergyNormal,
                 FighterCutInManager,
                 BattleObjectWorld,
+                BattleObjectManager,
                 AttackData,
                 StageManager,
                 BossManager,
@@ -102,5 +103,6 @@ pub mod BuildImports {
         std::f32::consts::PI,
         smash2,
         smash2::app::BattleObjectModuleAccessor,
+        skyline::hooks::InlineCtx,
     };
 }

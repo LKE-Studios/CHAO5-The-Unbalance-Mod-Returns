@@ -1,8 +1,7 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn falco_frame_Main(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn frame_falco_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    frame_common(fighter);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
         && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {

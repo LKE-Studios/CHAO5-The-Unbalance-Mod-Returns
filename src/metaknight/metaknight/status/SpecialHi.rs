@@ -7,8 +7,8 @@ unsafe extern "C" fn status_metaknight_SpecialHi_Main(fighter: &mut L2CFighterCo
     let dir_stick_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("dir_stick_x"));
     let pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("pass_mul"));
     let air_pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_pass_mul"));
-    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_start_x_mul"));
-    let air_start_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_accel_y"));
+    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_accel_y"));
+    let air_start_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("air_accel_x_mul"));
     let fall_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("fall_x_mul"));
     let trans_move_end_speed_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("trans_move_end_speed_x_mul"));
     let trans_move_end_speed_y_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("trans_move_end_speed_y_mul"));
@@ -40,15 +40,15 @@ unsafe extern "C" fn status_metaknight_SpecialHi_Main(fighter: &mut L2CFighterCo
             MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(metaknight_aerial_motion_kind), 0.0, 1.0, false, 0.0, false, false);
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_HI_FLAG_CONTINUE_MOT);
         }
-        fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_Sub_Sec as *const () as _))
+        fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_loop_Sec as *const () as _))
     }
     else {
         fighter.super_jump_punch(L2CValue::Void());
-        fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_Sub as *const () as _))
+        fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_loop as *const () as _))
     }
 }
 
-pub unsafe extern "C" fn metaknight_SpecialHi_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn metaknight_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
@@ -75,7 +75,7 @@ pub unsafe extern "C" fn metaknight_SpecialHi_Main_Sub(fighter: &mut L2CFighterC
     0.into()
 }
 
-pub unsafe extern "C" fn metaknight_SpecialHi_Main_Sub_Sec(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn metaknight_SpecialHi_Main_loop_Sec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);

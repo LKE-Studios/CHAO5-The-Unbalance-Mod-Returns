@@ -318,7 +318,7 @@ pub fn silver_beam_frame(weapon: &mut L2CFighterBase) {
         let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
 	    let SILVER = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 128 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 135);
 	    let SILVER_WEAPON = (WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 128 && WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 135);
-        if SILVER_WEAPON && [*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) == true { //silver
+        if SILVER_WEAPON && [*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) == true { //Silver
             if PostureModule::scale(weapon.module_accessor) != 1.75  && status_kind == *WEAPON_MEWTWO_SHADOWBALL_STATUS_KIND_CHARGE {
                 PostureModule::set_scale(weapon.module_accessor, 1.75, false);
             };

@@ -41,8 +41,8 @@ unsafe extern "C" fn game_gamewatch_octopus_FinalAttack(fighter: &mut L2CAgentBa
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("roty"), 100.0, 15, 100, 150, 10, 15.0, 0.0, 7.0, 6.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_NONE);
         ATTACK(fighter, 1, 0, Hash40::new("roty"), 100.0, 40, 30, 0, 90, 17.0, 0.0, 6.0, -17.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_NONE);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, true, -1, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, true, -1, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, true, -1.0, false);
+        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 1, true, true, -1.0, false);
         CATCH(fighter, 0, Hash40::new("lega"), 8.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED_OCTOPUS, *COLLISION_SITUATION_MASK_GA);
         CATCH(fighter, 1, Hash40::new("legb"), 8.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED_OCTOPUS, *COLLISION_SITUATION_MASK_GA);
         CATCH(fighter, 2, Hash40::new("legc"), 8.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED_OCTOPUS, *COLLISION_SITUATION_MASK_GA);
