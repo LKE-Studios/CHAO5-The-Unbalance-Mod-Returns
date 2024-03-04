@@ -15,6 +15,7 @@ pub mod BuildImports {
                 StageManager,
                 BossManager,
                 Item,
+                ItemManager,
                 ItemParamAccessor,
                 LinkEventMask,
                 LinkEventThrow,
@@ -34,7 +35,7 @@ pub mod BuildImports {
             Fighter, 
             sv_information    
         },
-        smash::phx::{Hash40, Vector2f, Vector3f},
+        smash::phx::{Hash40, Vector2f, Vector3f, Vector4f},
         smash::hash40,
         smash::lib::{
             L2CAgent,
@@ -63,7 +64,6 @@ pub mod BuildImports {
             FT_START_CUTIN_arg1,
             SET_SPEED,
             CHECK_FINISH_CAMERA_IF_NOT_HP_MODE,
-            EFFECT_FOLLOW_COLOR,
             SET_AIR,
             EFFECT_BRANCH_SITUATION,
         },
@@ -96,7 +96,8 @@ pub mod BuildImports {
             EFFECT_FOLLOW_RND,
             REQ_MOTION_CAMERA,
             CHECK_VALID_START_CAMERA,
-            SET_TAKEOUT_SE_STATUS
+            SET_TAKEOUT_SE_STATUS,
+            EFFECT_FOLLOW_COLOR
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},

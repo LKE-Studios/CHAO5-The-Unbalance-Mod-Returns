@@ -120,6 +120,29 @@ pub unsafe fn EFFECT_FOLLOW_RND(
     fighter.pop_lua_stack(1).get_bool();
 }
 
+pub unsafe fn EFFECT_FOLLOW_COLOR(
+    fighter: &mut L2CAgentBase, 
+    effect_type: Hash40, 
+    bone: Hash40,
+    x_pos: f32,
+    y_pos: f32,
+    z_pos: f32,
+    x_rot: f32,
+    y_rot: f32,
+    z_rot: f32,
+    unk1: f32,
+    unk2: bool,
+    unk3: f32,
+    unk4: f32,
+    unk5: f32
+) {
+    fighter.clear_lua_stack();
+    lua_args!(fighter, effect_type, bone, x_pos, y_pos, z_pos, x_rot, y_rot, z_rot, unk1, unk2, unk3, unk4, unk5);
+    sv_animcmd::EFFECT_FOLLOW_COLOR(fighter.lua_state_agent);
+    fighter.pop_lua_stack(1).get_bool();
+}
+
+
 pub unsafe fn EFFECT_FOLLOW_FLIP_arg13(
     fighter: &mut L2CAgentBase,
     unk1: Hash40,

@@ -350,13 +350,228 @@ pub unsafe extern "C" fn ac_update(fighter: &mut L2CFighterCommon) {
     }
 }
 
+pub unsafe extern "C" fn set_arrow_fuse_params(module_accessor: *mut smash::app::BattleObjectModuleAccessor, item_kind: i32, fuse_kind: i32, trait_type: i32) {
+    if (![*ITEM_KIND_NONE, *ITEM_KIND_ASSIST, *ITEM_KIND_LINKARROW].contains(&item_kind) && ![*ITEM_TRAIT_FLAG_NONE, *ITEM_TRAIT_FLAG_SHOOT, *ITEM_TRAIT_FLAG_SWING].contains(&trait_type)) 
+    || [*ITEM_KIND_BANANAGUN, *ITEM_KIND_FIREFLOWER].contains(&item_kind) {
+        WorkModule::on_flag(module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_ITEM_FUSED);
+    }
+    else {
+        WorkModule::off_flag(module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_ITEM_FUSED);
+    }
+    if WorkModule::is_flag(module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
+        let owner_module_accessor = smash::app::sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        let owner_kind = smash::app::utility::get_kind(&mut *owner_module_accessor);
+        WorkModule::set_int(module_accessor, item_kind, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_KIND);
+        if fuse_kind == FuseKind::FUSE {
+            if owner_kind == *FIGHTER_KIND_LINK {
+                WorkModule::set_int(owner_module_accessor, item_kind, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+            }
+            else if owner_kind == *FIGHTER_KIND_KIRBY {
+                WorkModule::set_int(owner_module_accessor, item_kind, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+            }
+            let item_id = ItemModule::get_have_item_id(owner_module_accessor, 0) as i32;
+            WorkModule::set_int(module_accessor, item_id, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
+        }
+        else if fuse_kind == FuseKind::REFUSE {
+            let pos_x = PostureModule::pos_x(module_accessor);
+            let pos_y = PostureModule::pos_y(module_accessor);
+            let pos_z = PostureModule::pos_z(module_accessor);
+            let mut params = CreateItemParam {
+                founder_pos: smash::Vector4f{x: pos_x, y: pos_y, z: pos_z, w: 0.0},
+                item_pos: smash::Vector4f{x: pos_x, y: pos_y, z: pos_z, w: 0.0},
+                item_kind: smash::app::ItemKind(item_kind),
+                another_battle_object_id: *BATTLE_OBJECT_ID_INVALID as u32,
+                variation_kind: *ITEM_VARIATION_NONE,
+                lr_dir: PostureModule::lr(module_accessor),
+                owner_id: (*(module_accessor)).battle_object_id,
+                unk_20: 20,
+                pokeball_or_assist_kind: *ITEM_KIND_NONE,
+                unk_0: 0,
+                weird_flag: 0x633F800000,
+                unk_1_weird: 1,
+                unk_approx_0: 0.0,
+                unk_02: 0.0
+            };
+            let item_manager = *(singletons::ItemManager() as *mut *mut smash::app::ItemManager);
+            let battle_object = create_item(item_manager, &mut params, false, false, false);
+            let item_module_accessor = (*battle_object).module_accessor;
+            if ![*ITEM_KIND_HEALBALL, *ITEM_KIND_CHEWING, *ITEM_KIND_BOOMERANG].contains(&item_kind) {
+                StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_HAVE, false);
+            }
+            if item_kind == *ITEM_KIND_LINKBOMB {
+                PostureModule::set_scale(item_module_accessor, 1.35, false);
+            }
+            let item_id = (*(item_module_accessor)).battle_object_id as i32;
+            WorkModule::set_int(module_accessor, item_id, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
+            if [*FIGHTER_KIND_MURABITO, *FIGHTER_KIND_SHIZUE].contains(&owner_kind) {
+                WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_LINK_ARROW_FUSE_ITEM);
+            }
+        }
+        if item_kind == *ITEM_KIND_BOMBER {
+            WorkModule::set_int(module_accessor, FuseType::NORMAL, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+            WorkModule::set_int(module_accessor, *ITEM_BOMBER_STATUS_KIND_BORN2, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else if [*ITEM_KIND_KILLER, *ITEM_KIND_BANANAGUN, *ITEM_KIND_DOLPHINBOMB].contains(&item_kind) {
+            WorkModule::set_int(module_accessor, FuseType::POWER, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_THROW, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else if item_kind == *ITEM_KIND_FIREFLOWER {
+            WorkModule::set_int(module_accessor, FuseType::ELEMENTAL, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_LOST, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else if item_kind == *ITEM_KIND_LINKBOMB {
+            WorkModule::set_int(module_accessor, FuseType::NORMAL, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_BORN, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else {
+            WorkModule::set_int(module_accessor, FuseType::NORMAL, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_THROW, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+    }
+}
+
+pub unsafe extern "C" fn set_elemental_fuse(weapon: &mut L2CFighterBase, element: i32, fuse_type: i32, end_status: i32) {
+    let owner_module_accessor = smash::app::sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let owner_kind = smash::app::utility::get_kind(&mut *owner_module_accessor);
+    if owner_kind == *FIGHTER_KIND_LINK {
+        WorkModule::set_int(owner_module_accessor, element, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+    }
+    else {
+        WorkModule::set_int(owner_module_accessor, element, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+    }
+    let pos_x = PostureModule::pos_x(weapon.module_accessor);
+    let pos_y = PostureModule::pos_y(weapon.module_accessor);
+    let pos_z = PostureModule::pos_z(weapon.module_accessor);
+    let mut params = CreateItemParam {
+        founder_pos: smash::Vector4f{x: pos_x, y: pos_y, z: pos_z, w: 0.0},
+        item_pos: smash::Vector4f{x: pos_x, y: pos_y, z: pos_z, w: 0.0},
+        item_kind: smash::app::ItemKind(element),
+        another_battle_object_id: *BATTLE_OBJECT_ID_INVALID as u32,
+        variation_kind: *ITEM_VARIATION_NONE,
+        lr_dir: PostureModule::lr(owner_module_accessor),
+        owner_id: (*(owner_module_accessor)).battle_object_id,
+        unk_20: 20,
+        pokeball_or_assist_kind: *ITEM_KIND_NONE,
+        unk_0: 0,
+        weird_flag: 0x633F800000,
+        unk_1_weird: 1,
+        unk_approx_0: 0.0,
+        unk_02: 0.0
+    };
+    let item_manager = *(singletons::ItemManager() as *mut *mut smash::app::ItemManager);
+    let battle_object = create_item(item_manager, &mut params, false, false, false);
+    WorkModule::set_int(weapon.module_accessor, element, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_KIND);
+    WorkModule::set_int(weapon.module_accessor, fuse_type, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG);
+    WorkModule::set_int(weapon.module_accessor, end_status, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+    let item_module_accessor = (*battle_object).module_accessor;
+    let item_id = (*item_module_accessor).battle_object_id;
+    WorkModule::set_int64(weapon.module_accessor, item_id as i64, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
+    StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_THROW, false);
+    LinkModule::remove_model_constraint(item_module_accessor, true);
+    if LinkModule::is_link(item_module_accessor, *ITEM_LINK_NO_HAVE) {
+        LinkModule::unlink(item_module_accessor, *ITEM_LINK_NO_HAVE);
+    }
+    if !LinkModule::is_link(item_module_accessor, *ITEM_LINK_NO_HAVE) {
+        VisibilityModule::set_whole(item_module_accessor, true);
+        LinkModule::link(item_module_accessor, *ITEM_LINK_NO_HAVE, (*(weapon.module_accessor)).battle_object_id);
+        LinkModule::set_model_constraint_pos_ort(item_module_accessor, *ITEM_LINK_NO_HAVE, Hash40::new("top"), Hash40::new("top"), *CONSTRAINT_FLAG_ORIENTATION as u32 | *CONSTRAINT_FLAG_POSITION as u32, true);
+    }
+    WorkModule::on_flag(weapon.module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_ITEM_FUSED);
+}
+
+pub unsafe extern "C" fn set_boomerang_fuse_params(module_accessor: *mut smash::app::BattleObjectModuleAccessor, item_kind: i32, fuse_kind: i32, trait_type: i32) {
+    if (![*ITEM_KIND_NONE,*ITEM_KIND_ASSIST,*ITEM_KIND_LINKARROW].contains(&item_kind) && ![*ITEM_TRAIT_FLAG_NONE,*ITEM_TRAIT_FLAG_SHOOT,*ITEM_TRAIT_FLAG_SWING].contains(&trait_type))
+    || [*ITEM_KIND_FIREFLOWER].contains(&item_kind) {
+        WorkModule::on_flag(module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED);
+    }
+    else {
+        WorkModule::off_flag(module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED);
+    }
+    if WorkModule::is_flag(module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
+        let owner_module_accessor = smash::app::sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        WorkModule::set_int(module_accessor, item_kind, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_KIND);
+        let owner_kind = smash::app::utility::get_kind(&mut *owner_module_accessor);
+        if fuse_kind == FuseKind::FUSE {
+            WorkModule::set_int(owner_module_accessor,item_kind, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE);
+            let item_id = ItemModule::get_have_item_id(owner_module_accessor, 0) as i32;
+            WorkModule::set_int(module_accessor,item_id, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
+            WorkModule::set_int(owner_module_accessor,item_id, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE_ID);
+        }
+        else if fuse_kind == FuseKind::REFUSE {
+            let mut params = CreateItemParam {
+                founder_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
+                item_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
+                item_kind: smash::app::ItemKind(item_kind),
+                another_battle_object_id: *BATTLE_OBJECT_ID_INVALID as u32,
+                variation_kind: *ITEM_VARIATION_NONE,
+                lr_dir: PostureModule::lr(module_accessor),
+                owner_id: (*(module_accessor)).battle_object_id,
+                unk_20: 20,
+                pokeball_or_assist_kind: *ITEM_KIND_NONE,
+                unk_0: 0,
+                weird_flag: 0x633F800000,
+                unk_1_weird: 1,
+                unk_approx_0: 0.0,
+                unk_02: 0.0
+            };
+            let item_manager = *(ItemManager() as *mut *mut smash::app::ItemManager);
+            let battle_object = create_item(item_manager,&mut params,false,false,false);
+            let item_module_accessor = (*battle_object).module_accessor;
+            if ![*ITEM_KIND_HEALBALL, *ITEM_KIND_CHEWING, *ITEM_KIND_BOOMERANG].contains(&item_kind) {
+                StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_HAVE,false);
+            }
+            if item_kind == *ITEM_KIND_LINKBOMB {
+                PostureModule::set_scale(item_module_accessor, 1.3, false);
+            }
+            let item_id = (*(item_module_accessor)).battle_object_id as i32;
+            WorkModule::set_int(module_accessor, item_id, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
+            WorkModule::set_int(owner_module_accessor, item_id, FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_LINK_BOOMERANG_FUSE_ITEM_ID);
+            if owner_kind == *FIGHTER_KIND_MURABITO
+            || owner_kind == *FIGHTER_KIND_SHIZUE {
+                WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE,FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_LINK_BOOMERANG_FUSE_ITEM);
+            }
+        }
+        if item_kind == *ITEM_KIND_BOMBER {
+            WorkModule::set_int(module_accessor, *ITEM_BOMBER_STATUS_KIND_BORN2, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else if item_kind == *ITEM_KIND_FIREFLOWER {
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_LOST, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else if item_kind == *ITEM_KIND_LINKBOMB {
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_BORN, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+        else {
+            WorkModule::set_int(module_accessor, *ITEM_STATUS_KIND_THROW, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_STATUS);
+        }
+    }
+}
+
+//A hook regarding the generation/visiblity of articles. Used to allow entry articles to generate
+#[skyline::hook(offset = 0x3a6670)]
+unsafe fn get_article_use_type_mask(weapon_kind: i32, entry_id: i32) -> u8 {
+    if weapon_kind == *WEAPON_KIND_LINK_PARASAIL {
+        return 1;
+    }
+    original!()(weapon_kind, entry_id)
+}
+
+#[skyline::hook(offset = 0x15db0b0)]
+pub unsafe fn create_item(item_manager: *mut smash::app::ItemManager, create_item_param: *mut CreateItemParam, unk: bool, unk2: bool, unk3: bool) -> *mut BattleObject {
+    if (*create_item_param).variation_kind > 7 {
+        (*create_item_param).variation_kind = 0;
+    }
+    original!()(item_manager, create_item_param, unk, unk2, unk3)
+}
+
 pub fn install() {
+    skyline::install_hooks!(
+        get_article_use_type_mask,
+        create_item
+    );
     Agent::new("fighter")
     .on_start(metaknight_init)
     .on_start(lucario_init)
     .install();
-    //smashline::api::install_line_callback(None, StatusLine::Init, metaknight_init as _);
-    //smashline::api::install_line_callback(None, StatusLine::Init, lucario_init as _);
     Agent::new("murabito")
     .on_line(Main, ac_update)
     .install();

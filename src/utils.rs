@@ -436,6 +436,39 @@ pub(crate) unsafe fn ray_check_pos(module_accessor: &mut smash::app::BattleObjec
 	GroundModule::ray_check(module_accessor, &Vector2f{ x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor)} as *const Vector2f, &Vector2f{ x: x_distance, y: y_distance} as *const Vector2f, ignore_plat)
 }
 
+#[repr(C)]
+pub struct CreateItemParam {
+    pub founder_pos: Vector4f,
+    pub item_pos: Vector4f,
+    pub item_kind: smash::app::ItemKind,
+    pub another_battle_object_id: u32,
+    pub variation_kind: i32,
+    pub lr_dir: f32,
+    pub owner_id: u32,
+    pub unk_20: u32,
+    pub pokeball_or_assist_kind: i32,
+    pub unk_0: u64,
+    pub weird_flag: u64,
+    pub unk_1_weird: u64,
+    pub unk_approx_0: f32,
+    pub unk_02: f32
+}
+
+pub struct FuseKind(i32);
+
+impl FuseKind {
+    pub const FUSE: i32 = 0;
+    pub const REFUSE: i32 = 1;
+}
+
+pub struct FuseType(i32);
+
+impl FuseType {
+    pub const NORMAL: i32 = 0;
+    pub const POWER: i32 = 1;
+    pub const ELEMENTAL: i32 = 2;
+}
+
 pub fn install() {
 	skyline::install_hook!(
         is_enable_transition_term_hook

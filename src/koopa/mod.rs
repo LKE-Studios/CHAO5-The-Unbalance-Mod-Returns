@@ -1,13 +1,9 @@
-mod game;
-mod frame;
-mod effect;
-mod sound;
-//mod status;
+mod koopa;
+mod koopa_breath;
+mod koopa_koopag;
 
 pub fn install() {
-    game::install(); 
-    frame::install();   
-    effect::install();
-    sound::install();
-    //status::install();
+    koopa::install(); 
+    koopa_breath::install(); 
+    koopa_koopag::install(); 
 }

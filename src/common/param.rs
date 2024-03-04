@@ -4,8 +4,8 @@ use smash::hash40;
 use smash::app::lua_bind::*;
 use crate::utils::*;
 
-static mut FLOAT_OFFSET : usize = 0x4e53c0;
-static mut INT_OFFSET : usize = 0x4e5380;
+static mut FLOAT_OFFSET : usize = 0x4e53e0; //13.0.2
+static mut INT_OFFSET : usize = 0x4e53a0; //13.0.2
 
 #[skyline::hook(offset=FLOAT_OFFSET)] //"Custom character" exclusive fighter attributes for FLOAT
 pub unsafe fn get_param_float(boma: u64, param_type: u64, param_hash: u64) -> f32 {
@@ -481,7 +481,7 @@ pub unsafe fn get_param_int(boma: u64, param_type: u64, param_hash: u64) -> i32 
 
 pub fn install() {
     skyline::install_hooks!(
-        //get_param_float,
-        //get_param_int
+        get_param_float,
+        get_param_int
     );
 }

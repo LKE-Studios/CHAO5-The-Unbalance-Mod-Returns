@@ -2,11 +2,11 @@ use crate::imports::BuildImports::*;
 
 #[skyline::hook(replace = L2CFighterCommon_sub_glide_stick_check_uniq)]
 unsafe fn sub_glide_stick_check_uniq(fighter: &mut L2CFighterCommon) {
-    let stick_x = fighter.global_table[0x1A].get_f32(); // 0x1A
+    let stick_x = fighter.global_table[STICK_X].get_f32(); // 0x1A
     if stick_x.abs() < 0.5 {
         return;
     }
-    let flick_x = fighter.global_table[0x1C].get_i32();
+    let flick_x = fighter.global_table[FLICK_X].get_i32();
     let lr = PostureModule::lr(fighter.module_accessor);
     if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_INPUT_BACK) {
         if flick_x < 3 && stick_x * lr < 0.0 {
@@ -30,7 +30,7 @@ unsafe fn sub_glide_check(fighter: &mut L2CFighterCommon) -> L2CValue {
     if jump_button_on_frame <= jump_button_hold_glide_frame {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_INPUT) {
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE) {
-                if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
+                if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
                     fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
                     return true.into();
                 }
@@ -39,7 +39,7 @@ unsafe fn sub_glide_check(fighter: &mut L2CFighterCommon) -> L2CValue {
     }
     else {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE) {
-            if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
+            if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
                 fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_START.into(), true.into());
                 return true.into();
             }

@@ -159,12 +159,12 @@ mod jack;
 mod kamui;
 mod ken;
 mod kirby;
-/*mod koopa;
+mod koopa;
 mod koopag;
 mod koopajr;
 mod krool;
 mod link;
-mod littlemac;
+/*mod littlemac;
 mod lucario;
 mod lucas;
 mod lucina;
@@ -253,7 +253,10 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     if str.contains("FIGHTER_RYU_STATUS_KIND_NUM") {
         value = 0x205;
     }
-    original!()(unk,constant,value)
+    if str.contains("FIGHTER_LINK_STATUS_KIND_NUM") {
+        value = 0x1F2;
+    }
+    original!()(unk, constant, value)
 }
 
 #[skyline::hook(offset=0x3f003c, inline)]
@@ -274,7 +277,6 @@ pub unsafe fn motionmodule_change_motion_replace(
     arg8: bool
 ) -> u64 {
 	let fighter_kind = smash::app::utility::get_kind(module_accessor);
-
     if fighter_kind == *FIGHTER_KIND_KOOPAG {
 		let GIGA_DTILT = &mut FIGHTER_BOOL_1[get_player_number(module_accessor)];
 		let GIGA_DASH_ATTACK = &mut FIGHTER_BOOL_2[get_player_number(module_accessor)];
@@ -376,8 +378,8 @@ pub fn main() {
     }
     mario::install();
     donkey::install();
-    /*link::install();
-    samus::install();
+    link::install();
+    /*samus::install();
     yoshi::install();*/
     kirby::install();
     //pikachu::install();
@@ -385,9 +387,9 @@ pub fn main() {
     /*luigi::install();
     ness::install();*/
     captain::install();
-    /*purin::install();
+    //purin::install();
     koopa::install();
-    marth::install();*/
+    //marth::install();
     ganon::install();
     gamewatch::install();
     /*mariod::install();
@@ -438,11 +440,11 @@ pub fn main() {
     rosetta::install();
     wiifit::install();*/
     duckhunt::install();
-    /*koopajr::install();
-    lucina::install();*/
+    koopajr::install();
+    //lucina::install();
     kamui::install();
-    /*ridley::install();
-    krool::install();*/
+    //ridley::install();
+    krool::install();
     gaogaen::install();
     //packun::install();
     ken::install();
@@ -466,8 +468,8 @@ pub fn main() {
     /*trail::install();
     tantan::install();*/
     claus::install();
-    /*koopag::install();
-    silver::install();
+    koopag::install();
+    /*silver::install();
     waluigi::install();*/
     skyline::install_hooks!(
         declare_const_hook, 
@@ -475,7 +477,7 @@ pub fn main() {
         log_remove_motion_partial,
         log_add_motion_partial,
         motionmodule_change_motion_replace,
-        change_version_string_hook
+        change_version_string_hook,
     );
     common::install();
 }

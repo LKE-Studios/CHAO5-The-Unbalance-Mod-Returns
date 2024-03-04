@@ -87,7 +87,7 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
     }
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let stick_magnitude = (stick_x * stick_x + stick_y * stick_y).sqrt(); //Square Root of Stick X^2 + Stick Y^2
+    let stick_magnitude = (stick_x.powi(2) + stick_y.powi(2)).sqrt(); //Square Root of Stick X^2 + Stick Y^2
     let radial_stick_sensitivity = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("radial_stick_sensitivity"));
     let angle_speed_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_speed_max"));
     let angle_speed_stick_add = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_speed_stick_add"));
