@@ -10,14 +10,14 @@ unsafe extern "C" fn status_metaknight_SpecialNEnd_Main(fighter: &mut L2CFighter
     let remove_effect_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("remove_effect_frame"));
     WorkModule::set_int(fighter.module_accessor, remove_effect_frame, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_REMOVE_FRAME);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_FLAG_EFFECT_REMOVE);
-    metaknight_special_n_end_motion_handler(fighter);
+    metaknight_SpecialNEnd_motion_handler(fighter);
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
     }
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialNEnd_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialNEnd_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn metaknight_special_n_end_motion_handler(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn metaknight_SpecialNEnd_motion_handler(fighter: &mut L2CFighterCommon) {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     let sum_speed = KineticModule::get_sum_speed(fighter.module_accessor, -1);
@@ -53,7 +53,7 @@ unsafe extern "C" fn metaknight_special_n_end_motion_handler(fighter: &mut L2CFi
     WorkModule::set_int(fighter.module_accessor, *SITUATION_KIND_AIR, *FIGHTER_STATUS_WORK_ID_UTILITY_WORK_INT_MTRANS);
 }
 
-unsafe extern "C" fn metaknight_SpecialNEnd_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialNEnd_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
@@ -123,7 +123,7 @@ unsafe extern "C" fn metaknight_SpecialNEnd_Main_Sub(fighter: &mut L2CFighterCom
         }
     }
     if bool_set {
-        metaknight_special_n_end_motion_handler(fighter);
+        metaknight_SpecialNEnd_motion_handler(fighter);
         if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
         }

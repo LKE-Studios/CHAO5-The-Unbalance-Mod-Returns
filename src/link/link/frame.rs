@@ -75,7 +75,7 @@ pub unsafe extern "C" fn activate_ascend_revali(fighter : &mut L2CFighterCommon)
     *FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && situation_kind == *SITUATION_KIND_AIR {
         let jump_button_on_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_ascend_revali"), hash40("jump_button_on_frame"));
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
-            WorkModule::inc_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME)
+            WorkModule::inc_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME);
         }
         if on_frame >= jump_button_on_frame {
             fighter.change_status(FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND.into(), true.into());

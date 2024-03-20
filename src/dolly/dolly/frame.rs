@@ -1,5 +1,4 @@
 use crate::imports::BuildImports::*;
-use crate::waluigi::frame::*;
 
 pub unsafe extern "C" fn frame_dolly_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
@@ -28,7 +27,7 @@ pub unsafe extern "C" fn frame_dolly_Main(fighter : &mut L2CFighterCommon) {
         };
     }
     //WALUIGI
-    let WALUIGI = color >= 120 && color <= 130; 
+    /*let WALUIGI = color >= 120 && color <= 130; 
     if WALUIGI {
         scale_waluigi(fighter);
         attack_dash_waluigi(fighter);
@@ -36,7 +35,7 @@ pub unsafe extern "C" fn frame_dolly_Main(fighter : &mut L2CFighterCommon) {
         special_s_waluigi(fighter);
         final_start_waluigi(fighter);
         //slap_cancel_waluigi(fighter);
-    }
+    }*/
 }
 
 pub fn install() {

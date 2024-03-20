@@ -3,12 +3,11 @@ use crate::mario::mario::frame::*;
 
 //SpecialN
 unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if MARIO_GIANT_FIREBALL[ENTRY_ID] {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 13.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_mario_special_n01"));
-            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_mario_special_n01"), 0.7);
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_mario_special_n01"), 0.8);
         }
     }
     else { 
@@ -21,12 +20,11 @@ unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn game_mario_SpecialAirN(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if MARIO_GIANT_FIREBALL[ENTRY_ID] {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 13.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_mario_special_n01"));
-            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_mario_special_n01"), 0.7);
+            SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_mario_special_n01"), 0.8);
         }
     }
     else { 

@@ -7,31 +7,35 @@ unsafe extern "C" fn frame_mario_Main(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    frame_common(fighter);
-    if MARIO_GIANT_FIREBALL[ENTRY_ID] == true {
-        MotionModule::set_rate(fighter.module_accessor, 0.41);
-        if MotionModule::frame(fighter.module_accessor) > 14.0 {
-            MotionModule::set_rate(fighter.module_accessor, 1.0);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let mut on_frame = WorkModule::get_int(fighter.module_accessor, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPECIAL_BUTTON_ON_FRAME);
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
+        MotionModule::set_rate(fighter.module_accessor, 0.4);
+        if frame > 14.0 {
+            MotionModule::set_rate(fighter.module_accessor, 1.0); 
         } 
-        if MotionModule::frame(fighter.module_accessor) > 16.0 {
+        if frame > 16.0 {
             MotionModule::set_rate(fighter.module_accessor, 0.6);
+            if situation_kind == *SITUATION_KIND_AIR {
+                WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI);
+                WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_JUMP_AERIAL);
+            }
         } 
-    };
+    }
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            HOLD_TIME[ENTRY_ID] += 1.0;
+            WorkModule::inc_int(fighter.module_accessor, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPECIAL_BUTTON_ON_FRAME);
         }
-        if HOLD_TIME[ENTRY_ID] == 30.0 {
-            MARIO_GIANT_FIREBALL[ENTRY_ID] = true;
+        if on_frame >= 30 {
+            WorkModule::on_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
         }
     }
     else {
-        HOLD_TIME[ENTRY_ID] = 0.0;
-        MARIO_GIANT_FIREBALL[ENTRY_ID] = false;
-        MotionModule::set_rate(fighter.module_accessor, 1.0);
-    };
+        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPECIAL_BUTTON_ON_FRAME)
+    }
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 {//Ice Mario Costume c09
-        MARIO_GIANT_FIREBALL[ENTRY_ID] = false;
+        WorkModule::off_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
     };
 }
 

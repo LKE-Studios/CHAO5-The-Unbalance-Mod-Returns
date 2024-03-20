@@ -141,7 +141,7 @@ mod daisy;
 mod dedede;
 mod demon;
 mod diddy;
-//mod dolly;
+mod dolly;
 mod donkey;
 mod duckhunt;
 mod edge;
@@ -164,24 +164,24 @@ mod koopag;
 mod koopajr;
 mod krool;
 mod link;
-/*mod littlemac;
+mod littlemac;
 mod lucario;
 mod lucas;
 mod lucina;
-mod luigi;*/
+mod luigi;
 mod mario;
-/*mod mariod;
+mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*mod mewtwo;
+mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
 mod nana;
 mod ness;
-mod packun;
+/*mod packun;
 mod pacman;
 mod palutena;
 mod peach;
@@ -193,8 +193,8 @@ mod pikmin;
 mod pit;
 //mod pitb;
 mod plizardon;
-/*mod popo;
-mod purin;
+mod popo;
+/*mod purin;
 mod ptrainer;
 mod pzenigame;
 mod reflet;
@@ -384,25 +384,25 @@ pub fn main() {
     kirby::install();
     //pikachu::install();
     fox::install();
-    /*luigi::install();
-    ness::install();*/
+    luigi::install();
+    ness::install();
     captain::install();
     //purin::install();
     koopa::install();
-    //marth::install();
+    marth::install();
     ganon::install();
     gamewatch::install();
-    /*mariod::install();
-    zelda::install();
+    mariod::install();
+    /*zelda::install();
     sheik::install();*/
     falco::install();
-    /*peach::install();
+    //peach::install();
     popo::install();
     nana::install();
-    younglink::install();
+    //younglink::install();
     mewtwo::install();
-    pichu::install();
-    roy::install();*/
+    //pichu::install();
+    //roy::install();
     metaknight::install();
     pit::install();
     //wario::install();
@@ -412,9 +412,9 @@ pub fn main() {
     pfushigisou::install();*/
     plizardon::install();
     dedede::install();
-    /*lucas::install();
+    lucas::install();
     lucario::install();
-    sonic::install();
+    /*sonic::install();
     snake::install();
     wolf::install();
     szerosuit::install();
@@ -422,26 +422,26 @@ pub fn main() {
     ike::install();
     //toonlink::install();
     pikmin::install();
-    /*littlemac::install();
-    shulk::install();
+    littlemac::install();
+    /*shulk::install();
     palutena::install();
     rockman::install();
-    ryu::install();
+    ryu::install();*/
     miifighter::install();
     miiswordsman::install();
-    miigunner::install();*/
+    miigunner::install();
     cloud::install();
     bayonetta::install();
     //reflet::install();
     gekkouga::install();
-    /*pitb::install();
-    pacman::install();
+    //pitb::install();
+    //pacman::install();
     murabito::install();
-    rosetta::install();
-    wiifit::install();*/
+    //rosetta::install();
+    //wiifit::install();
     duckhunt::install();
     koopajr::install();
-    //lucina::install();
+    lucina::install();
     kamui::install();
     //ridley::install();
     krool::install();
@@ -460,8 +460,8 @@ pub fn main() {
     edge::install();
     brave::install();
     demon::install();
-    /*master::install();
-    pickel::install();*/
+    master::install();
+    //pickel::install();
     eflame::install();
     elight::install();
     buddy::install();

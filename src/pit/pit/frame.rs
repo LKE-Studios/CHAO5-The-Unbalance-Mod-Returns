@@ -24,15 +24,9 @@ unsafe extern "C" fn frame_pit_Main(fighter: &mut L2CFighterCommon) {
             DamageModule::heal(fighter.module_accessor, -7.5, 0);
         }
     }
-    if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
-        if situation_kind == *SITUATION_KIND_AIR {
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
-            }
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-            }
-        }
+    if status_kind == FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY || status_kind == FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_TURN {
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
     };
 }
 

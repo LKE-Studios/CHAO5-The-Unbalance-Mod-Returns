@@ -450,8 +450,8 @@ unsafe extern "C" fn game_claus_AttackAirLw(fighter: &mut L2CAgentBase) {
 //CatchAttack
 unsafe extern "C" fn game_claus_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI) {
-        if is_excute(fighter) {
+    if is_excute(fighter) {
+        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, Hash40::new("catch_attack"), false, -1.0);
         }
     }

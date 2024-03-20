@@ -948,6 +948,11 @@ unsafe extern "C" fn game_pit_SpecialHiStart(fighter: &mut L2CAgentBase) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
     }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 27.0, /*Angle*/ 65, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 10, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 0.0, 0, 90, 0, 150, 9.0, 0.0, 3.0, -10.5, Some(0.0), Some(3.0), Some(10.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
+    }  
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         GroundModule::set_passable_check(fighter.module_accessor, true);
@@ -972,6 +977,33 @@ unsafe extern "C" fn game_pit_SpecialHi(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_FIX_ANGLE);
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_BACK_ANGLE);
         JostleModule::set_status(fighter.module_accessor, true)
+    }
+}
+
+//SpecialHiFly
+unsafe extern "C" fn game_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 0.0, 0, 90, 0, 80, 8.0, 0.0, 3.0, -10.5, Some(0.0), Some(3.0), Some(10.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    }
+}
+
+//SpecialAirHiStart
+unsafe extern "C" fn game_pit_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 27.0, /*Angle*/ 65, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 10, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 0.0, 0, 90, 0, 170, 9.0, 0.0, 3.0, -10.5, Some(0.0), Some(3.0), Some(10.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
+    }  
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        GroundModule::set_passable_check(fighter.module_accessor, true);
     }
 }
 
@@ -1151,6 +1183,8 @@ pub fn install() {
     .game_acmd("game_specialairsend", game_pit_SpecialAirSEnd)
     .game_acmd("game_specialhistart", game_pit_SpecialHiStart)
     .game_acmd("game_specialhi", game_pit_SpecialHi)
+    .game_acmd("game_specialhifly", game_pit_SpecialHiFly)
+    .game_acmd("game_specialairhistart", game_pit_SpecialAirHiStart)
     .game_acmd("game_speciallwhold", game_pit_SpecialLwHold)
     .game_acmd("game_specialairlwhold", game_pit_SpecialAirLwHold)
     .game_acmd("game_appealsr", game_pit_AppealSR)

@@ -9,6 +9,7 @@ use smash::{
 use smash::lib::L2CAgent;
 use smash::lua2cpp::L2CFighterCommon;
 use smash::phx::Vector2f;
+use bitflags::bitflags;
 use skyline::{
     c_str,
     from_c_str,
@@ -96,6 +97,10 @@ pub unsafe fn is_enable_transition_term_hook(module_accessor: &mut smash::app::B
     } else {
         original!()(module_accessor, flag)
     }
+}
+
+pub fn compare_mask(mask1: i32, mask2: i32) -> bool {
+    return (mask1 & mask2) != 0;
 }
 
 #[skyline::from_offset(crate::offsets::get_battle_object_from_id())]
@@ -289,6 +294,7 @@ pub unsafe fn enable_gravity(module_accessor: *mut BattleObjectModuleAccessor){
 
 //BomaExt, helps with various things
 pub trait BomaExt {
+    unsafe fn is_cat_flag<T: Into<CommandCat>>(&mut self, fighter_pad_cmd_flag: T) -> bool;
     unsafe fn is_fighter(&mut self) -> bool;
     unsafe fn is_status_one_of(&mut self, kinds: &[i32]) -> bool;
     unsafe fn is_weapon(&mut self) -> bool;
@@ -299,6 +305,13 @@ pub trait BomaExt {
 }
 
 impl BomaExt for BattleObjectModuleAccessor {
+    unsafe fn is_cat_flag<T: Into<CommandCat>>(&mut self, fighter_pad_cmd_flag: T) -> bool {
+        let cat = fighter_pad_cmd_flag.into();
+        match cat {
+            CommandCat::Cat1(cat) => Cat1::new(self).intersects(cat),
+            CommandCat::Cat4(cat) => Cat4::new(self).intersects(cat)
+        }
+    }
     unsafe fn is_fighter(&mut self) -> bool {
         return smash::app::utility::get_category(self) == *BATTLE_OBJECT_CATEGORY_FIGHTER;
     }
@@ -467,6 +480,191 @@ impl FuseType {
     pub const NORMAL: i32 = 0;
     pub const POWER: i32 = 1;
     pub const ELEMENTAL: i32 = 2;
+}
+
+bitflags! {
+    pub struct Cat1: i32 {
+        const AttackN       = 0x1;
+        const AttackS3      = 0x2;
+        const AttackHi3     = 0x4;
+        const AttackLw3     = 0x8;
+        const AttackS4      = 0x10;
+        const AttackHi4     = 0x20;
+        const AttackLw4     = 0x40;
+        const AttackAirN    = 0x80;
+        const AttackAirF    = 0x100;
+        const AttackAirB    = 0x200;
+        const AttackAirHi   = 0x400;
+        const AttackAirLw   = 0x800;
+        const SpecialN      = 0x1000;
+        const SpecialS      = 0x2000;
+        const SpecialHi     = 0x4000;
+        const SpecialLw     = 0x8000;
+        const SpecialAny    = 0xF000;
+        const Walk          = 0x10000;
+        const Dash          = 0x20000;
+        const Turn          = 0x40000;
+        const TurnDash      = 0x80000;
+        const Jump          = 0x100000;
+        const JumpButton    = 0x200000;
+        const AirEscape     = 0x400000;
+        const Squat         = 0x800000;
+        const Escape        = 0x1000000;
+        const EscapeF       = 0x2000000;
+        const EscapeB       = 0x4000000;
+        const WallJumpLeft  = 0x8000000;
+        const WallJumpRight = 0x10000000;
+        const Catch         = 0x20000000;
+        const NoCmd         = 0x40000000;
+    }
+    pub struct Cat2: i32 {
+        const AppealSL            = 0x1;
+        const AppealSR            = 0x2;
+        const AppealHi            = 0x4;
+        const AppealLw            = 0x8;
+        const AppealSmash         = 0x10;
+        const AppealAll           = 0x1F;
+        const AttackDashAttackHi4 = 0x20;
+        const FallJump            = 0x40;
+        const DashAttackS4        = 0x80;
+        const DamageFallToFall    = 0x100;
+        const DownToDownStandFB   = 0x200;
+        const DownToDownStand     = 0x400;
+        const GuardToPass         = 0x800;
+        const SquatToSquatF       = 0x1000;
+        const SquatToSquatB       = 0x2000;
+        const TurnToEscapeF       = 0x4000;
+        const TurnToEscapeB       = 0x8000;
+        const StickEscapeF        = 0x10000;
+        const StickEscapeB        = 0x20000;
+        const StickEscape         = 0x40000;
+        const SpecialNReverseLR   = 0x80000;
+        const ThrowF              = 0x100000;
+        const ThrowB              = 0x200000;
+        const ThrowHi             = 0x400000;
+        const ThrowLw             = 0x800000;
+        const CommonGuard         = 0x1000000;
+        const AirLasso            = 0x2000000;
+        const AttackN2            = 0x4000000;
+        const FinalReverseLR      = 0x8000000;
+    }
+    pub struct Cat3: i32 {
+        const ItemLightThrowFB4    = 0x1;
+        const ItemLightThrowHi4    = 0x2;
+        const ItemLightThrowLw4    = 0x4;
+        const ItemLightThrowHi     = 0x8;
+        const ItemLightThrowLw     = 0x10;
+        const ItemLightDrop        = 0x20;
+        const ItemLightThrowFB     = 0x40;
+        const ItemLightThrowAirFB  = 0x80;
+        const ItemLightThrowAirFB4 = 0x100;
+        const ItemLightThrowAirHi  = 0x200;
+        const ItemLightThrowAirHi4 = 0x400;
+        const ItemLightThrowAirLw  = 0x800;
+        const ItemLightThrowAirLw4 = 0x1000;
+        const ItemLightDropAir     = 0x2000;
+        const ItemHeavyThrowFB     = 0x4000;
+        const ItemGetAir           = 0x8000;
+        const SpecialSSmash        = 0x10000;
+        const SpecialSSmashDash    = 0x20000;
+
+        const ItemLightThrow       = 0x58;
+        const ItemLightThrowAir    = 0xA80;
+        const ItemLightThrow4      = 0x7;
+        const ItemLightThrow4Air   = 0x1500;
+        const ItemLightThrowAll    = 0x5F;
+        const ItemLightThrowAirAll = 0x1F80;
+    }
+    pub struct Cat4: i32 {
+        const SpecialNCommand       = 0x1;
+        const SpecialN2Command      = 0x2;
+        const SpecialSCommand       = 0x4;
+        const SpecialHiCommand      = 0x8;
+        const Command6N6            = 0x10;
+        const Command4N4            = 0x20;
+        const AttackCommand1        = 0x40;
+        const SpecialHi2Command     = 0x80;
+        const SuperSpecialCommand   = 0x100;
+        const SuperSpecialRCommand  = 0x200;
+        const SuperSpecial2Command  = 0x400;
+        const SuperSpecial2RCommand = 0x800;
+        const Command623NB          = 0x1000;
+        const Command623Strict      = 0x2000;
+        const Command623ALong       = 0x4000;
+        const Command623BLong       = 0x8000;
+        const Command623A           = 0x10000;
+        const Command2              = 0x20000;
+        const Command3              = 0x40000;
+        const Command1              = 0x80000;
+        const Command6              = 0x100000;
+        const Command4              = 0x200000;
+        const Command8              = 0x400000;
+        const Command9              = 0x800000;
+        const Command7              = 0x1000000;
+        const Command6N6AB          = 0x2000000;
+        const Command323Catch       = 0x4000000;
+    }
+    pub struct Buttons: i32 {
+        const Attack      = 0x1;
+        const Special     = 0x2;
+        const Jump        = 0x4;
+        const Guard       = 0x8;
+        const Catch       = 0x10;
+        const Smash       = 0x20;
+        const JumpMini    = 0x40;
+        const CStickOn    = 0x80;
+        const StockShare  = 0x100;
+        const AttackRaw   = 0x200;
+        const AppealHi    = 0x400;
+        const SpecialRaw  = 0x800;
+        const AppealLw    = 0x1000;
+        const AppealSL    = 0x2000;
+        const AppealSR    = 0x4000;
+        const FlickJump   = 0x8000;
+        const GuardHold   = 0x10000;
+        const SpecialRaw2 = 0x20000;
+        // We leave a blank at 0x4000 because the internal control mapping will map 1 << InputKind to the button bitfield, and so our shorthop button
+        // would get mapped to FullHop (issue #776)
+        const FullHop  = 0x80000;
+        const CStickOverride = 0x100000;
+        const SpecialAll  = 0x20802;
+        const AttackAll   = 0x201;
+        const AppealAll   = 0x7400;
+    }
+}
+
+#[derive(Copy, Clone)]
+pub enum CommandCat {
+    Cat1(Cat1),
+    Cat4(Cat4)
+}
+
+impl Into<CommandCat> for Cat1 {
+    fn into(self) -> CommandCat {
+        CommandCat::Cat1(self)
+    }
+}
+
+impl Into<CommandCat> for Cat4 {
+    fn into(self) -> CommandCat {
+        CommandCat::Cat4(self)
+    }
+}
+
+impl Cat1 {
+    pub fn new(boma: *mut BattleObjectModuleAccessor) -> Self {
+        unsafe {
+            Cat1::from_bits_unchecked(ControlModule::get_command_flag_cat(boma, 0))
+        }
+    }
+}
+
+impl Cat4 {
+    pub fn new(boma: *mut BattleObjectModuleAccessor) -> Self {
+        unsafe { 
+            Cat4::from_bits_unchecked(ControlModule::get_command_flag_cat(boma, 3)) 
+        }
+    }
 }
 
 pub fn install() {

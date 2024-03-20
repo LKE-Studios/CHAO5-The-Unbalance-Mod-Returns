@@ -23,7 +23,7 @@ unsafe extern "C" fn status_ganon_SpecialS_Main(fighter: &mut L2CFighterCommon) 
         fighter.set_situation(SITUATION_KIND_GROUND.into());
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
     }
-    fighter.sub_shift_status_main(L2CValue::Ptr(ganon_SpecialS_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(ganon_SpecialS_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn ganon_SpecialS_Sub_Status(fighter: &mut L2CFighterCommon, param_1: L2CValue) -> L2CValue {
@@ -38,7 +38,7 @@ unsafe extern "C" fn ganon_SpecialS_Sub_Status(fighter: &mut L2CFighterCommon, p
     0.into()
 }
 
-unsafe extern "C" fn ganon_SpecialS_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn ganon_SpecialS_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     let mut int_val: i32 = 0;
     if !fighter.sub_transition_group_check_air_cliff().get_bool() {

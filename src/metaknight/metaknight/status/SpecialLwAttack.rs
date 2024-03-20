@@ -85,10 +85,10 @@ unsafe extern "C" fn status_metaknight_SpecialLwAttack_Main(fighter: &mut L2CFig
         ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_METAKNIGHT_GENERATE_ARTICLE_MANTLE, Hash40::new_raw(mantle_mot_kind), true, -1.0);
         MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new_raw(mot_kind), -1.0, 1.0, 0.0, false, false);
     }
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialLwAttack_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialLwAttack_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn metaknight_SpecialLwAttack_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialLwAttack_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if CancelModule::is_enable_cancel(fighter.module_accessor) {

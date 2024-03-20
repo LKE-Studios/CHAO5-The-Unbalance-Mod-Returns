@@ -722,8 +722,8 @@ unsafe extern "C" fn game_falco_SpecialNStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, false, -1);
     }
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
-        if is_excute(fighter) {
+    if is_excute(fighter) {
+        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40::new("open"), false, -1.0);
         }
     }
@@ -739,8 +739,8 @@ unsafe extern "C" fn game_falco_SpecialNLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
-        if is_excute(fighter) {
+    if is_excute(fighter) {
+        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40::new("loop"), false, -1.0);
         }
     }
@@ -759,8 +759,8 @@ unsafe extern "C" fn game_falco_SpecialAirNStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, false, -1);
     }
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
-        if is_excute(fighter) {
+    if is_excute(fighter) {
+        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40::new("open"), false, -1.0);
         }
     }
@@ -776,8 +776,8 @@ unsafe extern "C" fn game_falco_SpecialAirNLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER_BULLET, false, -1);
     }
-    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
-        if is_excute(fighter) {
+    if is_excute(fighter) {
+        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_FALCO_GENERATE_ARTICLE_BLASTER, Hash40::new("loop"), false, -1.0);
         }
     }

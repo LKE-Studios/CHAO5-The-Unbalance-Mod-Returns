@@ -125,6 +125,7 @@ unsafe extern "C" fn effect_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
             LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.1, /*B*/ 2.2);
             EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, false);
             LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.1, /*B*/ 2.2);
+            EFFECT_FOLLOW(fighter, Hash40::new("pit_feather"), Hash40::new("top"), 0, 15, 0, 0, 0, 0, 1, false);
         }
         frame(fighter.lua_state_agent, 40.0);
         if is_excute(fighter) {

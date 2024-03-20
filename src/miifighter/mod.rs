@@ -1,7 +1,7 @@
-mod game;
-mod frame;
+mod miifighter;
+mod miifighter_ironball;
 
 pub fn install() {
-    game::install();   
-    frame::install(); 
+    miifighter::install();
+    miifighter_ironball::install();
 }
