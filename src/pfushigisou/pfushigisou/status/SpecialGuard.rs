@@ -1,8 +1,6 @@
 use crate::imports::BuildImports::*;
 
 pub static mut PFUSHIGISOU_SOLAR_BEAM_TIMER : [i32; 8] = [0; 8];
-pub static SOLAR_BEAM_MAX_CHARGE : i32 = 240;
-pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuard_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FALL, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
@@ -22,11 +20,11 @@ pub unsafe extern "C" fn status_pfushigisou_SpecialGuard_Main(fighter: &mut L2CF
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_z_start"), 0.0, 1.0, false, 0.0, false, false);
     }
-    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
     fighter.sub_shift_status_main(L2CValue::Ptr(pfushigisou_SpecialGuard_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn pfushigisou_SpecialGuard_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
         return 1.into();
     }
@@ -35,6 +33,7 @@ unsafe extern "C" fn pfushigisou_SpecialGuard_Main_loop(fighter: &mut L2CFighter
     }
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            SoundModule::play_landing_se(fighter.module_accessor, Hash40::new("se_pfushigisou_landing01"));
             StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
@@ -57,15 +56,14 @@ unsafe extern "C" fn pfushigisou_SpecialGuard_Main_loop(fighter: &mut L2CFighter
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_z_charge"), 0.0, 1.0, false, 0.0, false, false);
         }
     }     
-    let charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
     let charge_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_frame"));
-    WorkModule::inc_int(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
-    if charge >= charge_frame {
+    PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] += 1;
+    if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] >= charge_frame {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT.into(), false.into());
         }
     }
-    if charge == charge_frame {
+    if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] == charge_frame {
         gimmick_flash(fighter);
         SoundModule::play_se(fighter.module_accessor, Hash40::new("se_pfushigisou_appeal_l03"), true, false, false, false, enSEType(0));
         SoundModule::play_se(fighter.module_accessor, Hash40::new("se_pfushigisou_special_n01"), true, false, false, false, enSEType(0));
@@ -124,6 +122,7 @@ unsafe extern "C" fn status_pfushigisou_SpecialGuard_Exec(fighter: &mut L2CFight
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuard_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_pfushigisou_special_n01"), 0);
+    SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_pfushigisou_recovery"), 0);
     0.into()
 }
 

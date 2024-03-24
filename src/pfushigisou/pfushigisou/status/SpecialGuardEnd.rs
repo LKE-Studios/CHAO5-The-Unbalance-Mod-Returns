@@ -36,6 +36,7 @@ unsafe extern "C" fn pfushigisou_SpecialGuardEnd_Main_loop(fighter: &mut L2CFigh
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+            SoundModule::play_landing_se(fighter.module_accessor, Hash40::new("se_pfushigisou_landing01"));
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_z_end"), -1.0, 1.0, 0.0, false, false);
         }
     }

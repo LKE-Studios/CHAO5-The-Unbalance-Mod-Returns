@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::pfushigisou::pfushigisou::status::SpecialGuard::*;
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
@@ -34,6 +35,7 @@ unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFi
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            SoundModule::play_landing_se(fighter.module_accessor, Hash40::new("se_pfushigisou_landing01"));
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_z_shoot"), -1.0, 1.0, 0.0, false, false);
             KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         }
@@ -50,6 +52,8 @@ unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFi
 }
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
     WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("finptrainer_solar_beam"), false, false);
     0.into()

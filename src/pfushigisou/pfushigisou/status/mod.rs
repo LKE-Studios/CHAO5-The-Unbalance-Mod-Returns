@@ -1,4 +1,4 @@
-mod SpecialGuard;
+pub mod SpecialGuard;
 mod SpecialGuardShoot;
 mod SpecialGuardEnd;
 

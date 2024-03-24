@@ -29,11 +29,11 @@ unsafe extern "C" fn sound_pfushigisou_SpecialZCharge(fighter: &mut L2CAgentBase
         }
         wait(fighter.lua_state_agent, 15.0);
     }
-    frame(fighter.lua_state_agent, 40.0);
+    frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
-    frame(fighter.lua_state_agent, 80.0);
+    frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
@@ -89,11 +89,11 @@ unsafe extern "C" fn sound_pfushigisou_SpecialAirZCharge(fighter: &mut L2CAgentB
         }
         wait(fighter.lua_state_agent, 15.0);
     }
-    frame(fighter.lua_state_agent, 40.0);
+    frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
-    frame(fighter.lua_state_agent, 80.0);
+    frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
