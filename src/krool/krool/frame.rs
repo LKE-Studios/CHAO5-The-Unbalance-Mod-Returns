@@ -6,7 +6,6 @@ pub unsafe extern "C" fn frame_krool_Main(fighter : &mut L2CFighterCommon) {
     if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KROOL_STATUS_KIND_SPECIAL_S_GET, *FIGHTER_KROOL_STATUS_KIND_SPECIAL_S_CATCH,
     *FIGHTER_KROOL_STATUS_KIND_SPECIAL_S_THROW, *FIGHTER_KROOL_STATUS_KIND_SPECIAL_S_FAILURE, *FIGHTER_KROOL_STATUS_KIND_SPECIAL_HI_FALL,
     *FIGHTER_KROOL_STATUS_KIND_SPECIAL_HI_AIR_END,].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

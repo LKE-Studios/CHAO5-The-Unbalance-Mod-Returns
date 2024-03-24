@@ -15,7 +15,6 @@ pub unsafe extern "C" fn frame_lucas_Main(fighter: &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_N_HOLD,
         *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_N_END, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_END,
         *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_LW_HOLD, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) {
-            WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
             if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
                 fighter.sub_air_check_dive();
                 if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

@@ -45,7 +45,6 @@ unsafe extern "C" fn frame_miifighter_Main(fighter: &mut L2CFighterCommon) {
         *FIGHTER_WAZA_CUSTOMIZE_TO_SPECIAL_HI_3,
         *FIGHTER_WAZA_CUSTOMIZE_TO_SPECIAL_LW_3].contains(&CUSTOMIZE_TO)) 
     && [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_N3_TURN, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_S3_THROW,].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

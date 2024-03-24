@@ -1,8 +1,5 @@
 use crate::imports::BuildImports::*;
 
-pub static mut MARIO_GIANT_FIREBALL : [bool; 8] = [false; 8];
-pub static mut HOLD_TIME : [f32; 8] = [0.0; 8];
-
 unsafe extern "C" fn frame_mario_Main(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
@@ -33,6 +30,26 @@ unsafe extern "C" fn frame_mario_Main(fighter: &mut L2CFighterCommon) {
     }
     else {
         WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPECIAL_BUTTON_ON_FRAME)
+    }
+    if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
+        if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
+            fighter.sub_air_check_dive();
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
+                if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR || 
+                KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR_ANGLE {
+                    fighter.clear_lua_stack();
+                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION);
+                    let speed_y = sv_kinetic_energy::get_speed_y(fighter.lua_state_agent);
+                    fighter.clear_lua_stack();
+                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
+                    sv_kinetic_energy::reset_energy(fighter.lua_state_agent);
+                    fighter.clear_lua_stack();
+                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+                    sv_kinetic_energy::enable(fighter.lua_state_agent);
+                    KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+                }
+            }
+        }
     }
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 9 {//Ice Mario Costume c09
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);

@@ -6,7 +6,6 @@ unsafe extern "C" fn frame_lucario_Main(fighter: &mut L2CFighterCommon) {
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_N_HOLD,
     *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_N_CANCEL, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_N_MAX,
     *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH_END, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

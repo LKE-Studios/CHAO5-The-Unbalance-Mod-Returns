@@ -8,7 +8,6 @@ pub unsafe extern "C" fn frame_master_Main(fighter : &mut L2CFighterCommon) {
     *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_CANCEL, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_MAX_SHOOT, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_S_FRONT,
     *FIGHTER_MASTER_STATUS_KIND_SPECIAL_S_FRONT_DASH, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_HI_WALL_JUMP, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_TURN,
     *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_LW_CANCEL].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

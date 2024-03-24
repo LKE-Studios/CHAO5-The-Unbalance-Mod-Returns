@@ -4,8 +4,8 @@ pub unsafe extern "C" fn frame_kirby_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_N_SWALLOW {
-        DamageModule::heal(fighter.module_accessor, -15.0, 0);
+    if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_N_DRINK {
+        DamageModule::heal(fighter.module_accessor, -1.1, 0);
     }
     if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 && frame <= 2.0 {
         fighter.set_situation(SITUATION_KIND_AIR.into());

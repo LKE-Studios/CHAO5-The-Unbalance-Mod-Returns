@@ -21,7 +21,6 @@ pub unsafe extern "C" fn frame_koopajr_Main(fighter : &mut L2CFighterCommon) {
     *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_S_JUMP, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_S_HIT_WALL,
     *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_S_SPIN_TURN, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_HI_SHOOT, *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_HI_FALL,
     *FIGHTER_KOOPAJR_STATUS_KIND_SPECIAL_HI_ATTACK].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

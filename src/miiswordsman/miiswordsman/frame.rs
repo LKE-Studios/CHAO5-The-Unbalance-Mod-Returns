@@ -41,7 +41,6 @@ pub unsafe extern "C" fn frame_miiswordsman_Main(fighter : &mut L2CFighterCommon
     && [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_N3_END,
         *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_N3_END_MAX].contains(&status_kind) 
     || (motion_kind == hash40("special_air_hi3") && frame > 49.0) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

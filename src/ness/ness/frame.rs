@@ -5,7 +5,7 @@ unsafe extern "C" fn frame_ness_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if status_kind == *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD {
         let lr = PostureModule::lr(fighter.module_accessor);
-        let stick_x = ControlModule::stick_x(fighter.module_accessor);
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
         if stick_x * lr < 0.0 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             PostureModule::reverse_lr(fighter.module_accessor);
             PostureModule::update_rot_y_lr(fighter.module_accessor);
@@ -21,7 +21,6 @@ unsafe extern "C" fn frame_ness_Main(fighter: &mut L2CFighterCommon) {
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_END,
     *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END,
     *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

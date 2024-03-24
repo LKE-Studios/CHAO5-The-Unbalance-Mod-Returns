@@ -52,7 +52,6 @@ unsafe extern "C" fn frame_popo_Main(fighter: &mut L2CFighterCommon) {
     }
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_POPO_STATUS_KIND_SPECIAL_HI_FAIL,
     *FIGHTER_POPO_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_POPO_STATUS_KIND_SPECIAL_HI_JUMP_PARTNER].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

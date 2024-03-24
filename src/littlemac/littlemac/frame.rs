@@ -6,7 +6,6 @@ pub unsafe extern "C" fn frame_littlemac_Main(fighter : &mut L2CFighterCommon) {
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_LITTLEMAC_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_S);
     if [*FIGHTER_LITTLEMAC_STATUS_KIND_SPECIAL_N2, *FIGHTER_LITTLEMAC_STATUS_KIND_SPECIAL_S_BLOW_END,
     *FIGHTER_LITTLEMAC_STATUS_KIND_SPECIAL_S_JUMP_END, *FIGHTER_LITTLEMAC_STATUS_KIND_SPECIAL_HI_JUMP].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

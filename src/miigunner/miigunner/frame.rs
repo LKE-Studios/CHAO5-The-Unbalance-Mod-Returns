@@ -25,7 +25,6 @@ pub unsafe extern "C" fn frame_miigunner_Main(fighter : &mut L2CFighterCommon) {
     && [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END,
         *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_S3_1_AIR, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_S3_2_AIR, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_HI3_RUSH_END,
         *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW3_END, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW3_HIT, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW3_HOLD].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

@@ -8,7 +8,6 @@ pub unsafe extern "C" fn frame_marth_Main(fighter : &mut L2CFighterCommon) {
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI,
     *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_MARTH_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_MARTH_STATUS_KIND_SPECIAL_N_END,
     *FIGHTER_MARTH_STATUS_KIND_SPECIAL_N_END_MAX].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

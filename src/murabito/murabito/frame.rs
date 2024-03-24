@@ -8,7 +8,6 @@ pub unsafe extern "C" fn frame_murabito_Main(fighter : &mut L2CFighterCommon) {
     *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_FAILURE, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_TAKE_OUT, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, 
     *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_FALL, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH,
     *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_AIR, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_PLANT_FAIL, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

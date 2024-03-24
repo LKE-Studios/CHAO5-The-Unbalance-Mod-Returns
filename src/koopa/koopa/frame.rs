@@ -4,7 +4,6 @@ pub unsafe extern "C" fn frame_koopa_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KOOPA_STATUS_KIND_SPECIAL_HI_A].contains(&status_kind) {
-        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

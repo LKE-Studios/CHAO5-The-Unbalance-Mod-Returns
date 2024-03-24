@@ -181,12 +181,12 @@ mod miiswordsman;
 mod murabito;
 mod nana;
 mod ness;
-/*mod packun;
+mod packun;
 mod pacman;
 mod palutena;
 mod peach;
 mod pfushigisou;
-mod pichu;
+/*mod pichu;
 mod pickel;
 mod pikachu;*/
 mod pikmin;
@@ -396,7 +396,7 @@ pub fn main() {
     /*zelda::install();
     sheik::install();*/
     falco::install();
-    //peach::install();
+    peach::install();
     popo::install();
     nana::install();
     //younglink::install();
@@ -407,9 +407,9 @@ pub fn main() {
     pit::install();
     //wario::install();
     diddy::install();
-    /*ptrainer::install();
-    pzenigame::install();
-    pfushigisou::install();*/
+    //ptrainer::install();
+    //pzenigame::install();
+    pfushigisou::install();
     plizardon::install();
     dedede::install();
     lucas::install();
@@ -423,10 +423,10 @@ pub fn main() {
     //toonlink::install();
     pikmin::install();
     littlemac::install();
-    /*shulk::install();
+    //shulk::install();
     palutena::install();
-    rockman::install();
-    ryu::install();*/
+    //rockman::install();
+    //ryu::install();
     miifighter::install();
     miiswordsman::install();
     miigunner::install();
@@ -435,7 +435,7 @@ pub fn main() {
     //reflet::install();
     gekkouga::install();
     //pitb::install();
-    //pacman::install();
+    pacman::install();
     murabito::install();
     //rosetta::install();
     //wiifit::install();
@@ -446,7 +446,7 @@ pub fn main() {
     //ridley::install();
     krool::install();
     gaogaen::install();
-    //packun::install();
+    packun::install();
     ken::install();
     inkling::install();
     /*simon::install();

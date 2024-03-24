@@ -1,15 +1,10 @@
-mod game;
-mod effect;
-mod sound;
-mod expression;
-pub mod status;
-mod frame;
+mod pfushigisou;
+mod pfushigisou_seed;
+mod pfushigisou_leafcutter;
 
 pub fn install() {
-    game::install();
-    effect::install(); 
-    sound::install();
-    expression::install();
-    status::install();
-    frame::install();   
+    pfushigisou::install(); 
+    pfushigisou_seed::install(); 
+    pfushigisou_leafcutter::install(); 
+    smashline::add_param_object("pfushigisou", "param_special_guard");
 }
