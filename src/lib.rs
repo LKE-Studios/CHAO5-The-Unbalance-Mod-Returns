@@ -186,9 +186,9 @@ mod pacman;
 mod palutena;
 mod peach;
 mod pfushigisou;
-/*mod pichu;
-mod pickel;
-mod pikachu;*/
+mod pichu;
+//mod pickel;
+//mod pikachu;
 mod pikmin;
 mod pit;
 //mod pitb;
@@ -401,7 +401,7 @@ pub fn main() {
     nana::install();
     //younglink::install();
     mewtwo::install();
-    //pichu::install();
+    pichu::install();
     //roy::install();
     metaknight::install();
     pit::install();
