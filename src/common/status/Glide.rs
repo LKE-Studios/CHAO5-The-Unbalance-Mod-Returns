@@ -227,9 +227,6 @@ pub unsafe fn fighter_glide_specifics_function(fighter: &mut L2CFighterCommon) {
     if kind == *FIGHTER_KIND_TRAIL {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_trail_glide_loop"), 1.1 + angle * -0.0071);
     }
-    if kind == *FIGHTER_KIND_PALUTENA {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * -0.0043);
-    }
 }
 
 pub unsafe extern "C" fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {

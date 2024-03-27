@@ -187,7 +187,7 @@ mod palutena;
 mod peach;
 mod pfushigisou;
 mod pichu;
-//mod pickel;
+mod pickel;
 //mod pikachu;
 mod pikmin;
 mod pit;
@@ -461,7 +461,7 @@ pub fn main() {
     brave::install();
     demon::install();
     master::install();
-    //pickel::install();
+    pickel::install();
     eflame::install();
     elight::install();
     buddy::install();

@@ -15,6 +15,11 @@ unsafe extern "C" fn frame_palutena_Main(fighter: &mut L2CFighterCommon) {
     ].contains(&status_kind) { 
         STOP_SE(fighter, Hash40::new("se_palutena_glide_loop"));
     };
+    if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
+        let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
+        let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
+        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
+    }
     //Protected Goddess Mechanic
     FighterSpecializer_Palutena::goddess_power_up(fighter);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_PALUTENA_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) {
