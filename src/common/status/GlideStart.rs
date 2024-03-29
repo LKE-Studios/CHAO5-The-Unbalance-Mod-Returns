@@ -25,10 +25,10 @@ pub unsafe extern "C" fn status_GlideStart_Main(fighter: &mut L2CFighterCommon) 
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_start"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(GlideStart_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideStart_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn GlideStart_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn GlideStart_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }

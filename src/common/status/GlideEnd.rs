@@ -22,10 +22,10 @@ pub unsafe extern "C" fn status_GlideEnd_Main(fighter: &mut L2CFighterCommon) ->
         fighter.sub_fall_common_uniq(false.into());
     }
     fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(L2CFighterCommon_bind_address_call_sub_fall_common_uniq as *const () as _));
-    fighter.sub_shift_status_main(L2CValue::Ptr(GlideEnd_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideEnd_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn GlideEnd_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn GlideEnd_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }

@@ -5,7 +5,7 @@ use crate::imports::BuildImports::*;
     script = "effect_guardspecial", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     let lr = PostureModule::lr(fighter.module_accessor);
     if is_excute(fighter) {
         COL_NORMAL(fighter);
@@ -64,7 +64,7 @@ unsafe fn effect_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     script = "effect_escapeairspecial", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn effect_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
     let lr = PostureModule::lr(fighter.module_accessor);
     if is_excute(fighter) {
         COL_NORMAL(fighter);

@@ -188,15 +188,15 @@ mod peach;
 mod pfushigisou;
 mod pichu;
 mod pickel;
-//mod pikachu;
+mod pikachu;
 mod pikmin;
 mod pit;
-//mod pitb;
+mod pitb;
 mod plizardon;
 mod popo;
-/*mod purin;
 mod ptrainer;
-mod pzenigame;
+mod purin;
+/*mod pzenigame;
 mod reflet;
 mod richter;
 mod ridley;
@@ -382,12 +382,12 @@ pub fn main() {
     /*samus::install();
     yoshi::install();*/
     kirby::install();
-    //pikachu::install();
+    pikachu::install();
     fox::install();
     luigi::install();
     ness::install();
     captain::install();
-    //purin::install();
+    purin::install();
     koopa::install();
     marth::install();
     ganon::install();
@@ -407,7 +407,7 @@ pub fn main() {
     pit::install();
     //wario::install();
     diddy::install();
-    //ptrainer::install();
+    ptrainer::install();
     //pzenigame::install();
     pfushigisou::install();
     plizardon::install();
@@ -434,7 +434,7 @@ pub fn main() {
     bayonetta::install();
     //reflet::install();
     gekkouga::install();
-    //pitb::install();
+    pitb::install();
     pacman::install();
     murabito::install();
     //rosetta::install();
@@ -455,7 +455,7 @@ pub fn main() {
     /*samusd::install();
     richter::install();*/
     chrom::install();
-    //dolly::install();
+    dolly::install();
     jack::install();
     edge::install();
     brave::install();

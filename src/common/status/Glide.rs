@@ -27,10 +27,10 @@ pub unsafe extern "C" fn status_Glide_Main(fighter: &mut L2CFighterCommon) -> L2
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_direction"), 90.0, 0.0, true, 0.0, false, false);
     MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, Hash40::new("glide_wing"), 0.0, 1.0, true, false, 0.0, false, true, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(Glide_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(Glide_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn Glide_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn Glide_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }
@@ -221,9 +221,6 @@ pub unsafe fn fighter_glide_specifics_function(fighter: &mut L2CFighterCommon) {
     let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
     let se_volume_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("se_volume_max"));
     let kind = fighter.global_table[FIGHTER_KIND].get_i32();
-    if kind == *FIGHTER_KIND_PITB {
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
-    }
     if kind == *FIGHTER_KIND_TRAIL {
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_trail_glide_loop"), 1.1 + angle * -0.0071);
     }

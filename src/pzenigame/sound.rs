@@ -5,7 +5,7 @@ use crate::imports::BuildImports::*;
     script = "sound_guardspecial", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn sound_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SEQUENCE(fighter, Hash40::new("seq_pzenigame_rnd_attack"));
@@ -21,7 +21,7 @@ unsafe fn sound_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     script = "sound_escapeairspecial", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn sound_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SEQUENCE(fighter, Hash40::new("seq_pzenigame_rnd_attack"));

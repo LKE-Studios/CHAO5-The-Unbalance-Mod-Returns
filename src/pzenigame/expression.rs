@@ -5,7 +5,7 @@ use crate::imports::BuildImports::*;
     script = "expression_guardspecial", 
     category = ACMD_EXPRESSION, 
     low_priority )]
-unsafe fn expression_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -25,7 +25,7 @@ unsafe fn expression_pzenigame_guardspecial(fighter: &mut L2CAgentBase) {
     script = "expression_escapeairspecial", 
     category = ACMD_EXPRESSION, 
     low_priority )]
-unsafe fn expression_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_pzenigame_escapeairspecial(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);

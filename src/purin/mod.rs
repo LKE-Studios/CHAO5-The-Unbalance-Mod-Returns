@@ -1,11 +1,5 @@
-mod game;
-mod effect;
-mod status;
-mod frame;
+mod purin;
 
 pub fn install() {
-    game::install();
-    effect::install(); 
-    status::install(); 
-    frame::install();
+    purin::install();
 }

@@ -14,10 +14,10 @@ pub unsafe extern "C" fn status_GlideLanding_Main(fighter: &mut L2CFighterCommon
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("glide_landing"), 0.0, 1.0, false, 0.0, false, false);
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_WAIT);
     }
-    fighter.sub_shift_status_main(L2CValue::Ptr(GlideLanding_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(GlideLanding_Main_loop as *const () as _))
 }
 
-unsafe extern "C" fn GlideLanding_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn GlideLanding_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_AIR {
         if !MotionModule::is_anim_resource(fighter.module_accessor, Hash40::new("glide_landing")) {
             if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_STAND)
