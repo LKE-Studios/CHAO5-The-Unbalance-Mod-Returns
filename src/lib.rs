@@ -196,12 +196,12 @@ mod plizardon;
 mod popo;
 mod ptrainer;
 mod purin;
-/*mod pzenigame;
+mod pzenigame;
 mod reflet;
 mod richter;
 mod ridley;
 mod robot;
-mod rockman;
+/*mod rockman;
 mod rosetta;
 mod roy;
 mod ryu;
@@ -379,8 +379,8 @@ pub fn main() {
     mario::install();
     donkey::install();
     link::install();
-    /*samus::install();
-    yoshi::install();*/
+    //samus::install();
+    //yoshi::install();
     kirby::install();
     pikachu::install();
     fox::install();
@@ -393,8 +393,8 @@ pub fn main() {
     ganon::install();
     gamewatch::install();
     mariod::install();
-    /*zelda::install();
-    sheik::install();*/
+    //zelda::install();
+    //sheik::install();
     falco::install();
     peach::install();
     popo::install();
@@ -408,7 +408,7 @@ pub fn main() {
     //wario::install();
     diddy::install();
     ptrainer::install();
-    //pzenigame::install();
+    pzenigame::install();
     pfushigisou::install();
     plizardon::install();
     dedede::install();
@@ -417,8 +417,8 @@ pub fn main() {
     /*sonic::install();
     snake::install();
     wolf::install();
-    szerosuit::install();
-    robot::install();*/
+    szerosuit::install();*/
+    robot::install();
     ike::install();
     //toonlink::install();
     pikmin::install();
@@ -432,7 +432,7 @@ pub fn main() {
     miigunner::install();
     cloud::install();
     bayonetta::install();
-    //reflet::install();
+    reflet::install();
     gekkouga::install();
     pitb::install();
     pacman::install();
@@ -443,17 +443,17 @@ pub fn main() {
     koopajr::install();
     lucina::install();
     kamui::install();
-    //ridley::install();
+    ridley::install();
     krool::install();
     gaogaen::install();
     packun::install();
     ken::install();
     inkling::install();
-    /*simon::install();
-    shizue::install();*/
+    //simon::install();
+    //shizue::install();
     daisy::install();
-    /*samusd::install();
-    richter::install();*/
+    //samusd::install();
+    richter::install();
     chrom::install();
     dolly::install();
     jack::install();
@@ -465,12 +465,12 @@ pub fn main() {
     eflame::install();
     elight::install();
     buddy::install();
-    /*trail::install();
-    tantan::install();*/
+    //trail::install();
+    //tantan::install();
     claus::install();
     koopag::install();
-    /*silver::install();
-    waluigi::install();*/
+    //silver::install();
+    //waluigi::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

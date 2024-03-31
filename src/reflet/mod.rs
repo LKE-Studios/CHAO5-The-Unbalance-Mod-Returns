@@ -1,7 +1,11 @@
-mod game;
-mod frame;
+mod reflet;
+mod reflet_thunder;
+mod reflet_gigafire;
+mod reflet_elwind;
 
 pub fn install() {
-    game::install();    
-    frame::install();
+    reflet::install();
+    reflet_thunder::install();
+    reflet_gigafire::install();
+    reflet_elwind::install();
 }

@@ -187,7 +187,7 @@ unsafe extern "C" fn game_brave_AttackS4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_PLAY_MISS_SE);
         let battle_object = sv_system::battle_object(fighter.lua_state_agent);
-        FighterSpecializer_Brave::lot_critical(battle_object as *const smash::app::BattleObject as *mut Fighter);
+        FighterSpecializer_Brave::lot_critical(battle_object as *const BattleObject as *mut Fighter);
     }
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_CRITICAL_HIT) {
         if is_excute(fighter) {
@@ -223,7 +223,7 @@ unsafe extern "C" fn game_brave_AttackHi4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_PLAY_MISS_SE);
         let battle_object = sv_system::battle_object(fighter.lua_state_agent);
-        FighterSpecializer_Brave::lot_critical(battle_object as *const smash::app::BattleObject as *mut Fighter);
+        FighterSpecializer_Brave::lot_critical(battle_object as *const BattleObject as *mut Fighter);
     }
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_CRITICAL_HIT) {
         if is_excute(fighter) {
@@ -255,7 +255,7 @@ unsafe extern "C" fn game_brave_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_PLAY_MISS_SE);
         let battle_object = sv_system::battle_object(fighter.lua_state_agent);
-        FighterSpecializer_Brave::lot_critical(battle_object as *const smash::app::BattleObject as *mut Fighter);
+        FighterSpecializer_Brave::lot_critical(battle_object as *const BattleObject as *mut Fighter);
     }
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_BRAVE_INSTANCE_WORK_ID_FLAG_CRITICAL_HIT) {
         if is_excute(fighter) {
@@ -301,7 +301,7 @@ unsafe extern "C" fn game_brave_AttackLw4(fighter: &mut L2CAgentBase) {
 //AttackAirN
 unsafe extern "C" fn game_brave_AttackAirN(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
@@ -402,7 +402,7 @@ unsafe extern "C" fn game_brave_AttackAirHi(fighter: &mut L2CAgentBase) {
 //AttackAirLw
 unsafe extern "C" fn game_brave_AttackAirLw(fighter: &mut L2CAgentBase) {
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
     if is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 3.0, 3.0, 7.0, 3.0);
@@ -966,9 +966,9 @@ unsafe extern "C" fn game_brave_SpecialAirS32(fighter: &mut L2CAgentBase) {
 //SpecialHi1
 unsafe extern "C" fn game_brave_SpecialHi1(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -991,9 +991,9 @@ unsafe extern "C" fn game_brave_SpecialHi1(fighter: &mut L2CAgentBase) {
 //SpecialAirHi1
 unsafe extern "C" fn game_brave_SpecialAirHi1(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -1016,9 +1016,9 @@ unsafe extern "C" fn game_brave_SpecialAirHi1(fighter: &mut L2CAgentBase) {
 //SpecialHi2
 unsafe extern "C" fn game_brave_SpecialHi2(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -1041,9 +1041,9 @@ unsafe extern "C" fn game_brave_SpecialHi2(fighter: &mut L2CAgentBase) {
 //SpecialAirHi2
 unsafe extern "C" fn game_brave_SpecialAirHi2(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -1066,9 +1066,9 @@ unsafe extern "C" fn game_brave_SpecialAirHi2(fighter: &mut L2CAgentBase) {
 //SpecialHi3
 unsafe extern "C" fn game_brave_SpecialHi3(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -1091,9 +1091,9 @@ unsafe extern "C" fn game_brave_SpecialHi3(fighter: &mut L2CAgentBase) {
 //SpecialAirHi3
 unsafe extern "C" fn game_brave_SpecialAirHi3(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_BRAVE_GENERATE_ARTICLE_TORNADO, false, 0);
@@ -1116,9 +1116,9 @@ unsafe extern "C" fn game_brave_SpecialAirHi3(fighter: &mut L2CAgentBase) {
 //SpecialHiEmpty
 unsafe extern "C" fn game_brave_SpecialHiEmpty(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ rand_angle[rng as usize], /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -2, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ rand_effect[rng2 as usize], /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -1136,9 +1136,9 @@ unsafe extern "C" fn game_brave_SpecialHiEmpty(fighter: &mut L2CAgentBase) {
 //SpecialAirHiEmpty
 unsafe extern "C" fn game_brave_SpecialAirHiEmpty(fighter: &mut L2CAgentBase) {
     let rand_angle = [57, 361, 0, 30, 45, 90, 180, 362, 270, 345];
-    let rng = smash::app::sv_math::rand(hash40("brave"), rand_angle.len() as i32);
+    let rng = sv_math::rand(hash40("brave"), rand_angle.len() as i32);
     let rand_effect = [Hash40::new("collision_attr_normal"), Hash40::new("collision_attr_fire"), Hash40::new("collision_attr_aura"), Hash40::new("collision_attr_purple"), Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_coin"), Hash40::new("collision_attr_ice"), Hash40::new("collision_attr_cutup"), Hash40::new("collision_attr_pierce"), Hash40::new("collision_attr_flower"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_magic"), Hash40::new("collision_attr_water"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_curse_poison"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_saving"), Hash40::new("collision_attr_death")];
-    let rng2 = smash::app::sv_math::rand(hash40("brave"), rand_effect.len() as i32);
+    let rng2 = sv_math::rand(hash40("brave"), rand_effect.len() as i32);
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ rand_angle[rng as usize], /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -2, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ rand_effect[rng2 as usize], /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -1501,15 +1501,15 @@ unsafe extern "C" fn game_brave_AppealSL(fighter: &mut L2CAgentBase) {
 //AppealLwR
 unsafe extern "C" fn game_brave_AppealLwR(fighter: &mut L2CAgentBase) {
     let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
-    let rng = smash::app::sv_math::rand(hash40("brave"), itemlist.len() as i32);
-    ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(itemlist[rng as usize]), 0, 0, false, false);
+    let rng = sv_math::rand(hash40("brave"), itemlist.len() as i32);
+    ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
 }
 
 //AppealLwL
 unsafe extern "C" fn game_brave_AppealLwL(fighter: &mut L2CAgentBase) {
     let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
-    let rng = smash::app::sv_math::rand(hash40("brave"), itemlist.len() as i32);
-    ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(itemlist[rng as usize]), 0, 0, false, false);
+    let rng = sv_math::rand(hash40("brave"), itemlist.len() as i32);
+    ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
 }
 
 //FinalEnd
