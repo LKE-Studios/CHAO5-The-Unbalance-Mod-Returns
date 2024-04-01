@@ -235,6 +235,8 @@ unsafe extern "C" fn game_metaknight_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
+        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
     }
 }
 
@@ -258,6 +260,8 @@ unsafe extern "C" fn game_metaknight_AttackS3S2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
+        WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
     }
 }
 
@@ -779,9 +783,8 @@ unsafe extern "C" fn game_metaknight_ThrowB(fighter: &mut L2CAgentBase) {
 
 //ThrowHi
 unsafe extern "C" fn game_metaknight_ThrowHi(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(fighter.lua_state_agent, 1.0);
-    if META_POWER[ENTRY_ID] == true {
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
         if is_excute(fighter) {
             WHOLE_HIT(fighter, *HIT_STATUS_XLU);
             FT_LEAVE_NEAR_OTTOTTO(fighter, -2.5, 2.5);
@@ -827,7 +830,7 @@ unsafe extern "C" fn game_metaknight_ThrowHi(fighter: &mut L2CAgentBase) {
             HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         }
     }
-    else if META_POWER[ENTRY_ID] == false {
+    else {
         if is_excute(fighter) {
             WHOLE_HIT(fighter, *HIT_STATUS_XLU);
             FT_LEAVE_NEAR_OTTOTTO(fighter, -2.5, 2.5);
@@ -1163,7 +1166,7 @@ unsafe extern "C" fn game_metaknight_SpecialAirSFinish(fighter: &mut L2CAgentBas
         ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 142, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 18.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 15, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 10.0, /*Angle*/ 45, /*KBG*/ 142, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ -9.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 15, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8, 0, 0, 0, 0, 0, 0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8.0, 0, 7.0, 0, 0, 7.0, 21.0, 1.5, 1.25, 999999, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     wait(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
@@ -1638,7 +1641,7 @@ unsafe extern "C" fn game_metaknight_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.9, /*Angle*/ 53, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.9, /*Angle*/ 53, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_BODY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 37.0, /*Angle*/ 49, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 6.4, /*Z*/ -25.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.4), /*Z2*/ Some(19.0), /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 11.6, 0, 4.0, -10.0, 0, 4.0, -25.5, 1.2, 1.25, 5000, false, 2.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 600, /*Rehit*/ 30, /* Damage*/ 2.0, /*Unk*/ false);
@@ -1683,7 +1686,7 @@ unsafe extern "C" fn game_metaknight_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.9, /*Angle*/ 53, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 999.9, /*Angle*/ 53, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_BODY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 38.0, /*Angle*/ 48, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 6.4, /*Z*/ -25.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.4), /*Z2*/ Some(19.0), /*Hitlag*/ 0.7, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 11.6, 0, 4.0, -10.0, 0, 4.0, -25.5, 1.2, 1.25, 5000, false, 2.5, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
         AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 600, /*Rehit*/ 30, /* Damage*/ 2.0, /*Unk*/ false);
@@ -1771,8 +1774,21 @@ unsafe extern "C" fn game_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
 
 //AppealHiR
 unsafe extern "C" fn game_metaknight_AppealHiR(fighter: &mut L2CAgentBase) {
-    let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
-    let rng = smash::app::sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
+    let itemlist = [*ITEM_KIND_KILLEREYE, *ITEM_KIND_SCREW, *ITEM_KIND_SUPERLEAF, *ITEM_KIND_ROCKETBELT, *ITEM_KIND_SPECIALFLAG,
+    *ITEM_KIND_MAGICPOT, *ITEM_KIND_SLOW, *ITEM_KIND_MAGICBALL, *ITEM_KIND_CHEWING, *ITEM_KIND_SUPERSTAR, *ITEM_KIND_MUSHROOM,
+    *ITEM_KIND_MUSHD, *ITEM_KIND_POWDERBOX, *ITEM_KIND_HEALBALL, *ITEM_KIND_HEART, *ITEM_KIND_STARRING, *ITEM_KIND_SMASHBALL,
+    *ITEM_KIND_ASSIST, *ITEM_KIND_MAXIMTOMATO, *ITEM_KIND_WARPSTAR, *ITEM_KIND_WALKMUSH, *ITEM_KIND_USAGIHAT, *ITEM_KIND_UNIRA, 
+    *ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE, *ITEM_KIND_STEELDIVER, *ITEM_KIND_STARROD, *ITEM_KIND_STAFF, *ITEM_KIND_SOCCERBALL,
+    *ITEM_KIND_SMOKESCREEN, *ITEM_KIND_SMASHBOMB, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_SENSORBOMB, *ITEM_KIND_RIPSTICK, 
+    *ITEM_KIND_REVENGESHOOTER, *ITEM_KIND_POWBLOCK, *ITEM_KIND_POKEBALL, *ITEM_KIND_PITFALL, *ITEM_KIND_PASARAN, *ITEM_KIND_METALBLOCK,
+    *ITEM_KIND_MASTERBALL, *ITEM_KIND_KUSUDAMA, *ITEM_KIND_KILLSWORD, *ITEM_KIND_KILLER, *ITEM_KIND_HONEYCOMB, *ITEM_KIND_HOMERUNBAT,
+    *ITEM_KIND_HAMMER, *ITEM_KIND_GREENSHELL, *ITEM_KIND_GOLDENHAMMER, *ITEM_KIND_DEKU, *ITEM_KIND_FREEZER, *ITEM_KIND_FIREFLOWER,
+    *ITEM_KIND_FIREBAR, *ITEM_KIND_FAIRYBOTTLE, *ITEM_KIND_DRILL, *ITEM_KIND_DOLPHINBOMB, *ITEM_KIND_DEKU, *ITEM_KIND_DEATHSCYTHE,
+    *ITEM_KIND_CURRY, *ITEM_KIND_CROSSBOMB, *ITEM_KIND_CLUB, *ITEM_KIND_CHICKEN, *ITEM_KIND_CARRIERBOX, *ITEM_KIND_BUMPER, 
+    *ITEM_KIND_BOX, *ITEM_KIND_BOSSGALAGA, *ITEM_KIND_BOOMERANG, *ITEM_KIND_BOMBER, *ITEM_KIND_BOMBCHU, *ITEM_KIND_BLACKBALL,
+    *ITEM_KIND_BEETLE, *ITEM_KIND_BARREL, *ITEM_KIND_BANANAGUN, *ITEM_KIND_BADGE, *ITEM_KIND_BACKSHIELD, *ITEM_KIND_BOMBHEI,
+    *ITEM_KIND_DOSEISAN, *ITEM_KIND_BEAMSWORD, *ITEM_KIND_RAYGUN];
+    let rng = sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
     }
@@ -1780,8 +1796,21 @@ unsafe extern "C" fn game_metaknight_AppealHiR(fighter: &mut L2CAgentBase) {
 
 //AppealHiL
 unsafe extern "C" fn game_metaknight_AppealHiL(fighter: &mut L2CAgentBase) {
-    let itemlist = [*ITEM_KIND_KILLEREYE,*ITEM_KIND_SCREW,*ITEM_KIND_SUPERLEAF,*ITEM_KIND_ROCKETBELT,*ITEM_KIND_SPECIALFLAG,*ITEM_KIND_MAGICPOT,*ITEM_KIND_SLOW,*ITEM_KIND_MAGICBALL,*ITEM_KIND_CHEWING,*ITEM_KIND_SUPERSTAR,*ITEM_KIND_MUSHROOM,*ITEM_KIND_MUSHD,*ITEM_KIND_POWDERBOX,*ITEM_KIND_HEALBALL,*ITEM_KIND_HEART,*ITEM_KIND_STARRING,*ITEM_KIND_SMASHBALL,*ITEM_KIND_ASSIST,*ITEM_KIND_MAXIMTOMATO,*ITEM_KIND_WARPSTAR,*ITEM_KIND_WALKMUSH,*ITEM_KIND_USAGIHAT,*ITEM_KIND_UNIRA,*ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE,*ITEM_KIND_STEELDIVER,*ITEM_KIND_STARROD,*ITEM_KIND_STAFF,*ITEM_KIND_SOCCERBALL,*ITEM_KIND_SMOKESCREEN,*ITEM_KIND_SMASHBOMB,*ITEM_KIND_SMARTBOMB,*ITEM_KIND_SENSORBOMB,*ITEM_KIND_RIPSTICK,*ITEM_KIND_REVENGESHOOTER,*ITEM_KIND_POWBLOCK,*ITEM_KIND_POKEBALL,*ITEM_KIND_PITFALL,*ITEM_KIND_PASARAN,*ITEM_KIND_METALBLOCK,*ITEM_KIND_MASTERBALL,*ITEM_KIND_KUSUDAMA,*ITEM_KIND_KILLSWORD,*ITEM_KIND_KILLER,*ITEM_KIND_HONEYCOMB,*ITEM_KIND_HOMERUNBAT,*ITEM_KIND_HAMMER,*ITEM_KIND_GREENSHELL,*ITEM_KIND_GOLDENHAMMER,*ITEM_KIND_DEKU,*ITEM_KIND_FREEZER,*ITEM_KIND_FIREFLOWER,*ITEM_KIND_FIREBAR,*ITEM_KIND_FAIRYBOTTLE,*ITEM_KIND_DRILL,*ITEM_KIND_DOLPHINBOMB,*ITEM_KIND_DEKU,*ITEM_KIND_DEATHSCYTHE,*ITEM_KIND_CURRY,*ITEM_KIND_CROSSBOMB,*ITEM_KIND_CLUB,*ITEM_KIND_CHICKEN,*ITEM_KIND_CARRIERBOX,*ITEM_KIND_BUMPER,*ITEM_KIND_BOX,*ITEM_KIND_BOSSGALAGA,*ITEM_KIND_BOOMERANG,*ITEM_KIND_BOMBER,*ITEM_KIND_BOMBCHU,*ITEM_KIND_BLACKBALL,*ITEM_KIND_BEETLE,*ITEM_KIND_BARREL,*ITEM_KIND_BANANAGUN,*ITEM_KIND_BADGE,*ITEM_KIND_BACKSHIELD,*ITEM_KIND_BOMBHEI,*ITEM_KIND_DOSEISAN,*ITEM_KIND_BEAMSWORD,*ITEM_KIND_RAYGUN];
-    let rng = smash::app::sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
+    let itemlist = [*ITEM_KIND_KILLEREYE, *ITEM_KIND_SCREW, *ITEM_KIND_SUPERLEAF, *ITEM_KIND_ROCKETBELT, *ITEM_KIND_SPECIALFLAG,
+    *ITEM_KIND_MAGICPOT, *ITEM_KIND_SLOW, *ITEM_KIND_MAGICBALL, *ITEM_KIND_CHEWING, *ITEM_KIND_SUPERSTAR, *ITEM_KIND_MUSHROOM,
+    *ITEM_KIND_MUSHD, *ITEM_KIND_POWDERBOX, *ITEM_KIND_HEALBALL, *ITEM_KIND_HEART, *ITEM_KIND_STARRING, *ITEM_KIND_SMASHBALL,
+    *ITEM_KIND_ASSIST, *ITEM_KIND_MAXIMTOMATO, *ITEM_KIND_WARPSTAR, *ITEM_KIND_WALKMUSH, *ITEM_KIND_USAGIHAT, *ITEM_KIND_UNIRA, 
+    *ITEM_KIND_TEAMHEALFIELD,*ITEM_KIND_SUPERSCOPE, *ITEM_KIND_STEELDIVER, *ITEM_KIND_STARROD, *ITEM_KIND_STAFF, *ITEM_KIND_SOCCERBALL,
+    *ITEM_KIND_SMOKESCREEN, *ITEM_KIND_SMASHBOMB, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_SENSORBOMB, *ITEM_KIND_RIPSTICK, 
+    *ITEM_KIND_REVENGESHOOTER, *ITEM_KIND_POWBLOCK, *ITEM_KIND_POKEBALL, *ITEM_KIND_PITFALL, *ITEM_KIND_PASARAN, *ITEM_KIND_METALBLOCK,
+    *ITEM_KIND_MASTERBALL, *ITEM_KIND_KUSUDAMA, *ITEM_KIND_KILLSWORD, *ITEM_KIND_KILLER, *ITEM_KIND_HONEYCOMB, *ITEM_KIND_HOMERUNBAT,
+    *ITEM_KIND_HAMMER, *ITEM_KIND_GREENSHELL, *ITEM_KIND_GOLDENHAMMER, *ITEM_KIND_DEKU, *ITEM_KIND_FREEZER, *ITEM_KIND_FIREFLOWER,
+    *ITEM_KIND_FIREBAR, *ITEM_KIND_FAIRYBOTTLE, *ITEM_KIND_DRILL, *ITEM_KIND_DOLPHINBOMB, *ITEM_KIND_DEKU, *ITEM_KIND_DEATHSCYTHE,
+    *ITEM_KIND_CURRY, *ITEM_KIND_CROSSBOMB, *ITEM_KIND_CLUB, *ITEM_KIND_CHICKEN, *ITEM_KIND_CARRIERBOX, *ITEM_KIND_BUMPER, 
+    *ITEM_KIND_BOX, *ITEM_KIND_BOSSGALAGA, *ITEM_KIND_BOOMERANG, *ITEM_KIND_BOMBER, *ITEM_KIND_BOMBCHU, *ITEM_KIND_BLACKBALL,
+    *ITEM_KIND_BEETLE, *ITEM_KIND_BARREL, *ITEM_KIND_BANANAGUN, *ITEM_KIND_BADGE, *ITEM_KIND_BACKSHIELD, *ITEM_KIND_BOMBHEI,
+    *ITEM_KIND_DOSEISAN, *ITEM_KIND_BEAMSWORD, *ITEM_KIND_RAYGUN];
+    let rng = sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
     }
@@ -1789,8 +1818,16 @@ unsafe extern "C" fn game_metaknight_AppealHiL(fighter: &mut L2CAgentBase) {
 
 //AppealSR
 unsafe extern "C" fn game_metaknight_AppealSR(fighter: &mut L2CAgentBase) {
+    let itemlist = [*ITEM_KIND_SHOVELKNIGHT, *ITEM_KIND_DARKKNIGHT, *ITEM_KIND_LIN, 
+    *ITEM_KIND_GOROH, *ITEM_KIND_SPRINGMAN, *ITEM_KIND_ZERO, *ITEM_KIND_KRYSTAL, *ITEM_KIND_CYBORG, *ITEM_KIND_MIDNA];
+    let rng = sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
+            ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
+        }
+        else {
+            ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
+        }
     }
     frame(fighter.lua_state_agent, 32.0);
     if is_excute(fighter) {
@@ -1807,8 +1844,16 @@ unsafe extern "C" fn game_metaknight_AppealSR(fighter: &mut L2CAgentBase) {
 
 //AppealSL
 unsafe extern "C" fn game_metaknight_AppealSL(fighter: &mut L2CAgentBase) {
+    let itemlist = [*ITEM_KIND_SHOVELKNIGHT, *ITEM_KIND_DARKKNIGHT, *ITEM_KIND_LIN, 
+    *ITEM_KIND_GOROH, *ITEM_KIND_SPRINGMAN, *ITEM_KIND_ZERO, *ITEM_KIND_KRYSTAL, *ITEM_KIND_CYBORG, *ITEM_KIND_MIDNA];
+    let rng = sv_math::rand(hash40("metaknight"), itemlist.len() as i32);
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
+            ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
+        }
+        else {
+            ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFFROULETTE), 0, 0, false, false);
+        }
     }
     frame(fighter.lua_state_agent, 32.0);
     if is_excute(fighter) {
@@ -1826,7 +1871,7 @@ unsafe extern "C" fn game_metaknight_AppealSL(fighter: &mut L2CAgentBase) {
 //AppealLwR
 unsafe extern "C" fn game_metaknight_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEART), 0, 0, false, false);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 0, /*KBG*/ 125, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -15.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(15.5), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_none"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
     }
 }
@@ -1834,7 +1879,7 @@ unsafe extern "C" fn game_metaknight_AppealLwR(fighter: &mut L2CAgentBase) {
 //AppealLwL
 unsafe extern "C" fn game_metaknight_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEART), 0, 0, false, false);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 0, /*KBG*/ 125, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 20.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ -15.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(15.5), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_none"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_NONE);
     }
 }

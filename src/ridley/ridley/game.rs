@@ -401,6 +401,7 @@ unsafe extern "C" fn game_ridley_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 6.0, 7.0);
+        shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 8.0, 0, 8.0, 10.0, 0, 8.0, 30.0, 1.5, 1.25, 3000, false, 2, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {

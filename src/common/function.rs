@@ -207,7 +207,7 @@ pub mod FighterSpecializer_MetaKnight {
         let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("attack_mul"));
         let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("reaction_mul"));
         let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
-        if META_POWER[ENTRY_ID] == true {
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
             GFX_COUNTER[ENTRY_ID] += 1;
             SFX_COUNTER[ENTRY_ID] += 1;
             AttackModule::set_power_up(fighter.module_accessor, attack_mul);
@@ -233,11 +233,11 @@ pub mod FighterSpecializer_MetaKnight {
             };
         };
         if DamageModule::damage(fighter.module_accessor, 0) >= meta_power_damage {
-            META_POWER[ENTRY_ID] = true;
+            WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
         };   
         if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT].contains(&status_kind) 
-        || sv_information::is_ready_go() == false{
-            META_POWER[ENTRY_ID] = false;
+        || sv_information::is_ready_go() == false {
+            WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
             AttackModule::set_power_up(fighter.module_accessor, 1.0);

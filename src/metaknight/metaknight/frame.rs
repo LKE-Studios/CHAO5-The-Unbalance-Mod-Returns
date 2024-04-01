@@ -33,10 +33,15 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
             DamageModule::heal(fighter.module_accessor, -1.0, 0);
         }
     };
-    /*if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) && 
-    ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-        fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD.into(), true.into());
-    }*/
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW) {
+        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) { 
+            fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_LW.into(), false.into());
+        }
+    }
+    if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH) 
+    && (ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK)) { 
+        fighter.change_status(FIGHTER_STATUS_KIND_CATCH.into(), false.into());
+    }
 }
 
 unsafe extern "C" fn frame_metaknight_Exec(fighter: &mut L2CFighterCommon) {

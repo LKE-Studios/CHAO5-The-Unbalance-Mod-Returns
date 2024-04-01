@@ -41,7 +41,7 @@ unsafe extern "C" fn pichu_SpecialHiEnd_Main_loop(fighter: &mut L2CFighterCommon
             fighter.change_status(FIGHTER_STATUS_KIND_LANDING_LIGHT.into(), false.into());
             return 1.into();
         }
-        if frame > 10.0 {
+        if frame > 10.0 && frame < 15.0 {
             if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
                 fighter.change_status(FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_WARP.into(), true.into());
                 return 1.into();
