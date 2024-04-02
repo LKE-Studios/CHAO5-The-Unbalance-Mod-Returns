@@ -10,6 +10,7 @@ pub unsafe extern "C" fn status_elight_SpecialSEnd_Main(fighter: &mut L2CFighter
 unsafe extern "C" fn elight_SpecialSEnd_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     let prev_situation_kind = fighter.global_table[PREV_SITUATION_KIND].get_i32();
+    let frame = MotionModule::frame(fighter.module_accessor);
     if !CancelModule::is_enable_cancel(fighter.module_accessor) {
         if fighter.sub_transition_group_check_air_cliff().get_bool() {
             if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
@@ -21,11 +22,18 @@ unsafe extern "C" fn elight_SpecialSEnd_Main_loop(fighter: &mut L2CFighterCommon
         if !MotionModule::is_end(fighter.module_accessor) {
             if situation_kind == *SITUATION_KIND_GROUND && prev_situation_kind != *SITUATION_KIND_GROUND {
                 SoundModule::play_landing_se(fighter.module_accessor, Hash40::new("se_elight_landing01"));
-                let frame = MotionModule::frame(fighter.module_accessor);
                 let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor, Hash40::new("special_s_end"), true);
                 if frame >= cancel_frame {
                     fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
                     return 0.into()
+                }
+            }
+            if frame > 23.0 {
+                if situation_kind != *SITUATION_KIND_GROUND {
+                    fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+                }
+                else {
+                    fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
                 }
             }
         }

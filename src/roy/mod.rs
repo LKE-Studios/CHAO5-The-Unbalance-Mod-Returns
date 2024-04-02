@@ -1,5 +1,5 @@
-mod game;
+mod roy;
 
 pub fn install() {
-    game::install();    
+    roy::install();    
 }

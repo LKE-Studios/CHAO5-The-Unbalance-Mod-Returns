@@ -1,9 +1,13 @@
 use crate::imports::BuildImports::*;
 
-unsafe extern "C" fn frame_eflame(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_roy_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_S_CATCH].contains(&status_kind) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_HI,
+        *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_END, *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_END2,
+        *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_END3, *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_TURN,
+        *FIGHTER_ROY_STATUS_KIND_SPECIAL_N_END_MAX, *FIGHTER_ROY_STATUS_KIND_SPECIAL_LW_HIT].contains(&status_kind) {
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
@@ -23,10 +27,19 @@ unsafe extern "C" fn frame_eflame(fighter: &mut L2CFighterCommon) {
             }
         }
     }
+    if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+        if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && frame > 26.0 {
+            CancelModule::enable_cancel(fighter.module_accessor);
+        } 
+        if situation_kind == *SITUATION_KIND_GROUND && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_ROY_STATUS_SPECIAL_HI_FLAG_FREE_FALL) {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, false);
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_ROY_STATUS_SPECIAL_HI_FLAG_FREE_FALL);
+        }
+    }
 }
 
 pub fn install() {
-    Agent::new("eflame")
-    .on_line(Main, frame_eflame)
+    Agent::new("roy")
+    .on_line(Main, frame_roy_Main)
     .install();
 }

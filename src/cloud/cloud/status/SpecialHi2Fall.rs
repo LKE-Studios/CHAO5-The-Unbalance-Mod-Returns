@@ -10,9 +10,7 @@ unsafe extern "C" fn status_cloud_SpecialHi2Fall_Main(fighter: &mut L2CFighterCo
     let hi2_hit_fall_speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("hi2_hit_fall_speed_y"));
     let hi2_hit_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("hi2_hit_accel_y"));
     let hi2_hit_speed_max_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("hi2_hit_speed_max_y"));
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, -hi2_hit_fall_speed_y, 0.0, 0.0, 0.0);
-    sv_kinetic_energy::reset_energy(fighter.lua_state_agent);
+    sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, -hi2_hit_fall_speed_y, 0.0, 0.0, 0.0);
     sv_kinetic_energy!(set_accel, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -hi2_hit_accel_y);
     sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, hi2_hit_speed_max_y);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
