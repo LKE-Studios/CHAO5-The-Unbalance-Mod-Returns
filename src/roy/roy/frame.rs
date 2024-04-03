@@ -28,7 +28,7 @@ pub unsafe extern "C" fn frame_roy_Main(fighter : &mut L2CFighterCommon) {
         }
     }
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-        if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && frame > 26.0 {
+        if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             CancelModule::enable_cancel(fighter.module_accessor);
         } 
         if situation_kind == *SITUATION_KIND_GROUND && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_ROY_STATUS_SPECIAL_HI_FLAG_FREE_FALL) {

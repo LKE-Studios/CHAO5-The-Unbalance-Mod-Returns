@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub unsafe extern "C" fn frame_ken_Main(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_ryu_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_LOOP, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_COMMAND].contains(&status_kind) {
@@ -12,6 +12,10 @@ pub unsafe extern "C" fn frame_ken_Main(fighter : &mut L2CFighterCommon) {
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ATTACK);
         WorkModule::enable_transition_term_group(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_ESCAPE);
     };
+    if [FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_CHARGE, FIGHTER_RYU_STATUS_KIND_KAMEHAMEHA_START].contains(&status_kind) {
+        EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_elec"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.3, true, 0, 0, 0, 0, 0, true, true);
+        LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.6, 0.7);
+    }
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_RYU_STATUS_KIND_SPECIAL_N_COMMAND,
         *FIGHTER_RYU_STATUS_KIND_SPECIAL_N2_COMMAND, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_LOOP, *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_COMMAND,
         *FIGHTER_RYU_STATUS_KIND_SPECIAL_S_END, *FIGHTER_RYU_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_RYU_STATUS_KIND_SPECIAL_HI_FALL,
@@ -39,7 +43,7 @@ pub unsafe extern "C" fn frame_ken_Main(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    Agent::new("ken")
-    .on_line(Main, frame_ken_Main)
+    Agent::new("ryu")
+    .on_line(Main, frame_ryu_Main)
     .install();
 }

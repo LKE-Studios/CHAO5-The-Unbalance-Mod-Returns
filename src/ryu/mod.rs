@@ -1,13 +1,9 @@
-mod game;
-pub mod sound;
-pub mod effect;
-mod status;
-mod frame;
+mod ryu;
+mod ryu_hadoken;
+mod ryu_shinkuhadoken;
 
 pub fn install() {
-    game::install();
-    effect::install();
-    sound::install();
-    status::install();
-    frame::install();
+    ryu::install();
+    ryu_hadoken::install();
+    ryu_shinkuhadoken::install();
 }

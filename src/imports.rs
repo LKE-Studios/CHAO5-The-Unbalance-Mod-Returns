@@ -9,6 +9,7 @@ pub mod BuildImports {
                 KineticEnergy, 
                 KineticEnergyNormal,
                 FighterCutInManager,
+                FighterManager,
                 BattleObjectWorld,
                 BattleObjectManager,
                 AttackData,
