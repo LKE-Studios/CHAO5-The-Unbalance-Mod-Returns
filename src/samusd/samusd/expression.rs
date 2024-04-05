@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//AttackLw4 
-	agent = "samusd", 
-	script = "expression_attacklw4", 
-	category = ACMD_EXPRESSION, 
-	low_priority )]
-unsafe fn expression_samusd_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4 
+unsafe extern "C" fn expression_samusd_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -33,7 +29,7 @@ unsafe fn expression_samusd_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		expression_samusd_attacklw4
-    );
+    Agent::new("samusd")
+    .expression_acmd("expression_attacklw4", expression_samusd_AttackLw4)
+    .install();
 }

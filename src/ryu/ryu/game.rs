@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::ryu::ryu::status::KamehamehaCharge::*;
 
 //Attack11W
 unsafe extern "C" fn game_ryu_Attack11W(fighter: &mut L2CAgentBase) {
@@ -882,8 +883,8 @@ unsafe extern "C" fn game_ryu_Kamehameha_Start(fighter: &mut L2CAgentBase) {
 
 //Kamehameha_Fire
 unsafe extern "C" fn game_ryu_Kamehameha_Fire(fighter: &mut L2CAgentBase) {
-    let mut charge_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_RYU_STATUS_WORK_ID_KAMEHAMEHA_FLOAT_CHARGE_TIME);
-    let damage = (charge_time * 0.01) + 0.5;
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let damage = (CHARGE_TIME[ENTRY_ID] * 0.01) + 0.5;
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ damage, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 10, /*BKB*/ 10, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 18.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1000.0), /*Hitlag*/ 0.1, /*SDI*/ 5.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -1.0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);

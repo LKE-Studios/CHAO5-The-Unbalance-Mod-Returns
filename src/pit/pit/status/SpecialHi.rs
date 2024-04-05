@@ -34,13 +34,12 @@ pub unsafe extern "C" fn status_pit_SpecialHi_Main(fighter: &mut L2CFighterCommo
 
 unsafe extern "C" fn pit_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.super_jump_punch_main();
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY.into(), true.into());
-        let lr = PostureModule::lr(fighter.module_accessor);
-        let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
-        if stick_x * lr < -0.25 {
-            fighter.change_status(FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_TURN.into(), true.into());
-        }
+        return 1.into()
     }
     0.into()
 }

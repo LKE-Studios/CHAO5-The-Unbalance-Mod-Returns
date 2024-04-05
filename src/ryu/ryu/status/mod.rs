@@ -1,6 +1,6 @@
 pub mod SpecialN;
 mod KamehamehaStart;
-mod KamehamehaCharge;
+pub mod KamehamehaCharge;
 mod KamehamehaFire;
 
 pub fn install() {

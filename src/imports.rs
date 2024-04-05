@@ -49,7 +49,7 @@ pub mod BuildImports {
             L2CInnerFunctionBase, 
             L2CValueInner
         },
-        smash::lib::lua_const::EffectScreenLayer::GROUND,
+        smash::lib::lua_const::EffectScreenLayer::{GROUND, CHAR},
         smash::lua2cpp::{*, L2CAgentBase, L2CFighterCommon, L2CFighterBase},
         singletons::*,
         smash::app::sv_animcmd::{
@@ -66,7 +66,6 @@ pub mod BuildImports {
             SET_SPEED,
             CHECK_FINISH_CAMERA_IF_NOT_HP_MODE,
             SET_AIR,
-            EFFECT_BRANCH_SITUATION,
         },
         crate::globals::*,
         crate::common::{*,
@@ -87,6 +86,7 @@ pub mod BuildImports {
             EFFECT_OFF_HANDLE,
             FT_IS_SAME_FIGHTER_CATEGORY,
             EFFECT_FOLLOW_FLIP_arg13,
+            EFFECT_BRANCH_SITUATION,
             EFFECT_GLOBAL,
             DOWN_EFFECT,
             FT_ATTACK_ABS_CAMERA_QUAKE,
