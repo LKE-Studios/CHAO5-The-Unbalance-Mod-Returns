@@ -36,6 +36,7 @@ unsafe extern "C" fn game_shizue_bullet_ShootB(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_bullet")
+    .game_acmd("game_shootf", game_shizue_bullet_ShootF)
     .game_acmd("game_shootb", game_shizue_bullet_ShootB)
     .install();
 }
