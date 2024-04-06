@@ -1,5 +1,5 @@
-mod game;
+mod shulk;
 
 pub fn install() {
-    game::install();    
+    shulk::install();    
 }

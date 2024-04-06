@@ -209,9 +209,9 @@ mod samus;
 mod samusd;
 mod sheik;
 mod shizue;
-/*mod shulk;
+mod shulk;
 mod silver;
-mod simon;
+/*mod simon;
 mod snake;
 mod sonic;
 mod szerosuit;
@@ -423,7 +423,7 @@ pub fn main() {
     //toonlink::install();
     pikmin::install();
     littlemac::install();
-    //shulk::install();
+    shulk::install();
     palutena::install();
     rockman::install();
     ryu::install();
@@ -469,7 +469,7 @@ pub fn main() {
     //tantan::install();
     claus::install();
     koopag::install();
-    //silver::install();
+    silver::install();
     //waluigi::install();
     skyline::install_hooks!(
         declare_const_hook, 

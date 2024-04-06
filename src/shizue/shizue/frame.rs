@@ -1,8 +1,6 @@
 use crate::imports::BuildImports::*;
 use crate::shizue::shizue_pot::status::Throwed::*;
 
-pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
-
 pub unsafe extern "C" fn frame_shizue_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);

@@ -1,3 +1,13 @@
+pub mod SpecialHi;
+mod SpecialHi2;
+mod SpecialHi3;
+
+pub fn install() {
+    SpecialHi::install(); 
+    SpecialHi2::install();
+    SpecialHi3::install();
+}
+
 use crate::imports::BuildImports::*;
 
 #[status_script(agent = "mewtwo", status = FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]

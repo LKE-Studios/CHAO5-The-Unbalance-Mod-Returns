@@ -2,7 +2,7 @@ pub mod BuildImports {
     pub use {
         std::mem,
         smashline::*,    
-        smashline::{Agent, Main, Pre, Init, Exec, End, Exit, ExecStop},   
+        smashline::{Agent, Main, Pre, Init, Exec, End, Exit, ExecStop, original_status},   
         smash_script::{*, macros::*},
         smash::app::{*, 
             lua_bind::{*, 

@@ -37,6 +37,23 @@ pub unsafe extern "C" fn loupe_camera_exit(fighter : &mut L2CFighterCommon) {
     }
 }
 
+pub unsafe extern "C" fn jump_cancel(fighter : &mut L2CFighterCommon) {
+    let module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if is_jc(module_accessor, fighter_kind, status_kind, frame) && check_jump(module_accessor) {
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) 
+        < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) 
+        && StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+        };
+        if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+        };
+    };
+};
+
 pub fn install() {
     Agent::new("fighter")
     .on_line(Main, frame_common)

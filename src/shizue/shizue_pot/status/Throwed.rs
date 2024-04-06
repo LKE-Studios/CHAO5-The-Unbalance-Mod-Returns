@@ -46,7 +46,7 @@ pub unsafe extern "C" fn status_shizue_pot_Throwed_Main(weapon: &mut L2CWeaponCo
         shizue_furniture_picture(weapon);
         MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_1"), 0.0, 1.0, false, 0.0, false, false);
     }
-    smashline::original_status(Main, weapon, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED)(weapon)
+    original_status(Main, weapon, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED)(weapon)
 }
 
 unsafe extern "C" fn shizue_furniture_visibility_all_false(weapon: &mut L2CAgentBase) {
