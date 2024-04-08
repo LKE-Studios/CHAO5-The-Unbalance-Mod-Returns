@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//WalkSlow 
-    agent = "mewtwo", 
-    script = "expression_walkslow_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_walkslow(fighter: &mut L2CAgentBase) {
+//WalkSlow 
+unsafe extern "C" fn expression_silver_WalkSlow(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
@@ -18,18 +14,12 @@ unsafe fn expression_silver_walkslow(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_walk"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//WalkMiddle 
-    agent = "mewtwo", 
-    script = "expression_walkmiddle_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_walkmiddle(fighter: &mut L2CAgentBase) {
+//WalkMiddle 
+unsafe extern "C" fn expression_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
@@ -42,18 +32,12 @@ unsafe fn expression_silver_walkmiddle(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_walk"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//WalkFast 
-    agent = "mewtwo", 
-    script = "expression_walkfast_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_walkfast(fighter: &mut L2CAgentBase) {
+//WalkFast 
+unsafe extern "C" fn expression_silver_WalkFast(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
@@ -66,18 +50,12 @@ unsafe fn expression_silver_walkfast(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_walk"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//Run 
-    agent = "mewtwo", 
-    script = "expression_run_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_run(fighter: &mut L2CAgentBase) {
+//Run 
+unsafe extern "C" fn expression_silver_Run(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         if is_excute(fighter) {
             AREA_WIND_2ND_arg10(fighter, 0, 2, 0, 300, 1, 13, 7, 32, 14, 30);
@@ -91,18 +69,12 @@ unsafe fn expression_silver_run(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_run"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//RunBrakeR 
-    agent = "mewtwo", 
-    script = "expression_runbraker_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_runbraker(fighter: &mut L2CAgentBase) {
+//RunBrakeR 
+unsafe extern "C" fn expression_silver_RunBrakeR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_dash"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -113,12 +85,8 @@ unsafe fn expression_silver_runbraker(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//RunBrakeL 
-    agent = "mewtwo", 
-    script = "expression_runbrakel_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_runbrakel(fighter: &mut L2CAgentBase) {
+//RunBrakeL 
+unsafe extern "C" fn expression_silver_RunBrakeL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_dash"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -129,23 +97,15 @@ unsafe fn expression_silver_runbrakel(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//TurnRunBrake 
-    agent = "mewtwo", 
-    script = "expression_turnrunbrake_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_turnrunbrake(fighter: &mut L2CAgentBase) {
+//TurnRunBrake 
+unsafe extern "C" fn expression_silver_TurnRunBrake(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
     }
 }
 
-#[acmd_script(//Attack11 
-    agent = "mewtwo", 
-    script = "expression_attack11_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attack11(fighter: &mut L2CAgentBase) {
+//Attack11 
+unsafe extern "C" fn expression_silver_Attack11(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
@@ -164,12 +124,8 @@ unsafe fn expression_silver_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "mewtwo", 
-    script = "expression_attackdash_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn expression_silver_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
     }
@@ -187,12 +143,8 @@ unsafe fn expression_silver_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi 
-    agent = "mewtwo", 
-    script = "expression_attacks3hi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi 
+unsafe extern "C" fn expression_silver_AttackS3Hi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
     }
@@ -218,12 +170,8 @@ unsafe fn expression_silver_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3 
-    agent = "mewtwo", 
-    script = "expression_attacks3_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3 
+unsafe extern "C" fn expression_silver_AttackS3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
     }
@@ -249,12 +197,8 @@ unsafe fn expression_silver_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw 
-    agent = "mewtwo", 
-    script = "expression_attacks3lw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw 
+unsafe extern "C" fn expression_silver_AttackS3Lw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
     }
@@ -280,12 +224,8 @@ unsafe fn expression_silver_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3 
-    agent = "mewtwo", 
-    script = "expression_attackhi3_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3 
+unsafe extern "C" fn expression_silver_AttackHi3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -311,12 +251,8 @@ unsafe fn expression_silver_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3 
-    agent = "mewtwo", 
-    script = "expression_attacklw3_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3 
+unsafe extern "C" fn expression_silver_AttackLw3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_TOP);
     }
@@ -334,12 +270,8 @@ unsafe fn expression_silver_attacklw3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Hi 
-    agent = "mewtwo", 
-    script = "expression_attacks4hi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks4hi(fighter: &mut L2CAgentBase) {
+//AttackS4Hi 
+unsafe extern "C" fn expression_silver_AttackS4Hi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_R);
@@ -365,12 +297,8 @@ unsafe fn expression_silver_attacks4hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4 
-    agent = "mewtwo", 
-    script = "expression_attacks4_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4 
+unsafe extern "C" fn expression_silver_AttackS4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_R);
@@ -396,12 +324,8 @@ unsafe fn expression_silver_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Lw 
-    agent = "mewtwo", 
-    script = "expression_attacks4lw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacks4lw(fighter: &mut L2CAgentBase) {
+//AttackS4Lw 
+unsafe extern "C" fn expression_silver_AttackS4Lw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_R);
@@ -427,12 +351,8 @@ unsafe fn expression_silver_attacks4lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4 
-    agent = "mewtwo", 
-    script = "expression_attackhi4_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4 
+unsafe extern "C" fn expression_silver_AttackHi4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -484,12 +404,8 @@ unsafe fn expression_silver_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4 
-    agent = "mewtwo", 
-    script = "expression_attacklw4_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4 
+unsafe extern "C" fn expression_silver_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
     }
@@ -521,12 +437,8 @@ unsafe fn expression_silver_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN 
-    agent = "mewtwo", 
-    script = "expression_attackairn_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN 
+unsafe extern "C" fn expression_silver_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_elecattack"), 8, true, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -540,12 +452,8 @@ unsafe fn expression_silver_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "mewtwo", 
-    script = "expression_attackairf_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn expression_silver_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 8, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -564,12 +472,8 @@ unsafe fn expression_silver_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirB 
-    agent = "mewtwo", 
-    script = "expression_attackairb_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB 
+unsafe extern "C" fn expression_silver_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -580,12 +484,8 @@ unsafe fn expression_silver_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi 
-    agent = "mewtwo", 
-    script = "expression_attackairhi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi 
+unsafe extern "C" fn expression_silver_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         RUMBLE_HIT(fighter, Hash40::new("rbkind_attacks"), 0);
@@ -600,12 +500,8 @@ unsafe fn expression_silver_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw 
-    agent = "mewtwo", 
-    script = "expression_attackairlw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw 
+unsafe extern "C" fn expression_silver_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -616,11 +512,8 @@ unsafe fn expression_silver_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialNStart 
-    agent = "mewtwo", 
-    script = "expression_specialnstart_silver", 
-    category = ACMD_EXPRESSION, low_priority )]
-unsafe fn expression_silver_specialnstart(fighter: &mut L2CAgentBase) {
+//SpecialNStart 
+unsafe extern "C" fn expression_silver_SpecialNStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -631,24 +524,16 @@ unsafe fn expression_silver_specialnstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirNStart 
-    agent = "sonic", 
-    script = "expression_specialairnstart_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairnstart(fighter: &mut L2CAgentBase) {
+//SpecialAirNStart 
+unsafe extern "C" fn expression_silver_SpecialAirNStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
     }
 }
 
-#[acmd_script(//SpecialNShoot 
-    agent = "mewtwo", 
-    script = "expression_specialnshoot_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialnshoot(fighter: &mut L2CAgentBase) {
+//SpecialNShoot 
+unsafe extern "C" fn expression_silver_SpecialNShoot(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -666,12 +551,8 @@ unsafe fn expression_silver_specialnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirNShoot 
-    agent = "mewtwo", 
-    script = "expression_specialairnshoot_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairnshoot(fighter: &mut L2CAgentBase) {
+//SpecialAirNShoot 
+unsafe extern "C" fn expression_silver_SpecialAirNShoot(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -689,12 +570,8 @@ unsafe fn expression_silver_specialairnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSStart 
-    agent = "mewtwo", 
-    script = "expression_specialsstart_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialsstart(fighter: &mut L2CAgentBase) {
+//SpecialSStart 
+unsafe extern "C" fn expression_silver_SpecialSStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -705,12 +582,8 @@ unsafe fn expression_silver_specialsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSStart 
-    agent = "mewtwo", 
-    script = "expression_specialairsstart_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairsstart(fighter: &mut L2CAgentBase) {
+//SpecialAirSStart 
+unsafe extern "C" fn expression_silver_SpecialAirSStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -721,12 +594,8 @@ unsafe fn expression_silver_specialairsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS 
-    agent = "mewtwo", 
-    script = "expression_specials_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specials(fighter: &mut L2CAgentBase) {
+//SpecialS 
+unsafe extern "C" fn expression_silver_SpecialS(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -736,12 +605,8 @@ unsafe fn expression_silver_specials(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS 
-    agent = "mewtwo", 
-    script = "expression_specialairs_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairs(fighter: &mut L2CAgentBase) {
+//SpecialAirS 
+unsafe extern "C" fn expression_silver_SpecialAirS(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -751,12 +616,8 @@ unsafe fn expression_silver_specialairs(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiStart 
-    agent = "mewtwo", 
-    script = "expression_specialhistart_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialhistart(fighter: &mut L2CAgentBase) {
+//SpecialHiStart 
+unsafe extern "C" fn expression_silver_SpecialHiStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
@@ -768,12 +629,8 @@ unsafe fn expression_silver_specialhistart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHiStart 
-    agent = "mewtwo", 
-    script = "expression_specialairhistart_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairhistart(fighter: &mut L2CAgentBase) {
+//SpecialAirHiStart 
+unsafe extern "C" fn expression_silver_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
@@ -785,12 +642,8 @@ unsafe fn expression_silver_specialairhistart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHi 
-    agent = "mewtwo", 
-    script = "expression_specialhi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialhi(fighter: &mut L2CAgentBase) {
+//SpecialHi 
+unsafe extern "C" fn expression_silver_SpecialHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_beamss"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -802,12 +655,8 @@ unsafe fn expression_silver_specialhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHi 
-    agent = "mewtwo", 
-    script = "expression_specialairhi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairhi(fighter: &mut L2CAgentBase) {
+//SpecialAirHi 
+unsafe extern "C" fn expression_silver_SpecialAirHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_beamss"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -819,12 +668,8 @@ unsafe fn expression_silver_specialairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLw 
-    agent = "mewtwo", 
-    script = "expression_speciallw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_speciallw(fighter: &mut L2CAgentBase) {
+//SpecialLw 
+unsafe extern "C" fn expression_silver_SpecialLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -839,12 +684,8 @@ unsafe fn expression_silver_speciallw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLw 
-    agent = "mewtwo", 
-    script = "expression_specialairlw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_specialairlw(fighter: &mut L2CAgentBase) {
+//SpecialAirLw 
+unsafe extern "C" fn expression_silver_SpecialAirLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -859,12 +700,8 @@ unsafe fn expression_silver_specialairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF 
-    agent = "mewtwo", 
-    script = "expression_throwf_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF 
+unsafe extern "C" fn expression_silver_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_ATTACK_ABS_CAMERA_QUAKE(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, *CAMERA_QUAKE_KIND_NONE);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
@@ -881,12 +718,8 @@ unsafe fn expression_silver_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB 
-    agent = "mewtwo", 
-    script = "expression_throwb_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_throwb(fighter: &mut L2CAgentBase) {
+//ThrowB 
+unsafe extern "C" fn expression_silver_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -901,12 +734,8 @@ unsafe fn expression_silver_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi 
-    agent = "mewtwo", 
-    script = "expression_throwhi_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi 
+unsafe extern "C" fn expression_silver_ThrowHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::set_attack_reference_joint_id(fighter.module_accessor, Hash40::new("top"), AttackDirectionAxis(*ATTACK_DIRECTION_Y), AttackDirectionAxis(*ATTACK_DIRECTION_Z), AttackDirectionAxis(*ATTACK_DIRECTION_X));
         FT_ATTACK_ABS_CAMERA_QUAKE(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, *CAMERA_QUAKE_KIND_NONE);
@@ -919,12 +748,8 @@ unsafe fn expression_silver_throwhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowLw 
-    agent = "mewtwo", 
-    script = "expression_throwlw_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw 
+unsafe extern "C" fn expression_silver_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_ATTACK_ABS_CAMERA_QUAKE(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, *CAMERA_QUAKE_KIND_NONE);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 10);
@@ -940,12 +765,8 @@ unsafe fn expression_silver_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSL
-    agent = "mewtwo", 
-    script = "expression_appealsl_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_appealsl(fighter: &mut L2CAgentBase) {
+//AppealSL
+unsafe extern "C" fn expression_silver_AppealSL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_run"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -956,12 +777,8 @@ unsafe fn expression_silver_appealsl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSR
-    agent = "mewtwo", 
-    script = "expression_appealsr_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_appealsr(fighter: &mut L2CAgentBase) {
+//AppealSR
+unsafe extern "C" fn expression_silver_AppealSR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_run"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -972,12 +789,8 @@ unsafe fn expression_silver_appealsr(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR 
-    agent = "mewtwo", 
-    script = "expression_appealhir_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_appealhir(fighter: &mut L2CAgentBase) {
+//AppealHiR 
+unsafe extern "C" fn expression_silver_AppealHiR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_run"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -992,12 +805,8 @@ unsafe fn expression_silver_appealhir(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiL
-    agent = "mewtwo", 
-    script = "expression_appealhil_silver", 
-    category = ACMD_EXPRESSION, 
-    low_priority )]
-unsafe fn expression_silver_appealhil(fighter: &mut L2CAgentBase) {
+//AppealHiL
+unsafe extern "C" fn expression_silver_AppealHiL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_run"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -1013,53 +822,53 @@ unsafe fn expression_silver_appealhil(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        expression_silver_walkslow,
-        expression_silver_walkmiddle,
-        expression_silver_walkfast,
-        expression_silver_run,
-        expression_silver_runbraker,
-        expression_silver_runbrakel,
-        expression_silver_turnrunbrake,
-        expression_silver_attack11,
-        expression_silver_attackdash,
-        expression_silver_attacks3hi,
-        expression_silver_attacks3,
-        expression_silver_attacks3lw,
-        expression_silver_attackhi3,
-        expression_silver_attacklw3,
-        expression_silver_attacks4hi,
-        expression_silver_attacks4,
-        expression_silver_attacks4lw,
-        expression_silver_attackhi4,
-        expression_silver_attacklw4,
-        expression_silver_attackairn,
-        expression_silver_attackairf,
-        expression_silver_attackairb,
-        expression_silver_attackairhi,
-        expression_silver_attackairlw,
-        expression_silver_throwf,
-        expression_silver_throwb,
-        expression_silver_throwhi,
-        expression_silver_throwlw,
-        expression_silver_specialnstart,
-        expression_silver_specialairnstart,
-        expression_silver_specialnshoot,
-        expression_silver_specialairnshoot,
-        expression_silver_specialsstart,
-        expression_silver_specialairsstart,
-        expression_silver_specials,
-        expression_silver_specialairs,
-        expression_silver_specialhistart,
-        expression_silver_specialairhistart,
-        expression_silver_specialhi,
-        expression_silver_specialairhi,
-        expression_silver_speciallw,
-        expression_silver_specialairlw,
-        expression_silver_appealsl,
-        expression_silver_appealsr,
-        expression_silver_appealhil,
-        expression_silver_appealhir
-    );
+    Agent::new("mewtwo")
+    .expression_acmd("expression_attack11_silver", expression_silver_Attack11)
+    .expression_acmd("expression_attackdash_silver", expression_silver_AttackDash)
+    .expression_acmd("expression_attacks3hi_silver", expression_silver_AttackS3Hi)
+    .expression_acmd("expression_attacks3_silver", expression_silver_AttackS3)
+    .expression_acmd("expression_attacks3lw_silver", expression_silver_AttackS3Lw)
+    .expression_acmd("expression_attackhi3_silver", expression_silver_AttackHi3)
+    .expression_acmd("expression_attacklw3_silver", expression_silver_AttackLw3)
+    .expression_acmd("expression_attacks4hi_silver", expression_silver_AttackS4Hi)
+    .expression_acmd("expression_attacks4_silver", expression_silver_AttackS4)
+    .expression_acmd("expression_attacks4lw_silver", expression_silver_AttackS4Lw)
+    .expression_acmd("expression_attackhi4_silver", expression_silver_AttackHi4)
+    .expression_acmd("expression_attacklw4_silver", expression_silver_AttackLw4)
+    .expression_acmd("expression_attackairn_silver", expression_silver_AttackAirN)
+    .expression_acmd("expression_attackairf_silver", expression_silver_AttackAirF)    
+    .expression_acmd("expression_attackairb_silver", expression_silver_AttackAirB)
+    .expression_acmd("expression_attackairhi_silver", expression_silver_AttackAirHi)
+    .expression_acmd("expression_attackairlw_silver", expression_silver_AttackAirLw)
+    .expression_acmd("expression_throwf_silver", expression_silver_ThrowF)
+    .expression_acmd("expression_throwb_silver", expression_silver_ThrowB)
+    .expression_acmd("expression_throwhi_silver", expression_silver_ThrowHi)
+    .expression_acmd("expression_throwlw_silver", expression_silver_ThrowLw)
+    .expression_acmd("expression_specialnstart_silver", expression_silver_SpecialNStart)
+    .expression_acmd("expression_specialairnstart_silver", expression_silver_SpecialAirNStart)
+    .expression_acmd("expression_specialnshoot_silver", expression_silver_SpecialNShoot)
+    .expression_acmd("expression_specialairnshoot_silver", expression_silver_SpecialAirNShoot)
+    .expression_acmd("expression_specialsstart_silver", expression_silver_SpecialSStart)
+    .expression_acmd("expression_specialairsstart_silver", expression_silver_SpecialAirSStart)
+    .expression_acmd("expression_specials_silver", expression_silver_SpecialS)
+    .expression_acmd("expression_specialairs_silver", expression_silver_SpecialAirS)
+    .expression_acmd("expression_specialhistart_silver", expression_silver_SpecialHiStart)
+    .expression_acmd("expression_specialairhistart_silver", expression_silver_SpecialAirHiStart)
+    .expression_acmd("expression_specialhi_silver", expression_silver_SpecialHi)
+    .expression_acmd("expression_specialairhi_silver", expression_silver_SpecialAirHi)
+    .expression_acmd("expression_speciallw_silver", expression_silver_SpecialLw)
+    .expression_acmd("expression_specialairlw_silver", expression_silver_SpecialAirLw)
+    .expression_acmd("expression_run_silver", expression_silver_Run)
+    .expression_acmd("expression_walkslow_silver", expression_silver_WalkSlow)
+    .expression_acmd("expression_walkmiddle_silver", expression_silver_WalkMiddle)
+    .expression_acmd("expression_walkfast_silver", expression_silver_WalkFast)
+    .expression_acmd("expression_runbrakel_silver", expression_silver_RunBrakeL)
+    .expression_acmd("expression_runbraker_silver", expression_silver_RunBrakeR)
+    .expression_acmd("expression_turnrunbrake_silver", expression_silver_TurnRunBrake)
+    .expression_acmd("expression_appealsr_silver", expression_silver_AppealSR)
+    .expression_acmd("expression_appealsl_silver", expression_silver_AppealSL)
+    .expression_acmd("expression_appealhir_silver", expression_silver_AppealHiR)
+    .expression_acmd("expression_appealhil_silver", expression_silver_AppealHiL)
+    .install();
 }
 

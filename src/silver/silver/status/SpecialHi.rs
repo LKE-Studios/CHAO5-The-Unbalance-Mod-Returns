@@ -6,7 +6,7 @@ unsafe extern "C" fn status_silver_SpecialHi_Main(fighter: &mut L2CFighterCommon
     let SILVER = color >= 120 && color <= 127;
     if SILVER {
         fighter.set_situation(SITUATION_KIND_AIR.into());
-        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FREE);
         KineticModule::clear_speed_all(fighter.module_accessor);
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
@@ -29,12 +29,12 @@ unsafe extern "C" fn status_silver_SpecialHi_Main(fighter: &mut L2CFighterCommon
 
 unsafe extern "C" fn silver_SpecialHi_Sub_Status(fighter: &mut L2CFighterCommon, param_3: L2CValue) -> L2CValue {
     if !param_3.get_bool() {
-        WorkModule::count_down_int(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_MOVE_WAIT_FRAME);
+        WorkModule::count_down_int(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_MOVE_WAIT_FRAME, 0);
     }
     0.into()
 }
 
-unsafe extern "C" fn silver_SpecialHi_function(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn silver_SpecialHi_function(fighter: &mut L2CFighterCommon) {
     HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
     VisibilityModule::set_whole(fighter.module_accessor, false);
     notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
@@ -50,7 +50,7 @@ unsafe extern "C" fn silver_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) 
     //Vanilla Main_loop for Mewtwo
     if !fighter.sub_transition_group_check_air_cliff().get_bool() {
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_FLAG_MOVE_WAIT) {
-            let wait_frame = WorkModule::get_int(fighter.module_accessor, FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_MOVE_WAIT_FRAME);
+            let wait_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_MOVE_WAIT_FRAME);
             if wait_frame >= 0 {
                 fighter.change_status(FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_2.into(), false.into());
             }
@@ -58,7 +58,7 @@ unsafe extern "C" fn silver_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) 
         else {
             if MotionModule::is_end(fighter.module_accessor) {
                 let move_wait_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi"), hash40("move_wait_frame"));
-                let cliff_check = GroundModule::cliff_check(fighter.module_accessor);
+                let cliff_check = GroundModule::cliff_check(fighter.module_accessor) as i32;
                 WorkModule::set_int(fighter.module_accessor, move_wait_frame, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_MOVE_WAIT_FRAME);
                 WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_FLAG_MOVE_WAIT);
                 WorkModule::set_int(fighter.module_accessor, cliff_check, *FIGHTER_MEWTWO_STATUS_SPECIAL_HI_WORK_INT_CLIFF_CHECK);

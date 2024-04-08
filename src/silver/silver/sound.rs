@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//Attack11
-    agent = "mewtwo", 
-    script = "sound_attack11_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attack11(fighter: &mut L2CAgentBase) {
+//Attack11
+unsafe extern "C" fn sound_silver_Attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_h01"));
@@ -13,12 +9,8 @@ unsafe fn sound_silver_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "mewtwo", 
-    script = "sound_attackdash_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn sound_silver_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
@@ -26,12 +18,8 @@ unsafe fn sound_silver_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi
-    agent = "mewtwo", 
-    script = "sound_attacks3hi_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi
+unsafe extern "C" fn sound_silver_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
@@ -39,12 +27,8 @@ unsafe fn sound_silver_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3
-    agent = "mewtwo", 
-    script = "sound_attacks3_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3
+unsafe extern "C" fn sound_silver_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
@@ -52,12 +36,8 @@ unsafe fn sound_silver_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw
-    agent = "mewtwo", 
-    script = "sound_attacks3lw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw
+unsafe extern "C" fn sound_silver_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
@@ -65,12 +45,8 @@ unsafe fn sound_silver_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
-    agent = "mewtwo", 
-    script = "sound_attackhi3_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3
+unsafe extern "C" fn sound_silver_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attack100_02"));
@@ -78,24 +54,16 @@ unsafe fn sound_silver_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3 
-    agent = "mewtwo", 
-    script = "sound_attacklw3_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3 
+unsafe extern "C" fn sound_silver_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_b01"));
     }
 }
 
-#[acmd_script(//AttackS4Hi
-    agent = "mewtwo", 
-    script = "sound_attacks4hi_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks4hi(fighter: &mut L2CAgentBase) {
+//AttackS4Hi
+unsafe extern "C" fn sound_silver_AttackS4Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -107,12 +75,8 @@ unsafe fn sound_silver_attacks4hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4
-    agent = "mewtwo", 
-    script = "sound_attacks4_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn sound_silver_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -124,12 +88,8 @@ unsafe fn sound_silver_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Lw
-    agent = "mewtwo", 
-    script = "sound_attacks4lw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacks4lw(fighter: &mut L2CAgentBase) {
+//AttackS4Lw
+unsafe extern "C" fn sound_silver_AttackS4Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -141,12 +101,8 @@ unsafe fn sound_silver_attacks4lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4
-    agent = "mewtwo", 
-    script = "sound_attackhi4_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4
+unsafe extern "C" fn sound_silver_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack04"));
@@ -157,12 +113,8 @@ unsafe fn sound_silver_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4 
-    agent = "mewtwo", 
-    script = "sound_attacklw4_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4 
+unsafe extern "C" fn sound_silver_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack05"));
@@ -173,12 +125,8 @@ unsafe fn sound_silver_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN 
-    agent = "mewtwo", 
-    script = "sound_attackairn_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN 
+unsafe extern "C" fn sound_silver_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_l02"));
@@ -187,12 +135,8 @@ unsafe fn sound_silver_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "mewtwo", 
-    script = "sound_attackairf_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn sound_silver_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_silver_attackair_f02"));
@@ -203,24 +147,16 @@ unsafe fn sound_silver_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//LandingAirF 
-    agent = "mewtwo", 
-    script = "sound_landingairf_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_landingairf(fighter: &mut L2CAgentBase) {
+//LandingAirF 
+unsafe extern "C" fn sound_silver_LandingAirF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_mewtwo_final_01"));
         STOP_SE(fighter, Hash40::new("se_mewtwo_special_n08"));
     }
 }
 
-#[acmd_script(//AttackAirB 
-    agent = "mewtwo", 
-    script = "sound_attackairb_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB 
+unsafe extern "C" fn sound_silver_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_l02"));
@@ -228,12 +164,8 @@ unsafe fn sound_silver_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi 
-    agent = "mewtwo", 
-    script = "sound_attackairhi_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi 
+unsafe extern "C" fn sound_silver_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_f01"));
@@ -241,12 +173,8 @@ unsafe fn sound_silver_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw 
-    agent = "mewtwo", 
-    script = "sound_attackairlw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw 
+unsafe extern "C" fn sound_silver_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_throw_f02"));
@@ -254,23 +182,15 @@ unsafe fn sound_silver_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF 
-    agent = "mewtwo", 
-    script = "sound_throwf_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF 
+unsafe extern "C" fn sound_silver_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_special_s01"));
     }
 }
 
-#[acmd_script(//ThrowB 
-    agent = "mewtwo", 
-    script = "sound_throwb_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_throwb(fighter: &mut L2CAgentBase) {
+//ThrowB 
+unsafe extern "C" fn sound_silver_ThrowB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_throw_b"));
@@ -286,12 +206,8 @@ unsafe fn sound_silver_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi 
-    agent = "mewtwo", 
-    script = "sound_throwhi_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi 
+unsafe extern "C" fn sound_silver_ThrowHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_throw_f"));
@@ -307,12 +223,8 @@ unsafe fn sound_silver_throwhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowLw 
-    agent = "mewtwo", 
-    script = "sound_throwlw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw 
+unsafe extern "C" fn sound_silver_ThrowLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_attackair_n01"));
@@ -324,21 +236,16 @@ unsafe fn sound_silver_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CliffAttack 
-    agent = "mewtwo", script = "sound_cliffattack_silver", category = ACMD_SOUND, low_priority )]
-unsafe fn sound_silver_cliffattack(fighter: &mut L2CAgentBase) {
+//CliffAttack 
+unsafe extern "C" fn sound_silver_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
     }
 }
 
-#[acmd_script(//DownAttackU 
-    agent = "mewtwo", 
-    script = "sound_downattacku_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_downattacku(fighter: &mut L2CAgentBase) {
+//DownAttackU 
+unsafe extern "C" fn sound_silver_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_rise"));
@@ -353,12 +260,8 @@ unsafe fn sound_silver_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD 
-    agent = "mewtwo", 
-    script = "sound_downattackd_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_downattackd(fighter: &mut L2CAgentBase) {
+//DownAttackD 
+unsafe extern "C" fn sound_silver_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_rise"));
@@ -373,12 +276,8 @@ unsafe fn sound_silver_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialNShoot, SpecialAirNShoot 
-    agent = "mewtwo", 
-    scripts = ["sound_specialnshoot_silver", "sound_specialairnshoot_silver"], 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialnshoot(fighter: &mut L2CAgentBase) {
+//SpecialNShoot
+unsafe extern "C" fn sound_silver_SpecialNShoot(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_escapeair"));
@@ -393,31 +292,39 @@ unsafe fn sound_silver_specialnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSStart 
-    agent = "mewtwo", 
-    script = "sound_specialsstart_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialsstart(fighter: &mut L2CAgentBase) {
+//SpecialAirNShoot 
+unsafe extern "C" fn sound_silver_SpecialAirNShoot(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_mewtwo_escapeair"));
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_mewtwo_rnd_attack"));
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_mewtwo_special_s03"));
+    }
+}
+
+//SpecialSStart 
+unsafe extern "C" fn sound_silver_SpecialSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attack100"));
     }
 }
 
-#[acmd_script(//SpecialS 
-    agent = "mewtwo",
-    script = "sound_specials_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specials(fighter: &mut L2CAgentBase) {
+//SpecialS 
+unsafe extern "C" fn sound_silver_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_mewtwo_special_n01"));
     }
     frame(fighter.lua_state_agent, 56.0);
     if is_excute(fighter) {
-        let rand_sound = smash::app::sv_math::rand(hash40("mewtwo"), 6);
+        let rand_sound = sv_math::rand(hash40("mewtwo"), 6);
         if rand_sound == 0 {
             PLAY_SE(fighter, Hash40::new("vc_silver_special_s02"));
         }
@@ -427,31 +334,23 @@ unsafe fn sound_silver_specials(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSStart 
-    agent = "mewtwo", 
-    script = "sound_specialairsstart_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialairsstart(fighter: &mut L2CAgentBase) {
+//SpecialAirSStart 
+unsafe extern "C" fn sound_silver_SpecialAirSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attack100"));
     }
 }
 
-#[acmd_script(//SpecialAirS 
-    agent = "mewtwo",
-    script = "sound_specialairs_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialairs(fighter: &mut L2CAgentBase) {
+//SpecialAirS 
+unsafe extern "C" fn sound_silver_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_mewtwo_special_n01"));
     }
     frame(fighter.lua_state_agent, 56.0);
     if is_excute(fighter) {
-        let rand_sound = smash::app::sv_math::rand(hash40("mewtwo"), 6);
+        let rand_sound = sv_math::rand(hash40("mewtwo"), 6);
         if rand_sound == 0 {
             PLAY_SE(fighter, Hash40::new("vc_silver_special_s02"));
         }
@@ -461,34 +360,24 @@ unsafe fn sound_silver_specialairs(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiStart 
-    agent = "mewtwo", 
-    script = "sound_specialhistart_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialhistart(fighter: &mut L2CAgentBase) {
+//SpecialHi
+unsafe extern "C" fn sound_silver_SpecialHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_mewtwo_special_n07"));
     }
 }
 
-#[acmd_script(//SpecialAirHiStart 
-    agent = "mewtwo", 
-    script = "sound_specialairhistart_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialairhistart(fighter: &mut L2CAgentBase) {
+//SpecialAirHi
+unsafe extern "C" fn sound_silver_SpecialAirHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_mewtwo_special_n07"));
     }
 }
 
-#[acmd_script(//SpecialLw 
-    agent = "mewtwo", 
-    script = "sound_speciallw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_speciallw(fighter: &mut L2CAgentBase) {
+//SpecialLw 
+unsafe extern "C" fn sound_silver_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_special_s01"));
@@ -496,12 +385,8 @@ unsafe fn sound_silver_speciallw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLw 
-    agent = "mewtwo", 
-    script = "sound_specialairlw_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_specialairlw(fighter: &mut L2CAgentBase) {
+//SpecialAirLw 
+unsafe extern "C" fn sound_silver_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_special_s01"));
@@ -509,13 +394,8 @@ unsafe fn sound_silver_specialairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-//Misc Scripts
-#[acmd_script(//Run 
-    agent = "mewtwo", 
-    script = "sound_run_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_run(fighter: &mut L2CAgentBase) {
+//Run 
+unsafe extern "C" fn sound_silver_Run(fighter: &mut L2CAgentBase) {
     for _ in 0..36 {
         wait(fighter.lua_state_agent, 10.0);
         if is_excute(fighter) {
@@ -528,60 +408,40 @@ unsafe fn sound_silver_run(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//RunBrakeR 
-    agent = "mewtwo", 
-    script = "sound_runbraker_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_runbraker(fighter: &mut L2CAgentBase) {
+//RunBrakeR 
+unsafe extern "C" fn sound_silver_RunBrakeR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_dash_stop"));
     }
 }
 
-#[acmd_script(//RunBrakeL 
-    agent = "mewtwo", 
-    script = "sound_runbrakel_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_runbrakel(fighter: &mut L2CAgentBase) {
+//RunBrakeL 
+unsafe extern "C" fn sound_silver_RunBrakeL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_dash_stop"));
     }
 }
 
-#[acmd_script(//TurnRun 
-    agent = "mewtwo", 
-    script = "sound_turnrun_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_turnrun(fighter: &mut L2CAgentBase) {
+//TurnRun 
+unsafe extern "C" fn sound_silver_TurnRun(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_dash_stop"));
     }
 }
 
-#[acmd_script(//EscapeAir 
-    agent = "mewtwo", 
-    script = "sound_escapeair_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_escapeair(fighter: &mut L2CAgentBase) {
+//EscapeAir 
+unsafe extern "C" fn sound_silver_EscapeAir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_escape02"));
     }
 }
 
-#[acmd_script(//EscapeAirSlide 
-    agent = "mewtwo", 
-    script = "sound_escapeairslide_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_escapeairslide(fighter: &mut L2CAgentBase) {
+//EscapeAirSlide 
+unsafe extern "C" fn sound_silver_EscapeAirSlide(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_appeal_l01_02"));
@@ -589,48 +449,32 @@ unsafe fn sound_silver_escapeairslide(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeN 
-    agent = "mewtwo", 
-    script = "sound_escapen_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_escapen(fighter: &mut L2CAgentBase) {
+//EscapeN 
+unsafe extern "C" fn sound_silver_EscapeN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_escape"));
     }
 }
 
-#[acmd_script(//EscapeF 
-    agent = "mewtwo", 
-    script = "sound_escapef_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_escapef(fighter: &mut L2CAgentBase) {
+//EscapeF 
+unsafe extern "C" fn sound_silver_EscapeF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_appeal_l01_02"));
     }
 }
 
-#[acmd_script(//EscapeB 
-    agent = "mewtwo", 
-    script = "sound_escapeb_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_escapeb(fighter: &mut L2CAgentBase) {
+//EscapeB 
+unsafe extern "C" fn sound_silver_EscapeB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_appeal_l01_02"));
     }
 }
 
-#[acmd_script(//AppealHiL 
-    agent = "mewtwo", 
-    script = "sound_appealhil_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appealhil(fighter: &mut L2CAgentBase) {
+//AppealHiL 
+unsafe extern "C" fn sound_silver_AppealHiL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_silver_appeal_h02"));
@@ -646,12 +490,8 @@ unsafe fn sound_silver_appealhil(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR 
-    agent = "mewtwo", 
-    script = "sound_appealhir_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appealhir(fighter: &mut L2CAgentBase) {
+//AppealHiR 
+unsafe extern "C" fn sound_silver_AppealHiR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_silver_appeal_h02"));
@@ -668,12 +508,8 @@ unsafe fn sound_silver_appealhir(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSL 
-    agent = "mewtwo", 
-    script = "sound_appealsl_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appealsl(fighter: &mut L2CAgentBase) {
+//AppealSL 
+unsafe extern "C" fn sound_silver_AppealSL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_jump02"));
@@ -684,12 +520,8 @@ unsafe fn sound_silver_appealsl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSR 
-    agent = "mewtwo", 
-    script = "sound_appealsr_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appealsr(fighter: &mut L2CAgentBase) {
+//AppealSR 
+unsafe extern "C" fn sound_silver_AppealSR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_mewtwo_jump02"));
@@ -700,36 +532,24 @@ unsafe fn sound_silver_appealsr(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealLwL 
-    agent = "mewtwo", 
-    script = "sound_appeallwl_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appeallwl(fighter: &mut L2CAgentBase) {
+//AppealLwL 
+unsafe extern "C" fn sound_silver_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_special_n07"));
     }
 }
 
-#[acmd_script(//AppealLwR 
-    agent = "mewtwo",
-    script = "sound_appeallwr_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_appeallwr(fighter: &mut L2CAgentBase) {
+//AppealLwR 
+unsafe extern "C" fn sound_silver_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_special_n07"));
     }
 }
 
-#[acmd_script(//Win1 
-    agent = "mewtwo", 
-    script = "sound_win1_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_win1(fighter: &mut L2CAgentBase) {
+//Win1 
+unsafe extern "C" fn sound_silver_Win1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("se_mewtwo_escape"));
@@ -740,12 +560,8 @@ unsafe fn sound_silver_win1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Win2 
-    agent = "mewtwo", 
-    script = "sound_win2_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_win2(fighter: &mut L2CAgentBase) {
+//Win2 
+unsafe extern "C" fn sound_silver_Win2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 38.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_mewtwo_win01_02"));
@@ -757,12 +573,8 @@ unsafe fn sound_silver_win2(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Win2 
-    agent = "mewtwo", 
-    script = "sound_win3_silver", 
-    category = ACMD_SOUND, 
-    low_priority )]
-unsafe fn sound_silver_win3(fighter: &mut L2CAgentBase) {
+//Win3 
+unsafe extern "C" fn sound_silver_Win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_mewtwo_win03_02"));
@@ -782,58 +594,59 @@ unsafe fn sound_silver_win3(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        sound_silver_attack11,
-        sound_silver_attackdash,
-        sound_silver_attacks3hi,
-        sound_silver_attacks3,
-        sound_silver_attacks3lw,
-        sound_silver_attackhi3,
-        sound_silver_attacklw3,
-        sound_silver_attacks4hi,
-        sound_silver_attacks4,
-        sound_silver_attacks4lw,
-        sound_silver_attackhi4,
-        sound_silver_attacklw4,
-        sound_silver_attackairn,
-        sound_silver_attackairf,
-        sound_silver_landingairf,
-        sound_silver_attackairb,
-        sound_silver_attackairhi,
-        sound_silver_attackairlw,
-        sound_silver_throwf,
-        sound_silver_throwb,
-        sound_silver_throwhi,
-        sound_silver_throwlw,
-        sound_silver_cliffattack,
-        sound_silver_downattacku,
-        sound_silver_downattackd,
-        sound_silver_specialnshoot,
-        sound_silver_specialsstart,
-        sound_silver_specials,
-        sound_silver_specialairsstart,
-        sound_silver_specialairs,
-        sound_silver_specialhistart,
-        sound_silver_specialairhistart,
-        sound_silver_speciallw,
-        sound_silver_specialairlw,
-        sound_silver_run,
-        sound_silver_runbraker,
-        sound_silver_runbrakel,
-        sound_silver_turnrun,
-        sound_silver_escapeair,
-        sound_silver_escapeairslide,
-        sound_silver_escapen,
-        sound_silver_escapef,
-        sound_silver_escapeb,
-        sound_silver_appealhil,
-        sound_silver_appealhir,
-        sound_silver_appealsl,
-        sound_silver_appealsr,
-        sound_silver_appeallwl,
-        sound_silver_appeallwr,
-        sound_silver_win1,
-        sound_silver_win2,
-        sound_silver_win3
-    );
+    Agent::new("mewtwo")
+    .sound_acmd("sound_attack11_silver", sound_silver_Attack11)
+    .sound_acmd("sound_attackdash_silver", sound_silver_AttackDash)
+    .sound_acmd("sound_attacks3hi_silver", sound_silver_AttackS3Hi)
+    .sound_acmd("sound_attacks3_silver", sound_silver_AttackS3)
+    .sound_acmd("sound_attacks3lw_silver", sound_silver_AttackS3Lw)
+    .sound_acmd("sound_attackhi3_silver", sound_silver_AttackHi3)
+    .sound_acmd("sound_attacklw3_silver", sound_silver_AttackLw3)
+    .sound_acmd("sound_attacks4hi_silver", sound_silver_AttackS4Hi)
+    .sound_acmd("sound_attacks4_silver", sound_silver_AttackS4)
+    .sound_acmd("sound_attacks4lw_silver", sound_silver_AttackS4Lw)
+    .sound_acmd("sound_attackhi4_silver", sound_silver_AttackHi4)
+    .sound_acmd("sound_attacklw4_silver", sound_silver_AttackLw4)
+    .sound_acmd("sound_attackairn_silver", sound_silver_AttackAirN)
+    .sound_acmd("sound_attackairf_silver", sound_silver_AttackAirF) 
+    .sound_acmd("sound_landingairf_silver", sound_silver_LandingAirF)    
+    .sound_acmd("sound_attackairb_silver", sound_silver_AttackAirB)
+    .sound_acmd("sound_attackairhi_silver", sound_silver_AttackAirHi)
+    .sound_acmd("sound_attackairlw_silver", sound_silver_AttackAirLw)
+    .sound_acmd("sound_throwf_silver", sound_silver_ThrowF)
+    .sound_acmd("sound_throwb_silver", sound_silver_ThrowB)
+    .sound_acmd("sound_throwhi_silver", sound_silver_ThrowHi)
+    .sound_acmd("sound_throwlw_silver", sound_silver_ThrowLw)
+    .sound_acmd("sound_downattackd_silver", sound_silver_DownAttackD)
+    .sound_acmd("sound_downattacku_silver", sound_silver_DownAttackU)
+    .sound_acmd("sound_cliffattack_silver", sound_silver_CliffAttack)
+    .sound_acmd("sound_specialnshoot_silver", sound_silver_SpecialNShoot)
+    .sound_acmd("sound_specialairnshoot_silver", sound_silver_SpecialAirNShoot)
+    .sound_acmd("sound_specialsstart_silver", sound_silver_SpecialSStart)
+    .sound_acmd("sound_specialairsstart_silver", sound_silver_SpecialAirSStart)
+    .sound_acmd("sound_specials_silver", sound_silver_SpecialS)
+    .sound_acmd("sound_specialairs_silver", sound_silver_SpecialAirS)
+    .sound_acmd("sound_specialhi_silver", sound_silver_SpecialHi)
+    .sound_acmd("sound_specialairhi_silver", sound_silver_SpecialAirHi)
+    .sound_acmd("sound_speciallw_silver", sound_silver_SpecialLw)
+    .sound_acmd("sound_specialairlw_silver", sound_silver_SpecialAirLw)
+    .sound_acmd("sound_run_silver", sound_silver_Run)
+    .sound_acmd("sound_runbrakel_silver", sound_silver_RunBrakeL)
+    .sound_acmd("sound_runbraker_silver", sound_silver_RunBrakeR)
+    .sound_acmd("sound_turnrun_silver", sound_silver_TurnRun)
+    .sound_acmd("sound_escapeair_silver", sound_silver_EscapeAir)
+    .sound_acmd("sound_escapeairslide_silver", sound_silver_EscapeAirSlide)
+    .sound_acmd("sound_escapen_silver", sound_silver_EscapeN)
+    .sound_acmd("sound_escapef_silver", sound_silver_EscapeF)
+    .sound_acmd("sound_escapeb_silver", sound_silver_EscapeB)
+    .sound_acmd("sound_win1_silver", sound_silver_Win1)
+    .sound_acmd("sound_win2_silver", sound_silver_Win2)
+    .sound_acmd("sound_win3_silver", sound_silver_Win3)
+    .sound_acmd("sound_appealsr_silver", sound_silver_AppealSR)
+    .sound_acmd("sound_appealsl_silver", sound_silver_AppealSL)
+    .sound_acmd("sound_appealhir_silver", sound_silver_AppealHiR)
+    .sound_acmd("sound_appealhil_silver", sound_silver_AppealHiL)
+    .sound_acmd("sound_appeallwr_silver", sound_silver_AppealLwR)
+    .sound_acmd("sound_appeallwl_silver", sound_silver_AppealLwL)
+    .install();
 }

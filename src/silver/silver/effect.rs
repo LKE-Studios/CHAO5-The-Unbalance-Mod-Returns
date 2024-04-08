@@ -1,5 +1,5 @@
 use crate::imports::BuildImports::*;
-use crate::silver::frame::*;
+use crate::silver::silver::frame::*;
 
 pub static mut BASE :  Vector3f =  Vector3f { x: 0.0, y: 2.8, z: -7.0 };
 pub static mut BASEDOWN :  Vector3f =  Vector3f { x: 0.0, y: 4.8, z: -7.0 };
@@ -21,12 +21,8 @@ pub static mut ROTDOWN :  Vector3f =  Vector3f { x: 90.0, y: 0.0, z: -30.0 };
 pub static mut COUNT : [i32; 8] = [0; 8];
 pub static mut SPECIAL_N_WALL : [bool; 8] = [true; 8];
 
-#[acmd_script(//Attack11
-    agent = "mewtwo", 
-    script = "effect_attack11_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attack11(fighter: &mut L2CAgentBase) {
+//Attack11
+unsafe extern "C" fn effect_silver_Attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -41,12 +37,8 @@ unsafe fn effect_silver_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "mewtwo", 
-    script = "effect_attackdash_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn effect_silver_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
@@ -63,12 +55,8 @@ unsafe fn effect_silver_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi
-    agent = "mewtwo", 
-    script = "effect_attacks3hi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi
+unsafe extern "C" fn effect_silver_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -88,12 +76,8 @@ unsafe fn effect_silver_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3 
-    agent = "mewtwo", 
-    script = "effect_attacks3_silver",
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3 
+unsafe extern "C" fn effect_silver_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -113,12 +97,8 @@ unsafe fn effect_silver_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw 
-    agent = "mewtwo", 
-    script = "effect_attacks3lw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw 
+unsafe extern "C" fn effect_silver_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -138,12 +118,8 @@ unsafe fn effect_silver_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
-    agent = "mewtwo", 
-    script = "effect_attackhi3_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3
+unsafe extern "C" fn effect_silver_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
@@ -160,12 +136,8 @@ unsafe fn effect_silver_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3
-    agent = "mewtwo", 
-    script = "effect_attacklw3_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3
+unsafe extern "C" fn effect_silver_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -182,12 +154,8 @@ unsafe fn effect_silver_attacklw3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Hi
-    agent = "mewtwo", 
-    script = "effect_attacks4hi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks4hi(fighter: &mut L2CAgentBase) {
+//AttackS4Hi
+unsafe extern "C" fn effect_silver_AttackS4Hi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 9, 12, 0, 0, 0, 0.9, true);
     }
@@ -217,12 +185,8 @@ unsafe fn effect_silver_attacks4hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Charge 
-    agent = "mewtwo", 
-    script = "effect_attacks4charge_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks4charge(fighter: &mut L2CAgentBase) {
+//AttackS4Charge 
+unsafe extern "C" fn effect_silver_AttackS4Charge(fighter: &mut L2CAgentBase) {
     for _ in 0..25 {
         frame(fighter.lua_state_agent, 3.0);
         if is_excute(fighter) {
@@ -237,12 +201,8 @@ unsafe fn effect_silver_attacks4charge(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4Charge
-    agent = "mewtwo", 
-    script = "effect_attackhi4charge_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackhi4charge(fighter: &mut L2CAgentBase) {
+//AttackHi4Charge
+unsafe extern "C" fn effect_silver_AttackHi4Charge(fighter: &mut L2CAgentBase) {
     for _ in 0..25 {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
@@ -253,12 +213,8 @@ unsafe fn effect_silver_attackhi4charge(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4Charge
-    agent = "mewtwo", 
-    script = "effect_attacklw4charge_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacklw4charge(fighter: &mut L2CAgentBase) {
+//AttackLw4Charge
+unsafe extern "C" fn effect_silver_AttackLw4Charge(fighter: &mut L2CAgentBase) {
     for _ in 0..25 {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
@@ -269,12 +225,8 @@ unsafe fn effect_silver_attacklw4charge(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4
-    agent = "mewtwo", 
-    script = "effect_attacks4_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn effect_silver_AttackS4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 9, 12, 0, 0, 0, 0.9, true);
     }
@@ -304,12 +256,8 @@ unsafe fn effect_silver_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Lw
-    agent = "mewtwo", 
-    script = "effect_attacks4lw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacks4lw(fighter: &mut L2CAgentBase) {
+//AttackS4Lw
+unsafe extern "C" fn effect_silver_AttackS4Lw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 9, 12, 0, 0, 0, 0.9, true);
     }
@@ -339,12 +287,8 @@ unsafe fn effect_silver_attacks4lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4
-    agent = "mewtwo", 
-    script = "effect_attackhi4_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4
+unsafe extern "C" fn effect_silver_AttackHi4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 14, 11, 0, 0, 0, 0.9, true);
     }
@@ -368,12 +312,8 @@ unsafe fn effect_silver_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4
-    agent = "mewtwo", 
-    script = "effect_attacklw4_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4
+unsafe extern "C" fn effect_silver_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 13, -6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
     }
@@ -397,12 +337,8 @@ unsafe fn effect_silver_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN 
-    agent = "mewtwo", 
-    script = "effect_attackairn_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN 
+unsafe extern "C" fn effect_silver_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_nenriki"), Hash40::new("throw"), 0, 0, 0, 0, 90, 0, 0.35, true);
@@ -425,12 +361,8 @@ unsafe fn effect_silver_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "mewtwo", 
-    script = "effect_attackairf_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn effect_silver_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_shadowball_hold"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.74, true);
@@ -445,23 +377,15 @@ unsafe fn effect_silver_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//LandingAirF 
-    agent = "mewtwo", 
-    script = "effect_landingairf_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_landingairf(fighter: &mut L2CAgentBase) {
+//LandingAirF 
+unsafe extern "C" fn effect_silver_LandingAirF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("mewtwo_shadowball_bomb"), Hash40::new("top"), 10, 3, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true);
     }
 }
 
-#[acmd_script(//AttackAirB 
-    agent = "mewtwo", 
-    script = "effect_attackairb_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB 
+unsafe extern "C" fn effect_silver_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -477,12 +401,8 @@ unsafe fn effect_silver_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi 
-    agent = "mewtwo", 
-    script = "effect_attackairhi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi 
+unsafe extern "C" fn effect_silver_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 17.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
@@ -499,12 +419,8 @@ unsafe fn effect_silver_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw 
-    agent = "mewtwo", 
-    script = "effect_attackairlw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw 
+unsafe extern "C" fn effect_silver_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.0, true, *EF_FLIP_NONE);
@@ -518,48 +434,32 @@ unsafe fn effect_silver_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchWait 
-    agent = "mewtwo", 
-    script = "effect_catchwait_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_catchwait(fighter: &mut L2CAgentBase) {
+//CatchWait 
+unsafe extern "C" fn effect_silver_CatchWait(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
     }
 }
 
-#[acmd_script(//CatchAttack 
-    agent = "mewtwo", 
-    script = "effect_catchattack_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_catchattack(fighter: &mut L2CAgentBase) {
+//CatchAttack 
+unsafe extern "C" fn effect_silver_CatchAttack(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
     }
 }
 
-#[acmd_script(//CatchPull 
-    agent = "mewtwo", 
-    script = "effect_catchpull_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_catchpull(fighter: &mut L2CAgentBase) {
+//CatchPull 
+unsafe extern "C" fn effect_silver_CatchPull(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
     }
 }
 
-#[acmd_script(//ThrowF 
-    agent = "mewtwo", 
-    script = "effect_throwf_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF 
+unsafe extern "C" fn effect_silver_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.45, true, *EF_FLIP_YZ);
     }
@@ -580,12 +480,8 @@ unsafe fn effect_silver_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB 
-    agent = "mewtwo", 
-    script = "effect_throwb_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_throwb(fighter: &mut L2CAgentBase) { 
+//ThrowB 
+unsafe extern "C" fn effect_silver_ThrowB(fighter: &mut L2CAgentBase) { 
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
@@ -600,12 +496,8 @@ unsafe fn effect_silver_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi 
-    agent = "mewtwo", 
-    script = "effect_throwhi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi 
+unsafe extern "C" fn effect_silver_ThrowHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
@@ -626,12 +518,8 @@ unsafe fn effect_silver_throwhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowLw 
-    agent = "mewtwo", 
-    script = "effect_throwlw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw 
+unsafe extern "C" fn effect_silver_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.45, true, *EF_FLIP_YZ);
     }
@@ -661,12 +549,8 @@ unsafe fn effect_silver_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CliffAttack 
-    agent = "mewtwo", 
-    script = "effect_cliffattack_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_cliffattack(fighter: &mut L2CAgentBase) {
+//CliffAttack 
+unsafe extern "C" fn effect_silver_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         EFFECT_FLIP(fighter, Hash40::new("sys_smash_flash"), Hash40::new("sys_smash_flash"), Hash40::new("top"), -3, 13.5, -1.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ);
@@ -686,12 +570,8 @@ unsafe fn effect_silver_cliffattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackU 
-    agent = "mewtwo", 
-    script = "effect_downattacku_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_downattacku(fighter: &mut L2CAgentBase) {
+//DownAttackU
+unsafe extern "C" fn effect_silver_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_r"), Hash40::new("sys_whirlwind_l"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -711,12 +591,8 @@ unsafe fn effect_silver_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD
-    agent = "mewtwo", 
-    script = "effect_downattackd_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_downattackd(fighter: &mut L2CAgentBase) {
+//DownAttackD
+unsafe extern "C" fn effect_silver_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_r"), Hash40::new("sys_whirlwind_l"), Hash40::new("top"), -2, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -736,12 +612,8 @@ unsafe fn effect_silver_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialNShoot 
-    agent = "mewtwo", 
-    script = "effect_specialnshoot_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialnshoot(fighter: &mut L2CAgentBase) {
+//SpecialNShoot 
+unsafe extern "C" fn effect_silver_SpecialNShoot(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_shadowball_max_hand"), false, false);
@@ -770,12 +642,8 @@ unsafe fn effect_silver_specialnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirNShoot 
-    agent = "mewtwo", 
-    script = "effect_specialairnshoot_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairnshoot(fighter: &mut L2CAgentBase) {
+//SpecialAirNShoot 
+unsafe extern "C" fn effect_silver_SpecialAirNShoot(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_shadowball_max_hand"), false, false);
@@ -796,151 +664,8 @@ unsafe fn effect_silver_specialairnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Shoot 
-    agent = "mewtwo_shadowball", 
-    script = "effect_shoot_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_beam_shoot(fighter: &mut L2CAgentBase) {
-    let mut shoot : u32 = 0;
-    let mut trail : u32 = 0;
-    let mut trail2 : u32 = 0;
-    let mut trail3 : u32 = 0;
-    let mut trail4 : u32 = 0;
-    let shadowball_boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    let module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(shadowball_boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-	let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let status_kind = StatusModule::status_kind(module_accessor);
-    COUNT[ENTRY_ID] = 0;
-    SPECIAL_N_WALL[ENTRY_ID] = true;
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_shadowball_max_hand"), false, false);
-        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_shadowball"), true, true);
-        shoot = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_cut_shock"), Hash40::new("top"), &BASE, &ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-        EffectModule::set_rate(fighter.module_accessor, shoot, 2.4); 
-        EffectModule::set_rgb(fighter.module_accessor, shoot, 0.0, 1.0, 1.0);
-        let scale = Vector3f { x: 1.0, y: 0.35, z: 0.6};
-        EffectModule::set_scale(fighter.module_accessor, shoot, &scale);
-        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_flyroll_aura"), Hash40::new("sys_flyroll_aura"), Hash40::new("top"), 0, 0, -2, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-        LAST_EFFECT_SET_ALPHA(fighter, 0.1);
-        LAST_EFFECT_SET_RATE(fighter, 0.25);
-    } 
-    frame(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        EffectModule::set_rate(fighter.module_accessor, shoot, 0.0); 
-    }
-    frame(fighter.lua_state_agent, 7.0);
-    for _ in 0..5 {
-        if COUNT[ENTRY_ID] == 0 {
-            trail = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_cut_shock"), Hash40::new("top"), &BASE_TRAIL, &ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rate(fighter.module_accessor, trail, 2.4); 
-            EffectModule::set_alpha(fighter.module_accessor, trail, 0.8); 
-            EffectModule::set_rgb(fighter.module_accessor, trail, 0.2, 1.0, 1.0);
-            let scale2 = Vector3f { x: 0.9, y: 0.35, z: 0.55};
-            EffectModule::set_scale(fighter.module_accessor, trail, &scale2);
-            wait(fighter.lua_state_agent, 4.0);
-            if is_excute(fighter) {
-                EffectModule::set_rate(fighter.module_accessor, trail, 0.0); 
-                COUNT[ENTRY_ID] += 1;
-            }
-            wait(fighter.lua_state_agent, 6.0);
-        }
-        else if COUNT[ENTRY_ID] == 1 {
-            trail2 = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_cut_shock"), Hash40::new("top"), &BASE_TRAIL2, &ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rate(fighter.module_accessor, trail2, 2.4); 
-            EffectModule::set_alpha(fighter.module_accessor, trail2, 0.6); 
-            EffectModule::set_rgb(fighter.module_accessor, trail2, 0.4, 1.0, 1.0);
-            let scale3 = Vector3f { x: 0.85, y: 0.35, z: 0.5};
-            EffectModule::set_scale(fighter.module_accessor, trail2, &scale3);
-
-            wait(fighter.lua_state_agent, 4.0);
-            if is_excute(fighter) {
-                EffectModule::set_rate(fighter.module_accessor, trail2, 0.0); 
-                COUNT[ENTRY_ID] += 1;
-            }
-            wait(fighter.lua_state_agent, 6.0);
-        }
-        else if COUNT[ENTRY_ID] == 2 {
-            trail3 = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_cut_shock"), Hash40::new("top"), &BASE_TRAIL3, &ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rate(fighter.module_accessor, trail3, 2.4); 
-            EffectModule::set_alpha(fighter.module_accessor, trail3, 0.4); 
-            EffectModule::set_rgb(fighter.module_accessor, trail3, 0.6, 1.0, 1.0);
-            let scale4 = Vector3f { x: 0.8, y: 0.35, z: 0.45};
-            EffectModule::set_scale(fighter.module_accessor, trail3, &scale4);
-
-            wait(fighter.lua_state_agent, 4.0);
-            if is_excute(fighter) {
-                EffectModule::set_rate(fighter.module_accessor, trail3, 0.0); 
-                COUNT[ENTRY_ID] += 1;
-            }
-            wait(fighter.lua_state_agent, 6.0);
-        }
-        else if COUNT[ENTRY_ID] == 3 {
-            trail4 = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_cut_shock"), Hash40::new("top"), &BASE_TRAIL4, &ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rate(fighter.module_accessor, trail4, 2.4); 
-            EffectModule::set_alpha(fighter.module_accessor, trail4, 0.2); 
-            EffectModule::set_rgb(fighter.module_accessor, trail4, 0.8, 1.0, 1.0);
-            let scale5 = Vector3f { x: 0.75, y: 0.35, z: 0.4};
-            EffectModule::set_scale(fighter.module_accessor, trail4, &scale5);
-            wait(fighter.lua_state_agent, 4.0);
-            if is_excute(fighter) {
-                EffectModule::set_rate(fighter.module_accessor, trail4, 0.0); 
-                COUNT[ENTRY_ID] += 1;
-            }
-            wait(fighter.lua_state_agent, 6.0);
-        }
-    }
-    frame(fighter.lua_state_agent, 46.0);
-    if is_excute(fighter) {
-        SPECIAL_N_WALL[ENTRY_ID] = false;
-        EFFECT(fighter, Hash40::new("mewtwo_shadowball_bomb"), Hash40::new("top"), 0, 0, -1, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, true);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-        let scale = Vector3f { x: 0.001, y: 0.001, z: 0.001};
-        EffectModule::set_scale(fighter.module_accessor, shoot, &scale);
-        EffectModule::set_scale(fighter.module_accessor, trail, &scale);
-    }
-    frame(fighter.lua_state_agent, 50.0);
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("sys_flyroll_aura"), true, true);
-        let scale = Vector3f { x: 0.001, y: 0.001, z: 0.001};
-        EffectModule::set_scale(fighter.module_accessor, trail2, &scale);
-    }
-    frame(fighter.lua_state_agent, 53.0);
-    if is_excute(fighter) {
-        let scale = Vector3f { x: 0.001, y: 0.001, z: 0.001};
-        EffectModule::set_scale(fighter.module_accessor, trail3, &scale);
-    }
-    frame(fighter.lua_state_agent, 55.0);
-    if is_excute(fighter) {
-        let scale = Vector3f { x: 0.001, y: 0.001, z: 0.001};
-        EffectModule::set_scale(fighter.module_accessor, trail4, &scale);
-    }
-}
-
-#[acmd_script(//HitGround 
-    agent = "mewtwo_shadowball", 
-    script = "effect_hitground_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_beam_hitground(fighter: &mut L2CAgentBase) {
-    let shadowball_boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    let module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(shadowball_boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-	let ENTRY_ID = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_shadowball"), true, true);
-        if SPECIAL_N_WALL[ENTRY_ID] {
-            EFFECT(fighter, Hash40::new("mewtwo_shadowball_bomb"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
-        }
-    }
-}
-
-#[acmd_script(//SpecialSStart 
-    agent = "mewtwo", 
-    script = "effect_specialsstart_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialsstart(fighter: &mut L2CAgentBase) {
+//SpecialSStart 
+unsafe extern "C" fn effect_silver_SpecialSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 9, 8, 0, 0, 0, 0.9, true);
@@ -955,12 +680,8 @@ unsafe fn effect_silver_specialsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS 
-    agent = "mewtwo", 
-    script = "effect_specials_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specials(fighter: &mut L2CAgentBase) {
+//SpecialS 
+unsafe extern "C" fn effect_silver_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.65);
@@ -986,12 +707,8 @@ unsafe fn effect_silver_specials(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSStart 
-    agent = "mewtwo", 
-    script = "effect_specialairsstart_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairsstart(fighter: &mut L2CAgentBase) {
+//SpecialAirSStart 
+unsafe extern "C" fn effect_silver_SpecialAirSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 9, 8, 0, 0, 0, 0.9, true);
@@ -1006,12 +723,8 @@ unsafe fn effect_silver_specialairsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS 
-    agent = "mewtwo", 
-    script = "effect_specialairs_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairs(fighter: &mut L2CAgentBase) {
+//SpecialAirS 
+unsafe extern "C" fn effect_silver_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.65);
@@ -1037,24 +750,16 @@ unsafe fn effect_silver_specialairs(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiStart 
-    agent = "mewtwo", 
-    script = "effect_specialhistart_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialhistart(fighter: &mut L2CAgentBase) {
+//SpecialHiStart 
+unsafe extern "C" fn effect_silver_SpecialHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent,4.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
     }
 }
 
-#[acmd_script(//SpecialHi 
-    agent = "mewtwo", 
-    script = "effect_specialhi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialhi(fighter: &mut L2CAgentBase) {
+//SpecialHi 
+unsafe extern "C" fn effect_silver_SpecialHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.45);
@@ -1076,24 +781,16 @@ unsafe fn effect_silver_specialhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHiStart 
-    agent = "mewtwo", 
-    script = "effect_specialairhistart_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairhistart(fighter: &mut L2CAgentBase) {
+//SpecialAirHiStart 
+unsafe extern "C" fn effect_silver_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent,4.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_just_shield"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
     }
 }
 
-#[acmd_script(//SpecialAirHi 
-    agent = "mewtwo", 
-    script = "effect_specialairhi_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairhi(fighter: &mut L2CAgentBase) {
+//SpecialAirHi 
+unsafe extern "C" fn effect_silver_SpecialAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.45);
@@ -1115,12 +812,8 @@ unsafe fn effect_silver_specialairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLw 
-    agent = "mewtwo", 
-    script = "effect_speciallw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_speciallw(fighter: &mut L2CAgentBase) {
+//SpecialLw 
+unsafe extern "C" fn effect_silver_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
@@ -1143,12 +836,8 @@ unsafe fn effect_silver_speciallw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLw 
-    agent = "mewtwo", 
-    script = "effect_specialairlw_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_specialairlw(fighter: &mut L2CAgentBase) {
+//SpecialAirLw 
+unsafe extern "C" fn effect_silver_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
@@ -1174,25 +863,16 @@ unsafe fn effect_silver_specialairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-//Misc Scripts
-#[acmd_script(//Dash 
-    agent = "mewtwo", 
-    script = "effect_dash_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_dash(fighter: &mut L2CAgentBase) {
+//Dash
+unsafe extern "C" fn effect_silver_Dash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
-#[acmd_script(//Run 
-    agent = "mewtwo", 
-    script = "effect_run_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_run(fighter: &mut L2CAgentBase) {
+//Run 
+unsafe extern "C" fn effect_silver_Run(fighter: &mut L2CAgentBase) {
     for _ in 0..35 {
         wait(fighter.lua_state_agent, 10.0);
         if is_excute(fighter) {
@@ -1205,12 +885,8 @@ unsafe fn effect_silver_run(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//RunBrakeR 
-    agent = "mewtwo", 
-    script = "effect_runbraker_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_runbraker(fighter: &mut L2CAgentBase) {
+//RunBrakeR 
+unsafe extern "C" fn effect_silver_RunBrakeR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 9, 0, 0, 0, 180, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -1218,12 +894,8 @@ unsafe fn effect_silver_runbraker(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 8.0);
 }
 
-#[acmd_script(//RunBrakeL 
-    agent = "mewtwo", 
-    script = "effect_runbrakel_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_runbrakel(fighter: &mut L2CAgentBase) {
+//RunBrakeL 
+unsafe extern "C" fn effect_silver_RunBrakeL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 9, 0, 0, 0, 180, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -1231,24 +903,16 @@ unsafe fn effect_silver_runbrakel(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 8.0);
 }
 
-#[acmd_script(//TurnRun 
-    agent = "mewtwo", 
-    script = "effect_turnrun_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_turnrun(fighter: &mut L2CAgentBase) {
+//TurnRun 
+unsafe extern "C" fn effect_silver_TurnRun(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), -5, 0, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
-#[acmd_script(//EscapeAirSlide 
-    agent = "mewtwo", 
-    script = "effect_escapeairslide_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_escapeairslide(fighter: &mut L2CAgentBase) {
+//EscapeAirSlide 
+unsafe extern "C" fn effect_silver_EscapeAirSlide(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -1340,12 +1004,8 @@ unsafe fn effect_silver_escapeairslide(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeN 
-    agent = "mewtwo", 
-    script = "effect_escapen_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_escapen(fighter: &mut L2CAgentBase) {
+//EscapeN 
+unsafe extern "C" fn effect_silver_EscapeN(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
@@ -1355,12 +1015,8 @@ unsafe fn effect_silver_escapen(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeF 
-    agent = "mewtwo", 
-    script = "effect_escapef_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_escapef(fighter: &mut L2CAgentBase) {
+//EscapeF 
+unsafe extern "C" fn effect_silver_EscapeF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.65);
     }
@@ -1378,12 +1034,8 @@ unsafe fn effect_silver_escapef(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeB 
-    agent = "mewtwo", 
-    script = "effect_escapeb_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_escapeb(fighter: &mut L2CAgentBase) {
+//EscapeB 
+unsafe extern "C" fn effect_silver_EscapeB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FLASH(fighter, 0.0, 1.0, 1.0, 0.65);
     }
@@ -1401,36 +1053,24 @@ unsafe fn effect_silver_escapeb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Wait2 
-    agent = "mewtwo", 
-    script = "effect_wait2_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_wait2(fighter: &mut L2CAgentBase) {
+//Wait2 
+unsafe extern "C" fn effect_silver_Wait2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 185.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.36, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
-#[acmd_script(//Wait3 
-    agent = "mewtwo", 
-    script = "effect_wait3_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_wait3(fighter: &mut L2CAgentBase) {
+//Wait3 
+unsafe extern "C" fn effect_silver_Wait3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 185.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.36, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
-#[acmd_script(//AppealHiL
-    agent = "mewtwo", 
-    script = "effect_appealhil_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appealhil(fighter: &mut L2CAgentBase) {
+//AppealHiL
+unsafe extern "C" fn effect_silver_AppealHiL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_l"), Hash40::new("sys_whirlwind_r"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -1445,12 +1085,8 @@ unsafe fn effect_silver_appealhil(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR 
-    agent = "mewtwo", 
-    script = "effect_appealhir_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appealhir(fighter: &mut L2CAgentBase) {
+//AppealHiR 
+unsafe extern "C" fn effect_silver_AppealHiR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_l"), Hash40::new("sys_whirlwind_r"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -1465,12 +1101,8 @@ unsafe fn effect_silver_appealhir(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSL 
-    agent = "mewtwo", 
-    script = "effect_appealsl_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appealsl(fighter: &mut L2CAgentBase) {
+//AppealSL 
+unsafe extern "C" fn effect_silver_AppealSL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_l"), Hash40::new("sys_whirlwind_r"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -1481,12 +1113,8 @@ unsafe fn effect_silver_appealsl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealSR 
-    agent = "mewtwo", 
-    script = "effect_appealsr_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appealsr(fighter: &mut L2CAgentBase) {
+//AppealSR 
+unsafe extern "C" fn effect_silver_AppealSR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_whirlwind_l"), Hash40::new("sys_whirlwind_r"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -1497,12 +1125,8 @@ unsafe fn effect_silver_appealsr(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealLwL 
-    agent = "mewtwo", 
-    script = "effect_appeallwl_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appeallwl(fighter: &mut L2CAgentBase) {
+//AppealLwL 
+unsafe extern "C" fn effect_silver_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 59.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_appeal_aura"), Hash40::new("top"), 0, -1.5, 0, 0, 0, 0, 0.8, true);
@@ -1513,12 +1137,8 @@ unsafe fn effect_silver_appeallwl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealLwR 
-    agent = "mewtwo", 
-    script = "effect_appeallwr_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_appeallwr(fighter: &mut L2CAgentBase) {
+//AppealLwR 
+unsafe extern "C" fn effect_silver_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 59.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_appeal_aura"), Hash40::new("top"), 0, -1.5, 0, 0, 0, 0, 0.8, true);
@@ -1529,12 +1149,8 @@ unsafe fn effect_silver_appeallwr(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Win1 
-    agent = "mewtwo", 
-    script = "effect_win1_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_win1(fighter: &mut L2CAgentBase) {
+//Win1 
+unsafe extern "C" fn effect_silver_Win1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_entry"), Hash40::new("hip"), 0, 0, 0, 0, 0, -90, 1, true);
     }
@@ -1545,24 +1161,16 @@ unsafe fn effect_silver_win1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//WinWait1 
-    agent = "mewtwo", 
-    script = "effect_win1wait_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_win1wait(fighter: &mut L2CAgentBase) {
+//WinWait1 
+unsafe extern "C" fn effect_silver_Win1Wait(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0, 0, 0, 0.4, true);
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0.0, 0.0, 0.0, 0, 0, 0, 0.4, true);
     }
 }
 
-#[acmd_script(//Win3 
-    agent = "mewtwo", 
-    script = "effect_win3_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_win3(fighter: &mut L2CAgentBase) {
+//Win3 
+unsafe extern "C" fn effect_silver_Win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 115.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0, 0, 0, 0.4, true);
@@ -1570,126 +1178,32 @@ unsafe fn effect_silver_win3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Win3Wait 
-    agent = "mewtwo", 
-    script = "effect_win3wait_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_win3wait(fighter: &mut L2CAgentBase) {
+//Win3Wait 
+unsafe extern "C" fn effect_silver_Win3Wait(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0, 0, 0, 0.4, true);
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), 0.0, 0.0, 0.0, 0, 0, 0, 0.4, true);
     }
 }
 
-#[acmd_script(//Final, FinalAir 
-    agent = "mewtwo", 
-    scripts = ["effect_final_silver","effect_finalair_silver"], 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_final(fighter: &mut L2CAgentBase) {
+//Final
+unsafe extern "C" fn effect_silver_Final(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_mewtwo_final"), false, false, false);
         FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1.2, *GROUND, *EFFECT_SCREEN_PRIO_FINAL);
     }
 }
 
-#[acmd_script(//Hit 
-    agent = "mewtwo_psychobreak", 
-    script = "effect_hit_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_psychobreak_hit(fighter: &mut L2CAgentBase) {
+//FinalAir 
+unsafe extern "C" fn effect_silver_FinalAir(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_final_attack"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.45, false);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-    }
-    frame(fighter.lua_state_agent, 67.0);
-    if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("mewtwo_final_hit"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-        QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_mewtwo_final"), false, false, false);
+        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1.2, *GROUND, *EFFECT_SCREEN_PRIO_FINAL);
     }
 }
 
-#[acmd_script(//Final 
-    agent = "mewtwo_mewtwom", 
-    script = "effect_final_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_mewtwom_final_eff(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_final_aura"), Hash40::new("head"), 0, -3, 0, 0, 0, 0, 0.6, false);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_final_aura"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 0.7, false);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-    }
-}
-
-#[acmd_script(//FinalEnd 
-    agent = "mewtwo_mewtwom", 
-    script = "effect_finalend_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_mewtwom_finalend(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_final_shot"), false, false);
-        BURN_COLOR(fighter, 1, 0.0, 1.0, 1.0);
-    }
-    wait(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        BURN_COLOR_FRAME(fighter, 5, 1, 1.0, 1.0, 1);
-    }
-    wait(fighter.lua_state_agent, 10.0);
-    if is_excute(fighter) {
-        BURN_COLOR_NORMAL(fighter);
-    }
-}
-
-#[acmd_script(//FinalShoot
-    agent = "mewtwo_mewtwom", 
-    script = "effect_finalshoot_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_mewtwom_finalshoot(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_final_shot_hold"), Hash40::new("arml"), 4, 0, -2, 0, 0, 0, 1, false);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-    }
-    frame(fighter.lua_state_agent, 30.0);
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_final_shot_hold"), false, false);
-        EFFECT_OFF_KIND(fighter, Hash40::new("0x161efe0679"), false, false);
-        EFFECT(fighter, Hash40::new("mewtwo_final_shot"), Hash40::new("top"), 0, 13, 8, 0, 0, 0, 0.6, 0, 0, 0, 50, 360, 50, true);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-    }
-    for _ in 0..90 {
-        wait(fighter.lua_state_agent, 1.0);
-        if is_excute(fighter) {
-            QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
-        }
-    }
-}
-
-#[acmd_script(//Move 
-    agent = "mewtwo_search", 
-    script = "effect_move_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_search_move(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_final_ball"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.49, true);
-        LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
-    }
-}
-
-#[acmd_script(//EntryL, EntryR 
-    agent = "mewtwo", 
-    scripts = ["effect_entryr_silver","effect_entryl_silver"], 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_entry(fighter: &mut L2CAgentBase) {
+//EntryL
+unsafe extern "C" fn effect_silver_EntryL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_entry"), Hash40::new("hip"), 0, 0, 0, 0, 0, -90, 1, true);
         FLASH(fighter, 1, 1, 1, 1);
@@ -1710,12 +1224,30 @@ unsafe fn effect_silver_entry(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//WalkSlow 
-    agent = "mewtwo", 
-    script = "effect_walkslow_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_walkslow(fighter: &mut L2CAgentBase) {
+//EntryR
+unsafe extern "C" fn effect_silver_EntryR(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("mewtwo_entry"), Hash40::new("hip"), 0, 0, 0, 0, 0, -90, 1, true);
+        FLASH(fighter, 1, 1, 1, 1);
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        FLASH_FRM(fighter, 3, 0.8, 0, 1, 0);
+    }
+    wait(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        COL_NORMAL(fighter);
+    }
+    frame(fighter.lua_state_agent, 41.0);
+    if is_excute(fighter) {
+        FOOT_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+        LAST_EFFECT_SET_RATE(fighter, 0.8);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+    }
+}
+
+//WalkSlow 
+unsafe extern "C" fn effect_silver_WalkSlow(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
@@ -1725,18 +1257,12 @@ unsafe fn effect_silver_walkslow(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 3, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//WalkMiddle 
-    agent = "mewtwo", 
-    script = "effect_walkmiddle_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_walkmiddle(fighter: &mut L2CAgentBase) {
+//WalkMiddle 
+unsafe extern "C" fn effect_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 4.0);
         if is_excute(fighter) {
@@ -1746,18 +1272,12 @@ unsafe fn effect_silver_walkmiddle(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 4, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
-#[acmd_script(//WalkFast 
-    agent = "mewtwo", 
-    script = "effect_walkfast_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_silver_walkfast(fighter: &mut L2CAgentBase) {
+//WalkFast 
+unsafe extern "C" fn effect_silver_WalkFast(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
@@ -1767,102 +1287,80 @@ unsafe fn effect_silver_walkfast(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footr"), 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
-    }
-}
-
-#[acmd_script(//Run 
-    agent = "mewtwo", 
-    script = "effect_run_silver", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_run(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
-        frame(fighter.lua_state_agent, 8.0);
-        if is_excute(fighter) {
-            FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
-        }
-        frame(fighter.lua_state_agent, 23.0);
-        if is_excute(fighter) {
-            FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
-        }
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 0);
-        wait_loop_clear(fighter.lua_state_agent);
+        wait_loop_clear(fighter);
     }
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        effect_silver_attack11,
-        effect_silver_attackdash,
-        effect_silver_attacks3hi,
-        effect_silver_attacks3,
-        effect_silver_attacks3lw,
-        effect_silver_attackhi3,
-        effect_silver_attacklw3,
-        effect_silver_attacks4charge,
-        effect_silver_attackhi4charge,
-        effect_silver_attacklw4charge,
-        effect_silver_attacks4hi,
-        effect_silver_attacks4,
-        effect_silver_attacks4lw,
-        effect_silver_attackhi4,
-        effect_silver_attacklw4,
-        effect_silver_attackairn,
-        effect_silver_attackairf,
-        effect_silver_landingairf,
-        effect_silver_attackairb,
-        effect_silver_attackairhi,
-        effect_silver_attackairlw,
-        effect_silver_catchwait,
-        effect_silver_catchattack,
-        effect_silver_catchpull,
-        effect_silver_throwf,
-        effect_silver_throwb,
-        effect_silver_throwhi,
-        effect_silver_throwlw,
-        effect_silver_cliffattack,
-        effect_silver_downattacku,
-        effect_silver_downattackd,
-        effect_silver_specialnshoot,
-        effect_silver_specialairnshoot,
-        effect_silver_beam_shoot,
-        effect_silver_beam_hitground,
-        effect_silver_specialsstart,
-        effect_silver_specials,
-        effect_silver_specialairsstart,
-        effect_silver_specialairs,
-        effect_silver_specialhistart,
-        effect_silver_specialhi,
-        effect_silver_specialairhistart,
-        effect_silver_specialairhi,
-        effect_silver_speciallw,
-        effect_silver_specialairlw,
-        effect_silver_dash,
-        effect_silver_run,
-        effect_silver_runbraker,
-        effect_silver_runbrakel,
-        effect_silver_turnrun,
-        effect_silver_escapeairslide,
-        effect_silver_escapen,
-        effect_silver_escapef,
-        effect_silver_escapeb,
-        effect_silver_wait2,
-        effect_silver_wait3,
-        effect_silver_appealhil,
-        effect_silver_appealhir,
-        effect_silver_appealsl,
-        effect_silver_appealsr,
-        effect_silver_appeallwl,
-        effect_silver_appeallwr,
-        effect_silver_win1,
-        effect_silver_win1wait,
-        effect_silver_entry,
-        effect_silver_walkslow,
-        effect_silver_walkmiddle,
-        effect_silver_walkfast,
-    );
+    Agent::new("mewtwo")
+    .effect_acmd("effect_attack11_silver", effect_silver_Attack11)
+    .effect_acmd("effect_attackdash_silver", effect_silver_AttackDash)
+    .effect_acmd("effect_attacks3hi_silver", effect_silver_AttackS3Hi)
+    .effect_acmd("effect_attacks3_silver", effect_silver_AttackS3)
+    .effect_acmd("effect_attacks3lw_silver", effect_silver_AttackS3Lw)
+    .effect_acmd("effect_attackhi3_silver", effect_silver_AttackHi3)
+    .effect_acmd("effect_attacklw3_silver", effect_silver_AttackLw3)
+    .effect_acmd("effect_attacks4charge_silver", effect_silver_AttackS4Charge)
+    .effect_acmd("effect_attackhi4charge_silver", effect_silver_AttackHi4Charge)
+    .effect_acmd("effect_attacklw4charge_silver", effect_silver_AttackLw4Charge)
+    .effect_acmd("effect_attacks4hi_silver", effect_silver_AttackS4Hi)
+    .effect_acmd("effect_attacks4_silver", effect_silver_AttackS4)
+    .effect_acmd("effect_attacks4lw_silver", effect_silver_AttackS4Lw)
+    .effect_acmd("effect_attackhi4_silver", effect_silver_AttackHi4)
+    .effect_acmd("effect_attacklw4_silver", effect_silver_AttackLw4)
+    .effect_acmd("effect_attackairn_silver", effect_silver_AttackAirN)
+    .effect_acmd("effect_attackairf_silver", effect_silver_AttackAirF) 
+    .effect_acmd("effect_landingairf_silver", effect_silver_LandingAirF)    
+    .effect_acmd("effect_attackairb_silver", effect_silver_AttackAirB)
+    .effect_acmd("effect_attackairhi_silver", effect_silver_AttackAirHi)
+    .effect_acmd("effect_attackairlw_silver", effect_silver_AttackAirLw)
+    .effect_acmd("effect_catchwait_silver", effect_silver_CatchWait)
+    .effect_acmd("effect_catchattack_silver", effect_silver_CatchAttack)
+    .effect_acmd("effect_catchpull_silver", effect_silver_CatchPull)
+    .effect_acmd("effect_throwf_silver", effect_silver_ThrowF)
+    .effect_acmd("effect_throwb_silver", effect_silver_ThrowB)
+    .effect_acmd("effect_throwhi_silver", effect_silver_ThrowHi)
+    .effect_acmd("effect_throwlw_silver", effect_silver_ThrowLw)
+    .effect_acmd("effect_downattackd_silver", effect_silver_DownAttackD)
+    .effect_acmd("effect_downattacku_silver", effect_silver_DownAttackU)
+    .effect_acmd("effect_cliffattack_silver", effect_silver_CliffAttack)
+    .effect_acmd("effect_specialnshoot_silver", effect_silver_SpecialNShoot)
+    .effect_acmd("effect_specialairnshoot_silver", effect_silver_SpecialAirNShoot)
+    .effect_acmd("effect_specialsstart_silver", effect_silver_SpecialSStart)
+    .effect_acmd("effect_specialairsstart_silver", effect_silver_SpecialAirSStart)
+    .effect_acmd("effect_specials_silver", effect_silver_SpecialS)
+    .effect_acmd("effect_specialairs_silver", effect_silver_SpecialAirS)
+    .effect_acmd("effect_specialhistart_silver", effect_silver_SpecialHiStart)
+    .effect_acmd("effect_specialairhistart_silver", effect_silver_SpecialAirHiStart)
+    .effect_acmd("effect_specialhi_silver", effect_silver_SpecialHi)
+    .effect_acmd("effect_specialairhi_silver", effect_silver_SpecialAirHi)
+    .effect_acmd("effect_speciallw_silver", effect_silver_SpecialLw)
+    .effect_acmd("effect_specialairlw_silver", effect_silver_SpecialAirLw)
+    .effect_acmd("effect_entryl_silver", effect_silver_EntryL)
+    .effect_acmd("effect_entryr_silver", effect_silver_EntryR)
+    .effect_acmd("effect_dash_silver", effect_silver_Dash)
+    .effect_acmd("effect_run_silver", effect_silver_Run)
+    .effect_acmd("effect_walkslow_silver", effect_silver_WalkSlow)
+    .effect_acmd("effect_walkmiddle_silver", effect_silver_WalkMiddle)
+    .effect_acmd("effect_walkfast_silver", effect_silver_WalkFast)
+    .effect_acmd("effect_runbrakel_silver", effect_silver_RunBrakeL)
+    .effect_acmd("effect_runbraker_silver", effect_silver_RunBrakeR)
+    .effect_acmd("effect_turnrun_silver", effect_silver_TurnRun)
+    .effect_acmd("effect_escapeairslide_silver", effect_silver_EscapeAirSlide)
+    .effect_acmd("effect_escapen_silver", effect_silver_EscapeN)
+    .effect_acmd("effect_escapef_silver", effect_silver_EscapeF)
+    .effect_acmd("effect_escapeb_silver", effect_silver_EscapeB)
+    .effect_acmd("effect_wait2_silver", effect_silver_Wait2)
+    .effect_acmd("effect_wait3_silver", effect_silver_Wait3)
+    .effect_acmd("effect_win1_silver", effect_silver_Win1)
+    .effect_acmd("effect_win1wait_silver", effect_silver_Win1Wait)
+    .effect_acmd("effect_appealsr_silver", effect_silver_AppealSR)
+    .effect_acmd("effect_appealsl_silver", effect_silver_AppealSL)
+    .effect_acmd("effect_appealhir_silver", effect_silver_AppealHiR)
+    .effect_acmd("effect_appealhil_silver", effect_silver_AppealHiL)
+    .effect_acmd("effect_appeallwr_silver", effect_silver_AppealLwR)
+    .effect_acmd("effect_appeallwl_silver", effect_silver_AppealLwL)
+    .effect_acmd("effect_final_silver", effect_silver_Final)
+    .effect_acmd("effect_finalair_silver", effect_silver_FinalAir)
+    .install();
 }

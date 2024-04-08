@@ -1,10 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//Attack11
-    agent = "mewtwo", 
-    script = "game_attack11_silver", 
-    category = ACMD_GAME, low_priority )]
-unsafe fn game_silver_attack11(fighter: &mut L2CAgentBase) {
+//Attack11
+unsafe extern "C" fn game_silver_Attack11(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.2);
     wait(fighter.lua_state_agent, 8.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -19,12 +16,8 @@ unsafe fn game_silver_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "mewtwo", 
-    script = "game_attackdash_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn game_silver_AttackDash(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
     frame(fighter.lua_state_agent, 27.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -39,12 +32,8 @@ unsafe fn game_silver_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi
-    agent = "mewtwo", 
-    script = "game_attacks3hi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi
+unsafe extern "C" fn game_silver_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 361, 91, 0, 60, 8.35, 0.0, 7.0, 10.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -60,12 +49,8 @@ unsafe fn game_silver_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3 
-    agent = "mewtwo", 
-    script = "game_attacks3_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3 
+unsafe extern "C" fn game_silver_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 361, 91, 0, 60, 8.35, 0.0, 7.0, 10.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -81,12 +66,8 @@ unsafe fn game_silver_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw
-    agent = "mewtwo", 
-    script = "game_attacks3lw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw
+unsafe extern "C" fn game_silver_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 361, 91, 0, 60, 8.35, 0.0, 7.0, 10.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -102,12 +83,8 @@ unsafe fn game_silver_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
-    agent = "mewtwo", 
-    script = "game_attackhi3_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3
+unsafe extern "C" fn game_silver_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 15.0, 92, 100, 0, 66, 9.0, 0.0, 0.0, 2.5, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -120,12 +97,8 @@ unsafe fn game_silver_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3
-    agent = "mewtwo", 
-    script = "game_attacklw3_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3
+unsafe extern "C" fn game_silver_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 10.0, 74, 140, 0, 35, 7.5, 4.55, 0.0, 2.75, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_PUNCH);
@@ -137,12 +110,8 @@ unsafe fn game_silver_attacklw3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Hi
-    agent = "mewtwo", 
-    script = "game_attacks4hi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks4hi(fighter: &mut L2CAgentBase) {
+//AttackS4Hi
+unsafe extern "C" fn game_silver_AttackS4Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
@@ -162,12 +131,8 @@ unsafe fn game_silver_attacks4hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4
-    agent = "mewtwo", 
-    script = "game_attacks4_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn game_silver_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
@@ -187,12 +152,8 @@ unsafe fn game_silver_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4Lw
-    agent = "mewtwo", 
-    script = "game_attacks4lw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacks4lw(fighter: &mut L2CAgentBase) {
+//AttackS4Lw
+unsafe extern "C" fn game_silver_AttackS4Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
@@ -212,12 +173,8 @@ unsafe fn game_silver_attacks4lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4
-    agent = "mewtwo", 
-    script = "game_attackhi4_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4
+unsafe extern "C" fn game_silver_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -238,12 +195,8 @@ unsafe fn game_silver_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4
-    agent = "mewtwo", 
-    script = "game_attacklw4_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4
+unsafe extern "C" fn game_silver_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -259,12 +212,8 @@ unsafe fn game_silver_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN 
-    agent = "mewtwo", 
-    script = "game_attackairn_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN 
+unsafe extern "C" fn game_silver_AttackAirN(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.5);
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
@@ -286,12 +235,8 @@ unsafe fn game_silver_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "mewtwo", 
-    script = "game_attackairf_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn game_silver_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -325,23 +270,15 @@ unsafe fn game_silver_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//LandingAirF 
-    agent = "mewtwo", 
-    script = "game_landingairf_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_landingairf(fighter: &mut L2CAgentBase) {
+//LandingAirF 
+unsafe extern "C" fn game_silver_LandingAirF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
 
-#[acmd_script(//AttackAirB 
-    agent = "mewtwo", 
-    script = "game_attackairb_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB 
+unsafe extern "C" fn game_silver_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -364,12 +301,8 @@ unsafe fn game_silver_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi
-    agent = "mewtwo",
-    script = "game_attackairhi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi
+unsafe extern "C" fn game_silver_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -401,12 +334,8 @@ unsafe fn game_silver_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw 
-    agent = "mewtwo", 
-    script = "game_attackairlw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw 
+unsafe extern "C" fn game_silver_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -426,11 +355,8 @@ unsafe fn game_silver_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Catch 
-    agent = "mewtwo", 
-    script = "game_catch_silver", 
-    category = ACMD_GAME, low_priority )]
-unsafe fn game_silver_catch(fighter: &mut L2CAgentBase) {
+//Catch 
+unsafe extern "C" fn game_silver_Catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -449,19 +375,11 @@ unsafe fn game_silver_catch(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchWait 
-    agent = "mewtwo", 
-    script = "game_catchwait_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_catchwait(fighter: &mut L2CAgentBase) {}
+//CatchWait 
+unsafe extern "C" fn game_silver_CatchWait(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//CatchDash 
-    agent = "mewtwo", 
-    script = "game_catchdash_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_catchdash(fighter: &mut L2CAgentBase) {
+//CatchDash 
+unsafe extern "C" fn game_silver_CatchDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -480,12 +398,8 @@ unsafe fn game_silver_catchdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchTurn 
-    agent = "mewtwo", 
-    script = "game_catchturn_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_catchturn(fighter: &mut L2CAgentBase) {
+//CatchTurn 
+unsafe extern "C" fn game_silver_CatchTurn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -504,12 +418,8 @@ unsafe fn game_silver_catchturn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchAttack
-    agent = "mewtwo", 
-    script = "game_catchattack_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_catchattack(fighter: &mut L2CAgentBase) {
+//CatchAttack
+unsafe extern "C" fn game_silver_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -522,12 +432,8 @@ unsafe fn game_silver_catchattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF 
-    agent = "mewtwo", 
-    script = "game_throwf_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF 
+unsafe extern "C" fn game_silver_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 12.0, 43, 90, 0, 60, 0.0, 0.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 0.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -546,12 +452,8 @@ unsafe fn game_silver_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB 
-    agent = "mewtwo", 
-    script = "game_throwb_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_throwb(fighter: &mut L2CAgentBase) {
+//ThrowB 
+unsafe extern "C" fn game_silver_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 18.0, 45, 88, 0, 55, 0.0, 1.0, *ATTACK_LR_CHECK_B, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_B, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -569,12 +471,8 @@ unsafe fn game_silver_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi 
-    agent = "mewtwo", 
-    script = "game_throwhi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi 
+unsafe extern "C" fn game_silver_ThrowHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 16.0, 90, 55, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -593,12 +491,8 @@ unsafe fn game_silver_throwhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowLw 
-    agent = "mewtwo", 
-    script = "game_throwlw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw 
+unsafe extern "C" fn game_silver_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 15.0, 68, 80, 0, 50, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_THROW);
@@ -612,12 +506,8 @@ unsafe fn game_silver_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CliffAttack 
-    agent = "mewtwo", 
-    script = "game_cliffattack_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_cliffattack(fighter: &mut L2CAgentBase) {
+//CliffAttack 
+unsafe extern "C" fn game_silver_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 16.5, 45, 50, 0, 90, 5.0, 0.0, 5.0, 5.0, Some(0.0), Some(5.0), Some(1.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);
@@ -628,12 +518,8 @@ unsafe fn game_silver_cliffattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackU 
-    agent = "mewtwo", 
-    script = "game_downattacku_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_downattacku(fighter: &mut L2CAgentBase) {
+//DownAttackU 
+unsafe extern "C" fn game_silver_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 48, 78, 0, 80, 5.0, 0.0, 5.0, 14.5, Some(0.0), Some(5.0), Some(5.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 8, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -652,12 +538,8 @@ unsafe fn game_silver_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD 
-    agent = "mewtwo", 
-    script = "game_downattackd_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_downattackd(fighter: &mut L2CAgentBase) {
+//DownAttackD 
+unsafe extern "C" fn game_silver_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 48, 78, 0, 80, 5.0, 0.0, 5.0, 14.5, Some(0.0), Some(5.0), Some(5.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 8, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -676,12 +558,8 @@ unsafe fn game_silver_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SlipAttack 
-    agent = "mewtwo", 
-    script = "game_slipattack_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_slipattack(fighter: &mut L2CAgentBase) {
+//SlipAttack 
+unsafe extern "C" fn game_silver_SlipAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 15.0, 361, 80, 0, 60, 5.0, 0.0, 5.0, -12.5, Some(0.0), Some(5.0), Some(-3.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 8, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
@@ -700,12 +578,8 @@ unsafe fn game_silver_slipattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialNShoot, SpecialAirNShoot 
-    agent = "mewtwo", 
-    scripts = ["game_specialnshoot_silver", "game_specialairnshoot_silver"], 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialnshoot(fighter: &mut L2CAgentBase) {
+//SpecialNShoot
+unsafe extern "C" fn game_silver_SpecialNShoot(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.33);
     if is_excute(fighter) {
         CORRECT(fighter, *GROUND_CORRECT_KIND_GROUND_CLIFF_STOP);
@@ -729,27 +603,33 @@ unsafe fn game_silver_specialnshoot(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Shoot 
-    agent = "mewtwo_shadowball", 
-    script = "game_shoot_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_beam_shoot(fighter: &mut L2CAgentBase) {
+//SpecialAirNShoot 
+unsafe extern "C" fn game_silver_SpecialAirNShoot(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, 0.33);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 15.0, 361, 90, 0, 40, 9.0, 0.0, -5.0, 0.0, Some(0.0), Some(5.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -0.6, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_NONE);
+        CORRECT(fighter, *GROUND_CORRECT_KIND_GROUND_CLIFF_STOP);
     }
-    frame(fighter.lua_state_agent, 46.0);
+    frame(fighter.lua_state_agent, 41.0);
+    FT_MOTION_RATE(fighter, 1.0);
     if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+    }
+    frame(fighter.lua_state_agent, 51.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
+    }
+    frame(fighter.lua_state_agent, 52.0);
+    if is_excute(fighter) {
+        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
     }
 }
 
-#[acmd_script(//SpecialSStart 
-    agent = "mewtwo", 
-    script = "game_specialsstart_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialsstart(fighter: &mut L2CAgentBase) {
+//SpecialSStart 
+unsafe extern "C" fn game_silver_SpecialSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         CATCH(fighter, 0, Hash40::new("top"), 14.4, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
@@ -770,12 +650,8 @@ unsafe fn game_silver_specialsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialS 
-    agent = "mewtwo", 
-    script = "game_specials_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specials(fighter: &mut L2CAgentBase) {
+//SpecialS 
+unsafe extern "C" fn game_silver_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.7);
     frame(fighter.lua_state_agent, 61.0);
@@ -806,12 +682,8 @@ unsafe fn game_silver_specials(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSStart 
-    agent = "mewtwo", 
-    script = "game_specialairsstart_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialairsstart(fighter: &mut L2CAgentBase) {
+//SpecialAirSStart 
+unsafe extern "C" fn game_silver_SpecialAirSStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         CATCH(fighter, 0, Hash40::new("top"), 14.4, 0.0, 9.0, 8.0, Some(0.0), Some(9.0), Some(12.0), *FIGHTER_STATUS_KIND_MEWTWO_THROWN, *COLLISION_SITUATION_MASK_GA);
@@ -832,12 +704,8 @@ unsafe fn game_silver_specialairsstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirS 
-    agent = "mewtwo", 
-    script = "game_specialairs_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialairs(fighter: &mut L2CAgentBase) {
+//SpecialAirS 
+unsafe extern "C" fn game_silver_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.7);
     frame(fighter.lua_state_agent, 61.0);
@@ -868,12 +736,8 @@ unsafe fn game_silver_specialairs(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiStart 
-    agent = "mewtwo", 
-    script = "game_specialhistart_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialhistart(fighter: &mut L2CAgentBase) {
+//SpecialHiStart 
+unsafe extern "C" fn game_silver_SpecialHiStart(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
         VisibilityModule::set_whole(fighter.module_accessor, true);
         KineticModule::clear_speed_all(fighter.module_accessor);
@@ -886,12 +750,8 @@ unsafe fn game_silver_specialhistart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHiStart 
-    agent = "mewtwo", 
-    script = "game_specialairhistart_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialairhistart(fighter: &mut L2CAgentBase) {
+//SpecialAirHiStart 
+unsafe extern "C" fn game_silver_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
         VisibilityModule::set_whole(fighter.module_accessor, true);
         KineticModule::clear_speed_all(fighter.module_accessor);
@@ -904,12 +764,8 @@ unsafe fn game_silver_specialairhistart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHi 
-    agent = "mewtwo", 
-    script = "game_specialhi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialhi(fighter: &mut L2CAgentBase) {
+//SpecialHi 
+unsafe extern "C" fn game_silver_SpecialHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, 0.75);
     if is_excute(fighter) {
@@ -922,12 +778,8 @@ unsafe fn game_silver_specialhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHi 
-    agent = "mewtwo", 
-    script = "game_specialairhi_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialairhi(fighter: &mut L2CAgentBase) {
+//SpecialAirHi 
+unsafe extern "C" fn game_silver_SpecialAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, 0.75);
     if is_excute(fighter) {
@@ -940,12 +792,8 @@ unsafe fn game_silver_specialairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLw 
-    agent = "mewtwo", 
-    script = "game_speciallw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_speciallw(fighter: &mut L2CAgentBase) {
+//SpecialLw 
+unsafe extern "C" fn game_silver_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
     frame(fighter.lua_state_agent, 4.0);
@@ -968,12 +816,8 @@ unsafe fn game_silver_speciallw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLw 
-    agent = "mewtwo", 
-    script = "game_specialairlw_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_specialairlw(fighter: &mut L2CAgentBase) {
+//SpecialAirLw
+unsafe extern "C" fn game_silver_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
     frame(fighter.lua_state_agent, 4.0);
@@ -984,8 +828,8 @@ unsafe fn game_silver_specialairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 16.0, 0, 100, 0, 66, 14.0, 0.0, 9.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 16.0, 15, 100, 0, 66, 14.0, 0.0, 9.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 16.0, 0, 100, 0, 50, 14.0, 0.0, 9.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 16.0, 15, 100, 0, 50, 14.0, 0.0, 9.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
     }
     frame(fighter.lua_state_agent, 38.0);
     if is_excute(fighter) {
@@ -994,35 +838,24 @@ unsafe fn game_silver_specialairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealLwL
-    agent = "mewtwo",
-    script =  "game_appeallwl_silver",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_silver_appeallwl(fighter: &mut L2CAgentBase) {
+//AppealLwL
+unsafe extern "C" fn game_silver_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -15.0, 0);
     }
 }
 
-#[acmd_script(//AppealLwR
-    agent = "mewtwo",
-    script =  "game_appeallwr_silver",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_silver_appeallwr(fighter: &mut L2CAgentBase) {
+//AppealLwR
+unsafe extern "C" fn game_silver_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         DamageModule::heal(fighter.module_accessor, -15.0, 0);
     }
 }
 
-//Misc Scripts
-#[acmd_script(//TurnRun 
-    agent = "mewtwo", 
-    script = "game_turnrun_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_turnrun(fighter: &mut L2CAgentBase) {
+//TurnRun 
+unsafe extern "C" fn game_silver_TurnRun(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
     frame(fighter.lua_state_agent, 12.0);
@@ -1031,12 +864,8 @@ unsafe fn game_silver_turnrun(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeAir 
-    agent = "mewtwo", 
-    script = "game_escapeair_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_escapeair(fighter: &mut L2CAgentBase) {
+//EscapeAir 
+unsafe extern "C" fn game_silver_EscapeAir(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_whole(fighter.module_accessor, true);
         ArticleModule::remove(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_ESCAPEAIRDUMMY, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -1047,12 +876,8 @@ unsafe fn game_silver_escapeair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EscapeAirSlide 
-    agent = "mewtwo", 
-    script = "game_escapeairslide_silver", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_escapeairslide(fighter: &mut L2CAgentBase) {
+//EscapeAirSlide 
+unsafe extern "C" fn game_silver_EscapeAirSlide(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_whole(fighter.module_accessor, true);
         ArticleModule::remove(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_ESCAPEAIRDUMMY, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -1068,66 +893,69 @@ unsafe fn game_silver_escapeairslide(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EntryR, EntryL 
-    agent = "mewtwo", 
-    scripts = ["game_entryr_silver","game_entryl_silver"], 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_silver_entry(fighter: &mut L2CAgentBase) {
+//EntryR
+unsafe extern "C" fn game_silver_EntryL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
+}
+
+
+//EntryR
+unsafe extern "C" fn game_silver_EntryR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_silver_attack11,
-        game_silver_attackdash,
-        game_silver_attacks3hi,
-        game_silver_attacks3,
-        game_silver_attacks3lw,
-        game_silver_attackhi3,
-        game_silver_attacklw3,
-        game_silver_attacks4hi,
-        game_silver_attacks4,
-        game_silver_attacks4lw,
-        game_silver_attackhi4,
-        game_silver_attacklw4,
-        game_silver_attackairn,
-        game_silver_attackairf,
-        game_silver_landingairf,
-        game_silver_attackairb,
-        game_silver_attackairhi,
-        game_silver_attackairlw,
-        game_silver_catch,
-        game_silver_catchwait,
-        game_silver_catchdash,
-        game_silver_catchturn,
-        game_silver_catchattack,
-        game_silver_throwf,
-        game_silver_throwb,
-        game_silver_throwhi,
-        game_silver_throwlw,
-        game_silver_cliffattack,
-        game_silver_downattacku,
-        game_silver_downattackd,
-        game_silver_slipattack,
-        game_silver_specialnshoot,
-        game_silver_beam_shoot,
-        game_silver_specialsstart,
-        game_silver_specials,
-        game_silver_specialairsstart,
-        game_silver_specialairs,
-        game_silver_specialhistart,
-        game_silver_specialhi,
-        game_silver_specialairhistart,
-        game_silver_specialairhi,
-        game_silver_speciallw,
-        game_silver_specialairlw,
-        game_silver_appeallwl,
-        game_silver_appeallwr,
-        game_silver_turnrun,
-        game_silver_escapeair,
-        game_silver_escapeairslide,
-        game_silver_entry
-    );
+    Agent::new("mewtwo")
+    .game_acmd("game_attack11_silver", game_silver_Attack11)
+    .game_acmd("game_attackdash_silver", game_silver_AttackDash)
+    .game_acmd("game_attacks3hi_silver", game_silver_AttackS3Hi)
+    .game_acmd("game_attacks3_silver", game_silver_AttackS3)
+    .game_acmd("game_attacks3lw_silver", game_silver_AttackS3Lw)
+    .game_acmd("game_attackhi3_silver", game_silver_AttackHi3)
+    .game_acmd("game_attacklw3_silver", game_silver_AttackLw3)
+    .game_acmd("game_attacks4hi_silver", game_silver_AttackS4Hi)
+    .game_acmd("game_attacks4_silver", game_silver_AttackS4)
+    .game_acmd("game_attacks4lw_silver", game_silver_AttackS4Lw)
+    .game_acmd("game_attackhi4_silver", game_silver_AttackHi4)
+    .game_acmd("game_attacklw4_silver", game_silver_AttackLw4)
+    .game_acmd("game_attackairn_silver", game_silver_AttackAirN)
+    .game_acmd("game_attackairf_silver", game_silver_AttackAirF) 
+    .game_acmd("game_landingairf_silver", game_silver_LandingAirF)    
+    .game_acmd("game_attackairb_silver", game_silver_AttackAirB)
+    .game_acmd("game_attackairhi_silver", game_silver_AttackAirHi)
+    .game_acmd("game_attackairlw_silver", game_silver_AttackAirLw)
+    .game_acmd("game_catch_silver", game_silver_Catch)
+    .game_acmd("game_catchwait_silver", game_silver_CatchWait)
+    .game_acmd("game_catchdash_silver", game_silver_CatchDash)
+    .game_acmd("game_catchturn_silver", game_silver_CatchTurn)
+    .game_acmd("game_catchattack_silver", game_silver_CatchAttack)
+    .game_acmd("game_throwf_silver", game_silver_ThrowF)
+    .game_acmd("game_throwb_silver", game_silver_ThrowB)
+    .game_acmd("game_throwhi_silver", game_silver_ThrowHi)
+    .game_acmd("game_throwlw_silver", game_silver_ThrowLw)
+    .game_acmd("game_downattackd_silver", game_silver_DownAttackD)
+    .game_acmd("game_downattacku_silver", game_silver_DownAttackU)
+    .game_acmd("game_cliffattack_silver", game_silver_CliffAttack)
+    .game_acmd("game_specialnshoot_silver", game_silver_SpecialNShoot)
+    .game_acmd("game_specialairnshoot_silver", game_silver_SpecialAirNShoot)
+    .game_acmd("game_specialsstart_silver", game_silver_SpecialSStart)
+    .game_acmd("game_specialairsstart_silver", game_silver_SpecialAirSStart)
+    .game_acmd("game_specials_silver", game_silver_SpecialS)
+    .game_acmd("game_specialairs_silver", game_silver_SpecialAirS)
+    .game_acmd("game_specialhistart_silver", game_silver_SpecialHiStart)
+    .game_acmd("game_specialairhistart_silver", game_silver_SpecialAirHiStart)
+    .game_acmd("game_specialhi_silver", game_silver_SpecialHi)
+    .game_acmd("game_specialairhi_silver", game_silver_SpecialAirHi)
+    .game_acmd("game_speciallw_silver", game_silver_SpecialLw)
+    .game_acmd("game_specialairlw_silver", game_silver_SpecialAirLw)
+    .game_acmd("game_entryl_silver", game_silver_EntryL)
+    .game_acmd("game_entryr_silver", game_silver_EntryR)
+    .game_acmd("game_turnrun_silver", game_silver_TurnRun)
+    .game_acmd("game_escapeair_silver", game_silver_EscapeAir)
+    .game_acmd("game_escapeairslide_silver", game_silver_EscapeAirSlide)
+    .game_acmd("game_appeallwr_silver", game_silver_AppealLwR)
+    .game_acmd("game_appeallwl_silver", game_silver_AppealLwL)
+    .install();
 }

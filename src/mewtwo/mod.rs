@@ -1,4 +1,4 @@
-mod mewtwo;
+pub mod mewtwo;
 mod mewtwo_shadowball;
 mod mewtwo_bindball;
 mod mewtwo_psychobreak;

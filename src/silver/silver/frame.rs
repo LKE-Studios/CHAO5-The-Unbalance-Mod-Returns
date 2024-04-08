@@ -1,5 +1,6 @@
 use crate::imports::BuildImports::*;
-use crate::silver::effect::*;
+use crate::silver::silver::effect::*;
+use crate::mewtwo::mewtwo::frame::*;
 
 pub static mut ESCAPE_AIR_DIR : [i32; 8] = [0; 8];
 static mut BAN_UPB : [bool; 8] = [false; 8];
@@ -33,6 +34,9 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let SILVER = color >= 120 && color <= 127;
     if SILVER {
+        ModelModule::set_scale(fighter.module_accessor, 0.865);
+        AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
+        GrabModule::set_size_mul(fighter.module_accessor, 0.865);
         silver_float(fighter);
         misc_silver(fighter);
         motion_main_silver(fighter);
@@ -182,7 +186,7 @@ pub unsafe extern "C" fn special_hi_silver(fighter: &mut L2CFighterCommon) {
         HAS_ALREADY_TELECANCEL[ENTRY_ID] = false;
         HAS_ATTACK_AIR[ENTRY_ID] = false;
     };
-    if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
+    if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || !sv_information::is_ready_go() {
         HAS_ATTACK_AIR[ENTRY_ID] = false;
         ATTACK_AIR_WINDOW[ENTRY_ID] = 0;
     };

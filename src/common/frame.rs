@@ -52,7 +52,7 @@ pub unsafe extern "C" fn jump_cancel(fighter : &mut L2CFighterCommon) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
         };
     };
-};
+}
 
 pub fn install() {
     Agent::new("fighter")
