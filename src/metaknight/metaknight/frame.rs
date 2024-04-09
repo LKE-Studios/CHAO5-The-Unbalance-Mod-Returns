@@ -16,9 +16,8 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
         *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR,
         *FIGHTER_STATUS_KIND_CLIFF_CATCH, *FIGHTER_STATUS_KIND_GLIDE_ATTACK, *FIGHTER_STATUS_KIND_GLIDE_END
     ].contains(&status_kind) { 
-        STOP_SE(fighter, Hash40::new("se_metaknight_glide_start"));
-        STOP_SE(fighter, Hash40::new("se_metaknight_glide_loop"));
-        STOP_SE(fighter, Hash40::new("se_metaknight_special_h02"));
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_metaknight_glide_start"), 0);
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_metaknight_special_h02"), 0);
     };
     if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
         let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);

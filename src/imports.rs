@@ -4,6 +4,7 @@ pub mod BuildImports {
         smashline::*,    
         smashline::{Agent, Main, Pre, Init, Exec, End, Exit, ExecStop, original_status},   
         smash_script::{*, macros::*},
+        interpolation::lerp,
         smash::app::{*, 
             lua_bind::{*, 
                 KineticEnergy, 

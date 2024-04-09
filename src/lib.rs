@@ -211,9 +211,9 @@ mod sheik;
 mod shizue;
 mod shulk;
 pub mod silver;
-/*mod simon;
+mod simon;
 mod snake;
-mod sonic;
+/*mod sonic;
 mod szerosuit;
 mod tantan;
 mod toonlink;
@@ -414,10 +414,10 @@ pub fn main() {
     dedede::install();
     lucas::install();
     lucario::install();
-    /*sonic::install();
+    //sonic::install();
     snake::install();
-    wolf::install();
-    szerosuit::install();*/
+    //wolf::install();
+    //szerosuit::install();
     robot::install();
     ike::install();
     //toonlink::install();
@@ -449,7 +449,7 @@ pub fn main() {
     packun::install();
     ken::install();
     inkling::install();
-    //simon::install();
+    simon::install();
     shizue::install();
     daisy::install();
     samusd::install();

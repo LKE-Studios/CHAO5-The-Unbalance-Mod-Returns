@@ -56,6 +56,7 @@ unsafe extern "C" fn status_plizardon_SpecialHi2_Exec(fighter: &mut L2CFighterCo
 }
 
 pub unsafe extern "C" fn status_plizardon_SpecialHi2_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_plizardon_special_h02_02"), 0);
     0.into()
 }
 

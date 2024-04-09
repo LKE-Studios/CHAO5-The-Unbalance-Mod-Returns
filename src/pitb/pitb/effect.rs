@@ -34,15 +34,15 @@ unsafe extern "C" fn effect_pitb_GlideStart(fighter: &mut L2CAgentBase) {
         EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("bowr"), -0, 0, 0, 0, 0, 0, 1, true);
         EFFECT_FOLLOW(fighter, Hash40::new("pitb_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
         EFFECT_FOLLOW(fighter, Hash40::new("sys_aura_light"), Hash40::new("top"), 0.0, 4.2, 0, 0, 0, 0, 3.0, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.14);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.5, /*B*/ 0.14);
     }
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("pitb_ikaros_wing_flare"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, false);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.14);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.5, /*B*/ 0.14);
         LAST_EFFECT_SET_ALPHA(fighter, 0.7);
         EFFECT_FOLLOW(fighter, Hash40::new("pitb_ikaros_wing_flare"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, false);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.14);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.5, /*B*/ 0.14);
         LAST_EFFECT_SET_ALPHA(fighter, 0.7);
     }
     frame(fighter.lua_state_agent, 19.0);

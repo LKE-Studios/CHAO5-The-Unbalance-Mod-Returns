@@ -127,6 +127,20 @@ unsafe extern "C" fn effect_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
             LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.1, /*B*/ 2.2);
             EFFECT_FOLLOW(fighter, Hash40::new("pit_feather"), Hash40::new("top"), 0, 15, 0, 0, 0, 0, 1, false);
         }
+        for _ in 0..2 {
+            if is_excute(fighter) {
+                if WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
+                    EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
+                    EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, false);
+                    LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.2, /*G*/ 0.1, /*B*/ 0.0);
+                    EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, false);
+                    LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.2, /*G*/ 0.1, /*B*/ 0.0);
+                    EFFECT_FOLLOW(fighter, Hash40::new("sys_damage_fire"), Hash40::new("s_wingl1"), 0, -1.0, 1.0, 0, 0, 0, 0.7, false);
+                    EFFECT_FOLLOW(fighter, Hash40::new("sys_damage_fire"), Hash40::new("s_wingr1"), 0, -1.0, -1.0, 0, 0, 0, 0.7, false);
+                }
+            }
+            wait(fighter.lua_state_agent, 7.0);
+        }
         frame(fighter.lua_state_agent, 40.0);
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle"), Hash40::new("bust"), 0, 0, 0, 0, 0, 0, 1, false);
@@ -143,6 +157,13 @@ unsafe extern "C" fn effect_pit_SpecialHiFlyTurn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 40.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("pit_fly_miracle"), Hash40::new("bust"), 0, 0, 0, 0, 0, 0, 1, false);
+    }
+}
+
+//SpecialHiEnd
+unsafe extern "C" fn effect_pit_SpecialHiEnd(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
@@ -176,6 +197,7 @@ pub fn install() {
     .effect_acmd("effect_specialhistart", effect_pit_SpecialHiStart)
     .effect_acmd("effect_specialhifly", effect_pit_SpecialHiFly)
     .effect_acmd("effect_specialhiflyturn", effect_pit_SpecialHiFlyTurn)
+    .effect_acmd("effect_specialhiend", effect_pit_SpecialHiEnd)
     .effect_acmd("effect_specialairhistart", effect_pit_SpecialAirHiStart)
     .install();
 }

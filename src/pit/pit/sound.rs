@@ -114,6 +114,13 @@ unsafe extern "C" fn sound_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialHiEnd
+unsafe extern "C" fn sound_pit_SpecialHiEnd(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_LANDING_SE(fighter, Hash40::new("se_pit_landing02"));
+    }
+}
+
 pub fn install() {
     Agent::new("pit")
     .sound_acmd("sound_jumpaerialf4", sound_pit_JumpAerialF4)
@@ -127,5 +134,6 @@ pub fn install() {
     .sound_acmd("sound_specialhistart", sound_pit_SpecialHiStart)
     .sound_acmd("sound_specialairhistart", sound_pit_SpecialAirHiStart)
     .sound_acmd("sound_specialhifly", sound_pit_SpecialHiFly)
+    .sound_acmd("sound_specialhiend", sound_pit_SpecialHiEnd)
     .install();
 }

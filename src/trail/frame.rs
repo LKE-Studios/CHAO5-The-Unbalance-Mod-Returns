@@ -13,7 +13,6 @@ fn frame_trail(fighter: &mut L2CFighterCommon) {
             *FIGHTER_STATUS_KIND_GLIDE_ATTACK, *FIGHTER_STATUS_KIND_GLIDE_END, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F,
             *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N
         ].contains(&status_kind) { 
-            STOP_SE(fighter, Hash40::new("se_trail_glide_loop"));
             EFFECT_OFF_KIND(fighter, Hash40::new("sys_status_attack_up"), false, false);
         };
         if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_S_END {
