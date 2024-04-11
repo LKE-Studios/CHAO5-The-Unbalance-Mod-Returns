@@ -52,6 +52,7 @@ unsafe extern "C" fn palutena_Glide_Main_loop(fighter: &mut L2CFighterCommon) ->
 
 pub unsafe extern "C" fn status_palutena_Glide_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 0);
     0.into()
 }
 

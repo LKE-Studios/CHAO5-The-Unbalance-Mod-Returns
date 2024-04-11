@@ -1,4 +1,5 @@
 mod GlideStart;
+mod Glide;
 mod SpecialN;
 mod SpecialNSpin;
 mod SpecialNEnd;
@@ -13,6 +14,7 @@ mod SpecialGuard;
 
 pub fn install() {
     GlideStart::install();
+    Glide::install();
     SpecialN::install();
     SpecialNSpin::install();
     SpecialNEnd::install();

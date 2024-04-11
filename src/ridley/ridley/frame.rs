@@ -24,6 +24,9 @@ unsafe extern "C" fn frame_ridley_Main(fighter: &mut L2CFighterCommon) {
             PLAY_SE(fighter, Hash40::new("se_ridley_jump02"));
         }
     }
+    if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) { 
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_ridley_glide_loop"), 0);
+    };
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_SHOOT,
         *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_CHARGE, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_FAILURE, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FAILURE,

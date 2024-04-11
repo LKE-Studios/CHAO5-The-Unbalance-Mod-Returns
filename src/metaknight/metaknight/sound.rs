@@ -143,89 +143,41 @@ unsafe extern "C" fn sound_metaknight_SpecialSStart(fighter: &mut L2CAgentBase) 
 
 //SpecialHi
 unsafe extern "C" fn sound_metaknight_SpecialHi(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 
-    && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 10 {//Brawl Meta Knight 
-        frame(fighter.lua_state_agent, 7.0);
-        if is_excute(fighter) {
-            STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-            PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-            PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-        }
-        frame(fighter.lua_state_agent, 13.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 29.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
-        }
-    } 
-    else {
-        frame(fighter.lua_state_agent, 1.0);
-        if is_excute(fighter) {
-            STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-            PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-            PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-        }
-        frame(fighter.lua_state_agent, 6.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 16.0);
-        if is_excute(fighter) {
-            PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
-        }
-        frame(fighter.lua_state_agent, 29.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
-        }
+    frame(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
+        PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
+        PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
     }
-}    
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
+    }
+}
 
 //SpecialHiLoop
 unsafe extern "C" fn sound_metaknight_SpecialHiLoop(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 8 
-    && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 10 {//Brawl Meta Knight 
-        frame(fighter.lua_state_agent, 1.0);
-        if is_excute(fighter) {
-            STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-            PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-        }
-        frame(fighter.lua_state_agent, 2.0);
-        if is_excute(fighter) {
-            PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 29.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
-        }
-    } 
-    else {
-        frame(fighter.lua_state_agent, 1.0);
-        if is_excute(fighter) {
-            STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
-            PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
-        }
-        frame(fighter.lua_state_agent, 2.0);
-        if is_excute(fighter) {
-            PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 11.0);
-        if is_excute(fighter) {
-            PLAY_STATUS(fighter, Hash40::new("se_metaknight_special_h03"));
-        }
-        frame(fighter.lua_state_agent, 29.0);
-        if is_excute(fighter) {
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
-            PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
-        }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_metaknight_dash_start"));
+        PLAY_SE(fighter, Hash40::new("se_metaknight_special_h01"));
     }
-}   
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("vc_metaknight_special_h01"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_special_h02"));
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_start"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_glide_loop"));
+    }
+} 
 
 //SpecialLwStart 
 unsafe extern "C" fn sound_metaknight_SpecialLwStart(fighter: &mut L2CAgentBase) {

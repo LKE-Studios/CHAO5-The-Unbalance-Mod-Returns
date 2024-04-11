@@ -102,8 +102,13 @@ pub unsafe extern "C" fn metaknight_SpecialHi_Main_loop_Sec(fighter: &mut L2CFig
     0.into()
 }
 
+unsafe extern "C" fn status_metaknight_SpecialHi_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_metaknight_SpecialHi_Main)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_metaknight_SpecialHi_End)
     .install();
 }

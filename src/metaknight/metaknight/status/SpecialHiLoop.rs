@@ -32,8 +32,13 @@ unsafe extern "C" fn status_metaknight_SpecialHiLoop_Main(fighter: &mut L2CFight
     fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_loop as *const () as _))
 }
 
+unsafe extern "C" fn status_metaknight_SpecialHiLoop_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    0.into()
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .status(Main, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP, status_metaknight_SpecialHiLoop_Main)
+    .status(End, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP, status_metaknight_SpecialHiLoop_End)
     .install();
 }

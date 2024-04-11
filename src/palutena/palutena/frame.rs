@@ -11,6 +11,9 @@ unsafe extern "C" fn frame_palutena_Main(fighter: &mut L2CFighterCommon) {
         let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
     }
+    if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) { 
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_palutena_glide_loop"), 0);
+    };
     //Protected Goddess Mechanic
     FighterSpecializer_Palutena::goddess_power_up(fighter);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_PALUTENA_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) {
@@ -33,7 +36,7 @@ unsafe extern "C" fn frame_palutena_Main(fighter: &mut L2CFighterCommon) {
             }
         }
     }
-    if ![*FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD].contains(&status_kind) {
+    if ![*FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_HI4].contains(&status_kind) {
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
     }
 }

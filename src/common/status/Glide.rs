@@ -49,21 +49,6 @@ unsafe extern "C" fn Glide_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
     if fighter.sub_transition_group_check_air_landing().get_bool() {
         return 0.into();
     }
-    let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
-    let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
-    let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
-    let se_volume_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("se_volume_max"));
-    let se_play = WorkModule::get_int(fighter.module_accessor, FIGHTER_STATUS_GLIDE_WORK_INT_PITCH_SE);
-    let sound = match se_play {
-        0 => hash40("se_metaknight_glide_loop"), 
-        1 => hash40("se_pit_glide_loop"),  
-        2 => hash40("se_pitb_glide_loop"), 
-        3 => hash40("se_plizardon_glide_loop"),   
-        4 => hash40("se_palutena_glide_loop"), 
-        5 => hash40("se_buddy_glide_loop"), 
-        _ => hash40("se_trail_glide_loop"),
-    };
-    SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new_raw(sound), 1.0 + angle * angle_se_pitch_ratio);
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)
         || ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)
@@ -201,7 +186,6 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
         sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, angled.x, angled.y);
         WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
-        fighter_glide_specifics_function(fighter);
         println!("x{}, y{}", angled.x, angled.y);
         println!("{}", angle);
     }
@@ -231,19 +215,7 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
 }
 
 pub unsafe extern "C" fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let se_stop = WorkModule::get_int(fighter.module_accessor, FIGHTER_STATUS_GLIDE_WORK_INT_STOP_SE);
-    let sound = match se_stop {
-        0 => hash40("se_metaknight_glide_loop"), 
-        1 => hash40("se_pit_glide_loop"),  
-        2 => hash40("se_pitb_glide_loop"), 
-        3 => hash40("se_plizardon_glide_loop"), 
-        4 => hash40("se_ridley_glide_loop"),  
-        5 => hash40("se_palutena_glide_loop"), 
-        6 => hash40("se_buddy_glide_loop"), 
-        _ => hash40("se_trail_glide_loop"),
-    };
     MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
-    SoundModule::stop_se(fighter.module_accessor, Hash40::new_raw(sound), 0);
     0.into()
 }
 
