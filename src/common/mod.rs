@@ -32,7 +32,7 @@ pub unsafe fn get_player_number(module_accessor:  &mut smash::app::BattleObjectM
 }
 
 pub mod status;
-mod param;
+//mod param;
 pub mod consts;
 pub mod function;
 pub mod frame;
@@ -62,7 +62,7 @@ pub fn install() {
     skyline::nro::add_hook(nro_hook);
     status::install();
     frame::install();
-    param::install();
+    //param::install();
     function::install();
 }
 

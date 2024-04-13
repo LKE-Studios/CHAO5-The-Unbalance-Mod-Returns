@@ -44,7 +44,6 @@ unsafe extern "C" fn sound_pit_GlideStart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
-        //PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_bowsplit"));
         PLAY_SE_REMAIN(fighter, Hash40::new("se_pit_glide_loop"));
     }
 }
