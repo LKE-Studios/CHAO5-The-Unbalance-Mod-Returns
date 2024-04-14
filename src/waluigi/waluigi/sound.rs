@@ -4,7 +4,7 @@ use crate::imports::BuildImports::*;
     agent = "dolly",
     script =  "sound_attack11_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attack11(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_swing_s"));
@@ -15,7 +15,7 @@ unsafe fn sound_waluigi_attack11(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attack12_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attack12(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_swing_m"));
@@ -26,13 +26,13 @@ unsafe fn sound_waluigi_attack12(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attack13_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attack13(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_attack13(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//AttackDash
     agent = "dolly",
     script =  "sound_attackdash_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_dolly_attackdash01"));
@@ -51,7 +51,7 @@ unsafe fn sound_waluigi_attackdash(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_attacks3_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_attacks3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackhard_s01"));
@@ -66,7 +66,7 @@ unsafe fn sound_waluigi_attacks3(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_attackhi3_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackhard_h01"));
@@ -81,7 +81,7 @@ unsafe fn sound_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_attacklw3_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackhard_l01"));
@@ -97,7 +97,7 @@ unsafe fn sound_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attacks4_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attacks4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_smash_s01"));
@@ -114,7 +114,7 @@ unsafe fn sound_waluigi_attacks4(fighter: &mut L2CAgentBase) {
     script = "sound_attackhi4_waluigi", 
     category = ACMD_SOUND, 
     low_priority )]
-unsafe fn sound_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_smash_h01"));
@@ -134,7 +134,7 @@ unsafe fn sound_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attacklw4_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_kick_m"));
@@ -150,7 +150,7 @@ unsafe fn sound_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attackairn_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackairn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_dolly_attackair_n01"));
@@ -162,7 +162,7 @@ unsafe fn sound_waluigi_attackairn(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attackairf_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackairf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackairf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_dolly_attackair_f01"));
@@ -174,7 +174,7 @@ unsafe fn sound_waluigi_attackairf(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attackairb_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackairb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackair_b01"));
@@ -190,7 +190,7 @@ unsafe fn sound_waluigi_attackairb(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attackairhi_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_dolly_attackair_l01"));
@@ -205,7 +205,7 @@ unsafe fn sound_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_attackairlw_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackair_l01"));
@@ -224,7 +224,7 @@ unsafe fn sound_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_catchattack_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_catchattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_catchattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_special_h09_command_s"));
@@ -235,7 +235,7 @@ unsafe fn sound_waluigi_catchattack(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_throwf_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_throwf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_throwf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_special_h09_command_s"));
@@ -274,7 +274,7 @@ unsafe fn sound_waluigi_throwf(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_throwb_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_throwb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_throwb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_throw_01"));
@@ -295,7 +295,7 @@ unsafe fn sound_waluigi_throwb(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_throwhi_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_throwhi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_throwhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_special_sb03_command"));
@@ -311,7 +311,7 @@ unsafe fn sound_waluigi_throwhi(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_throwlw_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_throwlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_throwlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
@@ -326,7 +326,7 @@ unsafe fn sound_waluigi_throwlw(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_downattackd_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_downattackd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_fire_m_damage"));
@@ -337,7 +337,7 @@ unsafe fn sound_waluigi_downattackd(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_downattacku_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_downattacku(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_fire_m_damage"));
@@ -348,7 +348,7 @@ unsafe fn sound_waluigi_downattacku(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialn_waluigi", 
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 0.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
@@ -371,7 +371,7 @@ unsafe fn sound_waluigi_specialn(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialairn_waluigi", 
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialairn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 0.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
@@ -394,7 +394,7 @@ unsafe fn sound_waluigi_specialairn(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_specialsbstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial02_catch"));
@@ -409,19 +409,19 @@ unsafe fn sound_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_specialsbattack_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//SpecialSBAttackW
     agent = "dolly",
     script =  "game_specialsbattackw_waluigi",
     category = ACMD_GAME, low_priority)]
-unsafe fn sound_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//SpecialAirSFEnd 
     agent = "dolly", 
     script = "sound_specialairsfend_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_water_hit_ll"));
@@ -440,13 +440,13 @@ unsafe fn sound_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialairsfend2",
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//SpecialSFStart
     agent = "dolly",
     script =  "sound_specialsfstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial02_catch"));
@@ -461,13 +461,13 @@ unsafe fn sound_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialsfattack_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialsfattack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_specialsfattack(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//SpecialSFStart 
     agent = "dolly", 
     script = "sound_specialairsfstart_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_water_hit_m"));
@@ -486,7 +486,7 @@ unsafe fn sound_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialairsfattack_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_COMMON_WORK_INT_STRENGTH) == *FIGHTER_DOLLY_STRENGTH_W {
         if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_COMMON_WORK_FLAG_COMMAND) {
             if is_excute(fighter) {
@@ -515,7 +515,7 @@ unsafe fn sound_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialhi1_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
@@ -567,7 +567,7 @@ unsafe fn sound_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialairhi1_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
@@ -619,13 +619,13 @@ unsafe fn sound_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_specialairlw_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_specialairlw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_waluigi_specialairlw(fighter: &mut L2CAgentBase) {}
 
 #[acmd_script(//SpecialLwStart
     agent = "dolly",
     script =  "sound_speciallwstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_win02_02"));
@@ -636,7 +636,7 @@ unsafe fn sound_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_specialairlwstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_win02_02"));
@@ -647,7 +647,7 @@ unsafe fn sound_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwshield",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_system_fp_level_up"));
@@ -658,7 +658,7 @@ unsafe fn sound_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattack1",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_smash_l01"));
@@ -673,7 +673,7 @@ unsafe fn sound_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattack2",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_smash_l02"));
@@ -688,7 +688,7 @@ unsafe fn sound_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattack3",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_smash_h02"));
@@ -704,7 +704,7 @@ unsafe fn sound_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattackspecial1",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_special_n02"));
@@ -716,7 +716,7 @@ unsafe fn sound_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattackspecial2",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackair_b01"));
@@ -732,7 +732,7 @@ unsafe fn sound_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwjump",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_jump01"));
@@ -743,7 +743,7 @@ unsafe fn sound_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwspecial",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {        
         PLAY_SE(fighter, Hash40::new("se_dolly_attackair_h01"));
@@ -754,7 +754,7 @@ unsafe fn sound_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwattackair",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackhard_l01"));
@@ -769,7 +769,7 @@ unsafe fn sound_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwspecialair",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_attackdash01"));
@@ -780,7 +780,7 @@ unsafe fn sound_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_speciallwjumpair",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_stage_mariobros_09"));
@@ -803,7 +803,7 @@ unsafe fn sound_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_superspecial_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_superspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_superspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_success"));
@@ -823,7 +823,7 @@ unsafe fn sound_waluigi_superspecial(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_superspecial2_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_superspecial2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_superspecial2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial02_04"));
     }
@@ -841,7 +841,7 @@ unsafe fn sound_waluigi_superspecial2(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_superspecial2start_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_superspecial2start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_superspecial2start(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_success"));
@@ -865,7 +865,7 @@ unsafe fn sound_waluigi_superspecial2start(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_appealhil_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_appealhil(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_appealhil(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new_raw(0x136a368b1c));
@@ -888,7 +888,7 @@ unsafe fn sound_waluigi_appealhil(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_appealhir_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_appealhir(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_appealhir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new_raw(0x136a368b1c));
@@ -911,7 +911,7 @@ unsafe fn sound_waluigi_appealhir(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_appeallwl_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_dolly_win02"));
@@ -934,7 +934,7 @@ unsafe fn sound_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_appeallwr_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_dolly_win02"));
@@ -957,7 +957,7 @@ unsafe fn sound_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_entryr_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_entryr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_entryr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_jump01"));
@@ -980,7 +980,7 @@ unsafe fn sound_waluigi_entryr(fighter: &mut L2CAgentBase) {
     agent = "dolly", 
     script = "sound_entryl_waluigi", 
     category = ACMD_SOUND, low_priority )]
-unsafe fn sound_waluigi_entryl(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_entryl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_jump01"));
@@ -1003,7 +1003,7 @@ unsafe fn sound_waluigi_entryl(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_finalstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_finalstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_finalstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_final01"));
@@ -1018,7 +1018,7 @@ unsafe fn sound_waluigi_finalstart(fighter: &mut L2CAgentBase) {
     agent = "dolly",
     script =  "sound_finalairstart_waluigi",
     category = ACMD_SOUND, low_priority)]
-unsafe fn sound_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_final01"));

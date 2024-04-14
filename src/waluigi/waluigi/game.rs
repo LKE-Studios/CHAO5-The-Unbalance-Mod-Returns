@@ -2,12 +2,11 @@ use crate::imports::BuildImports::*;
 use crate::dolly::frame::*;
 use crate::waluigi::frame::*;
 
-#[acmd_script(//Attack11
+//Attack11
     agent = "dolly",
     script =  "game_attack11_waluigi",
-    category = ACMD_GAME, 
-    low_priority)]
-unsafe fn game_waluigi_attack11(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn game_waluigi_attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) { 
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hat"), /*Damage*/ 7.0, /*Angle*/ 255, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 78, /*Size*/ 4.7, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -27,12 +26,11 @@ unsafe fn game_waluigi_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack12
+//Attack12
     agent = "dolly",
     script =  "game_attack12_waluigi",
-    category = ACMD_GAME, 
-    low_priority)]
-unsafe fn game_waluigi_attack12(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn game_waluigi_attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         HIT_NODE(fighter, Hash40::new("shoulderl"), *HIT_STATUS_XLU);
@@ -57,18 +55,17 @@ unsafe fn game_waluigi_attack12(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack13
+//Attack13
     agent = "dolly",
     script =  "game_attack13_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attack13(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_attack13(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//AttackDash
+//AttackDash
     agent = "dolly",
     script =  "game_attackdash_waluigi",
-    category = ACMD_GAME, 
-    low_priority)]
-unsafe fn game_waluigi_attackdash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn game_waluigi_attackdash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
     }
@@ -125,12 +122,12 @@ unsafe fn game_waluigi_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3 
+//AttackS3 
     agent = "dolly", 
     script = "game_attacks3_waluigi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_waluigi_attacks3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_attacks3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 0.0);
     if is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.3);
@@ -168,11 +165,11 @@ unsafe fn game_waluigi_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
+//AttackHi3
     agent = "dolly",
     script =  "game_attackhi3_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_ATTACK_WORK_FLAG_HIT_CANCEL);
@@ -210,12 +207,12 @@ unsafe fn game_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3 
+//AttackLw3 
     agent = "dolly", 
     script = "game_attacklw3_waluigi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -231,11 +228,11 @@ unsafe fn game_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.7);
 }
 
-#[acmd_script(//AttackS4
+//AttackS4
     agent = "dolly",
     script =  "game_attacks4_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attacks4(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attacks4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     LAST_EFFECT_SET_RATE(fighter, 1.0);
     if is_excute(fighter) {
@@ -260,11 +257,11 @@ unsafe fn game_waluigi_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4
+//AttackHi4
     agent = "dolly",
     script =  "game_attackhi4_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -298,11 +295,11 @@ unsafe fn game_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4
+//AttackLw4
     agent = "dolly",
     script =  "game_attacklw4_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -328,11 +325,11 @@ unsafe fn game_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN
+//AttackAirN
     agent = "dolly",
     script =  "game_attackairn_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackairn(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackairn(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.4);
     frame(fighter.lua_state_agent, 8.0);
     FT_MOTION_RATE(fighter, 1.0);
@@ -363,11 +360,11 @@ unsafe fn game_waluigi_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF
+//AttackAirF
     agent = "dolly",
     script =  "game_attackairf_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackairf(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackairf(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
     }
@@ -397,11 +394,11 @@ unsafe fn game_waluigi_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirB
+//AttackAirB
     agent = "dolly",
     script =  "game_attackairb_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackairb(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackairb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -423,11 +420,11 @@ unsafe fn game_waluigi_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi
+//AttackAirHi
     agent = "dolly",
     script =  "game_attackairhi_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -461,11 +458,11 @@ unsafe fn game_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw
+//AttackAirLw
     agent = "dolly",
     script =  "game_attackairlw_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -505,11 +502,11 @@ unsafe fn game_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Catch
+//Catch
     agent = "dolly",
     script =  "game_catch_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_catch(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -528,11 +525,11 @@ unsafe fn game_waluigi_catch(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchDash
+//CatchDash
     agent = "dolly",
     script =  "game_catchdash_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_catchdash(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_catchdash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -551,11 +548,11 @@ unsafe fn game_waluigi_catchdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchTurn
+//CatchTurn
     agent = "dolly",
     script =  "game_catchturn_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_catchturn(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_catchturn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -574,11 +571,11 @@ unsafe fn game_waluigi_catchturn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchAttack 
+//CatchAttack 
     agent = "dolly", 
     script = "game_catchattack_waluigi", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_catchattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_catchattack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -591,11 +588,11 @@ unsafe fn game_waluigi_catchattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF
+//ThrowF
     agent = "dolly",
     script =  "game_throwf_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_throwf(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_throwf(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handr"), /*Damage*/ 2.0, /*Angle*/ 47, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 7.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.5), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_coin"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_KICK);
@@ -664,11 +661,11 @@ unsafe fn game_waluigi_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB 
+//ThrowB 
     agent = "dolly", 
     script = "game_throwb_waluigi", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_throwb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_throwb(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 19.0, 45, 65, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -689,11 +686,11 @@ unsafe fn game_waluigi_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi
+//ThrowHi
     agent = "dolly",
     script =  "game_throwhi_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_throwhi(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_throwhi(fighter: &mut L2CAgentBase) {
     let rand_val = smash::app::sv_math::rand(hash40("dolly"), 4);
     if rand_val == 0 {
         if is_excute(fighter) {
@@ -853,11 +850,11 @@ unsafe fn game_waluigi_throwhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowLw
+//ThrowLw
     agent = "dolly",
     script =  "game_throwlw_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_throwlw(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_throwlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 32.0);
     for _ in 0..4 {
         if is_excute(fighter) {
@@ -879,12 +876,12 @@ unsafe fn game_waluigi_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CliffAttack 
+//CliffAttack 
     agent = "dolly", 
     script = "game_cliffattack_waluigi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_waluigi_cliffattack(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_cliffattack(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 24.0);
     if is_excute(agent) {
         ATTACK(agent, 0, 0, Hash40::new("top"), 18.0, 45, 50, 0, 90, 5.0, 0.0, 5.0, 12.0, Some(0.0), Some(5.0), Some(-0.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -895,11 +892,11 @@ unsafe fn game_waluigi_cliffattack(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackU 
+//DownAttackU 
     agent = "dolly", 
     script = "game_downattacku_waluigi", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_downattacku(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_downattacku(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     for _ in 0..2 {
         if is_excute(fighter) {
@@ -932,12 +929,12 @@ unsafe fn game_waluigi_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD 
+//DownAttackD 
     agent = "dolly", 
     script = "game_downattackd_waluigi", 
     category = ACMD_GAME, 
     low_priority )]
-unsafe fn game_waluigi_downattackd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_downattackd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     for _ in 0..2 {
         if is_excute(fighter) {
@@ -970,11 +967,11 @@ unsafe fn game_waluigi_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SlipAttack 
+//SlipAttack 
     agent = "dolly", 
     script = "game_slipattack_waluigi", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_slipattack(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_slipattack(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 19.0);
     if is_excute(agent) {
         ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 80, 0, 60, 9.5, 0.0, 4.5, -15.0, Some(0.0), Some(4.5), Some(-3.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 8, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -993,11 +990,11 @@ unsafe fn game_waluigi_slipattack(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialN
+//SpecialN
     agent = "dolly", 
     script = "game_specialn_waluigi", 
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialn(fighter: &mut L2CAgentBase) { 
+    
+unsafe extern "C" fn game_waluigi_specialn(fighter: &mut L2CAgentBase) { 
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if is_excute(fighter) {
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
@@ -1237,12 +1234,11 @@ unsafe fn game_waluigi_specialn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirN
+//SpecialAirN
     agent = "dolly", 
     script = "game_specialairn_waluigi", 
-    category = ACMD_GAME, 
-    low_priority)]
-unsafe fn game_waluigi_specialairn(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn game_waluigi_specialairn(fighter: &mut L2CAgentBase) {
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if is_excute(fighter) {
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
@@ -1482,11 +1478,11 @@ unsafe fn game_waluigi_specialairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSBStart
+//SpecialSBStart
     agent = "dolly",
     script =  "game_specialsbstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
@@ -1506,23 +1502,23 @@ unsafe fn game_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSBAttackW
+//SpecialSBAttackW
     agent = "dolly",
     script =  "game_specialsbattackw_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialSBAttack
+//SpecialSBAttack
     agent = "dolly",
     script =  "game_specialsbattack_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialAirSFEnd 
+//SpecialAirSFEnd 
     agent = "dolly", 
     script = "game_specialairsfend_waluigi", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
@@ -1530,11 +1526,11 @@ unsafe fn game_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSFEnd2 
+//SpecialAirSFEnd2 
     agent = "dolly", 
     script = "game_specialairsfend2", 
     category = ACMD_GAME, low_priority )]
-unsafe fn game_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
@@ -1546,11 +1542,11 @@ unsafe fn game_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSFStart
+//SpecialSFStart
     agent = "dolly",
     script =  "game_specialsfstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1568,17 +1564,17 @@ unsafe fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSFAttack
+//SpecialSFAttack
     agent = "dolly",
     script =  "game_specialsfattack_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialsfattack(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_specialsfattack(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialAirSFStart
+//SpecialAirSFStart
     agent = "dolly",
     script =  "game_specialairsfstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("tOP"), /*Damage*/ 25.0, /*Angle*/ 80, /*KBG*/ 107, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 40, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
@@ -1620,11 +1616,11 @@ unsafe fn game_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSFAttack
+//SpecialAirSFAttack
     agent = "dolly",
     script =  "game_specialairsfattack_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -1637,11 +1633,11 @@ unsafe fn game_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHi1
+//SpecialHi1
     agent = "dolly",
     script =  "game_specialhi1_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1761,11 +1757,11 @@ unsafe fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirHi1
+//SpecialAirHi1
     agent = "dolly",
     script =  "game_specialairhi1_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1836,35 +1832,35 @@ unsafe fn game_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwStart
+//SpecialLwStart
     agent = "dolly",
     script =  "game_speciallwstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialAirLwStart
+//SpecialAirLwStart
     agent = "dolly",
     script =  "game_specialairlwstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialAirLw
+//SpecialAirLw
     agent = "dolly",
     script =  "game_specialairlw_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_specialairlw(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_specialairlw(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialLwShield
+//SpecialLwShield
     agent = "dolly",
     script =  "game_speciallwshield",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {}
+    
+unsafe extern "C" fn game_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//SpecialLwAttack1
+//SpecialLwAttack1
     agent = "dolly",
     script =  "game_speciallwattack1",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 37, /*KBG*/ 80, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
@@ -1881,11 +1877,11 @@ unsafe fn game_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwAttack2
+//SpecialLwAttack2
     agent = "dolly",
     script =  "game_speciallwattack2",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1900,11 +1896,11 @@ unsafe fn game_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwAttack3
+//SpecialLwAttack3
     agent = "dolly",
     script =  "game_speciallwattack3",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1919,11 +1915,11 @@ unsafe fn game_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwAttackSpecial1
+//SpecialLwAttackSpecial1
     agent = "dolly",
     script =  "game_speciallwattackspecial1",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1939,11 +1935,11 @@ unsafe fn game_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwAttackSpecial2
+//SpecialLwAttackSpecial2
     agent = "dolly",
     script =  "game_speciallwattackspecial2",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1958,11 +1954,11 @@ unsafe fn game_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwJump
+//SpecialLwJump
     agent = "dolly",
     script =  "game_speciallwjump",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.25);
     SET_SPEED_EX(fighter, 1.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -1973,11 +1969,11 @@ unsafe fn game_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwSpecial
+//SpecialLwSpecial
     agent = "dolly",
     script =  "game_speciallwspecial",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handl"), /*Damage*/ 25.0, /*Angle*/ 90, /*KBG*/ 96, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
@@ -1990,11 +1986,11 @@ unsafe fn game_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwAttackAir
+//SpecialLwAttackAir
     agent = "dolly",
     script =  "game_speciallwattackair",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("footl"), 6.0, 361, 20, 0, 50, 9.4, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -2017,11 +2013,11 @@ unsafe fn game_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwSpecialAir
+//SpecialLwSpecialAir
     agent = "dolly",
     script =  "game_speciallwspecialair",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 7.0);
@@ -2036,11 +2032,11 @@ unsafe fn game_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwJumpAir
+//SpecialLwJumpAir
     agent = "dolly",
     script =  "game_speciallwjumpair",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 3.0, 367,50, 0, 10, 7.5, 0.0, 12.5, 0.0, None, None, None, 0.5, 0.6, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_rush"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_OBJECT);
         ATTACK(fighter, 1, 0, Hash40::new("top"), 3.0, 90, 40, 0, 45, 7.5, 0.0, 9.0, 0.0, None, None, None, 0.5, 0.6, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_rush"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_OBJECT);
@@ -2055,11 +2051,11 @@ unsafe fn game_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
 	}
 }
 
-#[acmd_script(//AppealHiL
+//AppealHiL
     agent = "dolly",
     script =  "game_appealhil_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_appealhil(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_appealhil(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, 1.62);
@@ -2067,11 +2063,11 @@ unsafe fn game_waluigi_appealhil(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR
+//AppealHiR
     agent = "dolly",
     script =  "game_appealhir_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_appealhir(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_appealhir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, 1.62);
@@ -2079,53 +2075,53 @@ unsafe fn game_waluigi_appealhir(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealLwL
+//AppealLwL
     agent = "dolly",
     script =  "game_appeallwl_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HONEYCOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealLwR
+//AppealLwR
     agent = "dolly",
     script =  "game_appeallwr_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HONEYCOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//EntryR
+//EntryR
     agent = "dolly",
     script =  "game_entryr_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_entryr(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_entryr(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
     	WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
 	}
 }
 
-#[acmd_script(//EntryL
+//EntryL
     agent = "dolly",
     script =  "game_entryl_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_entryl(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_entryl(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
     	WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
 	}
 }
 
-#[acmd_script(//FinalStart
+//FinalStart
     agent = "dolly",
     script =  "game_finalstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_finalstart(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_finalstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, /*FSM*/ 1.38);
         FT_START_CUTIN(fighter, );
@@ -2449,11 +2445,11 @@ unsafe fn game_waluigi_finalstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//FinalAirStart
+//FinalAirStart
     agent = "dolly",
     script =  "game_finalairstart_waluigi",
-    category = ACMD_GAME, low_priority)]
-unsafe fn game_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
+    
+unsafe extern "C" fn game_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, /*FSM*/ 1.38);
         FT_START_CUTIN(fighter, );
@@ -2775,6 +2771,67 @@ unsafe fn game_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
+}
+
+pub fn install() {
+    Agent::new("dolly")
+    .game_acmd("game_attack11_waluigi", game_waluigi_Attack11)
+    .game_acmd("game_attack12_waluigi", game_waluigi_Attack12)
+    .game_acmd("game_attack13_waluigi", game_waluigi_Attack13)
+    .game_acmd("game_attackdash_waluigi", game_waluigi_AttackDash)
+    .game_acmd("game_attacks3_waluigi", game_waluigi_AttackS3)
+    .game_acmd("game_attackhi3_waluigi", game_waluigi_AttackHi3)
+    .game_acmd("game_attacklw3_waluigi", game_waluigi_AttackLw3)
+    .game_acmd("game_attacklw4_waluigi", game_waluigi_AttackLw4)
+    .game_acmd("game_attackairn_waluigi", game_waluigi_AttackAirN)
+    .game_acmd("game_attackairf_waluigi", game_waluigi_AttackAirF)
+    .game_acmd("game_attackairb_waluigi", game_waluigi_AttackAirB)
+    .game_acmd("game_attackairhi_waluigi", game_waluigi_AttackAirHi)
+    .game_acmd("game_attackairlw_waluigi", game_waluigi_AttackAirLw)
+    .game_acmd("game_catch_waluigi", game_waluigi_Catch)
+    .game_acmd("game_catchdash_waluigi", game_waluigi_CatchDash)
+    .game_acmd("game_catchturn_waluigi", game_waluigi_CatchTurn)
+    .game_acmd("game_catchattack_waluigi", game_waluigi_CatchAttack)
+    .game_acmd("game_throwf_waluigi", game_waluigi_ThrowF)
+    .game_acmd("game_throwb_waluigi", game_waluigi_ThrowB)
+    .game_acmd("game_throwhi_waluigi", game_waluigi_ThrowHi)
+    .game_acmd("game_throwlw_waluigi", game_waluigi_ThrowLw)
+    .game_acmd("game_downattacku_waluigi", game_waluigi_DownAttackU)
+    .game_acmd("game_downattackd_waluigi", game_waluigi_DownAttackD)
+    .game_acmd("game_specialn_waluigi", game_waluigi_SpecialN)
+    .game_acmd("game_specialairn_waluigi", game_waluigi_SpecialAirN)
+    .game_acmd("game_specialsbstart_waluigi", game_waluigi_SpecialSBStart)
+    .game_acmd("game_specialsbattackw_waluigi", game_waluigi_SpecialSBAttackW)
+    .game_acmd("game_specialsbattack_waluigi", game_waluigi_SpecialSBAttack)
+    .game_acmd("game_specialairsfend_waluigi", game_waluigi_SpecialAirSFEnd)
+    .game_acmd("game_specialairsfend2_waluigi", game_waluigi_SpecialAirSFEnd2)
+    .game_acmd("game_specialsfattack_waluigi", game_waluigi_SpecialSFAttack)
+    .game_acmd("game_specialsfstart_waluigi", game_waluigi_SpecialSFStart)
+    .game_acmd("game_specialairsfstart_waluigi", game_waluigi_SpecialAirSFStart)
+    .game_acmd("game_specialhi1_waluigi", game_waluigi_SpecialHi1)
+    .game_acmd("game_specialairhi1_waluigi", game_waluigi_SpecialAirHi1)
+    .game_acmd("game_speciallwstart_waluigi", game_waluigi_SpecialLwStart)
+    .game_acmd("game_specialairlwstart_waluigi", game_waluigi_SpecialAirLwStart)
+    .game_acmd("game_specialairlw_waluigi", game_waluigi_SpecialAirLw)
+    .game_acmd("game_speciallwshield", game_waluigi_SpecialLwShield)
+    .game_acmd("game_speciallwattack1", game_waluigi_SpecialLwAttack1)
+    .game_acmd("game_speciallwattack2", game_waluigi_SpecialLwAttack2)
+    .game_acmd("game_speciallwattack3", game_waluigi_SpecialLwAttack3)
+    .game_acmd("game_speciallwattackspecial1", game_waluigi_SpecialLwAttackSpecial1)
+    .game_acmd("game_speciallwattackspecial2", game_waluigi_SpecialLwAttackSpecial2)
+    .game_acmd("game_speciallwjump", game_waluigi_SpecialLwJump)
+    .game_acmd("game_speciallwattackair", game_waluigi_SpecialLwAttackAir)
+    .game_acmd("game_speciallwspecialair", game_waluigi_SpecialLwSpecialAir)
+    .game_acmd("game_speciallwspecial", game_waluigi_SpecialLwSpecial)
+    .game_acmd("game_speciallwjumpair", game_waluigi_SpecialLwJumpAir)
+    .game_acmd("game_superspecial_waluigi", game_waluigi_SuperSpecial)
+    .game_acmd("game_superspecial2_waluigi", game_waluigi_SuperSpecial2)
+    .game_acmd("game_superspecial2start_waluigi", game_waluigi_SuperSpecial2Start)
+    .game_acmd("game_finalstart_waluigi", game_waluigi_FinalStart)
+    .game_acmd("game_finalairstart_waluigi", game_waluigi_FinalAirStart)
+    .game_acmd("game_entryl_waluigi", game_waluigi_EntryL)
+    .game_acmd("game_entryr_waluigi", game_waluigi_EntryR)
+    .install();
 }
 
 pub fn install() {
