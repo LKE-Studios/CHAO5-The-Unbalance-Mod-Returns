@@ -14,13 +14,13 @@ pub static init_speed_y : f32 = 1.7;
 pub static dive_speed_y : f32 = 3.0;
 pub static dive_speed_x : f32 = 0.2;
 
-pub unsafe fn scale_waluigi(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn scale_waluigi(fighter: &mut L2CFighterCommon) {
     ModelModule::set_scale(fighter.module_accessor, 0.9);
     AttackModule::set_attack_scale(fighter.module_accessor, 0.9, true);
     GrabModule::set_size_mul(fighter.module_accessor, 0.9);
 }
 
-pub unsafe fn attack_dash_waluigi(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn attack_dash_waluigi(fighter: &mut L2CFighterCommon) {
     let frame = MotionModule::frame(fighter.module_accessor);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("attack_dash") {
         if frame > 30.0 && frame < 36.0 {
@@ -31,7 +31,7 @@ pub unsafe fn attack_dash_waluigi(fighter: &mut L2CFighterCommon) {
     }
 }
 
-pub unsafe fn special_n_waluigi(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn special_n_waluigi(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -50,7 +50,7 @@ pub unsafe fn special_n_waluigi(fighter: &mut L2CFighterCommon) {
     ArticleModule::generate_article(fighter.module_accessor, *WEAPON_KIND_DOLLY_CAP, true, 1);
 }
 
-pub unsafe fn special_s_waluigi(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn special_s_waluigi(fighter: &mut L2CFighterCommon) {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
@@ -116,7 +116,7 @@ pub fn waluigi_frame(fighter: &mut L2CFighterCommon) {
     }
 }
 
-pub unsafe fn final_start_waluigi(fighter: &mut L2CFighterCommon) {
+pub unsafe extern "C" fn final_start_waluigi(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("final_start") {
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {

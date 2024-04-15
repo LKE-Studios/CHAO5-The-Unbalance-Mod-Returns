@@ -1,10 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //Attack11
-    agent = "dolly",
-    script =  "expression_attack11_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attack11(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_Attack11(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -19,10 +16,7 @@ unsafe extern "C" fn expression_waluigi_attack11(fighter: &mut L2CAgentBase) {
 }
 
 //Attack12
-    agent = "dolly",
-    script =  "expression_attack12_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attack12(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_Attack12(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -37,16 +31,10 @@ unsafe extern "C" fn expression_waluigi_attack12(fighter: &mut L2CAgentBase) {
 }
 
 //Attack13
-    agent = "dolly",
-    script =  "expression_attack13_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attack13(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn expression_waluigi_Attack13(fighter: &mut L2CAgentBase) {}
 
 //AttackDash
-    agent = "dolly",
-    script =  "expression_attackdash_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_STATUS(fighter, Hash40::new("se_dolly_smash_l01"));
@@ -58,10 +46,7 @@ unsafe extern "C" fn expression_waluigi_attackdash(fighter: &mut L2CAgentBase) {
 }
 
 //AttackLw3 
-    agent = "dolly", 
-    script = "expression_attacklw3_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackLw3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 2);
     }
@@ -80,10 +65,7 @@ unsafe extern "C" fn expression_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
 }
 
 //AttackLw4
-    agent = "dolly",
-    script =  "expression_attacklw4_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 2);
@@ -109,10 +91,7 @@ unsafe extern "C" fn expression_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirN
-    agent = "dolly",
-    script =  "expression_attackairn_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackairn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohits"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -124,10 +103,7 @@ unsafe extern "C" fn expression_waluigi_attackairn(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirF
-    agent = "dolly",
-    script =  "expression_attackairf_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackairf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackAirF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
     }
@@ -142,10 +118,7 @@ unsafe extern "C" fn expression_waluigi_attackairf(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirB
-    agent = "dolly",
-    script =  "expression_attackairb_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackairb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohits"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -157,10 +130,7 @@ unsafe extern "C" fn expression_waluigi_attackairb(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirHi
-    agent = "dolly",
-    script =  "expression_attackairhi_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackAirHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
     }
@@ -175,10 +145,7 @@ unsafe extern "C" fn expression_waluigi_attackairhi(fighter: &mut L2CAgentBase) 
 }
 
 //AttackAirLw
-    agent = "dolly",
-    script =  "expression_attackairlw_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AttackAirLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
     }
@@ -201,10 +168,7 @@ unsafe extern "C" fn expression_waluigi_attackairlw(fighter: &mut L2CAgentBase) 
 }
 
 //SpecialSBStart
-    agent = "dolly",
-    script =  "expression_specialsbstart_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_SpecialSBStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -220,22 +184,13 @@ unsafe extern "C" fn expression_waluigi_specialsbstart(fighter: &mut L2CAgentBas
 }
 
 //SpecialSBAttack
-    agent = "dolly",
-    script =  "expression_specialsbattack_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn expression_waluigi_SpecialSBAttack(fighter: &mut L2CAgentBase) {}
 
 //SpecialSBAttackW
-    agent = "dolly",
-    script =  "expression_specialsbattackw_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn expression_waluigi_SpecialSBAttackW(fighter: &mut L2CAgentBase) {}
 
 //SpecialSFStart
-    agent = "dolly",
-    script =  "expression_specialsfstart_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_SpecialSFStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -251,10 +206,7 @@ unsafe extern "C" fn expression_waluigi_specialsfstart(fighter: &mut L2CAgentBas
 }
 
 //SpecialAirSFStart
-    agent = "dolly",
-    script =  "expression_specialairsfstart_waluigi",
-    
-unsafe extern "C" fn expression_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_SpecialAirSFStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -270,10 +222,7 @@ unsafe extern "C" fn expression_waluigi_specialairsfstart(fighter: &mut L2CAgent
 }
 
 //AppealHiL 
-    agent = "dolly", 
-    script = "expression_appealhil_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_appealhil(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AppealHiL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR);
     }
@@ -288,10 +237,7 @@ unsafe extern "C" fn expression_waluigi_appealhil(fighter: &mut L2CAgentBase) {
 }
 
 //AppealHiR 
-    agent = "dolly", 
-    script = "expression_appealhir_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_appealhir(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AppealHiR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR);
     }
@@ -306,10 +252,7 @@ unsafe extern "C" fn expression_waluigi_appealhir(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwL 
-    agent = "dolly", 
-    script = "expression_appeallwl_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -332,10 +275,7 @@ unsafe extern "C" fn expression_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwR 
-    agent = "dolly", 
-    script = "expression_appeallwr_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -358,10 +298,7 @@ unsafe extern "C" fn expression_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
 }
 
 //EntryR 
-    agent = "dolly", 
-    script = "expression_entryr_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_entryr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_EntryR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x24772eddef), false);
@@ -374,10 +311,7 @@ unsafe extern "C" fn expression_waluigi_entryr(fighter: &mut L2CAgentBase) {
 }
 
 //EntryL
-    agent = "dolly", 
-    script = "expression_entryl_waluigi", 
-    
-unsafe extern "C" fn expression_waluigi_entryl(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_waluigi_EntryL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x24772eddef), false);
@@ -390,28 +324,30 @@ unsafe extern "C" fn expression_waluigi_entryl(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        expression_waluigi_attack11,
-        expression_waluigi_attack12,
-        expression_waluigi_attack13,
-        expression_waluigi_attackdash,
-        expression_waluigi_attacklw3,
-        expression_waluigi_attacklw4,
-        expression_waluigi_attackairn,
-        expression_waluigi_attackairf,
-        expression_waluigi_attackairb,
-        expression_waluigi_attackairhi,
-        expression_waluigi_attackairlw,
-        expression_waluigi_specialsbstart,
-        expression_waluigi_specialsbattackw,
-        expression_waluigi_specialsbattack,
-        expression_waluigi_specialsfstart,
-        expression_waluigi_specialairsfstart,
-        expression_waluigi_appealhil,
-        expression_waluigi_appealhir,
-        expression_waluigi_appeallwl,
-        expression_waluigi_appeallwr,
-        expression_waluigi_entryl,
-        expression_waluigi_entryr,
-    );
+    Agent::new("dolly")
+    .expression_acmd("expression_attack11_waluigi", expression_waluigi_Attack11)
+    .expression_acmd("expression_attack12_waluigi", expression_waluigi_Attack12)
+    .expression_acmd("expression_attack13_waluigi", expression_waluigi_Attack13)
+    .expression_acmd("expression_attackdash_waluigi", expression_waluigi_AttackDash)
+    .expression_acmd("expression_attacks3_waluigi", expression_waluigi_AttackS3)
+    .expression_acmd("expression_attackhi3_waluigi", expression_waluigi_AttackHi3)
+    .expression_acmd("expression_attacklw3_waluigi", expression_waluigi_AttackLw3)
+    .expression_acmd("expression_attacklw4_waluigi", expression_waluigi_AttackLw4)
+    .expression_acmd("expression_attackairn_waluigi", expression_waluigi_AttackAirN)
+    .expression_acmd("expression_attackairf_waluigi", expression_waluigi_AttackAirF)
+    .expression_acmd("expression_attackairb_waluigi", expression_waluigi_AttackAirB)
+    .expression_acmd("expression_attackairhi_waluigi", expression_waluigi_AttackAirHi)
+    .expression_acmd("expression_attackairlw_waluigi", expression_waluigi_AttackAirLw)
+    .expression_acmd("expression_specialsbstart_waluigi", expression_waluigi_SpecialSBStart)
+    .expression_acmd("expression_specialsbattackw_waluigi", expression_waluigi_SpecialSBAttackW)
+    .expression_acmd("expression_specialsbattack_waluigi", expression_waluigi_SpecialSBAttack)
+    .expression_acmd("expression_specialsfstart_waluigi", expression_waluigi_SpecialSFStart)
+    .expression_acmd("expression_specialairsfstart_waluigi", expression_waluigi_SpecialAirSFStart)
+    .expression_acmd("expression_appealhil", expression_waluigi_AppealHiL)
+    .expression_acmd("expression_appealhir", expression_waluigi_AppealHiR)
+    .expression_acmd("expression_appeallwl", expression_waluigi_AppealLwL)
+    .expression_acmd("expression_appeallwr", expression_waluigi_AppealLwR)
+    .expression_acmd("expression_entryl_waluigi", expression_waluigi_EntryL)
+    .expression_acmd("expression_entryr_waluigi", expression_waluigi_EntryR)
+    .install();
 }
