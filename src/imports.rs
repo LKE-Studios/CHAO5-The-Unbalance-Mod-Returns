@@ -99,7 +99,8 @@ pub mod BuildImports {
             REQ_MOTION_CAMERA,
             CHECK_VALID_START_CAMERA,
             SET_TAKEOUT_SE_STATUS,
-            EFFECT_FOLLOW_COLOR
+            EFFECT_FOLLOW_COLOR,
+            FOOT_EFFECT_FLIP
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},

@@ -1,11 +1,10 @@
-use crate::imports::BuildImports::*;
-
 mod game;
 pub mod status;
 pub mod frame;
 pub mod effect;
 pub mod sound;
 mod expression;
+mod init;
 
 pub fn install() {
     game::install();    
@@ -14,4 +13,5 @@ pub fn install() {
     sound::install();
     frame::install();
     expression::install();
+    init::install();
 }

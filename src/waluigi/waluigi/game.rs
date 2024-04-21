@@ -1,12 +1,8 @@
 use crate::imports::BuildImports::*;
-use crate::dolly::frame::*;
-use crate::waluigi::frame::*;
+use crate::waluigi::waluigi::frame::*;
 
 //Attack11
-    agent = "dolly",
-    script =  "game_attack11_waluigi",
-
-unsafe extern "C" fn game_waluigi_attack11(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_Attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) { 
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hat"), /*Damage*/ 7.0, /*Angle*/ 255, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 78, /*Size*/ 4.7, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -27,10 +23,7 @@ unsafe extern "C" fn game_waluigi_attack11(fighter: &mut L2CAgentBase) {
 }
 
 //Attack12
-    agent = "dolly",
-    script =  "game_attack12_waluigi",
-
-unsafe extern "C" fn game_waluigi_attack12(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_Attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         HIT_NODE(fighter, Hash40::new("shoulderl"), *HIT_STATUS_XLU);
@@ -56,16 +49,10 @@ unsafe extern "C" fn game_waluigi_attack12(fighter: &mut L2CAgentBase) {
 }
 
 //Attack13
-    agent = "dolly",
-    script =  "game_attack13_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attack13(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_Attack13(fighter: &mut L2CAgentBase) {}
 
 //AttackDash
-    agent = "dolly",
-    script =  "game_attackdash_waluigi",
-
-unsafe extern "C" fn game_waluigi_attackdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
     }
@@ -123,11 +110,7 @@ unsafe extern "C" fn game_waluigi_attackdash(fighter: &mut L2CAgentBase) {
 }
 
 //AttackS3 
-    agent = "dolly", 
-    script = "game_attacks3_waluigi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe extern "C" fn game_waluigi_attacks3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 0.0);
     if is_excute(fighter) {
         MotionModule::set_rate(fighter.module_accessor, 1.3);
@@ -166,10 +149,7 @@ unsafe extern "C" fn game_waluigi_attacks3(fighter: &mut L2CAgentBase) {
 }
 
 //AttackHi3
-    agent = "dolly",
-    script =  "game_attackhi3_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackHi3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_ATTACK_WORK_FLAG_HIT_CANCEL);
@@ -208,11 +188,7 @@ unsafe extern "C" fn game_waluigi_attackhi3(fighter: &mut L2CAgentBase) {
 }
 
 //AttackLw3 
-    agent = "dolly", 
-    script = "game_attacklw3_waluigi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe extern "C" fn game_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackLw3(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.5);
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -229,10 +205,7 @@ unsafe extern "C" fn game_waluigi_attacklw3(fighter: &mut L2CAgentBase) {
 }
 
 //AttackS4
-    agent = "dolly",
-    script =  "game_attacks4_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attacks4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     LAST_EFFECT_SET_RATE(fighter, 1.0);
     if is_excute(fighter) {
@@ -258,10 +231,7 @@ unsafe extern "C" fn game_waluigi_attacks4(fighter: &mut L2CAgentBase) {
 }
 
 //AttackHi4
-    agent = "dolly",
-    script =  "game_attackhi4_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -296,10 +266,7 @@ unsafe extern "C" fn game_waluigi_attackhi4(fighter: &mut L2CAgentBase) {
 }
 
 //AttackLw4
-    agent = "dolly",
-    script =  "game_attacklw4_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -326,10 +293,7 @@ unsafe extern "C" fn game_waluigi_attacklw4(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirN
-    agent = "dolly",
-    script =  "game_attackairn_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackairn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackAirN(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 0.4);
     frame(fighter.lua_state_agent, 8.0);
     FT_MOTION_RATE(fighter, 1.0);
@@ -361,33 +325,21 @@ unsafe extern "C" fn game_waluigi_attackairn(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirF
-    agent = "dolly",
-    script =  "game_attackairf_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackairf(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
-    }
+unsafe extern "C" fn game_waluigi_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-    FT_MOTION_RATE(fighter, /*FSM*/ 1.3);
-    frame(fighter.lua_state_agent, 5.0);
+    frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("footl"), /*Damage*/ 18.0, /*Angle*/ 33, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ 3.0, /*Y*/ 2.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 15.0, /*Angle*/ 33, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ 3.0, /*Y*/ 2.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handl"), /*Damage*/ 18.0, /*Angle*/ 33, /*KBG*/ 93, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ 2.3, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_PUNCH);
+        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("arml"), /*Damage*/ 15.0, /*Angle*/ 33, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ -0.5, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_PUNCH);
     }
-    frame(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("footl"), /*Damage*/ 20.0, /*Angle*/ 48, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 18.0, /*Angle*/ 48, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 45, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
-    }
-    frame(fighter.lua_state_agent, 27.0);
+    wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
     }
-    frame(fighter.lua_state_agent, 31.0);
+    wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -395,10 +347,7 @@ unsafe extern "C" fn game_waluigi_attackairf(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirB
-    agent = "dolly",
-    script =  "game_attackairb_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackairb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -421,10 +370,7 @@ unsafe extern "C" fn game_waluigi_attackairb(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirHi
-    agent = "dolly",
-    script =  "game_attackairhi_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -459,10 +405,7 @@ unsafe extern "C" fn game_waluigi_attackairhi(fighter: &mut L2CAgentBase) {
 }
 
 //AttackAirLw
-    agent = "dolly",
-    script =  "game_attackairlw_waluigi",
-    
-unsafe extern "C" fn game_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AttackAirLw(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -503,10 +446,7 @@ unsafe extern "C" fn game_waluigi_attackairlw(fighter: &mut L2CAgentBase) {
 }
 
 //Catch
-    agent = "dolly",
-    script =  "game_catch_waluigi",
-    
-unsafe extern "C" fn game_waluigi_catch(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_Catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -526,10 +466,7 @@ unsafe extern "C" fn game_waluigi_catch(fighter: &mut L2CAgentBase) {
 }
 
 //CatchDash
-    agent = "dolly",
-    script =  "game_catchdash_waluigi",
-    
-unsafe extern "C" fn game_waluigi_catchdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_CatchDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -549,10 +486,7 @@ unsafe extern "C" fn game_waluigi_catchdash(fighter: &mut L2CAgentBase) {
 }
 
 //CatchTurn
-    agent = "dolly",
-    script =  "game_catchturn_waluigi",
-    
-unsafe extern "C" fn game_waluigi_catchturn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_CatchTurn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -572,10 +506,7 @@ unsafe extern "C" fn game_waluigi_catchturn(fighter: &mut L2CAgentBase) {
 }
 
 //CatchAttack 
-    agent = "dolly", 
-    script = "game_catchattack_waluigi", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_catchattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -589,10 +520,7 @@ unsafe extern "C" fn game_waluigi_catchattack(fighter: &mut L2CAgentBase) {
 }
 
 //ThrowF
-    agent = "dolly",
-    script =  "game_throwf_waluigi",
-    
-unsafe extern "C" fn game_waluigi_throwf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_ThrowF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handr"), /*Damage*/ 2.0, /*Angle*/ 47, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 7.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.5), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_coin"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_KICK);
@@ -662,10 +590,7 @@ unsafe extern "C" fn game_waluigi_throwf(fighter: &mut L2CAgentBase) {
 }
 
 //ThrowB 
-    agent = "dolly", 
-    script = "game_throwb_waluigi", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_throwb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 19.0, 45, 65, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -687,11 +612,8 @@ unsafe extern "C" fn game_waluigi_throwb(fighter: &mut L2CAgentBase) {
 }
 
 //ThrowHi
-    agent = "dolly",
-    script =  "game_throwhi_waluigi",
-    
-unsafe extern "C" fn game_waluigi_throwhi(fighter: &mut L2CAgentBase) {
-    let rand_val = smash::app::sv_math::rand(hash40("dolly"), 4);
+unsafe extern "C" fn game_waluigi_ThrowHi(fighter: &mut L2CAgentBase) {
+    let rand_val = sv_math::rand(hash40("dolly"), 4);
     if rand_val == 0 {
         if is_excute(fighter) {
             ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 1.0, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -851,10 +773,7 @@ unsafe extern "C" fn game_waluigi_throwhi(fighter: &mut L2CAgentBase) {
 }
 
 //ThrowLw
-    agent = "dolly",
-    script =  "game_throwlw_waluigi",
-    
-unsafe extern "C" fn game_waluigi_throwlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_ThrowLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 32.0);
     for _ in 0..4 {
         if is_excute(fighter) {
@@ -877,11 +796,7 @@ unsafe extern "C" fn game_waluigi_throwlw(fighter: &mut L2CAgentBase) {
 }
 
 //CliffAttack 
-    agent = "dolly", 
-    script = "game_cliffattack_waluigi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe extern "C" fn game_waluigi_cliffattack(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_CliffAttack(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 24.0);
     if is_excute(agent) {
         ATTACK(agent, 0, 0, Hash40::new("top"), 18.0, 45, 50, 0, 90, 5.0, 0.0, 5.0, 12.0, Some(0.0), Some(5.0), Some(-0.5), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -893,10 +808,7 @@ unsafe extern "C" fn game_waluigi_cliffattack(agent: &mut L2CAgentBase) {
 }
 
 //DownAttackU 
-    agent = "dolly", 
-    script = "game_downattacku_waluigi", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_downattacku(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     for _ in 0..2 {
         if is_excute(fighter) {
@@ -930,11 +842,7 @@ unsafe extern "C" fn game_waluigi_downattacku(fighter: &mut L2CAgentBase) {
 }
 
 //DownAttackD 
-    agent = "dolly", 
-    script = "game_downattackd_waluigi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe extern "C" fn game_waluigi_downattackd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     for _ in 0..2 {
         if is_excute(fighter) {
@@ -968,10 +876,7 @@ unsafe extern "C" fn game_waluigi_downattackd(fighter: &mut L2CAgentBase) {
 }
 
 //SlipAttack 
-    agent = "dolly", 
-    script = "game_slipattack_waluigi", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_slipattack(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SlipAttack(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 19.0);
     if is_excute(agent) {
         ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 80, 0, 60, 9.5, 0.0, 4.5, -15.0, Some(0.0), Some(4.5), Some(-3.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 8, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -991,501 +896,25 @@ unsafe extern "C" fn game_waluigi_slipattack(agent: &mut L2CAgentBase) {
 }
 
 //SpecialN
-    agent = "dolly", 
-    script = "game_specialn_waluigi", 
-    
-unsafe extern "C" fn game_waluigi_specialn(fighter: &mut L2CAgentBase) { 
-	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
-    }
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-    }
-    frame(fighter.lua_state_agent, 3.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), true);
-        if RANDOM_NUM[ENTRY_ID] == 0 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
-    }
-    wait(fighter.lua_state_agent, 19.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 155, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 120, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 115, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 70, /*KBG*/ 95, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 90, /*KBG*/ 95, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        if RANDOM_NUM[ENTRY_ID] == 0 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-        }
-        AttackModule::clear_all(fighter.module_accessor);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
-    }
-    wait(fighter.lua_state_agent, 6.0);
-    if is_excute(fighter) {
-        if RANDOM_NUM[ENTRY_ID] == 0 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 280, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 290, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 0, *FIGHTER_RYU_SAVING_LV_3 as u8);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 1, *FIGHTER_RYU_SAVING_LV_3 as u8);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 2, *FIGHTER_RYU_SAVING_LV_3 as u8);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, /*Ink*/ 200.0);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 1, /*Ink*/ 200.0);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 2, /*Ink*/ 200.0);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 9.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 2, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            DamageModule::heal(fighter.module_accessor, -180.0, 0);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);;
-            if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 2000.0, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            }
-        }
-    }
-    wait(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-        RANDOM_NUM[ENTRY_ID] = 0;
-        RANDOM_NUM_SELECTED[ENTRY_ID] = false;
-        ALREADY_BLOCK[ENTRY_ID] = false;
-    }
-    frame(fighter.lua_state_agent, 76.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), false);
-    }
+unsafe extern "C" fn game_waluigi_SpecialN(fighter: &mut L2CAgentBase) { 
+    frame(fighter.lua_state_agent, 19.0);
+	if is_excute(fighter) {
+		ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WALUIGI_GENERATE_ARTICLE_DICEBLOCK, false, -1);
+	}
 }
 
 //SpecialAirN
-    agent = "dolly", 
-    script = "game_specialairn_waluigi", 
-
-unsafe extern "C" fn game_waluigi_specialairn(fighter: &mut L2CAgentBase) {
-	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
-    }
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-    }
-    frame(fighter.lua_state_agent, 3.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), true);
-        if RANDOM_NUM[ENTRY_ID] == 0 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 && !ALREADY_BLOCK[ENTRY_ID] {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), true);
-            ALREADY_BLOCK[ENTRY_ID] = true;
-        }
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
-    }
-    wait(fighter.lua_state_agent, 19.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 155, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 120, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 55, /*KBG*/ 115, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 70, /*KBG*/ 95, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 4.0, /*Angle*/ 90, /*KBG*/ 95, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        if RANDOM_NUM[ENTRY_ID] == 0 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), true);
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-        }
-        AttackModule::clear_all(fighter.module_accessor);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
-    }
-    wait(fighter.lua_state_agent, 6.0);
-    if is_excute(fighter) {
-        if RANDOM_NUM[ENTRY_ID] == 0 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 10.0, /*Angle*/ 80, /*KBG*/ 150, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 1 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 280, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 25.5, /*Angle*/ 290, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 3.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 2 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 29.0, /*Angle*/ 362, /*KBG*/ 87, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 5.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 3 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 18.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FREEZE, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 4 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 40.0, /*Angle*/ 90, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 5, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_saving"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 0, *FIGHTER_RYU_SAVING_LV_3 as u8);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 1, *FIGHTER_RYU_SAVING_LV_3 as u8);
-            AttackModule::set_attack_level(fighter.module_accessor, /*ID*/ 2, *FIGHTER_RYU_SAVING_LV_3 as u8);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 5 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 30.0, /*Angle*/ 80, /*KBG*/ 61, /*FKB*/ 0, /*BKB*/ 22, /*Size*/ 6.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, /*Ink*/ 200.0);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 1, /*Ink*/ 200.0);
-            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 2, /*Ink*/ 200.0);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 6 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 9.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 190, /*Size*/ 10.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BAT, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 7 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 300.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_water"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_PSI);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 8 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 50.0, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 6.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 2, /*Frames*/ 900, /*Rehit*/ 40, /* Damage*/ 9.0, /*Unk*/ false);
-            DamageModule::heal(fighter.module_accessor, -180.0, 0);
-        }
-        else if RANDOM_NUM[ENTRY_ID] == 9 {
-            ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.3, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.8, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 20.7, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);;
-            if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 999.9, /*Angle*/ 80, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 2000.0, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_PSI);
-            }
-        }
-    }
-    wait(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-        RANDOM_NUM[ENTRY_ID] = 0;
-        RANDOM_NUM_SELECTED[ENTRY_ID] = false;
-        ALREADY_BLOCK[ENTRY_ID] = false;
-    }
-    frame(fighter.lua_state_agent, 76.0);
-    if is_excute(fighter) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), false);
-    }
+unsafe extern "C" fn game_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 19.0);
+	if is_excute(fighter) {
+		ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WALUIGI_GENERATE_ARTICLE_DICEBLOCK, false, -1);
+	}
 }
 
 //SpecialSBStart
-    agent = "dolly",
-    script =  "game_specialsbstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialSBStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
         shield!(fighter, MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, Hash40::new("top"), 9.0, 0, 7.0, 0.0, 0, 7.0, -14.0, 1.2, 1.2, 2000, false, 2.0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
     }
     frame(fighter.lua_state_agent, 23.0);
@@ -1503,22 +932,13 @@ unsafe extern "C" fn game_waluigi_specialsbstart(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialSBAttackW
-    agent = "dolly",
-    script =  "game_specialsbattackw_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialsbattackw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialSBAttackW(fighter: &mut L2CAgentBase) {}
 
 //SpecialSBAttack
-    agent = "dolly",
-    script =  "game_specialsbattack_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialsbattack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialSBAttack(fighter: &mut L2CAgentBase) {}
 
 //SpecialAirSFEnd 
-    agent = "dolly", 
-    script = "game_specialairsfend_waluigi", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialAirSFEnd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
@@ -1527,10 +947,7 @@ unsafe extern "C" fn game_waluigi_specialairsfend(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirSFEnd2 
-    agent = "dolly", 
-    script = "game_specialairsfend2", 
-    category = ACMD_GAME, low_priority )]
-unsafe extern "C" fn game_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialAirSFEnd2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS);
@@ -1543,10 +960,7 @@ unsafe extern "C" fn game_waluigi_specialairsfend2(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialSFStart
-    agent = "dolly",
-    script =  "game_specialsfstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialSFStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1556,7 +970,7 @@ unsafe extern "C" fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
     }    
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hat"), /*Damage*/ 30.0, /*Angle*/ 66, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 18.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(20.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_ENERGY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hat"), /*Damage*/ 30.0, /*Angle*/ 66, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 18.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(40.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_ENERGY);
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
@@ -1565,20 +979,13 @@ unsafe extern "C" fn game_waluigi_specialsfstart(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialSFAttack
-    agent = "dolly",
-    script =  "game_specialsfattack_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialsfattack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialSFAttack(fighter: &mut L2CAgentBase) {}
 
 //SpecialAirSFStart
-    agent = "dolly",
-    script =  "game_specialairsfstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialAirSFStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("tOP"), /*Damage*/ 25.0, /*Angle*/ 80, /*KBG*/ 107, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 40, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 25.0, /*Angle*/ 80, /*KBG*/ 107, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 9.3, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 40, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FAMICOM_HIT, /*Type*/ *ATTACK_REGION_PSI);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -1617,10 +1024,7 @@ unsafe extern "C" fn game_waluigi_specialairsfstart(fighter: &mut L2CAgentBase) 
 }
 
 //SpecialAirSFAttack
-    agent = "dolly",
-    script =  "game_specialairsfattack_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialairsfattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialAirSFAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -1634,10 +1038,7 @@ unsafe extern "C" fn game_waluigi_specialairsfattack(fighter: &mut L2CAgentBase)
 }
 
 //SpecialHi1
-    agent = "dolly",
-    script =  "game_specialhi1_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialHi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1675,19 +1076,19 @@ unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(6.0), /*Hitlag*/ 1.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 70, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(19.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(6.0), /*Hitlag*/ 1.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 70, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 17.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(19.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     else {
         if is_excute(fighter) {
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
         }
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1697,19 +1098,19 @@ unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 6.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(0.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 70, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 6.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(0.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 70, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 20, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     else {
         if is_excute(fighter) {
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 14, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
         }
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 30, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ -4.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 14, /*FKB*/ 50, /*BKB*/ 30, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ -4.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1718,26 +1119,26 @@ unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 70, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 70, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     else {
         if is_excute(fighter) {
-            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 90, /*KBG*/ 84, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+            ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 90, /*KBG*/ 84, /*FKB*/ 40, /*BKB*/ 10, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 3.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-1.5), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
         }
     }
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(-6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ -4.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(-6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     frame(fighter.lua_state_agent, 27.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
-        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.3, /*Angle*/ 70, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 367, /*KBG*/ 84, /*FKB*/ 50, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 3.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(3.5), /*Z2*/ Some(6.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 1.0, /*Angle*/ 70, /*KBG*/ 84, /*FKB*/ 30, /*BKB*/ 11, /*Size*/ 3.5, /*X*/ 0.0, /*Y*/ 16.0, /*Z*/ 1.0, /*X2*/ Some(0.0), /*Y2*/ Some(18.5), /*Z2*/ Some(1.0), /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_DOLLY_PUNCH, /*Type*/ *ATTACK_REGION_BODY);
     }
     wait(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1758,10 +1159,7 @@ unsafe extern "C" fn game_waluigi_specialhi1(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirHi1
-    agent = "dolly",
-    script =  "game_specialairhi1_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialAirHi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         SA_SET(fighter, *SITUATION_KIND_AIR);
@@ -1833,34 +1231,19 @@ unsafe extern "C" fn game_waluigi_specialairhi1(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwStart
-    agent = "dolly",
-    script =  "game_speciallwstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_speciallwstart(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialLwStart(fighter: &mut L2CAgentBase) {}
 
 //SpecialAirLwStart
-    agent = "dolly",
-    script =  "game_specialairlwstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialairlwstart(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialAirLwStart(fighter: &mut L2CAgentBase) {}
 
 //SpecialAirLw
-    agent = "dolly",
-    script =  "game_specialairlw_waluigi",
-    
-unsafe extern "C" fn game_waluigi_specialairlw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialAirLw(fighter: &mut L2CAgentBase) {}
 
 //SpecialLwShield
-    agent = "dolly",
-    script =  "game_speciallwshield",
-    
-unsafe extern "C" fn game_waluigi_speciallwshield(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn game_waluigi_SpecialLwShield(fighter: &mut L2CAgentBase) {}
 
 //SpecialLwAttack1
-    agent = "dolly",
-    script =  "game_speciallwattack1",
-    
-unsafe extern "C" fn game_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttack1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 37, /*KBG*/ 80, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 8.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BODY);
@@ -1878,10 +1261,7 @@ unsafe extern "C" fn game_waluigi_speciallwattack1(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwAttack2
-    agent = "dolly",
-    script =  "game_speciallwattack2",
-    
-unsafe extern "C" fn game_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttack2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1897,10 +1277,7 @@ unsafe extern "C" fn game_waluigi_speciallwattack2(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwAttack3
-    agent = "dolly",
-    script =  "game_speciallwattack3",
-    
-unsafe extern "C" fn game_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttack3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1916,10 +1293,7 @@ unsafe extern "C" fn game_waluigi_speciallwattack3(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwAttackSpecial1
-    agent = "dolly",
-    script =  "game_speciallwattackspecial1",
-    
-unsafe extern "C" fn game_waluigi_speciallwattackspecial1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttackSpecial1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1936,10 +1310,7 @@ unsafe extern "C" fn game_waluigi_speciallwattackspecial1(fighter: &mut L2CAgent
 }
 
 //SpecialLwAttackSpecial2
-    agent = "dolly",
-    script =  "game_speciallwattackspecial2",
-    
-unsafe extern "C" fn game_waluigi_speciallwattackspecial2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttackSpecial2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1955,10 +1326,7 @@ unsafe extern "C" fn game_waluigi_speciallwattackspecial2(fighter: &mut L2CAgent
 }
 
 //SpecialLwJump
-    agent = "dolly",
-    script =  "game_speciallwjump",
-    
-unsafe extern "C" fn game_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwJump(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.25);
     SET_SPEED_EX(fighter, 1.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -1970,10 +1338,7 @@ unsafe extern "C" fn game_waluigi_speciallwjump(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwSpecial
-    agent = "dolly",
-    script =  "game_speciallwspecial",
-    
-unsafe extern "C" fn game_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwSpecial(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("handl"), /*Damage*/ 25.0, /*Angle*/ 90, /*KBG*/ 96, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
@@ -1987,10 +1352,7 @@ unsafe extern "C" fn game_waluigi_speciallwspecial(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialLwAttackAir
-    agent = "dolly",
-    script =  "game_speciallwattackair",
-    
-unsafe extern "C" fn game_waluigi_speciallwattackair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwAttackAir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("footl"), 6.0, 361, 20, 0, 50, 9.4, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -2014,10 +1376,7 @@ unsafe extern "C" fn game_waluigi_speciallwattackair(fighter: &mut L2CAgentBase)
 }
 
 //SpecialLwSpecialAir
-    agent = "dolly",
-    script =  "game_speciallwspecialair",
-    
-unsafe extern "C" fn game_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwSpecialAir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 7.0);
@@ -2033,10 +1392,7 @@ unsafe extern "C" fn game_waluigi_speciallwspecialair(fighter: &mut L2CAgentBase
 }
 
 //SpecialLwJumpAir
-    agent = "dolly",
-    script =  "game_speciallwjumpair",
-    
-unsafe extern "C" fn game_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_SpecialLwJumpAir(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 3.0, 367,50, 0, 10, 7.5, 0.0, 12.5, 0.0, None, None, None, 0.5, 0.6, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_rush"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_OBJECT);
         ATTACK(fighter, 1, 0, Hash40::new("top"), 3.0, 90, 40, 0, 45, 7.5, 0.0, 9.0, 0.0, None, None, None, 0.5, 0.6, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_rush"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_OBJECT);
@@ -2052,10 +1408,7 @@ unsafe extern "C" fn game_waluigi_speciallwjumpair(fighter: &mut L2CAgentBase) {
 }
 
 //AppealHiL
-    agent = "dolly",
-    script =  "game_appealhil_waluigi",
-    
-unsafe extern "C" fn game_waluigi_appealhil(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AppealHiL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, 1.62);
@@ -2064,10 +1417,7 @@ unsafe extern "C" fn game_waluigi_appealhil(fighter: &mut L2CAgentBase) {
 }
 
 //AppealHiR
-    agent = "dolly",
-    script =  "game_appealhir_waluigi",
-    
-unsafe extern "C" fn game_waluigi_appealhir(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AppealHiR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, 1.62);
@@ -2076,10 +1426,7 @@ unsafe extern "C" fn game_waluigi_appealhir(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwL
-    agent = "dolly",
-    script =  "game_appeallwl_waluigi",
-    
-unsafe extern "C" fn game_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HONEYCOMB), 0, 0, false, false);
@@ -2087,10 +1434,7 @@ unsafe extern "C" fn game_waluigi_appeallwl(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwR
-    agent = "dolly",
-    script =  "game_appeallwr_waluigi",
-    
-unsafe extern "C" fn game_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HONEYCOMB), 0, 0, false, false);
@@ -2098,33 +1442,16 @@ unsafe extern "C" fn game_waluigi_appeallwr(fighter: &mut L2CAgentBase) {
 }
 
 //EntryR
-    agent = "dolly",
-    script =  "game_entryr_waluigi",
-    
-unsafe extern "C" fn game_waluigi_entryr(fighter: &mut L2CAgentBase) {
-	if is_excute(fighter) {
-    	WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
-	}
-}
+unsafe extern "C" fn game_waluigi_EntryR(fighter: &mut L2CAgentBase) {}
 
 //EntryL
-    agent = "dolly",
-    script =  "game_entryl_waluigi",
-    
-unsafe extern "C" fn game_waluigi_entryl(fighter: &mut L2CAgentBase) {
-	if is_excute(fighter) {
-    	WorkModule::off_flag(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_SPECIAL_DICE_BLOCK_WORK_ID_FLAG_VISIBLE);
-	}
-}
+unsafe extern "C" fn game_waluigi_EntryL(fighter: &mut L2CAgentBase) {}
 
 //FinalStart
-    agent = "dolly",
-    script =  "game_finalstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_finalstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_FinalStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, /*FSM*/ 1.38);
-        FT_START_CUTIN(fighter, );
+        FT_START_CUTIN(fighter);
         FT_SET_FINAL_FEAR_FACE(fighter, 40);
         CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 20, 20, 0, 0, 0);
         SLOW_OPPONENT(fighter, 20.0, 530.0);
@@ -2446,10 +1773,7 @@ unsafe extern "C" fn game_waluigi_finalstart(fighter: &mut L2CAgentBase) {
 }
 
 //FinalAirStart
-    agent = "dolly",
-    script =  "game_finalairstart_waluigi",
-    
-unsafe extern "C" fn game_waluigi_finalairstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_waluigi_FinalAirStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         FT_MOTION_RATE(fighter, /*FSM*/ 1.38);
         FT_START_CUTIN(fighter, );
@@ -2782,6 +2106,8 @@ pub fn install() {
     .game_acmd("game_attacks3_waluigi", game_waluigi_AttackS3)
     .game_acmd("game_attackhi3_waluigi", game_waluigi_AttackHi3)
     .game_acmd("game_attacklw3_waluigi", game_waluigi_AttackLw3)
+    .game_acmd("game_attacks4_waluigi", game_waluigi_AttackS4)
+    .game_acmd("game_attackhi4_waluigi", game_waluigi_AttackHi4)
     .game_acmd("game_attacklw4_waluigi", game_waluigi_AttackLw4)
     .game_acmd("game_attackairn_waluigi", game_waluigi_AttackAirN)
     .game_acmd("game_attackairf_waluigi", game_waluigi_AttackAirF)
@@ -2804,7 +2130,7 @@ pub fn install() {
     .game_acmd("game_specialsbattackw_waluigi", game_waluigi_SpecialSBAttackW)
     .game_acmd("game_specialsbattack_waluigi", game_waluigi_SpecialSBAttack)
     .game_acmd("game_specialairsfend_waluigi", game_waluigi_SpecialAirSFEnd)
-    .game_acmd("game_specialairsfend2_waluigi", game_waluigi_SpecialAirSFEnd2)
+    .game_acmd("game_specialairsfend2", game_waluigi_SpecialAirSFEnd2)
     .game_acmd("game_specialsfattack_waluigi", game_waluigi_SpecialSFAttack)
     .game_acmd("game_specialsfstart_waluigi", game_waluigi_SpecialSFStart)
     .game_acmd("game_specialairsfstart_waluigi", game_waluigi_SpecialAirSFStart)
@@ -2824,79 +2150,13 @@ pub fn install() {
     .game_acmd("game_speciallwspecialair", game_waluigi_SpecialLwSpecialAir)
     .game_acmd("game_speciallwspecial", game_waluigi_SpecialLwSpecial)
     .game_acmd("game_speciallwjumpair", game_waluigi_SpecialLwJumpAir)
-    .game_acmd("game_superspecial_waluigi", game_waluigi_SuperSpecial)
-    .game_acmd("game_superspecial2_waluigi", game_waluigi_SuperSpecial2)
-    .game_acmd("game_superspecial2start_waluigi", game_waluigi_SuperSpecial2Start)
+    .game_acmd("game_appealhil_waluigi", game_waluigi_AppealHiL)
+    .game_acmd("game_appealhir_waluigi", game_waluigi_AppealHiR)
+    .game_acmd("game_appeallwl_waluigi", game_waluigi_AppealLwL)
+    .game_acmd("game_appeallwr_waluigi", game_waluigi_AppealLwR)
     .game_acmd("game_finalstart_waluigi", game_waluigi_FinalStart)
     .game_acmd("game_finalairstart_waluigi", game_waluigi_FinalAirStart)
     .game_acmd("game_entryl_waluigi", game_waluigi_EntryL)
     .game_acmd("game_entryr_waluigi", game_waluigi_EntryR)
     .install();
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_waluigi_attack11,
-        game_waluigi_attack12,
-        game_waluigi_attack13,
-        game_waluigi_attackdash,
-        game_waluigi_attacks3,
-        game_waluigi_attackhi3,
-        game_waluigi_attacklw3,
-        game_waluigi_attacks4,
-        game_waluigi_attackhi4,
-        game_waluigi_attacklw4,
-        game_waluigi_attackairn,
-        game_waluigi_attackairf,
-        game_waluigi_attackairb,
-        game_waluigi_attackairhi,
-        game_waluigi_attackairlw,
-        game_waluigi_catch,
-        game_waluigi_catchdash,
-        game_waluigi_catchturn,
-        game_waluigi_catchattack,
-        game_waluigi_throwf,
-        game_waluigi_throwb,
-        game_waluigi_throwhi,
-        game_waluigi_throwlw,
-        game_waluigi_downattacku,
-        game_waluigi_downattackd,
-        game_waluigi_cliffattack,
-        game_waluigi_slipattack,
-        game_waluigi_specialn,
-        game_waluigi_specialairn,
-        game_waluigi_specialsbstart,
-        game_waluigi_specialsbattackw,
-        game_waluigi_specialsbattack,
-        game_waluigi_specialairsfend,
-        game_waluigi_specialairsfend2,
-        game_waluigi_specialsfstart,
-        game_waluigi_specialairsfstart,
-        game_waluigi_specialsfattack,
-        game_waluigi_specialairsfattack,
-        game_waluigi_specialhi1,
-        game_waluigi_specialairhi1,
-        game_waluigi_speciallwstart,
-        game_waluigi_specialairlwstart,
-        game_waluigi_specialairlw,
-        game_waluigi_speciallwshield,
-        game_waluigi_speciallwattack1,
-        game_waluigi_speciallwattack2,
-        game_waluigi_speciallwattack3,
-        game_waluigi_speciallwattackspecial1,
-        game_waluigi_speciallwattackspecial2,
-        game_waluigi_speciallwjump,
-        game_waluigi_speciallwattackair,
-        game_waluigi_speciallwspecial,
-        game_waluigi_speciallwspecialair,
-        game_waluigi_speciallwjumpair,
-        game_waluigi_appealhil,
-        game_waluigi_appealhir,
-        game_waluigi_appeallwl,
-        game_waluigi_appeallwr,
-        game_waluigi_entryl,
-        game_waluigi_entryr,
-        game_waluigi_finalstart,
-        game_waluigi_finalairstart
-    );
 }

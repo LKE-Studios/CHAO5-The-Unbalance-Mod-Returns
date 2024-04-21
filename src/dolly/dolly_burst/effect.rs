@@ -26,7 +26,7 @@ unsafe extern "C" fn effect_dolly_burst_SuperSpecial(fighter: &mut L2CAgentBase)
 }
 
 pub fn install() {
-    Agent::new("dolly")
+    Agent::new("dolly_burst")
     .effect_acmd("effect_superspecial", effect_dolly_burst_SuperSpecial)
     .install();
 }

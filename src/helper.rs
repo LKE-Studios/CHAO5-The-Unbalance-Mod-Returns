@@ -288,3 +288,30 @@ pub unsafe fn SET_TAKEOUT_SE_STATUS(agent: &mut L2CAgentBase, se: Hash40) {
     sv_animcmd::SET_TAKEOUT_SE_STATUS(agent.lua_state_agent);
     agent.clear_lua_stack();
 }
+
+pub unsafe fn FOOT_EFFECT_FLIP(
+    fighter: &mut L2CAgentBase,
+    unk1: Hash40,
+    unk2: Hash40,
+    unk3: Hash40,
+    unk4: f32,
+    unk5: f32,
+    unk6: f32,
+    unk7: f32,
+    unk8: f32,
+    unk9: f32,
+    size: f32,
+    unk11: f32,
+    unk12: f32,
+    unk13: f32,
+    unk14: f32,
+    unk15: f32,
+    unk16: f32,
+    unk17: bool,
+    unk18: i32,
+){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk1, unk2, unk3, unk4, unk5, unk6, unk7, unk8, unk9, size, unk11, unk12, unk13, unk14, unk15, unk16, unk17, unk18);
+    sv_animcmd::FOOT_EFFECT_FLIP(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}

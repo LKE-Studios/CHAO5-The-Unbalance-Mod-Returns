@@ -126,10 +126,14 @@ unsafe extern "C" fn sound_waluigi_AttackAirN(fighter: &mut L2CAgentBase) {
 
 //AttackAirF
 unsafe extern "C" fn sound_waluigi_AttackAirF(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 5.0);
+    frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
-        PLAY_STATUS(fighter, Hash40::new("se_dolly_attackair_f01"));
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_attack_s"));
+        PLAY_SE(fighter, Hash40::new("se_common_swing_06"));
+    }
+    wait(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_dolly_attackair_f01"));
+        PLAY_SE(fighter, Hash40::new("seq_dolly_rnd_attack_s"));
     }
 }
 
@@ -279,42 +283,34 @@ unsafe extern "C" fn sound_waluigi_DownAttackU(fighter: &mut L2CAgentBase) {
 
 //SpecialN
 unsafe extern "C" fn sound_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 0.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
-    }
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
-    }
-    frame(fighter.lua_state_agent, 11.0);
-    if is_excute(fighter) {
-        STOP_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_success"));
-    }
+	frame(fighter.lua_state_agent, 0.0);
+	if is_excute(fighter) {
+		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
+	}
+	frame(fighter.lua_state_agent, 1.0);
+	if is_excute(fighter) {
+		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
+	}
+	frame(fighter.lua_state_agent, 11.0);
+	if is_excute(fighter) {
+		STOP_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
+	}
 }
 
 //SpecialAirN
 unsafe extern "C" fn sound_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 0.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
-    }
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
-    }
-    frame(fighter.lua_state_agent, 11.0);
-    if is_excute(fighter) {
-        STOP_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_success"));
-    }
+	frame(fighter.lua_state_agent, 0.0);
+	if is_excute(fighter) {
+		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
+	}
+	frame(fighter.lua_state_agent, 1.0);
+	if is_excute(fighter) {
+		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
+	}
+	frame(fighter.lua_state_agent, 11.0);
+	if is_excute(fighter) {
+		STOP_SE(fighter, Hash40::new("se_dolly_superspecial_hit_critical"));
+	}
 }
 
 //SpecialSBStart
@@ -513,7 +509,7 @@ unsafe extern "C" fn sound_waluigi_SpecialAirHi1(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_waluigi_SpecialAirLw(fighter: &mut L2CAgentBase) {}
 
 //SpecialLwStart
-unsafe extern "C" fn sound_waluigi_SpecialLwstart(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_waluigi_SpecialLwStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_dolly_win02_02"));
@@ -878,7 +874,7 @@ pub fn install() {
     .sound_acmd("sound_specialsbattackw_waluigi", sound_waluigi_SpecialSBAttackW)
     .sound_acmd("sound_specialsbattack_waluigi", sound_waluigi_SpecialSBAttack)
     .sound_acmd("sound_specialairsfend_waluigi", sound_waluigi_SpecialAirSFEnd)
-    .sound_acmd("sound_specialairsfend2_waluigi", sound_waluigi_SpecialAirSFEnd2)
+    .sound_acmd("sound_specialairsfend2", sound_waluigi_SpecialAirSFEnd2)
     .sound_acmd("sound_specialsfattack_waluigi", sound_waluigi_SpecialSFAttack)
     .sound_acmd("sound_specialsfstart_waluigi", sound_waluigi_SpecialSFStart)
     .sound_acmd("sound_specialairsfstart_waluigi", sound_waluigi_SpecialAirSFStart)

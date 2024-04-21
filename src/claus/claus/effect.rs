@@ -27,7 +27,7 @@ unsafe extern "C" fn effect_claus_Attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 4.8, 4.5, 10, -25, 185, 0.9, true, *EF_FLIP_YZ);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 4.8, 4.5, 10, -25, 170, 0.6, true, *EF_FLIP_YZ);
         LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.9, /*B*/ 0.5);
     }
     frame(fighter.lua_state_agent, 7.0);

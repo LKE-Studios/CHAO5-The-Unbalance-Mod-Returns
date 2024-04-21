@@ -329,8 +329,6 @@ pub fn install() {
     .expression_acmd("expression_attack12_waluigi", expression_waluigi_Attack12)
     .expression_acmd("expression_attack13_waluigi", expression_waluigi_Attack13)
     .expression_acmd("expression_attackdash_waluigi", expression_waluigi_AttackDash)
-    .expression_acmd("expression_attacks3_waluigi", expression_waluigi_AttackS3)
-    .expression_acmd("expression_attackhi3_waluigi", expression_waluigi_AttackHi3)
     .expression_acmd("expression_attacklw3_waluigi", expression_waluigi_AttackLw3)
     .expression_acmd("expression_attacklw4_waluigi", expression_waluigi_AttackLw4)
     .expression_acmd("expression_attackairn_waluigi", expression_waluigi_AttackAirN)

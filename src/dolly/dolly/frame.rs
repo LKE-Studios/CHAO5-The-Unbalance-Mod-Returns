@@ -29,16 +29,6 @@ pub unsafe extern "C" fn frame_dolly_Main(fighter : &mut L2CFighterCommon) {
             }
         }
     }
-    //WALUIGI
-    /*let WALUIGI = color >= 120 && color <= 130; 
-    if WALUIGI {
-        scale_waluigi(fighter);
-        attack_dash_waluigi(fighter);
-        special_n_waluigi(fighter);
-        special_s_waluigi(fighter);
-        final_start_waluigi(fighter);
-        //slap_cancel_waluigi(fighter);
-    }*/
 }
 
 pub fn install() {
