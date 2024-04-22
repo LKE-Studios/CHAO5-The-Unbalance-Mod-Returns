@@ -1,10 +1,10 @@
 use crate::imports::BuildImports::*;
 
-pub static mut RANDOM_NUMBER : [i32; 65544] = [0; 65544];
-pub static mut RANDOM_NUMBER_SELECTED : [bool; 65544] = [false; 65544];
-pub static mut ALREADY_BLOCK : [bool; 65544] = [false; 65544];
+pub static mut RANDOM_NUMBER : [i32; 8] = [0; 8];
+pub static mut RANDOM_NUMBER_SELECTED : [bool; 8] = [false; 8];
+pub static mut ALREADY_BLOCK : [bool; 8] = [false; 8];
 pub static mut STICK_DIRECTION : [f32; 8] = [0.0; 8];
-pub static mut DICEBLOCK_FRAME : [i32; 65544] = [0; 65544];
+pub static mut DICEBLOCK_FRAME : [i32; 8] = [0; 8];
 
 pub unsafe extern "C" fn frame_waluigi_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
@@ -209,142 +209,141 @@ pub unsafe extern "C" fn final_start_waluigi(fighter: &mut L2CFighterCommon) {
     }
 }
 
-pub unsafe extern "C" fn frame_waluigi_diceblock_Main(fighter: &mut L2CFighterCommon) {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let frame = MotionModule::frame(fighter.module_accessor);
-    let module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBase) {
+    let status_kind = StatusModule::status_kind(weapon.module_accessor);
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let frame = MotionModule::frame(weapon.module_accessor);
+    let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
+    let color = WorkModule::get_int(weapon.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let WALUIGI = color >= 120 && color <= 130; 
     if [hash40("regular")].contains(&motion_kind) {
-        let life = WorkModule::get_param_int(fighter.module_accessor, hash40("param_diceblock"), hash40("life"));
+        let life = WorkModule::get_param_int(weapon.module_accessor, hash40("param_diceblock"), hash40("life"));
         if frame <= 1.0 {
-            WorkModule::set_int(fighter.module_accessor, life, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+            WorkModule::set_int(weapon.module_accessor, life, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
         }
     }
     DICEBLOCK_FRAME[ENTRY_ID] += 1;
-    ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), true);
+    ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("frame_dice"), true);
     if RANDOM_NUMBER[ENTRY_ID] == 0  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 1 {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 2  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 3 {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 4  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 5  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 6 {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 7  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 8  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 9  {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), true);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), true);
     }
 }
 

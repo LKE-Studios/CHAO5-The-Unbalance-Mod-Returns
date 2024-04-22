@@ -443,10 +443,6 @@ unsafe extern "C" fn effect_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
 		EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("handl"), 2.0, 3, -9.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		LAST_EFFECT_SET_RATE(fighter, 0.5);
 	}
-	frame(fighter.lua_state_agent, 3.0);
-	if is_excute(fighter) {
-		EFFECT_FOLLOW(fighter, Hash40::new("sys_falling_smoke"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.8, true);
-	}
 }
 
 //SpecialAirN
@@ -460,10 +456,6 @@ unsafe extern "C" fn effect_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
 		EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("handl"), 2.0, 3, -9.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		LAST_EFFECT_SET_RATE(fighter, 0.5);
-	}
-	frame(fighter.lua_state_agent, 3.0);
-	if is_excute(fighter) {
-		EFFECT_FOLLOW(fighter, Hash40::new("sys_falling_smoke"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.8, true);
 	}	
 }
 
