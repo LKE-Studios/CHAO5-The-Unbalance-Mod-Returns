@@ -36,8 +36,8 @@ unsafe extern "C" fn game_shizue_clayrocket_Destroy(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("shizue_clayrocket")
-    .game_acmd("game_fly", game_shizue_clayrocket_Fly)
-    .game_acmd("game_burst", game_shizue_clayrocket_Burst)
-    .game_acmd("game_destroy", game_shizue_clayrocket_Destroy)
+    .game_acmd("game_fly", game_shizue_clayrocket_Fly, Low)
+    .game_acmd("game_burst", game_shizue_clayrocket_Burst, Low)
+    .game_acmd("game_destroy", game_shizue_clayrocket_Destroy, Low)
     .install();
 }

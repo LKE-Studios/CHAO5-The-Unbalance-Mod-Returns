@@ -10,6 +10,6 @@ unsafe extern "C" fn game_samusd_missile_Homing(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd_missile")
-    .game_acmd("game_homing", game_samusd_missile_Homing)
+    .game_acmd("game_homing", game_samusd_missile_Homing, Low)
     .install();
 }

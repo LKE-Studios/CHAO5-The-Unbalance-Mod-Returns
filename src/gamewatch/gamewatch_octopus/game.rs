@@ -103,10 +103,10 @@ unsafe extern "C" fn game_gamewatch_octopus_FinalWait(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("gamewatch_octopus")
-    .game_acmd("game_finalstart", game_gamewatch_octopus_FinalStart)
-    .game_acmd("game_finalairstart", game_gamewatch_octopus_FinalAirStart)
-    .game_acmd("game_finalattack", game_gamewatch_octopus_FinalAttack)
-    .game_acmd("game_finalhold", game_gamewatch_octopus_FinalHold)
-    .game_acmd("game_finalwait", game_gamewatch_octopus_FinalWait)
+    .game_acmd("game_finalstart", game_gamewatch_octopus_FinalStart, Low)
+    .game_acmd("game_finalairstart", game_gamewatch_octopus_FinalAirStart, Low)
+    .game_acmd("game_finalattack", game_gamewatch_octopus_FinalAttack, Low)
+    .game_acmd("game_finalhold", game_gamewatch_octopus_FinalHold, Low)
+    .game_acmd("game_finalwait", game_gamewatch_octopus_FinalWait, Low)
     .install();
 }

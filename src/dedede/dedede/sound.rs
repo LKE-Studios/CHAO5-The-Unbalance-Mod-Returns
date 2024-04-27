@@ -58,12 +58,12 @@ unsafe extern "C" fn sound_dedede_JumpAerialF9(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("dedede")
-    .sound_acmd("sound_jumpaerialf3", sound_dedede_JumpAerialF3)
-    .sound_acmd("sound_jumpaerialf4", sound_dedede_JumpAerialF4)
-    .sound_acmd("sound_jumpaerialf5", sound_dedede_JumpAerialF5)
-    .sound_acmd("sound_jumpaerialf6", sound_dedede_JumpAerialF6)
-    .sound_acmd("sound_jumpaerialf7", sound_dedede_JumpAerialF7)
-    .sound_acmd("sound_jumpaerialf8", sound_dedede_JumpAerialF8)
-    .sound_acmd("sound_jumpaerialf9", sound_dedede_JumpAerialF9)
+    .sound_acmd("sound_jumpaerialf3", sound_dedede_JumpAerialF3, Low)
+    .sound_acmd("sound_jumpaerialf4", sound_dedede_JumpAerialF4, Low)
+    .sound_acmd("sound_jumpaerialf5", sound_dedede_JumpAerialF5, Low)
+    .sound_acmd("sound_jumpaerialf6", sound_dedede_JumpAerialF6, Low)
+    .sound_acmd("sound_jumpaerialf7", sound_dedede_JumpAerialF7, Low)
+    .sound_acmd("sound_jumpaerialf8", sound_dedede_JumpAerialF8, Low)
+    .sound_acmd("sound_jumpaerialf9", sound_dedede_JumpAerialF9, Low)
     .install();
 }

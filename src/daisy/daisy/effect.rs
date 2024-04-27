@@ -66,10 +66,10 @@ unsafe extern "C" fn effect_daisy_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("daisy")
-    .effect_acmd("effect_attacklw3", effect_daisy_AttackLw3)
-    .effect_acmd("effect_attackairn", effect_daisy_AttackAirN)
-    .effect_acmd("effect_attackairf", effect_daisy_AttackAirF)
-    .effect_acmd("effect_attackairhi", effect_daisy_AttackAirHi)
-    .effect_acmd("effect_attackairlw", effect_daisy_AttackAirLw)
+    .effect_acmd("effect_attacklw3", effect_daisy_AttackLw3, Low)
+    .effect_acmd("effect_attackairn", effect_daisy_AttackAirN, Low)
+    .effect_acmd("effect_attackairf", effect_daisy_AttackAirF, Low)
+    .effect_acmd("effect_attackairhi", effect_daisy_AttackAirHi, Low)
+    .effect_acmd("effect_attackairlw", effect_daisy_AttackAirLw, Low)
     .install();
 }

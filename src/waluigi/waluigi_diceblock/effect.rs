@@ -25,8 +25,8 @@ unsafe extern "C" fn effect_waluigi_diceblock_Break(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("dolly_diceblock")
-    .effect_acmd("effect_regular", effect_waluigi_diceblock_Regular)
-    .effect_acmd("effect_bound", effect_waluigi_diceblock_Bound)
-    .effect_acmd("effect_break", effect_waluigi_diceblock_Break)
+    .effect_acmd("effect_regular", effect_waluigi_diceblock_Regular, Low)
+    .effect_acmd("effect_bound", effect_waluigi_diceblock_Bound, Low)
+    .effect_acmd("effect_break", effect_waluigi_diceblock_Break, Low)
     .install();
 }

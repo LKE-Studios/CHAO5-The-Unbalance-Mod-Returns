@@ -82,7 +82,7 @@ unsafe extern "C" fn sound_donkey_SpecialAirHi(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("donkey")
-    .sound_acmd("sound_specialhi2", sound_donkey_SpecialHi2)
-    .sound_acmd("sound_specialairhi", sound_donkey_SpecialAirHi)
+    .sound_acmd("sound_specialhi2", sound_donkey_SpecialHi2, Low)
+    .sound_acmd("sound_specialairhi", sound_donkey_SpecialAirHi, Low)
     .install();
 }

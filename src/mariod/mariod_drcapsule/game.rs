@@ -18,6 +18,6 @@ unsafe extern "C" fn game_mariod_drcapsule_Regular(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mariod_drcapsule")
-    .game_acmd("game_regular", game_mariod_drcapsule_Regular)
+    .game_acmd("game_regular", game_mariod_drcapsule_Regular, Low)
     .install();
 }

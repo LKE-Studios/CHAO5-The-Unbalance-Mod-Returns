@@ -16,7 +16,7 @@ unsafe extern "C" fn game_ness_pkthunder_MoveChild(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness_pkthunder")
-    .game_acmd("game_move", game_ness_pkthunder_Move)
-    .game_acmd("game_movechild", game_ness_pkthunder_MoveChild)
+    .game_acmd("game_move", game_ness_pkthunder_Move, Low)
+    .game_acmd("game_movechild", game_ness_pkthunder_MoveChild, Low)
     .install();
 }

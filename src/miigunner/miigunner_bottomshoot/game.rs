@@ -9,6 +9,6 @@ unsafe extern "C" fn game_miigunner_bottomshoot_Shoot(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("miigunner_bottomshoot")
-    .game_acmd("game_shoot", game_miigunner_bottomshoot_Shoot)
+    .game_acmd("game_shoot", game_miigunner_bottomshoot_Shoot, Low)
     .install();
 }

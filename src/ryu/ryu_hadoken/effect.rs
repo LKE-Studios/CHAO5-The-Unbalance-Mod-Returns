@@ -104,8 +104,8 @@ unsafe extern "C" fn effect_ken_hadoken_MoveW(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ken_hadoken")
-    .effect_acmd("effect_moves", effect_ken_hadoken_MoveS)
-    .effect_acmd("effect_movem", effect_ken_hadoken_MoveM)
-    .effect_acmd("effect_movew", effect_ken_hadoken_MoveW)
+    .effect_acmd("effect_moves", effect_ken_hadoken_MoveS, Low)
+    .effect_acmd("effect_movem", effect_ken_hadoken_MoveM, Low)
+    .effect_acmd("effect_movew", effect_ken_hadoken_MoveW, Low)
     .install();
 }

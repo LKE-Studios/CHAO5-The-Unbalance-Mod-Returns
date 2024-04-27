@@ -30,6 +30,6 @@ unsafe extern "C" fn game_palutena_beam_Beam(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("palutena_beam")
-    .game_acmd("game_beam", game_palutena_beam_Beam)
+    .game_acmd("game_beam", game_palutena_beam_Beam, Low)
     .install();
 }

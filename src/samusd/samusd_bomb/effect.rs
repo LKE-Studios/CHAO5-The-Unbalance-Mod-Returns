@@ -11,6 +11,6 @@ unsafe extern "C" fn effect_samusd_bomb_BurstAttack(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("samusd_bomb")
-    .effect_acmd("effect_burstattack", effect_samusd_bomb_BurstAttack)
+    .effect_acmd("effect_burstattack", effect_samusd_bomb_BurstAttack, Low)
     .install();
 }

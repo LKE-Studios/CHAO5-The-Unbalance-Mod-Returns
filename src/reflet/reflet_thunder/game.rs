@@ -60,10 +60,10 @@ unsafe extern "C" fn game_reflet_thunder_Tron0(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet_thunder")
-    .game_acmd("game_shoot0", game_reflet_thunder_Shoot0)
-    .game_acmd("game_shoot1", game_reflet_thunder_Shoot1)
-    .game_acmd("game_shoot2", game_reflet_thunder_Shoot2)
-    .game_acmd("game_gigaspark", game_reflet_thunder_GigaSpark)
-    .game_acmd("game_tron0", game_reflet_thunder_Tron0)
+    .game_acmd("game_shoot0", game_reflet_thunder_Shoot0, Low)
+    .game_acmd("game_shoot1", game_reflet_thunder_Shoot1, Low)
+    .game_acmd("game_shoot2", game_reflet_thunder_Shoot2, Low)
+    .game_acmd("game_gigaspark", game_reflet_thunder_GigaSpark, Low)
+    .game_acmd("game_tron0", game_reflet_thunder_Tron0, Low)
     .install();
 }

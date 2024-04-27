@@ -13,6 +13,6 @@ unsafe extern "C" fn game_silver_beam_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_shadowball")
-    .game_acmd("game_shoot_silver", game_silver_beam_Shoot)
+    .game_acmd("game_shoot_silver", game_silver_beam_Shoot, Low)
     .install();
 }

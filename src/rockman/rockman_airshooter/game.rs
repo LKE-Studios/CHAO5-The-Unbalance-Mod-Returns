@@ -24,6 +24,6 @@ unsafe extern "C" fn game_rockman_airshooter_Regular(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("rockman_airshooter")
-    .game_acmd("game_regular", game_rockman_airshooter_Regular)
+    .game_acmd("game_regular", game_rockman_airshooter_Regular, Low)
     .install();
 }

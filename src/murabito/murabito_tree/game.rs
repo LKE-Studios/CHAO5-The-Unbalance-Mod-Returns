@@ -37,8 +37,8 @@ unsafe extern "C" fn game_murabito_tree_Bound(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_tree")
-    .game_acmd("game_appear", game_murabito_tree_Appear)
-    .game_acmd("game_fallen", game_murabito_tree_Fallen)
-    .game_acmd("game_bound", game_murabito_tree_Bound)
+    .game_acmd("game_appear", game_murabito_tree_Appear, Low)
+    .game_acmd("game_fallen", game_murabito_tree_Fallen, Low)
+    .game_acmd("game_bound", game_murabito_tree_Bound, Low)
     .install();
 }

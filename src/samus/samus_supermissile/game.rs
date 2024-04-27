@@ -17,7 +17,7 @@ unsafe extern "C" fn game_samus_supermissile_Straight(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("samus_supermissile")
-    .game_acmd("game_ready", game_samus_supermissile_Ready)
-    .game_acmd("game_straight", game_samus_supermissile_Straight)
+    .game_acmd("game_ready", game_samus_supermissile_Ready, Low)
+    .game_acmd("game_straight", game_samus_supermissile_Straight, Low)
     .install();
 }

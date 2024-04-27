@@ -82,7 +82,7 @@ unsafe extern "C" fn game_ptrainer_pzenigame_FinalAir(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("ptrainer_pzenigame")
-    .game_acmd("game_final", game_ptrainer_pzenigame_Final)
-    .game_acmd("game_finalair", game_ptrainer_pzenigame_FinalAir)
+    .game_acmd("game_final", game_ptrainer_pzenigame_Final, Low)
+    .game_acmd("game_finalair", game_ptrainer_pzenigame_FinalAir, Low)
     .install();
 }

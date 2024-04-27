@@ -80,10 +80,10 @@ unsafe extern "C" fn sound_sonic_AttackLw4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("sonic")
-    .sound_acmd("sound_attack12", sound_sonic_Attack12)
-    .sound_acmd("sound_attack13", sound_sonic_Attack13)
-    .sound_acmd("sound_attackdash", sound_sonic_AttackDash)
-    .sound_acmd("sound_attackhi4", sound_sonic_AttackHi4)
-    .sound_acmd("sound_attacklw4", sound_sonic_AttackLw4)
+    .sound_acmd("sound_attack12", sound_sonic_Attack12, Low)
+    .sound_acmd("sound_attack13", sound_sonic_Attack13, Low)
+    .sound_acmd("sound_attackdash", sound_sonic_AttackDash, Low)
+    .sound_acmd("sound_attackhi4", sound_sonic_AttackHi4, Low)
+    .sound_acmd("sound_attacklw4", sound_sonic_AttackLw4, Low)
     .install();
 }

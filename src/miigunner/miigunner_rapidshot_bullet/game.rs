@@ -35,9 +35,9 @@ unsafe extern "C" fn game_miigunner_rapidshot_bullet_Fly(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("miigunner_rapidshot_bullet")
-    .game_acmd("game_flythrowb", game_miigunner_rapidshot_bullet_FlyThrowB)
-    .game_acmd("game_flythrowhi", game_miigunner_rapidshot_bullet_FlyThrowHi)
-    .game_acmd("game_flythrowhi2", game_miigunner_rapidshot_bullet_FlyThrowHi2)
-    .game_acmd("game_fly", game_miigunner_rapidshot_bullet_Fly)
+    .game_acmd("game_flythrowb", game_miigunner_rapidshot_bullet_FlyThrowB, Low)
+    .game_acmd("game_flythrowhi", game_miigunner_rapidshot_bullet_FlyThrowHi, Low)
+    .game_acmd("game_flythrowhi2", game_miigunner_rapidshot_bullet_FlyThrowHi2, Low)
+    .game_acmd("game_fly", game_miigunner_rapidshot_bullet_Fly, Low)
     .install();
 }

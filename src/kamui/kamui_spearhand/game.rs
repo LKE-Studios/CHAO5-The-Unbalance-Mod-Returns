@@ -72,8 +72,8 @@ unsafe extern "C" fn game_kamui_spearhand_SpecialAirSAttack(fighter: &mut L2CAge
 
 pub fn install() {
     Agent::new("kamui_spearhand")
-    .game_acmd("game_attacks4", game_kamui_spearhand_AttackS4)
-    .game_acmd("game_specialsattack", game_kamui_spearhand_SpecialSAttack)
-    .game_acmd("game_specialairsattack", game_kamui_spearhand_SpecialAirSAttack)
+    .game_acmd("game_attacks4", game_kamui_spearhand_AttackS4, Low)
+    .game_acmd("game_specialsattack", game_kamui_spearhand_SpecialSAttack, Low)
+    .game_acmd("game_specialairsattack", game_kamui_spearhand_SpecialAirSAttack, Low)
     .install();
 }

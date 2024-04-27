@@ -11,6 +11,6 @@ unsafe extern "C" fn game_daisy_kinopiospore_Shot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("daisy_kinopiospore")
-    .game_acmd("game_shot", game_daisy_kinopiospore_Shot)
+    .game_acmd("game_shot", game_daisy_kinopiospore_Shot, Low)
     .install();
 }

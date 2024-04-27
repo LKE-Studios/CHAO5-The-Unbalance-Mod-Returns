@@ -39,7 +39,7 @@ unsafe extern "C" fn game_pickel_trolley_SpecialSDrivePartial(fighter: &mut L2CA
 
 pub fn install() {
     Agent::new("pickel_trolley")
-    .game_acmd("game_specialsdriveemptypartial", game_pickel_trolley_SpecialSDriveEmptyPartial)
-    .game_acmd("game_specialsdrivepartial", game_pickel_trolley_SpecialSDrivePartial)
+    .game_acmd("game_specialsdriveemptypartial", game_pickel_trolley_SpecialSDriveEmptyPartial, Low)
+    .game_acmd("game_specialsdrivepartial", game_pickel_trolley_SpecialSDrivePartial, Low)
     .install();
 }

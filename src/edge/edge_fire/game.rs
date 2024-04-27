@@ -121,11 +121,11 @@ unsafe extern "C" fn game_edge_fire_BurstL(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("edge_fire")
-    .game_acmd("game_specialn1", game_edge_fire_SpecialN1)
-    .game_acmd("game_specialn2", game_edge_fire_SpecialN2)
-    .game_acmd("game_specialn3", game_edge_fire_SpecialN3)
-    .game_acmd("game_bursts", game_edge_fire_BurstS)
-    .game_acmd("game_burstm", game_edge_fire_BurstM)
-    .game_acmd("game_burstl", game_edge_fire_BurstL)
+    .game_acmd("game_specialn1", game_edge_fire_SpecialN1, Low)
+    .game_acmd("game_specialn2", game_edge_fire_SpecialN2, Low)
+    .game_acmd("game_specialn3", game_edge_fire_SpecialN3, Low)
+    .game_acmd("game_bursts", game_edge_fire_BurstS, Low)
+    .game_acmd("game_burstm", game_edge_fire_BurstM, Low)
+    .game_acmd("game_burstl", game_edge_fire_BurstL, Low)
     .install();
 }

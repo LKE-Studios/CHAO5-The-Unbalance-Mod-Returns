@@ -10,6 +10,6 @@ unsafe extern "C" fn effect_silver_search_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_search")
-    .effect_acmd("effect_move_silver", effect_silver_search_Move)
+    .effect_acmd("effect_move_silver", effect_silver_search_Move, Low)
     .install();
 }

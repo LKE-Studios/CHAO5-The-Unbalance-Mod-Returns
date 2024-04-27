@@ -109,13 +109,13 @@ unsafe extern "C" fn sound_link_AttachWallClimb(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("link")
-    .sound_acmd("sound_ascendjump", sound_link_AscendJump)
-    .sound_acmd("sound_ascendairjump", sound_link_AscendAirJump)
-    .sound_acmd("sound_ascendstart", sound_link_AscendStart)
-    .sound_acmd("sound_ascend", sound_link_Ascend)
-    .sound_acmd("sound_ascendend", sound_link_AscendEnd)
-    .sound_acmd("sound_revaliglidelanding", sound_link_RevaliGlideLanding)
-    .sound_acmd("sound_attachwall", sound_link_AttachWall)
-    .sound_acmd("sound_attachwallclimb", sound_link_AttachWallClimb)
+    .sound_acmd("sound_ascendjump", sound_link_AscendJump, Low)
+    .sound_acmd("sound_ascendairjump", sound_link_AscendAirJump, Low)
+    .sound_acmd("sound_ascendstart", sound_link_AscendStart, Low)
+    .sound_acmd("sound_ascend", sound_link_Ascend, Low)
+    .sound_acmd("sound_ascendend", sound_link_AscendEnd, Low)
+    .sound_acmd("sound_revaliglidelanding", sound_link_RevaliGlideLanding, Low)
+    .sound_acmd("sound_attachwall", sound_link_AttachWall, Low)
+    .sound_acmd("sound_attachwallclimb", sound_link_AttachWallClimb, Low)
     .install();
 }

@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//Attack11 
-    agent = "wolf", 
-    script = "game_attack11", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attack11(fighter: &mut L2CAgentBase) {
+//Attack11 
+unsafe extern "C" fn game_wolf_Attack11(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
     frame(fighter.lua_state_agent, 3.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -30,12 +26,8 @@ unsafe fn game_wolf_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack12 
-    agent = "wolf", 
-    script = "game_attack12", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attack12(fighter: &mut L2CAgentBase) {
+//Attack12 
+unsafe extern "C" fn game_wolf_Attack12(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 4.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -54,12 +46,8 @@ unsafe fn game_wolf_attack12(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack13 
-    agent = "wolf", 
-    script = "game_attack13", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attack13(fighter: &mut L2CAgentBase) {
+//Attack13 
+unsafe extern "C" fn game_wolf_Attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.6, /*Angle*/ 55, /*KBG*/ 161, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 2.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -75,12 +63,8 @@ unsafe fn game_wolf_attack13(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "wolf", 
-    script = "game_attackdash", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn game_wolf_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 16.2, /*Angle*/ 80, /*KBG*/ 118, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(-3.3), /*Y2*/ Some(0.0), /*Z2*/ Some(-3.3), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -99,12 +83,8 @@ unsafe fn game_wolf_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi
-    agent = "wolf", 
-    script = "game_attacks3hi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi
+unsafe extern "C" fn game_wolf_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 60, /*KBG*/ 67, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -129,12 +109,8 @@ unsafe fn game_wolf_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3
-    agent = "wolf", 
-    script = "game_attacks3", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3
+unsafe extern "C" fn game_wolf_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 60, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 16.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -157,12 +133,8 @@ unsafe fn game_wolf_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw
-    agent = "wolf", 
-    script = "game_attacks3lw", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw
+unsafe extern "C" fn game_wolf_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 60, /*KBG*/ 67, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 14.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -187,12 +159,8 @@ unsafe fn game_wolf_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
-    agent = "wolf", 
-    script = "game_attackhi3", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3
+unsafe extern "C" fn game_wolf_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 15.0, /*Angle*/ 80, /*KBG*/ 155, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 8.5, /*X*/ -5.0, /*Y*/ 5.4, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -210,12 +178,8 @@ unsafe fn game_wolf_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3
-    agent = "wolf", 
-    script = "game_attacklw3", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3
+unsafe extern "C" fn game_wolf_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 7.0, /*X*/ 6.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.4, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_KICK);
@@ -229,12 +193,8 @@ unsafe fn game_wolf_attacklw3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4
-    agent = "wolf", 
-    script = "game_attacks4", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn game_wolf_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -253,12 +213,8 @@ unsafe fn game_wolf_attacks4(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
 }
 
-#[acmd_script(//AttackHi4
-    agent = "wolf", 
-    script = "game_attackhi4", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4
+unsafe extern "C" fn game_wolf_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -292,12 +248,8 @@ unsafe fn game_wolf_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4
-    agent = "wolf", 
-    script = "game_attacklw4", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4
+unsafe extern "C" fn game_wolf_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
     }
@@ -331,12 +283,8 @@ unsafe fn game_wolf_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN
-    agent = "wolf", 
-    script = "game_attackairn", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN
+unsafe extern "C" fn game_wolf_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -362,12 +310,8 @@ unsafe fn game_wolf_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "wolf", 
-    script = "game_attackairf", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn game_wolf_AttackAirF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -390,12 +334,8 @@ unsafe fn game_wolf_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirB
-    agent = "wolf", 
-    script = "game_attackairb", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB
+unsafe extern "C" fn game_wolf_AttackAirB(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.545);
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
@@ -419,12 +359,8 @@ unsafe fn game_wolf_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi
-    agent = "wolf", 
-    script = "game_attackairhi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi
+unsafe extern "C" fn game_wolf_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -448,12 +384,8 @@ unsafe fn game_wolf_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw
-    agent = "wolf", 
-    script = "game_attackairlw", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw
+unsafe extern "C" fn game_wolf_AttackAirLw(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.48);
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
@@ -476,12 +408,8 @@ unsafe fn game_wolf_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Catch
-    agent = "wolf", 
-    script = "game_catch", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_catch(fighter: &mut L2CAgentBase) {
+//Catch
+unsafe extern "C" fn game_wolf_Catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -500,12 +428,8 @@ unsafe fn game_wolf_catch(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchDash
-    agent = "wolf", 
-    script = "game_catchdash", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_catchdash(fighter: &mut L2CAgentBase) {
+//CatchDash
+unsafe extern "C" fn game_wolf_CatchDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -524,12 +448,8 @@ unsafe fn game_wolf_catchdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchTurn
-    agent = "wolf", 
-    script = "game_catchturn", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_catchturn(fighter: &mut L2CAgentBase) {
+//CatchTurn
+unsafe extern "C" fn game_wolf_CatchTurn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -548,12 +468,8 @@ unsafe fn game_wolf_catchturn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchAttack
-    agent = "wolf", 
-    script = "game_catchattack", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_catchattack(fighter: &mut L2CAgentBase) {
+//CatchAttack
+unsafe extern "C" fn game_wolf_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -566,12 +482,8 @@ unsafe fn game_wolf_catchattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF
-    agent = "wolf", 
-    script = "game_throwf", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF
+unsafe extern "C" fn game_wolf_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 37, /*KBG*/ 68, /*FKB*/ 0, /*BKB*/ 55, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -594,12 +506,8 @@ unsafe fn game_wolf_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB
-    agent = "wolf", 
-    script = "game_throwb", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_throwb(fighter: &mut L2CAgentBase) {
+//ThrowB
+unsafe extern "C" fn game_wolf_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 13.0, /*Angle*/ 120, /*KBG*/ 119, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -625,12 +533,8 @@ unsafe fn game_wolf_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi
-    agent = "wolf", 
-    script = "game_throwhi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi
+unsafe extern "C" fn game_wolf_ThrowHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 80, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 75, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -641,7 +545,7 @@ unsafe fn game_wolf_throwhi(fighter: &mut L2CAgentBase) {
         AttackModule::set_catch_only_all(fighter.module_accessor, true, false);
         CHECK_FINISH_CAMERA(fighter, 6, 20);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 2.0);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:0.0,y:8.0,z:0.0});
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 0.0, y: 8.0, z: 0.0});
     }
     frame(fighter.lua_state_agent, 27.0);
     if is_excute(fighter) {
@@ -654,24 +558,18 @@ unsafe fn game_wolf_throwhi(fighter: &mut L2CAgentBase) {
     }
 }      
 
-#[acmd_script(//ThrowLw
-    agent = "wolf", 
-    script = "game_throwlw", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw
+unsafe extern "C" fn game_wolf_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 15.5, /*Angle*/ 56, /*KBG*/ 52, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        fighter.clear_lua_stack();
-        lua_args!(fighter, 13, 1);
-        FT_CATCH_STOP(fighter.lua_state_agent);
+        FT_CATCH_STOP(fighter, 13.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 11, 0);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.5);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:5.0, y: 0.0, z: 0.0});
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 5.0, y: 0.0, z: 0.0});
     }
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
@@ -684,12 +582,8 @@ unsafe fn game_wolf_throwlw(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 }
 
-#[acmd_script(//CliffAttack
-    agent = "wolf", 
-    script = "game_cliffattack", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_cliffattack(fighter: &mut L2CAgentBase) {
+//CliffAttack
+unsafe extern "C" fn game_wolf_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 24.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 45, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 11.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(2.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -700,12 +594,8 @@ unsafe fn game_wolf_cliffattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SlipAttack
-    agent = "wolf", 
-    script = "game_slipattack", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_slipattack(fighter: &mut L2CAgentBase) {
+//SlipAttack
+unsafe extern "C" fn game_wolf_SlipAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 12.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(4.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -724,12 +614,8 @@ unsafe fn game_wolf_slipattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD
-    agent = "wolf", 
-    script = "game_downattackd", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_downattackd(fighter: &mut L2CAgentBase) {
+//DownAttackD
+unsafe extern "C" fn game_wolf_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -748,12 +634,8 @@ unsafe fn game_wolf_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackU
-    agent = "wolf", 
-    script = "game_downattacku", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_downattacku(fighter: &mut L2CAgentBase) {
+//DownAttackU
+unsafe extern "C" fn game_wolf_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 48, /*KBG*/ 48, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -14.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -772,19 +654,13 @@ unsafe fn game_wolf_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialN
-    agent = "wolf", 
-    script = "game_specialn", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialn(fighter: &mut L2CAgentBase) {
+//SpecialN
+unsafe extern "C" fn game_wolf_SpecialN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, false, -1);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40::new("open"), false, -1.0);
         }
@@ -805,9 +681,7 @@ unsafe fn game_wolf_specialn(fighter: &mut L2CAgentBase) {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 38.0);
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40::new("close"), false, -1.0);
         }
@@ -818,19 +692,13 @@ unsafe fn game_wolf_specialn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirN
-    agent = "wolf", 
-    script = "game_specialairn", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialairn(fighter: &mut L2CAgentBase) {
+//SpecialAirN
+unsafe extern "C" fn game_wolf_SpecialAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, false, -1);
     }
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40::new("open"), false, -1.0);
         }
@@ -851,9 +719,7 @@ unsafe fn game_wolf_specialairn(fighter: &mut L2CAgentBase) {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 38.0);
-    fighter.clear_lua_stack();
-    lua_args!(fighter, FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER);
-    if IS_EXIST_ARTICLE(fighter.lua_state_agent) {
+    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER) {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_BLASTER, Hash40::new("close"), false, -1.0);
         }
@@ -864,39 +730,24 @@ unsafe fn game_wolf_specialairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Fly
-    agent = "wolf_blaster_bullet", 
-    script = "game_fly", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_blaster_bullet_fly(fighter: &mut L2CAgentBase) {
+//SpecialS
+unsafe extern "C" fn game_wolf_SpecialS(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 21.0, /*Angle*/ 70, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -13, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 300, /*Rehit*/ 50, /* Damage*/ 1.0, /*Unk*/ false);
+        JostleModule::set_status(fighter.module_accessor, false);
     }
-    wait(fighter.lua_state_agent, 6.0);
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 70, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -14, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 300, /*Rehit*/ 50, /* Damage*/ 1.0, /*Unk*/ false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_ILLUSION, false, -1);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 68, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
     }
-    wait(fighter.lua_state_agent, 14.0);
+    frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 19.0, /*Angle*/ 70, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -13.5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 300, /*Rehit*/ 50, /* Damage*/ 1.0, /*Unk*/ false);
-    }
-    wait(fighter.lua_state_agent, 22.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 18.0, /*Angle*/ 70, /*KBG*/ 73, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -13, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 300, /*Rehit*/ 50, /* Damage*/ 1.0, /*Unk*/ false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_ILLUSION, false, -1);
     }
 }
 
-#[acmd_script(//SpecialSEnd
-    agent = "wolf", 
-    script = "game_specialsend", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialsend(fighter: &mut L2CAgentBase) {
+//SpecialSEnd
+unsafe extern "C" fn game_wolf_SpecialSEnd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 110.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -916,12 +767,24 @@ unsafe fn game_wolf_specialsend(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirSEnd
-    agent = "wolf", 
-    script = "game_specialairsend", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialairsend(fighter: &mut L2CAgentBase) {
+//SpecialAirS
+unsafe extern "C" fn game_wolf_SpecialAirS(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_ILLUSION, false, -1);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 68, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_WOLF_GENERATE_ARTICLE_ILLUSION, false, -1);
+    }
+}
+
+//SpecialAirSEnd
+unsafe extern "C" fn game_wolf_SpecialAirSEnd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 110.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 5.5, /*Z*/ 5.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -941,36 +804,8 @@ unsafe fn game_wolf_specialairsend(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//MoveAir
-    agent = "wolf_illusion", 
-    script = "game_moveair", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_illusion_moveair(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 68, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 30.0, /*Unk*/ false);
-    }
-}
-
-#[acmd_script(//MoveGround
-    agent = "wolf_illusion", 
-    script = "game_moveground", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_illusion_moveground(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 260, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 68, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 30.0, /*Unk*/ false);
-    }
-}
-
-#[acmd_script(//SpecialHiHold
-    agent = "wolf", 
-    script = "game_specialhihold", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialhihold(fighter: &mut L2CAgentBase) {
+//SpecialHiHold
+unsafe extern "C" fn game_wolf_SpecialHiHold(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 93, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 44, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -981,12 +816,8 @@ unsafe fn game_wolf_specialhihold(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiHoldAir
-    agent = "wolf", 
-    script = "game_specialhiholdair", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialhiholdair(fighter: &mut L2CAgentBase) {
+//SpecialHiHoldAir
+unsafe extern "C" fn game_wolf_SpecialHiHoldAir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 93, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 44, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 1.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -997,12 +828,8 @@ unsafe fn game_wolf_specialhiholdair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHi
-    agent = "wolf", 
-    script = "game_specialhi", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialhi(fighter: &mut L2CAgentBase) {
+//SpecialHi
+unsafe extern "C" fn game_wolf_SpecialHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 3.5, /*Angle*/ 40, /*KBG*/ 20, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 9.0, /*X*/ -2.0, /*Y*/ 0.0, /*Z*/ 2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 2, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1023,12 +850,8 @@ unsafe fn game_wolf_specialhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiLanding
-    agent = "wolf", 
-    script = "game_specialhilanding", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialhilanding(fighter: &mut L2CAgentBase) {
+//SpecialHiLanding
+unsafe extern "C" fn game_wolf_SpecialHiLanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 4.0);
@@ -1049,12 +872,8 @@ unsafe fn game_wolf_specialhilanding(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialHiFall
-    agent = "wolf", 
-    script = "game_specialhifall", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialhifall(fighter: &mut L2CAgentBase) {
+//SpecialHiFall
+unsafe extern "C" fn game_wolf_SpecialHiFall(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 25.0, /*Angle*/ 361, /*KBG*/ 115, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_curse_poison"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -1076,12 +895,8 @@ unsafe fn game_wolf_specialhifall(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwStart
-    agent = "wolf", 
-    script = "game_speciallwstart", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_speciallwstart(fighter: &mut L2CAgentBase) {
+//SpecialLwStart
+unsafe extern "C" fn game_wolf_SpecialLwStart(fighter: &mut L2CAgentBase) {
     WHOLE_HIT(fighter, *HIT_STATUS_XLU);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1097,12 +912,8 @@ unsafe fn game_wolf_speciallwstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwHit
-    agent = "wolf", 
-    script = "game_speciallwhit", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_speciallwhit(fighter: &mut L2CAgentBase) {
+//SpecialLwHit
+unsafe extern "C" fn game_wolf_SpecialLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 126, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 126, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -1113,24 +924,16 @@ unsafe fn game_wolf_speciallwhit(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwLoop
-    agent = "wolf", 
-    script = "game_speciallwloop", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_speciallwloop(fighter: &mut L2CAgentBase) {
+//SpecialLwLoop
+unsafe extern "C" fn game_wolf_SpecialLwLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 30, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 30, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
     }
 }
 
-#[acmd_script(//SpecialAirLwStart
-    agent = "wolf", 
-    script = "game_specialairlwstart", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialairlwstart(fighter: &mut L2CAgentBase) {
+//SpecialAirLwStart
+unsafe extern "C" fn game_wolf_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
     WHOLE_HIT(fighter, *HIT_STATUS_XLU);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -1146,12 +949,8 @@ unsafe fn game_wolf_specialairlwstart(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLwHit
-    agent = "wolf", 
-    script = "game_specialairlwhit", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialairlwhit(fighter: &mut L2CAgentBase) {
+//SpecialAirLwHit
+unsafe extern "C" fn game_wolf_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 144, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -1162,90 +961,58 @@ unsafe fn game_wolf_specialairlwhit(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLwLoop
-    agent = "wolf", 
-    script = "game_specialairlwloop", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_specialairlwloop(fighter: &mut L2CAgentBase) {
+//SpecialAirLwLoop
+unsafe extern "C" fn game_wolf_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 126, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 30, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 50, /*KBG*/ 126, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ -7.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 30, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
     }
 }
 
-#[acmd_script(//AppealHiR
-    agent = "wolf", 
-    script = "game_appealhir", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appealhir(fighter: &mut L2CAgentBase) {
+//AppealHiR
+unsafe extern "C" fn game_wolf_AppealHiR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_REVENGESHOOTER), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealHiL
-    agent = "wolf", 
-    script = "game_appealhil", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appealhil(fighter: &mut L2CAgentBase) {
+//AppealHiL
+unsafe extern "C" fn game_wolf_AppealHiL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_REVENGESHOOTER), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealSR
-    agent = "wolf", 
-    script = "game_appealsr", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appealsr(fighter: &mut L2CAgentBase) {
+//AppealSR
+unsafe extern "C" fn game_wolf_AppealSR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SENSORBOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealSL
-    agent = "wolf", 
-    script = "game_appealsl", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appealsl(fighter: &mut L2CAgentBase) {
+//AppealSL
+unsafe extern "C" fn game_wolf_AppealSL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SENSORBOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealLwR
-    agent = "wolf", 
-    script = "game_appeallwr", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appeallwr(fighter: &mut L2CAgentBase) {
+//AppealLwR
+unsafe extern "C" fn game_wolf_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SMARTBOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealLwL
-    agent = "wolf", 
-    script = "game_appeallwl", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_appeallwl(fighter: &mut L2CAgentBase) {
+//AppealLwL
+unsafe extern "C" fn game_wolf_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SMARTBOMB), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//FinalEnd
-    agent = "wolf", 
-    script = "game_finalend", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_finalend(fighter: &mut L2CAgentBase) {
+//FinalEnd
+unsafe extern "C" fn game_wolf_FinalEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         CAM_ZOOM_OUT(fighter, );
         camera!(fighter, MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1258,12 +1025,8 @@ unsafe fn game_wolf_finalend(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//FinalAirEnd
-    agent = "wolf", 
-    script = "game_finalairend", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn game_wolf_finalairend(fighter: &mut L2CAgentBase) {
+//FinalAirEnd
+unsafe extern "C" fn game_wolf_FinalAirEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         CAM_ZOOM_OUT(fighter, );
         camera!(fighter, MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 0);
@@ -1277,61 +1040,60 @@ unsafe fn game_wolf_finalairend(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_wolf_attack11,
-        game_wolf_attack12,
-        game_wolf_attack13,
-        game_wolf_attackdash,
-        game_wolf_attacks3hi,
-        game_wolf_attacks3,
-        game_wolf_attacks3lw,
-        game_wolf_attackhi3,
-        game_wolf_attacklw3,
-        game_wolf_attacks4,
-        game_wolf_attackhi4,
-        game_wolf_attacklw4,
-        game_wolf_attackairn,
-        game_wolf_attackairf,
-        game_wolf_attackairb,
-        game_wolf_attackairhi,
-        game_wolf_attackairlw,
-        game_wolf_catch,
-        game_wolf_catchturn,
-        game_wolf_catchdash,
-        game_wolf_catchattack,
-        game_wolf_throwf,
-        game_wolf_throwb,
-        game_wolf_throwhi,
-        game_wolf_throwlw,
-        game_wolf_cliffattack,
-        game_wolf_slipattack,
-        game_wolf_downattackd,
-        game_wolf_downattacku,
-        game_wolf_specialn,
-        game_wolf_specialairn,
-        game_wolf_blaster_bullet_fly,
-        game_wolf_specialsend,
-        game_wolf_specialairsend,
-        game_wolf_illusion_moveair,
-        game_wolf_illusion_moveground,
-        game_wolf_specialhihold,
-        game_wolf_specialhiholdair,
-        game_wolf_specialhi,
-        game_wolf_specialhilanding,
-        game_wolf_specialhifall,
-        game_wolf_speciallwstart,
-        game_wolf_speciallwhit,
-        game_wolf_speciallwloop,
-        game_wolf_specialairlwstart,
-        game_wolf_specialairlwhit,
-        game_wolf_specialairlwloop,
-        game_wolf_appealhir,
-        game_wolf_appealhil,
-        game_wolf_appealsr,
-        game_wolf_appealsl,
-        game_wolf_appeallwr,
-        game_wolf_appeallwl,
-        game_wolf_finalend,
-        game_wolf_finalairend
-    );
+    Agent::new("wolf")
+    .game_acmd("game_attack11", game_wolf_Attack11, Low)
+    .game_acmd("game_attack12", game_wolf_Attack12, Low)
+    .game_acmd("game_attack13", game_wolf_Attack13, Low)
+    .game_acmd("game_attackdash", game_wolf_AttackDash, Low)
+    .game_acmd("game_attacks3hi", game_wolf_AttackS3Hi, Low)
+    .game_acmd("game_attacks3", game_wolf_AttackS3, Low)
+    .game_acmd("game_attacks3lw", game_wolf_AttackS3Lw, Low)
+    .game_acmd("game_attackhi3", game_wolf_AttackHi3, Low)
+    .game_acmd("game_attacklw3", game_wolf_AttackLw3, Low)
+    .game_acmd("game_attacks4", game_wolf_AttackS4, Low)
+    .game_acmd("game_attackhi4", game_wolf_AttackHi4, Low)
+    .game_acmd("game_attacklw4", game_wolf_AttackLw4, Low)
+    .game_acmd("game_attackairn", game_wolf_AttackAirN, Low)
+    .game_acmd("game_attackairf", game_wolf_AttackAirF, Low)    
+    .game_acmd("game_attackairb", game_wolf_AttackAirB, Low)
+    .game_acmd("game_attackairhi", game_wolf_AttackAirHi, Low)
+    .game_acmd("game_attackairlw", game_wolf_AttackAirLw, Low)
+    .game_acmd("game_catch", game_wolf_Catch, Low)
+    .game_acmd("game_catchdash", game_wolf_CatchDash, Low)
+    .game_acmd("game_catchturn", game_wolf_CatchTurn, Low)
+    .game_acmd("game_catchattack", game_wolf_CatchAttack, Low)
+    .game_acmd("game_throwf", game_wolf_ThrowF, Low)
+    .game_acmd("game_throwb", game_wolf_ThrowB, Low)
+    .game_acmd("game_throwhi", game_wolf_ThrowHi, Low)
+    .game_acmd("game_throwlw", game_wolf_ThrowLw, Low)
+    .game_acmd("game_downattackd", game_wolf_DownAttackD, Low)
+    .game_acmd("game_downattacku", game_wolf_DownAttackU, Low)
+    .game_acmd("game_cliffattack", game_wolf_CliffAttack, Low)
+    .game_acmd("game_slipattack", game_wolf_SlipAttack, Low)
+    .game_acmd("game_specialn", game_wolf_SpecialN, Low)
+    .game_acmd("game_specialairn", game_wolf_SpecialAirN, Low)
+    .game_acmd("game_specials", game_wolf_SpecialS, Low)
+    .game_acmd("game_specialairs", game_wolf_SpecialAirS, Low)
+    .game_acmd("game_specialsend", game_wolf_SpecialSEnd, Low)
+    .game_acmd("game_specialairsend", game_wolf_SpecialAirSEnd, Low)
+    .game_acmd("game_specialhi", game_wolf_SpecialHi, Low)
+    .game_acmd("game_specialhihold", game_wolf_SpecialHiHold, Low)
+    .game_acmd("game_specialhiholdair", game_wolf_SpecialHiHoldAir, Low)
+    .game_acmd("game_specialhilanding", game_wolf_SpecialHiLanding, Low)
+    .game_acmd("game_specialhifall", game_wolf_SpecialHiFall, Low)
+    .game_acmd("game_speciallwstart", game_wolf_SpecialLwStart, Low)
+    .game_acmd("game_speciallwhit", game_wolf_SpecialLwHit, Low)
+    .game_acmd("game_speciallwloop", game_wolf_SpecialLwLoop, Low)
+    .game_acmd("game_specialairlwstart", game_wolf_SpecialAirLwStart, Low)
+    .game_acmd("game_specialairlwhit", game_wolf_SpecialAirLwHit, Low)
+    .game_acmd("game_specialairlwloop", game_wolf_SpecialAirLwLoop, Low)
+    .game_acmd("game_appealsr", game_wolf_AppealSR, Low)
+    .game_acmd("game_appealsl", game_wolf_AppealSL, Low)
+    .game_acmd("game_appealhir", game_wolf_AppealHiR, Low)
+    .game_acmd("game_appealhil", game_wolf_AppealHiL, Low)
+    .game_acmd("game_appeallwr", game_wolf_AppealLwR, Low)
+    .game_acmd("game_appeallwl", game_wolf_AppealLwL, Low)
+    .game_acmd("game_finalend", game_wolf_FinalEnd, Low)
+    .game_acmd("game_finalairend", game_wolf_FinalAirEnd, Low)
+    .install();
 }

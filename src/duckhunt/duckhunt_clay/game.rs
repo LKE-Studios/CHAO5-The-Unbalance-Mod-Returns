@@ -68,9 +68,9 @@ unsafe extern "C" fn game_duckhunt_clay_WallHit(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("duckhunt_clay")
-    .game_acmd("game_fly", game_duckhunt_clay_Fly)
-    .game_acmd("game_hit", game_duckhunt_clay_Hit)
-    .game_acmd("game_reflecthit", game_duckhunt_clay_ReflectHit)
-    .game_acmd("game_wallhit", game_duckhunt_clay_WallHit)
+    .game_acmd("game_fly", game_duckhunt_clay_Fly, Low)
+    .game_acmd("game_hit", game_duckhunt_clay_Hit, Low)
+    .game_acmd("game_reflecthit", game_duckhunt_clay_ReflectHit, Low)
+    .game_acmd("game_wallhit", game_duckhunt_clay_WallHit, Low)
     .install();
 }

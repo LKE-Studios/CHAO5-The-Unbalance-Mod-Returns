@@ -125,8 +125,8 @@ unsafe extern "C" fn game_tantan_punch2_AttackLongHold(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("tantan_punch2")
-    .game_acmd("game_attackshort", game_tantan_punch2_AttackShort)   
-    .game_acmd("game_attacklong", game_tantan_punch2_AttackLong)  
-    .game_acmd("game_attacklonghold", game_tantan_punch2_AttackLongHold)   
+    .game_acmd("game_attackshort", game_tantan_punch2_AttackShort, Low)   
+    .game_acmd("game_attacklong", game_tantan_punch2_AttackLong, Low)  
+    .game_acmd("game_attacklonghold", game_tantan_punch2_AttackLongHold, Low)   
     .install();
 }

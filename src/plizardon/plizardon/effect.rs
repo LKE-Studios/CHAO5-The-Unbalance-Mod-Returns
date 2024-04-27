@@ -139,14 +139,14 @@ pub unsafe extern "C" fn effect_plizardon_SpecialAirZ(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("plizardon")
-    .effect_acmd("effect_glidestart", effect_plizardon_GlideStart)
-    .effect_acmd("effect_glidewing", effect_plizardon_GlideWing)
-    .effect_acmd("effect_glideattack", effect_plizardon_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_plizardon_GlideLanding)
-    .effect_acmd("effect_specialairhi2start", effect_plizardon_SpecialAirHi2Start)
-    .effect_acmd("effect_specialairhi2", effect_plizardon_SpecialAirHi2)
-    .effect_acmd("effect_specialairhi2landing", effect_plizardon_SpecialAirHi2Landing)
-    .effect_acmd("effect_specialz", effect_plizardon_SpecialZ)
-    .effect_acmd("effect_specialairz", effect_plizardon_SpecialAirZ)
+    .effect_acmd("effect_glidestart", effect_plizardon_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_plizardon_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_plizardon_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_plizardon_GlideLanding, Low)
+    .effect_acmd("effect_specialairhi2start", effect_plizardon_SpecialAirHi2Start, Low)
+    .effect_acmd("effect_specialairhi2", effect_plizardon_SpecialAirHi2, Low)
+    .effect_acmd("effect_specialairhi2landing", effect_plizardon_SpecialAirHi2Landing, Low)
+    .effect_acmd("effect_specialz", effect_plizardon_SpecialZ, Low)
+    .effect_acmd("effect_specialairz", effect_plizardon_SpecialAirZ, Low)
     .install();
 }

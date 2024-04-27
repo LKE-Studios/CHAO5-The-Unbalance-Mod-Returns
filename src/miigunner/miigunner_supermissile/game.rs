@@ -9,6 +9,6 @@ unsafe extern "C" fn game_miigunner_supermissile_Straight(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("miigunner_supermissile")
-    .game_acmd("game_straight", game_miigunner_supermissile_Straight)
+    .game_acmd("game_straight", game_miigunner_supermissile_Straight, Low)
     .install();
 }

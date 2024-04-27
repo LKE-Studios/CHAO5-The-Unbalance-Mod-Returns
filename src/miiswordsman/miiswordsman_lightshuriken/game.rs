@@ -31,6 +31,6 @@ unsafe extern "C" fn game_miiswordsman_lightshuriken_Fly(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("miiswordsman_lightshuriken")
-    .game_acmd("game_fly", game_miiswordsman_lightshuriken_Fly)
+    .game_acmd("game_fly", game_miiswordsman_lightshuriken_Fly, Low)
     .install();
 }

@@ -108,7 +108,7 @@ unsafe extern "C" fn game_demon_blasterchest_FinalAir(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("demon_blasterchest")
-    .game_acmd("game_final", game_demon_blasterchest_Final)
-    .game_acmd("game_finalair", game_demon_blasterchest_FinalAir)
+    .game_acmd("game_final", game_demon_blasterchest_Final, Low)
+    .game_acmd("game_finalair", game_demon_blasterchest_FinalAir, Low)
     .install();
 }

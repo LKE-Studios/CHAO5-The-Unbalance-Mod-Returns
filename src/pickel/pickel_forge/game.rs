@@ -58,9 +58,9 @@ unsafe extern "C" fn game_pickel_forge_ThrowLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pickel_forge")
-    .game_acmd("game_fallattack", game_pickel_forge_FallAttack)
-    .game_acmd("game_fallattackride", game_pickel_forge_FallAttackRide)
-    .game_acmd("game_wait", game_pickel_forge_Wait)
-    .game_acmd("game_throwlw", game_pickel_forge_ThrowLw)
+    .game_acmd("game_fallattack", game_pickel_forge_FallAttack, Low)
+    .game_acmd("game_fallattackride", game_pickel_forge_FallAttackRide, Low)
+    .game_acmd("game_wait", game_pickel_forge_Wait, Low)
+    .game_acmd("game_throwlw", game_pickel_forge_ThrowLw, Low)
     .install();
 }

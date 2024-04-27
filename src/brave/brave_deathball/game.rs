@@ -26,7 +26,7 @@ unsafe extern "C" fn game_brave_deathball_Deathball2(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("brave_deathball")
-    .game_acmd("game_deathball1", game_brave_deathball_Deathball1)
-    .game_acmd("game_deathball2", game_brave_deathball_Deathball2)
+    .game_acmd("game_deathball1", game_brave_deathball_Deathball1, Low)
+    .game_acmd("game_deathball2", game_brave_deathball_Deathball2, Low)
     .install();
 }

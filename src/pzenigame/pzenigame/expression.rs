@@ -34,7 +34,7 @@ unsafe extern "C" fn expression_pzenigame_SpecialAirZ(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("pzenigame")
-    .expression_acmd("expression_specialz", expression_pzenigame_SpecialZ)
-    .expression_acmd("expression_specialairz", expression_pzenigame_SpecialAirZ)
+    .expression_acmd("expression_specialz", expression_pzenigame_SpecialZ, Low)
+    .expression_acmd("expression_specialairz", expression_pzenigame_SpecialAirZ, Low)
     .install();
 }

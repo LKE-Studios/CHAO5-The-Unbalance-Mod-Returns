@@ -9,6 +9,6 @@ unsafe extern "C" fn game_miigunner_miimissile_Homing(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("miigunner_miimissile")
-    .game_acmd("game_homing", game_miigunner_miimissile_Homing)
+    .game_acmd("game_homing", game_miigunner_miimissile_Homing, Low)
     .install();
 }

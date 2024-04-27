@@ -88,9 +88,9 @@ unsafe extern "C" fn game_buddy_bullet_BakyunW2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("buddy_bullet")
-    .game_acmd("game_missile", game_buddy_bullet_Missile)
-    .game_acmd("game_bakyun", game_buddy_bullet_Bakyun)
-    .game_acmd("game_bakyunw1", game_buddy_bullet_BakyunW1)
-    .game_acmd("game_bakyunw2", game_buddy_bullet_BakyunW2)
+    .game_acmd("game_missile", game_buddy_bullet_Missile, Low)
+    .game_acmd("game_bakyun", game_buddy_bullet_Bakyun, Low)
+    .game_acmd("game_bakyunw1", game_buddy_bullet_BakyunW1, Low)
+    .game_acmd("game_bakyunw2", game_buddy_bullet_BakyunW2, Low)
     .install();
 }

@@ -10,6 +10,6 @@ unsafe extern "C" fn game_plizardon_rockstone_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("plizardon_rockstone")
-    .game_acmd("game_move", game_plizardon_rockstone_Move)
+    .game_acmd("game_move", game_plizardon_rockstone_Move, Low)
     .install();
 }

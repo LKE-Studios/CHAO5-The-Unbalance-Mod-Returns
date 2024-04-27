@@ -35,6 +35,6 @@ unsafe extern "C" fn game_murabito_house_Construct(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_house")
-    .game_acmd("game_construct", game_murabito_house_Construct)
+    .game_acmd("game_construct", game_murabito_house_Construct, Low)
     .install();
 }

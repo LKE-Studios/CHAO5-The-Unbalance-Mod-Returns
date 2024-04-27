@@ -33,7 +33,7 @@ unsafe extern "C" fn game_reflet_elwind_Shoot1(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet_elwind")
-    .game_acmd("game_shoot0", game_reflet_elwind_Shoot0)
-    .game_acmd("game_shoot1", game_reflet_elwind_Shoot1)
+    .game_acmd("game_shoot0", game_reflet_elwind_Shoot0, Low)
+    .game_acmd("game_shoot1", game_reflet_elwind_Shoot1, Low)
     .install();
 }

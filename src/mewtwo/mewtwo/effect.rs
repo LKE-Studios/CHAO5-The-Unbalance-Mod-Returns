@@ -339,16 +339,16 @@ unsafe extern "C" fn effect_mewtwo_DownAttackD(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo")
-    .effect_acmd("effect_attacks3hi", effect_mewtwo_AttackS3Hi)
-    .effect_acmd("effect_attacks3", effect_mewtwo_AttackS3)
-    .effect_acmd("effect_attacks3lw", effect_mewtwo_AttackS3Lw)
-    .effect_acmd("effect_attackhi3", effect_mewtwo_AttackHi3)
-    .effect_acmd("effect_attacklw3", effect_mewtwo_AttackLw3)   
-    .effect_acmd("effect_attackairb", effect_mewtwo_AttackAirB)
-    .effect_acmd("effect_attackairhi", effect_mewtwo_AttackAirHi)
-    .effect_acmd("effect_throwlw", effect_mewtwo_ThrowLw)
-    .effect_acmd("effect_downattackd", effect_mewtwo_DownAttackD)
-    .effect_acmd("effect_downattacku", effect_mewtwo_DownAttackU)
-    .effect_acmd("effect_cliffattack", effect_mewtwo_CliffAttack)
+    .effect_acmd("effect_attacks3hi", effect_mewtwo_AttackS3Hi, Low)
+    .effect_acmd("effect_attacks3", effect_mewtwo_AttackS3, Low)
+    .effect_acmd("effect_attacks3lw", effect_mewtwo_AttackS3Lw, Low)
+    .effect_acmd("effect_attackhi3", effect_mewtwo_AttackHi3, Low)
+    .effect_acmd("effect_attacklw3", effect_mewtwo_AttackLw3, Low)   
+    .effect_acmd("effect_attackairb", effect_mewtwo_AttackAirB, Low)
+    .effect_acmd("effect_attackairhi", effect_mewtwo_AttackAirHi, Low)
+    .effect_acmd("effect_throwlw", effect_mewtwo_ThrowLw, Low)
+    .effect_acmd("effect_downattackd", effect_mewtwo_DownAttackD, Low)
+    .effect_acmd("effect_downattacku", effect_mewtwo_DownAttackU, Low)
+    .effect_acmd("effect_cliffattack", effect_mewtwo_CliffAttack, Low)
     .install();
 }

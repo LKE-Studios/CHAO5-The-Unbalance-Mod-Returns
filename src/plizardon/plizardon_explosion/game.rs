@@ -10,6 +10,6 @@ unsafe extern "C" fn game_plizardon_explosion_Start(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("plizardon_explosion")
-    .game_acmd("game_start", game_plizardon_explosion_Start)
+    .game_acmd("game_start", game_plizardon_explosion_Start, Low)
     .install();
 }

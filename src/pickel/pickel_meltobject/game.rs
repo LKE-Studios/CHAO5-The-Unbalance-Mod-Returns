@@ -10,6 +10,6 @@ unsafe extern "C" fn game_pickel_meltobject_AttackHi4(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("pickel_meltobject")
-    .game_acmd("game_attackhi4", game_pickel_meltobject_AttackHi4)
+    .game_acmd("game_attackhi4", game_pickel_meltobject_AttackHi4, Low)
     .install();
 }

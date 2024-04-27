@@ -18,7 +18,7 @@ unsafe extern "C" fn effect_trail_fire_Fly2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("trail_fire")   
-    .effect_acmd("effect_fly", effect_trail_fire_Fly) 
-    .effect_acmd("effect_fly2", effect_trail_fire_Fly2)
+    .effect_acmd("effect_fly", effect_trail_fire_Fly, Low) 
+    .effect_acmd("effect_fly2", effect_trail_fire_Fly2, Low)
     .install();
 }

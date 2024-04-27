@@ -18,6 +18,6 @@ unsafe extern "C" fn game_koopag_breath_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopag_breath")
-    .game_acmd("game_move", game_koopag_breath_Move)
+    .game_acmd("game_move", game_koopag_breath_Move, Low)
     .install();
 }

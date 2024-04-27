@@ -104,12 +104,12 @@ unsafe extern "C" fn sound_lucas_WessDance(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucas")
-    .sound_acmd("sound_attack13", sound_lucas_Attack13)
-    .sound_acmd("sound_attacks4charge", sound_lucas_AttackS4Charge)
-    .sound_acmd("sound_attacklw4", sound_lucas_AttackLw4)
-    .sound_acmd("sound_attackairlw", sound_lucas_AttackAirLw)   
-    .sound_acmd("sound_appealsr", sound_lucas_AppealSR)    
-    .sound_acmd("sound_appealsl", sound_lucas_AppealSL)      
-    .sound_acmd("sound_wessdance", sound_lucas_WessDance)
+    .sound_acmd("sound_attack13", sound_lucas_Attack13, Low)
+    .sound_acmd("sound_attacks4charge", sound_lucas_AttackS4Charge, Low)
+    .sound_acmd("sound_attacklw4", sound_lucas_AttackLw4, Low)
+    .sound_acmd("sound_attackairlw", sound_lucas_AttackAirLw, Low)   
+    .sound_acmd("sound_appealsr", sound_lucas_AppealSR, Low)    
+    .sound_acmd("sound_appealsl", sound_lucas_AppealSL, Low)      
+    .sound_acmd("sound_wessdance", sound_lucas_WessDance, Low)
     .install();
 }

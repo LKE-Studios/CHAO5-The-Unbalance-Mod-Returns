@@ -16,6 +16,6 @@ unsafe extern "C" fn game_murabito_balloon_Burst(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_balloon")
-    .game_acmd("game_burst", game_murabito_balloon_Burst)
+    .game_acmd("game_burst", game_murabito_balloon_Burst, Low)
     .install();
 }

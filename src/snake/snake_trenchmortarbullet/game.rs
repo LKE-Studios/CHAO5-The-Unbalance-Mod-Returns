@@ -29,6 +29,6 @@ unsafe extern "C" fn game_snake_c4_Explosion(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("snake_c4")
-    .game_acmd("game_explosion", game_snake_c4_Explosion)
+    .game_acmd("game_explosion", game_snake_c4_Explosion, Low)
     .install();
 }

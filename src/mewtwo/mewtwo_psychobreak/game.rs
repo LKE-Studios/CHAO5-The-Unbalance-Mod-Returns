@@ -37,6 +37,6 @@ unsafe extern "C" fn game_mewtwo_psychobreak_Hit(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_psychobreak")
-    .game_acmd("game_hit", game_mewtwo_psychobreak_Hit)
+    .game_acmd("game_hit", game_mewtwo_psychobreak_Hit, Low)
     .install();
 }

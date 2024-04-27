@@ -17,6 +17,6 @@ unsafe extern "C" fn game_inkling_splash_Normal(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("inkling_splash")
-    .game_acmd("game_normal", game_inkling_splash_Normal)
+    .game_acmd("game_normal", game_inkling_splash_Normal, Low)
     .install();
 }

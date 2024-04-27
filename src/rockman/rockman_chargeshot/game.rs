@@ -11,6 +11,6 @@ unsafe extern "C" fn game_rockman_chargeshot_Regular(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("rockman_chargeshot")
-    .game_acmd("game_regular", game_rockman_chargeshot_Regular)
+    .game_acmd("game_regular", game_rockman_chargeshot_Regular, Low)
     .install();
 }

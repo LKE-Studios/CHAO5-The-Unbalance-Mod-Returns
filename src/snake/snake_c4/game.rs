@@ -10,6 +10,6 @@ unsafe extern "C" fn game_snake_cypher_Detach(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("snake_cypher")
-    .game_acmd("game_detach", game_snake_cypher_Detach)
+    .game_acmd("game_detach", game_snake_cypher_Detach, Low)
     .install();
 }

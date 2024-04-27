@@ -106,12 +106,12 @@ unsafe extern "C" fn effect_buddy_GlideLanding(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("buddy")
-    .effect_acmd("effect_jumpaerialf3", effect_buddy_JumpAerialF3)
-    .effect_acmd("effect_jumpaerialf4", effect_buddy_JumpAerialF4)
-    .effect_acmd("effect_jumpaerialf5", effect_buddy_JumpAerialF5)
-    .effect_acmd("effect_glidestart", effect_buddy_GlideStart)
-    .effect_acmd("effect_glidewing", effect_buddy_GlideWing)
-    .effect_acmd("effect_glideattack", effect_buddy_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_buddy_GlideLanding)
+    .effect_acmd("effect_jumpaerialf3", effect_buddy_JumpAerialF3, Low)
+    .effect_acmd("effect_jumpaerialf4", effect_buddy_JumpAerialF4, Low)
+    .effect_acmd("effect_jumpaerialf5", effect_buddy_JumpAerialF5, Low)
+    .effect_acmd("effect_glidestart", effect_buddy_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_buddy_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_buddy_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_buddy_GlideLanding, Low)
     .install();
 }

@@ -21,7 +21,7 @@ unsafe extern "C" fn game_koopajr_cannonball_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopajr_cannonball")    
-    .game_acmd("game_hop", game_koopajr_cannonball_Hop)
-    .game_acmd("game_shoot", game_koopajr_cannonball_Shoot)
+    .game_acmd("game_hop", game_koopajr_cannonball_Hop, Low)
+    .game_acmd("game_shoot", game_koopajr_cannonball_Shoot, Low)
     .install();
 }

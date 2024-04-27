@@ -59,11 +59,11 @@ unsafe extern "C" fn game_packun_spikeball_Wait(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("packun_spikeball")
-    .game_acmd("game_fall", game_packun_spikeball_Fall)
-    .game_acmd("game_loop", game_packun_spikeball_Loop)
-    .game_acmd("game_shoot", game_packun_spikeball_Shoot)
-    .game_acmd("game_start", game_packun_spikeball_Start)
-    .game_acmd("game_startair", game_packun_spikeball_StartAir)
-    .game_acmd("game_wait", game_packun_spikeball_Wait)
+    .game_acmd("game_fall", game_packun_spikeball_Fall, Low)
+    .game_acmd("game_loop", game_packun_spikeball_Loop, Low)
+    .game_acmd("game_shoot", game_packun_spikeball_Shoot, Low)
+    .game_acmd("game_start", game_packun_spikeball_Start, Low)
+    .game_acmd("game_startair", game_packun_spikeball_StartAir, Low)
+    .game_acmd("game_wait", game_packun_spikeball_Wait, Low)
     .install();
 }

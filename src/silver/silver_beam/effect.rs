@@ -135,7 +135,7 @@ unsafe extern "C" fn effect_silver_beam_HitGround(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_shadowball")
-    .effect_acmd("effect_shoot_silver", effect_silver_beam_Shoot)
-    .effect_acmd("effect_hitground_silver", effect_silver_beam_HitGround)
+    .effect_acmd("effect_shoot_silver", effect_silver_beam_Shoot, Low)
+    .effect_acmd("effect_hitground_silver", effect_silver_beam_HitGround, Low)
     .install();
 }

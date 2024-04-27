@@ -39,6 +39,6 @@ unsafe extern "C" fn game_lucario_lucariom_FinalAttack(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("lucario_lucariom")    
-    .game_acmd("game_shoot", game_lucario_lucariom_FinalAttack)
+    .game_acmd("game_shoot", game_lucario_lucariom_FinalAttack, Low)
     .install();
 }

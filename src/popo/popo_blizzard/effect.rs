@@ -9,6 +9,6 @@ unsafe extern "C" fn effect_popo_blizzard_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("popo_blizzard")
-    .effect_acmd("effect_fly", effect_popo_blizzard_Fly)
+    .effect_acmd("effect_fly", effect_popo_blizzard_Fly, Low)
     .install();
 }

@@ -20,7 +20,7 @@ unsafe extern "C" fn sound_diddy_SpecialAirLwLaugh(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("diddy")
-    .sound_acmd("sound_speciallwlaugh", sound_diddy_SpecialLwLaugh)
-    .sound_acmd("sound_specialairlwlaugh", sound_diddy_SpecialAirLwLaugh)
+    .sound_acmd("sound_speciallwlaugh", sound_diddy_SpecialLwLaugh, Low)
+    .sound_acmd("sound_specialairlwlaugh", sound_diddy_SpecialAirLwLaugh, Low)
     .install();
 }

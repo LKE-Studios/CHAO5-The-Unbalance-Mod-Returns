@@ -13,6 +13,6 @@ unsafe extern "C" fn game_metaknight_galaxiabeam_Shoot(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("metaknight_galaxiabeam")
-    .game_acmd("game_shoot", game_metaknight_galaxiabeam_Shoot)
+    .game_acmd("game_shoot", game_metaknight_galaxiabeam_Shoot, Low)
     .install();
 }

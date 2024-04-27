@@ -38,7 +38,7 @@ unsafe extern "C" fn game_samus_bomb_Fall(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samus_bomb")
-    .game_acmd("game_burstattack", game_samus_bomb_BurstAttack)
-    .game_acmd("game_fall", game_samus_bomb_Fall)
+    .game_acmd("game_burstattack", game_samus_bomb_BurstAttack, Low)
+    .game_acmd("game_fall", game_samus_bomb_Fall, Low)
     .install();
 }

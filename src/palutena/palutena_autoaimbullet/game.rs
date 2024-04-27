@@ -10,6 +10,6 @@ unsafe extern "C" fn game_palutena_autoaimbullet_Shot(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("palutena_autoaimbullet")
-    .game_acmd("game_shot", game_palutena_autoaimbullet_Shot)
+    .game_acmd("game_shot", game_palutena_autoaimbullet_Shot, Low)
     .install();
 }

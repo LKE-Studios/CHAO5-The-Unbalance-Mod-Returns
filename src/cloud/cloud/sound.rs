@@ -24,7 +24,7 @@ unsafe extern "C" fn sound_cloud_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("cloud")
-    .sound_acmd("sound_speciallwloop", sound_cloud_SpecialLwLoop)
-    .sound_acmd("sound_specialairlwloop", sound_cloud_SpecialAirLwLoop)
+    .sound_acmd("sound_speciallwloop", sound_cloud_SpecialLwLoop, Low)
+    .sound_acmd("sound_specialairlwloop", sound_cloud_SpecialAirLwLoop, Low)
     .install();
 }

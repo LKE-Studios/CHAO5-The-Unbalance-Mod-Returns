@@ -30,9 +30,9 @@ unsafe extern "C" fn effect_purin_SpecialAirHiR(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("purin")
-    .effect_acmd("effect_specialhil", effect_purin_SpecialHiL)
-    .effect_acmd("effect_specialhir", effect_purin_SpecialHiR)
-    .effect_acmd("effect_specialairhil", effect_purin_SpecialAirHiL)
-    .effect_acmd("effect_specialairhir", effect_purin_SpecialAirHiR)
+    .effect_acmd("effect_specialhil", effect_purin_SpecialHiL, Low)
+    .effect_acmd("effect_specialhir", effect_purin_SpecialHiR, Low)
+    .effect_acmd("effect_specialairhil", effect_purin_SpecialAirHiL, Low)
+    .effect_acmd("effect_specialairhir", effect_purin_SpecialAirHiR, Low)
     .install();
 }

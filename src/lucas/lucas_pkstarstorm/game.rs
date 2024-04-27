@@ -11,6 +11,6 @@ unsafe extern "C" fn game_lucas_pkstarstorm_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucas_pkstarstorm")
-    .game_acmd("game_move", game_lucas_pkstarstorm_Move)
+    .game_acmd("game_move", game_lucas_pkstarstorm_Move, Low)
     .install();
 }

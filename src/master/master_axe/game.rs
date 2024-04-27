@@ -114,9 +114,9 @@ unsafe extern "C" fn game_master_axe_SpecialAirLwHit(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("master_axe")
-    .game_acmd("game_speciallw", game_master_axe_SpecialLw)
-    .game_acmd("game_specialairlw", game_master_axe_SpecialAirLw)
-    .game_acmd("game_speciallwhit", game_master_axe_SpecialLwHit)
-    .game_acmd("game_specialairlwhit", game_master_axe_SpecialAirLwHit)
+    .game_acmd("game_speciallw", game_master_axe_SpecialLw, Low)
+    .game_acmd("game_specialairlw", game_master_axe_SpecialAirLw, Low)
+    .game_acmd("game_speciallwhit", game_master_axe_SpecialLwHit, Low)
+    .game_acmd("game_specialairlwhit", game_master_axe_SpecialAirLwHit, Low)
     .install();
 }

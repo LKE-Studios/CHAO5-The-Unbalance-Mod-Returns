@@ -10,6 +10,6 @@ unsafe extern "C" fn effect_pitb_bowarrow_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pitb_bowarrow")
-    .game_acmd("game_fly", game_pitb_bowarrow_Fly)
+    .game_acmd("game_fly", game_pitb_bowarrow_Fly, Low)
     .install();
 }

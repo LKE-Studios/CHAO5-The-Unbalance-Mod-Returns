@@ -47,6 +47,6 @@ unsafe extern "C" fn sound_snake_AttackS4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("snake")
-    .sound_acmd("sound_attacks4", sound_snake_AttackS4)
+    .sound_acmd("sound_attacks4", sound_snake_AttackS4, Low)
     .install();
 }

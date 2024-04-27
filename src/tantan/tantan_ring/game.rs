@@ -52,7 +52,7 @@ unsafe extern "C" fn game_tantan_ring_AttackS4Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("tantan_ring")
-    .game_acmd("game_attackfly", game_tantan_ring_AttackFly)
-    .game_acmd("game_attacks4fly", game_tantan_ring_AttackS4Fly)   
+    .game_acmd("game_attackfly", game_tantan_ring_AttackFly, Low)
+    .game_acmd("game_attacks4fly", game_tantan_ring_AttackS4Fly, Low)   
     .install();
 }

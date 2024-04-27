@@ -29,6 +29,6 @@ unsafe extern "C" fn game_mario_hugeflame_Regular(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mario_hugeflame")
-    .game_acmd("game_regular", game_mario_hugeflame_Regular)
+    .game_acmd("game_regular", game_mario_hugeflame_Regular, Low)
     .install();
 }

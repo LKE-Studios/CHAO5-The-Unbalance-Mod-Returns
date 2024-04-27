@@ -36,6 +36,6 @@ unsafe extern "C" fn game_brave_sleep_Sleep(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_sleep")
-    .game_acmd("game_sleep", game_brave_sleep_Sleep)
+    .game_acmd("game_sleep", game_brave_sleep_Sleep, Low)
     .install();
 }

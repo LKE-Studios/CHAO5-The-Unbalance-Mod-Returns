@@ -349,6 +349,6 @@ unsafe extern "C" fn game_gekkouga_gekkougas_FinalAttack(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("gekkouga_gekkougas")
-    .game_acmd("game_finalattack", game_gekkouga_gekkougas_FinalAttack)
+    .game_acmd("game_finalattack", game_gekkouga_gekkougas_FinalAttack, Low)
     .install();
 }

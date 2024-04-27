@@ -14,6 +14,6 @@ unsafe extern "C" fn effect_ryu_Kamehameha_Fire(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ryu")
-    .effect_acmd("effect_kamehameha_fire", effect_ryu_Kamehameha_Fire)
+    .effect_acmd("effect_kamehameha_fire", effect_ryu_Kamehameha_Fire, Low)
     .install();
 }

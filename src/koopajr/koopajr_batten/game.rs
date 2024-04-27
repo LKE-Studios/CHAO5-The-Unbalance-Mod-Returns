@@ -84,6 +84,6 @@ unsafe extern "C" fn game_koopajr_batten_Final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopajr_batten") 
-    .game_acmd("game_final", game_koopajr_batten_Final)   
+    .game_acmd("game_final", game_koopajr_batten_Final, Low)   
     .install();
 }

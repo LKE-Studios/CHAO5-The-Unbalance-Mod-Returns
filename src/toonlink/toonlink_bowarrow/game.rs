@@ -11,6 +11,6 @@ unsafe extern "C" fn game_toonlink_bowarrow_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("toonlink_bowarrow")    
-    .game_acmd("game_fly", game_toonlink_bowarrow_Fly)
+    .game_acmd("game_fly", game_toonlink_bowarrow_Fly, Low)
     .install();
 }

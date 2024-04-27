@@ -50,8 +50,8 @@ unsafe extern "C" fn effect_silver_mewtwom_FinalShoot(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("mewtwo_mewtwom")
-    .effect_acmd("effect_final_silver", effect_silver_mewtwom_Final)
-    .effect_acmd("effect_finalend_silver", effect_silver_mewtwom_FinalEnd)
-    .effect_acmd("effect_finalshoot_silver", effect_silver_mewtwom_FinalShoot)
+    .effect_acmd("effect_final_silver", effect_silver_mewtwom_Final, Low)
+    .effect_acmd("effect_finalend_silver", effect_silver_mewtwom_FinalEnd, Low)
+    .effect_acmd("effect_finalshoot_silver", effect_silver_mewtwom_FinalShoot, Low)
     .install();
 }

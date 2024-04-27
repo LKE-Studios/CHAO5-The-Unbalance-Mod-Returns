@@ -37,8 +37,8 @@ unsafe extern "C" fn effect_koopag_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopag")
-	.effect_acmd("effect_attack13", effect_koopag_AttackLw3)
-    .effect_acmd("effect_attackairn", effect_koopag_AttackAirN)
-    .effect_acmd("effect_attackairlw", effect_koopag_AttackAirLw)
+	.effect_acmd("effect_attack13", effect_koopag_AttackLw3, Low)
+    .effect_acmd("effect_attackairn", effect_koopag_AttackAirN, Low)
+    .effect_acmd("effect_attackairlw", effect_koopag_AttackAirLw, Low)
     .install();
 }

@@ -14,6 +14,6 @@ unsafe extern "C" fn expression_daisy_AttackAirF(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("daisy")
-    .expression_acmd("expression_attackairf", expression_daisy_AttackAirF)
+    .expression_acmd("expression_attackairf", expression_daisy_AttackAirF, Low)
     .install();
 }

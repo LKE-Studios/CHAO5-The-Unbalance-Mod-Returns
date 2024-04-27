@@ -42,7 +42,7 @@ unsafe extern "C" fn game_inkling_megaphonelaser_FinalEnd(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("inkling_megaphonelaser")
-    .game_acmd("game_finalfire", game_inkling_megaphonelaser_FinalFire)
-    .game_acmd("game_finalend", game_inkling_megaphonelaser_FinalEnd)
+    .game_acmd("game_finalfire", game_inkling_megaphonelaser_FinalFire, Low)
+    .game_acmd("game_finalend", game_inkling_megaphonelaser_FinalEnd, Low)
     .install();
 }

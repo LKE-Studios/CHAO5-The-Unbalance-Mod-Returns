@@ -18,7 +18,7 @@ unsafe extern "C" fn game_gekkouga_water_SpecialHiR(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("gekkouga_water")
-    .game_acmd("game_specialhil", game_gekkouga_water_SpecialHiL)
-    .game_acmd("game_specialhir", game_gekkouga_water_SpecialHiR)
+    .game_acmd("game_specialhil", game_gekkouga_water_SpecialHiL, Low)
+    .game_acmd("game_specialhir", game_gekkouga_water_SpecialHiR, Low)
     .install();
 }

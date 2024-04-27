@@ -12,6 +12,6 @@ unsafe extern "C" fn game_miigunner_gunnercharge_Shoot(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("miigunner_gunnercharge")
-    .game_acmd("game_shoot", game_miigunner_gunnercharge_Shoot)
+    .game_acmd("game_shoot", game_miigunner_gunnercharge_Shoot, Low)
     .install();
 }

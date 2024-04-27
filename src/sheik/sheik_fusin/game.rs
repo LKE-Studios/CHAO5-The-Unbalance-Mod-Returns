@@ -17,6 +17,6 @@ unsafe extern "C" fn game_sheik_fusin_Explosion(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("sheik_fusin")
-    .game_acmd("game_explosion", game_sheik_fusin_Explosion)
+    .game_acmd("game_explosion", game_sheik_fusin_Explosion, Low)
     .install();
 }

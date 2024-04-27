@@ -17,6 +17,6 @@ unsafe extern "C" fn game_shizue_balloon_Burst(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_balloon")
-    .game_acmd("game_burst", game_shizue_balloon_Burst)
+    .game_acmd("game_burst", game_shizue_balloon_Burst, Low)
     .install();
 }

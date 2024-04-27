@@ -46,7 +46,7 @@ unsafe extern "C" fn game_szerosuit_paralyzer_bullet_ShootTame(fighter: &mut L2C
 
 pub fn install() {
     Agent::new("szerosuit_paralyzer_bullet")
-    .game_acmd("game_shoot", game_szerosuit_paralyzer_bullet_Shoot)    
-    .game_acmd("game_shoottame", game_szerosuit_paralyzer_bullet_ShootTame)
+    .game_acmd("game_shoot", game_szerosuit_paralyzer_bullet_Shoot, Low)    
+    .game_acmd("game_shoottame", game_szerosuit_paralyzer_bullet_ShootTame, Low)
     .install();
 }

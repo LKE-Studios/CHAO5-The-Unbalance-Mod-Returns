@@ -11,6 +11,6 @@ unsafe extern "C" fn sound_richter_axe_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("richter_axe")
-    .game_acmd("sound_fly", sound_richter_axe_Fly)
+    .game_acmd("sound_fly", sound_richter_axe_Fly, Low)
     .install();
 }

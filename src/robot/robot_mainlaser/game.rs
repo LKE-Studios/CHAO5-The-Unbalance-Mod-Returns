@@ -20,6 +20,6 @@ unsafe extern "C" fn game_robot_mainlaser_End(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("robot_mainlaser")
-    .game_acmd("game_end", game_robot_mainlaser_End)
+    .game_acmd("game_end", game_robot_mainlaser_End, Low)
     .install();
 }

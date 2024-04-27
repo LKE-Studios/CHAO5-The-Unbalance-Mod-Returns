@@ -152,8 +152,8 @@ unsafe extern "C" fn effect_mario_AttackS4Lw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mario")
-    .effect_acmd("effect_attacks3s3", effect_mario_AttackS4Hi)
-    .effect_acmd("effect_attacks4", effect_mario_AttackS4)
-    .effect_acmd("effect_attackhi4", effect_mario_AttackS4Lw)
+    .effect_acmd("effect_attacks4hi", effect_mario_AttackS4Hi, Low)
+    .effect_acmd("effect_attacks4", effect_mario_AttackS4, Low)
+    .effect_acmd("effect_attacks4lw", effect_mario_AttackS4Lw, Low)
     .install();
 }

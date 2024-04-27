@@ -14,6 +14,6 @@ unsafe extern "C" fn game_murabito_bowlingball_Fall(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("murabito_bowlingball")
-    .game_acmd("game_fall", game_murabito_bowlingball_Fall)
+    .game_acmd("game_fall", game_murabito_bowlingball_Fall, Low)
     .install();
 }

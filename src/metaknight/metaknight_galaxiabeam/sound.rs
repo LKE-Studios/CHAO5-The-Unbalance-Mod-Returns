@@ -9,6 +9,6 @@ unsafe extern "C" fn sound_metaknight_galaxiabeam_Shoot(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("metaknight_galaxiabeam")
-    .sound_acmd("sound_shoot", sound_metaknight_galaxiabeam_Shoot)
+    .sound_acmd("sound_shoot", sound_metaknight_galaxiabeam_Shoot, Low)
     .install();
 }

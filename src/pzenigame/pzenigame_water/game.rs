@@ -10,6 +10,6 @@ unsafe extern "C" fn game_pzenigame_water_Regular(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pzenigame_water")
-    .game_acmd("game_regular", game_pzenigame_water_Regular)
+    .game_acmd("game_regular", game_pzenigame_water_Regular, Low)
     .install();
 }

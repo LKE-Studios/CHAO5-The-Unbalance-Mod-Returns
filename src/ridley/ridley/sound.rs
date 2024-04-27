@@ -97,13 +97,13 @@ unsafe extern "C" fn sound_ridley_GlideEnd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ridley")
-    .sound_acmd("sound_jumpaerialf3", sound_ridley_JumpAerialF3)
-    .sound_acmd("sound_jumpaerialf4", sound_ridley_JumpAerialF4)
-    .sound_acmd("sound_jumpaerialf5", sound_ridley_JumpAerialF5)
-    .sound_acmd("sound_jumpaerialf6", sound_ridley_JumpAerialF6)
-    .sound_acmd("sound_glidestart", sound_ridley_GlideStart)
-    .sound_acmd("sound_glideattack", sound_ridley_GlideAttack)
-    .sound_acmd("sound_glidelanding", sound_ridley_GlideLanding)
-    .sound_acmd("sound_glideend", sound_ridley_GlideEnd)
+    .sound_acmd("sound_jumpaerialf3", sound_ridley_JumpAerialF3, Low)
+    .sound_acmd("sound_jumpaerialf4", sound_ridley_JumpAerialF4, Low)
+    .sound_acmd("sound_jumpaerialf5", sound_ridley_JumpAerialF5, Low)
+    .sound_acmd("sound_jumpaerialf6", sound_ridley_JumpAerialF6, Low)
+    .sound_acmd("sound_glidestart", sound_ridley_GlideStart, Low)
+    .sound_acmd("sound_glideattack", sound_ridley_GlideAttack, Low)
+    .sound_acmd("sound_glidelanding", sound_ridley_GlideLanding, Low)
+    .sound_acmd("sound_glideend", sound_ridley_GlideEnd, Low)
     .install();
 }

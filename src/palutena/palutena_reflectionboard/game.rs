@@ -10,6 +10,6 @@ unsafe extern "C" fn game_palutena_reflectionboard_Shoot(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("palutena_reflectionboard")
-    .game_acmd("game_shoot", game_palutena_reflectionboard_Shoot)
+    .game_acmd("game_shoot", game_palutena_reflectionboard_Shoot, Low)
     .install();
 }

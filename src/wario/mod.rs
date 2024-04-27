@@ -1,5 +1,7 @@
-mod game;
+mod wario;
+mod wario_wariobike;
 
 pub fn install() {
-    game::install();    
+    wario::install(); 
+    wario_wariobike::install();   
 }

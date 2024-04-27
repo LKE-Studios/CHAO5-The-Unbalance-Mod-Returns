@@ -22,7 +22,7 @@ unsafe extern "C" fn sound_koopa_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopa")
-    .sound_acmd("sound_attacklw3", sound_koopa_AttackLw3)
-    .sound_acmd("sound_attackairlw", sound_koopa_AttackAirLw)
+    .sound_acmd("sound_attacklw3", sound_koopa_AttackLw3, Low)
+    .sound_acmd("sound_attackairlw", sound_koopa_AttackAirLw, Low)
     .install();
 }

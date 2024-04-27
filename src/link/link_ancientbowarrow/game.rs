@@ -36,6 +36,6 @@ unsafe extern "C" fn game_link_ancientbowarrow_Stick(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("link_ancientbowarrow")    
-    .game_acmd("game_stick", game_link_ancientbowarrow_Stick)
+    .game_acmd("game_stick", game_link_ancientbowarrow_Stick, Low)
     .install();
 }

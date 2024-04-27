@@ -21,7 +21,7 @@ unsafe extern "C" fn game_link_boomerang_Turn(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("link_boomerang")    
-    .game_acmd("game_fly", game_link_boomerang_Fly)
-    .game_acmd("game_turn", game_link_boomerang_Turn)
+    .game_acmd("game_fly", game_link_boomerang_Fly, Low)
+    .game_acmd("game_turn", game_link_boomerang_Turn, Low)
     .install();
 }

@@ -186,12 +186,12 @@ unsafe extern "C" fn game_demon_blaster_FlyAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("demon_blaster")
-    .game_acmd("game_flythrow", game_demon_blaster_FlyThrow)
-    .game_acmd("game_flyn", game_demon_blaster_FlyN)
-    .game_acmd("game_flyairn", game_demon_blaster_FlyAirN)
-    .game_acmd("game_flyhi", game_demon_blaster_FlyHi)
-    .game_acmd("game_flyairhi", game_demon_blaster_FlyAirHi)
-    .game_acmd("game_flylw", game_demon_blaster_FlyLw)
-    .game_acmd("game_flyairlw", game_demon_blaster_FlyAirLw)
+    .game_acmd("game_flythrow", game_demon_blaster_FlyThrow, Low)
+    .game_acmd("game_flyn", game_demon_blaster_FlyN, Low)
+    .game_acmd("game_flyairn", game_demon_blaster_FlyAirN, Low)
+    .game_acmd("game_flyhi", game_demon_blaster_FlyHi, Low)
+    .game_acmd("game_flyairhi", game_demon_blaster_FlyAirHi, Low)
+    .game_acmd("game_flylw", game_demon_blaster_FlyLw, Low)
+    .game_acmd("game_flyairlw", game_demon_blaster_FlyAirLw, Low)
     .install();
 }

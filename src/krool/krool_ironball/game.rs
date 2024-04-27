@@ -32,9 +32,9 @@ unsafe extern "C" fn game_krool_ironball_SpitShoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("krool_ironball")    
-    .game_acmd("game_hop", game_krool_ironball_Hop)
-    .game_acmd("game_shoot", game_krool_ironball_Shoot)
-    .game_acmd("game_spithop", game_krool_ironball_SpitHop)
-    .game_acmd("game_spitshoot", game_krool_ironball_SpitShoot)
+    .game_acmd("game_hop", game_krool_ironball_Hop, Low)
+    .game_acmd("game_shoot", game_krool_ironball_Shoot, Low)
+    .game_acmd("game_spithop", game_krool_ironball_SpitHop, Low)
+    .game_acmd("game_spitshoot", game_krool_ironball_SpitShoot, Low)
     .install();
 }

@@ -34,8 +34,8 @@ unsafe extern "C" fn expression_koopag_LandingAirLw(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("koopag")
-    .expression_acmd("expression_attackairn", expression_koopag_AttackAirN)
-    .expression_acmd("expression_attackairlw", expression_koopag_AttackAirLw)
-    .expression_acmd("expression_landingairlw", expression_koopag_LandingAirLw)
+    .expression_acmd("expression_attackairn", expression_koopag_AttackAirN, Low)
+    .expression_acmd("expression_attackairlw", expression_koopag_AttackAirLw, Low)
+    .expression_acmd("expression_landingairlw", expression_koopag_LandingAirLw, Low)
     .install();
 }

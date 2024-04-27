@@ -41,8 +41,8 @@ unsafe extern "C" fn sound_mariod_AttackS4Lw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mariod")
-    .sound_acmd("sound_attacks4hi", sound_mariod_AttackS4Hi)
-    .sound_acmd("sound_attacks4", sound_mariod_AttackS4)
-    .sound_acmd("sound_attacks4lw", sound_mariod_AttackS4Lw)
+    .sound_acmd("sound_attacks4hi", sound_mariod_AttackS4Hi, Low)
+    .sound_acmd("sound_attacks4", sound_mariod_AttackS4, Low)
+    .sound_acmd("sound_attacks4lw", sound_mariod_AttackS4Lw, Low)
     .install();
 }

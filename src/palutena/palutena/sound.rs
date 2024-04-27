@@ -80,11 +80,11 @@ unsafe extern "C" fn sound_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("palutena")
-    .sound_acmd("sound_shieldbreakfly", sound_palutena_ShieldBreakFly)
-    .sound_acmd("sound_glidestart", sound_palutena_GlideStart)
-    .sound_acmd("sound_glideattack", sound_palutena_GlideAttack)
-    .sound_acmd("sound_glidelanding", sound_palutena_GlideLanding)
-    .sound_acmd("sound_glideend", sound_palutena_GlideEnd)
-    .sound_acmd("sound_attackhi4", sound_palutena_AttackHi4)
+    .sound_acmd("sound_shieldbreakfly", sound_palutena_ShieldBreakFly, Low)
+    .sound_acmd("sound_glidestart", sound_palutena_GlideStart, Low)
+    .sound_acmd("sound_glideattack", sound_palutena_GlideAttack, Low)
+    .sound_acmd("sound_glidelanding", sound_palutena_GlideLanding, Low)
+    .sound_acmd("sound_glideend", sound_palutena_GlideEnd, Low)
+    .sound_acmd("sound_attackhi4", sound_palutena_AttackHi4, Low)
     .install();
 }

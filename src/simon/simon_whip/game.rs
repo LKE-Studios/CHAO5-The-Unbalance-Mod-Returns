@@ -41,8 +41,8 @@ unsafe extern "C" fn game_simon_whip_AttackHold_AttackData(fighter: &mut L2CAgen
 
 pub fn install() {
     Agent::new("simon_whip")
-    .game_acmd("game_attackhold", game_simon_whip_AttackHold)
-    .game_acmd("game_attackairhold", game_simon_whip_AttackAirHold)
-    .game_acmd("game_attackhold_attackdata", game_simon_whip_AttackHold_AttackData)
+    .game_acmd("game_attackhold", game_simon_whip_AttackHold, Low)
+    .game_acmd("game_attackairhold", game_simon_whip_AttackAirHold, Low)
+    .game_acmd("game_attackhold_attackdata", game_simon_whip_AttackHold_AttackData, Low)
     .install();
 }

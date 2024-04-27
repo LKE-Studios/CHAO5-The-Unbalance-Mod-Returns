@@ -26,8 +26,8 @@ unsafe extern "C" fn effect_shizue_SpecialAirN(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue")
-    .effect_acmd("effect_attackairb", effect_shizue_AttackAirB)
-    .effect_acmd("effect_specialn", effect_shizue_SpecialN)
-    .effect_acmd("effect_specialairn", effect_shizue_SpecialAirN)
+    .effect_acmd("effect_attackairb", effect_shizue_AttackAirB, Low)
+    .effect_acmd("effect_specialn", effect_shizue_SpecialN, Low)
+    .effect_acmd("effect_specialairn", effect_shizue_SpecialAirN, Low)
     .install();
 }

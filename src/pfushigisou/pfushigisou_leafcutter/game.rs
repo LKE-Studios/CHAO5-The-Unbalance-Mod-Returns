@@ -18,6 +18,6 @@ unsafe extern "C" fn game_pfushigisou_leafcutter_Move(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("pfushigisou_leafcutter")
-    .game_acmd("game_move", game_pfushigisou_leafcutter_Move)
+    .game_acmd("game_move", game_pfushigisou_leafcutter_Move, Low)
     .install();
 }

@@ -14,6 +14,6 @@ unsafe extern "C" fn game_murabito_flowerpot_Throwed(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("murabito_flowerpot")
-    .game_acmd("game_throwed", game_murabito_flowerpot_Throwed)
+    .game_acmd("game_throwed", game_murabito_flowerpot_Throwed, Low)
     .install();
 }

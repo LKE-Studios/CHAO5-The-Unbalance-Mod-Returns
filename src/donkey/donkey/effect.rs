@@ -60,8 +60,8 @@ unsafe extern "C" fn effect_donkey_SpecialLwLoop(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("donkey")
-    .effect_acmd("effect_specialhi2", effect_donkey_SpecialHi2)
-    .effect_acmd("effect_specialairhi", effect_donkey_SpecialAirHi)
-    .effect_acmd("effect_speciallwloop", effect_donkey_SpecialLwLoop)
+    .effect_acmd("effect_specialhi2", effect_donkey_SpecialHi2, Low)
+    .effect_acmd("effect_specialairhi", effect_donkey_SpecialAirHi, Low)
+    .effect_acmd("effect_speciallwloop", effect_donkey_SpecialLwLoop, Low)
     .install();
 }

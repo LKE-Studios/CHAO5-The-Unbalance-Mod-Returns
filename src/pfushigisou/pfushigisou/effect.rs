@@ -121,14 +121,14 @@ unsafe extern "C" fn effect_pfushigisou_SpecialAirZEnd(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .effect_acmd("effect_specialairhi", effect_pfushigisou_SpecialAirHi)
-    .effect_acmd("effect_specialzstart", effect_pfushigisou_SpecialZStart)
-    .effect_acmd("effect_specialzcharge", effect_pfushigisou_SpecialZCharge)
-    .effect_acmd("effect_specialzend", effect_pfushigisou_SpecialZEnd)
-    .effect_acmd("effect_specialzshoot", effect_pfushigisou_SpecialZShoot)
-    .effect_acmd("effect_specialairzstart", effect_pfushigisou_SpecialAirZStart)
-    .effect_acmd("effect_specialairzcharge", effect_pfushigisou_SpecialAirZCharge)
-    .effect_acmd("effect_specialairzend", effect_pfushigisou_SpecialAirZEnd)
-    .effect_acmd("effect_specialairzshoot", effect_pfushigisou_SpecialAirZShoot)
+    .effect_acmd("effect_specialairhi", effect_pfushigisou_SpecialAirHi, Low)
+    .effect_acmd("effect_specialzstart", effect_pfushigisou_SpecialZStart, Low)
+    .effect_acmd("effect_specialzcharge", effect_pfushigisou_SpecialZCharge, Low)
+    .effect_acmd("effect_specialzend", effect_pfushigisou_SpecialZEnd, Low)
+    .effect_acmd("effect_specialzshoot", effect_pfushigisou_SpecialZShoot, Low)
+    .effect_acmd("effect_specialairzstart", effect_pfushigisou_SpecialAirZStart, Low)
+    .effect_acmd("effect_specialairzcharge", effect_pfushigisou_SpecialAirZCharge, Low)
+    .effect_acmd("effect_specialairzend", effect_pfushigisou_SpecialAirZEnd, Low)
+    .effect_acmd("effect_specialairzshoot", effect_pfushigisou_SpecialAirZShoot, Low)
     .install();
 }

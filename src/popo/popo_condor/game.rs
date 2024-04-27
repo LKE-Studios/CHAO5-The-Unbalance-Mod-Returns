@@ -12,6 +12,6 @@ unsafe extern "C" fn game_popo_condor_Main(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("popo_condor")
-    .game_acmd("game_main", game_popo_condor_Main)
+    .game_acmd("game_main", game_popo_condor_Main, Low)
     .install();
 }

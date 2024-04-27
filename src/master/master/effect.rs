@@ -172,9 +172,9 @@ unsafe extern "C" fn effect_master_SpecialAirSFDash(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("master")
-    .effect_acmd("effect_specialsf", effect_master_SpecialSF)
-    .effect_acmd("effect_specialairsf", effect_master_SpecialAirSF)
-    .effect_acmd("effect_specialsfdash", effect_master_SpecialSFDash)
-    .effect_acmd("effect_specialairsfdash", effect_master_SpecialAirSFDash)
+    .effect_acmd("effect_specialsf", effect_master_SpecialSF, Low)
+    .effect_acmd("effect_specialairsf", effect_master_SpecialAirSF, Low)
+    .effect_acmd("effect_specialsfdash", effect_master_SpecialSFDash, Low)
+    .effect_acmd("effect_specialairsfdash", effect_master_SpecialAirSFDash, Low)
     .install();
 }

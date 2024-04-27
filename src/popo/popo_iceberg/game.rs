@@ -102,9 +102,9 @@ unsafe extern "C" fn game_popo_iceberg_FinalWait(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("popo_iceberg")
-    .game_acmd("game_attackcommon", game_popo_iceberg_AttackCommon)
-    .game_acmd("game_finalrise", game_popo_iceberg_FinalRise)
-    .game_acmd("game_finaldecline", game_popo_iceberg_FinalDecline)
-    .game_acmd("game_finalwait", game_popo_iceberg_FinalWait)
+    .game_acmd("game_attackcommon", game_popo_iceberg_AttackCommon, Low)
+    .game_acmd("game_finalrise", game_popo_iceberg_FinalRise, Low)
+    .game_acmd("game_finaldecline", game_popo_iceberg_FinalDecline, Low)
+    .game_acmd("game_finalwait", game_popo_iceberg_FinalWait, Low)
     .install();
 }

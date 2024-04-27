@@ -19,6 +19,6 @@ unsafe extern "C" fn game_szerosuit_reticle_FinalEnd(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("szerosuit_reticle")
-    .game_acmd("game_finalend", game_szerosuit_reticle_FinalEnd)    
+    .game_acmd("game_finalend", game_szerosuit_reticle_FinalEnd, Low)    
     .install();
 }

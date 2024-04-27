@@ -110,11 +110,11 @@ unsafe extern "C" fn game_rockman_leafshield_StartReverse(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("rockman_leafshield")
-    .game_acmd("game_fly", game_rockman_leafshield_Fly)
-    .game_acmd("game_flyreverse", game_rockman_leafshield_FlyReverse)
-    .game_acmd("game_shield", game_rockman_leafshield_Shield)
-    .game_acmd("game_shieldreverse", game_rockman_leafshield_ShieldReverse)
-    .game_acmd("game_start", game_rockman_leafshield_Start)
-    .game_acmd("game_startreverse", game_rockman_leafshield_StartReverse)
+    .game_acmd("game_fly", game_rockman_leafshield_Fly, Low)
+    .game_acmd("game_flyreverse", game_rockman_leafshield_FlyReverse, Low)
+    .game_acmd("game_shield", game_rockman_leafshield_Shield, Low)
+    .game_acmd("game_shieldreverse", game_rockman_leafshield_ShieldReverse, Low)
+    .game_acmd("game_start", game_rockman_leafshield_Start, Low)
+    .game_acmd("game_startreverse", game_rockman_leafshield_StartReverse, Low)
     .install();
 }

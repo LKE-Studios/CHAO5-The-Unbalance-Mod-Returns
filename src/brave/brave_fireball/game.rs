@@ -59,9 +59,9 @@ unsafe extern "C" fn game_brave_fireball_BurstL(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_fireball")
-    .game_acmd("game_specialn1", game_brave_fireball_SpecialN1)
-    .game_acmd("game_specialn2", game_brave_fireball_SpecialN2)
-    .game_acmd("game_specialn3", game_brave_fireball_SpecialN3)
-    .game_acmd("game_burstl", game_brave_fireball_BurstL)
+    .game_acmd("game_specialn1", game_brave_fireball_SpecialN1, Low)
+    .game_acmd("game_specialn2", game_brave_fireball_SpecialN2, Low)
+    .game_acmd("game_specialn3", game_brave_fireball_SpecialN3, Low)
+    .game_acmd("game_burstl", game_brave_fireball_BurstL, Low)
     .install();
 }

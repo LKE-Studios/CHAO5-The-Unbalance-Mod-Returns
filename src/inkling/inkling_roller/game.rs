@@ -89,14 +89,14 @@ unsafe extern "C" fn game_inkling_roller_SpecialAirSWalk(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("inkling_roller")
-    .game_acmd("game_specialsdash", game_inkling_roller_SpecialSDash)
-    .game_acmd("game_specialsdashnoink", game_inkling_roller_SpecialSDashNoInk)
-    .game_acmd("game_specialsrun", game_inkling_roller_SpecialSRun)
-    .game_acmd("game_specialsrunnoink", game_inkling_roller_SpecialSRunNoInk)
-    .game_acmd("game_specialswalk", game_inkling_roller_SpecialSWalk)
-    .game_acmd("game_specialswalknoink", game_inkling_roller_SpecialSWalkNoInk)
-    .game_acmd("game_specialairsdash", game_inkling_roller_SpecialAirSDash)
-    .game_acmd("game_specialairsrun", game_inkling_roller_SpecialAirSRun)
-    .game_acmd("game_specialairswalk", game_inkling_roller_SpecialAirSWalk)
+    .game_acmd("game_specialsdash", game_inkling_roller_SpecialSDash, Low)
+    .game_acmd("game_specialsdashnoink", game_inkling_roller_SpecialSDashNoInk, Low)
+    .game_acmd("game_specialsrun", game_inkling_roller_SpecialSRun, Low)
+    .game_acmd("game_specialsrunnoink", game_inkling_roller_SpecialSRunNoInk, Low)
+    .game_acmd("game_specialswalk", game_inkling_roller_SpecialSWalk, Low)
+    .game_acmd("game_specialswalknoink", game_inkling_roller_SpecialSWalkNoInk, Low)
+    .game_acmd("game_specialairsdash", game_inkling_roller_SpecialAirSDash, Low)
+    .game_acmd("game_specialairsrun", game_inkling_roller_SpecialAirSRun, Low)
+    .game_acmd("game_specialairswalk", game_inkling_roller_SpecialAirSWalk, Low)
     .install();
 }

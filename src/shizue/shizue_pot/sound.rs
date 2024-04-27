@@ -10,6 +10,6 @@ unsafe extern "C" fn sound_shizue_pot_Burst(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_pot")
-    .sound_acmd("sound_burst", sound_shizue_pot_Burst)
+    .sound_acmd("sound_burst", sound_shizue_pot_Burst, Low)
     .install();
 }

@@ -11,6 +11,6 @@ unsafe extern "C" fn game_plizardon_breath_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("plizardon_breath")
-    .game_acmd("game_move", game_plizardon_breath_Move)
+    .game_acmd("game_move", game_plizardon_breath_Move, Low)
     .install();
 }

@@ -9,6 +9,6 @@ unsafe extern "C" fn game_elight_spreadbullet_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("elight_spreadbullet")
-    .game_acmd("game_fly", game_elight_spreadbullet_Fly)
+    .game_acmd("game_fly", game_elight_spreadbullet_Fly, Low)
     .install();
 }

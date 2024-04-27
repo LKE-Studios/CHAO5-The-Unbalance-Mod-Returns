@@ -23,6 +23,6 @@ unsafe extern "C" fn game_pickel_fire_AttackLw3(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pickel_fire")
-    .game_acmd("game_attacklw3", game_pickel_fire_AttackLw3)
+    .game_acmd("game_attacklw3", game_pickel_fire_AttackLw3, Low)
     .install();
 }

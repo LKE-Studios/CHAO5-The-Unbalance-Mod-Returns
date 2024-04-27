@@ -12,6 +12,6 @@ unsafe extern "C" fn game_krool_spitball_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("krool_spitball")    
-    .game_acmd("game_fly", game_krool_spitball_Fly)
+    .game_acmd("game_fly", game_krool_spitball_Fly, Low)
     .install();
 }

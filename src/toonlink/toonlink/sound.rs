@@ -26,8 +26,8 @@ unsafe extern "C" fn sound_toonlink_AttackLw4Charge(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("toonlink")
-    .sound_acmd("sound_attacks4charge", sound_toonlink_AttackS4Charge)
-    .sound_acmd("sound_attackhi4charge", sound_toonlink_AttackHi4Charge)
-    .sound_acmd("sound_attacklw4charge", sound_toonlink_AttackLw4Charge)
+    .sound_acmd("sound_attacks4charge", sound_toonlink_AttackS4Charge, Low)
+    .sound_acmd("sound_attackhi4charge", sound_toonlink_AttackHi4Charge, Low)
+    .sound_acmd("sound_attacklw4charge", sound_toonlink_AttackLw4Charge, Low)
     .install();
 }

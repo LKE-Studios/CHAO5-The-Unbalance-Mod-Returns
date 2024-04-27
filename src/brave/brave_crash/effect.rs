@@ -42,7 +42,7 @@ unsafe extern "C" fn effect_brave_crash_CrashEnd1(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_crash")
-    .effect_acmd("effect_crash1", effect_brave_crash_Crash1)
-    .effect_acmd("effect_crashend1", effect_brave_crash_CrashEnd1)
+    .effect_acmd("effect_crash1", effect_brave_crash_Crash1, Low)
+    .effect_acmd("effect_crashend1", effect_brave_crash_CrashEnd1, Low)
     .install();
 }

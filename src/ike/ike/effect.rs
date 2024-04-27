@@ -14,6 +14,6 @@ unsafe extern "C" fn effect_ike_AttackAirHi(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ike")
-    .effect_acmd("effect_attackairhi", effect_ike_AttackAirHi)
+    .effect_acmd("effect_attackairhi", effect_ike_AttackAirHi, Low)
     .install();
 }

@@ -42,8 +42,8 @@ unsafe extern "C" fn game_koopajr_remainclown_SpecialAirHiClownFall(fighter: &mu
 
 pub fn install() {
     Agent::new("koopajr_remainclown") 
-    .game_acmd("game_specialhiburst", game_koopajr_remainclown_SpecialHiBurst)   
-    .game_acmd("game_specialhiclownfall", game_koopajr_remainclown_SpecialHiClownFall)
-    .game_acmd("game_specialairhiclownfall", game_koopajr_remainclown_SpecialAirHiClownFall)
+    .game_acmd("game_specialhiburst", game_koopajr_remainclown_SpecialHiBurst, Low)   
+    .game_acmd("game_specialhiclownfall", game_koopajr_remainclown_SpecialHiClownFall, Low)
+    .game_acmd("game_specialairhiclownfall", game_koopajr_remainclown_SpecialAirHiClownFall, Low)
     .install();
 }

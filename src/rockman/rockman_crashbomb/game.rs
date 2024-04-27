@@ -16,6 +16,6 @@ unsafe extern "C" fn game_rockman_crashbomb_Explode(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("rockman_crashbomb")
-    .game_acmd("game_regular", game_rockman_crashbomb_Explode)
+    .game_acmd("game_regular", game_rockman_crashbomb_Explode, Low)
     .install();
 }

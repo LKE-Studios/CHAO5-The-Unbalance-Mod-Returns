@@ -93,13 +93,13 @@ pub unsafe extern "C" fn expression_plizardon_SpecialAirZ(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("plizardon")
-    .expression_acmd("expression_glidestart", expression_plizardon_GlideStart)
-    .expression_acmd("expression_glideattack", expression_plizardon_GlideAttack)
-    .expression_acmd("expression_glidelanding", expression_plizardon_GlideLanding)
-    .expression_acmd("expression_specialairhi2start", expression_plizardon_SpecialAirHi2Start)
-    .expression_acmd("expression_specialairhi2", expression_plizardon_SpecialAirHi2)
-    .expression_acmd("expression_specialairhi2landing", expression_plizardon_SpecialAirHi2Landing)
-    .expression_acmd("expression_specialz", expression_plizardon_SpecialZ)
-    .expression_acmd("expression_specialairz", expression_plizardon_SpecialAirZ)
+    .expression_acmd("expression_glidestart", expression_plizardon_GlideStart, Low)
+    .expression_acmd("expression_glideattack", expression_plizardon_GlideAttack, Low)
+    .expression_acmd("expression_glidelanding", expression_plizardon_GlideLanding, Low)
+    .expression_acmd("expression_specialairhi2start", expression_plizardon_SpecialAirHi2Start, Low)
+    .expression_acmd("expression_specialairhi2", expression_plizardon_SpecialAirHi2, Low)
+    .expression_acmd("expression_specialairhi2landing", expression_plizardon_SpecialAirHi2Landing, Low)
+    .expression_acmd("expression_specialz", expression_plizardon_SpecialZ, Low)
+    .expression_acmd("expression_specialairz", expression_plizardon_SpecialAirZ, Low)
     .install();
 }

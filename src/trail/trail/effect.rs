@@ -50,9 +50,9 @@ unsafe extern "C" fn effect_trail_GlideLanding(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("trail")
-    .effect_acmd("effect_glidestart", effect_trail_GlideStart)
-    .effect_acmd("effect_glidewing", effect_trail_GlideWing)
-    .effect_acmd("effect_glideattack", effect_trail_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_trail_GlideLanding)
+    .effect_acmd("effect_glidestart", effect_trail_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_trail_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_trail_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_trail_GlideLanding, Low)
     .install();
 }

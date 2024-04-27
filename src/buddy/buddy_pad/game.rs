@@ -33,6 +33,6 @@ unsafe extern "C" fn game_buddy_pad_Fall(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("buddy_pad")
-    .game_acmd("game_fall", game_buddy_pad_Fall)
+    .game_acmd("game_fall", game_buddy_pad_Fall, Low)
     .install();
 }

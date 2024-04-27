@@ -45,8 +45,8 @@ unsafe extern "C" fn game_brave_tornado_SpecialHi3(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_tornado")
-    .game_acmd("game_specialhi1", game_brave_tornado_SpecialHi1)
-    .game_acmd("game_specialhi2", game_brave_tornado_SpecialHi2)
-    .game_acmd("game_specialhi3", game_brave_tornado_SpecialHi3)
+    .game_acmd("game_specialhi1", game_brave_tornado_SpecialHi1, Low)
+    .game_acmd("game_specialhi2", game_brave_tornado_SpecialHi2, Low)
+    .game_acmd("game_specialhi3", game_brave_tornado_SpecialHi3, Low)
     .install();
 }

@@ -11,6 +11,6 @@ unsafe extern "C" fn game_miifighter_ironball_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("miifighter_ironball")
-    .game_acmd("game_fly", game_miifighter_ironball_Fly)
+    .game_acmd("game_fly", game_miifighter_ironball_Fly, Low)
     .install();
 }

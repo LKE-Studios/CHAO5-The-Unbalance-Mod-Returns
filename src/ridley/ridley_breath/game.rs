@@ -14,6 +14,6 @@ unsafe extern "C" fn game_ridley_breath_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ridley_breath")
-    .game_acmd("game_fly", game_ridley_breath_Fly)
+    .game_acmd("game_fly", game_ridley_breath_Fly, Low)
     .install();
 }

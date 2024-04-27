@@ -61,8 +61,8 @@ unsafe extern "C" fn game_ken_hadoken_MoveW(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ken_hadoken")
-    .game_acmd("game_movem", game_ken_hadoken_MoveM)
-    .game_acmd("game_moves", game_ken_hadoken_MoveS)
-    .game_acmd("game_movew", game_ken_hadoken_MoveW)
+    .game_acmd("game_movem", game_ken_hadoken_MoveM, Low)
+    .game_acmd("game_moves", game_ken_hadoken_MoveS, Low)
+    .game_acmd("game_movew", game_ken_hadoken_MoveW, Low)
     .install();
 }

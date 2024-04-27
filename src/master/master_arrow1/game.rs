@@ -11,6 +11,6 @@ unsafe extern "C" fn game_master_arrow1_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("master_arrow1")
-    .game_acmd("game_fly", game_master_arrow1_Fly)
+    .game_acmd("game_fly", game_master_arrow1_Fly, Low)
     .install();
 }

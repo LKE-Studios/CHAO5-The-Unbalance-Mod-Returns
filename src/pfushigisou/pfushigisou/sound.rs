@@ -122,13 +122,13 @@ unsafe extern "C" fn sound_pfushigisou_SpecialAirZEnd(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .sound_acmd("sound_specialzstart", sound_pfushigisou_SpecialZStart)
-    .sound_acmd("sound_specialzcharge", sound_pfushigisou_SpecialZCharge)
-    .sound_acmd("sound_specialzend", sound_pfushigisou_SpecialZEnd)
-    .sound_acmd("sound_specialzshoot", sound_pfushigisou_SpecialZShoot)
-    .sound_acmd("sound_specialairzstart", sound_pfushigisou_SpecialAirZStart)
-    .sound_acmd("sound_specialairzcharge", sound_pfushigisou_SpecialAirZCharge)
-    .sound_acmd("sound_specialairzend", sound_pfushigisou_SpecialAirZEnd)
-    .sound_acmd("sound_specialairzshoot", sound_pfushigisou_SpecialAirZShoot)
+    .sound_acmd("sound_specialzstart", sound_pfushigisou_SpecialZStart, Low)
+    .sound_acmd("sound_specialzcharge", sound_pfushigisou_SpecialZCharge, Low)
+    .sound_acmd("sound_specialzend", sound_pfushigisou_SpecialZEnd, Low)
+    .sound_acmd("sound_specialzshoot", sound_pfushigisou_SpecialZShoot, Low)
+    .sound_acmd("sound_specialairzstart", sound_pfushigisou_SpecialAirZStart, Low)
+    .sound_acmd("sound_specialairzcharge", sound_pfushigisou_SpecialAirZCharge, Low)
+    .sound_acmd("sound_specialairzend", sound_pfushigisou_SpecialAirZEnd, Low)
+    .sound_acmd("sound_specialairzshoot", sound_pfushigisou_SpecialAirZShoot, Low)
     .install();
 }

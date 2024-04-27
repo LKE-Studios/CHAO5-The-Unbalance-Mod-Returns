@@ -66,7 +66,7 @@ unsafe extern "C" fn game_brave_explosion_Explode2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_explosion")
-    .game_acmd("game_explode1", game_brave_explosion_Explode1)
-    .game_acmd("game_explode2", game_brave_explosion_Explode2)
+    .game_acmd("game_explode1", game_brave_explosion_Explode1, Low)
+    .game_acmd("game_explode2", game_brave_explosion_Explode2, Low)
     .install();
 }

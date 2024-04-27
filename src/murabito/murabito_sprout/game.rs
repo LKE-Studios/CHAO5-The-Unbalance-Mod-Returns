@@ -9,6 +9,6 @@ unsafe extern "C" fn game_murabito_sprout_Wait(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_sprout")
-    .game_acmd("game_wait", game_murabito_sprout_Wait)
+    .game_acmd("game_wait", game_murabito_sprout_Wait, Low)
     .install();
 }

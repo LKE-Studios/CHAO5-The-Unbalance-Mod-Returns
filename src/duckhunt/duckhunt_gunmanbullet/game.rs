@@ -21,6 +21,6 @@ unsafe extern "C" fn game_duckhunt_gunmanbullet_Move(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("duckhunt_gunmanbullet")
-    .game_acmd("game_move", game_duckhunt_gunmanbullet_Move)
+    .game_acmd("game_move", game_duckhunt_gunmanbullet_Move, Low)
     .install();
 }

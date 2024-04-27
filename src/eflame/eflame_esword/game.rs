@@ -1413,12 +1413,12 @@ unsafe extern "C" fn game_eflame_esword_ReflectedR(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("eflame_esword")
-    .game_acmd("game_rotate", game_eflame_esword_Rotate)
-    .game_acmd("game_flyl", game_eflame_esword_FlyL)
-    .game_acmd("game_flyr", game_eflame_esword_FlyR)
-    .game_acmd("game_flyflickl", game_eflame_esword_FlyFlickL)
-    .game_acmd("game_flyflickr", game_eflame_esword_FlyFlickR)
-    .game_acmd("game_reflectedl", game_eflame_esword_ReflectedL)
-    .game_acmd("game_reflectedr", game_eflame_esword_ReflectedR)
+    .game_acmd("game_rotate", game_eflame_esword_Rotate, Low)
+    .game_acmd("game_flyl", game_eflame_esword_FlyL, Low)
+    .game_acmd("game_flyr", game_eflame_esword_FlyR, Low)
+    .game_acmd("game_flyflickl", game_eflame_esword_FlyFlickL, Low)
+    .game_acmd("game_flyflickr", game_eflame_esword_FlyFlickR, Low)
+    .game_acmd("game_reflectedl", game_eflame_esword_ReflectedL, Low)
+    .game_acmd("game_reflectedr", game_eflame_esword_ReflectedR, Low)
     .install();
 }

@@ -98,13 +98,13 @@ unsafe extern "C" fn sound_samusd_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-    .sound_acmd("sound_attacks3hi", sound_samusd_AttackS3Hi)
-    .sound_acmd("sound_attacks3", sound_samusd_AttackS3)
-    .sound_acmd("sound_attacks3lw", sound_samusd_AttackS3Lw)
-    .sound_acmd("sound_attacklw4", sound_samusd_AttackLw4)
-    .sound_acmd("sound_attackairf", sound_samusd_AttackAirF)
-    .sound_acmd("sound_attackairb", sound_samusd_AttackAirB)
-    .sound_acmd("sound_attackairhi", sound_samusd_AttackAirHi)
-    .sound_acmd("sound_attackairlw", sound_samusd_AttackAirLw)
+    .sound_acmd("sound_attacks3hi", sound_samusd_AttackS3Hi, Low)
+    .sound_acmd("sound_attacks3", sound_samusd_AttackS3, Low)
+    .sound_acmd("sound_attacks3lw", sound_samusd_AttackS3Lw, Low)
+    .sound_acmd("sound_attacklw4", sound_samusd_AttackLw4, Low)
+    .sound_acmd("sound_attackairf", sound_samusd_AttackAirF, Low)
+    .sound_acmd("sound_attackairb", sound_samusd_AttackAirB, Low)
+    .sound_acmd("sound_attackairhi", sound_samusd_AttackAirHi, Low)
+    .sound_acmd("sound_attackairlw", sound_samusd_AttackAirLw, Low)
     .install();
 }

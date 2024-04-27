@@ -9,6 +9,6 @@ unsafe extern "C" fn game_luigi_plunger_AirCatch(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("luigi_plunger")
-    .game_acmd("game_aircatch", game_luigi_plunger_AirCatch)
+    .game_acmd("game_aircatch", game_luigi_plunger_AirCatch, Low)
     .install();
 }

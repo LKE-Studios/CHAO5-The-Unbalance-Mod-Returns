@@ -290,15 +290,15 @@ unsafe extern "C" fn game_elight_bunshin_SpecialAirS5(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("elight_bunshin")
-    .game_acmd("game_specials1", game_elight_bunshin_SpecialS1)
-    .game_acmd("game_specialairs1", game_elight_bunshin_SpecialAirS1)
-    .game_acmd("game_specials2", game_elight_bunshin_SpecialS2)
-    .game_acmd("game_specialairs2", game_elight_bunshin_SpecialAirS2)
-    .game_acmd("game_specials3", game_elight_bunshin_SpecialS3)
-    .game_acmd("game_specialairs3", game_elight_bunshin_SpecialAirS3)
-    .game_acmd("game_specials4", game_elight_bunshin_SpecialS4)
-    .game_acmd("game_specialairs4", game_elight_bunshin_SpecialAirS4)
-    .game_acmd("game_specials5", game_elight_bunshin_SpecialS5)
-    .game_acmd("game_specialairs5", game_elight_bunshin_SpecialAirS5)
+    .game_acmd("game_specials1", game_elight_bunshin_SpecialS1, Low)
+    .game_acmd("game_specialairs1", game_elight_bunshin_SpecialAirS1, Low)
+    .game_acmd("game_specials2", game_elight_bunshin_SpecialS2, Low)
+    .game_acmd("game_specialairs2", game_elight_bunshin_SpecialAirS2, Low)
+    .game_acmd("game_specials3", game_elight_bunshin_SpecialS3, Low)
+    .game_acmd("game_specialairs3", game_elight_bunshin_SpecialAirS3, Low)
+    .game_acmd("game_specials4", game_elight_bunshin_SpecialS4, Low)
+    .game_acmd("game_specialairs4", game_elight_bunshin_SpecialAirS4, Low)
+    .game_acmd("game_specials5", game_elight_bunshin_SpecialS5, Low)
+    .game_acmd("game_specialairs5", game_elight_bunshin_SpecialAirS5, Low)
     .install();
 }

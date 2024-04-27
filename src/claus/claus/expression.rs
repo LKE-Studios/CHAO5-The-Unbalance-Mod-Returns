@@ -30,6 +30,6 @@ unsafe extern "C" fn expression_claus_AttackLw4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucas")
-    .expression_acmd("expression_attacklw4_claus", expression_claus_AttackLw4)
+    .expression_acmd("expression_attacklw4_claus", expression_claus_AttackLw4, Low)
     .install();
 }

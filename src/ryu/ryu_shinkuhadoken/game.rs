@@ -21,6 +21,6 @@ unsafe extern "C" fn game_ryu_shinkuhadoken_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ryu_shinkuhadoken")
-    .game_acmd("game_move", game_ryu_shinkuhadoken_Move)
+    .game_acmd("game_move", game_ryu_shinkuhadoken_Move, Low)
     .install();
 }

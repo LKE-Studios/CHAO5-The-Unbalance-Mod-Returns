@@ -18,7 +18,7 @@ unsafe extern "C" fn game_pacman_firehydrantwater_ShootUp(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("pacman_firehydrantwater")
-    .game_acmd("game_shoot", game_pacman_firehydrantwater_Shoot)
-    .game_acmd("game_shootup", game_pacman_firehydrantwater_ShootUp)
+    .game_acmd("game_shoot", game_pacman_firehydrantwater_Shoot, Low)
+    .game_acmd("game_shootup", game_pacman_firehydrantwater_ShootUp, Low)
     .install();
 }

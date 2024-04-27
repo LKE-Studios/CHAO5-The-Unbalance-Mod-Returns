@@ -50,9 +50,9 @@ unsafe extern "C" fn game_reflet_gigafire_Vanish(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet_gigafire")
-    .game_acmd("game_shoot0", game_reflet_gigafire_Shoot0)
-    .game_acmd("game_burn", game_reflet_gigafire_Burn)
-    .game_acmd("game_rise", game_reflet_gigafire_Rise)
-    .game_acmd("game_vanish", game_reflet_gigafire_Vanish)
+    .game_acmd("game_shoot0", game_reflet_gigafire_Shoot0, Low)
+    .game_acmd("game_burn", game_reflet_gigafire_Burn, Low)
+    .game_acmd("game_rise", game_reflet_gigafire_Rise, Low)
+    .game_acmd("game_vanish", game_reflet_gigafire_Vanish, Low)
     .install();
 }

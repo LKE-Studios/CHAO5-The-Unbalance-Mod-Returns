@@ -23,6 +23,6 @@ unsafe extern "C" fn game_inkling_splashbomb_Explode(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("inkling_splashbomb")
-    .game_acmd("game_explode", game_inkling_splashbomb_Explode)
+    .game_acmd("game_explode", game_inkling_splashbomb_Explode, Low)
     .install();
 }

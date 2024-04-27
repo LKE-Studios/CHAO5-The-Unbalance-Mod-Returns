@@ -17,6 +17,6 @@ unsafe extern "C" fn game_palutena_blackhole_BlackHole(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("palutena_blackhole")
-    .game_acmd("game_explode", game_palutena_blackhole_BlackHole)
+    .game_acmd("game_explode", game_palutena_blackhole_BlackHole, Low)
     .install();
 }

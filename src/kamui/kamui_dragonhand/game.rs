@@ -250,11 +250,11 @@ unsafe extern "C" fn game_kamui_dragonhand_DHSpecialAirNEndMax(fighter: &mut L2C
 
 pub fn install() {
     Agent::new("kamui_dragonhand")
-    .game_acmd("game_dhspecialnend1", game_kamui_dragonhand_DHSpecialAirNEnd1)
-    .game_acmd("game_dhspecialnend2", game_kamui_dragonhand_DHSpecialAirNEnd2)
-    .game_acmd("game_dhspecialnendmax", game_kamui_dragonhand_DHSpecialNEndMax)
-    .game_acmd("game_dhspecialairnend1", game_kamui_dragonhand_DHSpecialAirNEnd1)
-    .game_acmd("game_dhspecialairnend2", game_kamui_dragonhand_DHSpecialAirNEnd2)
-    .game_acmd("game_dhspecialairnendmax", game_kamui_dragonhand_DHSpecialAirNEndMax)
+    .game_acmd("game_dhspecialnend1", game_kamui_dragonhand_DHSpecialAirNEnd1, Low)
+    .game_acmd("game_dhspecialnend2", game_kamui_dragonhand_DHSpecialAirNEnd2, Low)
+    .game_acmd("game_dhspecialnendmax", game_kamui_dragonhand_DHSpecialNEndMax, Low)
+    .game_acmd("game_dhspecialairnend1", game_kamui_dragonhand_DHSpecialAirNEnd1, Low)
+    .game_acmd("game_dhspecialairnend2", game_kamui_dragonhand_DHSpecialAirNEnd2, Low)
+    .game_acmd("game_dhspecialairnendmax", game_kamui_dragonhand_DHSpecialAirNEndMax, Low)
     .install();
 }

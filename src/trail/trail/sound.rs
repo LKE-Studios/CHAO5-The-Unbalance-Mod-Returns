@@ -53,9 +53,9 @@ unsafe extern "C" fn sound_trail_GlideEnd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("trail")
-    .sound_acmd("sound_glidestart", sound_trail_GlideStart)
-    .sound_acmd("sound_glideattack", sound_trail_GlideAttack)
-    .sound_acmd("sound_glideend", sound_trail_GlideEnd)
-    .sound_acmd("sound_glidelanding", sound_trail_GlideLanding)
+    .sound_acmd("sound_glidestart", sound_trail_GlideStart, Low)
+    .sound_acmd("sound_glideattack", sound_trail_GlideAttack, Low)
+    .sound_acmd("sound_glideend", sound_trail_GlideEnd, Low)
+    .sound_acmd("sound_glidelanding", sound_trail_GlideLanding, Low)
     .install();
 }

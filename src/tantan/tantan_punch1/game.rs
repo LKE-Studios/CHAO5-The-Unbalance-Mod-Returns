@@ -177,10 +177,10 @@ unsafe extern "C" fn game_tantan_punch1_SpecialAirHiAttackDragon(fighter: &mut L
 
 pub fn install() {
     Agent::new("tantan_punch1")
-    .game_acmd("game_attackshort", game_tantan_punch1_AttackShort) 
-    .game_acmd("game_attackdragonshootshort", game_tantan_punch1_AttackDragonShootShort)    
-    .game_acmd("game_attacklong", game_tantan_punch1_AttackLong) 
-    .game_acmd("game_specialnshootk", game_tantan_punch1_SpecialNShootK) 
-    .game_acmd("game_specialairhiattackdragon", game_tantan_punch1_SpecialAirHiAttackDragon) 
+    .game_acmd("game_attackshort", game_tantan_punch1_AttackShort, Low) 
+    .game_acmd("game_attackdragonshootshort", game_tantan_punch1_AttackDragonShootShort, Low)    
+    .game_acmd("game_attacklong", game_tantan_punch1_AttackLong, Low) 
+    .game_acmd("game_specialnshootk", game_tantan_punch1_SpecialNShootK, Low) 
+    .game_acmd("game_specialairhiattackdragon", game_tantan_punch1_SpecialAirHiAttackDragon, Low) 
     .install();
 }

@@ -18,7 +18,7 @@ unsafe extern "C" fn game_tantan_beam_BigShoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("tantan_beam")
-    .game_acmd("game_shoot", game_tantan_beam_Shoot)
-    .game_acmd("game_bigshoot", game_tantan_beam_BigShoot)   
+    .game_acmd("game_shoot", game_tantan_beam_Shoot, Low)
+    .game_acmd("game_bigshoot", game_tantan_beam_BigShoot, Low)   
     .install();
 }

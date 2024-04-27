@@ -77,13 +77,13 @@ unsafe extern "C" fn sound_pitb_GlideEnd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pitb")
-    .sound_acmd("sound_jumpaerialf4", sound_pitb_JumpAerialF4)
-    .sound_acmd("sound_jumpaerialf5", sound_pitb_JumpAerialF5)
-    .sound_acmd("sound_jumpaerialf6", sound_pitb_JumpAerialF6)
-    .sound_acmd("sound_jumpaerialf4", sound_pitb_JumpAerialF7)
-    .sound_acmd("sound_glidestart", sound_pitb_GlideStart)
-    .sound_acmd("sound_glideattack", sound_pitb_GlideAttack)
-    .sound_acmd("sound_glidelanding", sound_pitb_GlideLanding)
-    .sound_acmd("sound_glideend", sound_pitb_GlideEnd)
+    .sound_acmd("sound_jumpaerialf4", sound_pitb_JumpAerialF4, Low)
+    .sound_acmd("sound_jumpaerialf5", sound_pitb_JumpAerialF5, Low)
+    .sound_acmd("sound_jumpaerialf6", sound_pitb_JumpAerialF6, Low)
+    .sound_acmd("sound_jumpaerialf4", sound_pitb_JumpAerialF7, Low)
+    .sound_acmd("sound_glidestart", sound_pitb_GlideStart, Low)
+    .sound_acmd("sound_glideattack", sound_pitb_GlideAttack, Low)
+    .sound_acmd("sound_glidelanding", sound_pitb_GlideLanding, Low)
+    .sound_acmd("sound_glideend", sound_pitb_GlideEnd, Low)
     .install();
 }

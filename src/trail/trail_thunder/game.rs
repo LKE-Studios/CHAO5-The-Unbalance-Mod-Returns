@@ -51,9 +51,9 @@ unsafe extern "C" fn game_trail_thunder_0x10983531cc(fighter: &mut L2CAgentBase)
 
 pub fn install() {
     Agent::new("trail_thunder")   
-    .game_acmd("game_fall", game_trail_thunder_Fall) 
-    .game_acmd("game_fallair", game_trail_thunder_FallAir) 
-    .game_acmd("game_falllast", game_trail_thunder_FallLast)
-    .game_acmd("0x10983531cc", game_trail_thunder_0x10983531cc)
+    .game_acmd("game_fall", game_trail_thunder_Fall, Low) 
+    .game_acmd("game_fallair", game_trail_thunder_FallAir, Low) 
+    .game_acmd("game_falllast", game_trail_thunder_FallLast, Low)
+    .game_acmd("0x10983531cc", game_trail_thunder_0x10983531cc, Low)
     .install();
 }

@@ -10,6 +10,6 @@ unsafe extern "C" fn effect_plizardon_breath_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("plizardon_breath")
-    .effect_acmd("effect_move", effect_plizardon_breath_Move)
+    .effect_acmd("effect_move", effect_plizardon_breath_Move, Low)
     .install();
 }

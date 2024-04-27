@@ -38,9 +38,9 @@ unsafe extern "C" fn effect_ridley_GlideLanding(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ridley")
-    .effect_acmd("effect_glidestart", effect_ridley_GlideStart)
-    .effect_acmd("effect_glidewing", effect_ridley_GlideWing)
-    .effect_acmd("effect_glideattack", effect_ridley_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_ridley_GlideLanding)
+    .effect_acmd("effect_glidestart", effect_ridley_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_ridley_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_ridley_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_ridley_GlideLanding, Low)
     .install();
 }

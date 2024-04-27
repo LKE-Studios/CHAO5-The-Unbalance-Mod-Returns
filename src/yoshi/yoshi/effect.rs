@@ -1,11 +1,7 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//EntryR
-    agent = "yoshi", 
-    script = "effect_entryr", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_yoshi_entryr(fighter: &mut L2CAgentBase) {
+//EntryR
+unsafe extern "C" fn effect_yoshi_EntryR(fighter: &mut L2CAgentBase) {
     let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         frame(fighter.lua_state_agent, 25.0);
@@ -21,7 +17,8 @@ unsafe fn effect_yoshi_entryr(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_down_smoke"), Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 2.3, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_ZX);
         }
-    } else {    
+    } 
+    else {    
         frame(fighter.lua_state_agent, 25.0);
         if is_excute(fighter) {
             EFFECT_FOLLOW_arg11(fighter, Hash40::new("yoshi_entry_01"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true, slot_wrapped);
@@ -38,12 +35,8 @@ unsafe fn effect_yoshi_entryr(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//EntryL
-    agent = "yoshi", 
-    script = "effect_entryl", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_yoshi_entryl(fighter: &mut L2CAgentBase) {
+//EntryL
+unsafe extern "C" fn effect_yoshi_EntryL(fighter: &mut L2CAgentBase) {
     let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         frame(fighter.lua_state_agent, 25.0);
@@ -59,7 +52,8 @@ unsafe fn effect_yoshi_entryl(fighter: &mut L2CAgentBase) {
         if is_excute(fighter) {
             LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_down_smoke"), Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 2.3, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_ZX);
         }
-    } else {
+    } 
+    else {
         frame(fighter.lua_state_agent, 25.0);
         if is_excute(fighter) {
             EFFECT_FOLLOW_arg11(fighter, Hash40::new("yoshi_entry_01"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true, slot_wrapped);
@@ -76,12 +70,8 @@ unsafe fn effect_yoshi_entryl(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw
-    agent = "yoshi", 
-    script = "effect_attackairlw", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_yoshi_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw
+unsafe extern "C" fn effect_yoshi_AttackAirLw(fighter: &mut L2CAgentBase) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if color == 0 {
         frame(fighter.lua_state_agent, 10.0);
@@ -225,12 +215,8 @@ unsafe fn effect_yoshi_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialSLoop
-    agent = "yoshi", 
-    script = "effect_specialsloop", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn effect_yoshi_specialsloop(fighter: &mut L2CAgentBase) {
+//SpecialSLoop
+unsafe extern "C" fn effect_yoshi_SpecialSLoop(fighter: &mut L2CAgentBase) {
     let slot_wrapped = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if slot_wrapped >= 8 {
         if is_excute(fighter) {
@@ -275,7 +261,8 @@ unsafe fn effect_yoshi_specialsloop(fighter: &mut L2CAgentBase) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         }
         wait(fighter.lua_state_agent, 5.0);
-    } else {
+    } 
+    else {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("yoshi_gorogorotamago_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
         }
@@ -321,12 +308,11 @@ unsafe fn effect_yoshi_specialsloop(fighter: &mut L2CAgentBase) {
     }
 }
 
-
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        effect_yoshi_entryr,
-        effect_yoshi_entryl,
-        effect_yoshi_attackairlw,
-        effect_yoshi_specialsloop,
-    );
+    Agent::new("yoshi")
+    .effect_acmd("effect_entryr", effect_yoshi_EntryR, Low)
+    .effect_acmd("effect_entryl", effect_yoshi_EntryL, Low)
+    .effect_acmd("effect_attackairlw", effect_yoshi_AttackAirLw, Low)
+    .effect_acmd("effect_specialsloop", effect_yoshi_SpecialSLoop, Low)
+    .install();
 }

@@ -41,8 +41,8 @@ unsafe extern "C" fn game_lucario_auraball_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucario_auraball") 
-    .game_acmd("game_charge", game_lucario_auraball_Charge)   
-    .game_acmd("game_chargemax", game_lucario_auraball_ChargeMax)
-    .game_acmd("game_shoot", game_lucario_auraball_Shoot)
+    .game_acmd("game_charge", game_lucario_auraball_Charge, Low)   
+    .game_acmd("game_chargemax", game_lucario_auraball_ChargeMax, Low)
+    .game_acmd("game_shoot", game_lucario_auraball_Shoot, Low)
     .install();
 }

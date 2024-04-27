@@ -9,6 +9,6 @@ unsafe extern "C" fn effect_koopag_breath_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopag_breath")
-    .effect_acmd("effect_move", effect_koopag_breath_Move)
+    .effect_acmd("effect_move", effect_koopag_breath_Move, Low)
     .install();
 }

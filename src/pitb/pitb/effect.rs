@@ -135,15 +135,15 @@ unsafe extern "C" fn effect_pitb_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pitb")
-    .effect_acmd("effect_jumpaerialf4", effect_pitb_JumpAerialF4)
-    .effect_acmd("effect_jumpaerialf5", effect_pitb_JumpAerialF5)
-    .effect_acmd("effect_jumpaerialf6", effect_pitb_JumpAerialF6)
-    .effect_acmd("effect_jumpaerialf4", effect_pitb_JumpAerialF7)
-    .effect_acmd("effect_glidestart", effect_pitb_GlideStart)
-    .effect_acmd("effect_glidewing", effect_pitb_GlideWing)
-    .effect_acmd("effect_glideattack", effect_pitb_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_pitb_GlideLanding)
-    .effect_acmd("effect_specialhistart", effect_pitb_SpecialHiStart)
-    .effect_acmd("effect_specialairhistart", effect_pitb_SpecialAirHiStart)
+    .effect_acmd("effect_jumpaerialf4", effect_pitb_JumpAerialF4, Low)
+    .effect_acmd("effect_jumpaerialf5", effect_pitb_JumpAerialF5, Low)
+    .effect_acmd("effect_jumpaerialf6", effect_pitb_JumpAerialF6, Low)
+    .effect_acmd("effect_jumpaerialf4", effect_pitb_JumpAerialF7, Low)
+    .effect_acmd("effect_glidestart", effect_pitb_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_pitb_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_pitb_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_pitb_GlideLanding, Low)
+    .effect_acmd("effect_specialhistart", effect_pitb_SpecialHiStart, Low)
+    .effect_acmd("effect_specialairhistart", effect_pitb_SpecialAirHiStart, Low)
     .install();
 }

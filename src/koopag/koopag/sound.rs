@@ -73,10 +73,10 @@ unsafe extern "C" fn sound_koopag_DownBoundU(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopag")
-	.sound_acmd("sound_specialnstart", sound_koopag_SpecialNStart)
-    .sound_acmd("sound_specialairnstart", sound_koopag_SpecialAirNStart)
-    .sound_acmd("sound_run", sound_koopag_Run)
-    .sound_acmd("sound_downboundd", sound_koopag_DownBoundD)
-    .sound_acmd("sound_downboundu", sound_koopag_DownBoundU)
+	.sound_acmd("sound_specialnstart", sound_koopag_SpecialNStart, Low)
+    .sound_acmd("sound_specialairnstart", sound_koopag_SpecialAirNStart, Low)
+    .sound_acmd("sound_run", sound_koopag_Run, Low)
+    .sound_acmd("sound_downboundd", sound_koopag_DownBoundD, Low)
+    .sound_acmd("sound_downboundu", sound_koopag_DownBoundU, Low)
     .install();
 }

@@ -22,6 +22,6 @@ unsafe extern "C" fn game_popo_iceberghit_Main(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("popo_iceberghit")
-    .game_acmd("game_main", game_popo_iceberghit_Main)
+    .game_acmd("game_main", game_popo_iceberghit_Main, Low)
     .install();
 }

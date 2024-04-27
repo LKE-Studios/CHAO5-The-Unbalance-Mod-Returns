@@ -9,6 +9,6 @@ unsafe extern "C" fn effect_samusd_supermissile_SBurst(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("samusd_supermissile")
-    .effect_acmd("effect_sburst", effect_samusd_supermissile_SBurst)
+    .effect_acmd("effect_sburst", effect_samusd_supermissile_SBurst, Low)
     .install();
 }

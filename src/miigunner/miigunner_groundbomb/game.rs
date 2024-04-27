@@ -27,7 +27,7 @@ unsafe extern "C" fn game_miigunner_groundbomb_BurstAttack(fighter: &mut L2CAgen
 
 pub fn install() {
     Agent::new("miigunner_groundbomb")
-    .game_acmd("game_fly", game_miigunner_groundbomb_Fly)
-    .game_acmd("game_burstattack", game_miigunner_groundbomb_BurstAttack)
+    .game_acmd("game_fly", game_miigunner_groundbomb_Fly, Low)
+    .game_acmd("game_burstattack", game_miigunner_groundbomb_BurstAttack, Low)
     .install();
 }

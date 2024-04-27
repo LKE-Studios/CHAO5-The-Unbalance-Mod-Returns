@@ -83,11 +83,11 @@ unsafe extern "C" fn expression_pfushigisou_SpecialAirZEnd(fighter: &mut L2CAgen
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .expression_acmd("expression_specialzcharge", expression_pfushigisou_SpecialZCharge)
-    .expression_acmd("expression_specialzend", expression_pfushigisou_SpecialZEnd)
-    .expression_acmd("expression_specialzshoot", expression_pfushigisou_SpecialZShoot)
-    .expression_acmd("expression_specialairzcharge", expression_pfushigisou_SpecialAirZCharge)
-    .expression_acmd("expression_specialairzend", expression_pfushigisou_SpecialAirZEnd)
-    .expression_acmd("expression_specialairzshoot", expression_pfushigisou_SpecialAirZShoot)
+    .expression_acmd("expression_specialzcharge", expression_pfushigisou_SpecialZCharge, Low)
+    .expression_acmd("expression_specialzend", expression_pfushigisou_SpecialZEnd, Low)
+    .expression_acmd("expression_specialzshoot", expression_pfushigisou_SpecialZShoot, Low)
+    .expression_acmd("expression_specialairzcharge", expression_pfushigisou_SpecialAirZCharge, Low)
+    .expression_acmd("expression_specialairzend", expression_pfushigisou_SpecialAirZEnd, Low)
+    .expression_acmd("expression_specialairzshoot", expression_pfushigisou_SpecialAirZShoot, Low)
     .install();
 }

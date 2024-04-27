@@ -34,9 +34,9 @@ unsafe extern "C" fn game_mewtwo_shadowball_ShootThrowF(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("mewtwo_shadowball")
-    .game_acmd("game_charge", game_mewtwo_shadowball_Charge)
-    .game_acmd("game_chargemax", game_mewtwo_shadowball_ChargeMax)
-    .game_acmd("game_shoot", game_mewtwo_shadowball_Shoot)
-    .game_acmd("game_shootthrowf", game_mewtwo_shadowball_ShootThrowF)
+    .game_acmd("game_charge", game_mewtwo_shadowball_Charge, Low)
+    .game_acmd("game_chargemax", game_mewtwo_shadowball_ChargeMax, Low)
+    .game_acmd("game_shoot", game_mewtwo_shadowball_Shoot, Low)
+    .game_acmd("game_shootthrowf", game_mewtwo_shadowball_ShootThrowF, Low)
     .install();
 }

@@ -23,6 +23,6 @@ unsafe extern "C" fn game_miigunner_laser_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("miigunner_laser")
-    .game_acmd("game_fly", game_miigunner_laser_Fly)
+    .game_acmd("game_fly", game_miigunner_laser_Fly, Low)
     .install();
 }

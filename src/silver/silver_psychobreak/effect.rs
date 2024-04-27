@@ -16,6 +16,6 @@ unsafe extern "C" fn effect_silver_psychobreak_Hit(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_psychobreak")
-    .effect_acmd("effect_hit_silver", effect_silver_psychobreak_Hit)
+    .effect_acmd("effect_hit_silver", effect_silver_psychobreak_Hit, Low)
     .install();
 }

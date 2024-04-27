@@ -20,7 +20,7 @@ unsafe extern "C" fn game_ness_pkfire_PillarAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness_pkfire")
-    .game_acmd("game_pillar", game_ness_pkfire_Pillar)
-    .game_acmd("game_pillarair", game_ness_pkfire_PillarAir)
+    .game_acmd("game_pillar", game_ness_pkfire_Pillar, Low)
+    .game_acmd("game_pillarair", game_ness_pkfire_PillarAir, Low)
     .install();
 }

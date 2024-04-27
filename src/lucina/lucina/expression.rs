@@ -179,15 +179,15 @@ unsafe extern "C" fn expression_lucina_SpecialAirLwHit2(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("lucina")
-    .expression_acmd("expression_attack13", expression_lucina_Attack13)
-    .expression_acmd("expression_attacks3hi", expression_lucina_AttackS3Hi)
-    .expression_acmd("expression_attacks3", expression_lucina_AttackS3)
-    .expression_acmd("expression_attacks3lw", expression_lucina_AttackS3Lw)
-    .expression_acmd("expression_attacks4", expression_lucina_AttackS4)
-    .expression_acmd("expression_attackhi4", expression_lucina_AttackHi4)
-    .expression_acmd("expression_attacklw4", expression_lucina_AttackLw4)
-    .expression_acmd("expression_attackairb", expression_lucina_AttackAirB)
-    .expression_acmd("expression_speciallwhit2", expression_lucina_SpecialLwHit2)
-    .expression_acmd("expression_specialairlwhit2", expression_lucina_SpecialAirLwHit2)
+    .expression_acmd("expression_attack13", expression_lucina_Attack13, Low)
+    .expression_acmd("expression_attacks3hi", expression_lucina_AttackS3Hi, Low)
+    .expression_acmd("expression_attacks3", expression_lucina_AttackS3, Low)
+    .expression_acmd("expression_attacks3lw", expression_lucina_AttackS3Lw, Low)
+    .expression_acmd("expression_attacks4", expression_lucina_AttackS4, Low)
+    .expression_acmd("expression_attackhi4", expression_lucina_AttackHi4, Low)
+    .expression_acmd("expression_attacklw4", expression_lucina_AttackLw4, Low)
+    .expression_acmd("expression_attackairb", expression_lucina_AttackAirB, Low)
+    .expression_acmd("expression_speciallwhit2", expression_lucina_SpecialLwHit2, Low)
+    .expression_acmd("expression_specialairlwhit2", expression_lucina_SpecialAirLwHit2, Low)
     .install();
 }

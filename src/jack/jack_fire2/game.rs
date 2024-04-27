@@ -43,7 +43,7 @@ unsafe extern "C" fn game_jack_fire2_Hit(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("jack_fire2")
-    .game_acmd("game_fly", game_jack_fire2_Fly)
-    .game_acmd("game_hit", game_jack_fire2_Hit)
+    .game_acmd("game_fly", game_jack_fire2_Fly, Low)
+    .game_acmd("game_hit", game_jack_fire2_Hit, Low)
     .install();
 }

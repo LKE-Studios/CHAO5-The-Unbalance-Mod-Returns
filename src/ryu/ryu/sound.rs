@@ -28,8 +28,8 @@ unsafe extern "C" fn sound_ryu_Kamehameha_Fire(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ryu")
-    .sound_acmd("sound_kamehameha_start", sound_ryu_Kamehameha_Start)
-    .sound_acmd("sound_kamehameha_charge", sound_ryu_Kamehameha_Charge)
-    .sound_acmd("sound_kamehameha_fire", sound_ryu_Kamehameha_Fire)
+    .sound_acmd("sound_kamehameha_start", sound_ryu_Kamehameha_Start, Low)
+    .sound_acmd("sound_kamehameha_charge", sound_ryu_Kamehameha_Charge, Low)
+    .sound_acmd("sound_kamehameha_fire", sound_ryu_Kamehameha_Fire, Low)
     .install();
 }

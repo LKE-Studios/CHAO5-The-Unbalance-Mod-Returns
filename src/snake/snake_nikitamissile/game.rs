@@ -41,8 +41,8 @@ unsafe extern "C" fn game_snake_nikitamissile_HiExplosion(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("snake_nikitamissile")
-    .game_acmd("game_explosion", game_snake_nikitamissile_Explosion)
-    .game_acmd("game_fallexplosion", game_snake_nikitamissile_FallExplosion)
-    .game_acmd("game_hiexplosion", game_snake_nikitamissile_HiExplosion)
+    .game_acmd("game_explosion", game_snake_nikitamissile_Explosion, Low)
+    .game_acmd("game_fallexplosion", game_snake_nikitamissile_FallExplosion, Low)
+    .game_acmd("game_hiexplosion", game_snake_nikitamissile_HiExplosion, Low)
     .install();
 }

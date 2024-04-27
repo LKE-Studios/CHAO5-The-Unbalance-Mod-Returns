@@ -22,6 +22,6 @@ unsafe extern "C" fn expression_buddy_GlideAttack(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("buddy")
-    .effect_acmd("expression_glideattack", expression_buddy_GlideAttack)
+    .effect_acmd("expression_glideattack", expression_buddy_GlideAttack, Low)
     .install();
 }

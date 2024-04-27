@@ -17,6 +17,6 @@ unsafe extern "C" fn game_edge_flare1_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("edge_flare1")
-    .game_acmd("game_fly", game_edge_flare1_Fly)
+    .game_acmd("game_fly", game_edge_flare1_Fly, Low)
     .install();
 }

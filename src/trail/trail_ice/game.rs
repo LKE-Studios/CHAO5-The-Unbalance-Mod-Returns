@@ -38,7 +38,7 @@ unsafe extern "C" fn game_trail_ice_FlyLast(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("trail_ice")   
-    .game_acmd("game_fly", game_trail_ice_Fly) 
-    .game_acmd("game_flylast", game_trail_ice_FlyLast)
+    .game_acmd("game_fly", game_trail_ice_Fly, Low) 
+    .game_acmd("game_flylast", game_trail_ice_FlyLast, Low)
     .install();
 }

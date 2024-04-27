@@ -37,7 +37,7 @@ unsafe extern "C" fn game_mario_SpecialAirN(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mario")
-    .sound_acmd("sound_specialn", game_mario_SpecialN)
-    .sound_acmd("sound_specialairn", game_mario_SpecialAirN)
+    .sound_acmd("sound_specialn", game_mario_SpecialN, Low)
+    .sound_acmd("sound_specialairn", game_mario_SpecialAirN, Low)
     .install();
 }

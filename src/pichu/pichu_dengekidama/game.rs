@@ -9,6 +9,6 @@ unsafe extern "C" fn game_pichu_dengekidama_Regular(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("pichu_dengekidama")
-    .game_acmd("game_regular", game_pichu_dengekidama_Regular)
+    .game_acmd("game_regular", game_pichu_dengekidama_Regular, Low)
     .install();
 }

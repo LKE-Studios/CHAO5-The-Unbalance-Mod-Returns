@@ -21,6 +21,6 @@ unsafe extern "C" fn game_samus_laser3_Upper(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samus_laser3")
-    .game_acmd("game_upper", game_samus_laser3_Upper)
+    .game_acmd("game_upper", game_samus_laser3_Upper, Low)
     .install();
 }

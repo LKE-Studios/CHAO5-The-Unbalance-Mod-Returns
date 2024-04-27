@@ -9,6 +9,6 @@ unsafe extern "C" fn effect_daisy_kinopiospore_Shot(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("daisy_kinopiospore")
-    .effect_acmd("effect_shot", effect_daisy_kinopiospore_Shot)
+    .effect_acmd("effect_shot", effect_daisy_kinopiospore_Shot, Low)
     .install();
 }

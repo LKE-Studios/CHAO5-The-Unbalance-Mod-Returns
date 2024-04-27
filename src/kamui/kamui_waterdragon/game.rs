@@ -138,9 +138,9 @@ unsafe extern "C" fn game_kamui_waterdragon_SpecialAirLwHitTurn(fighter: &mut L2
 
 pub fn install() {
     Agent::new("kamui_waterdragon")
-    .game_acmd("game_speciallwhit", game_kamui_waterdragon_SpecialLwHit)
-    .game_acmd("game_speciallwhitturn", game_kamui_waterdragon_SpecialLwHitTurn)
-    .game_acmd("game_specialairlwhit", game_kamui_waterdragon_SpecialAirLwHit)
-    .game_acmd("game_specialairlwhitturn", game_kamui_waterdragon_SpecialAirLwHitTurn)
+    .game_acmd("game_speciallwhit", game_kamui_waterdragon_SpecialLwHit, Low)
+    .game_acmd("game_speciallwhitturn", game_kamui_waterdragon_SpecialLwHitTurn, Low)
+    .game_acmd("game_specialairlwhit", game_kamui_waterdragon_SpecialAirLwHit, Low)
+    .game_acmd("game_specialairlwhitturn", game_kamui_waterdragon_SpecialAirLwHitTurn, Low)
     .install();
 }

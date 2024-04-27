@@ -58,9 +58,9 @@ unsafe extern "C" fn game_packun_poisonbreath_StartMax(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("packun_poisonbreath")
-    .game_acmd("game_shoot", game_packun_poisonbreath_Shoot)
-    .game_acmd("game_shootmax", game_packun_poisonbreath_ShootMax)
-    .game_acmd("game_start", game_packun_poisonbreath_Start)
-    .game_acmd("game_startmax", game_packun_poisonbreath_StartMax)
+    .game_acmd("game_shoot", game_packun_poisonbreath_Shoot, Low)
+    .game_acmd("game_shootmax", game_packun_poisonbreath_ShootMax, Low)
+    .game_acmd("game_start", game_packun_poisonbreath_Start, Low)
+    .game_acmd("game_startmax", game_packun_poisonbreath_StartMax, Low)
     .install();
 }

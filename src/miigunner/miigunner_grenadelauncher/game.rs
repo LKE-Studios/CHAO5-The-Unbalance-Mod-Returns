@@ -26,6 +26,6 @@ unsafe extern "C" fn game_miigunner_grenadelauncher_Explode(fighter: &mut L2CAge
 
 pub fn install() {
     Agent::new("miigunner_grenadelauncher")
-    .game_acmd("game_explode", game_miigunner_grenadelauncher_Explode)
+    .game_acmd("game_explode", game_miigunner_grenadelauncher_Explode, Low)
     .install();
 }

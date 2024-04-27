@@ -70,6 +70,6 @@ unsafe extern "C" fn effect_snake_AttackS4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("snake")
-    .effect_acmd("effect_attacks4", effect_snake_AttackS4)
+    .effect_acmd("effect_attacks4", effect_snake_AttackS4, Low)
     .install();
 }

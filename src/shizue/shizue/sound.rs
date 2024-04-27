@@ -58,11 +58,11 @@ unsafe extern "C" fn sound_shizue_SpecialAirN(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue")
-    .sound_acmd("sound_attacks4charge", sound_shizue_AttackS4Charge)
-    .sound_acmd("sound_attackhi4charge", sound_shizue_AttackHi4Charge)
-    .sound_acmd("sound_attacklw4charge", sound_shizue_AttackLw4Charge)
-    .sound_acmd("sound_attackairb", sound_shizue_AttackAirB)
-    .sound_acmd("sound_specialn", sound_shizue_SpecialN)
-    .sound_acmd("sound_specialairn", sound_shizue_SpecialAirN)
+    .sound_acmd("sound_attacks4charge", sound_shizue_AttackS4Charge, Low)
+    .sound_acmd("sound_attackhi4charge", sound_shizue_AttackHi4Charge, Low)
+    .sound_acmd("sound_attacklw4charge", sound_shizue_AttackLw4Charge, Low)
+    .sound_acmd("sound_attackairb", sound_shizue_AttackAirB, Low)
+    .sound_acmd("sound_specialn", sound_shizue_SpecialN, Low)
+    .sound_acmd("sound_specialairn", sound_shizue_SpecialAirN, Low)
     .install();
 }

@@ -14,6 +14,6 @@ unsafe extern "C" fn game_luigi_fireball_Regular(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("luigi_fireball")
-    .game_acmd("game_regular", game_luigi_fireball_Regular)
+    .game_acmd("game_regular", game_luigi_fireball_Regular, Low)
     .install();
 }

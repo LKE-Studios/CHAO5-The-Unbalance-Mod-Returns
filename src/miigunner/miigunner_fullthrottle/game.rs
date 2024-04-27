@@ -27,6 +27,6 @@ unsafe extern "C" fn game_miigunner_fullthrottle_Final(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("miigunner_fullthrottle")
-    .game_acmd("game_final", game_miigunner_fullthrottle_Final)
+    .game_acmd("game_final", game_miigunner_fullthrottle_Final, Low)
     .install();
 }

@@ -20,6 +20,6 @@ unsafe extern "C" fn game_plizardon_daimonji_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("plizardon_daimonji")
-    .game_acmd("game_move", game_plizardon_daimonji_Move)
+    .game_acmd("game_move", game_plizardon_daimonji_Move, Low)
     .install();
 }

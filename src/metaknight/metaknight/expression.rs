@@ -99,10 +99,10 @@ unsafe extern "C" fn expression_metaknight_SpecialAirZ(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("metaknight")
-    .expression_acmd("expression_glidestart", expression_metaknight_GlideStart)
-    .expression_acmd("expression_glidedirection", expression_metaknight_GlideDirection)
-    .expression_acmd("expression_specialhi", expression_metaknight_SpecialHi)
-    .expression_acmd("expression_specialz", expression_metaknight_SpecialZ)
-    .expression_acmd("expression_specialairz", expression_metaknight_SpecialAirZ)
+    .expression_acmd("expression_glidestart", expression_metaknight_GlideStart, Low)
+    .expression_acmd("expression_glidedirection", expression_metaknight_GlideDirection, Low)
+    .expression_acmd("expression_specialhi", expression_metaknight_SpecialHi, Low)
+    .expression_acmd("expression_specialz", expression_metaknight_SpecialZ, Low)
+    .expression_acmd("expression_specialairz", expression_metaknight_SpecialAirZ, Low)
     .install();
 }

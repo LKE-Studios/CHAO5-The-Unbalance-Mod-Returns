@@ -33,7 +33,7 @@ unsafe extern "C" fn game_rosetta_powerstar_End(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("rosetta_powerstar")
-    .game_acmd("game_start", game_rosetta_powerstar_Start)
-    .game_acmd("game_end", game_rosetta_powerstar_End)
+    .game_acmd("game_start", game_rosetta_powerstar_Start, Low)
+    .game_acmd("game_end", game_rosetta_powerstar_End, Low)
     .install();
 }

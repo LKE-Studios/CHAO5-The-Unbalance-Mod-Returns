@@ -43,9 +43,9 @@ unsafe extern "C" fn game_murabito_clayrocket_LodgedBurst(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("murabito_clayrocket")
-    .game_acmd("game_burst", game_murabito_clayrocket_Burst)
-    .game_acmd("game_fall", game_murabito_clayrocket_Fall)
-    .game_acmd("game_fly", game_murabito_clayrocket_Fly)
-    .game_acmd("game_lodgedburst", game_murabito_clayrocket_LodgedBurst)
+    .game_acmd("game_burst", game_murabito_clayrocket_Burst, Low)
+    .game_acmd("game_fall", game_murabito_clayrocket_Fall, Low)
+    .game_acmd("game_fly", game_murabito_clayrocket_Fly, Low)
+    .game_acmd("game_lodgedburst", game_murabito_clayrocket_LodgedBurst, Low)
     .install();
 }

@@ -48,6 +48,6 @@ unsafe extern "C" fn game_palutena_explosiveflame_Explode(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("palutena_explosiveflame")
-    .game_acmd("game_explode", game_palutena_explosiveflame_Explode)
+    .game_acmd("game_explode", game_palutena_explosiveflame_Explode, Low)
     .install();
 }

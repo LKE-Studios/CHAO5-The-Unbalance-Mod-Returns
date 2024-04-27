@@ -23,6 +23,6 @@ unsafe extern "C" fn game_packun_bosspackun_End(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("packun_bosspackun")
-    .game_acmd("game_end", game_packun_bosspackun_End)
+    .game_acmd("game_end", game_packun_bosspackun_End, Low)
     .install();
 }

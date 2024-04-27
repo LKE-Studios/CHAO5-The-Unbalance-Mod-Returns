@@ -36,7 +36,7 @@ unsafe extern "C" fn game_sonic_supersonic_FinalAirEnd(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("sonic_supersonic")
-    .game_acmd("game_finalend", game_sonic_supersonic_FinalEnd)
-    .game_acmd("game_finalairend", game_sonic_supersonic_FinalAirEnd)
+    .game_acmd("game_finalend", game_sonic_supersonic_FinalEnd, Low)
+    .game_acmd("game_finalairend", game_sonic_supersonic_FinalAirEnd, Low)
     .install();
 }

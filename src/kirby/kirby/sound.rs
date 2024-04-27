@@ -36,7 +36,7 @@ unsafe extern "C" fn sound_kirby_SpecialAirHiH(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("kirby")
-    .sound_acmd("sound_specialhih", sound_kirby_SpecialHiH)
-    .sound_acmd("sound_specialairhih", sound_kirby_SpecialAirHiH)
+    .sound_acmd("sound_specialhih", sound_kirby_SpecialHiH, Low)
+    .sound_acmd("sound_specialairhih", sound_kirby_SpecialAirHiH, Low)
     .install();
 }

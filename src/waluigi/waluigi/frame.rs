@@ -141,6 +141,7 @@ pub unsafe extern "C" fn special_n_waluigi(fighter: &mut L2CFighterCommon) {
             }
             else if RANDOM_NUMBER[ENTRY_ID] == 8  {
                 ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
+                DamageModule::heal(fighter.module_accessor, -180.0, 0);
                 ALREADY_BLOCK[ENTRY_ID] = true;
             }
             else if RANDOM_NUMBER[ENTRY_ID] == 9  {
@@ -211,21 +212,14 @@ pub unsafe extern "C" fn final_start_waluigi(fighter: &mut L2CFighterCommon) {
 
 pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBase) {
     let status_kind = StatusModule::status_kind(weapon.module_accessor);
-    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let ENTRY_ID = WorkModule::get_int(weapon.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(weapon.module_accessor);
     let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
     let color = WorkModule::get_int(weapon.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
-    let WALUIGI = color >= 120 && color <= 130; 
-    if [hash40("regular")].contains(&motion_kind) {
-        let life = WorkModule::get_param_int(weapon.module_accessor, hash40("param_diceblock"), hash40("life"));
-        if frame <= 1.0 {
-            WorkModule::set_int(weapon.module_accessor, life, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
-        }
-    }
     DICEBLOCK_FRAME[ENTRY_ID] += 1;
     ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("frame_dice"), true);
     if RANDOM_NUMBER[ENTRY_ID] == 0  {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), true);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -238,6 +232,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 1 {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), true);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -250,6 +245,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 2  {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), true);
@@ -262,6 +258,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 3 {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -274,6 +271,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 4  {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -286,6 +284,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 5  {
+        ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -298,6 +297,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 6 {
+        ModelModule::set_scale(weapon.module_accessor, 1.1);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -310,6 +310,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 7  {
+        ModelModule::set_scale(weapon.module_accessor, 1.2);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -322,6 +323,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 8  {
+        ModelModule::set_scale(weapon.module_accessor, 1.5);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);
@@ -334,6 +336,7 @@ pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBas
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if RANDOM_NUMBER[ENTRY_ID] == 9  {
+        ModelModule::set_scale(weapon.module_accessor, 1.75);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_3"), false);

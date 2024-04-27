@@ -109,11 +109,11 @@ unsafe extern "C" fn effect_koopa_SpecialAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopa")
-    .effect_acmd("effect_attacklw3", effect_koopa_AttackLw3)
-    .effect_acmd("effect_attackairlw", effect_koopa_AttackAirLw)
-    .effect_acmd("effect_specialscatch", effect_koopa_SpecialSCatch)
-    .effect_acmd("effect_specialsaircatch", effect_koopa_SpecialSAirCatch)
-    .effect_acmd("effect_speciallw", effect_koopa_SpecialLw)
-    .effect_acmd("effect_specialairlw", effect_koopa_SpecialAirLw)
+    .effect_acmd("effect_attacklw3", effect_koopa_AttackLw3, Low)
+    .effect_acmd("effect_attackairlw", effect_koopa_AttackAirLw, Low)
+    .effect_acmd("effect_specialscatch", effect_koopa_SpecialSCatch, Low)
+    .effect_acmd("effect_specialsaircatch", effect_koopa_SpecialSAirCatch, Low)
+    .effect_acmd("effect_speciallw", effect_koopa_SpecialLw, Low)
+    .effect_acmd("effect_specialairlw", effect_koopa_SpecialAirLw, Low)
     .install();
 }

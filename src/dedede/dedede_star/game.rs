@@ -9,6 +9,6 @@ unsafe extern "C" fn game_dedede_star_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("dedede_star")
-    .game_acmd("game_fly", game_dedede_star_Fly)
+    .game_acmd("game_fly", game_dedede_star_Fly, Low)
     .install();
 }

@@ -34,9 +34,9 @@ unsafe extern "C" fn sound_gamewatch_SpecialAirS7(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("gamewatch")
-    .sound_acmd("sound_specials6", sound_gamewatch_SpecialS6)
-    .sound_acmd("sound_specialairs6", sound_gamewatch_SpecialAirS6)
-    .sound_acmd("sound_specials7", sound_gamewatch_SpecialS7)
-    .sound_acmd("sound_specialairs7", sound_gamewatch_SpecialAirS7)
+    .sound_acmd("sound_specials6", sound_gamewatch_SpecialS6, Low)
+    .sound_acmd("sound_specialairs6", sound_gamewatch_SpecialAirS6, Low)
+    .sound_acmd("sound_specials7", sound_gamewatch_SpecialS7, Low)
+    .sound_acmd("sound_specialairs7", sound_gamewatch_SpecialAirS7, Low)
     .install();
 }

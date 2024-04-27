@@ -13,6 +13,6 @@ unsafe extern "C" fn game_master_arrow2_Search(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("master_arrow2")
-    .game_acmd("game_search", game_master_arrow2_Search)
+    .game_acmd("game_search", game_master_arrow2_Search, Low)
     .install();
 }

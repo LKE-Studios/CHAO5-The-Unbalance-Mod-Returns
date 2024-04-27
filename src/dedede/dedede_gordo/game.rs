@@ -104,9 +104,9 @@ unsafe extern "C" fn game_dedede_gordo_SpecialSWallStop(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("dedede_gordo")
-    .game_acmd("game_specialsattack", game_dedede_gordo_SpecialSAttack)
-    .game_acmd("game_specialsshot", game_dedede_gordo_SpecialSShot)
-    .game_acmd("game_specialsthrow", game_dedede_gordo_SpecialSThrow)
-    .game_acmd("game_specialswallstop", game_dedede_gordo_SpecialSWallStop)
+    .game_acmd("game_specialsattack", game_dedede_gordo_SpecialSAttack, Low)
+    .game_acmd("game_specialsshot", game_dedede_gordo_SpecialSShot, Low)
+    .game_acmd("game_specialsthrow", game_dedede_gordo_SpecialSThrow, Low)
+    .game_acmd("game_specialswallstop", game_dedede_gordo_SpecialSWallStop, Low)
     .install();
 }

@@ -34,7 +34,7 @@ unsafe extern "C" fn game_murabito_bullet_ShootB(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_bullet")
-    .game_acmd("game_shootf", game_murabito_bullet_ShootF)
-    .game_acmd("game_shootb", game_murabito_bullet_ShootB)
+    .game_acmd("game_shootf", game_murabito_bullet_ShootF, Low)
+    .game_acmd("game_shootb", game_murabito_bullet_ShootB, Low)
     .install();
 }

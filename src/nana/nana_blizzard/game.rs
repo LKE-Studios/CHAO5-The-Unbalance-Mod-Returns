@@ -21,6 +21,6 @@ unsafe extern "C" fn game_nana_blizzard_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("nana_blizzard")
-    .game_acmd("game_fly", game_nana_blizzard_Fly)
+    .game_acmd("game_fly", game_nana_blizzard_Fly, Low)
     .install();
 }

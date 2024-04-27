@@ -140,13 +140,13 @@ unsafe extern "C" fn game_ryu_hadoken_MoveW(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ryu_hadoken")
-    .game_acmd("game_movem", game_ryu_hadoken_MoveM)
-    .game_acmd("game_moves", game_ryu_hadoken_MoveS)
-    .game_acmd("game_movespm", game_ryu_hadoken_MoveSpM)
-    .game_acmd("game_movespm_last", game_ryu_hadoken_MoveSpM_Last)
-    .game_acmd("game_movesps_last", game_ryu_hadoken_MoveSpS_Last)
-    .game_acmd("game_movespw", game_ryu_hadoken_MoveSpW)
-    .game_acmd("game_movespw_last", game_ryu_hadoken_MoveSpW_Last)
-    .game_acmd("game_movew", game_ryu_hadoken_MoveW)
+    .game_acmd("game_movem", game_ryu_hadoken_MoveM, Low)
+    .game_acmd("game_moves", game_ryu_hadoken_MoveS, Low)
+    .game_acmd("game_movespm", game_ryu_hadoken_MoveSpM, Low)
+    .game_acmd("game_movespm_last", game_ryu_hadoken_MoveSpM_Last, Low)
+    .game_acmd("game_movesps_last", game_ryu_hadoken_MoveSpS_Last, Low)
+    .game_acmd("game_movespw", game_ryu_hadoken_MoveSpW, Low)
+    .game_acmd("game_movespw_last", game_ryu_hadoken_MoveSpW_Last, Low)
+    .game_acmd("game_movew", game_ryu_hadoken_MoveW, Low)
     .install();
 }

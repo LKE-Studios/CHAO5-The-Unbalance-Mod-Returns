@@ -19,6 +19,6 @@ unsafe extern "C" fn game_pikmin_dolfin_FinalExplosion(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("pikmin_dolfin")
-    .game_acmd("game_finalexplosion", game_pikmin_dolfin_FinalExplosion)
+    .game_acmd("game_finalexplosion", game_pikmin_dolfin_FinalExplosion, Low)
     .install();
 }

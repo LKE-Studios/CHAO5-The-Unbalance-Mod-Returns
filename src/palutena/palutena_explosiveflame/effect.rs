@@ -14,6 +14,6 @@ unsafe extern "C" fn effect_palutena_explosiveflame_Explode(fighter: &mut L2CAge
 
 pub fn install() {
     Agent::new("palutena_explosiveflame")
-    .effect_acmd("effect_explode", effect_palutena_explosiveflame_Explode)
+    .effect_acmd("effect_explode", effect_palutena_explosiveflame_Explode, Low)
     .install();
 }

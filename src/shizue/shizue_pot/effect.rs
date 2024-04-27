@@ -9,6 +9,6 @@ unsafe extern "C" fn effect_shizue_pot_Burst(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_pot")
-    .effect_acmd("effect_burst", effect_shizue_pot_Burst)
+    .effect_acmd("effect_burst", effect_shizue_pot_Burst, Low)
     .install();
 }

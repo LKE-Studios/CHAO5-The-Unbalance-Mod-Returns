@@ -21,6 +21,6 @@ unsafe extern "C" fn game_miigunner_stealthbomb_s_Move(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("miigunner_stealthbomb_s")
-    .game_acmd("game_move", game_miigunner_stealthbomb_s_Move)
+    .game_acmd("game_move", game_miigunner_stealthbomb_s_Move, Low)
     .install();
 }

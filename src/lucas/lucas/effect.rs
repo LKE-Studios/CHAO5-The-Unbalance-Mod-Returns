@@ -178,14 +178,14 @@ unsafe extern "C" fn effect_lucas_WessDance(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucas")
-    .effect_acmd("effect_attack11", effect_lucas_Attack11)
-    .effect_acmd("effect_attack12", effect_lucas_Attack12)
-    .effect_acmd("effect_attack13", effect_lucas_Attack13)
-    .effect_acmd("effect_attackhi3", effect_lucas_AttackHi3)
-    .effect_acmd("effect_attacklw3", effect_lucas_AttackLw3)
-    .effect_acmd("effect_attacklw4", effect_lucas_AttackLw4)
-    .effect_acmd("effect_attackairn", effect_lucas_AttackAirN)
-    .effect_acmd("effect_attackairlw", effect_lucas_AttackAirLw)
-    .effect_acmd("effect_wessdance", effect_lucas_WessDance)
+    .effect_acmd("effect_attack11", effect_lucas_Attack11, Low)
+    .effect_acmd("effect_attack12", effect_lucas_Attack12, Low)
+    .effect_acmd("effect_attack13", effect_lucas_Attack13, Low)
+    .effect_acmd("effect_attackhi3", effect_lucas_AttackHi3, Low)
+    .effect_acmd("effect_attacklw3", effect_lucas_AttackLw3, Low)
+    .effect_acmd("effect_attacklw4", effect_lucas_AttackLw4, Low)
+    .effect_acmd("effect_attackairn", effect_lucas_AttackAirN, Low)
+    .effect_acmd("effect_attackairlw", effect_lucas_AttackAirLw, Low)
+    .effect_acmd("effect_wessdance", effect_lucas_WessDance, Low)
     .install();
 }

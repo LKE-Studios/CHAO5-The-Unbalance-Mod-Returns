@@ -124,12 +124,12 @@ unsafe extern "C" fn effect_link_RevaliGlideLanding(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("link")
-    .effect_acmd("effect_ascendjump", effect_link_AscendJump)
-    .effect_acmd("effect_ascendairjump", effect_link_AscendAirJump)
-    .effect_acmd("effect_ascendstart", effect_link_AscendStart)
-    .effect_acmd("effect_ascend", effect_link_Ascend)
-    .effect_acmd("effect_ascendend", effect_link_AscendEnd)
-    .effect_acmd("effect_revaliglidedrop", effect_link_RevaliGlideDrop)
-    .effect_acmd("effect_revaliglidelanding", effect_link_RevaliGlideLanding)
+    .effect_acmd("effect_ascendjump", effect_link_AscendJump, Low)
+    .effect_acmd("effect_ascendairjump", effect_link_AscendAirJump, Low)
+    .effect_acmd("effect_ascendstart", effect_link_AscendStart, Low)
+    .effect_acmd("effect_ascend", effect_link_Ascend, Low)
+    .effect_acmd("effect_ascendend", effect_link_AscendEnd, Low)
+    .effect_acmd("effect_revaliglidedrop", effect_link_RevaliGlideDrop, Low)
+    .effect_acmd("effect_revaliglidelanding", effect_link_RevaliGlideLanding, Low)
     .install();
 }

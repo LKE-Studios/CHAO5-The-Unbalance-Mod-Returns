@@ -21,6 +21,6 @@ unsafe extern "C" fn game_miiswordsman_wave_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("miiswordsman_wave")
-    .game_acmd("game_fly", game_miiswordsman_wave_Fly)
+    .game_acmd("game_fly", game_miiswordsman_wave_Fly, Low)
     .install();
 }

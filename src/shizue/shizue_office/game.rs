@@ -29,6 +29,6 @@ unsafe extern "C" fn game_shizue_office_Construct(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_office")
-    .game_acmd("game_construct", game_shizue_office_Construct)
+    .game_acmd("game_construct", game_shizue_office_Construct, Low)
     .install();
 }

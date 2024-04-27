@@ -28,7 +28,7 @@ unsafe extern "C" fn expression_kirby_SpecialAirHiH(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("kirby")
-    .expression_acmd("expression_specialhih", expression_kirby_SpecialHiH)
-    .expression_acmd("expression_specialairhih", expression_kirby_SpecialAirHiH)
+    .expression_acmd("expression_specialhih", expression_kirby_SpecialHiH, Low)
+    .expression_acmd("expression_specialairhih", expression_kirby_SpecialAirHiH, Low)
     .install();
 }

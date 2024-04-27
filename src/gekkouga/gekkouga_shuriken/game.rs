@@ -33,8 +33,8 @@ unsafe extern "C" fn game_gekkouga_shuriken_MaxVanish(fighter: &mut L2CAgentBase
 
 pub fn install() {
     Agent::new("gekkouga_shuriken")
-    .game_acmd("game_shot", game_gekkouga_shuriken_Shot)
-    .game_acmd("game_maxshot", game_gekkouga_shuriken_MaxShot)
-    .game_acmd("game_maxvanish", game_gekkouga_shuriken_MaxVanish)
+    .game_acmd("game_shot", game_gekkouga_shuriken_Shot, Low)
+    .game_acmd("game_maxshot", game_gekkouga_shuriken_MaxShot, Low)
+    .game_acmd("game_maxvanish", game_gekkouga_shuriken_MaxVanish, Low)
     .install();
 }

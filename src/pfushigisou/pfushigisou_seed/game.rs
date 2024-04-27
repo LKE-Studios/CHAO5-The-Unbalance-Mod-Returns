@@ -21,7 +21,7 @@ unsafe extern "C" fn game_pfushigisou_seed_MoveHard(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("pfushigisou_seed")
-    .game_acmd("game_move", game_pfushigisou_seed_Move)
-    .game_acmd("game_movehard", game_pfushigisou_seed_MoveHard)
+    .game_acmd("game_move", game_pfushigisou_seed_Move, Low)
+    .game_acmd("game_movehard", game_pfushigisou_seed_MoveHard, Low)
     .install();
 }

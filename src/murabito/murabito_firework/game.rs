@@ -32,6 +32,6 @@ unsafe extern "C" fn game_murabito_firework_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito_firework")
-    .game_acmd("game_shoot", game_murabito_firework_Shoot)
+    .game_acmd("game_shoot", game_murabito_firework_Shoot, Low)
     .install();
 }

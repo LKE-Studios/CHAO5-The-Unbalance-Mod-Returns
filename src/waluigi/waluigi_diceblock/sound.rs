@@ -19,8 +19,8 @@ unsafe extern "C" fn sound_waluigi_diceblock_Break(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("dolly_diceblock")
-    .sound_acmd("sound_regular", sound_waluigi_diceblock_Regular)
-    .sound_acmd("sound_bound", sound_waluigi_diceblock_Bound)
-    .sound_acmd("sound_break", sound_waluigi_diceblock_Break)
+    .sound_acmd("sound_regular", sound_waluigi_diceblock_Regular, Low)
+    .sound_acmd("sound_bound", sound_waluigi_diceblock_Bound, Low)
+    .sound_acmd("sound_break", sound_waluigi_diceblock_Break, Low)
     .install();
 }

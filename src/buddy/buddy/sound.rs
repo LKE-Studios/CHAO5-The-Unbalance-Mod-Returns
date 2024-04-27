@@ -112,13 +112,13 @@ unsafe extern "C" fn sound_buddy_GlideLanding(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("buddy")
-    .sound_acmd("sound_jumpaerialf3", sound_buddy_JumpAerialF3)
-    .sound_acmd("sound_jumpaerialf4", sound_buddy_JumpAerialF4)
-    .sound_acmd("sound_jumpaerialf5", sound_buddy_JumpAerialF5)
-    .sound_acmd("sound_glidestart", sound_buddy_GlideStart)
-    .sound_acmd("sound_glidewing", sound_buddy_GlideWing)
-    .sound_acmd("sound_glideattack", sound_buddy_GlideAttack)
-    .sound_acmd("sound_glideend", sound_buddy_GlideEnd)
-    .sound_acmd("sound_glidelanding", sound_buddy_GlideLanding)
+    .sound_acmd("sound_jumpaerialf3", sound_buddy_JumpAerialF3, Low)
+    .sound_acmd("sound_jumpaerialf4", sound_buddy_JumpAerialF4, Low)
+    .sound_acmd("sound_jumpaerialf5", sound_buddy_JumpAerialF5, Low)
+    .sound_acmd("sound_glidestart", sound_buddy_GlideStart, Low)
+    .sound_acmd("sound_glidewing", sound_buddy_GlideWing, Low)
+    .sound_acmd("sound_glideattack", sound_buddy_GlideAttack, Low)
+    .sound_acmd("sound_glideend", sound_buddy_GlideEnd, Low)
+    .sound_acmd("sound_glidelanding", sound_buddy_GlideLanding, Low)
     .install();
 }

@@ -9,6 +9,6 @@ unsafe extern "C" fn game_murabito_sprinkling_water_Flow(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("murabito_sprinkling_water")
-    .game_acmd("game_flow", game_murabito_sprinkling_water_Flow)
+    .game_acmd("game_flow", game_murabito_sprinkling_water_Flow, Low)
     .install();
 }

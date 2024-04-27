@@ -117,12 +117,12 @@ unsafe extern "C" fn effect_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("palutena")
-    .effect_acmd("effect_shieldbreakfly", effect_palutena_ShieldBreakFly)
-    .effect_acmd("effect_glidestart", effect_palutena_GlideStart)
-    .effect_acmd("effect_glidewing", effect_palutena_GlideWing)
-    .effect_acmd("effect_glideattack", effect_palutena_GlideAttack)
-    .effect_acmd("effect_glidelanding", effect_palutena_GlideLanding)
-    .effect_acmd("effect_glideend", effect_palutena_GlideEnd)
-    .effect_acmd("effect_attackhi4", effect_palutena_AttackHi4)
+    .effect_acmd("effect_shieldbreakfly", effect_palutena_ShieldBreakFly, Low)
+    .effect_acmd("effect_glidestart", effect_palutena_GlideStart, Low)
+    .effect_acmd("effect_glidewing", effect_palutena_GlideWing, Low)
+    .effect_acmd("effect_glideattack", effect_palutena_GlideAttack, Low)
+    .effect_acmd("effect_glidelanding", effect_palutena_GlideLanding, Low)
+    .effect_acmd("effect_glideend", effect_palutena_GlideEnd, Low)
+    .effect_acmd("effect_attackhi4", effect_palutena_AttackHi4, Low)
     .install();
 }

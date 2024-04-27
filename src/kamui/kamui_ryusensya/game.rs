@@ -21,7 +21,7 @@ unsafe extern "C" fn game_kamui_ryusensya_ShotMax(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("kamui_ryusensya")
-    .game_acmd("game_regular", game_kamui_ryusensya_Regular)
-    .game_acmd("game_shotmax", game_kamui_ryusensya_ShotMax)
+    .game_acmd("game_regular", game_kamui_ryusensya_Regular, Low)
+    .game_acmd("game_shotmax", game_kamui_ryusensya_ShotMax, Low)
     .install();
 }

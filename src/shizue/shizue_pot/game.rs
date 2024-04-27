@@ -189,8 +189,8 @@ unsafe extern "C" fn game_shizue_pot_Stay(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("shizue_pot")
-    .game_acmd("game_throwed", game_shizue_pot_Throwed)
-    .game_acmd("game_bound", game_shizue_pot_Bound)
-    .game_acmd("game_stay", game_shizue_pot_Stay)
+    .game_acmd("game_throwed", game_shizue_pot_Throwed, Low)
+    .game_acmd("game_bound", game_shizue_pot_Bound, Low)
+    .game_acmd("game_stay", game_shizue_pot_Stay, Low)
     .install();
 }

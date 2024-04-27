@@ -18,7 +18,7 @@ unsafe extern "C" fn game_bayonetta_specialn_bullet_MoveChargeBullet(fighter: &m
 
 pub fn install() {
     Agent::new("bayonetta_specialn_bullet")
-    .game_acmd("game_move", game_bayonetta_specialn_bullet_Move)
-    .game_acmd("game_movechargebullet", game_bayonetta_specialn_bullet_MoveChargeBullet)
+    .game_acmd("game_move", game_bayonetta_specialn_bullet_Move, Low)
+    .game_acmd("game_movechargebullet", game_bayonetta_specialn_bullet_MoveChargeBullet, Low)
     .install();
 }

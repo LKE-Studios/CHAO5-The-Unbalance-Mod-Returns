@@ -75,9 +75,9 @@ unsafe extern "C" fn game_ness_yoyohead_AttackLw4(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness_yoyohead")
-    .game_acmd("game_attackhi4charge", game_ness_yoyohead_AttackHi4Charge)
-    .game_acmd("game_attackhi4", game_ness_yoyohead_AttackHi4)
-    .game_acmd("game_attacklw4charge", game_ness_yoyohead_AttackLw4Charge)
-    .game_acmd("game_attacklw4", game_ness_yoyohead_AttackLw4)
+    .game_acmd("game_attackhi4charge", game_ness_yoyohead_AttackHi4Charge, Low)
+    .game_acmd("game_attackhi4", game_ness_yoyohead_AttackHi4, Low)
+    .game_acmd("game_attacklw4charge", game_ness_yoyohead_AttackLw4Charge, Low)
+    .game_acmd("game_attacklw4", game_ness_yoyohead_AttackLw4, Low)
     .install();
 }

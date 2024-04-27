@@ -35,6 +35,6 @@ unsafe extern "C" fn game_bayonetta_wickedweaveleg_AttackLw4(fighter: &mut L2CAg
 
 pub fn install() {
     Agent::new("bayonetta_wickedweaveleg")
-    .game_acmd("game_attackhi4", game_bayonetta_wickedweaveleg_AttackLw4)
+    .game_acmd("game_attackhi4", game_bayonetta_wickedweaveleg_AttackLw4, Low)
     .install();
 }

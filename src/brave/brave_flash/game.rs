@@ -48,7 +48,7 @@ unsafe extern "C" fn game_brave_flash_FlashHit2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("brave_flash")
-    .game_acmd("game_flashhit1", game_brave_flash_FlashHit1)
-    .game_acmd("game_flashhit2", game_brave_flash_FlashHit2)
+    .game_acmd("game_flashhit1", game_brave_flash_FlashHit1, Low)
+    .game_acmd("game_flashhit2", game_brave_flash_FlashHit2, Low)
     .install();
 }

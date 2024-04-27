@@ -71,7 +71,7 @@ unsafe extern "C" fn effect_fox_AttackAirHi(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("fox")
-    .effect_acmd("effect_attacklw3", effect_fox_AttackLw3)
-    .effect_acmd("effect_attackairhi", effect_fox_AttackAirHi)
+    .effect_acmd("effect_attacklw3", effect_fox_AttackLw3, Low)
+    .effect_acmd("effect_attackairhi", effect_fox_AttackAirHi, Low)
     .install();
 }

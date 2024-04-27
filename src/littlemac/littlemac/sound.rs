@@ -122,11 +122,11 @@ unsafe extern "C" fn sound_littlemac_AppealSL(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("littlemac")
-    .sound_acmd("sound_appealhir", sound_littlemac_AppealHiR)
-    .sound_acmd("sound_appealhil", sound_littlemac_AppealHiL)
-    .sound_acmd("sound_appeallwr", sound_littlemac_AppealLwR)
-    .sound_acmd("sound_appeallwl", sound_littlemac_AppealLwL)
-    .sound_acmd("sound_appealsr", sound_littlemac_AppealSR)
-    .sound_acmd("sound_appealsl", sound_littlemac_AppealSL)
+    .sound_acmd("sound_appealhir", sound_littlemac_AppealHiR, Low)
+    .sound_acmd("sound_appealhil", sound_littlemac_AppealHiL, Low)
+    .sound_acmd("sound_appeallwr", sound_littlemac_AppealLwR, Low)
+    .sound_acmd("sound_appeallwl", sound_littlemac_AppealLwL, Low)
+    .sound_acmd("sound_appealsr", sound_littlemac_AppealSR, Low)
+    .sound_acmd("sound_appealsl", sound_littlemac_AppealSL, Low)
     .install();
 }

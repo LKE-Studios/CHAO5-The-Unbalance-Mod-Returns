@@ -28,8 +28,8 @@ unsafe extern "C" fn game_duckhunt_can_Explode(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("duckhunt_can")
-    .game_acmd("game_fly", game_duckhunt_can_Fly)
-    .game_acmd("game_max", game_duckhunt_can_Max)
-    .game_acmd("game_explode", game_duckhunt_can_Explode)
+    .game_acmd("game_fly", game_duckhunt_can_Fly, Low)
+    .game_acmd("game_max", game_duckhunt_can_Max, Low)
+    .game_acmd("game_explode", game_duckhunt_can_Explode, Low)
     .install();
 }

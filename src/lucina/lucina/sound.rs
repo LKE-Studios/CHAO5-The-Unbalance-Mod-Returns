@@ -135,16 +135,16 @@ unsafe extern "C" fn sound_lucina_SpecialAirLwHit2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucina")
-    .sound_acmd("sound_attack13", sound_lucina_Attack13)
-    .sound_acmd("sound_attacks3hi", sound_lucina_AttackS3Hi)
-    .sound_acmd("sound_attacks3", sound_lucina_AttackS3)
-    .sound_acmd("sound_attacks3lw", sound_lucina_AttackS3Lw)
-    .sound_acmd("sound_attacks4", sound_lucina_AttackS4)
-    .sound_acmd("sound_attackhi4", sound_lucina_AttackHi4)
-    .sound_acmd("sound_attacklw4", sound_lucina_AttackLw4)
-    .sound_acmd("sound_attackairn", sound_lucina_AttackAirN)
-    .sound_acmd("sound_attackairb", sound_lucina_AttackAirB)
-    .sound_acmd("sound_speciallwhit2", sound_lucina_SpecialLwHit2)
-    .sound_acmd("sound_specialairlwhit2", sound_lucina_SpecialAirLwHit2)
+    .sound_acmd("sound_attack13", sound_lucina_Attack13, Low)
+    .sound_acmd("sound_attacks3hi", sound_lucina_AttackS3Hi, Low)
+    .sound_acmd("sound_attacks3", sound_lucina_AttackS3, Low)
+    .sound_acmd("sound_attacks3lw", sound_lucina_AttackS3Lw, Low)
+    .sound_acmd("sound_attacks4", sound_lucina_AttackS4, Low)
+    .sound_acmd("sound_attackhi4", sound_lucina_AttackHi4, Low)
+    .sound_acmd("sound_attacklw4", sound_lucina_AttackLw4, Low)
+    .sound_acmd("sound_attackairn", sound_lucina_AttackAirN, Low)
+    .sound_acmd("sound_attackairb", sound_lucina_AttackAirB, Low)
+    .sound_acmd("sound_speciallwhit2", sound_lucina_SpecialLwHit2, Low)
+    .sound_acmd("sound_specialairlwhit2", sound_lucina_SpecialAirLwHit2, Low)
     .install();
 }

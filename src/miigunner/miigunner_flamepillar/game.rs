@@ -25,7 +25,7 @@ unsafe extern "C" fn game_miigunner_flamepillar_Pillar(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("miigunner_flamepillar")
-    .game_acmd("game_shoot", game_miigunner_flamepillar_Shoot)
-    .game_acmd("game_pillar", game_miigunner_flamepillar_Pillar)
+    .game_acmd("game_shoot", game_miigunner_flamepillar_Shoot, Low)
+    .game_acmd("game_pillar", game_miigunner_flamepillar_Pillar, Low)
     .install();
 }

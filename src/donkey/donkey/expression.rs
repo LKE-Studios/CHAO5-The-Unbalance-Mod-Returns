@@ -49,6 +49,6 @@ unsafe extern "C" fn expression_donkey_SpecialHi2(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("donkey")
-    .expression_acmd("expression_specialhi2", expression_donkey_SpecialHi2)
+    .expression_acmd("expression_specialhi2", expression_donkey_SpecialHi2, Low)
     .install();
 }

@@ -57,11 +57,11 @@ unsafe extern "C" fn game_rockman_rushcoil_ExitAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("rockman_rushcoil")
-    .game_acmd("game_wait", game_rockman_rushcoil_Wait)
-    .game_acmd("game_fall", game_rockman_rushcoil_Fall)
-    .game_acmd("game_fly", game_rockman_rushcoil_Fly)
-    .game_acmd("game_landing", game_rockman_rushcoil_Landing)
-    .game_acmd("game_exitair", game_rockman_rushcoil_ExitAir)
-    .game_acmd("game_exit", game_rockman_rushcoil_Exit)
+    .game_acmd("game_wait", game_rockman_rushcoil_Wait, Low)
+    .game_acmd("game_fall", game_rockman_rushcoil_Fall, Low)
+    .game_acmd("game_fly", game_rockman_rushcoil_Fly, Low)
+    .game_acmd("game_landing", game_rockman_rushcoil_Landing, Low)
+    .game_acmd("game_exitair", game_rockman_rushcoil_ExitAir, Low)
+    .game_acmd("game_exit", game_rockman_rushcoil_Exit, Low)
     .install();
 }

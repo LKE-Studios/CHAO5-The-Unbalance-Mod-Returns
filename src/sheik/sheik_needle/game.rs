@@ -13,6 +13,6 @@ unsafe extern "C" fn game_sheik_needle_Move(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("sheik_needle")
-    .game_acmd("game_move", game_sheik_needle_Move)
+    .game_acmd("game_move", game_sheik_needle_Move, Low)
     .install();
 }

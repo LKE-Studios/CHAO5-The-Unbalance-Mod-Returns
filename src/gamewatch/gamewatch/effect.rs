@@ -52,9 +52,9 @@ unsafe extern "C" fn effect_gamewatch_SpecialAirS7(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("gamewatch")
-    .effect_acmd("effect_specials6", effect_gamewatch_SpecialS6)
-    .effect_acmd("effect_specialairs6", effect_gamewatch_SpecialAirS6)
-    .effect_acmd("effect_specials7", effect_gamewatch_SpecialS7)
-    .effect_acmd("effect_specialairs7", effect_gamewatch_SpecialAirS7)
+    .effect_acmd("effect_specials6", effect_gamewatch_SpecialS6, Low)
+    .effect_acmd("effect_specialairs6", effect_gamewatch_SpecialAirS6, Low)
+    .effect_acmd("effect_specials7", effect_gamewatch_SpecialS7, Low)
+    .effect_acmd("effect_specialairs7", effect_gamewatch_SpecialAirS7, Low)
     .install();
 }

@@ -51,8 +51,8 @@ unsafe extern "C" fn effect_cloud_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("cloud")
-    .effect_acmd("effect_attackairf", effect_cloud_AttackAirF)
-    .effect_acmd("effect_speciallwloop", effect_cloud_SpecialLwLoop)
-    .effect_acmd("effect_specialairlwloop", effect_cloud_SpecialAirLwLoop)
+    .effect_acmd("effect_attackairf", effect_cloud_AttackAirF, Low)
+    .effect_acmd("effect_speciallwloop", effect_cloud_SpecialLwLoop, Low)
+    .effect_acmd("effect_specialairlwloop", effect_cloud_SpecialAirLwLoop, Low)
     .install();
 }

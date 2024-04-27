@@ -9,6 +9,6 @@ unsafe extern "C" fn game_rosetta_starpiece_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("rosetta_starpiece")
-    .game_acmd("game_shoot", game_rosetta_starpiece_Shoot)
+    .game_acmd("game_shoot", game_rosetta_starpiece_Shoot, Low)
     .install();
 }

@@ -25,6 +25,6 @@ unsafe extern "C" fn game_shizue_trafficsign_Attack(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("shizue_trafficsign")
-    .game_acmd("game_attack", game_shizue_trafficsign_Attack)
+    .game_acmd("game_attack", game_shizue_trafficsign_Attack, Low)
     .install();
 }

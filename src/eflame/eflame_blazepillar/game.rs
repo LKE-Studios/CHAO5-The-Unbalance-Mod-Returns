@@ -32,6 +32,6 @@ unsafe extern "C" fn game_eflame_blazepillar_FinalAttack(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("eflame_blazepillar")
-    .game_acmd("game_finalattack", game_eflame_blazepillar_FinalAttack)
+    .game_acmd("game_finalattack", game_eflame_blazepillar_FinalAttack, Low)
     .install();
 }

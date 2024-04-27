@@ -36,7 +36,7 @@ unsafe extern "C" fn game_ganon_ganond_AttackAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ganon_ganond")
-    .game_acmd("game_attack", game_ganon_ganond_Attack)
-    .game_acmd("game_attackair", game_ganon_ganond_AttackAir)
+    .game_acmd("game_attack", game_ganon_ganond_Attack, Low)
+    .game_acmd("game_attackair", game_ganon_ganond_AttackAir, Low)
     .install();
 }

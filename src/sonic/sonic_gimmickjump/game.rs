@@ -9,6 +9,6 @@ unsafe extern "C" fn game_sonic_gimmickjump_Fall(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("sonic_gimmickjump")
-    .game_acmd("game_fall", game_sonic_gimmickjump_Fall)
+    .game_acmd("game_fall", game_sonic_gimmickjump_Fall, Low)
     .install();
 }

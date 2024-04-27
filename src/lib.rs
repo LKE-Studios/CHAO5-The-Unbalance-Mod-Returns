@@ -219,12 +219,12 @@ mod tantan;
 mod toonlink;
 mod trail;
 mod waluigi;
-/*mod wario;
+mod wario;
 mod wiifit;
 mod wolf;
 mod yoshi;
-mod younglink;
-mod zelda;*/
+//mod younglink;
+//mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -380,7 +380,7 @@ pub fn main() {
     donkey::install();
     link::install();
     samus::install();
-    //yoshi::install();
+    yoshi::install();
     kirby::install();
     pikachu::install();
     fox::install();
@@ -405,7 +405,7 @@ pub fn main() {
     roy::install();
     metaknight::install();
     pit::install();
-    //wario::install();
+    wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
@@ -416,7 +416,7 @@ pub fn main() {
     lucario::install();
     sonic::install();
     snake::install();
-    //wolf::install();
+    wolf::install();
     szerosuit::install();
     robot::install();
     ike::install();
@@ -438,7 +438,7 @@ pub fn main() {
     pacman::install();
     murabito::install();
     rosetta::install();
-    //wiifit::install();
+    wiifit::install();
     duckhunt::install();
     koopajr::install();
     lucina::install();

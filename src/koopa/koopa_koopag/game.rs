@@ -18,6 +18,6 @@ unsafe extern "C" fn game_koopa_koopag_Attack(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("koopa_koopag")
-    .game_acmd("game_attack", game_koopa_koopag_Attack)
+    .game_acmd("game_attack", game_koopa_koopag_Attack, Low)
     .install();
 }

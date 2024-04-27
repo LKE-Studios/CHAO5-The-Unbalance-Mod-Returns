@@ -52,7 +52,7 @@ unsafe extern "C" fn game_ptrainer_pfushigisou_FinalAir(fighter: &mut L2CAgentBa
 
 pub fn install() {
     Agent::new("ptrainer_pfushigisou")
-    .game_acmd("game_final", game_ptrainer_pfushigisou_Final)
-    .game_acmd("game_finalair", game_ptrainer_pfushigisou_FinalAir)
+    .game_acmd("game_final", game_ptrainer_pfushigisou_Final, Low)
+    .game_acmd("game_finalair", game_ptrainer_pfushigisou_FinalAir, Low)
     .install();
 }

@@ -11,6 +11,6 @@ unsafe extern "C" fn game_samusd_cshot_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd_cshot")
-    .game_acmd("game_shoot", game_samusd_cshot_Shoot)
+    .game_acmd("game_shoot", game_samusd_cshot_Shoot, Low)
     .install();
 }

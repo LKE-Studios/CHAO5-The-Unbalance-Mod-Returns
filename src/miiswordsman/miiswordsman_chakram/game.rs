@@ -18,6 +18,6 @@ unsafe extern "C" fn game_miiswordsman_chakram_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("miiswordsman_chakram")
-    .game_acmd("game_fly", game_miiswordsman_chakram_Fly)
+    .game_acmd("game_fly", game_miiswordsman_chakram_Fly, Low)
     .install();
 }

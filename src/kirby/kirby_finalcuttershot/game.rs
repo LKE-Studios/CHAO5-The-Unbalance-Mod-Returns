@@ -13,6 +13,6 @@ unsafe extern "C" fn game_kirby_finalcuttershot_FinalCutterRegular(fighter: &mut
 
 pub fn install() {
     Agent::new("kirby_finalcuttershot")
-    .game_acmd("game_finalcutterregular", game_kirby_finalcuttershot_FinalCutterRegular)
+    .game_acmd("game_finalcutterregular", game_kirby_finalcuttershot_FinalCutterRegular, Low)
     .install();
 }

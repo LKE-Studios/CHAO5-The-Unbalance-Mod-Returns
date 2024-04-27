@@ -35,8 +35,8 @@ unsafe extern "C" fn game_edge_flare2_Exp(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("edge_flare2")
-    .game_acmd("game_try", game_edge_flare2_Try)
-    .game_acmd("game_fly", game_edge_flare2_Fly)
-    .game_acmd("game_exp", game_edge_flare2_Exp)
+    .game_acmd("game_try", game_edge_flare2_Try, Low)
+    .game_acmd("game_fly", game_edge_flare2_Fly, Low)
+    .game_acmd("game_exp", game_edge_flare2_Exp, Low)
     .install();
 }

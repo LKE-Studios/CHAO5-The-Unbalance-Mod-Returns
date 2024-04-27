@@ -13,6 +13,6 @@ unsafe extern "C" fn game_pichu_kaminari_Regular(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pichu_kaminari")
-    .game_acmd("game_regular", game_pichu_kaminari_Regular)
+    .game_acmd("game_regular", game_pichu_kaminari_Regular, Low)
     .install();
 }

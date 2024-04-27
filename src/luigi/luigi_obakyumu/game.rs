@@ -18,7 +18,7 @@ unsafe extern "C" fn game_luigi_obakyumu_FinalAirShootReady(fighter: &mut L2CAge
 
 pub fn install() {
     Agent::new("luigi_obakyumu")
-    .game_acmd("game_finalshootready", game_luigi_obakyumu_FinalShootReady)
-    .game_acmd("game_finalairshootready", game_luigi_obakyumu_FinalAirShootReady)
+    .game_acmd("game_finalshootready", game_luigi_obakyumu_FinalShootReady, Low)
+    .game_acmd("game_finalairshootready", game_luigi_obakyumu_FinalAirShootReady, Low)
     .install();
 }

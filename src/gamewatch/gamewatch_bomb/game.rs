@@ -20,6 +20,6 @@ unsafe extern "C" fn game_gamewatch_bomb_Burst(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("gamewatch_bomb")
-    .game_acmd("game_burst", game_gamewatch_bomb_Burst)
+    .game_acmd("game_burst", game_gamewatch_bomb_Burst, Low)
     .install();
 }

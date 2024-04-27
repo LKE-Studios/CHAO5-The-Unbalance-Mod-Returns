@@ -19,6 +19,6 @@ unsafe extern "C" fn effect_metaknight_galaxiabeam_Shoot(fighter: &mut L2CAgentB
 
 pub fn install() {
     Agent::new("metaknight_galaxiabeam")
-    .effect_acmd("effect_shoot", effect_metaknight_galaxiabeam_Shoot)
+    .effect_acmd("effect_shoot", effect_metaknight_galaxiabeam_Shoot, Low)
     .install();
 }

@@ -127,9 +127,9 @@ unsafe extern "C" fn game_bayonetta_wickedweavearm_AttackHi4(fighter: &mut L2CAg
 
 pub fn install() {
     Agent::new("bayonetta_wickedweavearm")
-    .game_acmd("game_attacks4hi", game_bayonetta_wickedweavearm_AttackS4Hi)
-    .game_acmd("game_attacks4", game_bayonetta_wickedweavearm_AttackS4)
-    .game_acmd("game_attacks4lw", game_bayonetta_wickedweavearm_AttackS4Lw)
-    .game_acmd("game_attackhi4", game_bayonetta_wickedweavearm_AttackHi4)
+    .game_acmd("game_attacks4hi", game_bayonetta_wickedweavearm_AttackS4Hi, Low)
+    .game_acmd("game_attacks4", game_bayonetta_wickedweavearm_AttackS4, Low)
+    .game_acmd("game_attacks4lw", game_bayonetta_wickedweavearm_AttackS4Lw, Low)
+    .game_acmd("game_attackhi4", game_bayonetta_wickedweavearm_AttackHi4, Low)
     .install();
 }

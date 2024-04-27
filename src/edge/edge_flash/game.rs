@@ -38,6 +38,6 @@ unsafe extern "C" fn game_edge_flash_Attack(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("edge_flash")
-    .game_acmd("game_attack", game_edge_flash_Attack)
+    .game_acmd("game_attack", game_edge_flash_Attack, Low)
     .install();
 }

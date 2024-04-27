@@ -12,6 +12,6 @@ unsafe extern "C" fn game_popo_whitebear_Main(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("popo_whitebear")
-    .game_acmd("game_main", game_popo_whitebear_Main)
+    .game_acmd("game_main", game_popo_whitebear_Main, Low)
     .install();
 }

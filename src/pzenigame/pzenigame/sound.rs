@@ -28,7 +28,7 @@ unsafe extern "C" fn sound_pzenigame_SpecialAirZ(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pzenigame")
-    .sound_acmd("sound_specialz", sound_pzenigame_SpecialZ)
-    .sound_acmd("sound_specialairz", sound_pzenigame_SpecialAirZ)
+    .sound_acmd("sound_specialz", sound_pzenigame_SpecialZ, Low)
+    .sound_acmd("sound_specialairz", sound_pzenigame_SpecialAirZ, Low)
     .install();
 }

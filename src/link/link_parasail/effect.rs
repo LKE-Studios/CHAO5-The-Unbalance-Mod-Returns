@@ -42,9 +42,9 @@ unsafe extern "C" fn effect_link_parasail_GlideLanding(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("link_parasail")    
-    .effect_acmd("effect_ascendjump", effect_link_parasail_AscendJump)
-    .effect_acmd("effect_glide", effect_link_parasail_Glide)
-    .effect_acmd("effect_glideturn", effect_link_parasail_GlideTurn)
-    .effect_acmd("effect_glidedrop", effect_link_parasail_GlideLanding)
+    .effect_acmd("effect_ascendjump", effect_link_parasail_AscendJump, Low)
+    .effect_acmd("effect_glide", effect_link_parasail_Glide, Low)
+    .effect_acmd("effect_glideturn", effect_link_parasail_GlideTurn, Low)
+    .effect_acmd("effect_glidedrop", effect_link_parasail_GlideLanding, Low)
     .install();
 }

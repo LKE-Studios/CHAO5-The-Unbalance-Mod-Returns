@@ -98,10 +98,10 @@ unsafe extern "C" fn sound_ness_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness")
-    .sound_acmd("sound_entryl", sound_ness_EntryL)
-    .sound_acmd("sound_entryr", sound_ness_EntryR)
-    .sound_acmd("sound_speciallwstart", sound_ness_SpecialLwStart)
-    .sound_acmd("sound_specialairlwstart", sound_ness_SpecialAirLwStart)
-    .sound_acmd("sound_win3", sound_ness_Win3)
+    .sound_acmd("sound_entryl", sound_ness_EntryL, Low)
+    .sound_acmd("sound_entryr", sound_ness_EntryR, Low)
+    .sound_acmd("sound_speciallwstart", sound_ness_SpecialLwStart, Low)
+    .sound_acmd("sound_specialairlwstart", sound_ness_SpecialAirLwStart, Low)
+    .sound_acmd("sound_win3", sound_ness_Win3, Low)
     .install();
 }

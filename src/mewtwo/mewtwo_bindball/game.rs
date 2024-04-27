@@ -12,6 +12,6 @@ unsafe extern "C" fn game_mewtwo_bindball_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("mewtwo_bindball")
-    .game_acmd("game_shoot", game_mewtwo_bindball_Shoot)
+    .game_acmd("game_shoot", game_mewtwo_bindball_Shoot, Low)
     .install();
 }

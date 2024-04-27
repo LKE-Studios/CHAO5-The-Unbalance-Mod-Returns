@@ -47,9 +47,9 @@ unsafe extern "C" fn sound_daisy_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("daisy")
-    .sound_acmd("sound_attacklw3", sound_daisy_AttackLw3)
-    .sound_acmd("sound_attackairn", sound_daisy_AttackAirN)
-    .sound_acmd("sound_attackairf", sound_daisy_AttackAirF)
-    .sound_acmd("sound_attackairlw", sound_daisy_AttackAirLw)
+    .sound_acmd("sound_attacklw3", sound_daisy_AttackLw3, Low)
+    .sound_acmd("sound_attackairn", sound_daisy_AttackAirN, Low)
+    .sound_acmd("sound_attackairf", sound_daisy_AttackAirF, Low)
+    .sound_acmd("sound_attackairlw", sound_daisy_AttackAirLw, Low)
     .install();
 }

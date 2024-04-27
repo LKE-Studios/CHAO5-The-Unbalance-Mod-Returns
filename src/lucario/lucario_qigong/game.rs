@@ -19,6 +19,6 @@ unsafe extern "C" fn game_lucario_qigong_Shoot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("lucario_qigong")    
-    .game_acmd("game_shoot", game_lucario_qigong_Shoot)
+    .game_acmd("game_shoot", game_lucario_qigong_Shoot, Low)
     .install();
 }

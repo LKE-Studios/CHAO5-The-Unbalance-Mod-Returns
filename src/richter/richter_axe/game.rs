@@ -23,6 +23,6 @@ unsafe extern "C" fn game_richter_axe_Fly(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("richter_axe")
-    .game_acmd("game_fly", game_richter_axe_Fly)
+    .game_acmd("game_fly", game_richter_axe_Fly, Low)
     .install();
 }

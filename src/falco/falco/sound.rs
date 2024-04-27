@@ -36,7 +36,7 @@ unsafe extern "C" fn sound_falco_SpecialAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("falco")
-    .sound_acmd("sound_speciallw", sound_falco_SpecialLw)
-    .sound_acmd("sound_specialairlw", sound_falco_SpecialAirLw)
+    .sound_acmd("sound_speciallw", sound_falco_SpecialLw, Low)
+    .sound_acmd("sound_specialairlw", sound_falco_SpecialAirLw, Low)
     .install();
 }

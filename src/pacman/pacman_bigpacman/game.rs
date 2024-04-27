@@ -11,6 +11,6 @@ unsafe extern "C" fn game_pacman_bigpacman_Eat(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pacman_bigpacman")
-    .game_acmd("game_eat", game_pacman_bigpacman_Eat)
+    .game_acmd("game_eat", game_pacman_bigpacman_Eat, Low)
     .install();
 }

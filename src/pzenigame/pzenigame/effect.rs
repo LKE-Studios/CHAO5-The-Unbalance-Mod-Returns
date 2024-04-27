@@ -126,7 +126,7 @@ unsafe extern "C" fn effect_pzenigame_SpecialAirZ(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pzenigame")
-    .effect_acmd("effect_specialz", effect_pzenigame_SpecialZ)
-    .effect_acmd("effect_specialairz", effect_pzenigame_SpecialAirZ)
+    .effect_acmd("effect_specialz", effect_pzenigame_SpecialZ, Low)
+    .effect_acmd("effect_specialairz", effect_pzenigame_SpecialAirZ, Low)
     .install();
 }

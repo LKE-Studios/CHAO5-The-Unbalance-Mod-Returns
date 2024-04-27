@@ -16,7 +16,7 @@ unsafe extern "C" fn game_krool_backpack_FlyWind(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("krool_backpack")    
-    .game_acmd("game_fly", game_krool_backpack_Fly)
-    .game_acmd("game_flywind", game_krool_backpack_FlyWind)
+    .game_acmd("game_fly", game_krool_backpack_Fly, Low)
+    .game_acmd("game_flywind", game_krool_backpack_FlyWind, Low)
     .install();
 }

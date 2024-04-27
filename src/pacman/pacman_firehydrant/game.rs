@@ -31,9 +31,9 @@ unsafe extern "C" fn game_pacman_firehydrant_Wait(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pacman_firehydrant")
-    .game_acmd("game_down", game_pacman_firehydrant_Down)
-    .game_acmd("game_fall", game_pacman_firehydrant_Fall)
-    .game_acmd("game_fly", game_pacman_firehydrant_Fly)
-    .game_acmd("game_wait", game_pacman_firehydrant_Wait)
+    .game_acmd("game_down", game_pacman_firehydrant_Down, Low)
+    .game_acmd("game_fall", game_pacman_firehydrant_Fall, Low)
+    .game_acmd("game_fly", game_pacman_firehydrant_Fly, Low)
+    .game_acmd("game_wait", game_pacman_firehydrant_Wait, Low)
     .install();
 }

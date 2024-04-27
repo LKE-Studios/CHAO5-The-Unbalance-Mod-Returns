@@ -20,7 +20,7 @@ unsafe extern "C" fn game_robot_beam_FlyMax(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("robot_beam")
-    .game_acmd("game_fly", game_robot_beam_Fly)
-    .game_acmd("game_flymax", game_robot_beam_FlyMax)
+    .game_acmd("game_fly", game_robot_beam_Fly, Low)
+    .game_acmd("game_flymax", game_robot_beam_FlyMax, Low)
     .install();
 }

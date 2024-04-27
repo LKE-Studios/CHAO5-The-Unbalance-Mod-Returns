@@ -48,9 +48,9 @@ unsafe extern "C" fn game_cloud_wave_HitAir_LB(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("cloud_wave")
-    .game_acmd("game_regular", game_cloud_wave_Regular)
-    .game_acmd("game_regularair", game_cloud_wave_RegularAir)
-    .game_acmd("game_hit_lb", game_cloud_wave_Hit_LB)
-    .game_acmd("game_hitair_lb", game_cloud_wave_HitAir_LB)
+    .game_acmd("game_regular", game_cloud_wave_Regular, Low)
+    .game_acmd("game_regularair", game_cloud_wave_RegularAir, Low)
+    .game_acmd("game_hit_lb", game_cloud_wave_Hit_LB, Low)
+    .game_acmd("game_hitair_lb", game_cloud_wave_HitAir_LB, Low)
     .install();
 }

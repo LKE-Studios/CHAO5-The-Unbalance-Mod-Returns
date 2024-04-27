@@ -15,6 +15,6 @@ unsafe extern "C" fn game_pacman_trampoline_Break(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pacman_trampoline")
-    .game_acmd("game_break", game_pacman_trampoline_Break)
+    .game_acmd("game_break", game_pacman_trampoline_Break, Low)
     .install();
 }

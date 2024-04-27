@@ -25,7 +25,7 @@ unsafe extern "C" fn game_krool_crown_Shot(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("krool_crown")    
-    .game_acmd("game_throw", game_krool_crown_Throw)
-    .game_acmd("game_shot", game_krool_crown_Shot)
+    .game_acmd("game_throw", game_krool_crown_Throw, Low)
+    .game_acmd("game_shot", game_krool_crown_Shot, Low)
     .install();
 }

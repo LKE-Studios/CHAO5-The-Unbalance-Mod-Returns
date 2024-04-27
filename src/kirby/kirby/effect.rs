@@ -57,7 +57,7 @@ unsafe extern "C" fn effect_kirby_SpecialAirHiH(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("kirby")
-    .effect_acmd("effect_specialhih", effect_kirby_SpecialHiH)
-    .effect_acmd("effect_specialairhih", effect_kirby_SpecialAirHiH)
+    .effect_acmd("effect_specialhih", effect_kirby_SpecialHiH, Low)
+    .effect_acmd("effect_specialairhih", effect_kirby_SpecialAirHiH, Low)
     .install();
 }

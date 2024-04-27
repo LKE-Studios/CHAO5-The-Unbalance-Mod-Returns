@@ -17,6 +17,6 @@ unsafe extern "C" fn game_miigunner_attackairf_bullet_Fly(fighter: &mut L2CAgent
 
 pub fn install() {
     Agent::new("miigunner_attackairf_bullet")
-    .game_acmd("game_fly", game_miigunner_attackairf_bullet_Fly)
+    .game_acmd("game_fly", game_miigunner_attackairf_bullet_Fly, Low)
     .install();
 }

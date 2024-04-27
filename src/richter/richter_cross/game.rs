@@ -22,7 +22,7 @@ unsafe extern "C" fn game_richter_cross_Turn(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("richter_cross")
-    .game_acmd("game_fly", game_richter_cross_Fly)
-    .game_acmd("game_turn", game_richter_cross_Turn)
+    .game_acmd("game_fly", game_richter_cross_Fly, Low)
+    .game_acmd("game_turn", game_richter_cross_Turn, Low)
     .install();
 }

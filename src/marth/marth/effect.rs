@@ -14,6 +14,6 @@ unsafe extern "C" fn effect_marth_AttackAirLw(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("marth")
-    .effect_acmd("effect_attackairlw", effect_marth_AttackAirLw)
+    .effect_acmd("effect_attackairlw", effect_marth_AttackAirLw, Low)
     .install();
 }

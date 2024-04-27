@@ -26,6 +26,6 @@ unsafe extern "C" fn game_ken_shinryuken_Final(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ken_shinryuken")
-    .game_acmd("game_final", game_ken_shinryuken_Final)
+    .game_acmd("game_final", game_ken_shinryuken_Final, Low)
     .install();
 }
