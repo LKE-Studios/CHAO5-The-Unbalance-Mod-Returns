@@ -223,8 +223,8 @@ mod wario;
 mod wiifit;
 mod wolf;
 mod yoshi;
-//mod younglink;
-//mod zelda;
+mod younglink;
+mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -393,13 +393,13 @@ pub fn main() {
     ganon::install();
     gamewatch::install();
     mariod::install();
-    //zelda::install();
+    zelda::install();
     sheik::install();
     falco::install();
     peach::install();
     popo::install();
     nana::install();
-    //younglink::install();
+    younglink::install();
     mewtwo::install();
     pichu::install();
     roy::install();

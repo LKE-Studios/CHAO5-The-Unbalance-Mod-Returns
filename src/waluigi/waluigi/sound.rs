@@ -899,6 +899,10 @@ pub fn install() {
     .sound_acmd("sound_superspecial2start_waluigi", sound_waluigi_SuperSpecial2Start, Low)
     .sound_acmd("sound_finalstart_waluigi", sound_waluigi_FinalStart, Low)
     .sound_acmd("sound_finalairstart_waluigi", sound_waluigi_FinalAirStart, Low)
+    .sound_acmd("sound_appealhil_waluigi", sound_waluigi_AppealHiL, Low)
+    .sound_acmd("sound_appealhir_waluigi", sound_waluigi_AppealHiR, Low)
+    .sound_acmd("sound_appeallwl_waluigi", sound_waluigi_AppealLwL, Low)
+    .sound_acmd("sound_appeallwr_waluigi", sound_waluigi_AppealLwR, Low)
     .sound_acmd("sound_entryl_waluigi", sound_waluigi_EntryL, Low)
     .sound_acmd("sound_entryr_waluigi", sound_waluigi_EntryR, Low)
     .install();

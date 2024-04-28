@@ -1,11 +1,9 @@
-mod game;
-mod effect;
-mod sound;
-mod expression;
+mod younglink;
+mod younglink_bowarrow;
+mod younglink_boomerang;
 
 pub fn install() {
-    game::install();    
-    effect::install();
-    sound::install();
-    expression::install();
+    younglink::install();    
+    younglink_bowarrow::install();
+    younglink_boomerang::install();
 }
