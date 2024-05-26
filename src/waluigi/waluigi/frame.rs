@@ -212,7 +212,8 @@ pub unsafe extern "C" fn final_start_waluigi(fighter: &mut L2CFighterCommon) {
 
 pub unsafe extern "C" fn frame_waluigi_diceblock_Main(weapon: &mut L2CFighterBase) {
     let status_kind = StatusModule::status_kind(weapon.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(weapon.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(weapon.module_accessor);
     let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
     let color = WorkModule::get_int(weapon.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
