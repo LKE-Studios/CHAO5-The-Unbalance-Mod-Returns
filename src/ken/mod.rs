@@ -1,9 +1,9 @@
-mod game;
-mod frame;
-mod effect;
+mod ken;
+mod ken_hadoken;
+mod ken_shinryuken;
 
 pub fn install() {
-    game::install();
-    frame::install();
-    effect::install();
+    ken::install();
+    ken_hadoken::install();
+    ken_shinryuken::install();
 }

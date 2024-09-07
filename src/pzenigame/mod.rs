@@ -1,15 +1,7 @@
-mod game;
-mod effect;
-mod expression;
-mod sound;
-mod status;
-//mod frame;
+mod pzenigame;
+mod pzenigame_water;
 
 pub fn install() {
-    game::install();    
-    effect::install();
-    expression::install();
-    status::install();
-    sound::install();
-    //frame::install();
+    pzenigame::install();    
+    pzenigame_water::install();  
 }

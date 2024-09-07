@@ -1,7 +1,5 @@
-mod game;
-mod frame;
+mod chrom;
 
 pub fn install() {
-    game::install();    
-    frame::install();
+    chrom::install(); 
 }

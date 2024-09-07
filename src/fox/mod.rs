@@ -1,11 +1,11 @@
-mod game;
-mod frame;
-mod effect;
-mod sound;
+mod fox;
+mod fox_blaster_bullet;
+mod fox_illusion;
+mod fox_arwingshot;
 
 pub fn install() {
-    game::install(); 
-    frame::install();
-    effect::install();  
-    sound::install(); 
+    fox::install(); 
+    fox_blaster_bullet::install();
+    fox_illusion::install();
+    fox_arwingshot::install();
 }

@@ -1,16 +1,11 @@
-mod game;
-mod effect;
-mod sound;
-mod expression;
-mod frame;
-mod status;
-mod param;
+mod metaknight;
+mod metaknight_galaxiabeam;
 
 pub fn install() {
-    game::install();
-    effect::install();
-    sound::install();
-    expression::install();
-    frame::install();
-    status::install();
+    metaknight::install(); 
+    metaknight_galaxiabeam::install(); 
+    smashline::add_param_object("metaknight", "param_glide");
+    smashline::add_param_object("metaknight", "param_meta_power");
+    smashline::add_param_object("metaknight", "param_galaxiabeam");
+    smashline::clone_weapon("mario", "fireball", "metaknight", "galaxiabeam", false);
 }

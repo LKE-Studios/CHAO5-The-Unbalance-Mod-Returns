@@ -1,9 +1,11 @@
-mod game;
-mod frame;
-mod status;
+mod lucario;
+mod lucario_qigong;
+mod lucario_auraball;
+mod lucario_lucariom;
 
 pub fn install() {
-    game::install(); 
-    frame::install();   
-    status::install();
+    lucario::install(); 
+    lucario_qigong::install();   
+    lucario_auraball::install();
+    lucario_lucariom::install();
 }

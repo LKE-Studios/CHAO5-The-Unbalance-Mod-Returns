@@ -1,13 +1,11 @@
-mod game;
-mod sound;
-mod effect;
-mod expression;
-//mod frame;
+mod claus;
+mod claus_pkfire;
+mod claus_pkstarstorm;
+mod claus_pkthunder;
 
 pub fn install() {
-    game::install(); 
-    sound::install();  
-    effect::install();
-    expression::install();
-    //frame::install();
+    claus::install(); 
+    claus_pkfire::install(); 
+    claus_pkstarstorm::install(); 
+    claus_pkthunder::install(); 
 }

@@ -1,13 +1,11 @@
-mod game;
-mod sound;
-mod effect;
-mod expression;
-mod frame;
+mod lucas;
+mod lucas_pkfire;
+mod lucas_pkstarstorm;
+mod lucas_pkthunder;
 
 pub fn install() {
-    game::install(); 
-    sound::install();  
-    effect::install();
-    expression::install();
-    frame::install();
+    lucas::install(); 
+    lucas_pkfire::install(); 
+    lucas_pkstarstorm::install(); 
+    lucas_pkthunder::install(); 
 }

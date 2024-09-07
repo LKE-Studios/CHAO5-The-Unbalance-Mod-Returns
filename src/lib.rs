@@ -16,7 +16,6 @@
     clippy::if_same_then_else)]
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
-//#[macro_use]
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
@@ -131,6 +130,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
+mod basyaamo;
 mod bayonetta;
 mod brave;
 mod buddy;
@@ -142,7 +142,7 @@ mod daisy;
 mod dedede;
 mod demon;
 mod diddy;
-mod dolly;
+pub mod dolly;
 mod donkey;
 mod duckhunt;
 mod edge;
@@ -175,7 +175,7 @@ mod mariod;
 mod marth;
 mod master;
 mod metaknight;
-mod mewtwo;
+pub mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -195,8 +195,8 @@ mod pit;
 mod pitb;
 mod plizardon;
 mod popo;
-mod purin;
 mod ptrainer;
+mod purin;
 mod pzenigame;
 mod reflet;
 mod richter;
@@ -211,7 +211,7 @@ mod samusd;
 mod sheik;
 mod shizue;
 mod shulk;
-mod silver;
+pub mod silver;
 mod simon;
 mod snake;
 mod sonic;
@@ -231,6 +231,7 @@ pub mod singletons;
 pub mod helper;
 pub mod imports;
 mod utils;
+mod offsets;
 mod common;
 
 const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
@@ -240,7 +241,8 @@ const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
     0xf9, 0xe8, 0xfe, 0xdf, 0x08, 0xf4, 0x03, 0x02, 0x2a, 0xf5, 0x03, 0x01,
     0xaa, 0xf3, 0x03, 0x00, 0xaa, 0x88, 0x06, 0x00, 0x36
 ];
-static mut DECLARE_CONST_OFFSET : usize = 0x3727390; //13.0.1
+
+static mut DECLARE_CONST_OFFSET : usize = 0x3728010; //13.0.2
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
     haystack.windows(needle.len()).position(|window| window == needle)
@@ -252,10 +254,13 @@ unsafe fn declare_const_hook(unk: u64, constant: *const u8, mut value: u32) {
     if str.contains("FIGHTER_RYU_STATUS_KIND_NUM") {
         value = 0x205;
     }
-    original!()(unk,constant,value)
+    if str.contains("FIGHTER_LINK_STATUS_KIND_NUM") {
+        value = 0x1F2;
+    }
+    original!()(unk, constant, value)
 }
 
-#[skyline::hook(offset=0x3f0028, inline)]
+#[skyline::hook(offset=0x3f003c, inline)]
 pub unsafe fn offset_dump(ctx: &InlineCtx) {
 	let text = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
 	println!("Function Offset: {:#X}", ctx.registers[8].x.as_ref() - text);
@@ -273,7 +278,6 @@ pub unsafe fn motionmodule_change_motion_replace(
     arg8: bool
 ) -> u64 {
 	let fighter_kind = smash::app::utility::get_kind(module_accessor);
-
     if fighter_kind == *FIGHTER_KIND_KOOPAG {
 		let GIGA_DTILT = &mut FIGHTER_BOOL_1[get_player_number(module_accessor)];
 		let GIGA_DASH_ATTACK = &mut FIGHTER_BOOL_2[get_player_number(module_accessor)];
@@ -349,14 +353,13 @@ extern "C" {
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_string = unsafe {from_c_str(string)};
 	if original_string.contains("Ver.") {
-		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.9.0 \0", original_string);
+		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.9.5 \0", original_string);
 		call_original!(arg, skyline::c_str(&version_string));
 	}
 	else {
 		call_original!(arg, string);
 	}
 }
-
 
 #[skyline::main(name = "chao5")]
 pub fn main() {
@@ -365,12 +368,13 @@ pub fn main() {
         allow_ui_chara_hash_online(0xe7bbfb2e4); //Claus
         allow_ui_chara_hash_online(0xfec9738f6); //Silver
         allow_ui_chara_hash_online(0x108658e080); //Waluigi
+        allow_ui_chara_hash_online(hash40("ui_chara_basyaamo")); //Blaziken
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
         let text_size = (getRegionAddress(Region::Rodata) as usize) - (text_ptr as usize);
         let text = std::slice::from_raw_parts(text_ptr, text_size);
-        if let Some(offset) = find_subsequence(text, DECLARE_CONST_SEARCH_CODE){
+        if let Some(offset) = find_subsequence(text, DECLARE_CONST_SEARCH_CODE) {
             DECLARE_CONST_OFFSET = offset;
         }
     }
@@ -469,13 +473,14 @@ pub fn main() {
     koopag::install();
     silver::install();
     waluigi::install();
+    basyaamo::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,
         log_remove_motion_partial,
         log_add_motion_partial,
         motionmodule_change_motion_replace,
-        change_version_string_hook
+        change_version_string_hook,
     );
     common::install();
 }

@@ -1,9 +1,5 @@
-mod game;
-mod frame;
-mod sound;
+mod littlemac;
 
 pub fn install() {
-    game::install();  
-    frame::install();  
-    sound::install();
+    littlemac::install();
 }

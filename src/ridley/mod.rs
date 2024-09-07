@@ -1,13 +1,8 @@
-mod game;
-mod effect;
-mod frame;
-//mod status;
-mod sound;
+mod ridley;
+mod ridley_breath;
 
 pub fn install() {
-    game::install();
-    effect::install();    
-    frame::install();
-    //status::install();
-    sound::install();
+    ridley::install();
+    ridley_breath::install();
+    smashline::add_param_object("ridley", "param_glide");
 }

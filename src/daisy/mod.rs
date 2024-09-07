@@ -1,13 +1,7 @@
-mod game;
-mod effect;
-mod sound;
-mod frame;
-mod expression;
+mod daisy;
+mod daisy_kinopiospore;
 
 pub fn install() {
-    game::install();
-    effect::install();
-    sound::install();
-    frame::install();
-    expression::install();
+    daisy::install(); 
+    daisy_kinopiospore::install(); 
 }

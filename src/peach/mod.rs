@@ -1,9 +1,7 @@
-mod game;
-mod effect;
-mod frame;
+mod peach;
+mod peach_kinopiospore;
 
 pub fn install() {
-    game::install();
-    effect::install();
-    frame::install();
+    peach::install();
+    peach_kinopiospore::install();
 }

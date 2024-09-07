@@ -1,15 +1,7 @@
-mod game;
-mod frame;
-mod status;
-mod effect;
-mod expression;
-mod sound;
+mod koopag;
+mod koopag_breath;
 
 pub fn install() {
-    game::install();  
-    frame::install();  
-    status::install();
-    effect::install();
-    expression::install();
-    sound::install();
+    koopag::install();
+    koopag_breath::install();  
 }

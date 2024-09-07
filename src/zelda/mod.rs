@@ -1,7 +1,9 @@
-mod game;
-mod frame;
+mod zelda;
+mod zelda_dein_s;
+mod zelda_phantom;
 
 pub fn install() {
-    game::install();  
-    frame::install();
+    zelda::install();  
+    zelda_dein_s::install();
+    zelda_phantom::install();
 }

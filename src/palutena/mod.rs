@@ -1,13 +1,17 @@
-mod game;
-mod effect;
-mod frame;
-mod sound;
-mod status;
+mod palutena;
+mod palutena_autoaimbullet;
+mod palutena_beam;
+mod palutena_blackhole;
+mod palutena_explosiveflame;
+mod palutena_reflectionboard;
 
 pub fn install() {
-    game::install();    
-    effect::install();
-    frame::install();
-    sound::install();
-    status::install();
+    palutena::install();    
+    palutena_autoaimbullet::install(); 
+    palutena_beam::install(); 
+    palutena_blackhole::install();
+    palutena_explosiveflame::install();
+    palutena_reflectionboard::install();
+    smashline::add_param_object("palutena", "param_glide");
+    smashline::add_param_object("palutena", "param_divine_power_up");
 }

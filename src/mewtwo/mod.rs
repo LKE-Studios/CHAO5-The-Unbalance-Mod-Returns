@@ -1,9 +1,11 @@
-mod game;
-pub mod frame;
-mod effect;
+pub mod mewtwo;
+mod mewtwo_shadowball;
+mod mewtwo_bindball;
+mod mewtwo_psychobreak;
 
 pub fn install() {
-    game::install(); 
-    frame::install();
-    effect::install();   
+    mewtwo::install(); 
+    mewtwo_shadowball::install();
+    mewtwo_bindball::install();
+    mewtwo_psychobreak::install();
 }

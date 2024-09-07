@@ -1,12 +1,11 @@
 use crate::imports::BuildImports::*;
 use super::super::is_glider;
 
-
 #[skyline::hook(replace = L2CFighterCommon_status_JumpAerialSub)]
 unsafe fn status_jumpaerialsub(fighter: &mut L2CFighterCommon, motion: L2CValue, keep_jump: L2CValue) -> L2CValue {
     let ret = call_original!(fighter, motion, keep_jump);
     // Enable Gliding
-    if is_glider(fighter.global_table[0x2].get_i32()) {
+    if is_glider(fighter.global_table[FIGHTER_KIND].get_i32()) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_AVAILABLE_GLIDE);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE);
     }
@@ -25,7 +24,7 @@ unsafe fn status_jumpaerial_main(fighter: &mut L2CFighterCommon) -> L2CValue {
         return 0.into();
     }
     if MotionModule::is_end(fighter.module_accessor) {
-        if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_AIR {
+        if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());
             return 1.into();
         }

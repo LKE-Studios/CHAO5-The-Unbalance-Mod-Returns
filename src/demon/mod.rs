@@ -1,7 +1,9 @@
-mod game;
-mod frame;
+mod demon;
+mod demon_blaster;
+mod demon_blasterchest;
 
 pub fn install() {
-    game::install();
-    frame::install();
+    demon::install(); 
+    demon_blaster::install();
+    demon_blasterchest::install();
 }

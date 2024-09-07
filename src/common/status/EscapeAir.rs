@@ -53,8 +53,8 @@ pub unsafe fn change_status_request_hook(module_accessor: &mut smash::app::Battl
     }
 }
 
-#[common_status_script(status = FIGHTER_STATUS_KIND_ESCAPE_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE, symbol = "_ZN7lua2cpp16L2CFighterCommon20status_pre_EscapeAirEv")]
-pub unsafe fn status_pre_escape_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+#[skyline::hook(replace = L2CFighterCommon_status_pre_EscapeAir)]
+pub unsafe fn status_EscapeAir_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     //Automatically forces you to the ground if you're buffering Wavedashes during the startup of Airdodge
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_IS_WAVEDASH) && stick_y < 0.5 && 
@@ -66,12 +66,18 @@ pub unsafe fn status_pre_escape_air(fighter: &mut L2CFighterCommon) -> L2CValue 
     call_original!(fighter)
 }
 
+fn nro_hook(info: &skyline::nro::NroInfo) {
+    if info.name == "common" {
+        skyline::install_hooks!(
+            status_EscapeAir_Pre
+        );
+    }
+}
+
 pub fn install() {
+    skyline::nro::add_hook(nro_hook);
     skyline::install_hooks!(
         change_status_hook,
-        change_status_request_hook
-    );
-    install_status_scripts!(
-        status_pre_escape_air
+        change_status_request_hook,
     );
 }

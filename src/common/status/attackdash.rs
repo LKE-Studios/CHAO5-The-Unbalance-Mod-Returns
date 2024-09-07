@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_AttackDash)]
-unsafe fn status_attackdash(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_AttackDash(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_dash"), 0.0, 1.0, false, 0.0, false, false);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_TURN);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_DASH);
@@ -34,7 +34,7 @@ unsafe fn status_attackdash(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_AttackDash_Main)]
-unsafe fn status_attackdash_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_AttackDash_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     let fighter_kind = smash::app::utility::get_kind(boma);
     let frame = MotionModule::frame(boma);
@@ -167,8 +167,8 @@ unsafe fn status_attackdash_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
-            status_attackdash,
-            status_attackdash_main
+            status_AttackDash,
+            status_AttackDash_Main
         );
     }
 }

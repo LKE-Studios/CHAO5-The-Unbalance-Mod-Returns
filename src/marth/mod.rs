@@ -1,7 +1,5 @@
-mod game;
-mod effect;
+mod marth;
 
 pub fn install() {
-    game::install();   
-    effect::install(); 
+    marth::install();
 }

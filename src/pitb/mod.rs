@@ -1,11 +1,8 @@
-mod game;
-mod effect;
-mod frame;
-mod sound;
+mod pitb;
+mod pitb_bowarrow;
 
 pub fn install() {
-    game::install();    
-    effect::install();
-    frame::install();
-    sound::install();
+    pitb::install(); 
+    pitb_bowarrow::install();
+    smashline::add_param_object("pitb", "param_glide");
 }

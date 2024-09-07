@@ -1,7 +1,9 @@
-mod game;
-mod frame;
+mod wolf;
+mod wolf_illusion;
+mod wolf_blaster_bullet;
 
 pub fn install() {
-    game::install();  
-    frame::install();  
+    wolf::install();  
+    wolf_illusion::install();
+    wolf_blaster_bullet::install();
 }

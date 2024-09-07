@@ -1,7 +1,9 @@
-mod game;
-mod frame;
+mod gekkouga;
+mod gekkouga_shuriken;
+mod gekkouga_water;
 
 pub fn install() {
-    game::install();    
-    frame::install();
+    gekkouga::install();
+    gekkouga_shuriken::install();
+    gekkouga_water::install();
 }

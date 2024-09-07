@@ -1,9 +1,7 @@
-mod game;
-mod frame;
-mod status;
+mod ganon;
+mod ganon_ganond;
 
 pub fn install() {
-    game::install();   
-    frame::install(); 
-    status::install();
+    ganon::install(); 
+    ganon_ganond::install();
 }

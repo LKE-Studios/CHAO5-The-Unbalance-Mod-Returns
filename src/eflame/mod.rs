@@ -1,9 +1,11 @@
-mod game;
-mod effect;
-mod frame;
+mod eflame;
+mod eflame_esword;
+mod eflame_blazepillar;
+mod eflame_firepillar;
 
 pub fn install() {
-    game::install();
-    effect::install(); 
-    frame::install();
+    eflame::install(); 
+    eflame_esword::install(); 
+    eflame_blazepillar::install(); 
+    eflame_firepillar::install(); 
 }

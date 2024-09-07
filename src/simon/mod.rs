@@ -1,7 +1,11 @@
-mod game;
-mod frame;
+mod simon;
+mod simon_axe;
+mod simon_cross;
+mod simon_whip;
 
 pub fn install() {
-    game::install();   
-    frame::install();
+    simon::install();
+    simon_axe::install();
+    simon_cross::install();
+    simon_whip::install();
 }

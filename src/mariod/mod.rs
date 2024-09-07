@@ -1,9 +1,9 @@
-mod game;
-mod sound;
-mod effect;
+mod mariod;
+mod mariod_drcapsule;
+mod mariod_hugecapsule;
 
 pub fn install() {
-    game::install();
-    sound::install();
-    effect::install();    
+    mariod::install();
+    mariod_drcapsule::install();
+    mariod_hugecapsule::install();
 }

@@ -1,9 +1,9 @@
-mod game;
-pub mod frame;
-mod effect;
+mod dolly;
+mod dolly_wave;
+mod dolly_burst;
 
 pub fn install() {
-    game::install();    
-    frame::install();
-    effect::install();
+    dolly::install(); 
+    dolly_wave::install();
+    dolly_burst::install();
 }

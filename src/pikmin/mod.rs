@@ -1,5 +1,9 @@
-mod game;
+mod pikmin;
+mod pikmin_dolfin;
+mod pikmin_pikmin; 
 
 pub fn install() {
-    game::install();    
+    pikmin::install();  
+    pikmin_dolfin::install();  
+    pikmin_pikmin::install(); 
 }

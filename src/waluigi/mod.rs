@@ -1,17 +1,8 @@
-use crate::imports::BuildImports::*;
-
-mod game;
-pub mod status;
-pub mod frame;
-pub mod effect;
-pub mod sound;
-mod expression;
+mod waluigi;
+mod waluigi_diceblock;
 
 pub fn install() {
-    game::install();    
-    status::install();
-    effect::install();
-    sound::install();
-    frame::install();
-    expression::install();
+    waluigi::install();
+    waluigi_diceblock::install();
+    smashline::clone_weapon("mario", "fireball", "dolly", "diceblock", false);
 }

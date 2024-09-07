@@ -1,9 +1,9 @@
-mod game;
-mod sound;
-mod frame;
+mod dedede;
+mod dedede_gordo;
+mod dedede_star;
 
 pub fn install() {
-    game::install();    
-    sound::install();
-    frame::install();
+    dedede::install(); 
+    dedede_gordo::install();
+    dedede_star::install();
 }
