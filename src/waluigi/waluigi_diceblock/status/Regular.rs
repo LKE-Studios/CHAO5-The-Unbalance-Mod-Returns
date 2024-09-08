@@ -14,7 +14,7 @@ unsafe extern "C" fn waluigi_diceblock_Regular_Main_loop(weapon: &mut L2CWeaponC
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let remaining_life = life <= 0;
     if !remaining_life {
-        if !GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
+        if !GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
             return 0.into();
         }
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));

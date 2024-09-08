@@ -19,6 +19,8 @@
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
+use arcropolis_api::load_original_file;
+use std::collections::HashMap;
 use skyline::{c_str, from_c_str, nn::ro::LookupSymbol};
 use skyline::libc::c_char;
 use skyline::nro::{self, NroInfo};
@@ -131,7 +133,7 @@ pub mod globals {
 }
 
 mod basyaamo;
-mod bayonetta;
+/*mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -173,9 +175,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;
+mod master;*/
 mod metaknight;
-pub mod mewtwo;
+/*pub mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -190,9 +192,9 @@ mod pfushigisou;
 mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;
+mod pikmin;*/
 mod pit;
-mod pitb;
+/*mod pitb;
 mod plizardon;
 mod popo;
 mod ptrainer;
@@ -225,7 +227,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;
+mod zelda;*/
 
 pub mod singletons;
 pub mod helper;
@@ -361,13 +363,43 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 	}
 }
 
+pub static mut CLASSIC_BLAZIKEN: bool = false;
+pub static mut MARKED_COLORS: [bool; 256] = [false; 256];
+
+pub unsafe fn is_basyaamo(module_accessor: *mut BattleObjectModuleAccessor) -> bool {
+    let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    MARKED_COLORS[color as usize]
+}
+
+#[arcropolis_api::arc_callback]
+fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
+    let mut is_basyaamo: bool = false;
+    unsafe {
+        if CLASSIC_BLAZIKEN {
+            is_basyaamo = true;
+        }
+    }
+    if is_basyaamo {
+        match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_basyaamo.nutexb") {
+            Ok(s) => {
+                data[..s.len()].copy_from_slice(&s);
+                return Some(s.len());
+            },
+            Err(_err) => {
+                return load_original_file(hash, data);
+            }
+        }
+    }
+    load_original_file(hash, data)
+}
+
 #[skyline::main(name = "chao5")]
 pub fn main() {
     unsafe {
         extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
-        allow_ui_chara_hash_online(0xe7bbfb2e4); //Claus
-        allow_ui_chara_hash_online(0xfec9738f6); //Silver
-        allow_ui_chara_hash_online(0x108658e080); //Waluigi
+        allow_ui_chara_hash_online(hash40("ui_chara_claus")); //Claus
+        allow_ui_chara_hash_online(hash40("ui_chara_silver")); //Silver
+        allow_ui_chara_hash_online(hash40("ui_chara_waluigi")); //Waluigi
         allow_ui_chara_hash_online(hash40("ui_chara_basyaamo")); //Blaziken
     }
     unsafe {
@@ -378,7 +410,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    mario::install();
+    /*mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -404,10 +436,10 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();
+    roy::install();*/
     metaknight::install();
     pit::install();
-    wario::install();
+    /*wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
@@ -472,7 +504,7 @@ pub fn main() {
     claus::install();
     koopag::install();
     silver::install();
-    waluigi::install();
+    waluigi::install();*/
     basyaamo::install();
     skyline::install_hooks!(
         declare_const_hook, 
@@ -483,4 +515,5 @@ pub fn main() {
         change_version_string_hook,
     );
     common::install();
+    file_callback::install("standard/staffroll/texture/standard_staffroll_captain.nutexb", 924480);
 }

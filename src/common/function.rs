@@ -227,7 +227,7 @@ unsafe extern "C" fn basyaamo_init(fighter: &mut L2CFighterCommon) {
     fighter.global_table[CHECK_SPECIAL_COMMAND].assign(&L2CValue::Ptr(basyaamo_check_special_command as *const () as _));
 }
 
-unsafe extern "C" fn basyaamo_check_special_command(agent: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn basyaamo_check_special_command(fighter: &mut L2CFighterCommon) -> L2CValue {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let BASYAAMO = color >= 120 && color <= 127;
@@ -616,11 +616,11 @@ unsafe extern "C" fn captain_on_attack(vtable: u64, fighter: &mut Fighter, log: 
     let BASYAAMO = color >= 120 && color <= 127;
     if BASYAAMO {
         if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_N ||
-        (StatusModule::status_kind(module_accessor) == FIGHTER_BLAZIKEN_STATUS_KIND_SPECIAL_N_OVERHEAT && MotionModule::frame(module_accessor) <= 40.0) {
+        (StatusModule::status_kind(module_accessor) == FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT && MotionModule::frame(module_accessor) <= 40.0) {
             return 0;
         }
-        if StatusModule::status_kind(module_accessor) == FIGHTER_BLAZIKEN_STATUS_KIND_SPECIAL_N_OVERHEAT && MotionModule::frame(module_accessor) > 40.0 {
-            do_critical_zoom(module_accessor, log, 11, smash::hash40("param_special_n"), 1, 0, 0, 0, 0);
+        if StatusModule::status_kind(module_accessor) == FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT && MotionModule::frame(module_accessor) > 40.0 {
+            do_critical_zoom(module_accessor, log, 11, hash40("param_special_n"), 1, 0, 0, 0, 0);
             return 0;
         }
     }
@@ -629,7 +629,7 @@ unsafe extern "C" fn captain_on_attack(vtable: u64, fighter: &mut Fighter, log: 
 
 //The original critical zoom-in function
 #[skyline::from_offset(0x696720)]
-unsafe extern "C" fn do_critical_zoom(module_accessor: *mut BattleObjectModuleAccessor, log: u64, unk1: u8, param_hash: u64, unk3: u64, unk4: u32, unk5: u32, unk6: i8, unk7: i8) -> u8;
+unsafe extern "C" fn do_critical_zoom(module_accessor: *mut smash::app::BattleObjectModuleAccessor, log: u64, unk1: u8, param_hash: u64, unk3: u64, unk4: u32, unk5: u32, unk6: i8, unk7: i8) -> u8;
 
 pub fn install() {
     Agent::new("fighter")

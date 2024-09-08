@@ -510,26 +510,6 @@ unsafe extern "C" fn sound_basyaamo_SpecialAirN(fighter: &mut L2CAgentBase) {
     }
 }
 
-//SpecialAirNOverheat
-unsafe extern "C" fn sound_basyaamo_SpecialAirNOverheat(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("vc_captain_003"));
-    }
-    frame(fighter.lua_state_agent, 12.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_captain_special_s01"));
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_captain_special_h01"));
-    }
-    frame(fighter.lua_state_agent, 41.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("vc_captain_002"));
-    }
-}
-
 //SpecialS
 unsafe extern "C" fn sound_basyaamo_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
@@ -776,7 +756,6 @@ pub fn install() {
     .sound_acmd("sound_catch_basyaamo", sound_basyaamo_Catch, Low)
     .sound_acmd("sound_catchdash_basyaamo", sound_basyaamo_CatchDash, Low)
     .sound_acmd("sound_catchturn_basyaamo", sound_basyaamo_CatchTurn, Low)
-    .sound_acmd("sound_catchattack_basyaamo", sound_basyaamo_CatchAttack, Low)
     .sound_acmd("sound_throwf_basyaamo", sound_basyaamo_ThrowF, Low)
     .sound_acmd("sound_throwb_basyaamo", sound_basyaamo_ThrowB, Low)
     .sound_acmd("sound_throwhi_basyaamo", sound_basyaamo_ThrowHi, Low)
@@ -793,10 +772,12 @@ pub fn install() {
     .sound_acmd("sound_slipattack_basyaamo", sound_basyaamo_SlipAttack, Low)
     .sound_acmd("sound_specialn_basyaamo", sound_basyaamo_SpecialN, Low)
     .sound_acmd("sound_specialairn_basyaamo", sound_basyaamo_SpecialAirN, Low)
-    .sound_acmd("sound_specials_basyammo", sound_basyaamo_SpecialS, Low)
-    .sound_acmd("sound_specialairs_basyammo", sound_basyaamo_SpecialAirS, Low)
+    .sound_acmd("sound_specialnoverheat_basyaamo", sound_basyaamo_SpecialNOverheat, Low)
+    .sound_acmd("sound_specials_basyaamo", sound_basyaamo_SpecialS, Low)
+    .sound_acmd("sound_specialairs_basyaamo", sound_basyaamo_SpecialAirS, Low)
     .sound_acmd("sound_specialhi_basyaamo", sound_basyaamo_SpecialHi, Low)
     .sound_acmd("sound_specialairhi_basyaamo", sound_basyaamo_SpecialAirHi, Low)
+    .sound_acmd("sound_specialhioverheat_basyaamo", sound_basyaamo_SpecialHiOverheat, Low)
     .sound_acmd("sound_speciallw_basyaamo", sound_basyaamo_SpecialLw, Low)
     .sound_acmd("sound_speciallwloop_basyaamo", sound_basyaamo_SpecialLwLoop, Low)
     .sound_acmd("sound_speciallwlanding_basyaamo", sound_basyaamo_SpecialLwLanding, Low)

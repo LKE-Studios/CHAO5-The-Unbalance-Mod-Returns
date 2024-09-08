@@ -1,5 +1,5 @@
 use crate::imports::BuildImports::*;
-//use crate::ryu::ryu::status::KamehamehaCharge::*;
+use crate::ryu::ryu::status::KamehamehaCharge::*;
 
 //Attack11W
 unsafe extern "C" fn game_ryu_Attack11W(fighter: &mut L2CAgentBase) {
@@ -876,7 +876,7 @@ unsafe extern "C" fn game_ryu_DownAttackU(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*//Kamehameha_Start
+//Kamehameha_Start
 unsafe extern "C" fn game_ryu_Kamehameha_Start(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 1.6);
 }
@@ -893,7 +893,7 @@ unsafe extern "C" fn game_ryu_Kamehameha_Fire(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 12.5, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 18.0, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(1000.0), /*Hitlag*/ 0.5, /*SDI*/ 2.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -10.0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_aura"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
     }
-}*/
+}
 
 //SpecialAirN
 unsafe extern "C" fn game_ryu_SpecialAirN(fighter: &mut L2CAgentBase) {
@@ -1713,9 +1713,9 @@ pub fn install() {
     .game_acmd("game_downattacku", game_ryu_DownAttackU, Low)
     .game_acmd("game_cliffattack", game_ryu_CliffAttack, Low)
     .game_acmd("game_slipattack", game_ryu_SlipAttack, Low)
-    //.game_acmd("game_specialairn", game_ryu_SpecialAirN, Low)
-    //.game_acmd("game_kamehameha_start", game_ryu_Kamehameha_Start, Low)
-    //.game_acmd("game_kamehameha_fire", game_ryu_Kamehameha_Fire, Low)
+    .game_acmd("game_specialairn", game_ryu_SpecialAirN, Low)
+    .game_acmd("game_kamehameha_start", game_ryu_Kamehameha_Start, Low)
+    .game_acmd("game_kamehameha_fire", game_ryu_Kamehameha_Fire, Low)
     .game_acmd("game_specialsstart", game_ryu_SpecialSStart, Low)
     .game_acmd("game_specials", game_ryu_SpecialS, Low)
     .game_acmd("game_specialairsstart", game_ryu_SpecialAirSStart, Low)

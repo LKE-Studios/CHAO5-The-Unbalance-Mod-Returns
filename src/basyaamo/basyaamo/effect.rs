@@ -708,23 +708,6 @@ unsafe extern "C" fn effect_basyaamo_SpecialAirN(fighter: &mut L2CAgentBase) {
     }
 }
 
-//SpecialAirNOverheat
-unsafe extern "C" fn effect_basyaamo_SpecialAirNOverheat(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 9.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("captain_fk"), Hash40::new("top"), 0, 12, 12, -90, 0, 160, 0.7, true);
-        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 42.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("plizardon_flare_blitz"), Hash40::new("plizardon_flare_blitz"), Hash40::new("havel"), 0, 12, 15, 90, 0, 0, 1.0, true, *EF_FLIP_NONE);
-        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
-        EFFECT_FOLLOW(fighter, Hash40::new("captain_fn_flash"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.3, true);
-        EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
-        EFFECT_OFF_KIND(fighter, Hash40::new("captain_fk"), true, true);
-    }
-}
-
 //SpecialS
 unsafe extern "C" fn effect_basyaamo_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
@@ -1060,7 +1043,6 @@ pub fn install() {
     .effect_acmd("effect_attackairlw_basyaamo", effect_basyaamo_AttackAirLw, Low)
     .effect_acmd("effect_catchdash_basyaamo", effect_basyaamo_CatchDash, Low)
     .effect_acmd("effect_catchturn_basyaamo", effect_basyaamo_CatchTurn, Low)
-    .effect_acmd("effect_catchattack_basyaamo", effect_basyaamo_CatchAttack, Low)
     .effect_acmd("effect_throwf_basyaamo", effect_basyaamo_ThrowF, Low)
     .effect_acmd("effect_throwb_basyaamo", effect_basyaamo_ThrowB, Low)
     .effect_acmd("effect_throwhi_basyaamo", effect_basyaamo_ThrowHi, Low)
@@ -1077,10 +1059,12 @@ pub fn install() {
     .effect_acmd("effect_slipattack_basyaamo", effect_basyaamo_SlipAttack, Low)
     .effect_acmd("effect_specialn_basyaamo", effect_basyaamo_SpecialN, Low)
     .effect_acmd("effect_specialairn_basyaamo", effect_basyaamo_SpecialAirN, Low)
-    .effect_acmd("effect_specials_basyammo", effect_basyaamo_SpecialS, Low)
-    .effect_acmd("effect_specialairs_basyammo", effect_basyaamo_SpecialAirS, Low)
+    .effect_acmd("effect_specialnoverheat_basyaamo", effect_basyaamo_SpecialNOverheat, Low)
+    .effect_acmd("effect_specials_basyaamo", effect_basyaamo_SpecialS, Low)
+    .effect_acmd("effect_specialairs_basyaamo", effect_basyaamo_SpecialAirS, Low)
     .effect_acmd("effect_specialhi_basyaamo", effect_basyaamo_SpecialHi, Low)
     .effect_acmd("effect_specialairhi_basyaamo", effect_basyaamo_SpecialAirHi, Low)
+    .effect_acmd("effect_specialhioverheat_basyaamo", effect_basyaamo_SpecialHiOverheat, Low)
     .effect_acmd("effect_speciallw_basyaamo", effect_basyaamo_SpecialLw, Low)
     .effect_acmd("effect_speciallw2_basyaamo", effect_basyaamo_SpecialLw2, Low)
     .effect_acmd("effect_speciallwloop_basyaamo", effect_basyaamo_SpecialLwLoop, Low)
