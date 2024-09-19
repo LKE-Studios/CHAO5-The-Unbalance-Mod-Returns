@@ -14,6 +14,20 @@ unsafe extern "C" fn status_basyaamo_SpecialLwLoop_Main(fighter: &mut L2CFighter
 }
 
 unsafe extern "C" fn basyaamo_SpecialLwLoop_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+            return 1.into();
+        }
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
+    }
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+    }
     if fighter.global_table[CURRENT_FRAME].get_f32() > 40.0 {
         fighter.change_status(FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_AIR_END.into(), false.into());
     }

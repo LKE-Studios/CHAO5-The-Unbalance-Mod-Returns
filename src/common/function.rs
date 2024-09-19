@@ -73,7 +73,7 @@ pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
     LAST_EFFECT_SET_COLOR(fighter, 0.831, 0.686, 0.216);
 }
 
-unsafe extern "C" fn metaknight_init(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn special_flag_checks_init(fighter: &mut L2CFighterCommon) {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
         fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_special_n_callback as *const () as _));
@@ -81,6 +81,18 @@ unsafe extern "C" fn metaknight_init(fighter: &mut L2CFighterCommon) {
         fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(metaknight_special_hi_callback as *const () as _));
         fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(metaknight_special_lw_callback as *const () as _));
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(metaknight_change_status_callback as *const () as _)); 
+    }
+    if fighter_kind == *FIGHTER_KIND_LUCARIO {
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
+    }
+    if fighter_kind == *FIGHTER_KIND_SIMON || fighter_kind == *FIGHTER_KIND_RICHTER {
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(simon_special_hi_callback as *const () as _));  
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(simon_change_status_callback as *const () as _));   
+    }
+    if fighter_kind == *FIGHTER_KIND_TRAIL {
+        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(trail_special_s_callback as *const () as _));  
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(trail_change_status_callback as *const () as _));   
     }
 }
 
@@ -122,9 +134,8 @@ unsafe extern "C" fn metaknight_special_lw_callback(fighter: &mut L2CFighterComm
 
 unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
-    [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
+    let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
+    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
@@ -137,13 +148,6 @@ unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterC
     true.into()
 }
 
-unsafe extern "C" fn lucario_init(fighter: &mut L2CFighterCommon) {
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    if fighter_kind == *FIGHTER_KIND_LUCARIO {
-        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
-        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
-    }
-}
 
 unsafe extern "C" fn lucario_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI) {
@@ -161,14 +165,6 @@ unsafe extern "C" fn lucario_change_status_callback(fighter: &mut L2CFighterComm
     true.into()
 }
 
-unsafe extern "C" fn simon_init(fighter: &mut L2CFighterCommon) {
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    if fighter_kind == *FIGHTER_KIND_SIMON || fighter_kind == *FIGHTER_KIND_RICHTER {
-        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(simon_special_hi_callback as *const () as _));  
-        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(simon_change_status_callback as *const () as _));   
-    }
-}
-
 unsafe extern "C" fn simon_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI) {
         false.into()
@@ -180,9 +176,8 @@ unsafe extern "C" fn simon_special_hi_callback(fighter: &mut L2CFighterCommon) -
 
 unsafe extern "C" fn simon_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
-    [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
+    let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
+    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
@@ -190,14 +185,6 @@ unsafe extern "C" fn simon_change_status_callback(fighter: &mut L2CFighterCommon
         WorkModule::off_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
     }
     true.into()
-}
-
-unsafe extern "C" fn trail_init(fighter: &mut L2CFighterCommon) {
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    if fighter_kind == *FIGHTER_KIND_TRAIL {
-        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(trail_special_s_callback as *const () as _));  
-        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(trail_change_status_callback as *const () as _));   
-    }
 }
 
 unsafe extern "C" fn trail_special_s_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -211,9 +198,8 @@ unsafe extern "C" fn trail_special_s_callback(fighter: &mut L2CFighterCommon) ->
 
 unsafe extern "C" fn trail_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if [*SITUATION_KIND_GROUND, *SITUATION_KIND_CLIFF, *SITUATION_KIND_WATER, *SITUATION_KIND_LADDER].contains(&situation_kind) || 
-    [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
+    let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
+    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
@@ -633,10 +619,7 @@ unsafe extern "C" fn do_critical_zoom(module_accessor: *mut smash::app::BattleOb
 
 pub fn install() {
     Agent::new("fighter")
-    .on_start(metaknight_init)
-    .on_start(lucario_init)
-    .on_start(simon_init)
-    .on_start(trail_init)
+    .on_start(special_flag_checks_init)
     .on_start(basyaamo_init)
     .install();
     Agent::new("murabito")

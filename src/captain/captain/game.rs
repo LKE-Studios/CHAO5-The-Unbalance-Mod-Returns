@@ -1188,7 +1188,7 @@ unsafe extern "C" fn game_captain_AppealLwR(fighter: &mut L2CAgentBase) {
 //AppealLwL
 unsafe extern "C" fn game_captain_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_MAXIMTOMATO), 0, 0, false, false);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_SMARTBOMB), 0, 0, false, false);
     }
 }
 

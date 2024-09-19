@@ -1,5 +1,17 @@
 use crate::imports::BuildImports::*;
 
+//JumpAerialFront
+unsafe extern "C" fn sound_basyaamo_JumpAerialFront(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_captain_jump02"));
+    }
+    wait(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_swing_06"));
+    }
+}
+
 //Attack11 
 unsafe extern "C" fn sound_basyaamo_Attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
@@ -736,6 +748,7 @@ unsafe extern "C" fn sound_basyaamo_PassiveStandB(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("captain")
+    .sound_acmd("sound_jumpaerialfront_basyaamo", sound_basyaamo_JumpAerialFront, Low)
     .sound_acmd("sound_attack11_basyaamo", sound_basyaamo_Attack11, Low)
     .sound_acmd("sound_attack12_basyaamo", sound_basyaamo_Attack12, Low)
     .sound_acmd("sound_attack13_basyaamo", sound_basyaamo_Attack13, Low)

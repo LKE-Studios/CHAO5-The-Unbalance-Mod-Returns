@@ -51,6 +51,10 @@ unsafe extern "C" fn basyaamo_SpecialS_Main_loop(fighter: &mut L2CFighterCommon)
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
     }
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    fighter.sub_fighter_cliff_check(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES.into());
     if MotionModule::is_end(fighter.module_accessor) {
         if WorkModule::get_int(fighter.module_accessor, *FIGHTER_CAPTAIN_STATUS_WORK_ID_INT_FALCON_KNUCKLE_START_SITUATION) == *SITUATION_KIND_GROUND {
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());

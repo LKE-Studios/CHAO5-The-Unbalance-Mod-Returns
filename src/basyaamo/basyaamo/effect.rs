@@ -779,8 +779,8 @@ unsafe extern "C" fn effect_basyaamo_SpecialHiOverheat(fighter: &mut L2CAgentBas
     }
     frame(fighter.lua_state_agent, 46.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar"), Hash40::new("top"), 0, -52, 0, 0, 0, 0, 2.4, 0, 0, 0, 0, 0, 0, true);
-        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_ground"), Hash40::new("top"), 0, -52, 0, 0, 0, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar"), Hash40::new("top"), 0, -52, 0, 0, 0, 0, 3.4, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("eflame_promrevolt_firepillar_ground"), Hash40::new("top"), 0, -52, 0, 0, 0, 0, 2.7, 0, 0, 0, 0, 0, 0, true);
     }
 }
 

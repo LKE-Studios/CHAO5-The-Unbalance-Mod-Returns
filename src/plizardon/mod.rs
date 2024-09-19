@@ -1,3 +1,5 @@
+use crate::imports::BuildImports::*;
+
 mod plizardon;
 mod plizardon_breath;
 mod plizardon_daimonji;
@@ -17,6 +19,6 @@ pub fn install() {
     smashline::add_param_object("plizardon", "param_special_guard");
     smashline::add_param_object("plizardon", "param_rock");
     smashline::add_param_object("plizardon", "param_rockstone");
-    smashline::clone_weapon("link", "boomerang", "plizardon", "rock", false);
-    smashline::clone_weapon("sheik", "needle", "plizardon", "rockstone", false);
+    smashline::clone_weapon("link", *WEAPON_KIND_LINK_BOOMERANG, "plizardon", "rock", false);
+    smashline::clone_weapon("sheik", *WEAPON_KIND_SHEIK_NEEDLE, "plizardon", "rockstone", false);
 }
