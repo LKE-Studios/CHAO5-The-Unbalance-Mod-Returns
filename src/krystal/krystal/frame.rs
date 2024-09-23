@@ -1,69 +1,75 @@
 use crate::imports::BuildImports::*;
 
+static mut ATTACK_LW_EFFECT : [i32; 8] = [0; 8];
+
 unsafe extern "C" fn frame_pitb_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
-        let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
-        let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
-        SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
-    }
-    if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) { 
-        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_pitb_glide_loop"), 0);
-        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_pitb_glide_start"), 0);
-    };
-    if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
-        if situation_kind == *SITUATION_KIND_AIR {
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let KRYSTAL = color >= 64 && color <= 71; 
+    if KRYSTAL {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE);
+        if ModelModule::scale(fighter.module_accessor) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
+            ModelModule::set_scale(fighter.module_accessor, 0.89);
+            AttackModule::set_attack_scale(fighter.module_accessor, 0.89, true);
+            GrabModule::set_size_mul(fighter.module_accessor, 0.89);
+          };
+          if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD {
+            if frame >= 50.0 && frame < 60.0 {
+                WorkModule::on_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
             }
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
+            else {
+                WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
             }
+        };
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4 {
+            if frame >= 23.0 && frame < 30.0 {
+                if WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) {
+                    ATTACK_LW_EFFECT[ENTRY_ID] + 1;
+                    if ATTACK_LW_EFFECT[ENTRY_ID] < 2 {
+                        EffectModule::req_follow(fighter.module_accessor, Hash40::new("pitb_atk_s3"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.3, false, 0, 0, 0, 0, 0, false, false);
+                        EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_soil_landing"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.0, false, 0, 0, 0, 0, 0, false, false);
+                        PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
+                        QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
+                    };
+                };
+                if frame < 30.0 {
+                    WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
+                    ATTACK_LW_EFFECT[ENTRY_ID] = 0;
+                };
+            };
+        };
+        if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) {
+            STOP_SE(fighter, Hash40::new("se_pitb_special_h02"));
         }
-    };
-    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_CHARGE, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_SHOOT,
-    *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_HOLD, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) {
-        if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
-            fighter.sub_air_check_dive();
-            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
-                if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR || 
-                KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR_ANGLE {
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION);
-                    let speed_y = sv_kinetic_energy::get_speed_y(fighter.lua_state_agent);
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
-                    sv_kinetic_energy::reset_energy(fighter.lua_state_agent);
-                    fighter.clear_lua_stack();
-                    lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-                    sv_kinetic_energy::enable(fighter.lua_state_agent);
-                    KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+        if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_CHARGE, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_SHOOT,
+        *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_HOLD, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) {
+            if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
+                fighter.sub_air_check_dive();
+                if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
+                    if KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR || 
+                    KineticModule::get_kinetic_type(fighter.module_accessor) == *FIGHTER_KINETIC_TYPE_MOTION_AIR_ANGLE {
+                        fighter.clear_lua_stack();
+                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION);
+                        let speed_y = sv_kinetic_energy::get_speed_y(fighter.lua_state_agent);
+                        fighter.clear_lua_stack();
+                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
+                        sv_kinetic_energy::reset_energy(fighter.lua_state_agent);
+                        fighter.clear_lua_stack();
+                        lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+                        sv_kinetic_energy::enable(fighter.lua_state_agent);
+                        KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+                    }
                 }
             }
         }
     }
 }
 
-unsafe extern "C" fn frame_pitb_Exec(fighter: &mut L2CFighterCommon) {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    if [
-        *FIGHTER_STATUS_KIND_GLIDE_START,
-        *FIGHTER_STATUS_KIND_GLIDE
-    ].contains(&status_kind) { 
-        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.2, y:1.2, z:1.2});
-        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.2, y:1.2, z:1.2});
-    }
-    else {
-        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.0, y:1.0, z:1.0});
-        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.0, y:1.0, z:1.0});
-    };
-}
-
 pub fn install() {
     Agent::new("pitb")
     .on_line(Main, frame_pitb_Main)
-    .on_line(Exec, frame_pitb_Exec)
     .install();
 }

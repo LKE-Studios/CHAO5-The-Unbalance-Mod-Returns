@@ -7,7 +7,6 @@ unsafe extern "C" fn effect_krystal_JumpAerialF1(fighter: &mut L2CAgentBase) {
     }
 }
 
-
 //GlideStart
 unsafe extern "C" fn effect_krystal_GlideStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -254,49 +253,20 @@ unsafe extern "C" fn effect_krystal_AttackHi4(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 12, -3, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 12, -6, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
     }
-    frame(fighter.lua_state_agent, 4.0);
+    frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
-        AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_pitb_sword1"), Hash40::new("tex_pitb_sword2"), 4, Hash40::new("swordr1"), 0, 0, -0.2, Hash40::new("swordr1"), 0, 10.4, -1.2, true, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, 90, 0, 1, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
+        LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
-    frame(fighter.lua_state_agent, 5.0);
-    if get_value_float(fighter, *SO_VAR_FLOAT_LR) < 0.0 {
-        if is_excute(fighter) {
-            LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), -5, 0, 2, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        if !WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) { 
+            QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+            EFFECT(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+            EFFECT(fighter, Hash40::new("sys_quake"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+            EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
         }
-    }
-    else {
-        if is_excute(fighter) {
-            LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), -5, 0, -2, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-        }
-    }
-    frame(fighter.lua_state_agent, 7.0);
-    if is_excute(fighter) {
-        AFTER_IMAGE_OFF(fighter, 3);
-    }
-    frame(fighter.lua_state_agent, 16.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, 0, 0, 180, 90, 0, 1, true);
-    }
-    frame(fighter.lua_state_agent, 17.0);
-    if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) < 0.0 {
-        if is_excute(fighter) {
-            FOOT_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 2, 0, -3.5, 0, 180, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-        }
-    }
-    else {
-        if is_excute(fighter) {
-            FOOT_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 2, 0, 3.5, 0, 180, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-        }
-    }
-    frame(fighter.lua_state_agent, 18.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 3, 3, -12, 23, 197, 6, 0.6, true);
-    }
-    frame(fighter.lua_state_agent, 22.0);
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_sword"), false, true);
     }
 }
 
@@ -720,8 +690,8 @@ unsafe extern "C" fn effect_krystal_SpecialSStart(fighter: &mut L2CAgentBase) {
 	}
 }
 
-//SpecialSStart
-unsafe extern "C" fn effect_krystal_SpecialSStart(fighter: &mut L2CAgentBase) {
+//SpecialAirSStart
+unsafe extern "C" fn effect_krystal_SpecialAirSStart(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 4.0);
 	if is_excute(fighter) {
 		EFFECT_FOLLOW(fighter, Hash40::new("pitb_gouwan_dash_end"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 1, true);
@@ -814,10 +784,7 @@ unsafe extern "C" fn effect_krystal_SpecialHi(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialHiStart
-unsafe extern "C" fn effect_pitb_SpecialHiStart(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-    }
+unsafe extern "C" fn effect_krystal_SpecialHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
@@ -825,10 +792,7 @@ unsafe extern "C" fn effect_pitb_SpecialHiStart(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirHiStart
-unsafe extern "C" fn effect_pitb_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-    }
+unsafe extern "C" fn effect_krystal_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
@@ -877,47 +841,275 @@ unsafe extern "C" fn effect_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {}
 //SpecialAirLwHold
 unsafe extern "C" fn effect_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {}
 
+//SpecialLwEndR
+unsafe extern "C" fn effect_krystal_SpecialLwEndR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4.5, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.6, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.1, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, 1.2, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, -0.7, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+}
+
+//SpecialLwEndL
+unsafe extern "C" fn effect_krystal_SpecialLwEndL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4.5, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.6, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.1, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, 1.2, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, -0.7, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+}
+
+//SpecialAirLwEndL
+unsafe extern "C" fn effect_krystal_SpecialAirLwEndL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4.5, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.6, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.1, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, 1.2, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, -0.7, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+}
+
+//SpecialAirLwEndR
+unsafe extern "C" fn effect_krystal_SpecialAirLwEndR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4.5, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.6, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 5.6, 2.1, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, 1.2, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 0, 8.2, -0.7, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianf"), -2, 3, 4, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("virtualguardianb"), -2, 3, -4, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, 0.7, 0, 240, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 4.3, -0.7, 0, 120, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, 4, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_guardian_shield_end"), Hash40::new("top"), 0, 12.5, -2, 0, 120, 0, 1.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_guardian_shield"), false, false);
+    }
+}
+
 //AppealHiR
 unsafe extern "C" fn effect_krystal_AppealHiR(fighter: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 20.0);
-    if is_excute(agent) {
-       EFFECT_FOLLOW_ALPHA(agent, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
-       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
-       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+       EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
+       EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
+       EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
     }
-     frame(agent.lua_state_agent, 30.0);
-     if is_excute(agent) {
-       EFFECT_OFF_KIND(agent, Hash40::new("pitb_atk_air_n"), false, false);
+     frame(fighter.lua_state_agent, 30.0);
+     if is_excute(fighter) {
+       EFFECT_OFF_KIND(fighter, Hash40::new("pitb_atk_air_n"), false, false);
     }
-    frame(agent.lua_state_agent, 32.0);
-    if is_excute(agent) {
-       EFFECT_OFF_KIND(agent, Hash40::new("pitb_sword"), false, false);
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+       EFFECT_OFF_KIND(fighter, Hash40::new("pitb_sword"), false, false);
     }
-    frame(agent.lua_state_agent, 58.0);
-    if is_excute(agent) {
-       EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+    frame(fighter.lua_state_agent, 58.0);
+    if is_excute(fighter) {
+       EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
 //AppealHiL 
 unsafe extern "C" fn effect_krystal_AppealHiL(fighter: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 20.0);
-    if is_excute(agent) {
-       EFFECT_FOLLOW_ALPHA(agent, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
-       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
-       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+       EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
+       EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
+       EFFECT_FOLLOW(fighter, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
     }
-    frame(agent.lua_state_agent, 30.0);
-    if is_excute(agent) {
-       EFFECT_OFF_KIND(agent, Hash40::new("pitb_atk_air_n"), false, false);
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+       EFFECT_OFF_KIND(fighter, Hash40::new("pitb_atk_air_n"), false, false);
     }
-    frame(agent.lua_state_agent, 32.0);
-    if is_excute(agent) {
-       EFFECT_OFF_KIND(agent, Hash40::new("pitb_sword"), false, false);
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+       EFFECT_OFF_KIND(fighter, Hash40::new("pitb_sword"), false, false);
     }
-    frame(agent.lua_state_agent, 54.0);
-    if is_excute(agent) {
-        EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+    frame(fighter.lua_state_agent, 54.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
@@ -933,7 +1125,407 @@ unsafe extern "C" fn effect_krystal_AppealLwR(fighter: &mut L2CAgentBase) {}
 //AppealLwL
 unsafe extern "C" fn effect_krystal_AppealLwL(fighter: &mut L2CAgentBase) {}
 
+//Final
+unsafe extern "C" fn effect_krystal_Final(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_pitb_final"), false, false, false);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_staff_shot"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 0.75, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_explosion_flash"), Hash40::new("haver"), 0, 13, 1.5, 0, 0, 0, 0.15, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_end"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_end"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_staff_shot"), true, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_bomb_a"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 0.50, true);
+    }
 
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, 6, 3, 0, 0, 0, 2.8, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 2.8, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, -5, -3, 0, 0, 0, 2.8, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.46);
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("throw"), 0, -5, 2.2, 90, 0, 0, 2.0, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash"), Hash40::new("throw"), 0, -5, 3, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_start"), Hash40::new("throw"), 0, -5, 3, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("throw"), 0, 5, -3.2, 90, 0, 0, 2.0, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash"), Hash40::new("throw"), 0, 5, -4, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_start"), Hash40::new("throw"), 0, 5, -4, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.5, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.46);
+    }
+    frame(fighter.lua_state_agent, 83.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 2.4, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_explosion_flash"), Hash40::new("haver"), 0, 13, 1.5, 0, 0, 0, 0.5, true);
+    }
+    frame(fighter.lua_state_agent, 85.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_ring"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_start"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_flash"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_fireflower_bullet"), true, true);
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn effect_krystal_FinalAir(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_pitb_final"), false, false, false);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_staff_shot"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 0.75, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_explosion_flash"), Hash40::new("haver"), 0, 13, 1.5, 0, 0, 0, 0.15, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_end"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 1, true);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_end"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_staff_shot"), true, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_bomb_a"), Hash40::new("haver"), 0, 14, 1.5, 0, 0, 0, 0.50, true);
+    }
+
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, 6, 3, 0, 0, 0, 2.8, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 2.8, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_fireflower_bullet"), Hash40::new("throw"), 0, -5, -3, 0, 0, 0, 2.8, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.46);
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("throw"), 0, -5, 2.2, 90, 0, 0, 2.0, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash"), Hash40::new("throw"), 0, -5, 3, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_start"), Hash40::new("throw"), 0, -5, 3, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, -5, 2, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("throw"), 0, 5, -3.2, 90, 0, 0, 2.0, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash"), Hash40::new("throw"), 0, 5, -4, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_start"), Hash40::new("throw"), 0, 5, -4, 0, 0, 0, 1.5, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.7, true);
+        EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pitb_gouwan_dash_flash"), Hash40::new("throw"), 0, 5, -3, 0, 0, 0, 1.5, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.46);
+    }
+    frame(fighter.lua_state_agent, 83.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 2.4, 0, 0, 0, 0, 0, 0, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_explosion_flash"), Hash40::new("haver"), 0, 13, 1.5, 0, 0, 0, 0.5, true);
+    }
+    frame(fighter.lua_state_agent, 85.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_ring"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_start"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_flash"), true, true);
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_fireflower_bullet"), true, true);
+    }
+}
+
+//EntryL
+unsafe extern "C" fn effect_krystal_EntryL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 5.5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 15.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4.5, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 21.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7.6, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 27.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7.6, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 31.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 35.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 2.3, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 37.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 38.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 39.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.35, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 45.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+}
+
+//EntryR
+unsafe extern "C" fn effect_krystal_EntryR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 5.5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 11.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 15.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4.5, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 21.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 4, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7.6, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 27.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7.6, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 31.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.6, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 35.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 2.3, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 37.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 38.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 39.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pitb_entry"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.35, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+    frame(fighter.lua_state_agent, 45.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("pit_entry"), Hash40::new("top"), 0, 3.5, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+    }
+}
+
+//LandingLight
+unsafe extern "C" fn effect_krystal_LandingLight(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+//Win2
+unsafe extern "C" fn effect_krystal_Win2(fighter: &mut L2CAgentBase) {}
 
 pub fn install() {
     Agent::new("pitb")
@@ -961,16 +1553,22 @@ pub fn install() {
     .effect_acmd("effect_downattacku_krystal", effect_krystal_DownAttackU, Low)
     .effect_acmd("effect_slipattack_krystal", effect_krystal_SlipAttack, Low)
     .effect_acmd("effect_specialnfires_krystal", effect_krystal_SpecialNFireS, Low)  
-    .effect_acmd("effect_specialairnfires_krystal", effect_krystal_SpecialNFireS, Low)  
+    .effect_acmd("effect_specialairnfires_krystal", effect_krystal_SpecialAirNFireS, Low)  
     .effect_acmd("effect_specialsstart_krystal", effect_krystal_SpecialSStart, Low)  
     .effect_acmd("effect_specialairsstart_krystal", effect_krystal_SpecialAirSStart, Low)  
     .effect_acmd("effect_specialhi_krystal", effect_krystal_SpecialHi, Low)
+    .effect_acmd("effect_specialhistart_krystal", effect_krystal_SpecialHiStart, Low)
+    .effect_acmd("effect_specialairhistart_krystal", effect_krystal_SpecialAirHiStart, Low)
     .effect_acmd("effect_speciallwstartr_krystal", effect_krystal_SpecialLwStartR, Low)
     .effect_acmd("effect_speciallwstartl_krystal", effect_krystal_SpecialLwStartL, Low)
     .effect_acmd("effect_specialairlwstartr_krystal", effect_krystal_SpecialAirLwStartR, Low)
     .effect_acmd("effect_specialairlwstartl_krystal", effect_krystal_SpecialAirLwStartL, Low)
     .effect_acmd("effect_speciallwhold_krystal", effect_krystal_SpecialLwHold, Low)
     .effect_acmd("effect_specialairlwhold_krystal", effect_krystal_SpecialAirLwHold, Low)
+    .effect_acmd("effect_speciallwendl_krystal", effect_krystal_SpecialLwEndL, Low)
+    .effect_acmd("effect_specialairlwendl_krystal", effect_krystal_SpecialAirLwEndL, Low)
+    .effect_acmd("effect_speciallwendr_krystal", effect_krystal_SpecialLwEndR, Low)
+    .effect_acmd("effect_specialairlwendr_krystal", effect_krystal_SpecialAirLwEndR, Low)
     .effect_acmd("effect_appealsr_krystal", effect_krystal_AppealSR, Low)
     .effect_acmd("effect_appealsl_krystal", effect_krystal_AppealSL, Low)
     .effect_acmd("effect_appealhir_krystal", effect_krystal_AppealHiR, Low)
@@ -979,6 +1577,9 @@ pub fn install() {
     .effect_acmd("effect_appeallwl_krystal", effect_krystal_AppealLwL, Low)
     .effect_acmd("effect_final_krystal", effect_krystal_Final, Low)
     .effect_acmd("effect_finalair_krystal", effect_krystal_FinalAir, Low)
-    .effect_acmd("effect_finalcom_krystal", effect_krystal_FinalCom, Low)
+    .effect_acmd("effect_entryl_krystal", effect_krystal_EntryL, Low)
+    .effect_acmd("effect_entryr_krystal", effect_krystal_EntryR, Low)
+    .effect_acmd("effect_landinglight_krystal", effect_krystal_LandingLight, Low)
+    .effect_acmd("effect_win2_krystal", effect_krystal_Win2, Low)
     .install();
 }

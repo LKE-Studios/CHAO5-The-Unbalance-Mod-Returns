@@ -1,8 +1,8 @@
-mod pitb;
-mod pitb_bowarrow;
+mod krystal;
+mod krystal_beam;
 
 pub fn install() {
-    pitb::install(); 
-    pitb_bowarrow::install();
+    krystal::install(); 
+    krystal_beam::install();
     smashline::add_param_object("pitb", "param_glide");
 }

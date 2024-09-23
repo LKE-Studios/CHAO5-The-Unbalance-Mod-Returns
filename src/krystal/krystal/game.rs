@@ -1061,7 +1061,6 @@ unsafe extern "C" fn game_krystal_SpecialHi(fighter: &mut L2CAgentBase) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 4.5, 90, 100, 0, 60, 2.6, 0.0, 0.0, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
         ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.5, 90, 100, 0, 60, 2.6, 0.0, 4.6, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
         ATTACK(fighter, 2, 0, Hash40::new("haver"), 4.5, 90, 100, 0, 60, 2.6, 0.0, 9.2, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-    
     }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
@@ -1088,12 +1087,6 @@ unsafe extern "C" fn game_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 0.0, 50, 100, 50, 0, 12.9, 0.0, -0.6, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 4, false, false, true, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         DamageModule::set_damage_mul(fighter.module_accessor, 0.0);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_wpnnagirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_final"), true);
 	}
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
@@ -1115,12 +1108,6 @@ unsafe extern "C" fn game_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 0.0, 50, 100, 50, 0, 12.9, 0.0, -0.6, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 4, false, false, true, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
         DamageModule::set_damage_mul(fighter.module_accessor, 0.0);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_wpnnagirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_final"), true);
 	}
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
@@ -1270,7 +1257,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 63.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 28.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-    AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
+        AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 65.0);
     if is_excute(fighter) {
@@ -1330,6 +1317,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
 }
 
+//FinalAir
 unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -1485,6 +1473,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
 }
 
+//FinalCom
 unsafe extern "C" fn game_krystal_FinalCom(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -1536,7 +1525,7 @@ pub fn install() {
     .game_acmd("game_cliffattack_krystal", game_krystal_CliffAttack, Low)
     .game_acmd("game_slipattack_krystal", game_krystal_SlipAttack, Low)
     .game_acmd("game_specialnfires_krystal", game_krystal_SpecialNFireS, Low)  
-    .game_acmd("game_specialairnfires_krystal", game_krystal_SpecialNFireS, Low)  
+    .game_acmd("game_specialairnfires_krystal", game_krystal_SpecialAirNFireS, Low)  
     .game_acmd("game_specialsstart_krystal", game_krystal_SpecialSStart, Low)  
     .game_acmd("game_specialsend_krystal", game_krystal_SpecialSEnd, Low)
     .game_acmd("game_specialairsstart_krystal", game_krystal_SpecialAirSStart, Low)  

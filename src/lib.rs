@@ -19,6 +19,7 @@
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
+use the_csk_collection_api::*;
 use arcropolis_api::load_original_file;
 use std::collections::HashMap;
 use skyline::{c_str, from_c_str, nn::ro::LookupSymbol};
@@ -166,6 +167,7 @@ mod koopa;
 mod koopag;
 mod koopajr;
 mod krool;
+mod krystal;
 mod link;
 mod littlemac;
 mod lucario;
@@ -363,23 +365,41 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 	}
 }
 
-pub static mut CLASSIC_BLAZIKEN: bool = false;
 pub static mut MARKED_COLORS: [bool; 256] = [false; 256];
 
-pub unsafe fn is_basyaamo(module_accessor: *mut BattleObjectModuleAccessor) -> bool {
+pub unsafe fn new_fighter(module_accessor: *mut BattleObjectModuleAccessor) -> bool {
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     MARKED_COLORS[color as usize]
 }
 
 #[arcropolis_api::arc_callback]
 fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
-    let mut is_basyaamo: bool = false;
+    let mut new_fighter: bool = false;
+    let color = the_csk_collection_api::get_color_from_entry_id(0);
+    let ui_chara = the_csk_collection_api::get_ui_chara_from_entry_id(0);
     unsafe {
-        if CLASSIC_BLAZIKEN {
-            is_basyaamo = true;
+        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_claus") {
+            CLAUS = true;
+        }
+        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_krystal") {
+            KRYSTAL = true;
+        }
+        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_basyaamo") {
+            BASYAAMO = true;
         }
     }
-    if is_basyaamo {
+    if CLAUS {
+        match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_claus.nutexb") {
+            Ok(s) => {
+                data[..s.len()].copy_from_slice(&s);
+                return Some(s.len());
+            },
+            Err(_err) => {
+                return load_original_file(hash, data);
+            }
+        }
+    }
+    if BASYAAMO {
         match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_basyaamo.nutexb") {
             Ok(s) => {
                 data[..s.len()].copy_from_slice(&s);
@@ -387,6 +407,17 @@ fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
             },
             Err(_err) => {
                 return load_original_file(hash, data);
+            }
+        }
+    }
+    if KRYSTAL {
+        match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_krystal.nutexb") {
+            Ok(s) => {
+                data[..s.len()].copy_from_slice(&s);
+                return Some(s.len());
+            },
+            Err(_err) => {
+                return arcropolis_api::load_original_file(hash, data);
             }
         }
     }
@@ -401,6 +432,7 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_silver")); //Silver
         allow_ui_chara_hash_online(hash40("ui_chara_waluigi")); //Waluigi
         allow_ui_chara_hash_online(hash40("ui_chara_basyaamo")); //Blaziken
+        allow_ui_chara_hash_online(hash40("ui_chara_krystal")); //Krystal
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
@@ -506,6 +538,7 @@ pub fn main() {
     silver::install();
     waluigi::install();
     basyaamo::install();
+    krystal::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,
@@ -515,5 +548,8 @@ pub fn main() {
         change_version_string_hook,
     );
     common::install();
+    //File Callbacks
     file_callback::install("standard/staffroll/texture/standard_staffroll_captain.nutexb", 924480);
+    file_callback::install("standard/staffroll/texture/standard_staffroll_pitb.nutexb", 924480);
+    file_callback::install("standard/staffroll/texture/standard_staffroll_lucas.nutexb", 924480);
 }

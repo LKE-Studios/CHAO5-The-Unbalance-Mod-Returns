@@ -81,15 +81,15 @@ pub unsafe extern "C" fn should_remove_galaxia_on_hit(weapon: &mut L2CWeaponComm
 pub unsafe extern "C" fn galaxia_beam_removal(weapon: &mut L2CWeaponCommon) {
     let pos = *PostureModule::pos(weapon.module_accessor);
     EffectModule::req(weapon.module_accessor, Hash40::new("sys_erace_smoke"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
     weapon.pop_lua_stack(1);
 }
 
 pub unsafe extern "C" fn galaxia_beam_hit_removal(weapon: &mut L2CWeaponCommon) {
     let pos = *PostureModule::pos(weapon.module_accessor);
-    EffectModule::req(weapon.module_accessor, Hash40::new("miiswordsman_hensoku_hit"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
+    EffectModule::req(weapon.module_accessor, Hash40::new("metaknight_blade_beam_hit"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
     weapon.pop_lua_stack(1);
@@ -101,7 +101,7 @@ unsafe extern "C" fn status_metaknight_GalaxiaBeamShoot_Exec(weapon: &mut L2CWea
 }
 
 unsafe extern "C" fn status_metaknight_GalaxiaBeamShoot_End(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
     0.into()
 }
 

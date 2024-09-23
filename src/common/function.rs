@@ -351,12 +351,25 @@ pub mod FighterSpecializer_Murabito {
 }
 
 pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleObjectModuleAccessor) -> bool {
+    let color = WorkModule::get_int(object_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let ADDED_FIGHTER = color >= 120 && color <= 130;
+    let ADDED_FIGHTER_2 = color >= 64 && color <= 71;
     if utility::get_kind(&mut *object_boma) == *WEAPON_KIND_SHEIK_NEEDLE 
-    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOOMERANG {
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOOMERANG 
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_PITB_BOWARROW {
         let owner_id = WorkModule::get_int(object_boma, *WEAPON_INSTANCE_WORK_ID_INT_ACTIVATE_FOUNDER_ID) as u32;
         let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_boma);
         if owner_kind == *FIGHTER_KIND_PLIZARDON {
+            return true;
+        }
+        if owner_kind == *FIGHTER_KIND_METAKNIGHT {
+            return true;
+        }
+        if owner_kind == *FIGHTER_KIND_PITB && ADDED_FIGHTER_2 { //KRYSTAL
+            return true;
+        }
+        if owner_kind == *FIGHTER_KIND_DOLLY && ADDED_FIGHTER { //WALUIGI
             return true;
         }
     }
