@@ -142,7 +142,12 @@ unsafe extern "C" fn sound_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
 	}
 	frame(fighter.lua_state_agent, 23.0);
 	if is_excute(fighter) {
-		PLAY_SE(fighter, Hash40::new("se_pitb_smash_l01"));
+		if WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) { 
+			PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
+		}
+		else {
+			PLAY_SE(fighter, Hash40::new("se_pitb_smash_l01"));
+		}
 	}
 	frame(fighter.lua_state_agent, 24.0);
 	if is_excute(fighter) {
@@ -624,6 +629,9 @@ pub fn install() {
     .sound_acmd("sound_attacks4_krystal", sound_krystal_AttackS4, Low)
     .sound_acmd("sound_attackhi4_krystal", sound_krystal_AttackHi4, Low)
     .sound_acmd("sound_attacklw4_krystal", sound_krystal_AttackLw4, Low)
+	.sound_acmd("sound_attacks4charge_krystal", sound_krystal_AttackS4Charge, Low)
+    .sound_acmd("sound_attackhi4charge_krystal", sound_krystal_AttackHi4Charge, Low)
+    .sound_acmd("sound_attacklw4charge_krystal", sound_krystal_AttackLw4Charge, Low)
     .sound_acmd("sound_attackairn_krystal", sound_krystal_AttackAirN, Low)
     .sound_acmd("sound_attackairf_krystal", sound_krystal_AttackAirF, Low)    
     .sound_acmd("sound_attackairb_krystal", sound_krystal_AttackAirB, Low)

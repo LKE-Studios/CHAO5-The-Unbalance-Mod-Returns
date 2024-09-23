@@ -378,17 +378,17 @@ fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
     let color = the_csk_collection_api::get_color_from_entry_id(0);
     let ui_chara = the_csk_collection_api::get_ui_chara_from_entry_id(0);
     unsafe {
-        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_claus") {
-            CLAUS = true;
-        }
-        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_krystal") {
-            KRYSTAL = true;
-        }
-        if MARKED_COLOURS[color as usize] && ui_chara == hash40("ui_chara_basyaamo") {
-            BASYAAMO = true;
-        }
+        if MARKED_COLORS[color as usize] && ui_chara == hash40("ui_chara_claus") {
+            new_fighter = true;
+        };
+        if MARKED_COLORS[color as usize] && ui_chara == hash40("ui_chara_krystal") {
+            new_fighter = true;
+        };
+        if MARKED_COLORS[color as usize] && ui_chara == hash40("ui_chara_basyaamo") {
+            new_fighter = true;
+        };
     }
-    if CLAUS {
+    if new_fighter {
         match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_claus.nutexb") {
             Ok(s) => {
                 data[..s.len()].copy_from_slice(&s);
@@ -398,8 +398,6 @@ fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
                 return load_original_file(hash, data);
             }
         }
-    }
-    if BASYAAMO {
         match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_basyaamo.nutexb") {
             Ok(s) => {
                 data[..s.len()].copy_from_slice(&s);
@@ -409,8 +407,6 @@ fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
                 return load_original_file(hash, data);
             }
         }
-    }
-    if KRYSTAL {
         match std::fs::read("mods:/standard/staffroll/texture/standard_staffroll_krystal.nutexb") {
             Ok(s) => {
                 data[..s.len()].copy_from_slice(&s);

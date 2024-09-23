@@ -21,6 +21,7 @@ skyline-web = { git = "https://github.com/skyline-rs/skyline-web" }
 ninput = { git = "https://github.com/blu-dev/ninput", version = "0.1.0" }
 param_config = { git = "https://github.com/csharpm7/lib_paramconfig.git"}
 arcropolis-api = { git = "https://github.com/Raytwo/arcropolis_api" }
+the_csk_collection_api = { git = "https://github.com/Coolsonickirby/the_csk_collection_api.git" }
 libc-nnsdk = "0.2.0"
 crc32fast = "1.3.2"
 once_cell = "1.12.0"

@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 static mut ATTACK_LW_EFFECT : [i32; 8] = [0; 8];
 
-unsafe extern "C" fn frame_pitb_Main(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn frame_krystal_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
@@ -10,7 +10,7 @@ unsafe extern "C" fn frame_pitb_Main(fighter: &mut L2CFighterCommon) {
     let frame = MotionModule::frame(fighter.module_accessor);
     let KRYSTAL = color >= 64 && color <= 71; 
     if KRYSTAL {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE);
+        WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
         if ModelModule::scale(fighter.module_accessor) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
             ModelModule::set_scale(fighter.module_accessor, 0.89);
             AttackModule::set_attack_scale(fighter.module_accessor, 0.89, true);
@@ -24,22 +24,8 @@ unsafe extern "C" fn frame_pitb_Main(fighter: &mut L2CFighterCommon) {
                 WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
             }
         };
-        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4 {
-            if frame >= 23.0 && frame < 30.0 {
-                if WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) {
-                    ATTACK_LW_EFFECT[ENTRY_ID] + 1;
-                    if ATTACK_LW_EFFECT[ENTRY_ID] < 2 {
-                        EffectModule::req_follow(fighter.module_accessor, Hash40::new("pitb_atk_s3"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.3, false, 0, 0, 0, 0, 0, false, false);
-                        EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_soil_landing"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.0, false, 0, 0, 0, 0, 0, false, false);
-                        PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
-                        QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
-                    };
-                };
-                if frame < 30.0 {
-                    WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
-                    ATTACK_LW_EFFECT[ENTRY_ID] = 0;
-                };
-            };
+        if ![*FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4].contains(&status_kind) {
+            WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
         };
         if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) {
             STOP_SE(fighter, Hash40::new("se_pitb_special_h02"));
@@ -70,6 +56,6 @@ unsafe extern "C" fn frame_pitb_Main(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("pitb")
-    .on_line(Main, frame_pitb_Main)
+    .on_line(Main, frame_krystal_Main)
     .install();
 }

@@ -7,6 +7,20 @@ unsafe extern "C" fn effect_krystal_JumpAerialF1(fighter: &mut L2CAgentBase) {
     }
 }
 
+//JumpAerialF2
+unsafe extern "C" fn effect_krystal_JumpAerialF2(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+//JumpAerialF3
+unsafe extern "C" fn effect_krystal_JumpAerialF3(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
 //GlideStart
 unsafe extern "C" fn effect_krystal_GlideStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -261,12 +275,17 @@ unsafe extern "C" fn effect_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        if !WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) { 
-            QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) { 
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("pitb_atk_s3"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.3, false, 0, 0, 0, 0, 0, false, false);
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_soil_landing"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.0, false, 0, 0, 0, 0, 0, false, false);
+            QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
+        }
+        else {
             EFFECT(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
             EFFECT(fighter, Hash40::new("sys_quake"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
             EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
-        }
+            QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+        }        
     }
 }
 
@@ -660,29 +679,29 @@ unsafe extern "C" fn effect_krystal_SpecialSStart(fighter: &mut L2CAgentBase) {
     }
 	frame(fighter.lua_state_agent, 19.0);
 	if is_excute(fighter) {
-		EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
+		EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 23.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 26.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 29.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 32.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
         EFFECT_OFF_KIND(fighter, Hash40::new("klystal_iceblast_splash"), true, true);
         EFFECT_OFF_KIND(fighter, Hash40::new("klystal_iceblast_bullet_r"), true, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.75, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.4, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 1.25, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.9, true);
 	}
 	frame(fighter.lua_state_agent, 36.0);
 	if is_excute(fighter) {
@@ -696,32 +715,32 @@ unsafe extern "C" fn effect_krystal_SpecialAirSStart(fighter: &mut L2CAgentBase)
 	if is_excute(fighter) {
 		EFFECT_FOLLOW(fighter, Hash40::new("pitb_gouwan_dash_end"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 1, true);
 	}
-	frame(fighter.lua_state_agent, 19.0);
+    frame(fighter.lua_state_agent, 19.0);
 	if is_excute(fighter) {
-		EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
+		EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 23.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 26.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 29.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
 	}
     frame(fighter.lua_state_agent, 32.0);
 	if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 2, 17, 33, 0, 0, 1, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_shot"), Hash40::new("top"), 0, 8, 20, 0, 0, 0, 2.5, true);
         EFFECT_OFF_KIND(fighter, Hash40::new("klystal_iceblast_splash"), true, true);
         EFFECT_OFF_KIND(fighter, Hash40::new("klystal_iceblast_bullet_r"), true, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.75, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.4, true);
-    }
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_splash"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 1.25, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("klystal_iceblast_bullet_r"), Hash40::new("havel"), 0, 14, 1.5, 0, 0, 0, 0.9, true);
+	}
 	frame(fighter.lua_state_agent, 36.0);
 	if is_excute(fighter) {
 		EFFECT_OFF_KIND(fighter, Hash40::new("pitb_gouwan_dash_end"), true, true);
@@ -1530,6 +1549,8 @@ unsafe extern "C" fn effect_krystal_Win2(fighter: &mut L2CAgentBase) {}
 pub fn install() {
     Agent::new("pitb")
     .effect_acmd("effect_jumpaerialf1_krystal", effect_krystal_JumpAerialF1, Default)
+    .effect_acmd("effect_jumpaerialf2_krystal", effect_krystal_JumpAerialF2, Default)
+    .effect_acmd("effect_jumpaerialf3_krystal", effect_krystal_JumpAerialF3, Default)
     .effect_acmd("effect_attack11_krystal", effect_krystal_Attack11, Low)
     .effect_acmd("effect_attack12_krystal", effect_krystal_Attack12, Low)
     .effect_acmd("effect_attack13_krystal", effect_krystal_Attack13, Low)
