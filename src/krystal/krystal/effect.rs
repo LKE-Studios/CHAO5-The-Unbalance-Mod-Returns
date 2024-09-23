@@ -529,7 +529,7 @@ unsafe extern "C" fn effect_krystal_ThrowLw(fighter: &mut L2CAgentBase) {
 }
 
 //SlipAttack
-unsafe extern "C" fn game_krystal_SlipAttack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_krystal_SlipAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_pitb_sword1"), Hash40::new("tex_pitb_sword2"), 4, Hash40::new("swordr1"), 0.0, 0.0, -0.2, Hash40::new("swordr1"), 0.0, 15.2, -1.2, true, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 1.0, 0.0, 0.0, 0.0, 90.0, 0.0, 1.5, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -558,7 +558,7 @@ unsafe extern "C" fn game_krystal_SlipAttack(fighter: &mut L2CAgentBase) {
 }
 
 //DownAttackD
-unsafe extern "C" fn game_krystal_DownAttackD(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_krystal_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if is_excute(fighter) {
         AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_pitb_sword1"), Hash40::new("tex_pitb_sword2"), 4, Hash40::new("swordr1"), 0.0, 0.0, -0.2, Hash40::new("swordr1"), 0.0, 15.2, -1.2, true, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 1.0, 0.0, 0.0, 0.0, 90.0, 0.0, 1.5, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -587,7 +587,7 @@ unsafe extern "C" fn game_krystal_DownAttackD(fighter: &mut L2CAgentBase) {
 }
 
 //DownAttackU
-unsafe extern "C" fn game_krystal_DownAttackU(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_krystal_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_pitb_sword1"), Hash40::new("tex_pitb_sword2"), 4, Hash40::new("swordr1"), 0.0, 0.0, -0.2, Hash40::new("swordr1"), 0.0, 15.2, -1.2, true, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 1.0, 0.0, 0.0, 0.0, 90.0, 0.0, 1.5, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -619,7 +619,7 @@ unsafe extern "C" fn game_krystal_DownAttackU(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialNFireS
-unsafe extern "C" fn game_krystal_SpecialNFireS(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_krystal_SpecialNFireS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_staff_shot"), Hash40::new("haver"), 0, 12.6, 0, 0, 0, 0, 0.25, true);
@@ -651,7 +651,7 @@ unsafe extern "C" fn game_krystal_SpecialNFireS(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirNFireS
-unsafe extern "C" fn game_krystal_SpecialAirNFireS(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_krystal_SpecialAirNFireS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_staff_shot"), Hash40::new("haver"), 0, 12.6, 0, 0, 0, 0, 0.25, true);
@@ -813,22 +813,127 @@ unsafe extern "C" fn effect_krystal_SpecialHi(fighter: &mut L2CAgentBase) {
     }
 }
 
-//SpecialAirHiStart
-unsafe extern "C" fn effect_pitb_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+//SpecialHiStart
+unsafe extern "C" fn effect_pitb_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("pitb_fly_miracle_start"), Hash40::new("top"), 0, 7, 0, 0, 0, 0, 1, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("pitb_ikaros_wing_flare"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.95, /*G*/ 0.0, /*B*/ 2.1);
-        EFFECT_FOLLOW(fighter, Hash40::new("pitb_ikaros_wing_flare"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, true);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.95, /*G*/ 0.0, /*B*/ 2.1);
     }
-    frame(fighter.lua_state_agent, 14.0);
+    frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
-        LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-        EFFECT_OFF_KIND(fighter, Hash40::new("pitb_fly_miracle_start"), true, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("pitb_fly_miracle"), Hash40::new("bust"), 0, 0, 0, 0, 0, 0, 1, true);
+        LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
     }
 }
+
+//SpecialAirHiStart
+unsafe extern "C" fn effect_pitb_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+//SpecialLwStartL
+unsafe extern "C" fn effect_krystal_SpecialLwStartL(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 6.0);
+	if is_excute(fighter) {
+		EFFECT_FOLLOW(fighter, Hash40::new("pitb_guardian_shield"), Hash40::new("top"), 0.0, 12.0, 0.0, 0, 300, 0, 1.0, true);
+		LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
+	}
+}
+
+//SpecialLwStartR
+unsafe extern "C" fn effect_krystal_SpecialLwStartR(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 6.0);
+	if is_excute(fighter) {
+		EFFECT_FOLLOW(fighter, Hash40::new("pitb_guardian_shield"), Hash40::new("top"), 0.0, 12.0, 0.0, 0, 300, 0, 1.0, true);
+		LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
+	}
+}
+
+//SpecialAirLwStartL
+unsafe extern "C" fn effect_krystal_SpecialAirLwStartL(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 6.0);
+	if is_excute(fighter) {
+		EFFECT_FOLLOW(fighter, Hash40::new("pitb_guardian_shield"), Hash40::new("top"), 0.0, 12.0, 0.0, 0, 300, 0, 1.0, true);
+		LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
+	}
+}
+
+//SpecialAirLwStartR
+unsafe extern "C" fn effect_krystal_SpecialAirLwStartR(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 6.0);
+	if is_excute(fighter) {
+		EFFECT_FOLLOW(fighter, Hash40::new("pitb_guardian_shield"), Hash40::new("top"), 0.0, 12.0, 0.0, 0, 300, 0, 1.0, true);
+		LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
+	}
+}
+
+//SpecialLwHold
+unsafe extern "C" fn effect_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {}
+
+//SpecialAirLwHold
+unsafe extern "C" fn effect_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {}
+
+//AppealHiR
+unsafe extern "C" fn effect_krystal_AppealHiR(fighter: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 20.0);
+    if is_excute(agent) {
+       EFFECT_FOLLOW_ALPHA(agent, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
+       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
+       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
+    }
+     frame(agent.lua_state_agent, 30.0);
+     if is_excute(agent) {
+       EFFECT_OFF_KIND(agent, Hash40::new("pitb_atk_air_n"), false, false);
+    }
+    frame(agent.lua_state_agent, 32.0);
+    if is_excute(agent) {
+       EFFECT_OFF_KIND(agent, Hash40::new("pitb_sword"), false, false);
+    }
+    frame(agent.lua_state_agent, 58.0);
+    if is_excute(agent) {
+       EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+//AppealHiL 
+unsafe extern "C" fn effect_krystal_AppealHiL(fighter: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 20.0);
+    if is_excute(agent) {
+       EFFECT_FOLLOW_ALPHA(agent, Hash40::new("pitb_atk_air_n"), Hash40::new("swordr2"), 0, -1, 0, -90, -90, 0, 1, true, 0.3);
+       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordr1"), 0, 0, 0, 0, -90, 0, 1, true);
+       EFFECT_FOLLOW(agent, Hash40::new("pitb_sword"), Hash40::new("swordl"), 0, -0.06, 0, 180, -90, 0, 1, true);
+    }
+    frame(agent.lua_state_agent, 30.0);
+    if is_excute(agent) {
+       EFFECT_OFF_KIND(agent, Hash40::new("pitb_atk_air_n"), false, false);
+    }
+    frame(agent.lua_state_agent, 32.0);
+    if is_excute(agent) {
+       EFFECT_OFF_KIND(agent, Hash40::new("pitb_sword"), false, false);
+    }
+    frame(agent.lua_state_agent, 54.0);
+    if is_excute(agent) {
+        EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4.2, 4.1, 5.2, -4.5, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+//AppealSR
+unsafe extern "C" fn effect_krystal_AppealSR(fighter: &mut L2CAgentBase) {}
+
+//AppealSL
+unsafe extern "C" fn effect_krystal_AppealSL(fighter: &mut L2CAgentBase) {}
+
+//AppealLwR
+unsafe extern "C" fn effect_krystal_AppealLwR(fighter: &mut L2CAgentBase) {}
+
+//AppealLwL
+unsafe extern "C" fn effect_krystal_AppealLwL(fighter: &mut L2CAgentBase) {}
+
+
 
 pub fn install() {
     Agent::new("pitb")
@@ -860,6 +965,10 @@ pub fn install() {
     .effect_acmd("effect_specialsstart_krystal", effect_krystal_SpecialSStart, Low)  
     .effect_acmd("effect_specialairsstart_krystal", effect_krystal_SpecialAirSStart, Low)  
     .effect_acmd("effect_specialhi_krystal", effect_krystal_SpecialHi, Low)
+    .effect_acmd("effect_speciallwstartr_krystal", effect_krystal_SpecialLwStartR, Low)
+    .effect_acmd("effect_speciallwstartl_krystal", effect_krystal_SpecialLwStartL, Low)
+    .effect_acmd("effect_specialairlwstartr_krystal", effect_krystal_SpecialAirLwStartR, Low)
+    .effect_acmd("effect_specialairlwstartl_krystal", effect_krystal_SpecialAirLwStartL, Low)
     .effect_acmd("effect_speciallwhold_krystal", effect_krystal_SpecialLwHold, Low)
     .effect_acmd("effect_specialairlwhold_krystal", effect_krystal_SpecialAirLwHold, Low)
     .effect_acmd("effect_appealsr_krystal", effect_krystal_AppealSR, Low)
