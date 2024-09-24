@@ -10,7 +10,9 @@ unsafe extern "C" fn frame_krystal_Main(fighter: &mut L2CFighterCommon) {
     let frame = MotionModule::frame(fighter.module_accessor);
     let KRYSTAL = color >= 64 && color <= 71; 
     if KRYSTAL {
-        WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_INPUT);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_INPUT_BACK);
         if ModelModule::scale(fighter.module_accessor) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
             ModelModule::set_scale(fighter.module_accessor, 0.89);
             AttackModule::set_attack_scale(fighter.module_accessor, 0.89, true);

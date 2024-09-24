@@ -110,5 +110,8 @@ pub mod BuildImports {
         smash2::app::BattleObjectModuleAccessor,
         skyline::hooks::InlineCtx,
         the_csk_collection_api::*,
+        param_config::*,
+        arcropolis_api::*,
+        lazy_static::lazy_static,
     };
 }

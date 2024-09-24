@@ -62,7 +62,6 @@ pub fn install() {
     skyline::nro::add_hook(nro_hook);
     status::install();
     frame::install();
-    //param::install();
     function::install();
 }
 
