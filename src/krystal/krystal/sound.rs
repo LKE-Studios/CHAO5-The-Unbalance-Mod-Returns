@@ -140,12 +140,15 @@ unsafe extern "C" fn sound_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("vc_pitb_attack07"));
 	}
-	frame(fighter.lua_state_agent, 23.0);
-	if is_excute(fighter) {
-		if WorkModule::is_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS) { 
+    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED) { 
+	    frame(fighter.lua_state_agent, 23.0);
+	    if is_excute(fighter) {
 			PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
 		}
-		else {
+    }
+	else {
+        frame(fighter.lua_state_agent, 23.0);
+	    if is_excute(fighter) {
 			PLAY_SE(fighter, Hash40::new("se_pitb_smash_l01"));
 		}
 	}
@@ -372,6 +375,14 @@ unsafe extern "C" fn sound_krystal_SpecialAirHiStart(fighter: &mut L2CAgentBase)
 
 //SpecialLwHold
 unsafe extern "C" fn sound_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            }
+        }
+        wait_loop_clear(fighter);
+    }
 	frame(fighter.lua_state_agent, 1.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_pitb_special_s04"));
@@ -408,6 +419,14 @@ unsafe extern "C" fn sound_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwHold
 unsafe extern "C" fn sound_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        if is_excute(fighter) {
+            if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            }
+        }
+        wait_loop_clear(fighter);
+    }
     frame(fighter.lua_state_agent, 1.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_pitb_special_s04"));

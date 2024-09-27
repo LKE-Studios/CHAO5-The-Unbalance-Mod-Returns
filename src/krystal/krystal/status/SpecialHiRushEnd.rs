@@ -19,15 +19,13 @@ unsafe extern "C" fn krystal_SpecialHiRushEnd_Main_loop(fighter: &mut L2CFighter
     }
     if MotionModule::is_end(fighter.module_accessor) {
         if situation_kind != *SITUATION_KIND_GROUND {
-            fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());
             return 0.into();
         }
     }
-    else {
-        if situation_kind == *SITUATION_KIND_GROUND {
-            fighter.change_status(FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL.into(), false.into());
-            return 0.into();
-        }
+    else if situation_kind == *SITUATION_KIND_GROUND {
+        fighter.change_status(FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL.into(), false.into());
+        return 0.into();
     }
     0.into()
 }

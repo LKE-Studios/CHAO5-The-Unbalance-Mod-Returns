@@ -20,7 +20,7 @@
 use std::ffi::CStr;
 use std::os::raw::c_int;
 use the_csk_collection_api::*;
-use arcropolis_api::load_original_file;
+use arcropolis_api::*;
 use std::collections::HashMap;
 use skyline::{c_str, from_c_str, nn::ro::LookupSymbol};
 use skyline::libc::c_char;

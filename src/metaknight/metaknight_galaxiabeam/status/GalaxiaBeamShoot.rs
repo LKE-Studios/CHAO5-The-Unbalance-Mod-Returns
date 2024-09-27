@@ -36,12 +36,6 @@ unsafe extern "C" fn status_metaknight_GalaxiaBeamShoot_Main(weapon: &mut L2CWea
         sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x, 0.0);
         sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, 0.0);
     }
-    if should_remove_galaxia(weapon) {
-        galaxia_beam_removal(weapon);
-    }
-    if should_remove_galaxia_on_hit(weapon) {
-        galaxia_beam_hit_removal(weapon);
-    }
     weapon.fastshift(L2CValue::Ptr(metaknight_GalaxiaBeamShoot_Main_loop as *const () as _))
 }
 
@@ -53,8 +47,14 @@ unsafe extern "C" fn metaknight_GalaxiaBeamShoot_Main_loop(weapon: &mut L2CWeapo
     || situation_kind == *SITUATION_KIND_GROUND && prev_situation_kind == *SITUATION_KIND_AIR && WorkModule::is_flag(owner_module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_AIR_SPECIAL_GUARD) {
         galaxia_beam_removal(weapon);
     }
-    if should_remove_galaxia_on_hit(weapon) {
-        galaxia_beam_hit_removal(weapon);
+    let is_penetration = WorkModule::get_param_int(weapon.module_accessor, hash40("param_galaxiabeam"), hash40("is_penetration"));
+    if is_penetration == 0 {
+        if should_remove_galaxia_on_hit(weapon) {
+            galaxia_beam_hit_removal(weapon);
+        }
+    }
+    else if is_penetration == 1 {
+        return 0.into();
     }
     0.into()
 }
@@ -81,15 +81,16 @@ pub unsafe extern "C" fn should_remove_galaxia_on_hit(weapon: &mut L2CWeaponComm
 pub unsafe extern "C" fn galaxia_beam_removal(weapon: &mut L2CWeaponCommon) {
     let pos = *PostureModule::pos(weapon.module_accessor);
     EffectModule::req(weapon.module_accessor, Hash40::new("sys_erace_smoke"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
+    EffectModule::req(weapon.module_accessor, Hash40::new("miiswordsman_hensoku_hit"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
     weapon.pop_lua_stack(1);
 }
 
 pub unsafe extern "C" fn galaxia_beam_hit_removal(weapon: &mut L2CWeaponCommon) {
     let pos = *PostureModule::pos(weapon.module_accessor);
-    EffectModule::req(weapon.module_accessor, Hash40::new("metaknight_blade_beam_hit"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
+    EffectModule::req(weapon.module_accessor, Hash40::new("miiswordsman_hensoku_hit"), &Vector3f{x: pos.x, y: pos.y, z: pos.z + 5.0}, &Vector3f {x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
     weapon.pop_lua_stack(1);
@@ -101,7 +102,7 @@ unsafe extern "C" fn status_metaknight_GalaxiaBeamShoot_Exec(weapon: &mut L2CWea
 }
 
 unsafe extern "C" fn status_metaknight_GalaxiaBeamShoot_End(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("metaknight_blade_beam"), false, false);
+    EffectModule::kill_kind(weapon.module_accessor, Hash40::new("miiswordsman_final_edge_yellow"), false, false);
     0.into()
 }
 

@@ -17,20 +17,17 @@ unsafe extern "C" fn frame_krystal_Main(fighter: &mut L2CFighterCommon) {
             ModelModule::set_scale(fighter.module_accessor, 0.89);
             AttackModule::set_attack_scale(fighter.module_accessor, 0.89, true);
             GrabModule::set_size_mul(fighter.module_accessor, 0.89);
-          };
-          if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD {
-            if frame >= 50.0 && frame < 60.0 {
-                WorkModule::on_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
-            }
-            else {
-                WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
-            }
         };
         if ![*FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4].contains(&status_kind) {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_SUCCESS);
+            WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED);
         };
         if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) {
             STOP_SE(fighter, Hash40::new("se_pitb_special_h02"));
+        }
+        if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_HOLD {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -4.0, 0);
+            }
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_CHARGE, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_SHOOT,
         *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_HOLD, *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_END].contains(&status_kind) {

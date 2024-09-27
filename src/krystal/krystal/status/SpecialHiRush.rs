@@ -6,7 +6,6 @@ unsafe extern "C" fn status_krystal_SpecialHiRush_Main(fighter: &mut L2CFighterC
     if KRYSTAL {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_CONTINUE);
         WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_INT_RUSH_FRAME);
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_KRYSTAL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
         if !StopModule::is_stop(fighter.module_accessor) {
             WorkModule::inc_int(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_INT_RUSH_FRAME);
             krystal_SpecialHiRush_Sub_Status(fighter, false.into());

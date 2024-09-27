@@ -261,7 +261,7 @@ unsafe extern "C" fn expression_krystal_SpecialLwHold(fighter: &mut L2CAgentBase
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), true);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);
@@ -280,7 +280,7 @@ unsafe extern "C" fn expression_krystal_SpecialAirLwHold(fighter: &mut L2CAgentB
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), true);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
         ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);

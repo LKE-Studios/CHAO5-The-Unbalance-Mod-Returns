@@ -17,7 +17,6 @@ smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "
 smashline = { git = "https://github.com/HDR-Development/smashline" }
 smash2 = { package = "smash", git = "https://github.com/blu-dev/smash-rs" }
 smash_singletons = { git = "https://github.com/WuBoytH/smash_singletons.git" }
-skyline-web = { git = "https://github.com/skyline-rs/skyline-web" }
 ninput = { git = "https://github.com/blu-dev/ninput", version = "0.1.0" }
 param_config = { git = "https://github.com/csharpm7/lib_paramconfig.git"}
 arcropolis-api = { git = "https://github.com/Raytwo/arcropolis_api" }

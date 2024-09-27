@@ -5,6 +5,7 @@ pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut COUNTER : [i32; 8] = [0; 8];
 pub static mut CURRENT_ON_FRAME : [f32; 8] = [0.0; 8];
 pub static mut IS_CRIT : [bool; 8] = [false; 8];
+const COMMON_WEAPON_ATTACK_CALLBACK: usize = 0x33bdc10;
 
 pub mod KineticUtility {
     // Resets and enables the kinetic energy type.
@@ -591,13 +592,13 @@ pub unsafe extern "C" fn set_boomerang_fuse_params(module_accessor: *mut smash::
 }
 
 //A hook regarding the generation/visiblity of articles. Used to allow entry articles to generate
-#[skyline::hook(offset = 0x3a6670)]
+/*#[skyline::hook(offset = 0x3a6670)]
 unsafe fn get_article_use_type_mask(weapon_kind: i32, entry_id: i32) -> u8 {
     if weapon_kind == *WEAPON_KIND_LINK_PARASAIL {
         return 1;
     }
     original!()(weapon_kind, entry_id)
-}
+}*/
 
 #[skyline::hook(offset = 0x15db0b0)]
 pub unsafe fn create_item(item_manager: *mut smash::app::ItemManager, create_item_param: *mut CreateItemParam, unk: bool, unk2: bool, unk3: bool) -> *mut BattleObject {
@@ -630,6 +631,17 @@ unsafe extern "C" fn captain_on_attack(vtable: u64, fighter: &mut Fighter, log: 
 #[skyline::from_offset(0x696720)]
 unsafe extern "C" fn do_critical_zoom(module_accessor: *mut smash::app::BattleObjectModuleAccessor, log: u64, unk1: u8, param_hash: u64, unk3: u64, unk4: u32, unk5: u32, unk6: i8, unk7: i8) -> u8;
 
+#[skyline::hook(offset = COMMON_WEAPON_ATTACK_CALLBACK)]
+unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut smash::app::Weapon, log: u32) {
+    let collision_log = *(log as *const u64).add(0x10/0x8);
+    let collision_log = collision_log as *const CollisionLog;
+    let opponent_id = (*collision_log).collider_id;
+    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 {
+        *(weapon as *mut bool).add(0x90) = true;
+    }
+    call_original!(vtable, weapon, log)
+}
+
 pub fn install() {
     Agent::new("fighter")
     .on_start(special_flag_checks_init)
@@ -643,9 +655,9 @@ pub fn install() {
     .install();
     #[cfg(not(feature = "dev"))]
     skyline::install_hooks!(
-        //get_article_use_type_mask,
         create_item,
-        captain_on_attack
+        captain_on_attack,
+        common_weapon_attack_callback
     );
     #[cfg(feature = "dev")]
     let _ = skyline::patching::Patch::in_text(0x8b8c88).nop();
