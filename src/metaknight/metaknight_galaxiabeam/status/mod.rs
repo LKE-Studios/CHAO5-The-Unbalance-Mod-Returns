@@ -1,5 +1,7 @@
-mod GalaxiaBeamShoot;
+mod Shoot;
+mod End;
 
 pub fn install() {
-    GalaxiaBeamShoot::install();
+    Shoot::install();
+    End::install();
 }

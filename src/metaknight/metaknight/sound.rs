@@ -75,7 +75,37 @@ unsafe extern "C" fn sound_metaknight_GlideEnd(fighter: &mut L2CAgentBase) {
             PLAY_SE(fighter, Hash40::new("se_metaknight_dash_stop"));
         }
     }
-}    
+}     
+
+//Attack100End
+unsafe extern "C" fn sound_metaknight_Attack100End(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_attack100_03"));
+    }
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
+    }
+    wait(fighter.lua_state_agent, 28.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_metaknight_landing02"));
+        PLAY_SE(fighter, Hash40::new("se_metaknight_attack100_01"));
+    }
+}
+
+//AttackS3S3
+unsafe extern "C" fn sound_metaknight_AttackS3S3(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_metaknight_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_metaknight_attackhard_s03"));
+    }
+    wait(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
+    }
+}
 
 //ThrowHi
 unsafe extern "C" fn sound_metaknight_ThrowHi(fighter: &mut L2CAgentBase) {
@@ -98,7 +128,7 @@ unsafe extern "C" fn sound_metaknight_ThrowHi(fighter: &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_metaknight_final_hit"));
         PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
     }
-}   
+}  
 
 //SpecialNStart
 unsafe extern "C" fn sound_metaknight_SpecialNStart(fighter: &mut L2CAgentBase) {
@@ -213,6 +243,11 @@ unsafe extern "C" fn sound_metaknight_SpecialZ(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_metaknight_special_l03"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
     }
 }
 
@@ -225,6 +260,15 @@ unsafe extern "C" fn sound_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_metaknight_special_l03"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_blade_beam_shot"));
     }
 }
 
@@ -235,6 +279,8 @@ pub fn install() {
     .sound_acmd("sound_glideattack", sound_metaknight_GlideAttack, Low)
     .sound_acmd("sound_glideend", sound_metaknight_GlideEnd, Low)
     .sound_acmd("sound_glidelanding", sound_metaknight_GlideLanding, Low)
+    .sound_acmd("sound_attack100end", sound_metaknight_Attack100End, Low)
+    .sound_acmd("sound_attacks3s3", sound_metaknight_AttackS3S3, Low)
     .sound_acmd("sound_throwhi", sound_metaknight_ThrowHi, Low)
     .sound_acmd("sound_specialnstart", sound_metaknight_SpecialNStart, Low)
     .sound_acmd("sound_specialairnstart", sound_metaknight_SpecialAirNStart, Low)

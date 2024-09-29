@@ -38,14 +38,26 @@ unsafe extern "C" fn krystal_SpecialHiRush_Main_loop(fighter: &mut L2CFighterCom
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_AIR);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_BRAKE);
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi"), frame, 1.0, 0.0, false, false);
+            if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_CONTINUE) {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 0.0, 1.0, false, 0.0, false, false);
+            }
+            else {
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi"), frame, 1.0, 0.0, false, false);
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_CONTINUE);
+            }
         }
         if situation_kind == *SITUATION_KIND_AIR
         && prev_situation_kind == *SITUATION_KIND_GROUND {
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_AIR);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_BRAKE);
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_hi"), frame, 1.0, 0.0, false, false);
+            if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_CONTINUE) {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi"), 0.0, 1.0, false, 0.0, false, false);
+            }
+            else {
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi"), frame, 1.0, 0.0, false, false);
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_RUSH_FLAG_CONTINUE);
+            }
         }
     }
     if MotionModule::is_end(fighter.module_accessor) {

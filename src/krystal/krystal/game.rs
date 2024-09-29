@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 //JumpAerialF1
 unsafe extern "C" fn game_krystal_JumpAerialF1(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 28.0);
+    frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
     }
@@ -10,7 +10,7 @@ unsafe extern "C" fn game_krystal_JumpAerialF1(fighter: &mut L2CAgentBase) {
 
 //JumpAerialF2
 unsafe extern "C" fn game_krystal_JumpAerialF2(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 28.0);
+    frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
     }
@@ -18,7 +18,7 @@ unsafe extern "C" fn game_krystal_JumpAerialF2(fighter: &mut L2CAgentBase) {
 
 //JumpAerialF3
 unsafe extern "C" fn game_krystal_JumpAerialF3(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 28.0);
+    frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_JUMP_FLY_NEXT);
     }
@@ -1071,18 +1071,21 @@ unsafe extern "C" fn game_krystal_SpecialAirSEnd(fighter: &mut L2CAgentBase) {
 
 //SpecialHi
 unsafe extern "C" fn game_krystal_SpecialHi(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false)
+    }
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 30.0, 270, 63, 0, 0, 10.8, 0.0, 10.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_SWORD);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 29.0, 90, 90, 0, 60, 9.6, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        ATTACK(fighter, 2, 0, Hash40::new("top"), 29.0, 90, 90, 0, 60, 9.6, 0.0, 4.6, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        ATTACK(fighter, 3, 0, Hash40::new("top"), 29.5, 90, 90, 0, 60, 9.6, 0.0, 9.2, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 30.0, 270, 63, 0, 0, 10.8, 0.0, 10.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 29.0, 90, 90, 0, 60, 9.6, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 2, 0, Hash40::new("top"), 29.0, 90, 90, 0, 60, 9.6, 0.0, 4.6, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 3, 0, Hash40::new("top"), 29.5, 90, 90, 0, 60, 9.6, 0.0, 9.2, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
     }
     wait(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 0.0, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 4.6, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        ATTACK(fighter, 2, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 9.2, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 0.0, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 4.6, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 2, 0, Hash40::new("top"), 24.5, 90, 100, 0, 60, 9.6, 0.0, 9.2, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BODY);
     }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
@@ -1203,7 +1206,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 20.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 20.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 52.0, false);
     }
     frame(fighter.lua_state_agent, 33.0);
@@ -1213,18 +1216,17 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 35.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 21.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 21.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
     }
     frame(fighter.lua_state_agent, 37.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-
     }
     frame(fighter.lua_state_agent, 39.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 22.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-    AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 22.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
     }
     frame(fighter.lua_state_agent, 41.0);
     if is_excute(fighter) {
@@ -1232,7 +1234,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 43.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 23.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 23.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 40.0, false);
     }
     frame(fighter.lua_state_agent, 45.0);
@@ -1241,7 +1243,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 47.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 24.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 24.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 38.0, false);
     }
     frame(fighter.lua_state_agent, 49.0);
@@ -1250,7 +1252,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 51.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 25.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 25.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 38.0, false);
     }
     frame(fighter.lua_state_agent, 53.0);
@@ -1259,7 +1261,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 26.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 26.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 30.0, false);
     }
     frame(fighter.lua_state_agent, 57.0);
@@ -1268,7 +1270,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 59.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 27.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 27.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 61.0);
@@ -1277,7 +1279,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 63.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 28.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 28.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 65.0);
@@ -1286,7 +1288,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 67.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 29.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 29.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 18.0, false);
     }
     frame(fighter.lua_state_agent, 69.0);
@@ -1295,7 +1297,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 30.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 30.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 18.0, false);
     }
     frame(fighter.lua_state_agent, 73.0);
@@ -1304,7 +1306,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 75.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 31.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 31.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 10.0, false);
     }
     frame(fighter.lua_state_agent, 77.0);
@@ -1313,7 +1315,7 @@ unsafe extern "C" fn game_krystal_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 79.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 105, 20, 34.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 105, 20, 34.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 8.0, false);
     }
     frame(fighter.lua_state_agent, 81.0);
@@ -1359,7 +1361,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 20.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 20.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
     }
     frame(fighter.lua_state_agent, 33.0);
@@ -1369,7 +1371,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 35.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 21.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 21.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
     }
     frame(fighter.lua_state_agent, 37.0);
@@ -1378,7 +1380,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 39.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 22.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 22.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 48.0, false);
     }
     frame(fighter.lua_state_agent, 41.0);
@@ -1387,7 +1389,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 43.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 23.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 23.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 38.0, false);
     }
     frame(fighter.lua_state_agent, 45.0);
@@ -1396,7 +1398,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 47.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 24.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 24.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 38.0, false);
     }
     frame(fighter.lua_state_agent, 49.0);
@@ -1405,7 +1407,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 51.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 25.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 25.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 38.0, false);
     }
     frame(fighter.lua_state_agent, 53.0);
@@ -1414,7 +1416,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 26.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 26.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 57.0);
@@ -1423,7 +1425,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 59.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 27.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 27.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 61.0);
@@ -1432,7 +1434,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 63.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 28.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 28.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 28.0, false);
     }
     frame(fighter.lua_state_agent, 65.0);
@@ -1441,7 +1443,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 67.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 29.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 29.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 18.0, false);
     }
     frame(fighter.lua_state_agent, 69.0);
@@ -1450,7 +1452,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 78, 25, 60, 30.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 78, 25, 60, 30.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 18.0, false);
     }
     frame(fighter.lua_state_agent, 73.0);
@@ -1459,7 +1461,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 75.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 45, 20, 31.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 45, 20, 31.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 8.0, false);
     }
     frame(fighter.lua_state_agent, 77.0);
@@ -1468,7 +1470,7 @@ unsafe extern "C" fn game_krystal_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 79.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("throw"), 2.5, 10, 38, 105, 20, 34.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        ATTACK(fighter, 0, 0, Hash40::new("throw"), 8.5, 10, 38, 105, 20, 34.8, 0.0, 0.0, 0.0, None, None, None, 0.0, 0.1, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         AttackModule::set_add_reaction_frame_revised(fighter.module_accessor, 0, 8.0, false);
     }
     frame(fighter.lua_state_agent, 81.0);

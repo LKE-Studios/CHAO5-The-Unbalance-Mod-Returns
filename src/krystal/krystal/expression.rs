@@ -259,14 +259,10 @@ unsafe extern "C" fn expression_krystal_SpecialAirSEnd(fighter: &mut L2CAgentBas
 unsafe extern "C" fn expression_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        VisibilityModule::set_default_int64(fighter.module_accessor, hash40("weapon") as i64);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_wpnnagirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_final"), true);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -278,14 +274,10 @@ unsafe extern "C" fn expression_krystal_SpecialLwHold(fighter: &mut L2CAgentBase
 unsafe extern "C" fn expression_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        VisibilityModule::set_default_int64(fighter.module_accessor, hash40("weapon") as i64);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponlm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_arm"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_yumirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_wpnnagirm"), true);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_final"), true);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {

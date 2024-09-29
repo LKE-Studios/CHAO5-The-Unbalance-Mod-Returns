@@ -27,6 +27,8 @@ unsafe extern "C" fn frame_krystal_Main(fighter: &mut L2CFighterCommon) {
         if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_LW_HOLD {
             if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
                 DamageModule::heal(fighter.module_accessor, -4.0, 0);
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+                
             }
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_CHARGE, *FIGHTER_PIT_STATUS_KIND_SPECIAL_N_SHOOT,

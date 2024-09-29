@@ -10,7 +10,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     
     //MARIO
     param_config::update_float_2(*FIGHTER_KIND_MARIO, vec![9].clone(),(hash40("param_special_hi"), hash40("cappy_prob"), 0.0));
-    
+
     //CLAUS
     param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(),(hash40("walk_speed_max"), 0, 1.47));
     param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(),(hash40("ground_brake"), 0, 0.045));
@@ -161,8 +161,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("landing_attack_air_frame_lw"), 0, 6.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("landing_frame"), 0, 3.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("height"), 0, 14.2));
-    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("speed_table_y"), 1, 2.0));
-    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("speed_table_y"), 2, 2.0));
+    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("speed_y_table"), 1, 2.05));
+    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("speed_y_table"), 2, 2.1));
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_n"), hash40("charge_frame"), 0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_n"), hash40("turn_stick_x"), 0.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_n"), hash40("speed_x_mul"), 0.0));
@@ -172,7 +172,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_PITB_BOWARROW, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_bowarrow"), hash40("power"), 32.0));
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("stop_y_frame"), 8));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("accel_y"), 0.04));
-    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("rush_speed"), 6.6));
+    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("rush_speed"), 4.6));
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("landing_frame"), 20));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_hi"), hash40("rush_angle"), 60.0));
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_lw"), hash40("frame_min"), 28));

@@ -17,7 +17,7 @@ unsafe extern "C" fn status_metaknight_SpecialN_Main(fighter: &mut L2CFighterCom
     WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_ATTACK_COUNTER);
     WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
     ground_kinetic_function(fighter);
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialN_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialN_Main_loop as *const () as _))
 }
 
 pub unsafe extern "C" fn ground_kinetic_function(fighter: &mut L2CFighterCommon) {
@@ -32,7 +32,7 @@ pub unsafe extern "C" fn ground_kinetic_function(fighter: &mut L2CFighterCommon)
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 }
 
-unsafe extern "C" fn metaknight_SpecialN_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN.into(), false.into());

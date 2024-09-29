@@ -31,7 +31,7 @@ pub unsafe extern "C" fn status_plizardon_RockStoneMove_Main(weapon: &mut L2CWea
 
 pub unsafe extern "C" fn RockStone_remove(weapon: &mut L2CWeaponCommon) {
     let pos = PostureModule::pos(weapon.module_accessor);
-    let eff = EffectModule::req(weapon.module_accessor, Hash40::new("sys_misfire"), pos, &Vector3f{x: 0.0,y:0.0,z:0.0}, 1.0, 0, -1, false, 0) as u32;
+    let eff = EffectModule::req(weapon.module_accessor, Hash40::new("sys_misfire"), pos, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.0, 0, -1, false, 0) as u32;
     EffectModule::set_rgb(weapon.module_accessor, eff, 0.5, 0.5, 0.5);
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
 }

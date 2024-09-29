@@ -145,7 +145,6 @@ unsafe extern "C" fn effect_metaknight_Attack100End(fighter: &mut L2CAgentBase) 
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("metaknight_attack_end"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.25, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 7.2, 50.0, 0, 0, 0, 0.9, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
         EFFECT_OFF_KIND(fighter, Hash40::new("metaknight_sword"), false, false);
     }
@@ -165,8 +164,6 @@ unsafe extern "C" fn effect_metaknight_AttackS3S3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("metaknight_s3_trace"), Hash40::new("top"), -0.0, 0, 0, 0, 0, 0, 1.2, true);
         EffectModule::set_disable_render_offset_last(fighter.module_accessor);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_hit_sting"), Hash40::new("top"), 0, 7.2, 50.0, 0, 0, 0.0, 0.9, true);                 
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_item_revengeshooter_shot"));
     }
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
