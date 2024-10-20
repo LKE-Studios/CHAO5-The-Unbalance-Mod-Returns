@@ -906,6 +906,56 @@ unsafe extern "C" fn game_silver_EntryR(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 }
 
+//Final
+unsafe extern "C" fn game_silver_Final(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
+        SLOW_OPPONENT(fighter, 10.0, 100.0);
+    }
+    WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA);
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 13, 0, 0);
+        REQ_FINAL_START_CAMERA_arg3(fighter, Hash40::new("d04final.nuanmb"), false, false);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 2);
+        FT_START_CUTIN(fighter);
+    }
+    frame(fighter.lua_state_agent, 60.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
+    }
+    frame(fighter.lua_state_agent, 67.0);
+    if is_excute(fighter) {
+        WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn game_silver_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
+        SLOW_OPPONENT(fighter, 10.0, 100.0);
+    }
+    WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA);
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 13, 0, 0);
+        REQ_FINAL_START_CAMERA_arg3(fighter, Hash40::new("d04final.nuanmb"), false, false);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 2);
+        FT_START_CUTIN(fighter);
+    }
+    frame(fighter.lua_state_agent, 60.0);
+    if is_excute(fighter) {
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
+    }
+    frame(fighter.lua_state_agent, 67.0);
+    if is_excute(fighter) {
+        WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
+    }
+}
+
 pub fn install() {
     Agent::new("mewtwo")
     .game_acmd("game_attack11_silver", game_silver_Attack11, Low)
@@ -957,5 +1007,7 @@ pub fn install() {
     .game_acmd("game_escapeairslide_silver", game_silver_EscapeAirSlide, Low)
     .game_acmd("game_appeallwr_silver", game_silver_AppealLwR, Low)
     .game_acmd("game_appeallwl_silver", game_silver_AppealLwL, Low)
+    //.game_acmd("game_final_silver", game_silver_Final, Low)
+    //.game_acmd("game_finalair_silver", game_silver_FinalAir, Low)
     .install();
 }

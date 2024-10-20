@@ -633,10 +633,17 @@ unsafe extern "C" fn do_critical_zoom(module_accessor: *mut smash::app::BattleOb
 
 #[skyline::hook(offset = COMMON_WEAPON_ATTACK_CALLBACK)]
 unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut smash::app::Weapon, log: u32) {
+    let module_accessor = (*weapon).battle_object.module_accessor;
+    let owner_object_id = WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER);
+    let owner_module_accessor = smash::app::sv_battle_object::module_accessor(owner_object_id as u32);
+    let owner_kind = utility::get_kind(&mut *owner_module_accessor);
     let collision_log = *(log as *const u64).add(0x10/0x8);
     let collision_log = collision_log as *const CollisionLog;
     let opponent_id = (*collision_log).collider_id;
-    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 {
+    let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let CUSTOM_FIGHTER_2 = color >= 64 && color <= 71;
+    let CUSTOM_FIGHTER = color >= 120 && color <= 127;
+    if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 && CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
         *(weapon as *mut bool).add(0x90) = true;
     }
     call_original!(vtable, weapon, log)

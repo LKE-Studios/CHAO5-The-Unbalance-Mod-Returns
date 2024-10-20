@@ -37,7 +37,7 @@ unsafe extern "C" fn effect_silver_mewtwom_FinalShoot(fighter: &mut L2CAgentBase
     if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_final_shot_hold"), false, false);
         EFFECT_OFF_KIND(fighter, Hash40::new("0x161efe0679"), false, false);
-        EFFECT(fighter, Hash40::new("mewtwo_final_shot"), Hash40::new("top"), 0, 13, 8, 0, 0, 0, 0.6, 0, 0, 0, 50, 360, 50, true);
+        EFFECT(fighter, Hash40::new("mewtwo_final_shot"), Hash40::new("top"), 0, 13, 8, 0, 0, 0, 1.8, 0, 0, 0, 50, 360, 50, true);
         LAST_EFFECT_SET_COLOR(fighter, 0.0, 1.0, 1.0);
     }
     for _ in 0..90 {

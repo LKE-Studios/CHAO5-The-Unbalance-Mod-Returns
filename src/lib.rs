@@ -134,7 +134,7 @@ pub mod globals {
 }
 
 mod basyaamo;
-/*mod bayonetta;
+mod bayonetta;
 mod brave;
 mod buddy;
 mod captain;
@@ -166,9 +166,9 @@ mod kirby;
 mod koopa;
 mod koopag;
 mod koopajr;
-mod krool;*/
+mod krool;
 mod krystal;
-/*mod link;
+mod link;
 mod littlemac;
 mod lucario;
 mod lucas;
@@ -177,9 +177,9 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*pub mod mewtwo;
+pub mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
@@ -229,7 +229,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;*/
+mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -438,7 +438,7 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    /*mario::install();
+    mario::install();
     donkey::install();
     link::install();
     samus::install();
@@ -464,9 +464,9 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
-    /*pit::install();
+    pit::install();
     wario::install();
     diddy::install();
     ptrainer::install();
@@ -532,7 +532,7 @@ pub fn main() {
     claus::install();
     koopag::install();
     silver::install();
-    waluigi::install();*/
+    waluigi::install();
     basyaamo::install();
     krystal::install();
     skyline::install_hooks!(

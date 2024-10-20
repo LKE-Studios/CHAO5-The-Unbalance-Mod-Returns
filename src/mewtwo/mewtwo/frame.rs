@@ -3,7 +3,7 @@ use crate::imports::BuildImports::*;
 pub static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
 pub static mut START_FLOAT : [bool; 8] = [false; 8];
 pub static mut CHECK_FLOAT : [i32; 8] = [0; 8];
-pub static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
+pub static mut CHECK_FLOAT_MAX : i32 = 30; //Frames where jump needs to be held to start floating
 pub static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 pub static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
 pub static mut FLOAT_MAX : i32 = 1200; //Frames this bitch can float (In frames, 300 = 5 seconds)

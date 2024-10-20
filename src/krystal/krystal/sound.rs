@@ -411,14 +411,6 @@ unsafe extern "C" fn sound_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwHold
 unsafe extern "C" fn sound_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
-        if is_excute(fighter) {
-            if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
-            }
-        }
-        wait_loop_clear(fighter);
-    }
     frame(fighter.lua_state_agent, 1.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_pitb_special_s04"));
@@ -662,6 +654,8 @@ pub fn install() {
     .sound_acmd("sound_specialairhistart_krystal", sound_krystal_SpecialAirHiStart, Low)
     .sound_acmd("sound_speciallwhold_krystal", sound_krystal_SpecialLwHold, Low)
     .sound_acmd("sound_specialairlwhold_krystal", sound_krystal_SpecialAirLwHold, Low)
+    .sound_acmd("sound_appeallwl_krystal", sound_krystal_AppealLwL, Low)
+    .sound_acmd("sound_appeallwr_krystal", sound_krystal_AppealLwR, Low)
     .sound_acmd("sound_final_krystal", sound_krystal_Final, Low)
     .sound_acmd("sound_finalair_krystal", sound_krystal_FinalAir, Low)
 	.sound_acmd("sound_win1_krystal", sound_krystal_Win1, Low)

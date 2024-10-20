@@ -255,12 +255,56 @@ unsafe extern "C" fn expression_krystal_SpecialAirSEnd(fighter: &mut L2CAgentBas
     }
 }
 
+//SpecialLwStartL
+unsafe extern "C" fn expression_krystal_SpecialLwStartL(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
+    }
+}
+
+//SpecialLwStartR
+unsafe extern "C" fn expression_krystal_SpecialLwStartR(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
+    }
+}
+
+//SpecialAirLwStartL
+unsafe extern "C" fn expression_krystal_SpecialAirLwStartL(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
+    }
+}
+
+//SpecialAirLwStartR
+unsafe extern "C" fn expression_krystal_SpecialAirLwStartR(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
+    }
+}
+
 //SpecialLwHold
 unsafe extern "C" fn expression_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
-        VisibilityModule::set_default_int64(fighter.module_accessor, hash40("weapon") as i64);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
     }
@@ -274,8 +318,8 @@ unsafe extern "C" fn expression_krystal_SpecialLwHold(fighter: &mut L2CAgentBase
 unsafe extern "C" fn expression_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
-        VisibilityModule::set_default_int64(fighter.module_accessor, hash40("weapon") as i64);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("pit_weaponrm"), true);
+        VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_bow_r") as i64);
+        VisibilityModule::set_int64(fighter.module_accessor, hash40("weapon") as i64, hash40("weapon_arm_r") as i64);
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_awaken"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
     }
@@ -358,7 +402,11 @@ pub fn install() {
     .expression_acmd("expression_specialsstart_krystal", expression_krystal_SpecialSStart, Low)  
     .expression_acmd("expression_specialairsstart_krystal", expression_krystal_SpecialAirSStart, Low)  
     .expression_acmd("expression_specialsend_krystal", expression_krystal_SpecialSEnd, Low)  
-    .expression_acmd("expression_specialairsend_krystal", expression_krystal_SpecialAirSEnd, Low)  
+    .expression_acmd("expression_specialairsend_krystal", expression_krystal_SpecialAirSEnd, Low) 
+    .expression_acmd("expression_speciallwstartl_krystal", expression_krystal_SpecialLwStartL, Low)
+    .expression_acmd("expression_speciallwstartr_krystal", expression_krystal_SpecialLwStartR, Low) 
+    .expression_acmd("expression_specialairlwstartl_krystal", expression_krystal_SpecialAirLwStartL, Low)
+    .expression_acmd("expression_specialairlwstartr_krystal", expression_krystal_SpecialAirLwStartR, Low) 
     .expression_acmd("expression_speciallwhold_krystal", expression_krystal_SpecialLwHold, Low)
     .expression_acmd("expression_specialairlwhold_krystal", expression_krystal_SpecialAirLwHold, Low)
     .expression_acmd("expression_entryl_krystal", expression_krystal_EntryL, Low)

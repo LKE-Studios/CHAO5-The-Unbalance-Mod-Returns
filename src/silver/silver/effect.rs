@@ -1188,17 +1188,25 @@ unsafe extern "C" fn effect_silver_Win3Wait(fighter: &mut L2CAgentBase) {
 
 //Final
 unsafe extern "C" fn effect_silver_Final(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_mewtwo_final"), false, false, false);
-        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1.2, *GROUND, *EFFECT_SCREEN_PRIO_FINAL);
+        EFFECT(fighter, Hash40::new("sys_bg_black"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true);
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), -8, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
 //FinalAir 
 unsafe extern "C" fn effect_silver_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_mewtwo_final"), false, false, false);
-        FILL_SCREEN_MODEL_COLOR(fighter, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1.2, *GROUND, *EFFECT_SCREEN_PRIO_FINAL);
+        EFFECT(fighter, Hash40::new("sys_bg_black"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true);
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        FOOT_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), -8, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
@@ -1360,7 +1368,7 @@ pub fn install() {
     .effect_acmd("effect_appealhil_silver", effect_silver_AppealHiL, Low)
     .effect_acmd("effect_appeallwr_silver", effect_silver_AppealLwR, Low)
     .effect_acmd("effect_appeallwl_silver", effect_silver_AppealLwL, Low)
-    .effect_acmd("effect_final_silver", effect_silver_Final, Low)
-    .effect_acmd("effect_finalair_silver", effect_silver_FinalAir, Low)
+    //.effect_acmd("effect_final_silver", effect_silver_Final, Low)
+    //.effect_acmd("effect_finalair_silver", effect_silver_FinalAir, Low)
     .install();
 }

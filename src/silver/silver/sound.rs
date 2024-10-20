@@ -593,6 +593,30 @@ unsafe extern "C" fn sound_silver_Win3(fighter: &mut L2CAgentBase) {
     }
 }
 
+//Final
+unsafe extern "C" fn sound_silver_Final(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_mewtwo_final02"));
+    }
+    frame(fighter.lua_state_agent, 60.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_mewtwo_special_n01"));
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn sound_silver_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_mewtwo_final02"));
+    }
+    frame(fighter.lua_state_agent, 60.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_mewtwo_special_n01"));
+    }
+}
+
 pub fn install() {
     Agent::new("mewtwo")
     .sound_acmd("sound_attack11_silver", sound_silver_Attack11, Low)
@@ -648,5 +672,7 @@ pub fn install() {
     .sound_acmd("sound_appealhil_silver", sound_silver_AppealHiL, Low)
     .sound_acmd("sound_appeallwr_silver", sound_silver_AppealLwR, Low)
     .sound_acmd("sound_appeallwl_silver", sound_silver_AppealLwL, Low)
+    //.sound_acmd("sound_final_silver", sound_silver_Final, Low)
+    //.sound_acmd("sound_finalair_silver", sound_silver_FinalAir, Low)
     .install();
 }

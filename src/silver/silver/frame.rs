@@ -17,6 +17,14 @@ pub static mut SPECIAL_N_DIR: [i32; 65544] = [0; 65544];
 pub static mut SPECIAL_N_GET_ANGLE: [bool; 65544] = [false; 65544];
 pub static mut STICK_DIRECTION : [f32; 8] = [0.0; 8];
 pub static mut KILL_EFFECTS : [bool; 8] = [false; 8];
+pub static mut BOX_HIT : [bool; 8] = [false; 8];
+static mut DID_EFF : [bool; 8] = [false; 8];
+pub static mut CLOUD_COUNT : [f32; 8] = [0.0; 8];
+pub static mut CLOUD_EFF : [u32; 8] = [0; 8];
+pub static mut CLOUD_EFF2 : [u32; 8] = [0; 8];
+pub static mut CLOUD_POS : Vector3f = Vector3f { x: 0.0, y: 10.0, z: 10.0 };
+pub static mut CLOUD_POS2 : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+pub static mut CLOUD_ROT : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
 pub unsafe extern "C" fn frame_silver_Exec(fighter: &mut L2CFighterCommon) {
     ModelModule::set_scale(fighter.module_accessor, 0.865);
@@ -192,6 +200,41 @@ pub unsafe extern "C" fn special_hi_silver(fighter: &mut L2CFighterCommon) {
     };
 }
 
+pub unsafe extern "C" fn final_silver(fighter: &mut L2CFighterCommon) {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX) && motion_kind != hash40("final") && motion_kind != hash40("final_air") {
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_bg_black"), false, false);
+    };
+    if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX) {
+        DID_EFF[ENTRY_ID] = false;
+        BOX_HIT[ENTRY_ID] = false;
+    };
+    if [hash40("final"), hash40("final_air")].contains(&motion_kind) {
+        if frame == 37.0 {
+            CLOUD_EFF[ENTRY_ID] = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_misfire"), Hash40::new("top"), &CLOUD_POS, &CLOUD_ROT, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
+            EffectModule::set_rgb(fighter.module_accessor, CLOUD_EFF[ENTRY_ID], 0.0, 1.0, 1.0);
+            EffectModule::set_alpha(fighter.module_accessor, CLOUD_EFF[ENTRY_ID], 0.5);
+            EffectModule::set_rate(fighter.module_accessor, CLOUD_EFF[ENTRY_ID], 0.001); 
+        }
+        else if frame > 37.0 && frame < 67.0 {
+            CLOUD_COUNT[ENTRY_ID] += 1.0;
+            let scale = Vector3f { x: CLOUD_COUNT[ENTRY_ID]/2.0, y: CLOUD_COUNT[ENTRY_ID]/2.0, z: CLOUD_COUNT[ENTRY_ID]/2.0};
+            EffectModule::set_scale(fighter.module_accessor, CLOUD_EFF[ENTRY_ID], &scale);
+        }
+        else {
+            CLOUD_COUNT[ENTRY_ID] = 0.0;
+            let scale = Vector3f { x: 0.00001, y: 0.00001, z: 0.00001};
+            EffectModule::set_scale(fighter.module_accessor, CLOUD_EFF[ENTRY_ID], &scale);
+        };
+        if frame >= 100.0 {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
+            StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
+        };
+    };
+}
+
 pub unsafe extern "C" fn misc_silver(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
@@ -248,6 +291,21 @@ pub unsafe extern "C" fn frame_silver_shadowball_Main(weapon: &mut L2CFighterBas
     };
 }
 
+pub unsafe extern "C" fn frame_silver_box_Main(weapon: &mut L2CFighterBase) {
+    let owner_target_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((owner_target_id) as u32);
+    let ENTRY_ID = WorkModule::get_int(&mut *owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    BURN_COLOR(weapon, 0.0, 2.55, 2.55, 0.2);
+    FLASH(weapon, 0.3, 0.7, 0.7, 0.1);
+    if !DID_EFF[ENTRY_ID] {
+        CLOUD_EFF2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_misfire"), Hash40::new("top"), &CLOUD_POS2, &CLOUD_ROT, 15.0, true, 0, 0, 0, 0, 0, true, true) as u32;
+        EffectModule::set_rgb(weapon.module_accessor, CLOUD_EFF2[ENTRY_ID], 0.0, 1.0, 1.0);
+        EffectModule::set_alpha(weapon.module_accessor, CLOUD_EFF2[ENTRY_ID], 0.1);
+        EffectModule::set_rate(weapon.module_accessor, CLOUD_EFF2[ENTRY_ID], 0.001); 
+        DID_EFF[ENTRY_ID] = true;
+    };
+}
+
 pub fn install() {
     Agent::new("mewtwo")
     .on_line(Main, frame_silver_Main)
@@ -255,5 +313,9 @@ pub fn install() {
     
     Agent::new("mewtwo_shadowball")
     .on_line(Main, frame_silver_shadowball_Main)
+    .install();
+
+    Agent::new("mewtwo_box")
+    .on_line(Main, frame_silver_box_Main)
     .install();
 }

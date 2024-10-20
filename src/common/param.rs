@@ -30,7 +30,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("run_accel_add"), 0, 2.25));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("run_speed_max"), 0, 6.07));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_accel_x_mul"), 0, 0.055));
-    param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_x_stable"), 0, 0.1));
+    param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_x_stable"), 0, 1.1));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_y_stable"), 0, 1.356));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("jump_aerial_y"), 0, 38.0));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 82.0));

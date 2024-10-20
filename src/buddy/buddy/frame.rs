@@ -52,20 +52,8 @@ unsafe extern "C" fn frame_buddy(fighter: &mut L2CFighterCommon) {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_buddy_glide_start"), 0);
     };
     if status_kind == *FIGHTER_BUDDY_STATUS_KIND_SPECIAL_S_DASH {
-        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
-        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_JOSTLE);
-        fighter.sub_air_check_fall_common();
-        fighter.sub_wait_ground_check_common(false.into());
-        WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_BUDDY_INSTANCE_WORK_ID_INT_SPECIAL_S_REMAIN);
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -10.0, 0);
-        }
-        if MotionModule::frame(fighter.module_accessor) > 15.0 {
-            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-                if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-                    fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
-                }
-            }
         }
     };
 }

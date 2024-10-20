@@ -858,28 +858,10 @@ unsafe extern "C" fn effect_krystal_SpecialAirLwStartR(fighter: &mut L2CAgentBas
 }
 
 //SpecialLwHold
-unsafe extern "C" fn effect_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
-        if is_excute(fighter) {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
-            }
-        }
-        wait_loop_clear(fighter);
-    }
-}
+unsafe extern "C" fn effect_krystal_SpecialLwHold(fighter: &mut L2CAgentBase) {}
 
 //SpecialAirLwHold
-unsafe extern "C" fn effect_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
-        if is_excute(fighter) {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
-            }
-        }
-        wait_loop_clear(fighter);
-    }
-}
+unsafe extern "C" fn effect_krystal_SpecialAirLwHold(fighter: &mut L2CAgentBase) {}
 
 //SpecialLwEndR
 unsafe extern "C" fn effect_krystal_SpecialLwEndR(fighter: &mut L2CAgentBase) {
