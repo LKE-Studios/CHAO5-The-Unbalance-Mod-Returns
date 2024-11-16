@@ -3,7 +3,7 @@ pub mod BuildImports {
         std::mem,
         smashline::*,    
         smashline::Priority::*,
-        smashline::{Agent, Main, Pre, Init, Exec, End, Exit, ExecStop, original_status},   
+        smashline::{Agent, Main, Pre, Init, Exec, End, Exit, ExecStop, CheckDamage, original_status},   
         smash_script::{*, macros::*},
         interpolation::lerp,
         smash::app::{*, 

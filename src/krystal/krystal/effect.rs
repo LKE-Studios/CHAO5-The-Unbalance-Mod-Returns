@@ -273,22 +273,11 @@ unsafe extern "C" fn effect_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED) {
-        frame(fighter.lua_state_agent, 23.0);
-        if is_excute(fighter) {
-            EffectModule::req_follow(fighter.module_accessor, Hash40::new("pitb_atk_s3"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.3, false, 0, 0, 0, 0, 0, false, false);
-            EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_soil_landing"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.0, false, 0, 0, 0, 0, 0, false, false);
-            QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
-        }
-    }
-    else {
-        frame(fighter.lua_state_agent, 23.0);
-        if is_excute(fighter) {
-            EFFECT(fighter, Hash40::new("pitb_gouwan_dash_ring"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
-            EFFECT(fighter, Hash40::new("sys_quake"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
-            EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("top"), 1, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
-            QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
-        }        
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        EffectModule::req_follow(fighter.module_accessor, Hash40::new("pitb_atk_s3"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.3, false, 0, 0, 0, 0, 0, false, false);
+        EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_soil_landing"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 2.0, false, 0, 0, 0, 0, 0, false, false);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
     }
 }
 

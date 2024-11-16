@@ -10,7 +10,7 @@ unsafe extern "C" fn status_metaknight_SpecialS_Main(fighter: &mut L2CFighterCom
     WorkModule::set_int64(fighter.module_accessor, hash40("special_s_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
     WorkModule::set_int64(fighter.module_accessor, hash40("special_air_s_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_AIR_KIND);  
     metaknight_special_s_motion_handler(fighter);
-    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialS_Main_Sub as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialS_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn metaknight_special_s_motion_handler(fighter: &mut L2CFighterCommon) {
@@ -34,7 +34,7 @@ unsafe extern "C" fn metaknight_special_s_motion_handler(fighter: &mut L2CFighte
     }
 }
 
-unsafe extern "C" fn metaknight_SpecialS_Main_Sub(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn metaknight_SpecialS_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let mut bool_set: bool = false;
     let mot_air_kind = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_AIR_KIND);
     let mot_kind = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);

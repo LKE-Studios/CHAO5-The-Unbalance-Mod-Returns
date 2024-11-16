@@ -652,13 +652,15 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
 pub fn install() {
     Agent::new("fighter")
     .on_start(special_flag_checks_init)
-    .on_start(basyaamo_init)
     .install();
     Agent::new("murabito")
     .on_line(Main, ac_update)
     .install();
     Agent::new("shizue")
     .on_line(Main, ac_update)
+    .install();
+    Agent::new("captain")
+    .on_start(basyaamo_init)
     .install();
     #[cfg(not(feature = "dev"))]
     skyline::install_hooks!(

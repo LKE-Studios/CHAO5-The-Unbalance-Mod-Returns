@@ -1,19 +1,13 @@
 use crate::imports::BuildImports::*;
 
-#[acmd_script(//Win3
-    agent = "ness", 
-    script = "game_win3_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_win3(fighter: &mut L2CAgentBase) {
+//Win3
+unsafe extern "C" fn game_ninten_Win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE(fighter, 2.5);
+    FT_MOTION_RATE(fighter, 3.0);
 }
 
-#[acmd_script(//Attack11 
-    agent = "ness", 
-    script = "game_attack11_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attack11(fighter: &mut L2CAgentBase) {
+//Attack11 
+unsafe extern "C" fn game_ninten_Attack11(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 2.0, 361, 25, 0, 30, 1.6, 0.0, 5.0, 7.0, None, None, None, 0.7, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
@@ -36,11 +30,8 @@ unsafe fn game_ninten_attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack12 
-    agent = "ness", 
-    script = "game_attack12_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attack12(fighter: &mut L2CAgentBase) {
+//Attack12 
+unsafe extern "C" fn game_ninten_Attack12(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 3.0, 361, 25, 0, 30, 2.2, 0.0, 5.5, 5.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
@@ -57,11 +48,8 @@ unsafe fn game_ninten_attack12(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Attack13 
-    agent = "ness", 
-    script = "game_attack13_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attack13(fighter: &mut L2CAgentBase) {
+//Attack13
+unsafe extern "C" fn game_ninten_Attack13(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
     }
@@ -81,11 +69,8 @@ unsafe fn game_ninten_attack13(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackDash
-    agent = "ness", 
-    script = "game_attackdash_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackdash(fighter: &mut L2CAgentBase) {
+//AttackDash
+unsafe extern "C" fn game_ninten_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
     }
@@ -111,11 +96,8 @@ unsafe fn game_ninten_attackdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Hi
-    agent = "ness", 
-    script = "game_attacks3hi_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacks3hi(fighter: &mut L2CAgentBase) {
+//AttackS3Hi
+unsafe extern "C" fn game_ninten_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("legr"), 12.0, 361, 100, 0, 35, 6.6, 0.6, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -127,11 +109,8 @@ unsafe fn game_ninten_attacks3hi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3
-    agent = "ness", 
-    script = "game_attacks3_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacks3(fighter: &mut L2CAgentBase) {
+//AttackS3
+unsafe extern "C" fn game_ninten_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("legr"), 12.0, 361, 100, 0, 35, 6.6, 0.6, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -143,11 +122,8 @@ unsafe fn game_ninten_attacks3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS3Lw
-    agent = "ness", 
-    script = "game_attacks3lw_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacks3lw(fighter: &mut L2CAgentBase) {
+//AttackS3Lw
+unsafe extern "C" fn game_ninten_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("legr"), 12.0, 361, 100, 0, 35, 6.6, 0.6, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -159,11 +135,8 @@ unsafe fn game_ninten_attacks3lw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi3
-    agent = "ness", 
-    script = "game_attackhi3_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackhi3(fighter: &mut L2CAgentBase) {
+//AttackHi3
+unsafe extern "C" fn game_ninten_AttackHi3(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
     }
@@ -183,15 +156,12 @@ unsafe fn game_ninten_attackhi3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw3
-    agent = "ness", 
-    script = "game_attacklw3_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacklw3(fighter: &mut L2CAgentBase) {
+//AttackLw3
+unsafe extern "C" fn game_ninten_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 1.8, 366, 100, 30, 0, 7.5, 0.0, 3.5, 10.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 7, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_THROW);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 1.8, 366, 100, 30, 0, 6.0, 0.0, 3.5, 10.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 7, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_THROW);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 1.8, 366, 100, 30, 0, 7.5, 0.0, 3.5, 10.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 7, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_THROW);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 1.8, 366, 100, 30, 0, 6.0, 0.0, 3.5, 10.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 7, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 39.0);
     if is_excute(fighter) {
@@ -208,11 +178,8 @@ unsafe fn game_ninten_attacklw3(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackS4
-    agent = "ness", 
-    script = "game_attacks4_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacks4(fighter: &mut L2CAgentBase) {
+//AttackS4
+unsafe extern "C" fn game_ninten_AttackS4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
     }
@@ -244,17 +211,11 @@ unsafe fn game_ninten_attacks4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackHi4Charge
-    agent = "ness", 
-    script = "game_attackhi4charge_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackhi4charge(fighter: &mut L2CAgentBase) {}
+//AttackHi4Charge
+unsafe extern "C" fn game_ninten_AttackHi4Charge(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//AttackHi4
-    agent = "ness", 
-    script = "game_attackhi4_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackhi4(fighter: &mut L2CAgentBase) {
+//AttackHi4
+unsafe extern "C" fn game_ninten_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -277,17 +238,11 @@ unsafe fn game_ninten_attackhi4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackLw4Charge
-    agent = "ness", 
-    script = "game_attacklw4charge_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacklw4charge(fighter: &mut L2CAgentBase) {}
+//AttackLw4Charge
+unsafe extern "C" fn game_ninten_AttackLw4Charge(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//AttackLw4
-    agent = "ness", 
-    script = "game_attacklw4_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attacklw4(fighter: &mut L2CAgentBase) {
+//AttackLw4
+unsafe extern "C" fn game_ninten_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -306,11 +261,8 @@ unsafe fn game_ninten_attacklw4(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirN
-    agent = "ness", 
-    script = "game_attackairn_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackairn(fighter: &mut L2CAgentBase) {
+//AttackAirN
+unsafe extern "C" fn game_ninten_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -329,11 +281,8 @@ unsafe fn game_ninten_attackairn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirF 
-    agent = "ness", 
-    script = "game_attackairf_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackairf(fighter: &mut L2CAgentBase) {
+//AttackAirF 
+unsafe extern "C" fn game_ninten_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
@@ -359,11 +308,8 @@ unsafe fn game_ninten_attackairf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirB
-    agent = "ness", 
-    script = "game_attackairb_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackairb(fighter: &mut L2CAgentBase) {
+//AttackAirB
+unsafe extern "C" fn game_ninten_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("kneer"), 17.0, 361, 100, 0, 25, 7.0, -1.0, 0.0, 1.5, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);
@@ -388,11 +334,8 @@ unsafe fn game_ninten_attackairb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirHi
-    agent = "ness", 
-    script = "game_attackairhi_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackairhi(fighter: &mut L2CAgentBase) {
+//AttackAirHi
+unsafe extern "C" fn game_ninten_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -421,11 +364,8 @@ unsafe fn game_ninten_attackairhi(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AttackAirLw
-    agent = "ness", 
-    script = "game_attackairlw_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_attackairlw(fighter: &mut L2CAgentBase) {
+//AttackAirLw
+unsafe extern "C" fn game_ninten_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -449,11 +389,8 @@ unsafe fn game_ninten_attackairlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Catch
-    agent = "ness", 
-    script = "game_catch_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_catch(fighter: &mut L2CAgentBase) {
+//Catch
+unsafe extern "C" fn game_ninten_Catch(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -472,11 +409,8 @@ unsafe fn game_ninten_catch(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchDash
-    agent = "ness", 
-    script = "game_catchdash_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_catchdash(fighter: &mut L2CAgentBase) {
+//CatchDash
+unsafe extern "C" fn game_ninten_CatchDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -495,11 +429,8 @@ unsafe fn game_ninten_catchdash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchTurn
-    agent = "ness", 
-    script = "game_catchturn_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_catchturn(fighter: &mut L2CAgentBase) {
+//CatchTurn
+unsafe extern "C" fn game_ninten_CatchTurn(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);
@@ -518,11 +449,8 @@ unsafe fn game_ninten_catchturn(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CatchAttack
-    agent = "ness", 
-    script = "game_catchattack_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_catchattack(fighter: &mut L2CAgentBase) {
+//CatchAttack
+unsafe extern "C" fn game_ninten_CatchAttack(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
@@ -535,11 +463,8 @@ unsafe fn game_ninten_catchattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowF
-    agent = "ness", 
-    script = "game_throwf_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_throwf(fighter: &mut L2CAgentBase) {
+//ThrowF
+unsafe extern "C" fn game_ninten_ThrowF(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 13.0, 68, 92, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -559,11 +484,8 @@ unsafe fn game_ninten_throwf(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowB
-    agent = "ness", 
-    script = "game_throwb_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_throwb(fighter: &mut L2CAgentBase) {
+//ThrowB
+unsafe extern "C" fn game_ninten_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 13.0, 135, 110, 0, 65, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -587,11 +509,8 @@ unsafe fn game_ninten_throwb(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//ThrowHi
-    agent = "ness", 
-    script = "game_throwhi_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_throwhi(fighter: &mut L2CAgentBase) {
+//ThrowHi
+unsafe extern "C" fn game_ninten_ThrowHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 14.0, 90, 60, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_THROW);
@@ -613,11 +532,8 @@ unsafe fn game_ninten_throwhi(fighter: &mut L2CAgentBase) {
     }
 }      
 
-#[acmd_script(//ThrowLw
-    agent = "ness", 
-    script = "game_throwlw_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_throwlw(fighter: &mut L2CAgentBase) {
+//ThrowLw
+unsafe extern "C" fn game_ninten_ThrowLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 13.0, 55, 90, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -640,11 +556,8 @@ unsafe fn game_ninten_throwlw(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//CliffAttack
-    agent = "ness", 
-    script = "game_cliffattack_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_cliffattack(fighter: &mut L2CAgentBase) {
+//CliffAttack
+unsafe extern "C" fn game_ninten_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if is_excute(fighter) {
@@ -656,11 +569,8 @@ unsafe fn game_ninten_cliffattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SlipAttack
-    agent = "ness", 
-    script = "game_slipattack_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_slipattack(fighter: &mut L2CAgentBase) {
+//SlipAttack
+unsafe extern "C" fn game_ninten_SlipAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -6.5, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-2.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -679,11 +589,8 @@ unsafe fn game_ninten_slipattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackU
-    agent = "ness", 
-    script = "game_downattacku", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_downattacku(fighter: &mut L2CAgentBase) {
+//DownAttackU
+unsafe extern "C" fn game_ninten_DownAttackU(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 13.0, /*Angle*/ 48, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -13.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -702,11 +609,8 @@ unsafe fn game_ninten_downattacku(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//DownAttackD
-    agent = "ness", 
-    script = "game_downattackd", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_downattackd(fighter: &mut L2CAgentBase) {
+//DownAttackD
+unsafe extern "C" fn game_ninten_DownAttackD(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 13.0, /*Angle*/ 48, /*KBG*/ 88, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ -13.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-5.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -725,29 +629,8 @@ unsafe fn game_ninten_downattackd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//Pillar
-    agent = "ness_pkflash", 
-    script = "game_bang_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_pkhypnosis_bang(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        let power = WorkModule::get_int(fighter.module_accessor,*WEAPON_NESS_PK_FLASH_INSTANCE_WORK_ID_INT_POWER) as f32;
-        AttackModule::set_power(fighter.module_accessor, 1, power, false);
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 0.0, 361, 6, 0, 0, 10.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep_ex"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), power, 361, 3, 0, 0, 10.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_LEFT, false, 0, 0.0, 0, true, true, false, true, false, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep_ex"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
-    }
-    frame(fighter.lua_state_agent, 5.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x27936db96d));
-    }
-}
-
-#[acmd_script(//SpecialS
-    agent = "ness", 
-    script = "game_specials_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specials(fighter: &mut L2CAgentBase) {
+//SpecialS
+unsafe extern "C" fn game_ninten_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
     frame(fighter.lua_state_agent, 20.0);
@@ -760,11 +643,8 @@ unsafe fn game_ninten_specials(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 1.0);
 }
 
-#[acmd_script(//SpecialAirS
-    agent = "ness", 
-    script = "game_specialairs_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairs(fighter: &mut L2CAgentBase) {
+//SpecialAirS
+unsafe extern "C" fn game_ninten_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
     frame(fighter.lua_state_agent, 20.0);
@@ -777,74 +657,38 @@ unsafe fn game_ninten_specialairs(fighter: &mut L2CAgentBase) {
     FT_MOTION_RATE(fighter, 1.0);
 }
 
-#[acmd_script(//Shoot
-    agent = "ness_pkfire", 
-    script = "game_shoot_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_pkbeam_shoot(fighter: &mut L2CAgentBase) {
+//SpecialHiStart
+unsafe extern "C" fn game_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 9.0, 82, 15, 0, 45, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
-        AttackModule::enable_safe_pos(fighter.module_accessor);
-        AttackModule::set_no_finish_camera(fighter.module_accessor, 0, true, false);
-        AREA_WIND_2ND_RAD_arg9(fighter, 0, 1, 0.05, 200, 0.6, 0, 10, 20, 60);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+    }
+    FT_MOTION_RATE(fighter, 0.6);
+    frame(fighter.lua_state_agent, 24.0);
+    FT_MOTION_RATE(fighter, 1.0);
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 261, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
 
-#[acmd_script(//Pillar
-    agent = "ness_pkfire", 
-    script = "game_pillar_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_pkbeam_pillar(fighter: &mut L2CAgentBase) {
+//SpecialAirHiStart
+unsafe extern "C" fn game_ninten_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 12.0, 60, 110, 0, 45, 11.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
     }
-    wait(fighter.lua_state_agent, 3.0);
+    FT_MOTION_RATE(fighter, 0.6);
+    frame(fighter.lua_state_agent, 24.0);
+    FT_MOTION_RATE(fighter, 1.0);
+    frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-}
-
-#[acmd_script(//PillarAir
-    agent = "ness_pkfire", 
-    script = "game_pillarair_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_pkbeam_pillarair(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 12.0, 60, 110, 0, 45, 11.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-    }
-    wait(fighter.lua_state_agent, 3.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 361, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
 
-#[acmd_script(//SpecialHiStart
-    agent = "ness", 
-    script = "game_specialhistart_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialhistart(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 70, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_BODY);
-    }
-}
-
-#[acmd_script(//SpecialAirHiStart
-    agent = "ness", 
-    script = "game_specialairhistart_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairhistart(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 70, /*KBG*/ 99, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_BODY);
-    }
-}
-
-#[acmd_script(//SpecialAirHiAttack
-    agent = "ness", 
-    script = "game_specialairhiattack_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairhiattack(fighter: &mut L2CAgentBase) {
+//SpecialAirHiAttack
+unsafe extern "C" fn game_ninten_SpecialAirHiAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("claviclel"), 21.0, 362, 88, 0, 70, 16.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 0.5, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0.5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_purple"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
@@ -855,11 +699,8 @@ unsafe fn game_ninten_specialairhiattack(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwHold
-    agent = "ness", 
-    script = "game_speciallwhold_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_speciallwhold(fighter: &mut L2CAgentBase) {
+//SpecialLwHold
+unsafe extern "C" fn game_ninten_SpecialLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
         let phy_magnet_size = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size"));
@@ -875,11 +716,8 @@ unsafe fn game_ninten_speciallwhold(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLwHold
-    agent = "ness", 
-    script = "game_specialairlwhold_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairlwhold(fighter: &mut L2CAgentBase) {
+//SpecialAirLwHold
+unsafe extern "C" fn game_ninten_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
         let phy_magnet_size = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size"));
@@ -895,31 +733,22 @@ unsafe fn game_ninten_specialairlwhold(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialLwEnd
-    agent = "ness", 
-    script = "game_speciallwend_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_speciallwend(fighter: &mut L2CAgentBase) {
+//SpecialLwEnd
+unsafe extern "C" fn game_ninten_SpecialLwEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
     }
 }
 
-#[acmd_script(//SpecialAirLwEnd
-    agent = "ness", 
-    script = "game_specialairlwend_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairlwend(fighter: &mut L2CAgentBase) {
+//SpecialAirLwEnd
+unsafe extern "C" fn game_ninten_SpecialAirLwEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
     }
 }
 
-#[acmd_script(//SpecialLwHit
-    agent = "ness", 
-    script = "game_speciallwhit_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_speciallwhit(fighter: &mut L2CAgentBase) {
+//SpecialLwHit
+unsafe extern "C" fn game_ninten_SpecialLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
         WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -930,8 +759,8 @@ unsafe fn game_ninten_speciallwhit(fighter: &mut L2CAgentBase) {
         let work_time = WorkModule::get_int(fighter.module_accessor,*FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_TIME);
         let ratio = 1.0;
         let attack_size = ratio * WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size")) + 5.0;
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 8.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 6.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -942,11 +771,8 @@ unsafe fn game_ninten_speciallwhit(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//SpecialAirLwHit
-    agent = "ness", 
-    script = "game_specialairlwhit_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_specialairlwhit(fighter: &mut L2CAgentBase) {
+//SpecialAirLwHit
+unsafe extern "C" fn game_ninten_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AbsorberModule::clear_all(fighter.module_accessor);
         WHOLE_HIT(fighter, *HIT_STATUS_XLU);
@@ -957,8 +783,8 @@ unsafe fn game_ninten_specialairlwhit(fighter: &mut L2CAgentBase) {
         let work_time = WorkModule::get_int(fighter.module_accessor,*FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_TIME);
         let ratio = 1.0;
         let attack_size = ratio * WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size")) + 5.0;
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 8.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 6.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
+        ATTACK(fighter, 1, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -969,121 +795,166 @@ unsafe fn game_ninten_specialairlwhit(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(//AppealHiR
-    agent = "ness", 
-    script = "game_appealhir_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appealhir(fighter: &mut L2CAgentBase) {}
+//AppealHiR
+unsafe extern "C" fn game_ninten_AppealHiR(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//AppealHiL
-    agent = "ness", 
-    script = "game_appealhil_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appealhil(fighter: &mut L2CAgentBase) {}
+//AppealHiL
+unsafe extern "C" fn game_ninten_AppealHiL(fighter: &mut L2CAgentBase) {}
 
-#[acmd_script(//AppealSR
-    agent = "ness", 
-    script = "game_appealsr_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appealsr(fighter: &mut L2CAgentBase) {
+//AppealSR
+unsafe extern "C" fn game_ninten_AppealSR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 361, 25, 0, 10, 4.6, 0.0, 5.0, 7.0, Some(0.0), Some(5.0), Some(14.0), 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_NONE);
+        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 1200, /*Rehit*/ 30, /* Damage*/ 5.0, /*Unk*/ false);
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HOMERUNBAT), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealSL
-    agent = "ness", 
-    script = "game_appealsl_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appealsl(fighter: &mut L2CAgentBase) {
+//AppealSL
+unsafe extern "C" fn game_ninten_AppealSL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 361, 25, 0, 10, 4.6, 0.0, 5.0, 7.0, Some(0.0), Some(5.0), Some(14.0), 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_NONE);
+        AttackModule::set_poison_param(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 1200, /*Rehit*/ 30, /* Damage*/ 5.0, /*Unk*/ false);
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HOMERUNBAT), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealLwR
-    agent = "ness", 
-    script = "game_appeallwr_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appeallwr(fighter: &mut L2CAgentBase) {
+//AppealLwR
+unsafe extern "C" fn game_ninten_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DOSEISAN), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//AppealLwL
-    agent = "ness", 
-    script = "game_appeallwl_ninten", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_appeallwl(fighter: &mut L2CAgentBase) {
+//AppealLwL
+unsafe extern "C" fn game_ninten_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_DOSEISAN), 0, 0, false, false);
     }
 }
 
-#[acmd_script(//Move
-    agent = "ness_pkstarstorm_ninten", 
-    script = "game_move", 
-    category = ACMD_GAME )]
-unsafe fn game_ninten_pkstarstorm_move(fighter: &mut L2CAgentBase) {
+//Final
+unsafe extern "C" fn game_ninten_Final(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 60.0, /*Angle*/ 42, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 67, /*Size*/ 26.0, /*X*/ 0.0, /*Y*/ 12.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(40.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_jack_final"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_NONE);
-        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
-        AttackModule::set_final_finish_cut_in(fighter.module_accessor, 0, true, false, -1.0, false);
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
+        SLOW_OPPONENT(fighter, 5.0, 30.0);
+    }
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
+        frame(fighter.lua_state_agent, 10.0);
+        if is_excute(fighter) {
+            FT_SET_FINAL_FEAR_FACE(fighter, 60);
+            REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
+        }
+    }
+    else {
+        if is_excute(fighter) {
+            let scale = PostureModule::scale(fighter.module_accessor);
+            CAM_ZOOM_IN_arg5(fighter, 0.0, 0.0, 2.2 * scale, 5.0, 0.0);
+            FT_START_CUTIN(fighter);
+        }
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        CAM_ZOOM_OUT(fighter);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_RECT, 50, -50, 50, -10);
+    }
+    frame(fighter.lua_state_agent, 51.0);
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_INSTANCE_WORK_ID_FLAG_FINAL_START);
+    }
+    frame(fighter.lua_state_agent, 357.0);
+    if is_excute(fighter) {
+        CancelModule::enable_cancel(fighter.module_accessor);
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn game_ninten_FinalAir(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
+        SLOW_OPPONENT(fighter, 5.0, 30.0);
+    }
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
+        frame(fighter.lua_state_agent, 10.0);
+        if is_excute(fighter) {
+            FT_SET_FINAL_FEAR_FACE(fighter, 60);
+            REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
+        }
+    }
+    else {
+        if is_excute(fighter) {
+            let scale = PostureModule::scale(fighter.module_accessor);
+            CAM_ZOOM_IN_arg5(fighter, 0.0, 0.0, 2.2 * scale, 5.0, 0.0);
+            FT_START_CUTIN(fighter);
+        }
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        CAM_ZOOM_OUT(fighter);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_RECT, 50, -50, 50, -10);
+    }
+    frame(fighter.lua_state_agent, 51.0);
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_INSTANCE_WORK_ID_FLAG_FINAL_START);
+    }
+    frame(fighter.lua_state_agent, 357.0);
+    if is_excute(fighter) {
+        CancelModule::enable_cancel(fighter.module_accessor);
     }
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        game_ninten_win3,
-        game_ninten_attack11,
-        game_ninten_attack12,
-        game_ninten_attack13,
-        game_ninten_attackdash,
-        game_ninten_attacks3hi,
-        game_ninten_attacks3,
-        game_ninten_attacks3lw,
-        game_ninten_attackhi3,
-        game_ninten_attacklw3,
-        game_ninten_attacks4,
-        game_ninten_attackhi4charge,
-        game_ninten_attackhi4,
-        game_ninten_attacklw4charge,
-        game_ninten_attacklw4,
-        game_ninten_attackairn,
-        game_ninten_attackairf,
-        game_ninten_attackairb,
-        game_ninten_attackairhi,
-        game_ninten_attackairlw,
-        game_ninten_catch,
-        game_ninten_catchdash,
-        game_ninten_catchturn,
-        game_ninten_catchattack,
-        game_ninten_throwf,
-        game_ninten_throwb,
-        game_ninten_throwhi,
-        game_ninten_throwlw,
-        game_ninten_cliffattack,
-        game_ninten_slipattack,
-        game_ninten_downattacku,
-        game_ninten_downattackd,
-        game_ninten_pkhypnosis_bang,
-        game_ninten_specials,
-        game_ninten_specialairs,
-        game_ninten_pkbeam_shoot,
-        game_ninten_pkbeam_pillar,
-        game_ninten_pkbeam_pillarair,
-        game_ninten_specialhistart,
-        game_ninten_specialairhistart,
-        game_ninten_specialairhiattack,
-        game_ninten_speciallwhold,
-        game_ninten_specialairlwhold,
-        game_ninten_appealhir,
-        game_ninten_appealhil,
-        game_ninten_appealsr,
-        game_ninten_appealsl,
-        game_ninten_appeallwr,
-        game_ninten_appeallwl,
-        game_ninten_pkstarstorm_move
-    );
+    Agent::new("ness")
+    .game_acmd("game_win3_ninten", game_ninten_Win3, Low)
+    .game_acmd("game_attack11_ninten", game_ninten_Attack11, Low)
+    .game_acmd("game_attack12_ninten", game_ninten_Attack12, Low)
+    .game_acmd("game_attack13_ninten", game_ninten_Attack13, Low)
+    .game_acmd("game_attackdash_ninten", game_ninten_AttackDash, Low)
+    .game_acmd("game_attacks3hi_ninten", game_ninten_AttackS3Hi, Low)
+    .game_acmd("game_attacks3_ninten", game_ninten_AttackS3, Low)
+    .game_acmd("game_attacks3lw_ninten", game_ninten_AttackS3Lw, Low)
+    .game_acmd("game_attackhi3_ninten", game_ninten_AttackHi3, Low)
+    .game_acmd("game_attacklw3_ninten", game_ninten_AttackLw3, Low)
+    .game_acmd("game_attacks4_ninten", game_ninten_AttackS4, Low)
+    .game_acmd("game_attackhi4charge_ninten", game_ninten_AttackHi4Charge, Low)
+    .game_acmd("game_attackhi4_ninten", game_ninten_AttackHi4, Low)
+    .game_acmd("game_attacklw4charge_ninten", game_ninten_AttackLw4Charge, Low)
+    .game_acmd("game_attacklw4_ninten", game_ninten_AttackLw4, Low)
+    .game_acmd("game_attackairn_ninten", game_ninten_AttackAirN, Low)
+    .game_acmd("game_attackairf_ninten", game_ninten_AttackAirF, Low)    
+    .game_acmd("game_attackairb_ninten", game_ninten_AttackAirB, Low)
+    .game_acmd("game_attackairhi_ninten", game_ninten_AttackAirHi, Low)
+    .game_acmd("game_attackairlw_ninten", game_ninten_AttackAirLw, Low)
+    .game_acmd("game_catch_ninten", game_ninten_Catch, Low)
+    .game_acmd("game_catchdash_ninten", game_ninten_CatchDash, Low)
+    .game_acmd("game_catchturn_ninten", game_ninten_CatchTurn, Low)
+    .game_acmd("game_catchattack_ninten", game_ninten_CatchAttack, Low)
+    .game_acmd("game_throwf_ninten", game_ninten_ThrowF, Low)
+    .game_acmd("game_throwb_ninten", game_ninten_ThrowB, Low)
+    .game_acmd("game_throwhi_ninten", game_ninten_ThrowHi, Low)
+    .game_acmd("game_throwlw_ninten", game_ninten_ThrowLw, Low)
+    .game_acmd("game_downattackd_ninten", game_ninten_DownAttackD, Low)
+    .game_acmd("game_downattacku_ninten", game_ninten_DownAttackU, Low)
+    .game_acmd("game_cliffattack_ninten", game_ninten_CliffAttack, Low)
+    .game_acmd("game_slipattack_ninten", game_ninten_SlipAttack, Low)
+    .game_acmd("game_specials_ninten", game_ninten_SpecialS, Low)  
+    .game_acmd("game_specialairs_ninten", game_ninten_SpecialAirS, Low) 
+    .game_acmd("game_specialhistart_ninten", game_ninten_SpecialHiStart, Low)
+    .game_acmd("game_specialairhistart_ninten", game_ninten_SpecialAirHiStart, Low)
+    .game_acmd("game_specialairhiattack_ninten", game_ninten_SpecialAirHiAttack, Low)
+    .game_acmd("game_speciallwhold_ninten", game_ninten_SpecialLwHold, Low)
+    .game_acmd("game_speciallwend_ninten", game_ninten_SpecialLwEnd, Low)
+    .game_acmd("game_specialairlwhold_ninten", game_ninten_SpecialAirLwHold, Low)
+    .game_acmd("game_specialairlwend_ninten", game_ninten_SpecialAirLwEnd, Low)
+    .game_acmd("game_speciallwhit_ninten", game_ninten_SpecialLwHit, Low)
+    .game_acmd("game_specialairlwhit_ninten", game_ninten_SpecialAirLwHit, Low)
+    .game_acmd("game_appealsr_ninten", game_ninten_AppealSR, Low)
+    .game_acmd("game_appealsl_ninten", game_ninten_AppealSL, Low)
+    .game_acmd("game_appealhir_ninten", game_ninten_AppealHiR, Low)
+    .game_acmd("game_appealhil_ninten", game_ninten_AppealHiL, Low)
+    .game_acmd("game_appeallwr_ninten", game_ninten_AppealLwR, Low)
+    .game_acmd("game_appeallwl_ninten", game_ninten_AppealLwL, Low)
+    .game_acmd("game_final_ninten", game_ninten_Final, Low)
+    .game_acmd("game_finalair_ninten", game_ninten_FinalAir, Low)
+    .install();
 }

@@ -139,19 +139,12 @@ unsafe extern "C" fn sound_krystal_AttackLw4(fighter: &mut L2CAgentBase) {
 	wait(fighter.lua_state_agent, 1.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("vc_pitb_attack07"));
-	}
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED) { 
-	    frame(fighter.lua_state_agent, 23.0);
-	    if is_excute(fighter) {
-			PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
-		}
+	} 
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_l"));
+        PLAY_SE(fighter, Hash40::new("se_pitb_smash_l01"));
     }
-	else {
-        frame(fighter.lua_state_agent, 23.0);
-	    if is_excute(fighter) {
-			PLAY_SE(fighter, Hash40::new("se_pitb_smash_l01"));
-		}
-	}
 	frame(fighter.lua_state_agent, 24.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_m"));
