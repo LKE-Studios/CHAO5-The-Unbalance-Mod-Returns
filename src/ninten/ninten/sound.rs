@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 //Win3
 unsafe extern "C" fn sound_ninten_Win3(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 8.0);
+    frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE_NO_3D(fighter, Hash40::new("vc_ninten_win02"));
     }

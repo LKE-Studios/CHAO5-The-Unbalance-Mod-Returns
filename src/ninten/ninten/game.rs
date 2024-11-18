@@ -3,7 +3,7 @@ use crate::imports::BuildImports::*;
 //Win3
 unsafe extern "C" fn game_ninten_Win3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE(fighter, 3.0);
+    FT_MOTION_RATE(fighter, 4.0);
 }
 
 //Attack11 
