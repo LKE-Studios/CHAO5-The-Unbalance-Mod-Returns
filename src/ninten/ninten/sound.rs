@@ -112,7 +112,7 @@ unsafe extern "C" fn sound_ninten_AttackHi4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("vc_ness_attack02"));
+        PLAY_SE(fighter, Hash40::new("vc_ness_attack06"));
     }
 }
 
@@ -129,7 +129,7 @@ unsafe extern "C" fn sound_ninten_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_common_smash_start_04"));
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("vc_ness_attack07"));
     }
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {

@@ -247,7 +247,7 @@ const DECLARE_CONST_SEARCH_CODE: &[u8] = &[
     0xaa, 0xf3, 0x03, 0x00, 0xaa, 0x88, 0x06, 0x00, 0x36
 ];
 
-static mut DECLARE_CONST_OFFSET : usize = 0x3728010; //13.0.2
+static mut DECLARE_CONST_OFFSET : usize = 0x3728030; //13.0.3
 
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
     haystack.windows(needle.len()).position(|window| window == needle)
