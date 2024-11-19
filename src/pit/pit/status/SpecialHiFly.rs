@@ -90,9 +90,7 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
         MotionModule::set_rate(fighter.module_accessor, motion_rate_min);
     }
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    //let turn_count = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TURN_COUNT);
     if stick_x * lr < -0.25 {
-        WorkModule::inc_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TURN_COUNT);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly_turn"), 0.0, 1.0, false, 0.0, false, false);
     }
     if motion_kind == hash40("special_hi_fly_turn") {
