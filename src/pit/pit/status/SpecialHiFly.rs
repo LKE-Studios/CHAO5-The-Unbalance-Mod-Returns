@@ -81,38 +81,6 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
         }
     }
     pit_SpecialHiFly_sound_handler(fighter);
-    let mut rot_y = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_ROT_Y);
-    let mut turn_dir = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_TURN_DIR);
-    if !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_TURN) {
-        if stick_x * lr < -0.25 && stick_x.abs() > -0.25 {
-            WorkModule::on_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_TURN);
-            WorkModule::set_float(fighter.module_accessor, -lr, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_TURN_DIR);
-            WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_ROT_Y);
-        }
-    }
-    else {
-        if turn_dir == 0.0 { 
-            turn_dir = 1.0
-        };
-        let target_rot = 180.0;
-        rot_y = lerp(&rot_y, &target_rot, &0.15);
-        if (rot_y - target_rot).abs() < 2.0 {
-            rot_y = target_rot;
-            PostureModule::set_lr(fighter.module_accessor, turn_dir);
-            PostureModule::update_rot_y_lr(fighter.module_accessor);
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_TURN);
-            //MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly"), 0.0, 1.0, true, 0.0, false, false);
-        }
-        else {
-            ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &Vector3f{x: 0.0, y: rot_y, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-            WorkModule::set_float(fighter.module_accessor, rot_y, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLOAT_ROT_Y);
-            //MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly_turn"), 0.0, 1.0, false, 0.0, false, false);
-            if (rot_y > 90.0 && lr != turn_dir) {
-                PostureModule::set_lr(fighter.module_accessor, turn_dir);
-            }
-        } 
-    }
     let motion_rate_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_max"));
     let motion_rate_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_min"));
     if stick_y > 0.0 {
@@ -120,6 +88,19 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
     }
     else {
         MotionModule::set_rate(fighter.module_accessor, motion_rate_min);
+    }
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    //let turn_count = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TURN_COUNT);
+    if stick_x * lr < -0.25 {
+        WorkModule::inc_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TURN_COUNT);
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly_turn"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if motion_kind == hash40("special_hi_fly_turn") {
+        if MotionModule::is_end(fighter.module_accessor) {
+            PostureModule::update_rot_y_lr(fighter.module_accessor);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly"), 0.0, 1.0, true, 0.0, false, false);
+            MotionModule::set_frame(fighter.module_accessor, 1.0, true);
+        }
     }
     let landing_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("landing_frame"));
     let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);

@@ -981,6 +981,13 @@ unsafe extern "C" fn game_pit_SpecialHi(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialHiFlyTurn
+unsafe extern "C" fn game_pit_SpecialHiFlyTurn(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        REVERSE_LR(fighter);
+    }
+}
+
 //SpecialHiFly
 unsafe extern "C" fn game_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -1190,6 +1197,7 @@ pub fn install() {
     .game_acmd("game_specialhistart", game_pit_SpecialHiStart, Low)
     .game_acmd("game_specialhi", game_pit_SpecialHi, Low)
     .game_acmd("game_specialhifly", game_pit_SpecialHiFly, Low)
+    .game_acmd("game_specialhiflyturn", game_pit_SpecialHiFlyTurn, Low)
     .game_acmd("game_specialairhistart", game_pit_SpecialAirHiStart, Low)
     .game_acmd("game_speciallwhold", game_pit_SpecialLwHold, Low)
     .game_acmd("game_specialairlwhold", game_pit_SpecialAirLwHold, Low)
