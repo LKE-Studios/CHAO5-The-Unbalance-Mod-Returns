@@ -20,45 +20,6 @@ unsafe extern "C" fn game_kamek_Attack11(fighter: &mut L2CAgentBase) {
     }
 }
 
-//Attack12 
-unsafe extern "C" fn game_kamek_Attack12(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 6.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 3.0, 361, 25, 0, 30, 2.2, 0.0, 5.5, 5.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 3.0, 361, 25, 0, 30, 2.2, 0.0, 5.5, 8.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        ATTACK(fighter, 2, 0, Hash40::new("top"), 3.0, 361, 20, 0, 20, 3.0, 0.0, 5.5, 13.1, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 8.0);
-    if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
-    }
-}
-
-//Attack13
-unsafe extern "C" fn game_kamek_Attack13(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_visible") as i64);
-    }
-    frame(fighter.lua_state_agent, 7.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("haver"), 11.0, 361, 80, 0, 78, 5.3, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_NESS_BAT, *ATTACK_REGION_BAT);
-        ATTACK(fighter, 1, 0, Hash40::new("haver"), 12.0, 361, 80, 0, 78, 5.6, 0.0, 3.85, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_NESS_BAT, *ATTACK_REGION_BAT);
-        ATTACK(fighter, 2, 0, Hash40::new("haver"), 13.0, 361, 80, 0, 78, 6.0, 0.0, 7.7, 0.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_NESS_BAT, *ATTACK_REGION_BAT);
-    }
-    frame(fighter.lua_state_agent, 9.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 33.0);
-    if is_excute(fighter) {
-        VisibilityModule::set_int64(fighter.module_accessor, hash40("bat") as i64, hash40("bat_invisible") as i64);
-    }
-}
-
 //AttackDash
 unsafe extern "C" fn game_kamek_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
