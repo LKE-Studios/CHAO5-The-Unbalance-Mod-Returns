@@ -276,15 +276,15 @@ unsafe extern "C" fn sound_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_gohoubi_search_ui"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_gohoubi_search_ui"));
     }
-    frame(fighter.lua_state_agent, 24.0);
+}
+
+//SpecialHiHold
+unsafe extern "C" fn sound_ninten_SpecialHiHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
-    }
-    frame(fighter.lua_state_agent, 144.0);
-    if is_excute(fighter) {
-        STOP_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
     }
 }
 
@@ -295,15 +295,15 @@ unsafe extern "C" fn sound_ninten_SpecialAirHiStart(fighter: &mut L2CAgentBase) 
     }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_gohoubi_search_ui"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_gohoubi_search_ui"));
     }
-    frame(fighter.lua_state_agent, 24.0);
+}
+
+//SpecialAirHiHold
+unsafe extern "C" fn sound_ninten_SpecialAirHiHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
-    }
-    frame(fighter.lua_state_agent, 144.0);
-    if is_excute(fighter) {
-        STOP_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
     }
 }
 
@@ -465,7 +465,9 @@ pub fn install() {
     .sound_acmd("sound_throwhi_ninten", sound_ninten_ThrowHi, Low)
     .sound_acmd("sound_throwlw_ninten", sound_ninten_ThrowLw, Low)
     .sound_acmd("sound_specialhistart_ninten", sound_ninten_SpecialHiStart, Low)
+    .sound_acmd("sound_specialhihold_ninten", sound_ninten_SpecialHiHold, Low)
     .sound_acmd("sound_specialairhistart_ninten", sound_ninten_SpecialAirHiStart, Low)
+    .sound_acmd("sound_specialairhihold_ninten", sound_ninten_SpecialAirHiHold, Low)
     .sound_acmd("sound_specialairhiend_ninten", sound_ninten_SpecialAirHiEnd, Low)
     .sound_acmd("sound_specialairhiattack_ninten", sound_ninten_SpecialAirHiAttack, Low)
     .sound_acmd("sound_speciallwhit_ninten", sound_ninten_SpecialLwHit, Low)

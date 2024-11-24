@@ -8,13 +8,6 @@ pub unsafe extern "C" fn status_pit_SpecialHiFlyTurn_Pre(fighter: &mut L2CFighte
 }
 
 pub unsafe extern "C" fn status_pit_SpecialHiFlyTurn_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let speed_x_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("speed_x_max"));
-    let speed_y_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("speed_y_max"));
-    sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_max, speed_y_max);
-    sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_max, speed_y_max);
-    sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, 0.0, speed_y_max);
-    sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, 0.0, speed_y_max);
-    KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
     0.into()
 }
 
@@ -40,20 +33,6 @@ unsafe extern "C" fn pit_SpecialHiFlyTurn_Main_loop(fighter: &mut L2CFighterComm
 }
 
 pub unsafe extern "C" fn status_pit_SpecialHiFlyTurn_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let lr = PostureModule::lr(fighter.module_accessor);
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
-    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_x"));
-    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
-    let speed_x = air_accel_x * stick_x;
-    let speed_y = air_accel_y * stick_y;
-    let gravity_speed = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("gravity_speed"));
-    sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -gravity_speed);
-    sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x * lr, speed_y);
-    sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, 0.0, speed_y);
-    KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-    WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
-    println!("speed_x{}", speed_x);
     0.into()
 }
 

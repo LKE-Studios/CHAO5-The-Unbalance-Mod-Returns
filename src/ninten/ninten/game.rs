@@ -659,14 +659,13 @@ unsafe extern "C" fn game_ninten_SpecialAirS(fighter: &mut L2CAgentBase) {
 
 //SpecialHiStart
 unsafe extern "C" fn game_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, 0.6);
+}
+
+//SpecialHiHold
+unsafe extern "C" fn game_ninten_SpecialHiHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-    }
-    FT_MOTION_RATE(fighter, 0.6);
-    frame(fighter.lua_state_agent, 24.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 25.0);
-    if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 261, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
@@ -674,15 +673,14 @@ unsafe extern "C" fn game_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
 
 //SpecialAirHiStart
 unsafe extern "C" fn game_ninten_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, 0.6);
+}
+
+//SpecialAirHiHold
+unsafe extern "C" fn game_ninten_SpecialAirHiHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-    }
-    FT_MOTION_RATE(fighter, 0.6);
-    frame(fighter.lua_state_agent, 24.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 25.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 361, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 261, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
@@ -940,7 +938,9 @@ pub fn install() {
     .game_acmd("game_specials_ninten", game_ninten_SpecialS, Low)  
     .game_acmd("game_specialairs_ninten", game_ninten_SpecialAirS, Low) 
     .game_acmd("game_specialhistart_ninten", game_ninten_SpecialHiStart, Low)
+    .game_acmd("game_specialhihold_ninten", game_ninten_SpecialHiHold, Low)
     .game_acmd("game_specialairhistart_ninten", game_ninten_SpecialAirHiStart, Low)
+    .game_acmd("game_specialairhihold_ninten", game_ninten_SpecialAirHiHold, Low)
     .game_acmd("game_specialairhiattack_ninten", game_ninten_SpecialAirHiAttack, Low)
     .game_acmd("game_speciallwhold_ninten", game_ninten_SpecialLwHold, Low)
     .game_acmd("game_speciallwend_ninten", game_ninten_SpecialLwEnd, Low)

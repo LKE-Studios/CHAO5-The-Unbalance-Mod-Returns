@@ -609,18 +609,18 @@ unsafe extern "C" fn effect_ninten_SpecialAirNFire(fighter: &mut L2CAgentBase) {
     }
 }
 
-//SpecialHiStart
-unsafe extern "C" fn effect_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 24.0);
+//SpecialHiHold
+unsafe extern "C" fn effect_ninten_SpecialHiHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 1.25, 10, 10, 10, 0, 0, 0, false);
     }
-    frame(fighter.lua_state_agent, 27.0);
+    frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
-    frame(fighter.lua_state_agent, 30.0);
-    for _ in 0..12 {
+    frame(fighter.lua_state_agent, 7.0);
+    for _ in 0..i32::MAX {
         if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.85, 10, 10, 10, 0, 0, 0, false);
         }
@@ -628,18 +628,18 @@ unsafe extern "C" fn effect_ninten_SpecialHiStart(fighter: &mut L2CAgentBase) {
     }
 }
 
-//SpecialAirHiStart
-unsafe extern "C" fn effect_ninten_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 24.0);
+//SpecialAirHiHold
+unsafe extern "C" fn effect_ninten_SpecialAirHiHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 1.25, 10, 10, 10, 0, 0, 0, false);
     }
-    frame(fighter.lua_state_agent, 27.0);
+    frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
-    frame(fighter.lua_state_agent, 30.0);
-    for _ in 0..12 {
+    frame(fighter.lua_state_agent, 7.0);
+    for _ in 0..i32::MAX {
         if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.85, 10, 10, 10, 0, 0, 0, false);
         }
@@ -829,8 +829,8 @@ pub fn install() {
     .effect_acmd("effect_specialairnfire_ninten", effect_ninten_SpecialAirNFire, Low) 
     .effect_acmd("effect_specialairnhold_ninten", effect_ninten_SpecialAirNHold, Low)  
     .effect_acmd("effect_specialairnstart_ninten", effect_ninten_SpecialAirNStart, Low) 
-    .effect_acmd("effect_specialhistart_ninten", effect_ninten_SpecialHiStart, Low)
-    .effect_acmd("effect_specialairhistart_ninten", effect_ninten_SpecialAirHiStart, Low)
+    .effect_acmd("effect_specialhihold_ninten", effect_ninten_SpecialHiHold, Low)
+    .effect_acmd("effect_specialairhihold_ninten", effect_ninten_SpecialAirHiHold, Low)
     .effect_acmd("effect_specialairhiend_ninten", effect_ninten_SpecialAirHiEnd, Low)
     .effect_acmd("effect_specialairhiattack_ninten", effect_ninten_SpecialAirHiAttack, Low)
     .effect_acmd("effect_speciallwstart_ninten", effect_ninten_SpecialLwStart, Low)
