@@ -1,5 +1,7 @@
 use crate::imports::BuildImports::*;
 
+pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT : [i32; 8] = [0; 8];
+
 pub unsafe extern "C" fn frame_ninten_Main(fighter: &mut L2CFighterCommon) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);    
     let status_kind = StatusModule::status_kind(fighter.module_accessor); 

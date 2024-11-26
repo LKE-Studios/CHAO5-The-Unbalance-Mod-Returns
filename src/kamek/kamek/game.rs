@@ -1,9 +1,15 @@
 use crate::imports::BuildImports::*;
 
-//Win3
-unsafe extern "C" fn game_kamek_Win3(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE(fighter, 4.0);
+//JumpAerial
+unsafe extern "C" fn game_kamek_JumpAerial(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 1.0, 361, 160, 0, 0, 8.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, true, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_THROW);
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
 }
 
 //Attack11 
@@ -431,9 +437,9 @@ unsafe extern "C" fn game_kamek_ThrowLw(fighter: &mut L2CAgentBase) {
 //CliffAttack
 unsafe extern "C" fn game_kamek_CliffAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
-    FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
+    FT_MOTION_RATE(fighter, 1.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 45, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 7.5, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(-2.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_KICK);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 16.0, 45, 50, 0, 90, 8.0, 0.0, 5.0, 7.5, Some(0.0), Some(5.0), Some(-2.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_KICK);
     }
     wait(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
@@ -445,7 +451,7 @@ unsafe extern "C" fn game_kamek_CliffAttack(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_kamek_SlipAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -6.5, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-2.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ -6.5, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(-2.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
     wait(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
@@ -453,7 +459,7 @@ unsafe extern "C" fn game_kamek_SlipAttack(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 29.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(3.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 8.5, /*X*/ 0.0, /*Y*/ 4.5, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.5), /*Z2*/ Some(3.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
     }
     wait(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
@@ -501,169 +507,252 @@ unsafe extern "C" fn game_kamek_DownAttackD(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialNStart
+unsafe extern "C" fn game_kamek_SpecialNStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+}
+
+//SpecialAirNStart
+unsafe extern "C" fn game_kamek_SpecialAirNStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+}
+
+//SpecialNFire
+unsafe extern "C" fn game_kamek_SpecialNFire(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        SET_SPEED_EX(fighter, -1.0, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_PINKMAGIC, false, -1);
+    }
+}
+
+//SpecialAirNFire
+unsafe extern "C" fn game_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        SET_SPEED_EX(fighter, -1.0, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_PINKMAGIC, false, -1);
+    }
+}
+
 //SpecialS
 unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
-    frame(fighter.lua_state_agent, 20.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 21.0);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    sv_kinetic_energy!(set_speed_mul, agent, FIGHTER_KINETIC_ENERGY_ID_MOTION, 1.0);
+    frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_NESS_GENERATE_ARTICLE_PK_FIRE, false, -1);
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_S_FLAG_SHOOT);
+        if rand_num >= 0 && rand_num <= 30 { //Magic 30%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 31 && rand_num <= 50 { //Poison 20%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 25.0, 88, 100, 0, 20, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 25.0, 88, 100, 0, 20, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+            AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
+        }
+        else if rand_num >= 51 && rand_num <= 60 { //Cape 10%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 30.0, 361, 100, 80, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 61 && rand_num <= 70 { //Sleep 10%
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_book"), 0.0, 361, 100, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 40.0, 361, 100, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 3, 0, Hash40::new("kamek_spike"), 0.0, 361, 100, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_spike"), 40.0, 361, 100, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+        }
+        else if rand_num >= 71 && rand_num <= 85 { //Ice 15%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 35.0, 25, 65, 0, 70, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 35.0, 25, 65, 0, 70, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 86 && rand_num <= 90 { //Death 5%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 999.0, 45, 66, 0, 60, 16.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 999.0, 45, 66, 0, 60, 13.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        }
+        else if rand_num >= 91 && rand_num <= 95 { //Grow 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 5.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 5.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else { //Shrink 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
     }
-    FT_MOTION_RATE(fighter, 1.0);
+    frame(fighter.lua_state_agent, 45.0);
+    if is_excute(fighter) {
+        if rand_num >= 0 && rand_num <= 30 { //Magic 30%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 50.0, 361, 0, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 31 && rand_num <= 50 { //Poison 20%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 25.0, 88, 100, 0, 20, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+        }
+        else if rand_num >= 51 && rand_num <= 60 { //Cape 10%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 30.0, 361, 100, 80, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 61 && rand_num <= 70 { //Sleep 10%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 40.0, 361, 100, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+        }
+        else if rand_num >= 71 && rand_num <= 85 { //Ice 15%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 35.0, 25, 65, 0, 70, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 86 && rand_num <= 90 { //Death 5%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 999.0, 45, 66, 0, 60, 18.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        }
+        else if rand_num >= 91 && rand_num <= 95 { //Grow 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 5.0, 361, 0, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else { //Shrink 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+    }
+    frame(fighter.lua_state_agent, 70.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
 }
 
 //SpecialAirS
 unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
-    frame(fighter.lua_state_agent, 20.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 21.0);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    sv_kinetic_energy!(set_speed_mul, agent, FIGHTER_KINETIC_ENERGY_ID_MOTION, 1.0);
+    frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_NESS_GENERATE_ARTICLE_PK_FIRE, false, -1);
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_S_FLAG_SHOOT);
+        if rand_num >= 0 && rand_num <= 30 { //Magic 30%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 31 && rand_num <= 50 { //Poison 20%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 25.0, 88, 100, 0, 20, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 25.0, 88, 100, 0, 20, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+            AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
+        }
+        else if rand_num >= 51 && rand_num <= 60 { //Cape 10%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 30.0, 361, 100, 80, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 61 && rand_num <= 70 { //Sleep 10%
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_book"), 0.0, 361, 100, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 40.0, 361, 100, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 3, 0, Hash40::new("kamek_spike"), 0.0, 361, 100, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_spike"), 40.0, 361, 100, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+        }
+        else if rand_num >= 71 && rand_num <= 85 { //Ice 15%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 35.0, 25, 65, 0, 70, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 35.0, 25, 65, 0, 70, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 86 && rand_num <= 90 { //Death 5%
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 999.0, 45, 66, 0, 60, 16.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 999.0, 45, 66, 0, 60, 13.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        }
+        else if rand_num >= 91 && rand_num <= 95 { //Grow 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 5.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 5.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else { //Shrink 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 13.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
     }
-    FT_MOTION_RATE(fighter, 1.0);
+    frame(fighter.lua_state_agent, 45.0);
+    if is_excute(fighter) {
+        if rand_num >= 0 && rand_num <= 30 { //Magic 30%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 50.0, 361, 0, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 8, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 31 && rand_num <= 50 { //Poison 20%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 25.0, 88, 100, 0, 20, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+            AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+        }
+        else if rand_num >= 51 && rand_num <= 60 { //Cape 10%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 30.0, 361, 100, 80, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 61 && rand_num <= 70 { //Sleep 10%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 40.0, 361, 100, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, true, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sleep"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PSI);
+        }
+        else if rand_num >= 71 && rand_num <= 85 { //Ice 15%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 35.0, 25, 65, 0, 70, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_OBJECT);
+        }
+        else if rand_num >= 86 && rand_num <= 90 { //Death 5%
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 999.0, 45, 66, 0, 60, 18.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        }
+        else if rand_num >= 91 && rand_num <= 95 { //Grow 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 5.0, 361, 0, 0, 0, 18.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+        else { //Shrink 5%
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 16.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        }
+    }
+    frame(fighter.lua_state_agent, 70.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
 }
 
 //SpecialHiStart
 unsafe extern "C" fn game_kamek_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
-        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-    }
-    FT_MOTION_RATE(fighter, 0.6);
-    frame(fighter.lua_state_agent, 24.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 25.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 261, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
-        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+        if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+            notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+        }
     }
 }
 
 //SpecialAirHiStart
 unsafe extern "C" fn game_kamek_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
-    }
-    FT_MOTION_RATE(fighter, 0.6);
-    frame(fighter.lua_state_agent, 24.0);
-    FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 25.0);
-    if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.0, /*Angle*/ 361, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 120, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
-        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-    }
-}
-
-//SpecialAirHiAttack
-unsafe extern "C" fn game_kamek_SpecialAirHiAttack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("claviclel"), 21.0, 362, 88, 0, 70, 16.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 0.5, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0.5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_purple"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
-    }
-    frame(fighter.lua_state_agent, 12.0);
-    if is_excute(fighter) {
-		AttackModule::clear_all(fighter.module_accessor);
-    }
-}
-
-//SpecialLwHold
-unsafe extern "C" fn game_kamek_SpecialLwHold(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
-        let phy_magnet_size = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size"));
-        let phy_magnet_offset_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_offset_y"));
-        let shield_pos = &Vector3f{x: 0.0, y: phy_magnet_offset_y - 4.0, z: 0.0};
-        if !ReflectorModule::is_shield(fighter.module_accessor, 0,*FIGHTER_REFLECTOR_GROUP_HOMERUNBAT) {    
-            let attack_mul = 1.0;
-            let speed_mul = 1.0;
-            let max_life = 800;
-            let life_mul = 1.0;
-            shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("throw"), phy_magnet_size + 0.5, shield_pos.x, 0.0, shield_pos.z, shield_pos.x, 0.0, shield_pos.z, attack_mul, speed_mul, max_life, false, life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);  
+        if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
+            notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
         }
     }
 }
 
-//SpecialAirLwHold
-unsafe extern "C" fn game_kamek_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
+//SpecialHiEnd
+unsafe extern "C" fn game_kamek_SpecialHiEnd(fighter: &mut L2CAgentBase) {}
+
+//SpecialAirHiEnd
+unsafe extern "C" fn game_kamek_SpecialAirHiEnd(fighter: &mut L2CAgentBase) {}
+
+//SpecialLwStart
+unsafe extern "C" fn game_kamek_SpecialLwStart(fighter: &mut L2CAgentBase) {
+    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMBER];
+    let rng = sv_math::rand(hash40("ness"), itemlist.len() as i32);
+    frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
-        let phy_magnet_size = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size"));
-        let phy_magnet_offset_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_offset_y"));
-        let shield_pos = &Vector3f{x: 0.0, y: phy_magnet_offset_y - 4.0, z: 0.0};
-        if !ReflectorModule::is_shield(fighter.module_accessor, 0,*FIGHTER_REFLECTOR_GROUP_HOMERUNBAT) {    
-            let attack_mul = 1.0;
-            let speed_mul = 1.0;
-            let max_life = 800;
-            let life_mul = 1.0;
-            shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, Hash40::new("throw"), phy_magnet_size + 0.5, shield_pos.x, 0.0, shield_pos.z, shield_pos.x, 0.0, shield_pos.z, attack_mul, speed_mul, max_life, false, life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);  
-        }
+        ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
+    }
+    frame(fighter.lua_state_agent, 24.0);
+    if is_excute(fighter) {
+        ItemModule::throw_item(fighter.module_accessor, 5.0, 2.2, 1.0, 0, true, 0.0);
     }
 }
 
-//SpecialLwEnd
-unsafe extern "C" fn game_kamek_SpecialLwEnd(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
-    }
-}
 
-//SpecialAirLwEnd
-unsafe extern "C" fn game_kamek_SpecialAirLwEnd(fighter: &mut L2CAgentBase) {
+//SpecialAirLwStart
+unsafe extern "C" fn game_kamek_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
+    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMBER];
+    let rng = sv_math::rand(hash40("ness"), itemlist.len() as i32);
+    frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(itemlist[rng as usize]), 0, 0, false, false);
     }
-}
-
-//SpecialLwHit
-unsafe extern "C" fn game_kamek_SpecialLwHit(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 24.0);
     if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
-        WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-    }
-    frame(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_lw"), hash40("time"));
-        let work_time = WorkModule::get_int(fighter.module_accessor,*FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_TIME);
-        let ratio = 1.0;
-        let attack_size = ratio * WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size")) + 5.0;
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-    }
-    frame(fighter.lua_state_agent, 6.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-        SlowModule::clear(fighter.module_accessor);
-        shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-        WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
-    }
-}
-
-//SpecialAirLwHit
-unsafe extern "C" fn game_kamek_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        AbsorberModule::clear_all(fighter.module_accessor);
-        WHOLE_HIT(fighter, *HIT_STATUS_XLU);
-    }
-    frame(fighter.lua_state_agent, 2.0);
-    if is_excute(fighter) {
-        let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_lw"), hash40("time"));
-        let work_time = WorkModule::get_int(fighter.module_accessor,*FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_TIME);
-        let ratio = 1.0;
-        let attack_size = ratio * WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("phy_magnet_size")) + 5.0;
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-        ATTACK(fighter, 1, 0, Hash40::new("top"), 36.0, 60, 70, 0, 60, attack_size, 0.0, 6.5, 0.0, None, None, None, 0.55, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PSI);
-    }
-    frame(fighter.lua_state_agent, 6.0);
-    if is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-        SlowModule::clear(fighter.module_accessor);
-        shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-        WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
+        ItemModule::throw_item(fighter.module_accessor, 5.0, 2.2, 1.0, 0, true, 0.0);
     }
 }
 
@@ -708,89 +797,111 @@ unsafe extern "C" fn game_kamek_AppealLwL(fighter: &mut L2CAgentBase) {
 //Final
 unsafe extern "C" fn game_kamek_Final(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
         CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
-        SLOW_OPPONENT(fighter, 5.0, 30.0);
+        SLOW_OPPONENT(fighter, 5.0, 100.0);
+        FT_START_CUTIN(fighter);
     }
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
-        frame(fighter.lua_state_agent, 10.0);
-        if is_excute(fighter) {
-            FT_SET_FINAL_FEAR_FACE(fighter, 60);
-            REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
-        }
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        FT_SET_FINAL_FEAR_FACE(fighter, 60);
+        REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
+    }   
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+        VisibilityModule::set_whole(fighter.module_accessor, false);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        ItemModule::set_attach_item_visibility(fighter.module_accessor, false, 0);
     }
-    else {
-        if is_excute(fighter) {
-            let scale = PostureModule::scale(fighter.module_accessor);
-            CAM_ZOOM_IN_arg5(fighter, 0.0, 0.0, 2.2 * scale, 5.0, 0.0);
-            FT_START_CUTIN(fighter);
-        }
-    }
-    frame(fighter.lua_state_agent, 25.0);
+    frame(fighter.lua_state_agent, 41.0);
     if is_excute(fighter) {
         CAM_ZOOM_OUT(fighter);
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_RECT, 50, -50, 50, -10);
+        let pos = Vector3f { x: 0.0, y: 110.0, z: 0.0 };
+        PostureModule::set_pos(fighter.module_accessor, &pos);
+		PostureModule::init_pos(fighter.module_accessor, &pos, true, true);
     }
-    frame(fighter.lua_state_agent, 51.0);
+    frame(fighter.lua_state_agent, 44.0);
     if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_INSTANCE_WORK_ID_FLAG_FINAL_START);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_INSTANCE_WORK_ID_FLAG_NAME_CURSOR);
+        VisibilityModule::set_whole(fighter.module_accessor, true);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
+        ItemModule::set_attach_item_visibility(fighter.module_accessor, true, 0);
+        JostleModule::set_status(fighter.module_accessor, true);
     }
-    frame(fighter.lua_state_agent, 357.0);
+    frame(fighter.lua_state_agent, 110.0);
     if is_excute(fighter) {
-        CancelModule::enable_cancel(fighter.module_accessor);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_FINALMAGIC, false, -1);
+    }
+    frame(fighter.lua_state_agent, 150.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
     }
 }
 
 //FinalAir
 unsafe extern "C" fn game_kamek_FinalAir(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
         CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
-        SLOW_OPPONENT(fighter, 5.0, 30.0);
+        SLOW_OPPONENT(fighter, 5.0, 100.0);
+        FT_START_CUTIN(fighter);
     }
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
-        frame(fighter.lua_state_agent, 10.0);
-        if is_excute(fighter) {
-            FT_SET_FINAL_FEAR_FACE(fighter, 60);
-            REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
-        }
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        FT_SET_FINAL_FEAR_FACE(fighter, 60);
+        REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
+    }   
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+        VisibilityModule::set_whole(fighter.module_accessor, false);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        ItemModule::set_attach_item_visibility(fighter.module_accessor, false, 0);
     }
-    else {
-        if is_excute(fighter) {
-            let scale = PostureModule::scale(fighter.module_accessor);
-            CAM_ZOOM_IN_arg5(fighter, 0.0, 0.0, 2.2 * scale, 5.0, 0.0);
-            FT_START_CUTIN(fighter);
-        }
-    }
-    frame(fighter.lua_state_agent, 25.0);
+    frame(fighter.lua_state_agent, 41.0);
     if is_excute(fighter) {
         CAM_ZOOM_OUT(fighter);
         camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_RECT, 50, -50, 50, -10);
+        let pos = Vector3f { x: 0.0, y: 110.0, z: 0.0 };
+        PostureModule::set_pos(fighter.module_accessor, &pos);
+		PostureModule::init_pos(fighter.module_accessor, &pos, true, true);
     }
-    frame(fighter.lua_state_agent, 51.0);
+    frame(fighter.lua_state_agent, 44.0);
     if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_NESS_INSTANCE_WORK_ID_FLAG_FINAL_START);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_INSTANCE_WORK_ID_FLAG_NAME_CURSOR);
+        VisibilityModule::set_whole(fighter.module_accessor, true);
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
+        ItemModule::set_attach_item_visibility(fighter.module_accessor, true, 0);
+        JostleModule::set_status(fighter.module_accessor, true);
     }
-    frame(fighter.lua_state_agent, 357.0);
+    frame(fighter.lua_state_agent, 110.0);
     if is_excute(fighter) {
-        CancelModule::enable_cancel(fighter.module_accessor);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_FINALMAGIC, false, -1);
+    }
+    frame(fighter.lua_state_agent, 150.0);
+    if is_excute(fighter) {
+        HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .game_acmd("game_win3_kamek", game_kamek_Win3, Low)
+    .game_acmd("game_jumpaerial_kamek", game_kamek_JumpAerial, Low)
     .game_acmd("game_attack11_kamek", game_kamek_Attack11, Low)
-    .game_acmd("game_attack12_kamek", game_kamek_Attack12, Low)
-    .game_acmd("game_attack13_kamek", game_kamek_Attack13, Low)
     .game_acmd("game_attackdash_kamek", game_kamek_AttackDash, Low)
-    .game_acmd("game_attacks3hi_kamek", game_kamek_AttackS3Hi, Low)
     .game_acmd("game_attacks3_kamek", game_kamek_AttackS3, Low)
-    .game_acmd("game_attacks3lw_kamek", game_kamek_AttackS3Lw, Low)
     .game_acmd("game_attackhi3_kamek", game_kamek_AttackHi3, Low)
     .game_acmd("game_attacklw3_kamek", game_kamek_AttackLw3, Low)
     .game_acmd("game_attacks4_kamek", game_kamek_AttackS4, Low)
-    .game_acmd("game_attackhi4charge_kamek", game_kamek_AttackHi4Charge, Low)
     .game_acmd("game_attackhi4_kamek", game_kamek_AttackHi4, Low)
-    .game_acmd("game_attacklw4charge_kamek", game_kamek_AttackLw4Charge, Low)
     .game_acmd("game_attacklw4_kamek", game_kamek_AttackLw4, Low)
     .game_acmd("game_attackairn_kamek", game_kamek_AttackAirN, Low)
     .game_acmd("game_attackairf_kamek", game_kamek_AttackAirF, Low)    
@@ -809,17 +920,16 @@ pub fn install() {
     .game_acmd("game_downattacku_kamek", game_kamek_DownAttackU, Low)
     .game_acmd("game_cliffattack_kamek", game_kamek_CliffAttack, Low)
     .game_acmd("game_slipattack_kamek", game_kamek_SlipAttack, Low)
+    .game_acmd("game_specialnstart_kamek", game_kamek_SpecialNStart, Low)  
+    .game_acmd("game_specialairnstart_kamek", game_kamek_SpecialAirNStart, Low)  
+    .game_acmd("game_specialnfire_kamek", game_kamek_SpecialNFire, Low)  
+    .game_acmd("game_specialairnfire_kamek", game_kamek_SpecialAirNFire, Low)  
     .game_acmd("game_specials_kamek", game_kamek_SpecialS, Low)  
     .game_acmd("game_specialairs_kamek", game_kamek_SpecialAirS, Low) 
     .game_acmd("game_specialhistart_kamek", game_kamek_SpecialHiStart, Low)
     .game_acmd("game_specialairhistart_kamek", game_kamek_SpecialAirHiStart, Low)
-    .game_acmd("game_specialairhiattack_kamek", game_kamek_SpecialAirHiAttack, Low)
-    .game_acmd("game_speciallwhold_kamek", game_kamek_SpecialLwHold, Low)
-    .game_acmd("game_speciallwend_kamek", game_kamek_SpecialLwEnd, Low)
-    .game_acmd("game_specialairlwhold_kamek", game_kamek_SpecialAirLwHold, Low)
-    .game_acmd("game_specialairlwend_kamek", game_kamek_SpecialAirLwEnd, Low)
-    .game_acmd("game_speciallwhit_kamek", game_kamek_SpecialLwHit, Low)
-    .game_acmd("game_specialairlwhit_kamek", game_kamek_SpecialAirLwHit, Low)
+    .game_acmd("game_speciallwstart_kamek", game_kamek_SpecialLwStart, Low)
+    .game_acmd("game_specialairlwstart_kamek", game_kamek_SpecialAirLwStart, Low)
     .game_acmd("game_appealsr_kamek", game_kamek_AppealSR, Low)
     .game_acmd("game_appealsl_kamek", game_kamek_AppealSL, Low)
     .game_acmd("game_appealhir_kamek", game_kamek_AppealHiR, Low)
