@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-static mut BANANA_EXIST : [bool; 8] = [false; 8];
+pub static mut BANANA_EXIST : [bool; 8] = [false; 8];
 
 pub unsafe extern "C" fn frame_diddy(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);

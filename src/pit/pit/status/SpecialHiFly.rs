@@ -105,12 +105,13 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
     let landing_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("landing_frame"));
     let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     let fly_frame_max = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_max"));
+    let frame_remain_burn = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("frame_remain_burn"));
     if int_time == 0 {
         WorkModule::set_float(fighter.module_accessor, landing_frame as f32, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
         fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());
         return 1.into();
     }
-    else if int_time <= 0 + 120 && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
+    else if int_time <= frame_remain_burn && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
         WorkModule::on_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
     }
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {

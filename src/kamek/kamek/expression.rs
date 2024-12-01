@@ -1,21 +1,47 @@
 use crate::imports::BuildImports::*;
 
-//SpecialLwHold
-unsafe extern "C" fn expression_ninten_SpecialLwHold(fighter: &mut L2CAgentBase) {
+//SpecialHiStart
+unsafe extern "C" fn expression_kamek_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
-        AREA_WIND_2ND_arg10(fighter,0, 2, 225, 2, 1, 0, 12, 30, 30, 80);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
     }
 }
 
-//SpecialAirLwHold
-unsafe extern "C" fn expression_ninten_SpecialAirLwHold(fighter: &mut L2CAgentBase) {
+//SpecialAirHiStart
+unsafe extern "C" fn expression_kamek_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
-        AREA_WIND_2ND_arg10(fighter,0, 2, 225, 2, 1, 0, 12, 30, 30, 80);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
+    }
+}
+
+//SpecialHiEnd
+unsafe extern "C" fn expression_kamek_SpecialHiEnd(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        RUMBLE_HIT(fighter, Hash40::new("rbkind_attackl"), 0);
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohit_attacks"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+}
+
+//SpecialAirHiEnd
+unsafe extern "C" fn expression_kamek_SpecialAirHiEnd(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        RUMBLE_HIT(fighter, Hash40::new("rbkind_attackl"), 0);
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohit_attacks"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
     }
 }
 
 //SpecialLwHit
-unsafe extern "C" fn expression_ninten_SpecialLwHit(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_kamek_SpecialLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_shield_off"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -23,7 +49,7 @@ unsafe extern "C" fn expression_ninten_SpecialLwHit(fighter: &mut L2CAgentBase) 
 }
 
 //SpecialAirLwHit
-unsafe extern "C" fn expression_ninten_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_kamek_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_shield_off"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -31,14 +57,14 @@ unsafe extern "C" fn expression_ninten_SpecialAirLwHit(fighter: &mut L2CAgentBas
 }
 
 //AppealSR
-unsafe extern "C" fn expression_ninten_AppealSR(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_kamek_AppealSR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
 }
 
 //AppealSL
-unsafe extern "C" fn expression_ninten_AppealSL(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expression_kamek_AppealSL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -46,11 +72,11 @@ unsafe extern "C" fn expression_ninten_AppealSL(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness")
-    .expression_acmd("expression_speciallwhold_ninten", expression_ninten_SpecialLwHold, Low)
-    .expression_acmd("expression_specialairlwhold_ninten", expression_ninten_SpecialAirLwHold, Low)
-    .expression_acmd("expression_speciallwhit_ninten", expression_ninten_SpecialLwHit, Low)
-    .expression_acmd("expression_specialairlwhit_ninten", expression_ninten_SpecialAirLwHit, Low)
-    .expression_acmd("expression_appealsr_ninten", expression_ninten_AppealSR, Low)
-    .expression_acmd("expression_appealsl_ninten", expression_ninten_AppealSL, Low)
+    .expression_acmd("expression_specialhistart_kamek", expression_kamek_SpecialHiStart, Low)
+    .expression_acmd("expression_specialairhistart_kamek", expression_kamek_SpecialAirHiStart, Low)
+    .expression_acmd("expression_specialhiend_kamek", expression_kamek_SpecialHiEnd, Low)
+    .expression_acmd("expression_specialairhiend_kamek", expression_kamek_SpecialAirHiEnd, Low)
+    .expression_acmd("expression_appealsr_kamek", expression_kamek_AppealSR, Low)
+    .expression_acmd("expression_appealsl_kamek", expression_kamek_AppealSL, Low)
     .install();
 }

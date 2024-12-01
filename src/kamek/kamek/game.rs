@@ -928,6 +928,8 @@ pub fn install() {
     .game_acmd("game_specialairs_kamek", game_kamek_SpecialAirS, Low) 
     .game_acmd("game_specialhistart_kamek", game_kamek_SpecialHiStart, Low)
     .game_acmd("game_specialairhistart_kamek", game_kamek_SpecialAirHiStart, Low)
+    .game_acmd("game_specialhiend_kamek", game_kamek_SpecialHiEnd, Low)
+    .game_acmd("game_specialairhiend_kamek", game_kamek_SpecialAirHiEnd, Low)
     .game_acmd("game_speciallwstart_kamek", game_kamek_SpecialLwStart, Low)
     .game_acmd("game_specialairlwstart_kamek", game_kamek_SpecialAirLwStart, Low)
     .game_acmd("game_appealsr_kamek", game_kamek_AppealSR, Low)

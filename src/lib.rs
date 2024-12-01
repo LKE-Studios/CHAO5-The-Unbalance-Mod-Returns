@@ -133,7 +133,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
-mod basyaamo;
+/*mod basyaamo;
 mod bayonetta;
 mod brave;
 mod buddy;
@@ -145,9 +145,9 @@ mod daisy;
 mod dedede;
 mod demon;
 mod diddy;
-pub mod dolly;
+pub mod dolly;*/
 mod donkey;
-mod duckhunt;
+/*mod duckhunt;
 mod edge;
 mod eflame;
 mod elight;
@@ -159,8 +159,9 @@ mod gaogaen;
 mod gekkouga;
 mod ike;
 mod inkling;
-mod jack;
-mod kamui;
+mod jack;*/
+mod kamek;
+/*mod kamui;
 mod ken;
 mod kirby;
 mod koopa;
@@ -195,9 +196,9 @@ mod pfushigisou;
 mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;
+mod pikmin;*/
 mod pit;
-mod pitb;
+/*mod pitb;
 mod plizardon;
 mod popo;
 mod ptrainer;
@@ -230,7 +231,7 @@ mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;
+mod zelda;*/
 
 pub mod singletons;
 pub mod helper;
@@ -439,9 +440,9 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    mario::install();
+    //mario::install();
     donkey::install();
-    link::install();
+    /*link::install();
     samus::install();
     yoshi::install();
     kirby::install();
@@ -466,9 +467,9 @@ pub fn main() {
     mewtwo::install();
     pichu::install();
     roy::install();
-    metaknight::install();
+    metaknight::install();*/
     pit::install();
-    wario::install();
+    /*wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
@@ -536,7 +537,8 @@ pub fn main() {
     waluigi::install();
     basyaamo::install();
     krystal::install();
-    ninten::install();
+    ninten::install();*/
+    kamek::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

@@ -69,7 +69,8 @@ unsafe extern "C" fn game_metaknight_Attack100Start(fighter: &mut L2CAgentBase) 
 
 //Attack100
 unsafe extern "C" fn game_metaknight_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
+        frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             MotionModule::set_rate(fighter.module_accessor, 1.5);
             HIT_NODE(fighter, Hash40::new("handr"), *HIT_STATUS_INVINCIBLE);
