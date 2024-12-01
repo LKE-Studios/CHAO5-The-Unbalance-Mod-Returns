@@ -81,6 +81,7 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
 
     let fly_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     let land_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
+    let burn_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("frame_remain_burn"));
     WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
 
@@ -91,8 +92,7 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
         return 1.into();
     }
 
-    // TODO: add a param for the 120 value?
-    if fly_time <= 120 && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
+    if fly_time <= burn_time && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
         WorkModule::on_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
     }
 
@@ -141,10 +141,10 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 
     let accel_x = air_accel_x * stick_x;
     let accel_y = air_accel_y * stick_y;
-    if stick_x > 0 && prev_stick_x <= 0 {
+    if stick_x > 0.0 && prev_stick_x <= 0.0 {
         accel_x += 0.8;
     }
-    if stick_x < 0 && prev_stick_x >= 0 {
+    if stick_x < 0.0 && prev_stick_x >= 0.0 {
         accel_x -= 0.8
     }
 
@@ -152,8 +152,6 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
-    println!("speed_y_stop{ }", speed_y_stop);
-    println!("speed_x_control{ }", speed_x_control);
     0.into()
 }
 
