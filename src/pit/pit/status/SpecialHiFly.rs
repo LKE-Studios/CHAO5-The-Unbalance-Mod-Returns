@@ -32,7 +32,7 @@ pub unsafe extern "C" fn status_pit_SpecialHiFly_Init(fighter: &mut L2CFighterCo
     // sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, ENERGY_CONTROLLER_RESET_TYPE_FREE, sum_speed_x, sum_speed_y, 0.0, 0.0, 0.0);
     sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_max, speed_y_max);
     sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, 2.5, 2.5);
-    sv_kinetic_energy!(set_brake, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, control_brake_x, control_brake_y);
+    sv_kinetic_energy!(set_brake, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, control_brake_x, control_brake_y);
     0.into()
 }
 
