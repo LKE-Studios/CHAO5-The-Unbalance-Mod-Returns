@@ -1,3 +1,5 @@
+use sv_kinetic_energy::get_stable_speed_y;
+
 use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn status_pit_SpecialHiFly_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -120,6 +122,17 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
     0.into()
 }
 
+macro_rules! get_sv_kinetic_energy {
+    ($cmd_name:ident, $agent:ident, $($arg:expr),* $(,)?) => {
+        {
+            $agent.clear_lua_stack();
+            lua_args!($agent, $($arg),*);
+            smash::app::sv_kinetic_energy::$cmd_name($agent.lua_state_agent);
+            $agent.pop_lua_stack(1)
+        }
+    }
+}
+
 unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let fly_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     // print this every 15 frames
@@ -127,39 +140,46 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
         let kinetic_type = KineticModule::get_kinetic_type(fighter.module_accessor);
         let situation = StatusModule::situation_kind(fighter.module_accessor);
 
-        let gravity_enabled = KineticModule::is_enable_energy(module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-        let gravity_suspended = KineticModule::is_suspend_energy(module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-        let gravity_speed_y = sv_kinetic_energy!(get_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
-        let gravity_accel_y = sv_kinetic_energy!(get_accel_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
-        let gravity_stable_y = sv_kinetic_energy!(get_stable_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
-        let gravity_limit_y = sv_kinetic_energy!(get_limit_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
+        let gravity_enabled = KineticModule::is_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        let gravity_suspended = KineticModule::is_suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        let control_enabled = KineticModule::is_enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        let control_suspended = KineticModule::is_suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 
-        let control_enabled = KineticModule::is_enable_energy(module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-        let control_suspended = KineticModule::is_suspend_energy(module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-        let control_speed_x = sv_kinetic_energy!(get_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_speed_y = sv_kinetic_energy!(get_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_accel_x = sv_kinetic_energy!(get_accel_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_accel_y = sv_kinetic_energy!(get_accel_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_stable_x = sv_kinetic_energy!(get_stable_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_stable_y = sv_kinetic_energy!(get_stable_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_limit_x = sv_kinetic_energy!(get_limit_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
-        let control_limit_y = sv_kinetic_energy!(get_limit_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let gravity_speed_y = get_sv_kinetic_energy!(get_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
+        let gravity_accel_y = get_sv_kinetic_energy!(get_accel_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
+        let gravity_stable_y = get_sv_kinetic_energy!(get_stable_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
+        let gravity_limit_y = get_sv_kinetic_energy!(get_limit_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY).get_f32();
+        let control_speed_x = get_sv_kinetic_energy!(get_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_speed_y = get_sv_kinetic_energy!(get_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+     // let control_accel_x = get_sv_kinetic_energy!(get_accel_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_accel_y = get_sv_kinetic_energy!(get_accel_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_stable_x = get_sv_kinetic_energy!(get_stable_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_stable_y = get_sv_kinetic_energy!(get_stable_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_limit_x = get_sv_kinetic_energy!(get_limit_speed_x, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        let control_limit_y = get_sv_kinetic_energy!(get_limit_speed_y, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL).get_f32();
+        // let control_limit_y = {
+        //     fighter.clear_lua_stack();
+        //     lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        //     smash::app::sv_kinetic_energy::get_limit_speed_y(fighter.lua_state_agent);
+        //     fighter.pop_lua_stack(1)
+        // }.get_f32();
 
         println!("========");
 
         println!("kinetic_type: {kinetic_type}");
         println!("situation: {situation}");
+        println!("control_enabled: {control_enabled}");
+        println!("control_suspended: {control_suspended}");
+
         println!("gravity_enabled: {gravity_enabled}");
         println!("gravity_suspended: {gravity_suspended}");
         println!("gravity_speed_y: {gravity_speed_y}");
         println!("gravity_accel_y: {gravity_accel_y}");
         println!("gravity_stable_y: {gravity_stable_y}");
         println!("gravity_limit_y: {gravity_limit_y}");
-        println!("control_enabled: {control_enabled}");
-        println!("control_suspended: {control_suspended}");
         println!("control_speed_x: {control_speed_x}");
         println!("control_speed_y: {control_speed_y}");
-        println!("control_accel_x: {control_accel_x}");
+     // println!("control_accel_x: {control_accel_x}");
         println!("control_accel_y: {control_accel_y}");
         println!("control_stable_x: {control_stable_x}");
         println!("control_stable_y: {control_stable_y}");
