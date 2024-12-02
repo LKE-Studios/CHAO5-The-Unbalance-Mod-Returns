@@ -191,29 +191,29 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    // let prev_stick_x = ControlModule::get_stick_prev_x(fighter.module_accessor);
-    // if stick_y > 0.0 {
-    //     let motion_rate_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_max"));
-    //     MotionModule::set_rate(fighter.module_accessor, motion_rate_max);
-    // }
-    // else {
-    //     let motion_rate_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_min"));
-    //     MotionModule::set_rate(fighter.module_accessor, motion_rate_min);
-    // }
+    let prev_stick_x = ControlModule::get_stick_prev_x(fighter.module_accessor);
+    if stick_y > 0.0 {
+        let motion_rate_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_max"));
+        MotionModule::set_rate(fighter.module_accessor, motion_rate_max);
+    }
+    else {
+        let motion_rate_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("motion_rate_min"));
+        MotionModule::set_rate(fighter.module_accessor, motion_rate_min);
+    }
 
-    // let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_x"));
-    // let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
+    let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_x"));
+    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
 
-    // let accel_x = air_accel_x * stick_x;
-    // let accel_y = air_accel_y * stick_y;
-    // if stick_x > 0.0 && prev_stick_x <= 0.0 {
-    //     accel_x += 0.8;
-    // }
-    // if stick_x < 0.0 && prev_stick_x >= 0.0 {
-    //     accel_x -= 0.8
-    // }
+    let accel_x = air_accel_x * stick_x;
+    let accel_y = air_accel_y * stick_y;
+    if stick_x > 0.0 && prev_stick_x <= 0.0 {
+        accel_x += 0.8;
+    }
+    if stick_x < 0.0 && prev_stick_x >= 0.0 {
+        accel_x -= 0.8
+    }
 
-    sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, stick_x, stick_y);
+    sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, accel_x, accel_y);
 
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x: 1.5, y: 1.5, z: 1.5});
