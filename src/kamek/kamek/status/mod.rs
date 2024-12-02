@@ -1,4 +1,4 @@
-mod AttackHi4;
+mod SpecialNHold;
 mod SpecialHi;
 mod SpecialHiEnd;
 mod SpecialHiAttack;
@@ -7,7 +7,7 @@ mod SpecialLwHold;
 mod SpecialLwHit;
 
 pub fn install() {
-    AttackHi4::install();
+    SpecialNHold::install();
     SpecialHi::install();
     SpecialHiEnd::install();
     SpecialHiAttack::install();

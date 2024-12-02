@@ -133,6 +133,7 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
     let lr = PostureModule::lr(fighter.module_accessor);
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+    let prev_stick_x = ControlModule::get_stick_prev_x(fighter.module_accessor);
     let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_x"));
     let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
     let gravity_speed = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("gravity_speed"));
@@ -152,10 +153,14 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
     sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x * lr, speed_y);
     let air_decel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_decel_y"));
     let air_decel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_decel_x"));
-    let mut sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    let mut sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    sum_speed_y -= air_decel_y;
-    sum_speed_x -= air_decel_x;
+    let mut accel_x = air_accel_x * stick_x;
+    let mut accel_y = air_accel_y * stick_y;
+    if stick_x > 0.0 && prev_stick_x <= 0.0 {
+        accel_x += 0.8;
+    }
+    if stick_x < 0.0 && prev_stick_x >= 0.0 {
+        accel_x -= 0.8
+    }
     WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     fighter.clear_lua_stack();
     lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL);

@@ -373,6 +373,9 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
         if owner_kind == *FIGHTER_KIND_DOLLY && ADDED_FIGHTER { //WALUIGI
             return true;
         }
+        if owner_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_2 { //KAMEK
+            return true;
+        }
     }
     return false;
 }

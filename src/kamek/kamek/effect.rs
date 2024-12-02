@@ -756,7 +756,7 @@ unsafe extern "C" fn effect_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialS
-unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -774,7 +774,7 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirS
-unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -1224,8 +1224,6 @@ pub fn install() {
     .effect_acmd("effect_specialairlwstart_kamek", effect_kamek_SpecialAirLwStart, Low)
     .effect_acmd("effect_appealsr_kamek", effect_kamek_AppealSR, Low)
     .effect_acmd("effect_appealsl_kamek", effect_kamek_AppealSL, Low)
-    .effect_acmd("effect_appealhir_kamek", effect_kamek_AppealHiR, Low)
-    .effect_acmd("effect_appealhil_kamek", effect_kamek_AppealHiL, Low)
     .effect_acmd("effect_appeallwr_kamek", effect_kamek_AppealLwR, Low)
     .effect_acmd("effect_appeallwl_kamek", effect_kamek_AppealLwL, Low)
     .effect_acmd("effect_final_kamek", effect_kamek_Final, Low)
