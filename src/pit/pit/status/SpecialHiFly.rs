@@ -204,8 +204,8 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
     let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_x"));
     let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
 
-    let accel_x = air_accel_x * stick_x;
-    let accel_y = air_accel_y * stick_y;
+    let mut accel_x = air_accel_x * stick_x;
+    let mut accel_y = air_accel_y * stick_y;
     if stick_x > 0.0 && prev_stick_x <= 0.0 {
         accel_x += 0.8;
     }
