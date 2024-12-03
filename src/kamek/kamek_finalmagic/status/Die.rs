@@ -1,0 +1,34 @@
+use crate::imports::BuildImports::*;
+
+pub unsafe extern "C" fn status_kamek_finalmagic_Die_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_AIR), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(0), false, *WEAPON_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *WEAPON_STATUS_WORK_KEEP_FLAG_ALL_INT, *WEAPON_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, *FS_SUCCEEDS_KEEP_ATTACK as i32);
+    0.into()
+}
+
+unsafe extern "C" fn status_kamek_finalmagic_Die_Main(weapon: &mut L2CFighterCommon) -> L2CValue {
+    WorkModule::set_int(weapon.module_accessor, 10, *WEAPON_INSTANCE_WORK_ID_INT_INIT_LIFE);
+    VisibilityModule::set_whole(weapon.module_accessor, false);
+    sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, 0.0);
+	weapon.fastshift(L2CValue::Ptr(kamek_finalmagic_Die_Main_loop as *const () as _)) 
+}
+
+pub unsafe extern "C" fn kamek_finalmagic_Die_Main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_INIT_LIFE);
+	let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_INIT_LIFE);
+	if life < 0 {
+		notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+	}
+	0.into()
+}
+
+pub unsafe extern "C" fn status_kamek_finalmagic_Die_End(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    0.into()
+}
+
+pub fn install() {
+    Agent::new("ness_finalmagic")
+	.status(Pre, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_Pre)
+	.status(Main, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_Main)
+    .status(End, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_End)
+    .install();
+}

@@ -13,7 +13,7 @@ unsafe extern "C" fn status_kamek_book_Stick_Init(weapon: &mut L2CWeaponCommon) 
     0.into()
 }
 
-unsafe extern "C" fn status_kamek_book_Stick_Main(weapon: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_book_Stick_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     notify_event_msc_cmd!(weapon, Hash40::new_raw(0x220cea5125));
     weapon.pop_lua_stack(1);
     GroundModule::attach(weapon.module_accessor, GroundTouchFlag(*GROUND_TOUCH_FLAG_ALL));

@@ -2,6 +2,10 @@ use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn frame_gamewatch_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    if status_kind == *FIGHTER_STATUS_KIND_ATTACK_100 {
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_STATUS_ATTACK_WORK_INT_100_HIT_NEAR_COUNT);
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_STATUS_ATTACK_WORK_INT_100_HIT_NEAR_COUNT_CLIFF_STOP);
+    }
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND
         && StatusModule::prev_situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {

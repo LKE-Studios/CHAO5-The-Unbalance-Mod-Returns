@@ -159,9 +159,9 @@ mod gaogaen;
 mod gekkouga;
 mod ike;
 mod inkling;
-mod jack;
+mod jack;*/
 mod kamek;
-mod kamui;
+/*mod kamui;
 mod ken;
 mod kirby;
 mod koopa;
@@ -537,8 +537,8 @@ pub fn main() {
     waluigi::install();
     basyaamo::install();
     krystal::install();
-    ninten::install();
-    kamek::install();*/
+    ninten::install();*/
+    kamek::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

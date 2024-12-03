@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::kamek::kamek::frame::*;
 
 pub static charge_time : f32 = 210.0;
 
@@ -19,8 +20,8 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterComm
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
-        let time = WorkModule::get_param_int(fighter.module_accessor, Hash40::new("param_special_n"), Hash40::new("time"));
-        let nobang_time = WorkModule::get_param_int(fighter.module_accessor, Hash40::new("param_special_n"), Hash40::new("nobang_time"));
+        let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("time"));
+        let nobang_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("nobang_time"));
         WorkModule::set_int(fighter.module_accessor, time, *FIGHTER_NESS_STATUS_SPECIAL_N_WORK_INT_TIME);
         WorkModule::set_int(fighter.module_accessor, nobang_time, *FIGHTER_NESS_STATUS_SPECIAL_N_WORK_INT_NOBANG_TIME);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_N_FLAG_MOT_CHANGE);
@@ -81,7 +82,7 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
     }
     let float_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
     WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
-    if float_time == charge_frame {
+    if float_time == charge_time {
         gimmick_flash(fighter);
     }
     let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);

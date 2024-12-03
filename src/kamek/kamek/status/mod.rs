@@ -1,17 +1,17 @@
 mod SpecialNHold;
+mod SpecialNFire;
+mod SpecialS;
 mod SpecialHi;
 mod SpecialHiEnd;
-mod SpecialHiAttack;
+mod SpecialHiHold;
 mod SpecialLw;
-mod SpecialLwHold;
-mod SpecialLwHit;
 
 pub fn install() {
     SpecialNHold::install();
+    SpecialNFire::install();
+    SpecialS::install();
     SpecialHi::install();
     SpecialHiEnd::install();
-    SpecialHiAttack::install();
+    SpecialHiHold::install();
     SpecialLw::install();
-    SpecialLwHold::install();
-    SpecialLwHit::install();
 }

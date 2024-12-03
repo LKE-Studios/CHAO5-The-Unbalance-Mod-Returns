@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::kamek::kamek::frame::*;
 
 //JumpAerial
 unsafe extern "C" fn game_kamek_JumpAerial(fighter: &mut L2CAgentBase) {
@@ -524,7 +525,7 @@ unsafe extern "C" fn game_kamek_SpecialNFire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         SET_SPEED_EX(fighter, -1.0, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_PINKMAGIC, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_PINKMAGIC, false, -1);
     }
 }
 
@@ -533,7 +534,7 @@ unsafe extern "C" fn game_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         SET_SPEED_EX(fighter, -1.0, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_PINKMAGIC, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_PINKMAGIC, false, -1);
     }
 }
 
@@ -541,7 +542,6 @@ unsafe extern "C" fn game_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let rand_num = sv_math::rand(hash40("fighter"), 100);
-    sv_kinetic_energy!(set_speed_mul, agent, FIGHTER_KINETIC_ENERGY_ID_MOTION, 1.0);
     frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
         if rand_num >= 0 && rand_num <= 30 { //Magic 30%
@@ -623,7 +623,6 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let rand_num = sv_math::rand(hash40("fighter"), 100);
-    sv_kinetic_energy!(set_speed_mul, agent, FIGHTER_KINETIC_ENERGY_ID_MOTION, 1.0);
     frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
         if rand_num >= 0 && rand_num <= 30 { //Magic 30%
@@ -729,7 +728,7 @@ unsafe extern "C" fn game_kamek_SpecialAirHiEnd(fighter: &mut L2CAgentBase) {}
 
 //SpecialLwStart
 unsafe extern "C" fn game_kamek_SpecialLwStart(fighter: &mut L2CAgentBase) {
-    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMBER];
+    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMPER];
     let rng = sv_math::rand(hash40("ness"), itemlist.len() as i32);
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
@@ -744,7 +743,7 @@ unsafe extern "C" fn game_kamek_SpecialLwStart(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwStart
 unsafe extern "C" fn game_kamek_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
-    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMBER];
+    let itemlist = [*ITEM_KIND_GREENSHELL, *ITEM_KIND_BOMBHEI, *ITEM_KIND_PITFALL, *ITEM_KIND_DEKU, *ITEM_KIND_SMARTBOMB, *ITEM_KIND_BUMPER];
     let rng = sv_math::rand(hash40("ness"), itemlist.len() as i32);
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
@@ -835,7 +834,7 @@ unsafe extern "C" fn game_kamek_Final(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 110.0);
     if is_excute(fighter) {
         QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_FINALMAGIC, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_FINALMAGIC, false, -1);
     }
     frame(fighter.lua_state_agent, 150.0);
     if is_excute(fighter) {
@@ -884,7 +883,7 @@ unsafe extern "C" fn game_kamek_FinalAir(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 110.0);
     if is_excute(fighter) {
         QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_NESS_GENERATE_ARTICLE_FINALMAGIC, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_FINALMAGIC, false, -1);
     }
     frame(fighter.lua_state_agent, 150.0);
     if is_excute(fighter) {

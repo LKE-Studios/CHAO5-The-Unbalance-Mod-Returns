@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //JumpAerialF
-unsafe extern "C" fn effect_kamek_JumpAerialF(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_kamek_JumpAerialFront(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("ness_psi_rush"), Hash40::new("top"), 0, 0, 0, 90, 0, 90, 1.85, 0, 0, 0, 0, 360, 0, true);
@@ -9,7 +9,7 @@ unsafe extern "C" fn effect_kamek_JumpAerialF(fighter: &mut L2CAgentBase) {
 }
 
 //JumpAerialB
-unsafe extern "C" fn effect_kamek_JumpAerialB(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_kamek_JumpAerialBack(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("ness_psi_rush"), Hash40::new("top"), 0, 0, 0, 90, 0, 90, 1.85, 0, 0, 0, 0, 360, 0, true);

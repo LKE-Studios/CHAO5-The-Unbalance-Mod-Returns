@@ -67,7 +67,7 @@ pub mod BuildImports {
             L2CValueInner
         },
         smash::lib::lua_const::EffectScreenLayer::{GROUND, CHAR},
-        smash::lua2cpp::{*, L2CAgentBase, L2CFighterCommon, L2CFighterBase},
+        smash::lua2cpp::{*, L2CAgentBase, L2CFighterCommon, L2CWeaponCommon, L2CFighterBase},
         singletons::*,
         smash::app::sv_animcmd::{
             frame, 

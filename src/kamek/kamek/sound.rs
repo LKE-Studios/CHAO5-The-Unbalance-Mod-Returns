@@ -199,7 +199,7 @@ unsafe extern "C" fn sound_kamek_Catch(fighter: &mut L2CAgentBase) {
 }
 
 //CatchDash
-unsafe extern "C" fn sound_kamek_CatchTurn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_kamek_CatchDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_attackair_f01"));
@@ -288,6 +288,30 @@ unsafe extern "C" fn sound_kamek_SpecialAirNHold(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_appeal03"));
+    }
+}
+
+//SpecialNFire
+unsafe extern "C" fn sound_kamek_SpecialNFire(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_ness_attack06"));
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_item_pasaran_growth"));
+    }
+}
+
+//SpecialAirNFire
+unsafe extern "C" fn sound_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_ness_attack06"));
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_item_pasaran_growth"));
     }
 }
 
@@ -491,6 +515,8 @@ pub fn install() {
     .sound_acmd("sound_throwhi_kamek", sound_kamek_ThrowHi, Low)
     .sound_acmd("sound_throwlw_kamek", sound_kamek_ThrowLw, Low)
     .sound_acmd("sound_cliffattack_kamek", sound_kamek_CliffAttack, Low)
+    .sound_acmd("sound_specialnhold_kamek", sound_kamek_SpecialNHold, Low)  
+    .sound_acmd("sound_specialairnhold_kamek", sound_kamek_SpecialAirNHold, Low)
     .sound_acmd("sound_specialnfire_kamek", sound_kamek_SpecialNFire, Low)  
     .sound_acmd("sound_specialairnfire_kamek", sound_kamek_SpecialAirNFire, Low)  
     .sound_acmd("sound_specials_kamek", sound_kamek_SpecialS, Low)  

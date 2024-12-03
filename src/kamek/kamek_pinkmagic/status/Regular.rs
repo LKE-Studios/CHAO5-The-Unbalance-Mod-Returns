@@ -106,14 +106,14 @@ unsafe extern "C" fn status_kamek_pinkmagic_Regular_Exec(weapon: &mut L2CWeaponC
     let lr = PostureModule::lr(weapon.module_accessor);
     let speed_x = float_angle.to_radians().cos() * float_speed * lr;
     let speed_y = float_angle.to_radians().sin() * float_speed;
-    let mut speed = float_speed - brake;
+    let mut new_speed = float_speed - brake;
     if current_frame < 1.0 {
         kamek_pinkmagic_Regular_function(weapon);
     }
     sv_kinetic_energy!(set_speed, weapon, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x, -speed_y);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
-    if speed < 0.01 {
-        speed = 0.01;
+    if new_speed < 0.01 {
+        new_speed = 0.01;
     }
     WorkModule::set_float(weapon.module_accessor, speed, *WEAPON_KIRBY_FINALCUTTERSHOT_INSTANCE_WORK_ID_FLOAT_SPEED);
     0.into()
@@ -125,8 +125,8 @@ unsafe extern "C" fn status_kamek_pinkmagic_Regular_MapCorrection(weapon: &mut L
 }
 
 unsafe extern "C" fn kamek_pinkmagic_Regular_function(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    let angle = WorkModule::get_float(weapon.module_accessor, *WEAPON_KIRBY_FINALCUTTERSHOT_INSTANCE_WORK_ID_FLOAT_ANGLE);
-    let mut new_angle = angle;
+    let float_angle = WorkModule::get_float(weapon.module_accessor, *WEAPON_KIRBY_FINALCUTTERSHOT_INSTANCE_WORK_ID_FLOAT_ANGLE);
+    let mut new_angle = float_angle;
     if weapon.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
         if GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_DOWN as u32) {
             let get_touch_normal = GroundModule::get_touch_normal(weapon.module_accessor, *GROUND_TOUCH_FLAG_DOWN as u32);
@@ -135,7 +135,7 @@ unsafe extern "C" fn kamek_pinkmagic_Regular_function(weapon: &mut L2CWeaponComm
             let mut vector = weapon.Vector2__create(touch_x.into(), touch_y.into());
             let vec_x = vector["x"].get_f32();
             let vec_y = vector["y"].get_f32();
-            vector["x"].assign(&L2CValue::F32(angle));
+            vector["x"].assign(&L2CValue::F32(float_angle));
             let combined_value = (vec_x * vec_y).atan();
             let lr = PostureModule::lr(weapon.module_accessor);
             new_angle = combined_value * lr;
