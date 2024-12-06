@@ -2,6 +2,7 @@ use crate::imports::BuildImports::*;
 
 pub static life : i32 = 200;
 pub static speed : f32 = 3.5;
+pub static scale : f32 = 2.0;
 
 unsafe extern "C" fn status_kamek_book_Regular_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_AIR), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
@@ -19,6 +20,8 @@ unsafe extern "C" fn status_kamek_book_Regular_Init(weapon: &mut L2CWeaponCommon
 
 unsafe extern "C" fn status_kamek_book_Regular_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
+    ModelModule::set_scale(weapon.module_accessor, scale);
+    AttackModule::set_attack_scale(weapon.module_accessor, scale, true);
     if !StopModule::is_stop(weapon.module_accessor) {
         kamek_book_Regular_Sub_status(weapon, false.into());
     }

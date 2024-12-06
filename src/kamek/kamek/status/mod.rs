@@ -3,7 +3,7 @@ mod SpecialNFire;
 mod SpecialS;
 mod SpecialHi;
 mod SpecialHiEnd;
-mod SpecialHiHold;
+mod SpecialHiWarp;
 mod SpecialLw;
 
 pub fn install() {
@@ -12,6 +12,6 @@ pub fn install() {
     SpecialS::install();
     SpecialHi::install();
     SpecialHiEnd::install();
-    SpecialHiHold::install();
+    SpecialHiWarp::install();
     SpecialLw::install();
 }

@@ -144,8 +144,8 @@ mod cloud;
 mod daisy;
 mod dedede;
 mod demon;
-mod diddy;
-pub mod dolly;*/
+mod diddy;*/
+pub mod dolly;
 mod donkey;
 /*mod duckhunt;
 mod edge;
@@ -178,17 +178,17 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;
+mod master;*/
 mod metaknight;
-pub mod mewtwo;
+/*pub mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
-mod nana;
+mod nana;*/
 mod ness;
 mod ninten;
-mod packun;
+/*mod packun;
 mod pacman;
 mod palutena;
 mod peach;
@@ -224,9 +224,9 @@ mod sonic;
 mod szerosuit;
 mod tantan;
 mod toonlink;
-mod trail;
+mod trail;*/
 mod waluigi;
-mod wario;
+/*mod wario;
 mod wiifit;
 mod wolf;
 mod yoshi;
@@ -448,9 +448,9 @@ pub fn main() {
     kirby::install();
     pikachu::install();
     fox::install();
-    luigi::install();
+    luigi::install();*/
     ness::install();
-    captain::install();
+    /*captain::install();
     purin::install();
     koopa::install();
     marth::install();
@@ -466,8 +466,8 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();
-    metaknight::install();*/
+    roy::install();*/
+    metaknight::install();
     pit::install();
     /*wario::install();
     diddy::install();
@@ -518,9 +518,9 @@ pub fn main() {
     daisy::install();
     samusd::install();
     richter::install();
-    chrom::install();
+    chrom::install();*/
     dolly::install();
-    jack::install();
+    /*jack::install();
     edge::install();
     brave::install();
     demon::install();
@@ -533,11 +533,11 @@ pub fn main() {
     tantan::install();
     claus::install();
     koopag::install();
-    silver::install();
+    silver::install();*/
     waluigi::install();
-    basyaamo::install();
-    krystal::install();
-    ninten::install();*/
+    /*basyaamo::install();
+    krystal::install();*/
+    ninten::install();
     kamek::install();
     skyline::install_hooks!(
         declare_const_hook, 

@@ -20,7 +20,6 @@ unsafe extern "C" fn status_kamek_SpecialHi_Pre(fighter: &mut L2CFighterCommon) 
 
 unsafe extern "C" fn status_kamek_SpecialHi_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
         let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -97,7 +96,7 @@ unsafe extern "C" fn kamek_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -
         kamek_SpecialHi_status_helper(fighter, false, *FIGHTER_STATUS_KIND_SPECIAL_HI);
     }
     if MotionModule::is_end(fighter.module_accessor) {
-        fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD.into(),false.into());
+        fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP.into(),false.into());
         return 0.into();
     }
     0.into()

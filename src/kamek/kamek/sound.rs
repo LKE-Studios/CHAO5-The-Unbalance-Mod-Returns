@@ -1,10 +1,26 @@
 use crate::imports::BuildImports::*;
 
-//Jump
-unsafe extern "C" fn sound_kamek_Jump(fighter: &mut L2CAgentBase) {
+//JumpFront
+unsafe extern "C" fn sound_kamek_JumpFront(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_jump01"));
+    }
+}
+
+//JumpBack
+unsafe extern "C" fn sound_kamek_JumpBack(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_jump01"));
+    }
+}
+
+//JumpAerial
+unsafe extern "C" fn sound_kamek_JumpAerial(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_pk_s"));
     }
 }
 
@@ -489,7 +505,9 @@ unsafe extern "C" fn sound_kamek_FinalAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("ness")
-    .sound_acmd("sound_jump_kamek", sound_kamek_Jump, Low)
+    .sound_acmd("sound_jumpfront_kamek", sound_kamek_JumpFront, Low)
+    .sound_acmd("sound_jumpback_kamek", sound_kamek_JumpBack, Low)
+    .sound_acmd("sound_jumpaerial_kamek", sound_kamek_JumpAerial, Low)
     .sound_acmd("sound_jumpaerialfront_kamek", sound_kamek_JumpAerialFront, Low)
     .sound_acmd("sound_jumpaerialback_kamek", sound_kamek_JumpAerialBack, Low)
     .sound_acmd("sound_run_kamek", sound_kamek_Run, Low)

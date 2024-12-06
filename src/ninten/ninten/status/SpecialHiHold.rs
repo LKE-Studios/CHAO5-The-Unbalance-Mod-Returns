@@ -9,7 +9,6 @@ pub static button_add_warp_time : i32 = 6;
 
 unsafe extern "C" fn status_ninten_SpecialHiHold_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {	
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FREE, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
@@ -23,7 +22,6 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Pre(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn status_ninten_SpecialHiHold_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -45,7 +43,6 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Init(fighter: &mut L2CFighterCo
 
 unsafe extern "C" fn status_ninten_SpecialHiHold_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         fighter.set_situation(SITUATION_KIND_AIR.into());

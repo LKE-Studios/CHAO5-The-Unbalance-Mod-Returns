@@ -10,7 +10,7 @@ unsafe extern "C" fn status_kamek_SpecialHiEnd_Pre(fighter: &mut L2CFighterCommo
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END)(fighter)
+        0.into()
     }
 }
 
@@ -29,7 +29,7 @@ unsafe extern "C" fn status_kamek_SpecialHiEnd_Init(fighter: &mut L2CFighterComm
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END)(fighter)
+        0.into()
     }
 }
 
@@ -37,11 +37,11 @@ unsafe extern "C" fn status_kamek_SpecialHiEnd_Main(fighter: &mut L2CFighterComm
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
-        kamek_SpecialHi_status_helper(fighter, true, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END);
+        kamek_SpecialHi_status_helper(fighter, true, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END);
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialHiEnd_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END)(fighter)
+        0.into()
     }
 }
 
@@ -64,7 +64,7 @@ unsafe extern "C" fn kamek_SpecialHiEnd_Main_loop(fighter: &mut L2CFighterCommon
     }
     if !StatusModule::is_changing(fighter.module_accessor)
     && StatusModule::is_situation_changed(fighter.module_accessor) {
-        kamek_SpecialHi_status_helper(fighter, false, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END);
+        kamek_SpecialHi_status_helper(fighter, false, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END);
     }
     if MotionModule::is_end(fighter.module_accessor) {
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND { 
@@ -90,9 +90,9 @@ unsafe extern "C" fn status_kamek_SpecialHiEnd_End(fighter: &mut L2CFighterCommo
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Pre)
-    .status(Init, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Init)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Main)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_End)
+    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Pre)
+    .status(Init, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Init)
+    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_Main)
+    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END, status_kamek_SpecialHiEnd_End)
     .install();
 }

@@ -16,6 +16,7 @@ unsafe extern "C" fn status_metaknight_SpecialGuard_Pre(fighter: &mut L2CFighter
 }
 
 unsafe extern "C" fn status_metaknight_SpecialGuard_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_z"), 0.0, 1.0, false, 0.0, false, false);
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
@@ -28,6 +29,7 @@ unsafe extern "C" fn status_metaknight_SpecialGuard_Main(fighter: &mut L2CFighte
 }
 
 unsafe extern "C" fn metaknight_SpecialGuard_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     if CancelModule::is_enable_cancel(fighter.module_accessor) {
         if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
             return 1.into();

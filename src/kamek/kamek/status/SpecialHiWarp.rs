@@ -6,7 +6,7 @@ pub static warp_speed_add : f32 = 1.5;
 pub static max_frame : i32 = 40;
 pub static button_add_warp_time : i32 = 5;
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
@@ -15,11 +15,11 @@ unsafe extern "C" fn status_kamek_SpecialHiHold_Pre(fighter: &mut L2CFighterComm
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     } 
 }
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
@@ -58,11 +58,11 @@ unsafe extern "C" fn status_kamek_SpecialHiHold_Init(fighter: &mut L2CFighterCom
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
@@ -84,14 +84,14 @@ unsafe extern "C" fn status_kamek_SpecialHiHold_Main(fighter: &mut L2CFighterCom
             *GROUND_CORRECT_KIND_AIR
         };
         GroundModule::set_correct(fighter.module_accessor, GroundCorrectKind(correct));
-        fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialHiHold_Main_loop as *const () as _))
+        fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialHiWarp_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
-unsafe extern "C" fn kamek_SpecialHiHold_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn kamek_SpecialHiWarp_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if CancelModule::is_enable_cancel(fighter.module_accessor) {
         if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
             return 1.into();
@@ -120,26 +120,25 @@ unsafe extern "C" fn kamek_SpecialHiHold_Main_loop(fighter: &mut L2CFighterCommo
         WorkModule::add_int(fighter.module_accessor, button_add_warp_time, *FIGHTER_NESS_STATUS_SPECIAL_HI_WORK_INT_TIME);
     }
     if max_frame_int || stop_ground || stop_air || stop_cliff {
-        fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END.into(),false.into());
+        fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END.into(),false.into());
         return 0.into();
     }
     0.into()
 }
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
         WorkModule::dec_int(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_HI_WORK_INT_TIME);
         0.into()
     }
     else {
-        original_status(Exec, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
@@ -149,29 +148,28 @@ unsafe extern "C" fn status_kamek_SpecialHiHold_Exit(fighter: &mut L2CFighterCom
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
-unsafe extern "C" fn status_kamek_SpecialHiHold_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_kamek_SpecialHiWarp_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_Pre)
-    .status(Init, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_Init)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_Main)
-    .status(Exec, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_Exec)
-    .status(Exit, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_Exit)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_kamek_SpecialHiHold_End)
+    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Pre)
+    .status(Init, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Init)
+    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Main)
+    .status(Exec, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exec)
+    .status(Exit, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exit)
+    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_End)
     .install();
 }

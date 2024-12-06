@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static stick_frame : i32 = 10;
+pub static stick_frame : i32 = 20;
 
 unsafe extern "C" fn status_kamek_book_Stick_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_AIR), *WEAPON_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
@@ -47,7 +47,7 @@ pub unsafe extern "C" fn status_kamek_book_Stick_End(weapon: &mut L2CWeaponCommo
 }
 
 pub fn install() {
-    Agent::new("dolly_book")
+    Agent::new("ness_book")
     .status(Pre, *WEAPON_ROCKMAN_HARDKNUCKLE_STATUS_KIND_STICK, status_kamek_book_Stick_Pre)
     .status(Init, *WEAPON_ROCKMAN_HARDKNUCKLE_STATUS_KIND_STICK, status_kamek_book_Stick_Init)
 	.status(Main, *WEAPON_ROCKMAN_HARDKNUCKLE_STATUS_KIND_STICK, status_kamek_book_Stick_Main)

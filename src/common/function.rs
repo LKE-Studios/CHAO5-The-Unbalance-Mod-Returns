@@ -357,9 +357,13 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
     let ADDED_FIGHTER_2 = color >= 64 && color <= 71;
     if utility::get_kind(&mut *object_boma) == *WEAPON_KIND_SHEIK_NEEDLE 
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOOMERANG 
-    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_PITB_BOWARROW {
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_PITB_BOWARROW 
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_MARIO_FIREBALL
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LUIGI_FIREBALL
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KIRBY_FINALCUTTERSHOT
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_ROCKMAN_HARDKNUCKLE {
         let owner_id = WorkModule::get_int(object_boma, *WEAPON_INSTANCE_WORK_ID_INT_ACTIVATE_FOUNDER_ID) as u32;
-        let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
+        let owner_boma = sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_boma);
         if owner_kind == *FIGHTER_KIND_PLIZARDON {
             return true;

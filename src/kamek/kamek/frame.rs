@@ -33,6 +33,9 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
     let cstick_y = ControlModule::get_attack_air_stick_y(fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
     if KAMEK {
+        if ArticleModule::is_exist(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_FIREBALL) {
+            println!("FIREBALL GENERATED");
+        }
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4 {
             if frame > 17.0 && frame < 32.0 {
 				if ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] == 0 {
