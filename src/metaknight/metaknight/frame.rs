@@ -30,6 +30,10 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
         KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -1.0, 0);
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+            if DamageModule::damage(fighter.module_accessor, 0) > 0.0 {
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            }
         }
     };
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW) {

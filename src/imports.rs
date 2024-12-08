@@ -54,7 +54,7 @@ pub mod BuildImports {
             sv_information    
         },
         smash::phx::{Hash40, Vector2f, Vector3f, Vector4f},
-        smash::hash40,
+        smash::{hash40},
         smash::lib::{
             L2CAgent,
             L2CValue,

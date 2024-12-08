@@ -5,7 +5,8 @@ pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut COUNTER : [i32; 8] = [0; 8];
 pub static mut CURRENT_ON_FRAME : [f32; 8] = [0.0; 8];
 pub static mut IS_CRIT : [bool; 8] = [false; 8];
-const COMMON_WEAPON_ATTACK_CALLBACK: usize = 0x33bdc10;
+const COMMON_WEAPON_ATTACK_CALLBACK : usize = 0x33bdc10;
+const ITEM_CREATOR : usize = 0x15db0b0;
 
 pub mod KineticUtility {
     // Resets and enables the kinetic energy type.
@@ -607,12 +608,12 @@ unsafe fn get_article_use_type_mask(weapon_kind: i32, entry_id: i32) -> u8 {
     original!()(weapon_kind, entry_id)
 }*/
 
-#[skyline::hook(offset = 0x15db0b0)]
-pub unsafe fn create_item(item_manager: *mut smash::app::ItemManager, create_item_param: *mut CreateItemParam, unk: bool, unk2: bool, unk3: bool) -> *mut BattleObject {
+#[skyline::hook(offset = ITEM_CREATOR)]
+pub unsafe fn create_item(item_manager: *mut smash::app::ItemManager, create_item_param: *mut CreateItemParam, param_3: bool, param_4: bool, param_5: bool) -> *mut BattleObject {
     if (*create_item_param).variation_kind > 7 {
         (*create_item_param).variation_kind = 0;
     }
-    original!()(item_manager, create_item_param, unk, unk2, unk3)
+    original!()(item_manager, create_item_param, param_3, param_4, param_5)
 }
 
 //VTable hook to disable the critical zoom-in on Neutral B
@@ -654,6 +655,35 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
         *(weapon as *mut bool).add(0x90) = true;
     }
     call_original!(vtable, weapon, log)
+}
+
+pub(crate) unsafe fn ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
+	let rand_val = sv_math::rand(hash40("fighter"), 12);
+	match rand_val {
+		0 => PLAY_SE(fighter, Hash40::new("vc_ness_attack01")),
+		1 => PLAY_SE(fighter, Hash40::new("vc_ness_attack02")),
+		2 => PLAY_SE(fighter, Hash40::new("vc_ness_attack03")),
+		3 => PLAY_SE(fighter, Hash40::new("vc_ness_attack04")),
+		4 => PLAY_SE(fighter, Hash40::new("vc_ness_attack05")),
+        5 => PLAY_SE(fighter, Hash40::new("vc_ness_attack06")),
+        6 => PLAY_SE(fighter, Hash40::new("vc_ness_attack07")),
+		_ => println!("kamek is silent"),
+	}
+}
+
+pub unsafe fn get_table_value(table: *mut smash2::lib::L2CTable, key: &str) -> smash2::lib::L2CValue {
+    let hash = if key.starts_with("0x") {
+        smash2::phx::Hash40::from_hex_str(key).unwrap()
+    } 
+    else {
+        smash2::phx::hash40(key)
+    };
+    (*table).get_map(hash).unwrap().clone()
+}
+
+extern "C" {
+    #[link_name = "_ZN3lib9SingletonIN3app11ItemManagerEE9instance_E"]
+    pub static ITEM_MANAGER: *mut smash::app::ItemManager;
 }
 
 pub fn install() {

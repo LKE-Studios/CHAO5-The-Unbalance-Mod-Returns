@@ -59,7 +59,7 @@ unsafe extern "C" fn game_inkling_Attack13(fighter: &mut L2CAgentBase) {
 
 //Attack100 
 unsafe extern "C" fn game_inkling_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 2.0);
         if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
             if is_excute(fighter) {

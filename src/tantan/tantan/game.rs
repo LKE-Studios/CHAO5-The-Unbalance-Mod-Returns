@@ -82,7 +82,7 @@ unsafe extern "C" fn game_tantan_Attack13(fighter: &mut L2CAgentBase) {
 
 //Attack100 
 unsafe extern "C" fn game_tantan_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.4, /*Angle*/ 361, /*KBG*/ 16, /*FKB*/ 0, /*BKB*/ 12, /*Size*/ 6.8, /*X*/ 0.0, /*Y*/ 5.4, /*Z*/ 7.0, /*X2*/ Some(0.0), /*Y2*/ Some(11.6), /*Z2*/ Some(15.0), /*Hitlag*/ 0.3, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);

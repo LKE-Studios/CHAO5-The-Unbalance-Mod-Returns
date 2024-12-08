@@ -56,7 +56,7 @@ unsafe extern "C" fn game_richter_Attack12(fighter: &mut L2CAgentBase) {
 
 //Attack100
 unsafe extern "C" fn game_richter_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 5.0);
         }

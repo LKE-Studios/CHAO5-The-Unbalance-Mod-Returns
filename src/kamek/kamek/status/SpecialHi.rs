@@ -39,11 +39,11 @@ unsafe extern "C" fn status_kamek_SpecialHi_Init(fighter: &mut L2CFighterCommon)
 pub unsafe extern "C" fn kamek_SpecialHi_status_helper(fighter: &mut L2CFighterCommon, is_start: bool, status: i32) {
     let motion_g;
     let motion_a;
-    if status == *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD {
+    if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP {
         motion_g = Hash40::new("special_hi_hold");
         motion_a = Hash40::new("special_hi_hold");
     }
-    else if status == *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END {
+    else if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {
         motion_g = Hash40::new("special_hi_end");
         motion_a = Hash40::new("special_air_hi_end");
     }
@@ -61,10 +61,9 @@ pub unsafe extern "C" fn kamek_SpecialHi_status_helper(fighter: &mut L2CFighterC
     let correct = if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {*GROUND_CORRECT_KIND_GROUND} else {*GROUND_CORRECT_KIND_AIR};
     GroundModule::set_correct(fighter.module_accessor, GroundCorrectKind(correct));
     if status == *FIGHTER_STATUS_KIND_SPECIAL_HI || !is_start {
-        let air_kinetic = if status == *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END {FIGHTER_KINETIC_TYPE_AIR_STOP} else {FIGHTER_KINETIC_TYPE_SHEIK_SPECIAL_HI_AIR};
+        let air_kinetic = if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {FIGHTER_KINETIC_TYPE_AIR_STOP} else {FIGHTER_KINETIC_TYPE_FREE};
         fighter.sub_change_kinetic_type_by_situation(FIGHTER_KINETIC_TYPE_GROUND_STOP.into(),air_kinetic.into());
     } 
-    
 }
 
 unsafe extern "C" fn status_kamek_SpecialHi_Main(fighter: &mut L2CFighterCommon) -> L2CValue {

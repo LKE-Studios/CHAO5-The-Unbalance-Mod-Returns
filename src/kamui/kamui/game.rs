@@ -73,7 +73,7 @@ unsafe extern "C" fn game_kamui_Attack13(fighter: &mut L2CAgentBase) {
 
 //Attack100
 unsafe extern "C" fn game_kamui_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_DRAGONHAND, false, 0);
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_DRAGONHAND, Hash40::new("attack_100"), false, 0.0);

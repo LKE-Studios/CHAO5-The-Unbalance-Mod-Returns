@@ -73,7 +73,7 @@ unsafe extern "C" fn game_reflet_Attack13(fighter: &mut L2CAgentBase) {
 
 //Attack100
 unsafe extern "C" fn game_reflet_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
         frame(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {

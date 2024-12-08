@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 use crate::kamek::kamek::frame::*;
 
-pub static charge_time : i32 = 210;
+pub static full_charge_time : f32 = 85.0;
 
 unsafe extern "C" fn status_kamek_SpecialNHold_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
@@ -12,7 +12,7 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Pre(fighter: &mut L2CFighterCommo
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD)(fighter)
+        0.into()
     }
 }
 
@@ -22,10 +22,14 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterComm
 	if KAMEK {
         let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("time"));
         let nobang_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("nobang_time"));
+        let air_speed_x_stable = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_x_stable"), 0);
         WorkModule::set_int(fighter.module_accessor, time, *FIGHTER_NESS_STATUS_SPECIAL_N_WORK_INT_TIME);
         WorkModule::set_int(fighter.module_accessor, nobang_time, *FIGHTER_NESS_STATUS_SPECIAL_N_WORK_INT_NOBANG_TIME);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_N_FLAG_MOT_CHANGE);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+            KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FREE);
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, air_speed_x_stable);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_hold"), 0.0, 1.0, false, 0.0, false, false);
         }
@@ -33,17 +37,16 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterComm
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_hold"), 0.0, 1.0, false, 0.0, false, false);
         }
-        let float_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialNHold_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD)(fighter)
+        0.into()
     }
 }
 
 unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
         return 1.into();
     }
@@ -55,14 +58,6 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_n_hold"), -1.0, 1.0, 0.0, false, false);
-            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                if frame >= 58.0 {
-                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_hold"), 20.0, 1.0, false, 0.0, false, false);
-                }
-            }
-            else if ControlModule::check_button_release(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE.into(), false.into());
-            }
         }
     }
     else {
@@ -71,18 +66,9 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_n_hold"), -1.0, 1.0, 0.0, false, false);
         }
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            if frame >= 58.0 {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_hold"), 20.0, 1.0, false, 0.0, false, false);
-            }
-        }
-        else if ControlModule::check_button_release(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE.into(), false.into());
-        }
     }
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
-    WorkModule::inc_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
-    if int_time == charge_time {
+    FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] += 1.0;
+    if FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] == full_charge_time {
         gimmick_flash(fighter);
     }
     let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);
@@ -106,16 +92,19 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             }
         }
     }
-    if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-            fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+            fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), false.into());
+            return 0.into();
         }
         else {
-            fighter.change_status(FIGHTER_STATUS_KIND_GUARD.into(), true.into());
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+            return 0.into();
         }
     }
-    if MotionModule::is_end(fighter.module_accessor) {
-        fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE.into(), false.into());
+    if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) 
+    || MotionModule::is_end(fighter.module_accessor) {
+        fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE.into(), false.into());
         return 0.into();
     }
     0.into()
@@ -126,7 +115,6 @@ unsafe extern "C" fn status_kamek_SpecialNHold_End(fighter: &mut L2CFighterCommo
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {	
-        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_light"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_stardust"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_sscope_bullet"), false, false);
@@ -136,14 +124,14 @@ unsafe extern "C" fn status_kamek_SpecialNHold_End(fighter: &mut L2CFighterCommo
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Pre)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Main)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_End)
+    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Pre)
+    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Main)
+    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_End)
     .install();
 }

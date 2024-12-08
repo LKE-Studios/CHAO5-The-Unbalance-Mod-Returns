@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE : [i32; 8] = [0; 8];
+pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE : [f32; 8] = [0.0; 8];
 pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT : [i32; 8] = [0; 8];
 pub static mut ATTTACK_LW4_SPIN_EFFECT : [i32; 8] = [0; 8];
 pub static mut N1 : Vector3f = Vector3f { x: 0.0, y: 3.0, z: -15.0 };
@@ -31,11 +31,9 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
     let frame = MotionModule::frame(fighter.module_accessor);
     let cstick_x = ControlModule::get_attack_air_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
     let cstick_y = ControlModule::get_attack_air_stick_y(fighter.module_accessor);
+    CSTICK_DIRECTION[ENTRY_ID] = ControlModule::get_attack_air_stick_dir(fighter.module_accessor) * (180.0 / PI);
     let KAMEK = color >= 64 && color <= 71;
     if KAMEK {
-        if ArticleModule::is_exist(fighter.module_accessor, FIGHTER_KAMEK_GENERATE_ARTICLE_FIREBALL) {
-            println!("FIREBALL GENERATED");
-        }
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4 {
             if frame > 17.0 && frame < 32.0 {
 				if ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] == 0 {
@@ -74,6 +72,13 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
                 };
             };
         };
+        if ![FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE].contains(&status_kind) 
+        || !sv_information::is_ready_go() {
+            FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] = 0.0;
+        }
+        if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_S {
+            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 0;
+        }
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW,
         *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD,
         *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT,
@@ -98,18 +103,6 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
                 }
             }
         }
-        if ControlModule::get_command_flag_cat(fighter.module_accessor, 0) == *FIGHTER_PAD_CMD_CAT1_SPECIAL_HI {
-            fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_HI.into(), true.into());
-        }
-        if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, 
-        *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD].contains(&status_kind) == true {
-            AbsorberModule::clear_all(fighter.module_accessor);
-        };
-        if status_kind == *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                DamageModule::heal(fighter.module_accessor, -75.0, 0);
-            }
-        };
     }
 }
 
@@ -119,7 +112,7 @@ unsafe extern "C" fn frame_kamek_beam_Main(weapon : &mut L2CFighterBase) {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(weapon.module_accessor) as i32;
-    let charge_time = WorkModule::get_int(weapon.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
+    let size = (FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] * 0.05) + 0.1;
     if frame < 15 {
         if frame >= 2 {
             if frame % 4 == 0 {
@@ -136,39 +129,39 @@ unsafe extern "C" fn frame_kamek_beam_Main(weapon : &mut L2CFighterBase) {
             variance[ENTRY_ID] = 0.0;
         };
         if frame % 3 == 0 {
-            let f1: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {0.5} else if charge_time >= 42 && charge_time <= 64 {1.0} else {1.8}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            let f1: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, 0.5 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, f1, 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, f1, 0.7);
             EffectModule::set_rate(weapon.module_accessor, f1, 1.5);
             if frame >= 2 {
-                let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N1, &NONE, if charge_time < 42 {0.2} else if charge_time >= 42 && charge_time <= 64 {0.4} else {0.7}, true, 0, 0, 0, 0, 0, true, true) as u32;
+                let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N1, &NONE, 0.25 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
                 EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 27.0/255.0, 172.0/255.0);
                 EffectModule::set_alpha(weapon.module_accessor, f2, 0.7);
                 EffectModule::set_rate(weapon.module_accessor, f2, 1.5);
             };
             if frame >= 5 {
-                let f3: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N2, &NONE, if charge_time < 42 {0.175} else if charge_time >= 42 && charge_time <= 64 {0.35} else {0.6}, true, 0, 0, 0, 0, 0, true, true) as u32;
+                let f3: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N2, &NONE, 0.2 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
                 EffectModule::set_rgb(weapon.module_accessor, f3, 255.0/255.0, 27.0/255.0, 172.0/255.0);
                 EffectModule::set_alpha(weapon.module_accessor, f3, 0.7);
                 EffectModule::set_rate(weapon.module_accessor, f3, 1.5);
             };
         };
         if frame % 5 == 0 {
-            let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_smash_flash"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {0.4} else if charge_time >= 42 && charge_time <= 64 {0.8} else {1.4}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_smash_flash"), Hash40::new("top"), &NONE, &NONE, 0.4 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 0.0/255.0, 60.0/255.0);
         };
         if frame % 20 == 0 {
             EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
-            F2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {1.05} else if charge_time >= 42 && charge_time <= 64 {2.1} else {3.9}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &NONE, &NONE, 1.05 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F2[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
         };
         if frame == 2 {
-            F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N1, &NONE, if charge_time < 42 {0.42} else if charge_time >= 42 && charge_time <= 64 {0.84} else {1.38}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N1, &NONE, 0.42 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F3[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, F3[ENTRY_ID], 0.65);
         };
         if frame == 5 {
-            F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N2, &NONE, if charge_time < 42 {0.3675} else if charge_time >= 42 && charge_time <= 64 {0.735} else {1.2}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N2, &NONE, 0.3675 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F4[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, F4[ENTRY_ID], 0.5);
         };

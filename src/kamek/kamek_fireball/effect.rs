@@ -15,8 +15,8 @@ unsafe extern "C" fn effect_kamek_fireball_Bound(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    Agent::new("ness_fireball")
-    .effect_acmd("effect_regular_kamek", effect_kamek_fireball_Regular, Low)
-    .effect_acmd("effect_bound_kamek", effect_kamek_fireball_Bound, Low)
+    Agent::new("ness_fire")
+    .effect_acmd("effect_regular", effect_kamek_fireball_Regular, Low)
+    .effect_acmd("effect_bound", effect_kamek_fireball_Bound, Low)
     .install();
 }

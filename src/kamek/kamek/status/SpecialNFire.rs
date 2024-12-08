@@ -10,7 +10,7 @@ unsafe extern "C" fn status_kamek_SpecialNFire_Pre(fighter: &mut L2CFighterCommo
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE)(fighter)
+        0.into()
     }
 }
 
@@ -30,7 +30,7 @@ unsafe extern "C" fn status_kamek_SpecialNFire_Main(fighter: &mut L2CFighterComm
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialNFire_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE)(fighter)
+        0.into()
     }
 }
 
@@ -74,7 +74,7 @@ unsafe extern "C" fn status_kamek_SpecialNFire_End(fighter: &mut L2CFighterCommo
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {	
-        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+        FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] = 0.0;
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_sscope_bullet"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_fireflower_shot"), false, false);
         EffectModule::kill(fighter.module_accessor, F2[ENTRY_ID], false, true);
@@ -82,14 +82,14 @@ unsafe extern "C" fn status_kamek_SpecialNFire_End(fighter: &mut L2CFighterCommo
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Pre)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Main)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_End)
+    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Pre)
+    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Main)
+    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_End)
     .install();
 }

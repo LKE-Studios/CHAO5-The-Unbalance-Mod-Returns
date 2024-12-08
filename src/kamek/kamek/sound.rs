@@ -41,7 +41,12 @@ unsafe extern "C" fn sound_kamek_JumpAerialBack(fighter: &mut L2CAgentBase) {
 }
 
 //Run
-unsafe extern "C" fn sound_kamek_Run(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_kamek_Run(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_ness_yoyo_swing"));
+    }
+}
 
 //TurnRun
 unsafe extern "C" fn sound_kamek_TurnRun(fighter: &mut L2CAgentBase) {
@@ -87,7 +92,7 @@ unsafe extern "C" fn sound_kamek_AttackDash(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -159,7 +164,7 @@ unsafe extern "C" fn sound_kamek_AttackLw4(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
@@ -175,7 +180,7 @@ unsafe extern "C" fn sound_kamek_AttackAirF(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        ATTACK_VC(fighter);
     }
 }
 
@@ -183,7 +188,7 @@ unsafe extern "C" fn sound_kamek_AttackAirF(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        ATTACK_VC(fighter);
     } 
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -199,12 +204,21 @@ unsafe extern "C" fn sound_kamek_AttackAirHi(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("seq_ness_rnd_attack"));
+        ATTACK_VC(fighter);
     }
 }
 
 //AttackAirLw
-unsafe extern "C" fn sound_kamek_AttackAirLw(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_kamek_AttackAirLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 14.0);
+    if is_excute(fighter) {
+        ATTACK_VC(fighter);
+    }
+    frame(fighter.lua_state_agent, 15.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_attackair_h01"));
+    }
+}
 
 //Catch
 unsafe extern "C" fn sound_kamek_Catch(fighter: &mut L2CAgentBase) {
@@ -293,6 +307,22 @@ unsafe extern "C" fn sound_kamek_SpecialNHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_appeal03"));
     }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 70.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 85.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
 }
 
 //SpecialAirNHold
@@ -305,6 +335,22 @@ unsafe extern "C" fn sound_kamek_SpecialAirNHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_appeal03"));
     }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 70.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
+    frame(fighter.lua_state_agent, 85.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n05"));
+    }
 }
 
 //SpecialNFire
@@ -312,6 +358,10 @@ unsafe extern "C" fn sound_kamek_SpecialNFire(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_attack06"));
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n02"));
     }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
@@ -325,6 +375,10 @@ unsafe extern "C" fn sound_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_attack06"));
     }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n02"));
+    }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_item_pasaran_growth"));
@@ -333,6 +387,7 @@ unsafe extern "C" fn sound_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn sound_kamek_SpecialS(fighter: &mut L2CAgentBase) {
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_appeal01"));
@@ -340,11 +395,16 @@ unsafe extern "C" fn sound_kamek_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_special_n01"));
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if rand_num >= 31 && rand_num <= 50 {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }
 
 //SpecialAirS
 unsafe extern "C" fn sound_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("vc_ness_appeal01"));
@@ -352,6 +412,10 @@ unsafe extern "C" fn sound_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_special_n01"));
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if rand_num >= 31 && rand_num <= 50 {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }
 
@@ -360,6 +424,7 @@ unsafe extern "C" fn sound_kamek_SpecialHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_item_bomber_ottotto"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ness_special_h01"));
     }
 }
 
@@ -368,6 +433,7 @@ unsafe extern "C" fn sound_kamek_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_item_bomber_ottotto"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ness_special_h01"));
     }
 }
 
@@ -375,6 +441,7 @@ unsafe extern "C" fn sound_kamek_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_SpecialHiEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_attackair_n01"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ness_special_h02"));
     }
 }
 
@@ -382,6 +449,7 @@ unsafe extern "C" fn sound_kamek_SpecialHiEnd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_SpecialAirHiEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_ness_attackair_n01"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_ness_special_h02"));
     }
 }
 
@@ -477,6 +545,7 @@ unsafe extern "C" fn sound_kamek_Final(fighter: &mut L2CAgentBase) {
         STOP_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
         PLAY_SE(fighter, Hash40::new("vc_ness_attack05"));
         PLAY_SE(fighter, Hash40::new("se_system_sprits_level_up_right_center"));
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n02"));
     }
 }
 
@@ -500,6 +569,7 @@ unsafe extern "C" fn sound_kamek_FinalAir(fighter: &mut L2CAgentBase) {
         STOP_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
         PLAY_SE(fighter, Hash40::new("vc_ness_attack05"));
         PLAY_SE(fighter, Hash40::new("se_system_sprits_level_up_right_center"));
+        PLAY_SE(fighter, Hash40::new("se_ness_special_n02"));
     }
 }
 
@@ -515,6 +585,9 @@ pub fn install() {
     .sound_acmd("sound_runbrake_kamek", sound_kamek_RunBrake, Low)
     .sound_acmd("sound_attack11_kamek", sound_kamek_Attack11, Low)
     .sound_acmd("sound_attackdash_kamek", sound_kamek_AttackDash, Low)
+    .sound_acmd("sound_attacks3hi_kamek", sound_kamek_AttackS3, Low)
+    .sound_acmd("sound_attacks3_kamek", sound_kamek_AttackS3, Low)
+    .sound_acmd("sound_attacks3lw_kamek", sound_kamek_AttackS3, Low)
     .sound_acmd("sound_attackhi3_kamek", sound_kamek_AttackHi3, Low)
     .sound_acmd("sound_attacklw3_kamek", sound_kamek_AttackLw3, Low)
     .sound_acmd("sound_attacks4_kamek", sound_kamek_AttackS4, Low)

@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 use crate::kamek::kamek::status::SpecialHi::*;
 
 pub static warp_speed_mul : f32 = 2.2;
-pub static warp_speed_add : f32 = 1.5;
+pub static warp_speed_add : f32 = 0.5;
 pub static max_frame : i32 = 40;
 pub static button_add_warp_time : i32 = 5;
 
@@ -10,7 +10,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Pre(fighter: &mut L2CFighterComm
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
-        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), false, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
+        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FREE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), false, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, (*FIGHTER_STATUS_ATTR_DISABLE_DISSOLVE_CURSOR | *FIGHTER_STATUS_ATTR_HIDE_NAME_CURSOR) as u32, (*FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI) as u32, 0);
         0.into()
     }
@@ -24,7 +24,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Init(fighter: &mut L2CFighterCom
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
-        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
         JostleModule::set_status(fighter.module_accessor, false);
         let lr = PostureModule::lr(fighter.module_accessor);
@@ -73,7 +73,6 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Main(fighter: &mut L2CFighterCom
         VisibilityModule::set_whole(fighter.module_accessor, false);
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1f20a9d549), false);
         WorkModule::set_flag(fighter.module_accessor, false,*FIGHTER_INSTANCE_WORK_ID_FLAG_NAME_CURSOR);
-        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_SHEIK_SPECIAL_HI_AIR);
         KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
         fighter.sub_fighter_cliff_check(GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES.into());
         HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_XLU), 0);
@@ -119,7 +118,8 @@ unsafe extern "C" fn kamek_SpecialHiWarp_Main_loop(fighter: &mut L2CFighterCommo
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         WorkModule::add_int(fighter.module_accessor, button_add_warp_time, *FIGHTER_NESS_STATUS_SPECIAL_HI_WORK_INT_TIME);
     }
-    if max_frame_int || stop_ground || stop_air || stop_cliff {
+    if max_frame_int || stop_ground || stop_air || stop_cliff 
+    || ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
         fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END.into(),false.into());
         return 0.into();
     }

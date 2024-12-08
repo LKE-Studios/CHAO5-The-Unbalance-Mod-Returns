@@ -62,7 +62,7 @@ unsafe extern "C" fn game_master_Attack13(fighter: &mut L2CAgentBase) {
 
 //Attack100 
 unsafe extern "C" fn game_master_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, Hash40::new("attack_100"), false, 0.0);
         }

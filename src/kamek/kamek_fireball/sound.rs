@@ -9,7 +9,7 @@ unsafe extern "C" fn sound_kamek_fireball_Regular(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    Agent::new("ness_fireball")
-    .sound_acmd("sound_regular_kamek", sound_kamek_fireball_Regular, Low)
+    Agent::new("ness_fire")
+    .sound_acmd("sound_regular", sound_kamek_fireball_Regular, Low)
     .install();
 }

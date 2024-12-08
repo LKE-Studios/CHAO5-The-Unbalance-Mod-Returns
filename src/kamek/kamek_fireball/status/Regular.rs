@@ -39,7 +39,7 @@ unsafe extern "C" fn status_kamek_fireball_Regular_Exec(weapon: &mut L2CWeaponCo
 }
 
 pub fn install() {
-    Agent::new("ness_fireball")
+    Agent::new("ness_fire")
 	.status(Pre, *WEAPON_MARIO_FIREBALL_STATUS_KIND_REGULAR, status_kamek_fireball_Regular_Pre)
 	.status(Main, *WEAPON_MARIO_FIREBALL_STATUS_KIND_REGULAR, status_kamek_fireball_Regular_Main)
     .status(Exec, *WEAPON_MARIO_FIREBALL_STATUS_KIND_REGULAR, status_kamek_fireball_Regular_Exec)

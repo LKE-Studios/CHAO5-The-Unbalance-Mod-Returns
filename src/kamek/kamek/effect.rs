@@ -2,6 +2,9 @@ use crate::imports::BuildImports::*;
 
 //JumpAerialF
 unsafe extern "C" fn effect_kamek_JumpAerialFront(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("ness_psi_rush"), Hash40::new("top"), 0, 0, 0, 90, 0, 90, 1.85, 0, 0, 0, 0, 360, 0, true);
@@ -10,6 +13,9 @@ unsafe extern "C" fn effect_kamek_JumpAerialFront(fighter: &mut L2CAgentBase) {
 
 //JumpAerialB
 unsafe extern "C" fn effect_kamek_JumpAerialBack(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_jump_aerial"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("ness_psi_rush"), Hash40::new("top"), 0, 0, 0, 90, 0, 90, 1.85, 0, 0, 0, 0, 360, 0, true);
@@ -17,7 +23,7 @@ unsafe extern "C" fn effect_kamek_JumpAerialBack(fighter: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn effect_kamek_Run(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 4, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, false);
@@ -757,6 +763,7 @@ unsafe extern "C" fn effect_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -764,6 +771,10 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
         EFFECT_FOLLOW(fighter, Hash40::new("rosetta_wand_stardust"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.9, true);
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
         LAST_EFFECT_SET_RATE(fighter, 2);
+    }
+    frame(fighter.lua_state_agent, 34.0);
+    if rand_num >= 31 && rand_num <= 50 {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
@@ -775,6 +786,7 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
+    let rand_num = sv_math::rand(hash40("fighter"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -782,6 +794,9 @@ unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
         EFFECT_FOLLOW(fighter, Hash40::new("rosetta_wand_stardust"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.9, true);
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
         LAST_EFFECT_SET_RATE(fighter, 2);
+    }
+    if rand_num >= 31 && rand_num <= 50 {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
@@ -1187,7 +1202,9 @@ pub fn install() {
     .effect_acmd("effect_entryr_kamek", effect_kamek_EntryR, Low)
     .effect_acmd("effect_attack11_kamek", effect_kamek_Attack11, Low)
     .effect_acmd("effect_attackdash_kamek", effect_kamek_AttackDash, Low)
+    .effect_acmd("effect_attacks3hi_kamek", effect_kamek_AttackS3, Low)
     .effect_acmd("effect_attacks3_kamek", effect_kamek_AttackS3, Low)
+    .effect_acmd("effect_attacks3lw_kamek", effect_kamek_AttackS3, Low)
     .effect_acmd("effect_attackhi3_kamek", effect_kamek_AttackHi3, Low)
     .effect_acmd("effect_attacklw3_kamek", effect_kamek_AttackLw3, Low)
     .effect_acmd("effect_attacks4_kamek", effect_kamek_AttackS4, Low)
@@ -1213,7 +1230,9 @@ pub fn install() {
     .effect_acmd("effect_cliffattack_kamek", effect_kamek_CliffAttack, Low)
     .effect_acmd("effect_slipattack_kamek", effect_kamek_SlipAttack, Low)
     .effect_acmd("effect_specialnstart_kamek", effect_kamek_SpecialNStart, Low)  
-    .effect_acmd("effect_specialairnstart_kamek", effect_kamek_SpecialAirNStart, Low)  
+    .effect_acmd("effect_specialairnstart_kamek", effect_kamek_SpecialAirNStart, Low)
+    .effect_acmd("effect_specialnhold_kamek", effect_kamek_SpecialNHold, Low)  
+    .effect_acmd("effect_specialairnhold_kamek", effect_kamek_SpecialAirNHold, Low)  
     .effect_acmd("effect_specialnfire_kamek", effect_kamek_SpecialNFire, Low)  
     .effect_acmd("effect_specialairnfire_kamek", effect_kamek_SpecialAirNFire, Low)  
     .effect_acmd("effect_specials_kamek", effect_kamek_SpecialS, Low)  

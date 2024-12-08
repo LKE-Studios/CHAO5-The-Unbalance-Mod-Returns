@@ -133,7 +133,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
-/*mod basyaamo;
+mod basyaamo;
 mod bayonetta;
 mod brave;
 mod buddy;
@@ -144,10 +144,10 @@ mod cloud;
 mod daisy;
 mod dedede;
 mod demon;
-mod diddy;*/
+mod diddy;
 pub mod dolly;
 mod donkey;
-/*mod duckhunt;
+mod duckhunt;
 mod edge;
 mod eflame;
 mod elight;
@@ -159,9 +159,9 @@ mod gaogaen;
 mod gekkouga;
 mod ike;
 mod inkling;
-mod jack;*/
+mod jack;
 mod kamek;
-/*mod kamui;
+mod kamui;
 mod ken;
 mod kirby;
 mod koopa;
@@ -178,17 +178,17 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod master;*/
+mod master;
 mod metaknight;
-/*pub mod mewtwo;
+pub mod mewtwo;
 mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
-mod nana;*/
+mod nana;
 mod ness;
 mod ninten;
-/*mod packun;
+mod packun;
 mod pacman;
 mod palutena;
 mod peach;
@@ -196,9 +196,9 @@ mod pfushigisou;
 mod pichu;
 mod pickel;
 mod pikachu;
-mod pikmin;*/
+mod pikmin;
 mod pit;
-/*mod pitb;
+mod pitb;
 mod plizardon;
 mod popo;
 mod ptrainer;
@@ -224,14 +224,14 @@ mod sonic;
 mod szerosuit;
 mod tantan;
 mod toonlink;
-mod trail;*/
+mod trail;
 mod waluigi;
-/*mod wario;
+mod wario;
 mod wiifit;
 mod wolf;
 mod yoshi;
 mod younglink;
-mod zelda;*/
+mod zelda;
 
 pub mod singletons;
 pub mod helper;
@@ -359,7 +359,7 @@ extern "C" {
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_string = unsafe {from_c_str(string)};
 	if original_string.contains("Ver.") {
-		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 1.9.5 \0", original_string);
+		let version_string = format!("\nSmash {} \nCHAO5: The UN-Balance Mod Returns! | Ver. 2.0.0 \0", original_string);
 		call_original!(arg, skyline::c_str(&version_string));
 	}
 	else {
@@ -431,6 +431,7 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_waluigi")); //Waluigi
         allow_ui_chara_hash_online(hash40("ui_chara_basyaamo")); //Blaziken
         allow_ui_chara_hash_online(hash40("ui_chara_krystal")); //Krystal
+        allow_ui_chara_hash_online(hash40("ui_chara_kamek")); //Kamek
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
@@ -440,17 +441,17 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
-    //mario::install();
+    mario::install();
     donkey::install();
-    /*link::install();
+    link::install();
     samus::install();
     yoshi::install();
     kirby::install();
     pikachu::install();
     fox::install();
-    luigi::install();*/
+    luigi::install();
     ness::install();
-    /*captain::install();
+    captain::install();
     purin::install();
     koopa::install();
     marth::install();
@@ -466,10 +467,10 @@ pub fn main() {
     younglink::install();
     mewtwo::install();
     pichu::install();
-    roy::install();*/
+    roy::install();
     metaknight::install();
     pit::install();
-    /*wario::install();
+    wario::install();
     diddy::install();
     ptrainer::install();
     pzenigame::install();
@@ -518,9 +519,9 @@ pub fn main() {
     daisy::install();
     samusd::install();
     richter::install();
-    chrom::install();*/
+    chrom::install();
     dolly::install();
-    /*jack::install();
+    jack::install();
     edge::install();
     brave::install();
     demon::install();
@@ -533,10 +534,10 @@ pub fn main() {
     tantan::install();
     claus::install();
     koopag::install();
-    silver::install();*/
+    silver::install();
     waluigi::install();
-    /*basyaamo::install();
-    krystal::install();*/
+    basyaamo::install();
+    krystal::install();
     ninten::install();
     kamek::install();
     skyline::install_hooks!(

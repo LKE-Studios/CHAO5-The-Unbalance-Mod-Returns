@@ -55,7 +55,7 @@ unsafe extern "C" fn game_koopajr_Attack12(fighter: &mut L2CAgentBase) {
 
 //Attack100
 unsafe extern "C" fn game_koopajr_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         FT_MOTION_RATE(fighter, /*FSM*/ 1);
         if is_excute(fighter) {
             FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 5.0, 5.0);

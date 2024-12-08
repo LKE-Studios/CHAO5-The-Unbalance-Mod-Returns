@@ -3,7 +3,7 @@ use crate::kamek::kamek::frame::*;
 
 pub static speed_x_air : f32 = 1.7;
 pub static speed_x_ground : f32 = 1.5;
-pub static gravity_mul : f32 = 0.5;
+pub static gravity_speed : f32 = 0.0;
 
 unsafe extern "C" fn status_kamek_SpecialS_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
@@ -19,6 +19,30 @@ unsafe extern "C" fn status_kamek_SpecialS_Pre(fighter: &mut L2CFighterCommon) -
     }
 }
 
+unsafe extern "C" fn status_kamek_SpecialS_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let KAMEK = color >= 64 && color <= 71;
+	if KAMEK {
+        KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+        KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FREE);
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air);
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_air);
+            sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
+            sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
+        }
+        else {
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground);
+        }
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
 unsafe extern "C" fn status_kamek_SpecialS_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -28,23 +52,15 @@ unsafe extern "C" fn status_kamek_SpecialS_Main(fighter: &mut L2CFighterCommon) 
         PostureModule::set_stick_lr(fighter.module_accessor, 0.0);
         PostureModule::update_rot_y_lr(fighter.module_accessor);
         JostleModule::set_status(fighter.module_accessor, false);
-        KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FREE);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_CLIFF);
-            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air);
-            KineticUtility::clear_unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-            KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s"), 0.0, 1.0, false, 0.0, false, false);
         }
         else {
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FREE);
-            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s"), 0.0, 1.0, false, 0.0, false, false);
         }
-        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialS_Main_loop as *const () as _))
     }
     else {
@@ -78,7 +94,7 @@ unsafe extern "C" fn kamek_SpecialS_Main_loop(fighter: &mut L2CFighterCommon) ->
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
             let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
-            sv_kinetic_energy!(set_accel, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -air_accel_y * gravity_mul);
+            sv_kinetic_energy!(set_accel, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -air_accel_y * gravity_speed);
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_S_FLAG_SHOOT);
         }
     }
@@ -91,6 +107,66 @@ unsafe extern "C" fn kamek_SpecialS_Main_loop(fighter: &mut L2CFighterCommon) ->
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         return 0.into();
+    }
+    0.into()
+}
+
+unsafe extern "C" fn status_kamek_SpecialS_CheckAttack(fighter: &mut L2CFighterCommon, param2: &L2CValue, param3: &L2CValue) -> L2CValue {
+    let table = param3.get_table() as *mut smash2::lib::L2CTable;
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
+    let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
+    if category == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+        if collision_kind == *COLLISION_KIND_HIT {
+            let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
+            let module_accessor = sv_battle_object::module_accessor(object_id);
+            if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] == 1 {
+                let mut params = CreateItemParam {
+                    founder_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
+                    item_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor) + 12.0, z: PostureModule::pos_z(module_accessor), w: 0.0},
+                    item_kind: ItemKind(*ITEM_KIND_MUSHROOM),
+                    another_battle_object_id: *BATTLE_OBJECT_ID_INVALID as u32,
+                    variation_kind: *ITEM_VARIATION_NONE,
+                    lr_dir: PostureModule::lr(module_accessor),
+                    owner_id: (*(module_accessor)).battle_object_id,
+                    unk_20: 20,
+                    pokeball_or_assist_kind: *ITEM_KIND_NONE,
+                    unk_0: 0,
+                    weird_flag: 0x633F800000,
+                    unk_1_weird: 1,
+                    unk_approx_0: 0.0,
+                    unk_02: 0.0
+                };
+                KineticModule::clear_speed_all(module_accessor);
+                let battle_object = create_item(ITEM_MANAGER, &mut params, false, false, false);
+                let hover_stone = (*battle_object).module_accessor;
+                StatusModule::change_status_request(hover_stone, *ITEM_STATUS_KIND_THROW, false);
+                StatusModule::change_status_request(hover_stone, *ITEM_STATUS_KIND_LANDING, false);
+            }
+            else if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] == 2 {
+                let mut params = CreateItemParam {
+                    founder_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
+                    item_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor) + 12.0, z: PostureModule::pos_z(module_accessor), w: 0.0},
+                    item_kind: ItemKind(*ITEM_KIND_MUSHD),
+                    another_battle_object_id: *BATTLE_OBJECT_ID_INVALID as u32,
+                    variation_kind: *ITEM_VARIATION_NONE,
+                    lr_dir: PostureModule::lr(module_accessor),
+                    owner_id: (*(module_accessor)).battle_object_id,
+                    unk_20: 20,
+                    pokeball_or_assist_kind: *ITEM_KIND_NONE,
+                    unk_0: 0,
+                    weird_flag: 0x633F800000,
+                    unk_1_weird: 1,
+                    unk_approx_0: 0.0,
+                    unk_02: 0.0
+                };
+                KineticModule::clear_speed_all(module_accessor);
+                let battle_object = create_item(ITEM_MANAGER, &mut params, false, false, false);
+                let hover_stone = (*battle_object).module_accessor;
+                StatusModule::change_status_request(hover_stone,*ITEM_STATUS_KIND_THROW,false);
+                StatusModule::change_status_request(hover_stone,*ITEM_STATUS_KIND_LANDING,false);
+            }
+        }
     }
     0.into()
 }
@@ -111,7 +187,9 @@ unsafe extern "C" fn status_kamek_SpecialS_End(fighter: &mut L2CFighterCommon) -
 pub fn install() {
     Agent::new("ness")
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Pre)
+    .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Init)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Main)
+    .status(CheckAttack, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_CheckAttack)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_End)
     .install();
 }

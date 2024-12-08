@@ -2,8 +2,8 @@ mod game;
 mod sound;
 mod effect;
 mod expression;
-mod frame;
-mod status;
+pub mod frame;
+pub mod status;
 
 pub fn install() {
     game::install();
