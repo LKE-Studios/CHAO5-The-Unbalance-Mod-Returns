@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 use crate::kamek::kamek::frame::*;
 
-pub static charge_time : f32 = 210.0;
+pub static charge_time : i32 = 210;
 
 unsafe extern "C" fn status_kamek_SpecialNHold_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
@@ -33,8 +33,8 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterComm
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_hold"), 0.0, 1.0, false, 0.0, false, false);
         }
-        let float_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
+        let float_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
+        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialNHold_Main_loop as *const () as _))
     }
     else {
@@ -80,9 +80,9 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE.into(), false.into());
         }
     }
-    let float_time = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
-    WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
-    if float_time == charge_time {
+    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
+    WorkModule::inc_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
+    if int_time == charge_time {
         gimmick_flash(fighter);
     }
     let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);

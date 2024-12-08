@@ -119,7 +119,7 @@ unsafe extern "C" fn frame_kamek_beam_Main(weapon : &mut L2CFighterBase) {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(weapon.module_accessor) as i32;
-    let charge_time = WorkModule::get_float(weapon.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_TIME);
+    let charge_time = WorkModule::get_int(weapon.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_INT_TIME);
     if frame < 15 {
         if frame >= 2 {
             if frame % 4 == 0 {
@@ -136,39 +136,39 @@ unsafe extern "C" fn frame_kamek_beam_Main(weapon : &mut L2CFighterBase) {
             variance[ENTRY_ID] = 0.0;
         };
         if frame % 3 == 0 {
-            let f1: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42.0 {0.5} else if charge_time >= 42.0 && charge_time <= 64.0 {1.0} else {1.8}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            let f1: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {0.5} else if charge_time >= 42 && charge_time <= 64 {1.0} else {1.8}, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, f1, 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, f1, 0.7);
             EffectModule::set_rate(weapon.module_accessor, f1, 1.5);
             if frame >= 2 {
-                let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N1, &NONE, if charge_time < 42.0 {0.2} else if charge_time >= 42.0 && charge_time <= 64.0 {0.4} else {0.7}, true, 0, 0, 0, 0, 0, true, true) as u32;
+                let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N1, &NONE, if charge_time < 42 {0.2} else if charge_time >= 42 && charge_time <= 64 {0.4} else {0.7}, true, 0, 0, 0, 0, 0, true, true) as u32;
                 EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 27.0/255.0, 172.0/255.0);
                 EffectModule::set_alpha(weapon.module_accessor, f2, 0.7);
                 EffectModule::set_rate(weapon.module_accessor, f2, 1.5);
             };
             if frame >= 5 {
-                let f3: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N2, &NONE, if charge_time < 42.0 {0.175} else if charge_time >= 42.0 && charge_time <= 64.0 {0.35} else {0.6}, true, 0, 0, 0, 0, 0, true, true) as u32;
+                let f3: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N2, &NONE, if charge_time < 42 {0.175} else if charge_time >= 42 && charge_time <= 64 {0.35} else {0.6}, true, 0, 0, 0, 0, 0, true, true) as u32;
                 EffectModule::set_rgb(weapon.module_accessor, f3, 255.0/255.0, 27.0/255.0, 172.0/255.0);
                 EffectModule::set_alpha(weapon.module_accessor, f3, 0.7);
                 EffectModule::set_rate(weapon.module_accessor, f3, 1.5);
             };
         };
         if frame % 5 == 0 {
-            let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_smash_flash"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42.0 {0.4} else if charge_time >= 42.0 && charge_time <= 64.0 {0.8} else {1.4}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_smash_flash"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {0.4} else if charge_time >= 42 && charge_time <= 64 {0.8} else {1.4}, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 0.0/255.0, 60.0/255.0);
         };
         if frame % 20 == 0 {
             EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
-            F2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42.0 {1.05} else if charge_time >= 42.0 && charge_time <= 64.0 {2.1} else {3.9}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &NONE, &NONE, if charge_time < 42 {1.05} else if charge_time >= 42 && charge_time <= 64 {2.1} else {3.9}, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F2[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
         };
         if frame == 2 {
-            F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N1, &NONE, if charge_time < 42.0 {0.42} else if charge_time >= 42.0 && charge_time <= 64.0 {0.84} else {1.38}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N1, &NONE, if charge_time < 42 {0.42} else if charge_time >= 42 && charge_time <= 64 {0.84} else {1.38}, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F3[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, F3[ENTRY_ID], 0.65);
         };
         if frame == 5 {
-            F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N2, &NONE, if charge_time < 42.0 {0.3675} else if charge_time >= 42.0 && charge_time <= 64.0 {0.735} else {1.2}, true, 0, 0, 0, 0, 0, true, true) as u32;
+            F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N2, &NONE, if charge_time < 42 {0.3675} else if charge_time >= 42 && charge_time <= 64 {0.735} else {1.2}, true, 0, 0, 0, 0, 0, true, true) as u32;
             EffectModule::set_rgb(weapon.module_accessor, F4[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
             EffectModule::set_alpha(weapon.module_accessor, F4[ENTRY_ID], 0.5);
         };
