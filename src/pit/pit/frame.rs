@@ -54,6 +54,12 @@ unsafe extern "C" fn frame_pit_Exec(fighter: &mut L2CFighterCommon) {
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x:1.0, y:1.0, z:1.0});
         ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x:1.0, y:1.0, z:1.0});
     };
+
+    let special_hi_fuel = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
+    let recover_rate = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("recover_rate"));
+    let fly_frame_max = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_max"));
+    let new_fuel = (special_hi_fuel + recover_rate).min(fly_frame_max as f32);
+    WorkModule::set_float(fighter.module_accessor, new_fuel, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
 }
 
 pub fn install() {

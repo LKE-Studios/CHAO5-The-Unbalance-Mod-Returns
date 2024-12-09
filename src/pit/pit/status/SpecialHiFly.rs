@@ -1,5 +1,3 @@
-use sv_kinetic_energy::get_stable_speed_y;
-
 use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn status_pit_SpecialHiFly_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -45,8 +43,8 @@ pub unsafe extern "C" fn status_pit_SpecialHiFly_Main(fighter: &mut L2CFighterCo
 
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly"), 0.0, 1.0, true, 0.0, false, false);
 
-    let fly_frame_max = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_max"));
-    WorkModule::set_int(fighter.module_accessor, fly_frame_max, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
+    let fly_frame_max = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
+    WorkModule::set_int(fighter.module_accessor, fly_frame_max as i32, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
 
     fighter.sub_shift_status_main(L2CValue::Ptr(pit_SpecialHiFly_Main_loop as *const () as _))
 }
@@ -162,7 +160,9 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 }
 
 pub unsafe extern "C" fn status_pit_SpecialHiFly_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let fly_frame_min = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_min"));
     WorkModule::off_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
+    WorkModule::set_float(fighter.module_accessor, fly_frame_min as f32, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingl1"), &Vector3f{x: 1.0, y: 1.0, z: 1.0});
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("wingr1"), &Vector3f{x: 1.0, y: 1.0, z: 1.0});
     0.into()
