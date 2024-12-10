@@ -2,6 +2,7 @@ mod game;
 mod effect;
 mod frame;
 mod sound;
+mod init;
 pub mod status;
 
 pub fn install() {
@@ -9,5 +10,6 @@ pub fn install() {
     effect::install();
     frame::install();
     sound::install();
+    init::install();
     status::install();
 }
