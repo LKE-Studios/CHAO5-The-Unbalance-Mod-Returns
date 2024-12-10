@@ -145,11 +145,12 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 
     let mut accel_x = air_accel_x * stick_x;
     let mut accel_y = air_accel_y * stick_y;
+    let speed_x_boost = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("speed_x_boost"));
     if stick_x > 0.0 && prev_stick_x <= 0.0 {
-        accel_x += 0.8;
+        accel_x += speed_x_boost;
     }
     if stick_x < 0.0 && prev_stick_x >= 0.0 {
-        accel_x -= 0.8
+        accel_x -= speed_x_boost
     }
 
     sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, accel_x, accel_y);
