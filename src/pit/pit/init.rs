@@ -5,6 +5,6 @@ unsafe extern "C" fn start_pit_Init(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("pit")
-    .on_start(start_pit_init)
+    .on_start(start_pit_Init)
     .install();
 }
