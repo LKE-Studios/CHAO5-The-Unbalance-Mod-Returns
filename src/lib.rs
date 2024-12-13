@@ -160,10 +160,11 @@ mod gekkouga;
 mod ike;
 mod inkling;
 mod jack;
-mod kamek;
+pub mod kamek;
 mod kamui;
 mod ken;
 mod kirby;
+mod knuckles;
 mod koopa;
 mod koopag;
 mod koopajr;
@@ -186,8 +187,8 @@ mod miigunner;
 mod miiswordsman;
 mod murabito;
 mod nana;
-mod ness;
-mod ninten;
+pub mod ness;
+pub mod ninten;
 mod packun;
 mod pacman;
 mod palutena;
@@ -540,6 +541,7 @@ pub fn main() {
     krystal::install();
     ninten::install();
     kamek::install();
+    knuckles::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,
@@ -553,4 +555,5 @@ pub fn main() {
     file_callback::install("standard/staffroll/texture/standard_staffroll_captain.nutexb", 924480);
     file_callback::install("standard/staffroll/texture/standard_staffroll_pitb.nutexb", 924480);
     file_callback::install("standard/staffroll/texture/standard_staffroll_lucas.nutexb", 924480);
+    file_callback::install("standard/staffroll/texture/standard_staffroll_knuckles.nutexb", 924480);
 }

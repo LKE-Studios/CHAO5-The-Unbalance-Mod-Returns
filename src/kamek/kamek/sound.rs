@@ -397,7 +397,7 @@ unsafe extern "C" fn sound_kamek_SpecialS(fighter: &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_ness_special_n01"));
     }
     frame(fighter.lua_state_agent, 34.0);
-    if rand_num >= 31 && rand_num <= 50 {
+    if rand_num >= 31 && rand_num <= 45 {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }
@@ -414,7 +414,7 @@ unsafe extern "C" fn sound_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_ness_special_n01"));
     }
     frame(fighter.lua_state_agent, 34.0);
-    if rand_num >= 31 && rand_num <= 50 {
+    if rand_num >= 31 && rand_num <= 45 {
         PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }

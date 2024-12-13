@@ -14,9 +14,12 @@ pub unsafe extern "C" fn status_pit_SpecialHi_Main(fighter: &mut L2CFighterCommo
     let dir_stick_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("dir_stick_x"));
     let pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("pass_mul"));
     let air_pass_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_pass_mul"));
-    let accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_start_x_mul"));
-    let start_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_accel_y"));
+    let accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("accel_y"));
+    let start_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("start_x_mul"));
     let fall_x_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fall_x_mul"));
+    let air_preserve_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_preserve_x"));
+    let air_preserve_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("air_preserve_y"));
+    let fastest_landing_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fastest_landing_frame"));
     WorkModule::set_int64(fighter.module_accessor, hash40("special_air_hi_start") as i64, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND_AIR);
     WorkModule::set_int64(fighter.module_accessor, hash40("special_hi_start") as i64, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
     WorkModule::set_float(fighter.module_accessor, lr_stick_x, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_LR_STICK_X);
@@ -25,17 +28,25 @@ pub unsafe extern "C" fn status_pit_SpecialHi_Main(fighter: &mut L2CFighterCommo
     WorkModule::set_float(fighter.module_accessor, pass_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_PASS_MUL);
     WorkModule::set_float(fighter.module_accessor, air_pass_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_PASS_MUL);
     WorkModule::set_float(fighter.module_accessor, accel_y, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_ACCEL_Y);
-    WorkModule::set_float(fighter.module_accessor, start_x_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
+    WorkModule::set_float(fighter.module_accessor, air_preserve_x, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
     WorkModule::set_float(fighter.module_accessor, fall_x_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_FALL_X_MUL);
     WorkModule::set_int(fighter.module_accessor, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
+    WorkModule::set_int(fighter.module_accessor, fastest_landing_frame, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
+    let sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    let speed_y = sum_speed_y * air_preserve_y;
+    sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, speed_y);
     fighter.super_jump_punch(L2CValue::Void());
     fighter.sub_shift_status_main(L2CValue::Ptr(pit_SpecialHi_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn pit_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     fighter.super_jump_punch_main();
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
+    }
+    if WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND) == hash40("special_hi_start") {
+        WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
     }
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY.into(), true.into());

@@ -1,5 +1,7 @@
-mod Regular;
+mod Start;
+mod Shoot;
 
 pub fn install() {
-    Regular::install();
+    Start::install();
+    Shoot::install();
 }

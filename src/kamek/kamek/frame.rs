@@ -69,8 +69,8 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
                 }
                 else if CSTICK_DIRECTION[ENTRY_ID] > 20.0 && CSTICK_DIRECTION[ENTRY_ID] <= 67.5 && cstick_x > 0.0 { //9 (Angled Up)
                     param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), 20.0);
-                };
-            };
+                }
+            }
         };
         if ![FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE].contains(&status_kind) 
         || !sv_information::is_ready_go() {
@@ -104,81 +104,6 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
             }
         }
     }
-}
-
-unsafe extern "C" fn frame_kamek_beam_Main(weapon : &mut L2CFighterBase) {
-    let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-    let module_accessor = sv_battle_object::module_accessor(otarget_id);
-    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let frame = MotionModule::frame(weapon.module_accessor) as i32;
-    let size = (FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] * 0.05) + 0.1;
-    if frame < 15 {
-        if frame >= 2 {
-            if frame % 4 == 0 {
-                variance[ENTRY_ID] = 8.0;
-            } 
-            else if (frame + 1) % 2 == 0 {
-                variance[ENTRY_ID] = 4.0;
-            } 
-            else {
-                variance[ENTRY_ID] = -2.0;
-            };
-        } 
-        else {
-            variance[ENTRY_ID] = 0.0;
-        };
-        if frame % 3 == 0 {
-            let f1: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, 0.5 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rgb(weapon.module_accessor, f1, 255.0/255.0, 27.0/255.0, 172.0/255.0);
-            EffectModule::set_alpha(weapon.module_accessor, f1, 0.7);
-            EffectModule::set_rate(weapon.module_accessor, f1, 1.5);
-            if frame >= 2 {
-                let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N1, &NONE, 0.25 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-                EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 27.0/255.0, 172.0/255.0);
-                EffectModule::set_alpha(weapon.module_accessor, f2, 0.7);
-                EffectModule::set_rate(weapon.module_accessor, f2, 1.5);
-            };
-            if frame >= 5 {
-                let f3: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &N2, &NONE, 0.2 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-                EffectModule::set_rgb(weapon.module_accessor, f3, 255.0/255.0, 27.0/255.0, 172.0/255.0);
-                EffectModule::set_alpha(weapon.module_accessor, f3, 0.7);
-                EffectModule::set_rate(weapon.module_accessor, f3, 1.5);
-            };
-        };
-        if frame % 5 == 0 {
-            let f2: u32 = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_smash_flash"), Hash40::new("top"), &NONE, &NONE, 0.4 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rgb(weapon.module_accessor, f2, 255.0/255.0, 0.0/255.0, 60.0/255.0);
-        };
-        if frame % 20 == 0 {
-            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
-            F2[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &NONE, &NONE, 1.05 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rgb(weapon.module_accessor, F2[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
-        };
-        if frame == 2 {
-            F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N1, &NONE, 0.42 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rgb(weapon.module_accessor, F3[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
-            EffectModule::set_alpha(weapon.module_accessor, F3[ENTRY_ID], 0.65);
-        };
-        if frame == 5 {
-            F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), Hash40::new("top"), &N2, &NONE, 0.3675 + size, true, 0, 0, 0, 0, 0, true, true) as u32;
-            EffectModule::set_rgb(weapon.module_accessor, F4[ENTRY_ID], 255.0/255.0, 27.0/255.0, 172.0/255.0);
-            EffectModule::set_alpha(weapon.module_accessor, F4[ENTRY_ID], 0.5);
-        };
-        if frame >= 2 {
-            let n1 =  Vector3f { x: 0.0, y: 2.0 + variance[ENTRY_ID], z: -15.0 };
-            EffectModule::set_pos(module_accessor, F3[ENTRY_ID], &n1);
-        };
-        if frame >= 5 {
-            let n2 =  Vector3f { x: 0.0, y: 8.0 - variance[ENTRY_ID], z: -24.0 };
-            EffectModule::set_pos(module_accessor, F4[ENTRY_ID], &n2);
-        };
-    } 
-    else {
-        EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
-        macros::EFFECT_OFF_KIND(weapon, Hash40::new("sys_sscope_bullet"), false, true);
-        EffectModule::kill(weapon.module_accessor, F2[ENTRY_ID], false, true);
-    };
 }
 
 unsafe fn AttackLw4_Function(fighter: &mut L2CFighterCommon) {
@@ -223,9 +148,5 @@ unsafe fn AttackLw4_Function(fighter: &mut L2CFighterCommon) {
 pub fn install() {
     Agent::new("ness")
     .on_line(Main, frame_kamek_Main)
-    .install();
-
-    Agent::new("ness_pinkmagic")
-    .on_line(Main, frame_kamek_beam_Main)
     .install();
 }

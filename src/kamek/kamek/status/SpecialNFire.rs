@@ -1,5 +1,6 @@
 use crate::imports::BuildImports::*;
 use crate::kamek::kamek::frame::*;
+use crate::kamek::kamek::status::SpecialNHold::*;
 
 unsafe extern "C" fn status_kamek_SpecialNFire_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     

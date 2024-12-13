@@ -773,7 +773,7 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_RATE(fighter, 2);
     }
     frame(fighter.lua_state_agent, 34.0);
-    if rand_num >= 31 && rand_num <= 50 {
+    if rand_num >= 31 && rand_num <= 45 {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
     frame(fighter.lua_state_agent, 71.0);
@@ -795,7 +795,7 @@ unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
         LAST_EFFECT_SET_RATE(fighter, 2);
     }
-    if rand_num >= 31 && rand_num <= 50 {
+    if rand_num >= 31 && rand_num <= 45 {
         EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
     frame(fighter.lua_state_agent, 71.0);

@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 use crate::kamek::kamek::frame::*;
 
-pub static speed_x_air : f32 = 1.7;
+pub static speed_x_air : f32 = 3.2;
 pub static speed_x_ground : f32 = 1.5;
 pub static gravity_speed : f32 = 0.0;
 

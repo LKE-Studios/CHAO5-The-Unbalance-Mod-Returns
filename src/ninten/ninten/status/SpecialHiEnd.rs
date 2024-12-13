@@ -2,7 +2,6 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_ninten_SpecialHiEnd_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         0.into()
@@ -14,7 +13,6 @@ unsafe extern "C" fn status_ninten_SpecialHiEnd_Init(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn status_ninten_SpecialHiEnd_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);

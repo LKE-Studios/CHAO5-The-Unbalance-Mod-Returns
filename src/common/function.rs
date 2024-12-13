@@ -1,12 +1,14 @@
 use crate::imports::BuildImports::*;
+use crate::kamek::kamek::frame::*;
 
 pub static mut GFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut COUNTER : [i32; 8] = [0; 8];
 pub static mut CURRENT_ON_FRAME : [f32; 8] = [0.0; 8];
 pub static mut IS_CRIT : [bool; 8] = [false; 8];
-const COMMON_WEAPON_ATTACK_CALLBACK : usize = 0x33bdc10;
-const ITEM_CREATOR : usize = 0x15db0b0;
+const COMMON_WEAPON_ATTACK_CALLBACK : usize = 0x33BDC30;
+const ITEM_CREATOR : usize = 0x15DB0B0;
+const NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x67A7B0;
 
 pub mod KineticUtility {
     // Resets and enables the kinetic energy type.
@@ -352,6 +354,25 @@ pub mod FighterSpecializer_Murabito {
     }
 }
 
+pub mod WeaponSpecializer_Kamek {
+    use crate::imports::BuildImports::*;
+    use crate::kamek::kamek::frame::*;
+    pub unsafe fn pinkmagic_effect_handler(weapon: &mut L2CFighterBase) {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let module_accessor = sv_battle_object::module_accessor(otarget_id);
+        let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let size = (FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] * 0.04) + 0.1;
+        GFX_COUNTER[ENTRY_ID] += 1;
+        if GFX_COUNTER[ENTRY_ID] >= 6 {
+            EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, 0.5 + size, true, 0, 0, 0, 0, 0, true, true);
+            EffectModule::set_rate_last(weapon.module_accessor, 1.5);
+            EffectModule::set_alpha_last(weapon.module_accessor, 0.7);
+            GFX_COUNTER[ENTRY_ID] = 0;
+        }
+    }
+}
+
 pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleObjectModuleAccessor) -> bool {
     let color = WorkModule::get_int(object_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let ADDED_FIGHTER = color >= 120 && color <= 130;
@@ -654,6 +675,9 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
     if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 && CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
         *(weapon as *mut bool).add(0x90) = true;
     }
+    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 && CUSTOM_FIGHTER_2 && owner_kind == *FIGHTER_KIND_NESS {
+        *(weapon as *mut bool).add(0x90) = true;
+    }
     call_original!(vtable, weapon, log)
 }
 
@@ -686,6 +710,39 @@ extern "C" {
     pub static ITEM_MANAGER: *mut smash::app::ItemManager;
 }
 
+#[skyline::hook(offset = NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET)]
+pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash::app::FighterManager, attacker_object_id: u32, defender_object_id: u32, move_type: f32, arg5: i32, move_type_again: bool) -> u64 {
+    let attacker_module_accessor = sv_battle_object::module_accessor(attacker_object_id);
+    let defender_module_accessor = sv_battle_object::module_accessor(defender_object_id);
+    let attacker_fighter_kind = sv_battle_object::kind(attacker_object_id);
+    let defender_fighter_kind = sv_battle_object::kind(defender_object_id);
+    let ENTRY_ID_A = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let ENTRY_ID_D = WorkModule::get_int(defender_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let CUSTOM_FIGHTER = color >= 64 && color <= 71;
+    if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER {
+        if utility::get_category(&mut *defender_module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+            if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
+                if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID_A] == 3 {
+                    if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
+                        SlowModule::set(defender_module_accessor, 0, 25, 600, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
+                    }
+                }
+            }
+        }
+    };
+    original!()(fighter_manager, attacker_object_id, defender_object_id, move_type, arg5, move_type_again)
+}
+
+#[skyline::hook(offset = 0x1798ac8, inline)]
+unsafe fn fix_chara_replace(ctx: &skyline::hooks::InlineCtx) {
+    let ptr1 = *ctx.registers[0].x.as_ref() as *mut u64;
+    let ptr2 = *ctx.registers[1].x.as_ref() as *mut u64;
+    *ptr2.add(0x2) = *ptr1.add(0x2);
+    *ptr2.add(0x3) = *ptr1.add(0x3);
+    *ptr2.add(0x4) = *ptr1.add(0x4);
+}
+
 pub fn install() {
     Agent::new("fighter")
     .on_start(special_flag_checks_init)
@@ -703,7 +760,9 @@ pub fn install() {
     skyline::install_hooks!(
         create_item,
         captain_on_attack,
-        common_weapon_attack_callback
+        common_weapon_attack_callback,
+        notify_log_event_collision_hit_replace,
+        fix_chara_replace
     );
     #[cfg(feature = "dev")]
     let _ = skyline::patching::Patch::in_text(0x8b8c88).nop();

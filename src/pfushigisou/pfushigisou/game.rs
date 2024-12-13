@@ -58,7 +58,6 @@ unsafe extern "C" fn game_pfushigisou_Attack12(fighter: &mut L2CAgentBase) {
 //Attack100 
 unsafe extern "C" fn game_pfushigisou_Attack100(fighter: &mut L2CAgentBase) {
     loop {
-        FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
         frame(fighter.lua_state_agent, 1.0);
         if is_excute(fighter) {
             ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.5, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 7, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 17.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.5), /*Z2*/ Some(8.0), /*Hitlag*/ 0.5, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_OBJECT);

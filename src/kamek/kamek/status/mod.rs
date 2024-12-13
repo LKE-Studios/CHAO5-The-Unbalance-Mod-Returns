@@ -1,11 +1,11 @@
 pub mod SpecialN;
 pub mod SpecialNHold;
 pub mod SpecialNFire;
-mod SpecialS;
-mod SpecialHi;
-mod SpecialHiEnd;
-mod SpecialHiWarp;
-mod SpecialLw;
+pub mod SpecialS;
+pub mod SpecialHi;
+pub mod SpecialHiEnd;
+pub mod SpecialHiWarp;
+pub mod SpecialLw;
 
 pub fn install() {
     SpecialN::install();

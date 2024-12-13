@@ -2,7 +2,6 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_ninten_SpecialHi_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {	
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
@@ -16,7 +15,6 @@ unsafe extern "C" fn status_ninten_SpecialHi_Pre(fighter: &mut L2CFighterCommon)
 
 unsafe extern "C" fn status_ninten_SpecialHi_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         fighter.set_situation(SITUATION_KIND_AIR.into());

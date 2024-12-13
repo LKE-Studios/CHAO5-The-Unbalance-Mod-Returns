@@ -126,6 +126,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("scale"), 0, 1.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("shield_radius"), 0, 12.2));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("dive_speed_y"), 0, 2.756));
+    param_config::update_int_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("wall_jump_type"), 0, 1));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_n"), 0, 3.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_f"), 0, 5.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_b"), 0, 6.0));
