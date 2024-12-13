@@ -1,6 +1,10 @@
+use crate::imports::BuildImports::*;
+
 mod knuckles;
 mod knuckles_gimmickjump;
-mod knuckles_superknuckles;
+mod knuckles_supersonic;
+
+pub static mut KNUCKLES_MERIKOMI_EFFECT_HANDLE : [i32; 8] = [0; 8];
 
 pub fn install() {
     knuckles::install();   
