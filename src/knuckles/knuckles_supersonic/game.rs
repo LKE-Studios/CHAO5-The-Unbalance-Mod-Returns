@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 //FinalEnd
-unsafe extern "C" fn game_sonic_supersonic_FinalEnd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_knuckles_supersonic_FinalEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
     }
@@ -18,7 +18,7 @@ unsafe extern "C" fn game_sonic_supersonic_FinalEnd(fighter: &mut L2CAgentBase) 
 }
 
 //FinalAirEnd
-unsafe extern "C" fn game_sonic_supersonic_FinalAirEnd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn game_knuckles_supersonic_FinalAirEnd(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WHOLE_HIT(fighter, *HIT_STATUS_INVINCIBLE);
     }
@@ -36,7 +36,7 @@ unsafe extern "C" fn game_sonic_supersonic_FinalAirEnd(fighter: &mut L2CAgentBas
 
 pub fn install() {
     Agent::new("sonic_supersonic")
-    .game_acmd("game_finalend", game_sonic_supersonic_FinalEnd, Low)
-    .game_acmd("game_finalairend", game_sonic_supersonic_FinalAirEnd, Low)
+    .game_acmd("game_finalend_knuckles", game_knuckles_supersonic_FinalEnd, Low)
+    .game_acmd("game_finalairend_knuckles", game_knuckles_supersonic_FinalAirEnd, Low)
     .install();
 }

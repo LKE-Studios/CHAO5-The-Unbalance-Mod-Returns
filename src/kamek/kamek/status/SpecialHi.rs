@@ -63,8 +63,7 @@ pub unsafe extern "C" fn kamek_SpecialHi_status_helper(fighter: &mut L2CFighterC
     if status == *FIGHTER_STATUS_KIND_SPECIAL_HI || !is_start {
         let air_kinetic = if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {FIGHTER_KINETIC_TYPE_AIR_STOP} else {FIGHTER_KINETIC_TYPE_SHEIK_SPECIAL_HI_AIR};
         fighter.sub_change_kinetic_type_by_situation(FIGHTER_KINETIC_TYPE_GROUND_STOP.into(),air_kinetic.into());
-    } 
-    
+    }   
 }
 
 unsafe extern "C" fn status_kamek_SpecialHi_Main(fighter: &mut L2CFighterCommon) -> L2CValue {

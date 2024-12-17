@@ -101,13 +101,14 @@ unsafe extern "C" fn sound_pit_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
 
 //SpecialHiFly
 unsafe extern "C" fn sound_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_pit_special_h04"));
+    }
     loop {
-        if is_excute(fighter) {
-            PLAY_STATUS(fighter, Hash40::new("se_pit_jump02"));
-        }
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_pit_special_h03"));
+            PLAY_SE(fighter, Hash40::new("se_pit_jump03"));
         }
         wait_loop_clear(fighter);
     }

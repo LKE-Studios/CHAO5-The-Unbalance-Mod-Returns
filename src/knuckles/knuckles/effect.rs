@@ -127,7 +127,7 @@ unsafe extern "C" fn effect_knuckles_AttackDash(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_ALPHA(fighter, 0.9);
     }
     frame(fighter.lua_state_agent, 27.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 1.5, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
         LAST_EFFECT_SET_ALPHA(fighter, 0.2);
     }
@@ -941,15 +941,15 @@ unsafe extern "C" fn effect_knuckles_AppealLwL(fighter: &mut L2CAgentBase) {
 //Win1
 unsafe extern "C" fn effect_knuckles_Win1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("sonic_spintrace"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 0.88, true);
     }
     frame(fighter.lua_state_agent, 50.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("sonic_spintrace"), false, false);
     }
     frame(fighter.lua_state_agent, 65.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_quake"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         LAST_EFFECT_SET_RATE(fighter, 1.2);
         EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
@@ -958,7 +958,7 @@ unsafe extern "C" fn effect_knuckles_Win1(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_RATE(fighter, 1.2);
     }
     frame(fighter.lua_state_agent, 118.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
@@ -966,15 +966,15 @@ unsafe extern "C" fn effect_knuckles_Win1(fighter: &mut L2CAgentBase) {
 //Win2
 unsafe extern "C" fn effect_knuckles_Win2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 56.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("handl"), 0, 0, 3, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 360, false);
     }
     frame(fighter.lua_state_agent, 70.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("handl"), 0, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 360, false);
     }
     frame(fighter.lua_state_agent, 97.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
     }
 }
@@ -983,18 +983,18 @@ unsafe extern "C" fn effect_knuckles_Win2(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_knuckles_Win3(fighter: &mut L2CAgentBase) {
     let mut handle = 0;
     frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("littlemac_risinguppercut"), Hash40::new("sphere"), 0, 4.8, 0, 0, 90, 0, 1.25, true);
         LAST_EFFECT_SET_RATE(fighter, 0.7);
         EFFECT_FOLLOW(fighter, Hash40::new("sonic_spintrace"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 0.88, true);
     }
     frame(fighter.lua_state_agent, 20.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("littlemac_risinguppercut"), false, false);
         EFFECT_OFF_KIND(fighter, Hash40::new("sonic_spintrace"), false, false);
     }
     frame(fighter.lua_state_agent, 22.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         let mut pos = Vector3f{ x: 0.0, y: 0.0, z: 0.0 };
         let offset = ModelModule::joint_global_offset_from_top(fighter.module_accessor, Hash40::new("hip"), &mut pos);
         let new_pos = Vector3f{
@@ -1007,18 +1007,18 @@ unsafe extern "C" fn effect_knuckles_Win3(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 47.0);
     for i in 0..8 {
-        if is_excute(fighter.lua_state_agent) {
+        if is_excute(fighter) {
             let scale = 1.0 - (0.14 * i as f32);
             EffectModule::set_scale(fighter.module_accessor, handle as u32, &Vector3f{x: scale, y: 1.0, z: scale});
         }
         wait(fighter.lua_state_agent, 1.0);
     }
     frame(fighter.lua_state_agent, 55.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("sys_merikomi"), false, false);
     }
     frame(fighter.lua_state_agent, 62.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         let mut pos = Vector3f{ x: 0.0, y: 0.0, z: 0.0 };
         let offset = ModelModule::joint_global_offset_from_top(fighter.module_accessor, Hash40::new("hip"), &mut pos);
         let new_pos = Vector3f{
@@ -1031,14 +1031,14 @@ unsafe extern "C" fn effect_knuckles_Win3(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 91.0);
     for i in 0..8 {
-        if is_excute(fighter.lua_state_agent) {
+        if is_excute(fighter) {
             let scale = 1.0 - (0.14 * i as f32);
             EffectModule::set_scale(fighter.module_accessor, handle as u32, &Vector3f{x: scale, y: 1.0, z: scale});
         }
         wait(fighter.lua_state_agent, 1.0);
     }
     frame(fighter.lua_state_agent, 99.0);
-    if is_excute(fighter.lua_state_agent) {
+    if is_excute(fighter) {
         EFFECT_OFF_KIND(fighter, Hash40::new("sys_merikomi"), false, false);
     }
 }

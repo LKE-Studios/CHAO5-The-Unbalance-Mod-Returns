@@ -164,7 +164,7 @@ pub mod kamek;
 mod kamui;
 mod ken;
 mod kirby;
-mod knuckles;
+//mod knuckles;
 mod koopa;
 mod koopag;
 mod koopajr;
@@ -179,6 +179,7 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
+mod maskedman;
 mod master;
 mod metaknight;
 pub mod mewtwo;
@@ -540,8 +541,9 @@ pub fn main() {
     basyaamo::install();
     krystal::install();
     ninten::install();
+    maskedman::install();
     kamek::install();
-    knuckles::install();
+    //knuckles::install();
     skyline::install_hooks!(
         declare_const_hook, 
         offset_dump,

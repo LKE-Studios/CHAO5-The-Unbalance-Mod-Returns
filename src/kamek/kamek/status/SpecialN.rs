@@ -63,7 +63,7 @@ unsafe extern "C" fn kamek_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) ->
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_NESS_AIR_STOP_SPECIAL_N);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_n_fire"), -1.0, 1.0, 0.0, false, false);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_n_start"), -1.0, 1.0, 0.0, false, false);
             SoundModule::play_landing_se(fighter.module_accessor, Hash40::new("se_ness_landing01"));
         }
     }
@@ -72,7 +72,7 @@ unsafe extern "C" fn kamek_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) ->
             StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP_ATTACK));
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_n_fire"), -1.0, 1.0, 0.0, false, false);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_n_start"), -1.0, 1.0, 0.0, false, false);
         }
     }
     if MotionModule::is_end(fighter.module_accessor) {

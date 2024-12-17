@@ -41,14 +41,14 @@ unsafe extern "C" fn frame_pit_Main(fighter: &mut L2CFighterCommon) {
     }
     if status_kind == *FIGHTER_STATUS_KIND_DEAD || !sv_information::is_ready_go() {
         let fly_frame_max = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_max"));
-        WorkModule::set_float(fighter.module_accessor, fly_frame_max as f32, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
+        WorkModule::set_float(fighter.module_accessor, fly_frame_max as f32, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_POWER);
     } 
     else {
-        let special_hi_fuel = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
+        let special_hi_fuel = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_POWER);
         let recover_rate = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("recover_rate"));
         let fly_frame_max = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_max"));
         let new_fuel = (special_hi_fuel + recover_rate).min(fly_frame_max as f32);
-        WorkModule::set_float(fighter.module_accessor, new_fuel, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FUEL);
+        WorkModule::set_float(fighter.module_accessor, new_fuel, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_POWER);
     }
 }
 

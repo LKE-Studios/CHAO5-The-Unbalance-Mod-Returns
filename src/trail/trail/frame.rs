@@ -35,11 +35,9 @@ unsafe extern "C" fn frame_trail_Main(fighter: &mut L2CFighterCommon) {
         }
     }
     if motion_kind == hash40("appeal_hi_l") || motion_kind == hash40("appeal_hi_r") { 
-        if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
-                if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                    SLOW_OPPONENT(fighter, 20.0, 240.0);
-                }
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                SLOW_OPPONENT(fighter, 20.0, 240.0);
             }
         }
     }

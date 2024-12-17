@@ -725,7 +725,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
             if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
                 if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID_A] == 3 {
                     if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
-                        SlowModule::set(defender_module_accessor, 0, 25, 600, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
+                        SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
                     }
                 }
             }
