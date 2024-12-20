@@ -11,7 +11,7 @@ unsafe extern "C" fn frame_pfushigisou_Main(fighter: &mut L2CFighterCommon) {
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, false);
     }
-    let mut charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
+    let mut charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_INT_CHARGE);
     let charge_effect_scale_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_min"));
     let charge_effect_scale_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_max"));
     if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] >= 1 {

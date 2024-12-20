@@ -19,23 +19,14 @@ unsafe extern "C" fn sound_pfushigisou_SpecialZStart(fighter: &mut L2CAgentBase)
 
 //SpecialZCharge
 unsafe extern "C" fn sound_pfushigisou_SpecialZCharge(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
-    }
-    for _ in 0..8 {
+    loop {
         if is_excute(fighter) {
             PLAY_SE_REMAIN(fighter, Hash40::new("se_pfushigisou_appeal_l02"));
+            if DamageModule::damage(fighter.module_accessor, 0) > 0.0 {
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            }
         }
         wait(fighter.lua_state_agent, 15.0);
-    }
-    frame(fighter.lua_state_agent, 30.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
-    }
-    frame(fighter.lua_state_agent, 60.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }
 
@@ -79,23 +70,14 @@ unsafe extern "C" fn sound_pfushigisou_SpecialAirZStart(fighter: &mut L2CAgentBa
 
 //SpecialAirZCharge
 unsafe extern "C" fn sound_pfushigisou_SpecialAirZCharge(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
-    }
-    for _ in 0..8 {
+    loop {
         if is_excute(fighter) {
             PLAY_SE_REMAIN(fighter, Hash40::new("se_pfushigisou_appeal_l02"));
+            if DamageModule::damage(fighter.module_accessor, 0) > 0.0 {
+                PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            }
         }
         wait(fighter.lua_state_agent, 15.0);
-    }
-    frame(fighter.lua_state_agent, 30.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
-    }
-    frame(fighter.lua_state_agent, 60.0);
-    if is_excute(fighter) {
-        PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
     }
 }
 

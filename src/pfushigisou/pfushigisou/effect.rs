@@ -37,7 +37,7 @@ unsafe extern "C" fn effect_pfushigisou_SpecialZStart(fighter: &mut L2CAgentBase
 
 //SpecialZCharge
 unsafe extern "C" fn effect_pfushigisou_SpecialZCharge(fighter: &mut L2CAgentBase) {
-    for _ in 0..6 {
+    loop {
         if is_excute(fighter) {
             FLASH(fighter, 0.0, 1.0, 0.14, 0.6);
             EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
@@ -83,7 +83,7 @@ unsafe extern "C" fn effect_pfushigisou_SpecialAirZStart(fighter: &mut L2CAgentB
 
 //SpecialAirZCharge
 unsafe extern "C" fn effect_pfushigisou_SpecialAirZCharge(fighter: &mut L2CAgentBase) {
-    for _ in 0..6 {
+    loop {
         if is_excute(fighter) {
             FLASH(fighter, 0.0, 1.0, 0.14, 0.6);
             EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);

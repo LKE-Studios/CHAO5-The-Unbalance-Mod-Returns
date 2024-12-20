@@ -268,6 +268,39 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("speed_ground"), 3.0));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("speed_air"), 5.0));
     param_config::update_int_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("life"), 300));
+
+    //MASKEDMAN
+    param_config::update_int_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("attack_combo_max"), 0, 1));
+    param_config::update_int_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_motion"), hash40("flip"), 0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_f"), 0, 8.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_n"), 0, 4.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_hi"), 0, 3.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_b"), 0, 7.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_lw"), 0, 8.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("weight"), 0, 88.0));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("shield_radius"), 0, 10.8));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("dash_speed"), 0, 2.468));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("run_accel_mul"), 0, 0.16));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_speed_y_stable"), 0, 1.6));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("dive_speed_y"), 0, 2.88));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_accel_x_mul"), 0, 0.072));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("ground_brake"), 0, 0.116));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("run_speed_max"), 0, 2.25));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_aerial_y"), 0, 45.13));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_speed_x_stable"), 0, 1.275));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_accel_y"), 0, 0.09));
+    param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(),(hash40("scale"), 0, 1.0));
+    param_config::update_int_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("life"), 960));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("angle_ground"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("speed_ground"), 4.2));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("angle_air"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("speed_air"), 4.2));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_life"), 12.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_damage_mul"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_offset_y"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_accel_y"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_speed_max_y"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_scale_min"), 0.0));
 }
 
 pub fn install() {

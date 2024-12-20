@@ -23,7 +23,6 @@ pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_Main(fighter: &mut
 }
 
 unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let mut charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
     if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
         return 1.into();
     }
@@ -54,7 +53,7 @@ unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFi
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
-    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_WORK_INT_CHARGE);
+    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_INT_CHARGE);
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("finptrainer_solar_beam"), false, false);
     0.into()
 }

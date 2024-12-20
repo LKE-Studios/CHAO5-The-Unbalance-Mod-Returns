@@ -13,6 +13,9 @@ pub unsafe extern "C" fn frame_maskedman_Main(fighter: &mut L2CFighterCommon) {
         platform_cancel_function(fighter);
         ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("normalbatm"), false);
         ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("normalbatmflip"), true);
+        ModelModule::set_scale(fighter.module_accessor, 0.96);
+        AttackModule::set_attack_scale(fighter.module_accessor, 0.96, true);
+        GrabModule::set_size_mul(fighter.module_accessor, 0.96);
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_DOSEITABLE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_N_HOLD,

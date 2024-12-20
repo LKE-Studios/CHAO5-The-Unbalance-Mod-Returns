@@ -277,6 +277,25 @@ unsafe extern "C" fn effect_maskedman_AttackHi4(fighter: &mut L2CAgentBase) {
         LAST_PARTICLE_SET_COLOR(fighter, 1.2, 0.8, 0.2);
         EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 22.0, 0.5, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
         LAST_EFFECT_SET_RATE(fighter, 1.2);
+        EFFECT(fighter, Hash40::new("lucas_psi_atk_hi"), Hash40::new("top"), 0, 12, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 10, 0, -90, 0, 0, 1.05, true);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("lucas_psi_atk"), true, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 21, 0, -90, 0, 0, 1.0, true);
+    }
+    frame(fighter.lua_state_agent, 32.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("lucas_psi_atk"), true, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_atk"), Hash40::new("top"), 0, 30, 0, -90, 0, 0, 0.6, true);
+    }
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("lucas_psi_atk"), false, false);
     }
 }
 
@@ -724,10 +743,18 @@ unsafe extern "C" fn effect_maskedman_SpecialHiHold(fighter: &mut L2CAgentBase) 
 
 //SpecialLwStart
 unsafe extern "C" fn effect_maskedman_SpecialLwStart(fighter: &mut L2CAgentBase) {
+    let team_color = FighterUtil::get_team_color(fighter.module_accessor);
+    let color = FighterUtil::get_effect_team_color(EColorKind(team_color as i32), Hash40::new("direction_effect_color"));
+    frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), -1.5, 0, -1, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_hold"), Hash40::new("havel"), -0.3, 0, 0.1, 0, 0, 0, 0.8, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psimagnet_start"), Hash40::new("trans"), 0, 6.5, 12, 0, 0, 0, 1, false);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, -5, 0, 0, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 5, 0, 180, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, -5, 90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, 5, -90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
     }
 }
 
@@ -749,9 +776,18 @@ unsafe extern "C" fn effect_maskedman_SpecialLwEnd(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwStart
 unsafe extern "C" fn effect_maskedman_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
+    let team_color = FighterUtil::get_team_color(fighter.module_accessor);
+    let color = FighterUtil::get_effect_team_color(EColorKind(team_color as i32), Hash40::new("direction_effect_color"));
+    frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psi_hold"), Hash40::new("havel"), -0.3, 0, 0.1, 0, 0, 0, 0.8, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("lucas_psimagnet_start"), Hash40::new("trans"), 0, 6.5, 12, 0, 0, 0, 1, false);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, -5, 0, 0, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 5, 0, 180, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, -5, 90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, 5, -90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(fighter.module_accessor, color.value[0], color.value[1], color.value[2]);
     }
 }
 
@@ -799,16 +835,12 @@ unsafe extern "C" fn effect_maskedman_AppealHiL(fighter: &mut L2CAgentBase) {
 
 //AppealLwR
 unsafe extern "C" fn effect_maskedman_AppealLwR(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BOMBHEI), 0, 0, false, false);
-    }
+
 }
 
 //AppealLwL
 unsafe extern "C" fn effect_maskedman_AppealLwL(fighter: &mut L2CAgentBase) {
-    if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BOMBHEI), 0, 0, false, false);
-    }
+
 }
 
 //Final

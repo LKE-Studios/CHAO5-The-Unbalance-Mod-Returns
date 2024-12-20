@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
-pub static speed_x_air : f32 = 5.5;
-pub static speed_x_ground : f32 = 6.0;
+pub static speed_x_air : f32 = 8.5;
+pub static speed_x_ground : f32 = 7.0;
 pub static dash_speed_end_frame : f32 = 15.0;
 
 unsafe extern "C" fn status_maskedman_SpecialNDash_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -20,19 +20,22 @@ unsafe extern "C" fn status_maskedman_SpecialNDash_Pre(fighter: &mut L2CFighterC
 unsafe extern "C" fn status_maskedman_SpecialNDash_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let MASKEDMAN = color >= 120 && color <= 127;
-	if MASKEDMAN {	
+	if MASKEDMAN {
+        let lr = PostureModule::lr(fighter.module_accessor);	
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_STOP);
             sv_kinetic_energy!(clear_speed_ex, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air);
-            sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air);
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air * lr, 0.0);
+            sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_air * lr, 0.0);
         }
         else {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
-            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground);
-            sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground);
+            sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground * lr);
+            sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x_ground * lr);
         }
+        0.into()
     }
     else {
         0.into()
@@ -44,7 +47,7 @@ unsafe extern "C" fn status_maskedman_SpecialNDash_Main(fighter: &mut L2CFighter
     let MASKEDMAN = color >= 120 && color <= 127;
 	if MASKEDMAN {
         let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
-        AttackModule::set_power_up(fighter.module_accessor, 1.0 + (float_charge * 0.6));
+        AttackModule::set_power_mul(fighter.module_accessor, 1.0 + (float_charge * 0.04));
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_dash"), 0.0, 1.0, false, 0.0, false, false);
@@ -63,6 +66,7 @@ unsafe extern "C" fn status_maskedman_SpecialNDash_Main(fighter: &mut L2CFighter
 
 unsafe extern "C" fn maskedman_SpecialNDash_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }
@@ -88,7 +92,7 @@ unsafe extern "C" fn maskedman_SpecialNDash_Main_loop(fighter: &mut L2CFighterCo
         }
     }
     if frame > dash_speed_end_frame {
-        KineticModule::suspend_energy_all(fighter.module_accessor);
+        KineticModule::clear_speed_all(fighter.module_accessor);
     }
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END.into(), false.into());
@@ -99,6 +103,7 @@ unsafe extern "C" fn maskedman_SpecialNDash_Main_loop(fighter: &mut L2CFighterCo
 
 unsafe extern "C" fn status_maskedman_SpecialNDash_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+    AttackModule::set_power_mul(fighter.module_accessor, 1.0);
     WorkModule::off_flag(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE);
     0.into()
 }

@@ -3,6 +3,8 @@ pub mod SpecialNDash;
 mod SpecialNEnd;
 pub mod SpecialHi;
 pub mod SpecialHiHold;
+pub mod SpecialHiEnd;
+mod SpecialLw;
 mod AirLasso;
 
 pub fn install() {
@@ -11,5 +13,7 @@ pub fn install() {
     SpecialNEnd::install();
     SpecialHi::install();
     SpecialHiHold::install(); 
+    SpecialHiEnd::install(); 
+    SpecialLw::install();
     AirLasso::install();
 }

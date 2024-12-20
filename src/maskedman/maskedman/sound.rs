@@ -10,6 +10,10 @@ unsafe extern "C" fn sound_maskedman_Attack11(fighter: &mut L2CAgentBase) {
 
 //AttackDash
 unsafe extern "C" fn sound_maskedman_AttackDash(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackdash"));
+    }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_fire_m_damage"));
@@ -20,7 +24,7 @@ unsafe extern "C" fn sound_maskedman_AttackDash(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_swing_03"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
     }
 }
 
@@ -28,7 +32,7 @@ unsafe extern "C" fn sound_maskedman_AttackS3Hi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_swing_03"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
     }
 }
 
@@ -36,7 +40,7 @@ unsafe extern "C" fn sound_maskedman_AttackS3(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_swing_03"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
     }
 }
 
@@ -44,7 +48,8 @@ unsafe extern "C" fn sound_maskedman_AttackS3Lw(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_item_beamsword_s"));
+        PLAY_SE(fighter, Hash40::new("se_item_beamsword_m"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
     }
 }
 
@@ -52,7 +57,7 @@ unsafe extern "C" fn sound_maskedman_AttackHi3(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_s"));
     }
 }
 
@@ -76,11 +81,12 @@ unsafe extern "C" fn sound_maskedman_AttackS4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_item_beamsword_s"));
+        PLAY_SE(fighter, Hash40::new("se_item_beamsword_l"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_l"));
     }
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_heavy_hit_s"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_smash_s02"));
     }
 }
 
@@ -100,7 +106,8 @@ unsafe extern "C" fn sound_maskedman_AttackHi4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_sword_hit_s"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_smash_h01"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_smash_h02"));
     }
 }
 
@@ -116,7 +123,7 @@ unsafe extern "C" fn sound_maskedman_AttackLw4Charge(fighter: &mut L2CAgentBase)
 unsafe extern "C" fn sound_maskedman_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_smash_l01"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_smash_l02"));
     }
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
@@ -129,6 +136,7 @@ unsafe extern "C" fn sound_maskedman_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_item_beamsword_l"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_l"));
     }
 }
 
@@ -141,6 +149,7 @@ unsafe extern "C" fn sound_maskedman_AttackAirF(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_f01"));
     }
 }
 
@@ -148,15 +157,15 @@ unsafe extern "C" fn sound_maskedman_AttackAirF(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l02"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_b01"));
     }
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l03"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_b02"));
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_l04"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_b03"));
     }
 }
 
@@ -165,6 +174,7 @@ unsafe extern "C" fn sound_maskedman_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_item_beamsword_m"));
+        PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
     }
 }
 
@@ -173,6 +183,7 @@ unsafe extern "C" fn sound_maskedman_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_f01"));
     }
 }
 
@@ -340,58 +351,120 @@ unsafe extern "C" fn sound_maskedman_DownAttackD(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialNStart
+unsafe extern "C" fn sound_maskedman_SpecialNStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_n02"));
+    }
+}
+
+//SpecialAirNStart
+unsafe extern "C" fn sound_maskedman_SpecialAirNStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_n02"));
+    }
+}
+
 //SpecialNDash
 unsafe extern "C" fn sound_maskedman_SpecialNDash(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_lucas_special_n02"));
+    }
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_item_beamsword_l"));
-        PLAY_SE(fighter, Hash40::new("se_item_assist_vanish"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_n05"));
     }
 }
 
 //SpecialAirNDash
 unsafe extern "C" fn sound_maskedman_SpecialAirNDash(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        STOP_SE(fighter, Hash40::new("se_lucas_special_n02"));
+    }
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_item_beamsword_l"));
-        PLAY_SE(fighter, Hash40::new("se_item_assist_vanish"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_n05"));
     }
 }
 
 //SpecialS
 unsafe extern "C" fn sound_maskedman_SpecialS(fighter: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 13.0);
-    if is_excute(agent) {
-        PLAY_SE(agent, Hash40::new("se_lucas_special_s03"));
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
     }
 }       
 
 //SpecialAirS
 unsafe extern "C" fn sound_maskedman_SpecialAirS(fighter: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 13.0);
-    if is_excute(agent) {
-        PLAY_SE(agent, Hash40::new("se_lucas_special_s03"));
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_s03"));
     }
 }
 
 //SpecialHiStart
-unsafe extern "C" fn sound_maskedman_SpecialHiStart(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_maskedman_SpecialHiStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_h02"));
+    }
+}
 
 //SpecialAirHiStart
-unsafe extern "C" fn sound_maskedman_SpecialAirHiStart(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn sound_maskedman_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_h02"));
+    }
+}
 
 //SpecialHiHold
 unsafe extern "C" fn sound_maskedman_SpecialHiHold(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_lucas_special_h01"));
+    }
+}
+
+//SpecialLwStart
+unsafe extern "C" fn sound_maskedman_SpecialLwStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_l02"));
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_throw_l02"));
+    }
+}
+
+//SpecialAirLwStart
+unsafe extern "C" fn sound_maskedman_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_l02"));
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_throw_l02"));
     }
 }
 
 //AppealHiR
 unsafe extern "C" fn sound_maskedman_AppealHiR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_landing01"));
+    }
+    frame(fighter.lua_state_agent, 31.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_landing02"));
+    }
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_f01"));
     }
     frame(fighter.lua_state_agent, 87.0);
     if is_excute(fighter) {
@@ -401,9 +474,18 @@ unsafe extern "C" fn sound_maskedman_AppealHiR(fighter: &mut L2CAgentBase) {
 
 //AppealHiL
 unsafe extern "C" fn sound_maskedman_AppealHiL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_landing01"));
+    }
+    frame(fighter.lua_state_agent, 31.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_landing02"));
+    }
     frame(fighter.lua_state_agent, 55.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_attackair_f01"));
     }
     frame(fighter.lua_state_agent, 87.0);
     if is_excute(fighter) {
@@ -411,15 +493,31 @@ unsafe extern "C" fn sound_maskedman_AppealHiL(fighter: &mut L2CAgentBase) {
     }
 }
 
+//AppealSR
+unsafe extern "C" fn sound_maskedman_AppealSR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_landing01"));
+    }
+}
+
+//AppealSL
+unsafe extern "C" fn sound_maskedman_AppealSL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_landing01"));
+    }
+}
+
 //AppealLwR
 unsafe extern "C" fn sound_maskedman_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
-        PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal02"));
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_special_l02"));
     }
-    wait(fighter.lua_state_agent, 36.0);
+    wait(fighter.lua_state_agent, 35.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_appeal02_02"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_swing_l"));
     }
 }
 
@@ -427,11 +525,11 @@ unsafe extern "C" fn sound_maskedman_AppealLwR(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_maskedman_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
-        PLAY_STATUS(fighter, Hash40::new("se_lucas_appeal02"));
+        PLAY_STATUS(fighter, Hash40::new("se_lucas_special_l02"));
     }
-    wait(fighter.lua_state_agent, 36.0);
+    wait(fighter.lua_state_agent, 35.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_lucas_appeal02_02"));
+        PLAY_SE(fighter, Hash40::new("se_lucas_swing_l"));
     }
 }
 
@@ -481,6 +579,8 @@ pub fn install() {
     .sound_acmd("sound_downattacku_maskedman", sound_maskedman_DownAttackU, Low)
     .sound_acmd("sound_cliffattack_maskedman", sound_maskedman_CliffAttack, Low)
     .sound_acmd("sound_slipattack_maskedman", sound_maskedman_SlipAttack, Low)
+    .sound_acmd("sound_specialnstart_maskedman", sound_maskedman_SpecialNStart, Low)
+    .sound_acmd("sound_specialairnstart_maskedman", sound_maskedman_SpecialAirNStart, Low)
     .sound_acmd("sound_specialndash_maskedman", sound_maskedman_SpecialNDash, Low)
     .sound_acmd("sound_specialairndash_maskedman", sound_maskedman_SpecialAirNDash, Low)
     .sound_acmd("sound_specials_maskedman", sound_maskedman_SpecialS, Low)
@@ -488,8 +588,12 @@ pub fn install() {
     .sound_acmd("sound_specialhistart_maskedman", sound_maskedman_SpecialHiStart, Low)
     .sound_acmd("sound_specialhihold_maskedman", sound_maskedman_SpecialHiHold, Low)
     .sound_acmd("sound_specialairhistart_maskedman", sound_maskedman_SpecialAirHiStart, Low)
+    .sound_acmd("sound_speciallwstart_maskedman", sound_maskedman_SpecialLwStart, Low)
+    .sound_acmd("sound_specialairlwstart_maskedman", sound_maskedman_SpecialAirLwStart, Low)
     .sound_acmd("sound_appealhir_maskedman", sound_maskedman_AppealHiR, Low)
     .sound_acmd("sound_appealhil_maskedman", sound_maskedman_AppealHiL, Low)
+    .sound_acmd("sound_appealsr_maskedman", sound_maskedman_AppealSR, Low)
+    .sound_acmd("sound_appealsl_maskedman", sound_maskedman_AppealSL, Low)
     .sound_acmd("sound_appeallwr_maskedman", sound_maskedman_AppealLwR, Low)
     .sound_acmd("sound_appeallwl_maskedman", sound_maskedman_AppealLwL, Low)
     .sound_acmd("sound_final_maskedman", sound_maskedman_Final, Low)
