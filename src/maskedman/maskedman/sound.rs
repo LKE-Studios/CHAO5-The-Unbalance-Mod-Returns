@@ -104,6 +104,10 @@ unsafe extern "C" fn sound_maskedman_AttackHi4(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_common_smash_start_02"));
     }
+    frame(fighter.lua_state_agent, 12.0);
+    if is_excute(fighter) {
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_lucas_smash_l02"));
+    }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_lucas_smash_h01"));

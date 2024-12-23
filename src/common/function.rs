@@ -29,6 +29,7 @@ pub mod KineticUtility {
 //Const Functions
 pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let special_zoom_effect = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_EFFECT);
     if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
         COUNTER[ENTRY_ID] += 1;
         IS_CRIT[ENTRY_ID] = true;
@@ -254,35 +255,37 @@ pub mod FighterSpecializer_MetaKnight {
         let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("reaction_mul"));
         let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
         if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
-            GFX_COUNTER[ENTRY_ID] += 1;
-            SFX_COUNTER[ENTRY_ID] += 1;
+            let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            let sound_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
             AttackModule::set_power_up(fighter.module_accessor, attack_mul);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
             DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
-            if SFX_COUNTER[ENTRY_ID] < 2 {
-                PLAY_SE(fighter, Hash40::new("se_metaknight_special_l01"));
+            if sound_counter < 3 {
+                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_special_l01"), true, false, false, false, enSEType(0));
                 PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_final01"));
                 PLAY_SE_REMAIN(fighter, Hash40::new("vc_metaknight_final03"));
             };
-            if SFX_COUNTER[ENTRY_ID] >= 100 {
-                SFX_COUNTER[ENTRY_ID] = 2;
+            if sound_counter >= 100 {
+                WorkModule::set_int(fighter.module_accessor, 3, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
             };
             if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage {
-                SFX_COUNTER[ENTRY_ID] = 0;
+                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
             };
-            if GFX_COUNTER[ENTRY_ID] >= 6 {
-                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
-                LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
-                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
-                LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.68, /*G*/ 0.87, /*B*/ 2.0);
-                GFX_COUNTER[ENTRY_ID] = 0;
+            if effect_counter >= 6 {
+                let effect_a = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(fighter.module_accessor, effect_a as u32, 0.68, 0.87, 2.0);
+                let effect_b = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(fighter.module_accessor, effect_b as u32, 0.68, 0.87, 2.0);
+                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             };
         };
         if DamageModule::damage(fighter.module_accessor, 0) >= meta_power_damage {
             WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
         };   
         if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT].contains(&status_kind) 
-        || sv_information::is_ready_go() == false {
+        || !sv_information::is_ready_go() {
             WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);

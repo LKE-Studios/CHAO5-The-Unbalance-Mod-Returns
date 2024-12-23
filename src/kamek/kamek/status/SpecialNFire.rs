@@ -75,10 +75,8 @@ unsafe extern "C" fn status_kamek_SpecialNFire_End(fighter: &mut L2CFighterCommo
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {	
-        FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] = 0.0;
-        EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_sscope_bullet"), false, false);
+        WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_KAMEK_INSTANCE_WORK_FLOAT_CHARGE);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_fireflower_shot"), false, false);
-        EffectModule::kill(fighter.module_accessor, F2[ENTRY_ID], false, true);
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_spirits_floor_ice_loop"), 0);
         0.into()
     }

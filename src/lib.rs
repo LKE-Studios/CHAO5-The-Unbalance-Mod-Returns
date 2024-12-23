@@ -433,6 +433,8 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_waluigi")); //Waluigi
         allow_ui_chara_hash_online(hash40("ui_chara_basyaamo")); //Blaziken
         allow_ui_chara_hash_online(hash40("ui_chara_krystal")); //Krystal
+        allow_ui_chara_hash_online(hash40("ui_chara_ninten")); //Ninten
+        allow_ui_chara_hash_online(hash40("ui_chara_maskedman")); //Masked Man
         allow_ui_chara_hash_online(hash40("ui_chara_kamek")); //Kamek
     }
     unsafe {

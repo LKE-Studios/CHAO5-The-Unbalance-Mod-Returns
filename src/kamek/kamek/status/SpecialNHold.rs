@@ -37,22 +37,11 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterComm
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_hold"), 0.0, 1.0, false, 0.0, false, false);
         }
-        if !StopModule::is_stop(fighter.module_accessor) {
-            kamek_SpecialNHold_Sub_Status(fighter, false.into());
-        }
-        fighter.global_table[SUB_STATUS].assign(&L2CValue::Ptr(kamek_SpecialNHold_Sub_Status as *const () as _));
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialNHold_Main_loop as *const () as _))
     }
     else {
         0.into()
     }
-}
-
-unsafe extern "C" fn kamek_SpecialNHold_Sub_Status(fighter: &mut L2CFighterCommon, is_stop: L2CValue) -> L2CValue {
-    if is_stop.get_bool() {
-        WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_STATUS_SPECIAL_N_HOLD_WORK_FLOAT_CHARGE);
-    }
-    0.into()
 }
 
 unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -78,8 +67,9 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_n_hold"), -1.0, 1.0, 0.0, false, false);
         }
     }
-    FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] += 1.0;
-    if FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] == charge_frame {
+    let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_FLOAT_CHARGE);
+    WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_INSTANCE_WORK_FLOAT_CHARGE);
+    if float_charge == charge_frame {
         gimmick_flash(fighter);
     }
     let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);
@@ -128,9 +118,7 @@ unsafe extern "C" fn status_kamek_SpecialNHold_End(fighter: &mut L2CFighterCommo
 	if KAMEK {	
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_light"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_stardust"), false, false);
-        EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_sscope_bullet"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_fireflower_shot"), false, false);
-        EffectModule::kill(fighter.module_accessor, F2[ENTRY_ID], false, true);
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_spirits_floor_ice_loop"), 0);
         0.into()
     }

@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 use crate::maskedman::maskedman::status::SpecialHi::*;
 
 pub static speed_x_mul : f32 = 1.0;
-pub static speed_y : f32 = 5.2;
+pub static speed_y : f32 = 6.5;
 pub static air_speed_y_mul : f32 = 1.03;
 pub static air_accel_y : f32 = 0.15;
 pub static accel_x_mul : f32 = 0.1;

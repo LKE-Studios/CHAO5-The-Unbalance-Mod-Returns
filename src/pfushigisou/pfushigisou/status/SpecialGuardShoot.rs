@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 use crate::pfushigisou::pfushigisou::status::SpecialGuard::*;
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+    StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
     0.into()
 }
@@ -51,9 +51,8 @@ unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFi
 }
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_End(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] = 0;
-    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_GUARD_INT_CHARGE);
+    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_INSTANCE_WORK_ID_FLOAT_EFFECT_SCALE_MUL);
+    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("finptrainer_solar_beam"), false, false);
     0.into()
 }

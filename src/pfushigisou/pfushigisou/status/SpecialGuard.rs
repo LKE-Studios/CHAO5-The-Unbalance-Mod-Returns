@@ -1,7 +1,5 @@
 use crate::imports::BuildImports::*;
 
-pub static mut PFUSHIGISOU_SOLAR_BEAM_TIMER : [i32; 8] = [0; 8];
-
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuard_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FALL, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
     FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
@@ -56,14 +54,15 @@ unsafe extern "C" fn pfushigisou_SpecialGuard_Main_loop(fighter: &mut L2CFighter
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_z_charge"), 0.0, 1.0, false, 0.0, false, false);
         }
     }     
+    let int_charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     let charge_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_frame"));
-    PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] += 1;
-    if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] >= charge_frame {
+    WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    if int_charge >= charge_frame {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT.into(), false.into());
         }
     }
-    if PFUSHIGISOU_SOLAR_BEAM_TIMER[ENTRY_ID] == charge_frame {
+    if int_charge == charge_frame {
         gimmick_flash(fighter);
         SoundModule::play_se(fighter.module_accessor, Hash40::new("se_pfushigisou_appeal_l03"), true, false, false, false, enSEType(0));
         SoundModule::play_se(fighter.module_accessor, Hash40::new("se_pfushigisou_special_n01"), true, false, false, false, enSEType(0));
