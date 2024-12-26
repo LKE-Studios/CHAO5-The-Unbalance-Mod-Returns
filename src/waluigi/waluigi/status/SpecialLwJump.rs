@@ -87,6 +87,9 @@ unsafe extern "C" fn waluigi_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCom
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
     }
+    if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.6, z: 0.0});
+    }
     let lr = PostureModule::lr(fighter.module_accessor); 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
     let speed_x = x_acl_air * stick_x;
@@ -100,8 +103,8 @@ unsafe extern "C" fn waluigi_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCom
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
     }
-    if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND &&
-    MotionModule::is_end(fighter.module_accessor) {
+    if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND 
+    && MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
     }
     0.into()

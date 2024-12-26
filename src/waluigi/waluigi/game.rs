@@ -897,16 +897,32 @@ unsafe extern "C" fn game_waluigi_SlipAttack(agent: &mut L2CAgentBase) {
 
 //SpecialN
 unsafe extern "C" fn game_waluigi_SpecialN(fighter: &mut L2CAgentBase) { 
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM);
+    }
     frame(fighter.lua_state_agent, 19.0);
 	if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
 		ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WALUIGI_GENERATE_ARTICLE_DICEBLOCK, false, -1);
 	}
 }
 
 //SpecialAirN
 unsafe extern "C" fn game_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM);
+    }
     frame(fighter.lua_state_agent, 19.0);
 	if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
 		ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WALUIGI_GENERATE_ARTICLE_DICEBLOCK, false, -1);
 	}
 }

@@ -729,6 +729,8 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
                 if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID_A] == 3 {
                     if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
                         SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
+                        EffectModule::req_time_follow(defender_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 720, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.25, false, 0);
+                        SoundModule::play_se(defender_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
                     }
                 }
             }

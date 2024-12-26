@@ -5,6 +5,7 @@ mod Turn;
 mod TurnDash;
 mod Landing;
 mod LandingLight;
+mod SpecialN;
 mod SpecialS;
 mod SpecialSDive;
 mod SpecialSLanding;
@@ -25,6 +26,7 @@ pub fn install() {
     TurnDash::install();
     Landing::install();
     LandingLight::install();
+    SpecialN::install();
     SpecialS::install();
     SpecialSDive::install();
     SpecialSLanding::install();

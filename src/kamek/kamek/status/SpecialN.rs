@@ -59,6 +59,15 @@ unsafe extern "C" fn kamek_SpecialN_Sub_Status(fighter: &mut L2CFighterCommon, p
 }
 
 unsafe extern "C" fn kamek_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool()
+        || fighter.sub_air_check_fall_common().get_bool() {
+            return 1.into();
+        }
+        else if fighter.sub_air_check_stop_ceil().get_bool() {
+            return 1.into();
+        }
+    }
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_NESS_AIR_STOP_SPECIAL_N);
