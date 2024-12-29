@@ -552,8 +552,7 @@ unsafe extern "C" fn game_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
         if rand_num >= 0 && rand_num <= 30 { //Magic 30%
@@ -566,6 +565,7 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
             AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
             AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
             DamageModule::heal(fighter.module_accessor, -40.0, 0);
+            WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape 10%
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
@@ -586,19 +586,19 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 999.0, 45, 66, 0, 60, 22.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
         }
         else if rand_num >= 86 && rand_num <= 90 { //Grow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 5.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 5.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 6, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 91 && rand_num <= 95 { //Shrink Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 7, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE); 
         }
-        else {
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 3;
-            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
-            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        else { //Slow Enemy
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 8, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
     }
     frame(fighter.lua_state_agent, 45.0);
@@ -609,6 +609,7 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
         else if rand_num >= 31 && rand_num <= 45 { //Heal Self + Poison Enemy 15%
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 25.0, 88, 72, 0, 20, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
             AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+            WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape Turn 10%
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 30.0, 361, 100, 80, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
@@ -623,16 +624,16 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 999.0, 45, 66, 0, 60, 26.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
         }
         else if rand_num >= 86 && rand_num <= 90 { //Grow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 5.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 6, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 91 && rand_num <= 95 { //Shrink Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
-            ATTACK(fighter, 2, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 50.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 7, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
-        else {
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 3;
-            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 10.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+        else { //Slow Enemy
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 10.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 8, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
     }
     frame(fighter.lua_state_agent, 70.0);
@@ -643,8 +644,7 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
         if rand_num >= 0 && rand_num <= 30 { //Magic 30%
@@ -657,6 +657,7 @@ unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
             AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
             AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
             DamageModule::heal(fighter.module_accessor, -40.0, 0);
+            WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape 10%
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
@@ -677,19 +678,19 @@ unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 999.0, 45, 66, 0, 60, 22.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
         }
         else if rand_num >= 86 && rand_num <= 90 { //Grow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 5.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 5.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 6, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 91 && rand_num <= 95 { //Shrink Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
             ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 50.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 7, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else { //Slow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 3;
-            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
-            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 1, 0, Hash40::new("kamek_spike"), 10.0, 361, 0, 0, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 8, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
     }
     frame(fighter.lua_state_agent, 45.0);
@@ -700,6 +701,7 @@ unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
         else if rand_num >= 31 && rand_num <= 45 { //Heal Self + Poison Enemy 15%
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 25.0, 88, 72, 0, 20, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
             AttackModule::set_poison_param(fighter.module_accessor, 0, 900, 60, 9.5, false);
+            WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape Turn 10%
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 30.0, 361, 100, 80, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
@@ -714,16 +716,16 @@ unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 999.0, 45, 66, 0, 60, 26.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
         }
         else if rand_num >= 86 && rand_num <= 90 { //Grow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 1;
             ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 5.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 6, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else if rand_num >= 91 && rand_num <= 95 { //Shrink Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 2;
             ATTACK(fighter, 2, 0, Hash40::new("kamek_book"), 50.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 7, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
         else { //Slow Enemy 5%
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 3;
-            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 10.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            ATTACK(fighter, 2, 0, Hash40::new("kamek_box"), 10.0, 361, 0, 0, 0, 26.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, true, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_magic"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_OBJECT);
+            WorkModule::set_int(fighter.module_accessor, 8, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
         }
     }
     frame(fighter.lua_state_agent, 70.0);

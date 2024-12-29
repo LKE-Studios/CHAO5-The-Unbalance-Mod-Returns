@@ -67,8 +67,8 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_n_hold"), -1.0, 1.0, 0.0, false, false);
         }
     }
-    let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_FLOAT_CHARGE);
-    WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_INSTANCE_WORK_FLOAT_CHARGE);
+    let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
+    WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
     if float_charge == charge_frame {
         gimmick_flash(fighter);
     }

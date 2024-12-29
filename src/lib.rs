@@ -16,6 +16,8 @@
     clippy::if_same_then_else)]
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
+#![feature(repr_simd)]
+#![feature(simd_ffi)]
 
 use std::ffi::CStr;
 use std::os::raw::c_int;
@@ -417,7 +419,7 @@ fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
                 return Some(s.len());
             },
             Err(_err) => {
-                return arcropolis_api::load_original_file(hash, data);
+                return load_original_file(hash, data);
             }
         }
     }

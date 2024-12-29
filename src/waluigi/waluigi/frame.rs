@@ -1,10 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static mut RANDOM_NUMBER : [i32; 8] = [0; 8];
-pub static mut RANDOM_NUMBER_SELECTED : [bool; 8] = [false; 8];
-pub static mut ALREADY_BLOCK : [bool; 8] = [false; 8];
 pub static mut STICK_DIRECTION : [f32; 8] = [0.0; 8];
-pub static mut DICEBLOCK_FRAME : [i32; 8] = [0; 8];
 
 pub unsafe extern "C" fn frame_waluigi_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);

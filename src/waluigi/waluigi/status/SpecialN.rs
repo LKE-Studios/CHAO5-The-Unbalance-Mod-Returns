@@ -3,19 +3,26 @@ use crate::imports::BuildImports::*;
 pub static num_9_recover_amount : f32 = 180.0;
 
 unsafe extern "C" fn status_waluigi_SpecialN_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    fighter.sub_set_special_start_common_kinetic_setting(hash40("param_special_n").into());
-    if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n"), 0.0, 1.0, false, 0.0, false, false);
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI {
+        fighter.sub_set_special_start_common_kinetic_setting(hash40("param_special_n").into());
+        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        else {
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        waluigi_SpecialN_diceblock_helper(fighter);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE_DONE);
+        fighter.sub_shift_status_main(L2CValue::Ptr(waluigi_SpecialN_Main_loop as *const () as _))
     }
     else {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
+        original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
     }
-    waluigi_SpecialN_diceblock_helper(fighter);
-    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE);
-    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE_DONE);
-    fighter.sub_shift_status_main(L2CValue::Ptr(waluigi_SpecialN_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn waluigi_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -82,7 +89,6 @@ unsafe extern "C" fn waluigi_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) 
 }
 
 pub unsafe extern "C" fn waluigi_SpecialN_diceblock_helper(fighter: &mut L2CFighterCommon) {
-    let frame = MotionModule::frame(fighter.module_accessor);
     let mut rand_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
     rand_num = sv_math::rand(hash40("dolly"), 10);
     WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_FRAME);
@@ -166,8 +172,21 @@ pub unsafe extern "C" fn waluigi_SpecialN_diceblock_helper(fighter: &mut L2CFigh
     }
 }
 
+unsafe extern "C" fn status_waluigi_SpecialN_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI {
+        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
+        0.into()
+    }
+    else {
+        original_status(End, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
+    }
+}
+
 pub fn install() {
     Agent::new("dolly")
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, status_waluigi_SpecialN_Main)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_N, status_waluigi_SpecialN_End)
     .install();
 }

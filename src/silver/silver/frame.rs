@@ -26,12 +26,6 @@ pub static mut CLOUD_POS : Vector3f = Vector3f { x: 0.0, y: 10.0, z: 10.0 };
 pub static mut CLOUD_POS2 : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 pub static mut CLOUD_ROT : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
-pub unsafe extern "C" fn frame_silver_Exec(fighter: &mut L2CFighterCommon) {
-    ModelModule::set_scale(fighter.module_accessor, 0.865);
-    AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
-    GrabModule::set_size_mul(fighter.module_accessor, 0.865);
-}
-
 pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
@@ -137,25 +131,13 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
 pub unsafe extern "C" fn motion_main_silver(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    if [hash40("special_n_hold"),hash40("special_n_start")].contains(&motion_kind) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, true);
-        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
-    };
-    if [hash40("special_air_n_hold"),hash40("special_air_n_start")].contains(&motion_kind) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, true);
-        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
-    };
-    if [hash40("special_n_max"),hash40("special_n_cancel")].contains(&motion_kind) {
+    if [hash40("special_n_max"), hash40("special_n_cancel")].contains(&motion_kind) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
         StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
     };
-    if [hash40("special_air_n_max"),hash40("special_air_n_cancel"),hash40("special_air_n_jump_cancel")].contains(&motion_kind) {
+    if [hash40("special_air_n_max"), hash40("special_air_n_cancel"),hash40("special_air_n_jump_cancel")].contains(&motion_kind) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
         StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
-    };
-    if [hash40("attack_100_start"), hash40("attack_100"), hash40("attack_100_end")].contains(&motion_kind) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
     };
     if ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_AIR, 
         *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_MAX, 

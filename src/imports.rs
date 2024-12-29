@@ -74,7 +74,7 @@ pub mod BuildImports {
             wait, 
             execute,
             get_value_float, 
-            get_value_int,  
+            get_value_int,
             wait_loop, 
             stop, 
             wait_loop_sync_mot, 
@@ -87,7 +87,7 @@ pub mod BuildImports {
         crate::globals::*,
         crate::common::{*,
             consts::*,
-            function::{*, KineticUtility},
+            function::{*, KineticUtility, Rect, get_camera_range},
             frame::frame_common,
             FIGHTER_BOOL_1,
             FIGHTER_BOOL_2,
@@ -128,7 +128,6 @@ pub mod BuildImports {
         param_config::*,
         arcropolis_api::*,
         lazy_static::lazy_static,
-        
         crate::kamek::kamek::status::SpecialHiEnd::*,
     };
 }

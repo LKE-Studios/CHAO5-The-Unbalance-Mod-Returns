@@ -32,7 +32,8 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_Init(fighter: &mut L2CFighterC
             sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
             sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
             sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
-            sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, 0.0);
+            sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, y_acl_air);
+            sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, y_acl_air);
             sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
             sv_kinetic_energy!(controller_set_accel_x_add, fighter, 0.0);
             sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -88,14 +89,13 @@ unsafe extern "C" fn waluigi_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCom
         return 1.into();
     }
     if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 0.6, z: 0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 1.0, z: 0.0});
     }
     let lr = PostureModule::lr(fighter.module_accessor); 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
     let speed_x = x_acl_air * stick_x;
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0 + speed_x, y: 0.0, z: 0.0});
-        sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, 0.0, -y_acl_air);
         if frame >= 28.0 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_air_jump"), 0.0, 1.0, false, 0.0, false, false);
         }

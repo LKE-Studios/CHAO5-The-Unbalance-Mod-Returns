@@ -23,17 +23,30 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
         common_attack_critical_flag(fighter);
     }
+    loupe(fighter);
 }
 
-pub unsafe extern "C" fn loupe_camera_init(fighter : &mut L2CFighterCommon) {
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
-        SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
+pub unsafe extern "C" fn loupe(fighter : &mut L2CFighterCommon) {
+    let pos_x = PostureModule::pos_x(fighter.module_accessor);
+    let camzones = get_camera_range();
+    let threshold_left = camzones.left();
+    let threshold_right = camzones.right();
+    let is_too_left = pos_x < threshold_left;
+    let is_too_right = pos_x > threshold_right;
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) 
+    && (is_too_left || is_too_right) {
+        let sound_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        if sound_counter < 2 {
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
+        }
+        else {
+            WorkModule::set_int(fighter.module_accessor, 2, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        }
     }
-}
-
-pub unsafe extern "C" fn loupe_camera_exit(fighter : &mut L2CFighterCommon) {
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) {
+    else {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), 0);
+        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
     }
 }
 

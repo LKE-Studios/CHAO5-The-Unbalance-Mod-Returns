@@ -104,7 +104,6 @@ unsafe extern "C" fn status_kamek_SpecialN_End(fighter: &mut L2CFighterCommon) -
 
 pub fn install() {
     Agent::new("ness")
-    //.status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, status_kamek_SpecialN_Pre)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, status_kamek_SpecialN_Main)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_N, status_kamek_SpecialN_End)
     .install();

@@ -21,27 +21,13 @@ unsafe extern "C" fn frame_trail_Main(fighter: &mut L2CFighterCommon) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
         };
     }
-    if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-        fighter.sub_air_check_fall_common();
-        if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-            if frame > 42.0 {
-                CancelModule::enable_cancel(fighter.module_accessor);
-            };
-        }
-    }
     if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_LW_ATTACK {
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -35.0, 0);
         }
     }
-    if motion_kind == hash40("appeal_hi_l") || motion_kind == hash40("appeal_hi_r") { 
-        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
-            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-                SLOW_OPPONENT(fighter, 20.0, 240.0);
-            }
-        }
-    }
 }
+
 
 pub fn install() {
     Agent::new("trail")

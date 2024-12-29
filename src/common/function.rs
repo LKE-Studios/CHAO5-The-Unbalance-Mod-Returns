@@ -317,28 +317,29 @@ pub mod FighterSpecializer_Palutena {
         let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("attack_mul"));
         let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("reaction_mul"));
         let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("hit_damage_mul"));
-        if GODDESS_POWER_UP[ENTRY_ID] == true {
-            GFX_COUNTER[ENTRY_ID] += 1;
+        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER) {
+            let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
             DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
             AttackModule::set_power_up(fighter.module_accessor, attack_mul);
-            if GFX_COUNTER[ENTRY_ID] >= 20 {
-                EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
-                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
-                LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 2.55, /*B*/ 0.48);
-                GFX_COUNTER[ENTRY_ID] = 0;
+            if effect_counter >= 20 {
+                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_aura_light"), false, false);
+                let effect = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(fighter.module_accessor, effect as u32, 0.0, 2.55, 0.48);
+                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             };
         };
         if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
-            GODDESS_POWER_UP[ENTRY_ID] = true;
+            WorkModule::on_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
         }
-        if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT || 
-        sv_information::is_ready_go() == false {
-            GODDESS_POWER_UP[ENTRY_ID] = false;
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT 
+        || !sv_information::is_ready_go() {
+            WorkModule::off_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
             AttackModule::set_power_up(fighter.module_accessor, 1.0);
             DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
             DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            EFFECT_OFF_KIND(fighter, Hash40::new("sys_aura_light"), false, false);
+            EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_aura_light"), false, false);
         };
     }
 }
@@ -357,23 +358,30 @@ pub mod FighterSpecializer_Murabito {
     }
 }
 
-pub mod WeaponSpecializer_Kamek {
-    use crate::imports::BuildImports::*;
-    use crate::kamek::kamek::frame::*;
-    pub unsafe fn pinkmagic_effect_handler(weapon: &mut L2CFighterBase) {
-        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-        let module_accessor = sv_battle_object::module_accessor(otarget_id);
-        let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-        let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let size = (FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] * 0.04) + 0.1;
-        GFX_COUNTER[ENTRY_ID] += 1;
-        if GFX_COUNTER[ENTRY_ID] >= 6 {
-            EffectModule::req_follow(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), &NONE, &NONE, 0.5 + size, true, 0, 0, 0, 0, 0, true, true);
-            EffectModule::set_rate_last(weapon.module_accessor, 1.5);
-            EffectModule::set_alpha_last(weapon.module_accessor, 0.7);
-            GFX_COUNTER[ENTRY_ID] = 0;
-        }
+extern "C" {
+    #[link_name = "_ZN3app6camera13get_dead_areaEv"]
+    pub fn get_dead_area() -> Rect;
+    #[link_name = "_ZN3app6camera16get_camera_rangeEv"]
+    pub fn get_camera_range() -> Rect;
+}
+#[repr(simd)]
+#[derive(Debug)]
+pub struct Rect {
+    //left: f32,
+    //right: f32,
+    //up: f32,
+    //down: f32,
+    pub vec: [f32; 4]
+}
+
+impl Rect {
+    pub fn contains(&self, x: f32, y: f32) -> bool {
+        (self.vec[0] <= x && x <= self.vec[1]) && (self.vec[3] <= y && y <= self.vec[2])
     }
+    pub fn left(&self) -> f32 {return self.vec[0];}
+    pub fn right(&self) -> f32 {return self.vec[1];}
+    pub fn up(&self) -> f32 {return self.vec[2];}
+    pub fn down(&self) -> f32 {return self.vec[3];}
 }
 
 pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -719,18 +727,33 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let defender_module_accessor = sv_battle_object::module_accessor(defender_object_id);
     let attacker_fighter_kind = sv_battle_object::kind(attacker_object_id);
     let defender_fighter_kind = sv_battle_object::kind(defender_object_id);
-    let ENTRY_ID_A = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let ENTRY_ID_D = WorkModule::get_int(defender_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let spell_type = WorkModule::get_int(attacker_module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let CUSTOM_FIGHTER = color >= 64 && color <= 71;
     if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER {
         if utility::get_category(&mut *defender_module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
             if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
-                if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID_A] == 3 {
+                if spell_type == 8 {
                     if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
                         SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
-                        EffectModule::req_time_follow(defender_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 720, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.25, false, 0);
+                        EffectModule::req_time_follow(defender_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 720, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.1, false, 0);
                         SoundModule::play_se(defender_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
+                    }
+                }
+            }
+        }
+    }
+    let num_players = Fighter::get_fighter_entry_count();
+    if attacker_fighter_kind == *FIGHTER_KIND_TRAIL {
+        let motion_kind = MotionModule::motion_kind(attacker_module_accessor);
+        if motion_kind == hash40("appeal_hi_l") || motion_kind == hash40("appeal_hi_r") { 
+            if WorkModule::get_int(attacker_module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_INT_APPEAL_HI_KIND) == 2 {
+                if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
+                    for i in 1..num_players {
+                        let opponent_module_accessor = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(i)); //All Opponents
+                        SlowModule::set(opponent_module_accessor, 0, 20, 300, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
+                        EffectModule::req_time_follow(opponent_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 300, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.1, false, 0);
+                        SoundModule::play_se(opponent_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
                     }
                 }
             }

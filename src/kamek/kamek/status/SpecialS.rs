@@ -113,14 +113,14 @@ unsafe extern "C" fn kamek_SpecialS_Main_loop(fighter: &mut L2CFighterCommon) ->
 
 unsafe extern "C" fn status_kamek_SpecialS_CheckAttack(fighter: &mut L2CFighterCommon, param2: &L2CValue, param3: &L2CValue) -> L2CValue {
     let table = param3.get_table() as *mut smash2::lib::L2CTable;
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
     let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
+    let spell_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     if category == *BATTLE_OBJECT_CATEGORY_FIGHTER {
         if collision_kind == *COLLISION_KIND_HIT {
             let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
             let module_accessor = sv_battle_object::module_accessor(object_id);
-            if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] == 1 {
+            if spell_type == 6 {
                 let mut params = CreateItemParam {
                     founder_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
                     item_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor) + 12.0, z: PostureModule::pos_z(module_accessor), w: 0.0},
@@ -143,7 +143,7 @@ unsafe extern "C" fn status_kamek_SpecialS_CheckAttack(fighter: &mut L2CFighterC
                 StatusModule::change_status_request(hover_stone, *ITEM_STATUS_KIND_THROW, false);
                 StatusModule::change_status_request(hover_stone, *ITEM_STATUS_KIND_LANDING, false);
             }
-            else if FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] == 2 {
+            else if spell_type == 7 {
                 let mut params = CreateItemParam {
                     founder_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor), z: PostureModule::pos_z(module_accessor), w: 0.0},
                     item_pos: smash::Vector4f{x: PostureModule::pos_x(module_accessor), y: PostureModule::pos_y(module_accessor) + 12.0, z: PostureModule::pos_z(module_accessor), w: 0.0},
@@ -172,11 +172,9 @@ unsafe extern "C" fn status_kamek_SpecialS_CheckAttack(fighter: &mut L2CFighterC
 }
 
 unsafe extern "C" fn status_kamek_SpecialS_End(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);  
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;  
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);   
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
-        FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 0;
         0.into()
     }
     else {

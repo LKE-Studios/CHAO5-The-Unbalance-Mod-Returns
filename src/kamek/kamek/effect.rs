@@ -763,7 +763,8 @@ unsafe extern "C" fn effect_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
-    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    let magic_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -773,8 +774,10 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_RATE(fighter, 2);
     }
     frame(fighter.lua_state_agent, 34.0);
-    if rand_num >= 31 && rand_num <= 45 {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+    if is_excute(fighter) {
+        if magic_type == 1 {
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+        }
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
@@ -786,7 +789,8 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
-    let rand_num = sv_math::rand(hash40("fighter"), 100);
+    let magic_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         EFFECT_FOLLOW(fighter, Hash40::new("stg_mariou_water_magic_bright"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.4, true);
@@ -795,8 +799,11 @@ unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
         EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
         LAST_EFFECT_SET_RATE(fighter, 2);
     }
-    if rand_num >= 31 && rand_num <= 45 {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+    frame(fighter.lua_state_agent, 34.0);
+    if is_excute(fighter) {
+        if magic_type == 1 {
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+        }
     }
     frame(fighter.lua_state_agent, 71.0);
     if is_excute(fighter) {
