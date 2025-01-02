@@ -15,7 +15,7 @@ unsafe extern "C" fn status_metaknight_SpecialN_Main(fighter: &mut L2CFighterCom
     }
     fighter.set_situation(SITUATION_KIND_AIR.into());
     WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_BUTTON_ATTACK_COUNTER);
-    WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
+    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
     ground_kinetic_function(fighter);
     fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialN_Main_loop as *const () as _))
 }

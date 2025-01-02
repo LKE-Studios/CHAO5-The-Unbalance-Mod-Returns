@@ -5,7 +5,6 @@ pub static mut STICK_DIRECTION : [f32; 8] = [0.0; 8];
 pub unsafe extern "C" fn frame_waluigi_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
     let module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -53,7 +52,7 @@ pub unsafe extern "C" fn special_s_waluigi(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B, *FIGHTER_DOLLY_STATUS_KIND_SPECIAL_S_COMMAND, *FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B_COMMAND].contains(&status_kind) 
     || motion_kind == hash40("special_air_b_start") {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S, true);
+        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S, true);
     }
     if status_kind == *FIGHTER_DOLLY_STATUS_KIND_SPECIAL_F_ATTACK || status_kind == *FIGHTER_DOLLY_STATUS_KIND_SPECIAL_F_END {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);

@@ -36,6 +36,7 @@ pub mod param;
 pub mod consts;
 pub mod function;
 pub mod frame;
+pub mod vtable;
 
 pub fn is_glider(kind: i32) -> bool {
     [
@@ -64,5 +65,6 @@ pub fn install() {
     frame::install();
     param::install();
     function::install();
+    vtable::install();
 }
 

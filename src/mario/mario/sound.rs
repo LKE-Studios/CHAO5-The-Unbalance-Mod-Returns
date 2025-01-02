@@ -3,7 +3,7 @@ use crate::mario::mario::frame::*;
 
 //SpecialN
 unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 13.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_mario_special_n01"));
@@ -20,7 +20,7 @@ unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn game_mario_SpecialAirN(fighter: &mut L2CAgentBase) {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 13.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_mario_special_n01"));

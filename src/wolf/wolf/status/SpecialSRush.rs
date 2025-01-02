@@ -81,9 +81,9 @@ unsafe extern "C" fn status_wolf_SpecialSRush_End(fighter: &mut L2CFighterCommon
 
 pub fn install() {
     Agent::new("wolf")
-    .status(Pre, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Pre)
-    .status(Init, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Init)
-    .status(Main, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Main)
-    .status(End, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_End)
+    .status(Pre, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Pre)
+    .status(Init, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Init)
+    .status(Main, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_Main)
+    .status(End, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_RUSH, status_wolf_SpecialSRush_End)
     .install();
 }

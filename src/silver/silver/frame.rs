@@ -131,14 +131,6 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
 pub unsafe extern "C" fn motion_main_silver(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    if [hash40("special_n_max"), hash40("special_n_cancel")].contains(&motion_kind) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), true);
-    };
-    if [hash40("special_air_n_max"), hash40("special_air_n_cancel"),hash40("special_air_n_jump_cancel")].contains(&motion_kind) {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
-        StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
-    };
     if ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_AIR, 
         *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_MAX, 
         *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT].contains(&status_kind) {

@@ -56,8 +56,8 @@ unsafe extern "C" fn metaknight_SpecialSEnd_Main_Sub(fighter: &mut L2CFighterCom
         return 1.into();
     }
     if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
     }
     if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
         DamageModule::heal(fighter.module_accessor, -5.0, 0);

@@ -1,5 +1,6 @@
 mod SpecialN;
 mod SpecialNHold;
+mod SpecialNCancel;
 mod SpecialNShoot;
 mod SpecialNMax;
 pub mod SpecialHi;
@@ -10,7 +11,8 @@ mod SpecialLw;
 
 pub fn install() {
     SpecialN::install(); 
-    SpecialNHold::install(); 
+    SpecialNHold::install();
+    SpecialNCancel::install(); 
     SpecialNShoot::install(); 
     SpecialNMax::install(); 
     SpecialHi::install(); 

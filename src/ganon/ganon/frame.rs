@@ -20,16 +20,6 @@ unsafe extern "C" fn frame_ganon_Main(fighter: &mut L2CFighterCommon) {
             }
         }
     };
-    if FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] {
-        if StopModule::is_hit(fighter.module_accessor) {
-            if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4_START, false);
-            }
-            else {
-                FIGHTER_STATUS_GANON_UNIQ_APPEAL_COUNTER[ENTRY_ID] = false;
-            }
-        }
-    };
 }
 
 pub fn install() {

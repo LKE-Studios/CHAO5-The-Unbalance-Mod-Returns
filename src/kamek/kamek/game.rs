@@ -566,6 +566,8 @@ unsafe extern "C" fn game_kamek_SpecialS(fighter: &mut L2CAgentBase) {
             AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
             DamageModule::heal(fighter.module_accessor, -40.0, 0);
             WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape 10%
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);
@@ -658,6 +660,8 @@ unsafe extern "C" fn game_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
             AttackModule::set_poison_param(fighter.module_accessor, 1, 900, 60, 9.5, false);
             DamageModule::heal(fighter.module_accessor, -40.0, 0);
             WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+            PLAY_SE_REMAIN(fighter, Hash40::new("se_common_lifeup"));
+            EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
         }
         else if rand_num >= 46 && rand_num <= 55 { //Cape 10%
             ATTACK(fighter, 0, 0, Hash40::new("kamek_book"), 30.0, 361, 100, 80, 0, 22.0, 0.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_turn"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_KAMEHIT, *ATTACK_REGION_OBJECT);

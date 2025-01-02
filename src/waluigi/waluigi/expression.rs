@@ -167,6 +167,86 @@ unsafe extern "C" fn expression_waluigi_AttackAirLw(fighter: &mut L2CAgentBase) 
     }
 }
 
+//SpecialN
+unsafe extern "C" fn expression_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 3, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        if dice_num == 0 {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true);
+        }
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 3);
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_TOP, 3, true);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+	if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_explosion"), 4, false, *BATTLE_OBJECT_ID_INVALID as u32);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
+	}
+    frame(fighter.lua_state_agent, 40.0);
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
+    }
+}
+
+//SpecialAirN
+unsafe extern "C" fn expression_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) { 
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+    }
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 3, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        if dice_num == 0 {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true);
+        }
+    }
+    frame(fighter.lua_state_agent, 19.0);
+	if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_loopattack"), 15, true, *BATTLE_OBJECT_ID_INVALID as u32);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
+    }
+}
+
 //SpecialSBStart
 unsafe extern "C" fn expression_waluigi_SpecialSBStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -218,6 +298,24 @@ unsafe extern "C" fn expression_waluigi_SpecialAirSFStart(fighter: &mut L2CAgent
     wait(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 4, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+}
+
+//SpecialLwJumpAir
+unsafe extern "C" fn expression_waluigi_SpecialLwJumpAir(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_loopattack"), 15, true, *BATTLE_OBJECT_ID_INVALID as u32);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
     }
 }
 
@@ -336,11 +434,14 @@ pub fn install() {
     .expression_acmd("expression_attackairb_waluigi", expression_waluigi_AttackAirB, Low)
     .expression_acmd("expression_attackairhi_waluigi", expression_waluigi_AttackAirHi, Low)
     .expression_acmd("expression_attackairlw_waluigi", expression_waluigi_AttackAirLw, Low)
+    .expression_acmd("expression_specialn_waluigi", expression_waluigi_SpecialN, Low)
+    .expression_acmd("expression_specialairn_waluigi", expression_waluigi_SpecialAirN, Low)
     .expression_acmd("expression_specialsbstart_waluigi", expression_waluigi_SpecialSBStart, Low)
     .expression_acmd("expression_specialsbattackw_waluigi", expression_waluigi_SpecialSBAttackW, Low)
     .expression_acmd("expression_specialsbattack_waluigi", expression_waluigi_SpecialSBAttack, Low)
     .expression_acmd("expression_specialsfstart_waluigi", expression_waluigi_SpecialSFStart, Low)
     .expression_acmd("expression_specialairsfstart_waluigi", expression_waluigi_SpecialAirSFStart, Low)
+    .expression_acmd("expression_speciallwjumpair", expression_waluigi_SpecialLwJumpAir, Low)
     .expression_acmd("expression_appealhil", expression_waluigi_AppealHiL, Low)
     .expression_acmd("expression_appealhir", expression_waluigi_AppealHiR, Low)
     .expression_acmd("expression_appeallwl", expression_waluigi_AppealLwL, Low)

@@ -152,9 +152,9 @@ unsafe extern "C" fn status_waluigi_SpecialLwAttack_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("dolly")
-    .status(Pre, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Pre)
-    .status(Main, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Main)
-    .status(Exec, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Exec)
-    .status(End, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_End)
+    .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Pre)
+    .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Main)
+    .status(Exec, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_Exec)
+    .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_ATTACK, status_waluigi_SpecialLwAttack_End)
     .install();
 }

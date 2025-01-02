@@ -2,6 +2,17 @@ use crate::imports::BuildImports::*;
 
 pub static num_9_recover_amount : f32 = 180.0;
 
+unsafe extern "C" fn status_waluigi_SpecialN_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI {
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
 unsafe extern "C" fn status_waluigi_SpecialN_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let WALUIGI = color >= 120 && color <= 130;
@@ -16,6 +27,7 @@ unsafe extern "C" fn status_waluigi_SpecialN_Main(fighter: &mut L2CFighterCommon
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
         }
         waluigi_SpecialN_diceblock_helper(fighter);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_N_WORK_FLAG_GENERATE_DONE);
         fighter.sub_shift_status_main(L2CValue::Ptr(waluigi_SpecialN_Main_loop as *const () as _))
@@ -29,6 +41,7 @@ unsafe extern "C" fn waluigi_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) 
     let hop_speed_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("hop_speed_y"));
     let gravity_accel = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("gravity_accel"));
     let gravity_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_n"), hash40("gravity_max"));
+    let frame = MotionModule::frame(fighter.module_accessor);
     if fighter.sub_wait_ground_check_common(false.into()).get_bool()
     || fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
@@ -88,95 +101,12 @@ unsafe extern "C" fn waluigi_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) 
     0.into()
 }
 
-pub unsafe extern "C" fn waluigi_SpecialN_diceblock_helper(fighter: &mut L2CFighterCommon) {
-    let mut rand_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-    rand_num = sv_math::rand(hash40("dolly"), 10);
-    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_FRAME);
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("dolly_Kart_Glider_VIS_O_OBJShape"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10_trans"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), false);
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), false);
-    }
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM) {
-        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), true);
-        if rand_num == 0 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true); 
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 1 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 1, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 2  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 2, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 3  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 3, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 4  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 4, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 5  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 5, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 6 {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 6, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 7  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 7, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 8  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            DamageModule::heal(fighter.module_accessor, -num_9_recover_amount, 0);
-            WorkModule::set_int(fighter.module_accessor, 8, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-        else if rand_num == 9  {
-            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), true);
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
-            WorkModule::set_int(fighter.module_accessor, 9, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-        }
-    }
-}
-
 unsafe extern "C" fn status_waluigi_SpecialN_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let WALUIGI = color >= 120 && color <= 130;
 	if WALUIGI {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_INVISIBLE);
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_dolly_superspecial_hit_critical"), 0);
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
         0.into()
     }
     else {
@@ -184,8 +114,69 @@ unsafe extern "C" fn status_waluigi_SpecialN_End(fighter: &mut L2CFighterCommon)
     }
 }
 
+pub unsafe extern "C" fn waluigi_SpecialN_diceblock_helper(fighter: &mut L2CFighterCommon) {
+    let mut rand_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    rand_num = sv_math::rand(hash40("dolly"), 10);
+    WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_FRAME);
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM) {
+        ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("frame_dice"), true);
+        if rand_num == 0 {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_1"), true); 
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 1 {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_2"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 2  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_3"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 2, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 3  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_4"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 3, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 4  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_5"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 4, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 5  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_6"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 5, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 6 {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_7"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 6, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 7  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_8"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 7, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+        else if rand_num == 8  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_9"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 8, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+            DamageModule::heal(fighter.module_accessor, -num_9_recover_amount, 0);
+        }
+        else if rand_num == 9  {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("num_dice_10"), true);
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_OUT);
+            WorkModule::set_int(fighter.module_accessor, 9, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+        }
+    }
+}
+
 pub fn install() {
     Agent::new("dolly")
+    .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_N, status_waluigi_SpecialN_Init)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, status_waluigi_SpecialN_Main)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_N, status_waluigi_SpecialN_End)
     .install();

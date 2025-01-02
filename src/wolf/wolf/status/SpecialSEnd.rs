@@ -128,10 +128,10 @@ unsafe extern "C" fn status_wolf_SpecialSEnd_End(fighter: &mut L2CFighterCommon)
 
 pub fn install() {
     Agent::new("wolf")
-    .status(Pre, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Pre)
-    .status(Init, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Init)
-    .status(Main, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Main)
-    .status(Exec, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Exec)
-    .status(End, FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_End)
+    .status(Pre, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Pre)
+    .status(Init, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Init)
+    .status(Main, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Main)
+    .status(Exec, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_Exec)
+    .status(End, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_S_END, status_wolf_SpecialSEnd_End)
     .install();
 }

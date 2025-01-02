@@ -129,7 +129,7 @@ unsafe extern "C" fn effect_pit_SpecialHiFly(fighter: &mut L2CAgentBase) {
         }
         for _ in 0..2 {
             if is_excute(fighter) {
-                if WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
+                if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
                     EFFECT_OFF_KIND(fighter, Hash40::new("pit_ikaros_wing_flare"), true, true);
                     EFFECT_FOLLOW(fighter, Hash40::new("pit_ikaros_wing_flare"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, false);
                     LAST_EFFECT_SET_COLOR(fighter, /*R*/ 2.2, /*G*/ 0.1, /*B*/ 0.0);

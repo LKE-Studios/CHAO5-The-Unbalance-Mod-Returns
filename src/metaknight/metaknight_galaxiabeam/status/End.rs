@@ -34,8 +34,8 @@ unsafe extern "C" fn status_metaknight_galaxiabeam_End_End(weapon: &mut L2CWeapo
 
 pub fn install() {
     Agent::new("metaknight_galaxiabeam")
-    .status(Pre, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_Pre)
-    .status(Main, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_Main)
-    .status(End, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_End)
+    .status(Pre, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_Pre)
+    .status(Main, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_Main)
+    .status(End, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_END, status_metaknight_galaxiabeam_End_End)
     .install();
 }

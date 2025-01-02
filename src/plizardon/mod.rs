@@ -19,6 +19,7 @@ pub fn install() {
     smashline::add_param_object("plizardon", "param_special_guard");
     smashline::add_param_object("plizardon", "param_rock");
     smashline::add_param_object("plizardon", "param_rockstone");
+    smashline::add_param_object("plizardon", "param_critical");
     smashline::clone_weapon("link", *WEAPON_KIND_LINK_BOOMERANG, "plizardon", "rock", false);
     smashline::clone_weapon("sheik", *WEAPON_KIND_SHEIK_NEEDLE, "plizardon", "rockstone", false);
 }

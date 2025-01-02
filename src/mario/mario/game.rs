@@ -718,14 +718,14 @@ unsafe extern "C" fn game_mario_DownAttackU(fighter: &mut L2CAgentBase) {
 
 //SpecialN
 unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 14.0);
         if is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MARIO_GENERATE_ARTICLE_FIREBALL, false, 0);
         }
         frame(fighter.lua_state_agent, 50.0);
         if is_excute(fighter) {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
         }
     }
     else {
@@ -741,14 +741,14 @@ unsafe extern "C" fn game_mario_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn game_mario_SpecialAirN(fighter: &mut L2CAgentBase) {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL) {
         frame(fighter.lua_state_agent, 14.0);
         if is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MARIO_GENERATE_ARTICLE_FIREBALL, false, 0);
         }
         frame(fighter.lua_state_agent, 50.0);
         if is_excute(fighter) {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_MARIO_STATUS_SPECIAL_N_FLAG_SPECIAL_N_GIANT_FIREBALL);
         }
     }
     else {

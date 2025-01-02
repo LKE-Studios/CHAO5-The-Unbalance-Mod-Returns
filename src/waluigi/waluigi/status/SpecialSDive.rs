@@ -133,9 +133,9 @@ unsafe extern "C" fn status_waluigi_SpecialSDive_End(fighter: &mut L2CFighterCom
 
 pub fn install() {
     Agent::new("dolly")
-    .status(Pre, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Pre)
-    .status(Main, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Main)
-    .status(Exec, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Exec)
-    .status(End, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_End)
+    .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Pre)
+    .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Main)
+    .status(Exec, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_Exec)
+    .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_DIVE, status_waluigi_SpecialSDive_End)
     .install();
 }

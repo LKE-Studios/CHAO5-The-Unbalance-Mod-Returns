@@ -3,11 +3,11 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn status_metaknight_SpecialGuard_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let kinetic;
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
-        WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_AIR_SPECIAL_GUARD);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_AIR_SPECIAL_GUARD);
         kinetic = *FIGHTER_KINETIC_TYPE_FALL;
     }
     else {
-        WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_AIR_SPECIAL_GUARD);
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_AIR_SPECIAL_GUARD);
         kinetic = *FIGHTER_KINETIC_TYPE_GROUND_STOP;
     }
     StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), kinetic, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
@@ -72,9 +72,9 @@ unsafe extern "C" fn status_metaknight_SpecialGuard_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("metaknight")
-    .status(Pre, FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Pre)
-    .status(Main, FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Main)
-    .status(End, FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_End)
+    .status(Pre, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Pre)
+    .status(Main, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Main)
+    .status(End, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_End)
     .install();
 }
 

@@ -54,8 +54,8 @@ unsafe extern "C" fn status_waluigi_SpecialSLanding_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("dolly")
-    .status(Pre, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_Pre)
-    .status(Main, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_Main)
-    .status(End, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_End)
+    .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_Pre)
+    .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_Main)
+    .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_S_LANDING, status_waluigi_SpecialSLanding_End)
     .install();
 }

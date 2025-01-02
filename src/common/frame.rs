@@ -20,7 +20,7 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
     WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_COUNT);
     WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CLIFF_XLU);
     //Flag Checks
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
         common_attack_critical_flag(fighter);
     }
     loupe(fighter);
@@ -33,20 +33,18 @@ pub unsafe extern "C" fn loupe(fighter : &mut L2CFighterCommon) {
     let threshold_right = camzones.right();
     let is_too_left = pos_x < threshold_left;
     let is_too_right = pos_x > threshold_right;
+    let loupe_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) 
-    && (is_too_left || is_too_right) {
-        let sound_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-        WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-        if sound_counter < 2 {
+    && (is_too_left || is_too_right) && !CustomModule::is_operation_cpu(fighter.module_accessor) {
+        WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
+        println!("{}", loupe_frame);
+        if loupe_frame == 1 {
             SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
-        }
-        else {
-            WorkModule::set_int(fighter.module_accessor, 2, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
         }
     }
     else {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), 0);
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
     }
 }
 

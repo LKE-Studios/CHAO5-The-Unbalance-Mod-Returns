@@ -19,6 +19,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(),(hash40("air_speed_x_stable"), 0, 1.4883));
     param_config::update_float_2(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(),(hash40("dive_speed_y"), 0, 2.35));
     param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("speed_ground"), 7.5));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(), 0);
 
     //SILVER
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("walk_accel_mul"), 0, 0.15));
@@ -60,6 +62,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_MEWTWO_SHADOWBALL, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_shadowball"), hash40("flicker_scale_min"), 0.0));
     param_config::update_float_2(-*WEAPON_KIND_MEWTWO_SHADOWBALL, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_shadowball"), hash40("flicker_scale_max"), 0.0));
     param_config::update_int_2(-*WEAPON_KIND_MEWTWO_SHADOWBALL, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_shadowball"), hash40("life"), 600));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(), 0);
 
     //WALUIGI
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("walk_accel_mul"), 0, 0.097));
@@ -100,6 +104,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("air_speed_y_mul"), 1.676));
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("speed_y_mul"), 1.55));
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("lr_stick_x"), 0.2));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(), 0);
 
     //BLAZIKEN
     param_config::update_int_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("attack_combo_max"), 0, 3));
@@ -132,6 +138,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_b"), 0, 6.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_hi"), 0, 4.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_lw"), 0, 9.0));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(), 0);
 
     //KRYSTAL
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("jump_count_max"), 0, 4));
@@ -187,6 +195,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_lw"), hash40("end_offset_y"), 0.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_special_lw"), hash40("reflector_max"), 3000.0));
     param_config::update_int_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_glide"), hash40("jump_button_hold_glide_frame"), 9999));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(), 0);
 
     //NINTEN
     param_config::update_float_2(*FIGHTER_KIND_NESS, vec![120,121,122,123,124,125,126,127].clone(),(hash40("walk_accel_mul"), 0, 0.071));
@@ -236,6 +246,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_NESS, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_lw"), hash40("accel_y"), 0.24));
     param_config::update_float_2(*FIGHTER_KIND_NESS, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_lw"), hash40("absorb_power_max"), 7000.0));
     param_config::update_float_2(*FIGHTER_KIND_NESS, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_lw"), hash40("phy_magnet_effect_scale"), 1.2));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_NESS, vec![120,121,122,123,124,125,126,127].clone());
 
     //KAMEK
     param_config::update_float_2(*FIGHTER_KIND_NESS, vec![64,65,66,67,68,69,70,71].clone(),(hash40("walk_accel_mul"), 0, 0.065));
@@ -268,6 +279,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("speed_ground"), 3.0));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("speed_air"), 5.0));
     param_config::update_int_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71].clone(),(hash40("param_pkfire"), hash40("life"), 300));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_NESS, vec![64,65,66,67,68,69,70,71].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_NESS, vec![64,65,66,67,68,69,70,71].clone(), 0);
 
     //MASKEDMAN
     param_config::update_int_2(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), (hash40("attack_combo_max"), 0, 1));
@@ -301,6 +314,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_accel_y"), 0.0));
     param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_speed_max_y"), 0.0));
     param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_scale_min"), 0.0));
+    param_config::disable_kirby_copy(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), 0);
 }
 
 pub fn install() {

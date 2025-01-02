@@ -51,10 +51,10 @@ unsafe extern "C" fn status_metaknight_galaxiabeam_Shoot_End(weapon: &mut L2CWea
 
 pub fn install() {
     Agent::new("metaknight_galaxiabeam")
-    .status(Pre, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Pre)
-    .status(Init, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Init)
-    .status(Main, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Main)
-    .status(Exec, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Exec)
-    .status(End, WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_End)
+    .status(Pre, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Pre)
+    .status(Init, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Init)
+    .status(Main, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Main)
+    .status(Exec, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_Exec)
+    .status(End, *WEAPON_METAKNIGHT_GALAXIA_BEAM_STATUS_KIND_SHOOT, status_metaknight_galaxiabeam_Shoot_End)
     .install();
 }

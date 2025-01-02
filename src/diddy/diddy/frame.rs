@@ -6,7 +6,6 @@ pub unsafe extern "C" fn frame_diddy(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let prev_status_kind = fighter.global_table[PREV_STATUS_KIND].get_i32();
     let frame = MotionModule::frame(fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if status_kind == *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_N_SHOOT {
         if frame > 5.0 {
             if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
@@ -25,16 +24,15 @@ pub unsafe extern "C" fn frame_diddy(fighter : &mut L2CFighterCommon) {
         let opponent_status_kind = StatusModule::status_kind(opponent_module_accessor);
         let banana_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_DIDDY_STATUS_SPECIAL_LW_WORK_INT_BANANA_ID);
         if prev_status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW
-        && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST) {
-            WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST);
+        && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST) {
+            WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST);
         }
         if opponent_status_kind == *FIGHTER_STATUS_KIND_SLIP
-        && WorkModule::is_flag(fighter.module_accessor, FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST) {
+        && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST) {
             WorkModule::set_int(fighter.module_accessor, banana_id, *FIGHTER_DIDDY_STATUS_SPECIAL_LW_WORK_INT_BANANA_ID);
-            WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST);
+            WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_DIDDY_INSTANCE_WORK_ID_FLAG_BANANA_EXIST);
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_LW_LAUGH, false);
         }
-        println!("Is Banana Exist {:?}", BANANA_EXIST[ENTRY_ID]);
     }
 }
 

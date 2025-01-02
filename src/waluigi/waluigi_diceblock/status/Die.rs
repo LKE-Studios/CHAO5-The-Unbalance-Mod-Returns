@@ -22,13 +22,14 @@ pub unsafe extern "C" fn waluigi_diceblock_Die_Main_loop(weapon: &mut L2CWeaponC
 }
 
 pub unsafe extern "C" fn status_waluigi_diceblock_Die_End(weapon: &mut L2CWeaponCommon) -> L2CValue {
+	WorkModule::off_flag(weapon.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_FLAG_DICEBLOCK_SELECT_NUM);
     0.into()
 }
 
 pub fn install() {
     Agent::new("dolly_diceblock")
-    .status(Pre, WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_Pre)
-	.status(Main, WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_Main)
-	.status(End, WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_End)
+    .status(Pre, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_Pre)
+	.status(Main, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_Main)
+	.status(End, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_DIE, status_waluigi_diceblock_Die_End)
     .install();
 }

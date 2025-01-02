@@ -128,6 +128,5 @@ pub mod BuildImports {
         param_config::*,
         arcropolis_api::*,
         lazy_static::lazy_static,
-        crate::kamek::kamek::status::SpecialHiEnd::*,
     };
 }

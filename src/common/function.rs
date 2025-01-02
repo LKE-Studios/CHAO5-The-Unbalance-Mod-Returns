@@ -1,5 +1,4 @@
 use crate::imports::BuildImports::*;
-use crate::kamek::kamek::frame::*;
 
 pub static mut GFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
@@ -9,6 +8,7 @@ pub static mut IS_CRIT : [bool; 8] = [false; 8];
 const COMMON_WEAPON_ATTACK_CALLBACK : usize = 0x33BDC30;
 const ITEM_CREATOR : usize = 0x15DB0B0;
 const NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x67A7B0;
+const SPECIAL_ZOOM_CRITICAL_OFFSET : usize = 0x696720;
 
 pub mod KineticUtility {
     // Resets and enables the kinetic energy type.
@@ -26,7 +26,10 @@ pub mod KineticUtility {
     }
 }
 
-//Const Functions
+//Calls the Special Zoom function
+#[skyline::from_offset(SPECIAL_ZOOM_CRITICAL_OFFSET)]
+pub fn special_zoom_critical(module_accessor: *mut smash::app::BattleObjectModuleAccessor, collision_log: u64, fighter_kind: i32, vl_params: u64, param_5: i32, param_6: i32, param_7: i32, param_8: i32, param_9: i32) -> u64;
+
 pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let special_zoom_effect = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_EFFECT);
@@ -34,10 +37,10 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
         COUNTER[ENTRY_ID] += 1;
         IS_CRIT[ENTRY_ID] = true;
         if COUNTER[ENTRY_ID] < 2 {
-            EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("haver"), &Vector3f{x: 0.0, y: 8.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
+            EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, true, true);
             CURRENT_ON_FRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
             SlowModule::set_whole(fighter.module_accessor, 2, 0);
-            PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_criticalhit"), true, false, false, false, enSEType(0));
             QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
             let lr = PostureModule::lr(fighter.module_accessor);
             CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * lr);
@@ -78,31 +81,32 @@ pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
     LAST_EFFECT_SET_COLOR(fighter, 0.831, 0.686, 0.216);
 }
 
-unsafe extern "C" fn special_flag_checks_init(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn Start_special_flag_checks_Init(fighter: &mut L2CFighterCommon) {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
-        fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_special_n_callback as *const () as _));
-        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_special_s_callback as *const () as _));
-        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(metaknight_special_hi_callback as *const () as _));
-        fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(metaknight_special_lw_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialN_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialS_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialHi_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialLw_callback as *const () as _));
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(metaknight_change_status_callback as *const () as _)); 
     }
     if fighter_kind == *FIGHTER_KIND_LUCARIO {
-        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_special_hi_callback as *const () as _));  
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(lucario_SpecialHi_callback as *const () as _));  
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(lucario_change_status_callback as *const () as _));   
     }
     if fighter_kind == *FIGHTER_KIND_SIMON || fighter_kind == *FIGHTER_KIND_RICHTER {
-        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(simon_special_hi_callback as *const () as _));  
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(simon_SpecialHi_callback as *const () as _));  
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(simon_change_status_callback as *const () as _));   
     }
     if fighter_kind == *FIGHTER_KIND_TRAIL {
-        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(trail_special_s_callback as *const () as _));  
+        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(trail_SpecialS_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(trail_SpecialHi_callback as *const () as _));  
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(trail_change_status_callback as *const () as _));   
     }
 }
 
-unsafe extern "C" fn metaknight_special_n_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N) {
+unsafe extern "C" fn metaknight_SpecialN_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N) {
         false.into()
     }
     else {
@@ -110,8 +114,8 @@ unsafe extern "C" fn metaknight_special_n_callback(fighter: &mut L2CFighterCommo
     }
 }
 
-unsafe extern "C" fn metaknight_special_s_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S) {
+unsafe extern "C" fn metaknight_SpecialS_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S) {
         false.into()
     }
     else {
@@ -119,8 +123,8 @@ unsafe extern "C" fn metaknight_special_s_callback(fighter: &mut L2CFighterCommo
     }
 }
 
-unsafe extern "C" fn metaknight_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI) {
+unsafe extern "C" fn metaknight_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI) {
         false.into()
     }
     else {
@@ -128,8 +132,8 @@ unsafe extern "C" fn metaknight_special_hi_callback(fighter: &mut L2CFighterComm
     }
 }
 
-unsafe extern "C" fn metaknight_special_lw_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW) {
+unsafe extern "C" fn metaknight_SpecialLw_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW) {
         false.into()
     }
     else {
@@ -145,16 +149,16 @@ unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterC
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
     *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
     }
     true.into()
 }
 
 
-unsafe extern "C" fn lucario_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn lucario_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI) {
         false.into()
     }
@@ -170,8 +174,8 @@ unsafe extern "C" fn lucario_change_status_callback(fighter: &mut L2CFighterComm
     true.into()
 }
 
-unsafe extern "C" fn simon_special_hi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI) {
+unsafe extern "C" fn simon_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI) {
         false.into()
     }
     else {
@@ -187,13 +191,22 @@ unsafe extern "C" fn simon_change_status_callback(fighter: &mut L2CFighterCommon
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
     *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
     }
     true.into()
 }
 
-unsafe extern "C" fn trail_special_s_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S) {
+unsafe extern "C" fn trail_SpecialS_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn trail_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI) {
         false.into()
     }
     else {
@@ -209,7 +222,7 @@ unsafe extern "C" fn trail_change_status_callback(fighter: &mut L2CFighterCommon
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
     *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
     *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
     }
     true.into()
 }
@@ -241,55 +254,50 @@ unsafe extern "C" fn basyaamo_check_special_command(fighter: &mut L2CFighterComm
 
 //Custom Fighter Functions
 
-pub static mut META_POWER : [bool; 8] = [false; 8];
-pub static mut GODDESS_POWER_UP : [bool; 8] = [false; 8];
-pub static POWER_MUL : f32 = 1.1;
-
 pub mod FighterSpecializer_MetaKnight {
     use crate::imports::BuildImports::*;
-    pub unsafe fn meta_power(fighter: &mut L2CFighterCommon) {
-        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        let meta_power_damage = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("meta_power_damage"));
-        let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("attack_mul"));
-        let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("reaction_mul"));
-        let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
-        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
-            let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            let sound_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            AttackModule::set_power_up(fighter.module_accessor, attack_mul);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
-            DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
-            if sound_counter < 3 {
-                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_metaknight_special_l01"), true, false, false, false, enSEType(0));
-                PLAY_SE_REMAIN(fighter, Hash40::new("se_metaknight_final01"));
+    pub unsafe fn meta_power(module_accessor: *mut smash::app::BattleObjectModuleAccessor) {
+        let fighter = get_fighter_common_from_accessor(&mut *module_accessor);
+        let status_kind = StatusModule::status_kind(module_accessor);
+        let meta_power_damage = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("meta_power_damage"));
+        let attack_mul = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("attack_mul"));
+        let reaction_mul = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("reaction_mul"));
+        let hit_damage_mul = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
+        let effect_scale = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("effect_scale"));
+        if WorkModule::is_flag(module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
+            let effect_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            let sound_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            AttackModule::set_power_up(module_accessor, attack_mul);
+            DamageModule::set_damage_mul_2nd(module_accessor, hit_damage_mul);
+            DamageModule::set_reaction_mul(module_accessor, reaction_mul);
+            if sound_counter == 1 {
+                SoundModule::play_se(module_accessor, Hash40::new("se_metaknight_special_l01"), true, false, false, false, enSEType(0));
+                SoundModule::play_se(module_accessor, Hash40::new("se_metaknight_final01"), true, false, false, false, enSEType(0));
                 PLAY_SE_REMAIN(fighter, Hash40::new("vc_metaknight_final03"));
-            };
-            if sound_counter >= 100 {
-                WorkModule::set_int(fighter.module_accessor, 3, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            };
-            if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage {
-                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            };
+                println!("{}", sound_counter);
+            }
             if effect_counter >= 6 {
-                let effect_a = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
-                EffectModule::set_rgb(fighter.module_accessor, effect_a as u32, 0.68, 0.87, 2.0);
-                let effect_b = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 0.15, true, 0, 0, 0, 0, 0, true, true);
-                EffectModule::set_rgb(fighter.module_accessor, effect_b as u32, 0.68, 0.87, 2.0);
-                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            };
-        };
-        if DamageModule::damage(fighter.module_accessor, 0) >= meta_power_damage {
-            WorkModule::on_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
-        };   
-        if DamageModule::damage(fighter.module_accessor, 0) < meta_power_damage || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT].contains(&status_kind) 
+                let effect_a = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, effect_scale, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(module_accessor, effect_a as u32, 0.68, 0.87, 2.0);
+                let effect_b = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, effect_scale, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(module_accessor, effect_b as u32, 0.68, 0.87, 2.0);
+                WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            }
+        }
+        else {
+            WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        }
+        if DamageModule::damage(module_accessor, 0) >= meta_power_damage {
+            WorkModule::on_flag(module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
+        }
+        else if DamageModule::damage(module_accessor, 0) < meta_power_damage || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT].contains(&status_kind) 
         || !sv_information::is_ready_go() {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            AttackModule::set_power_up(fighter.module_accessor, 1.0);
+            WorkModule::off_flag(module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
+            DamageModule::set_damage_mul_2nd(module_accessor, 1.0);
+            DamageModule::set_reaction_mul(module_accessor, 1.0);
+            AttackModule::set_power_up(module_accessor, 1.0);
         };     
         if [
             *FIGHTER_STATUS_KIND_DEAD,
@@ -304,42 +312,38 @@ pub mod FighterSpecializer_MetaKnight {
             *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D,
             *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR,
         ].contains(&status_kind) {
-            SoundModule::stop_se(fighter.module_accessor, Hash40::new("vc_metaknight_final03"), 0);
+            SoundModule::stop_se(module_accessor, Hash40::new("vc_metaknight_final03"), 0);
         }
     }
 }
 
 pub mod FighterSpecializer_Palutena {
     use crate::imports::BuildImports::*;
-    pub unsafe fn goddess_power_up (fighter: &mut L2CFighterCommon) {
-        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let status_kind = StatusModule::status_kind(fighter.module_accessor);
-        let attack_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("attack_mul"));
-        let reaction_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("reaction_mul"));
-        let hit_damage_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_divine_power_up"), hash40("hit_damage_mul"));
-        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER) {
-            let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, hit_damage_mul);
-            DamageModule::set_reaction_mul(fighter.module_accessor, reaction_mul);
-            AttackModule::set_power_up(fighter.module_accessor, attack_mul);
+    pub unsafe fn goddess_power_up (module_accessor: *mut smash::app::BattleObjectModuleAccessor) {
+        let status_kind = StatusModule::status_kind(module_accessor);
+        let attack_mul = WorkModule::get_param_float(module_accessor, hash40("param_divine_power_up"), hash40("attack_mul"));
+        let reaction_mul = WorkModule::get_param_float(module_accessor, hash40("param_divine_power_up"), hash40("reaction_mul"));
+        let hit_damage_mul = WorkModule::get_param_float(module_accessor, hash40("param_divine_power_up"), hash40("hit_damage_mul"));
+        if WorkModule::is_flag(module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER) {
+            let effect_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            DamageModule::set_damage_mul_2nd(module_accessor, hit_damage_mul);
+            DamageModule::set_reaction_mul(module_accessor, reaction_mul);
+            AttackModule::set_power_up(module_accessor, attack_mul);
             if effect_counter >= 20 {
-                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_aura_light"), false, false);
-                let effect = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
-                EffectModule::set_rgb(fighter.module_accessor, effect as u32, 0.0, 2.55, 0.48);
-                WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+                EffectModule::kill_kind(module_accessor, Hash40::new("sys_aura_light"), false, false);
+                let effect = EffectModule::req_follow(module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::set_rgb(module_accessor, effect as u32, 0.0, 2.55, 0.48);
+                WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             };
         };
-        if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
-            WorkModule::on_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
-        }
         if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT 
         || !sv_information::is_ready_go() {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
-            AttackModule::set_power_up(fighter.module_accessor, 1.0);
-            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-            EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_aura_light"), false, false);
+            WorkModule::off_flag(module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
+            AttackModule::set_power_up(module_accessor, 1.0);
+            DamageModule::set_damage_mul_2nd(module_accessor, 1.0);
+            DamageModule::set_reaction_mul(module_accessor, 1.0);
+            EffectModule::kill_kind(module_accessor, Hash40::new("sys_aura_light"), false, false);
         };
     }
 }
@@ -660,16 +664,12 @@ unsafe extern "C" fn captain_on_attack(vtable: u64, fighter: &mut Fighter, log: 
             return 0;
         }
         if StatusModule::status_kind(module_accessor) == FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT && MotionModule::frame(module_accessor) > 40.0 {
-            do_critical_zoom(module_accessor, log, 11, hash40("param_special_n"), 1, 0, 0, 0, 0);
+            special_zoom_critical(module_accessor, log, *FIGHTER_KIND_CAPTAIN, hash40("param_SpecialN"), 1, 0, 0, 0, 0);
             return 0;
         }
     }
     call_original!(vtable, fighter, log)
 }
-
-//The original critical zoom-in function
-#[skyline::from_offset(0x696720)]
-unsafe extern "C" fn do_critical_zoom(module_accessor: *mut smash::app::BattleObjectModuleAccessor, log: u64, unk1: u8, param_hash: u64, unk3: u64, unk4: u32, unk5: u32, unk6: i8, unk7: i8) -> u8;
 
 #[skyline::hook(offset = COMMON_WEAPON_ATTACK_CALLBACK)]
 unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut smash::app::Weapon, log: u32) {
@@ -771,9 +771,28 @@ unsafe fn fix_chara_replace(ctx: &skyline::hooks::InlineCtx) {
     *ptr2.add(0x4) = *ptr1.add(0x4);
 }
 
+//Sound pitch change values
+pub static semitone_0_up : f32 = 1.0;
+pub static semitone_1_up : f32 = 1.05946;
+pub static semitone_2_up : f32 = 1.1225;
+pub static semitone_3_up : f32 = 1.18921;
+pub static semitone_4_up : f32 = 1.26;
+pub static semitone_5_up : f32 = 1.33484;
+pub static semitone_6_up : f32 = 1.41421;
+pub static semitone_7_up : f32 = 1.49831;
+pub static semitone_8_up : f32 = 1.58740;
+pub static semitone_9_up : f32 = 1.68179;
+pub static semitone_10_up : f32 = 1.78180;
+pub static semitone_11_up : f32 = 1.88775;
+pub static semitone_12_up : f32 = 2.0;
+pub static semitone_13_up : f32 = 2.11893;
+pub static semitone_14_up : f32 = 2.24492;
+pub static semitone_15_up : f32 = 2.37841;
+pub static semitone_16_up : f32 = 2.51984;
+
 pub fn install() {
     Agent::new("fighter")
-    .on_start(special_flag_checks_init)
+    .on_start(Start_special_flag_checks_Init)
     .install();
     Agent::new("murabito")
     .on_line(Main, ac_update)

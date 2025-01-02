@@ -7,7 +7,7 @@ use smash::{
     app::{lua_bind::*, *}
 };
 use smash::lib::L2CAgent;
-use smash::lua2cpp::L2CFighterCommon;
+use smash::lua2cpp::{*, L2CFighterCommon, L2CWeaponCommon};
 use smash::phx::Vector2f;
 use bitflags::bitflags;
 use skyline::{
@@ -680,6 +680,59 @@ impl Cat4 {
         unsafe { 
             Cat4::from_bits_unchecked(ControlModule::get_command_flag_cat(boma, 3)) 
         }
+    }
+}
+
+pub fn get_weapon_common_from_accessor<'a>(boma: &'a mut BattleObjectModuleAccessor) -> &'a mut L2CWeaponCommon {
+    unsafe {
+        let lua_module = *(boma as *mut BattleObjectModuleAccessor as *mut u64).add(0x190 / 8);
+        std::mem::transmute(*((lua_module + 0x1D8) as *mut *mut L2CWeaponCommon))
+    }
+}
+
+pub mod CustomModule {
+    use super::*;
+
+    // A shortcut to reset i32 variables to 0.
+    pub unsafe fn reset_i32(module_accessor: *mut BattleObjectModuleAccessor, flag: i32) {
+        WorkModule::set_int(module_accessor, 0, flag);
+    }
+
+    // A shortcut to reset f32 variables to 0.
+    pub unsafe fn reset_f32(module_accessor: *mut BattleObjectModuleAccessor, flag: i32) {
+        WorkModule::set_float(module_accessor, 0.0, flag);
+    }
+
+    // A shortcut to add a value to an i32 variable.
+    pub unsafe fn add_i32(module_accessor: *mut BattleObjectModuleAccessor, flag: i32, amount: i32) {
+        let counter = WorkModule::get_int(module_accessor, flag) + amount;
+        WorkModule::set_int(module_accessor, counter, flag);
+    }
+
+    // A shortcut to add a value to an f32 variable.
+    pub unsafe fn add_f32(module_accessor: *mut BattleObjectModuleAccessor, flag: i32, amount: f32) {
+        let counter = WorkModule::get_float(module_accessor, flag) + amount;
+        WorkModule::set_float(module_accessor, counter, flag);
+    }
+
+    // A function for incrementing an f32 variable by an amount.
+    // This function takes into account the effects of slowdown, such as from
+    // Bayonetta's Witch Time or from the Timer item.
+    pub unsafe fn count_down(module_accessor: *mut BattleObjectModuleAccessor, flag: i32, amount: f32) {
+        let slow_rate = SlowModule::rate(module_accessor);
+        let global_slow_rate = sv_information::slow_rate();
+        let counter = WorkModule::get_float(module_accessor, flag) - (amount * slow_rate * global_slow_rate);
+        WorkModule::set_float(module_accessor, counter, flag);
+    }
+
+    pub unsafe fn is_operation_cpu(module_accessor: *mut BattleObjectModuleAccessor) -> bool {
+        if utility::get_category(&mut *module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+            return false;
+        }
+        let entry_id = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as i32;
+        let fighterentryid = smash::app::FighterEntryID(entry_id);
+        let fighterinformation = smash::app::lua_bind::FighterManager::get_fighter_information(singletons::FighterManager(), fighterentryid);
+        smash::app::lua_bind::FighterInformation::is_operation_cpu(fighterinformation)
     }
 }
 

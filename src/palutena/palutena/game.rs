@@ -1007,6 +1007,7 @@ unsafe extern "C" fn game_palutena_AppealSL(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_palutena_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
     }
 }
 
@@ -1014,6 +1015,7 @@ unsafe extern "C" fn game_palutena_AppealLwR(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_palutena_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
     }
 }
 

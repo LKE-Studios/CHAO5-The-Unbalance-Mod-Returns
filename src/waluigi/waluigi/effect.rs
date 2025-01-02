@@ -433,7 +433,7 @@ unsafe extern "C" fn effect_waluigi_DownAttackU(fighter: &mut L2CAgentBase) {
 
 //SpecialN
 unsafe extern "C" fn effect_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
-    let dice_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
     frame(fighter.lua_state_agent, 2.0);
 	if is_excute(fighter) {
 		EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0.0, 30.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -451,7 +451,7 @@ unsafe extern "C" fn effect_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn effect_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
-    let dice_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
     frame(fighter.lua_state_agent, 2.0);
 	if is_excute(fighter) {
 		EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0.0, 30.0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);

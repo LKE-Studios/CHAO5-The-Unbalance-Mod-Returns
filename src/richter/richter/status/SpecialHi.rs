@@ -23,7 +23,7 @@ unsafe extern "C" fn status_richter_SpecialHi_Main(fighter: &mut L2CFighterCommo
     WorkModule::set_float(fighter.module_accessor, 1.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_MOVE_TRANS_END_SPEED_X_MUL);
     WorkModule::set_float(fighter.module_accessor, 1.0, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_MOVE_TRANS_END_SPEED_Y_MUL);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
-    WorkModule::on_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
+    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
     let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     fighter.super_jump_punch(L2CValue::Void());
     let start_x_mul;
@@ -62,7 +62,7 @@ unsafe extern "C" fn richter_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon)
     }
     let frame = MotionModule::frame(fighter.module_accessor);
     if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
         if frame > 32.0 {
             CancelModule::enable_cancel(fighter.module_accessor);
         }

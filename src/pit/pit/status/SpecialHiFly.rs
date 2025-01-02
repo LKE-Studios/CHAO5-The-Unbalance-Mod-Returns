@@ -35,7 +35,7 @@ pub unsafe extern "C" fn status_pit_SpecialHiFly_Main(fighter: &mut L2CFighterCo
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_TREAD_JUMP);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_fly"), 0.0, 1.0, true, 0.0, false, false);
     let motion_kind = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND);
-    let fly_frame_max = WorkModule::get_float(fighter.module_accessor, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_POWER);
+    let fly_frame_max = WorkModule::get_float(fighter.module_accessor, *FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FLY_POWER);
     WorkModule::set_int(fighter.module_accessor, fly_frame_max as i32, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_TIME);
     if fighter.global_table[PREV_STATUS_KIND].get_i32() == *FIGHTER_STATUS_KIND_SPECIAL_HI && motion_kind == hash40("special_air_hi_start") {
         let fastest_landing_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fastest_landing_frame"));
@@ -88,8 +88,8 @@ unsafe extern "C" fn pit_SpecialHiFly_Main_loop(fighter: &mut L2CFighterCommon) 
         fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());
         return 1.into();
     }
-    if fly_time <= frame_remain_burn && !WorkModule::is_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
+    if fly_time <= frame_remain_burn && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
     }
     if land_time <= 0 {
         WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
@@ -146,8 +146,8 @@ unsafe extern "C" fn status_pit_SpecialHiFly_Exec(fighter: &mut L2CFighterCommon
 
 pub unsafe extern "C" fn status_pit_SpecialHiFly_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     let fly_frame_min = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_hi_fly"), hash40("fly_frame_min"));
-    WorkModule::set_float(fighter.module_accessor, fly_frame_min as f32, FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_POWER);
-    WorkModule::off_flag(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
+    WorkModule::set_float(fighter.module_accessor, fly_frame_min as f32, *FIGHTER_PIT_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_FLY_POWER);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_FLAG_BURN);
     0.into()
 }
 
@@ -159,11 +159,11 @@ pub unsafe extern "C" fn status_pit_SpecialHiFly_End(fighter: &mut L2CFighterCom
 
 pub fn install() {
     Agent::new("pit")
-    .status(Pre, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Pre)
-    .status(Init, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Init)
-    .status(Main, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Main)
-    .status(Exec, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Exec)
-    .status(Exit, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Exit)
-    .status(End, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_End)
+    .status(Pre, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Pre)
+    .status(Init, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Init)
+    .status(Main, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Main)
+    .status(Exec, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Exec)
+    .status(Exit, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_Exit)
+    .status(End, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, status_pit_SpecialHiFly_End)
     .install();
 }

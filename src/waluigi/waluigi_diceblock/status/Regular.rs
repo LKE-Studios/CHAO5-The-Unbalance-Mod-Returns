@@ -8,16 +8,25 @@ unsafe extern "C" fn status_waluigi_diceblock_Regular_Pre(weapon: &mut L2CWeapon
 unsafe extern "C" fn status_waluigi_diceblock_Regular_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
     waluigi_Regular_helper(weapon);
+    let diceblock_id = WorkModule::get_int(weapon.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
+    if diceblock_id == 0 && sv_battle_object::is_active(diceblock_id as u32) {
+        if diceblock_id == 1 && sv_battle_object::is_active(diceblock_id as u32) {
+            WorkModule::set_int(weapon.module_accessor, 1, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
+        }
+        else {
+            WorkModule::set_int(weapon.module_accessor, 0, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
+        }
+    }
     weapon.fastshift(L2CValue::Ptr(waluigi_diceblock_Regular_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let rand_num = WorkModule::get_int(owner_module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
-    WorkModule::add_int(owner_module_accessor, 1, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_FRAME);
+    let rand_num = WorkModule::get_int(owner_module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
     ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("frame_dice"), true);
+    WorkModule::set_int(weapon.module_accessor, rand_num, *WEAPON_WALUIGI_DICEBLOCK_INSTANCE_WORK_ID_INT_NUMBER);
+    println!("{}", rand_num);
     if rand_num == 0  {
-        WorkModule::set_int(owner_module_accessor, 0, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), true);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -31,7 +40,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 1 {
-        WorkModule::set_int(owner_module_accessor, 1, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), true);
@@ -45,7 +53,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 2  {
-        WorkModule::set_int(owner_module_accessor, 2, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -59,7 +66,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 3 {
-        WorkModule::set_int(owner_module_accessor, 3, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -73,7 +79,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 4  {
-        WorkModule::set_int(owner_module_accessor, 4, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -87,7 +92,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 5  {
-        WorkModule::set_int(owner_module_accessor, 5, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.0);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -101,7 +105,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 6 {
-        WorkModule::set_int(owner_module_accessor, 6, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.1);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -115,7 +118,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 7  {
-        WorkModule::set_int(owner_module_accessor, 7, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.2);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -129,7 +131,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 8  {
-        WorkModule::set_int(owner_module_accessor, 8, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.5);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -143,7 +144,6 @@ unsafe extern "C" fn waluigi_Regular_helper(weapon: &mut L2CWeaponCommon) {
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_10"), false);
     }
     else if rand_num == 9  {
-        WorkModule::set_int(owner_module_accessor, 9, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
         ModelModule::set_scale(weapon.module_accessor, 1.75);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_1"), false);
         ModelModule::set_mesh_visibility(weapon.module_accessor, Hash40::new("num_dice_2"), false);
@@ -168,9 +168,9 @@ unsafe extern "C" fn waluigi_diceblock_Regular_Main_loop(weapon: &mut L2CWeaponC
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
         weapon.pop_lua_stack(1);
         MotionAnimcmdModule::call_script_single(weapon.module_accessor, *WEAPON_ANIMCMD_EFFECT, Hash40::new("effect_bound"), -1);
-        if remaining_life {
-            notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
-            weapon.pop_lua_stack(1);
+        MotionAnimcmdModule::call_script_single(weapon.module_accessor, *WEAPON_ANIMCMD_SOUND, Hash40::new("sound_bound"), -1);
+        if remaining_life || GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
+            StatusModule::change_status_force(weapon.module_accessor, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_BREAK, false);
             return 0.into();
         }
     }
@@ -182,15 +182,16 @@ unsafe extern "C" fn waluigi_diceblock_Regular_Main_loop(weapon: &mut L2CWeaponC
 }
 
 unsafe extern "C" fn status_waluigi_diceblock_Regular_Exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
-	WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
-	let frame = MotionModule::frame(weapon.module_accessor);
-	let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
-	if frame <= 1.0 {
+    let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    let frame = MotionModule::frame(weapon.module_accessor);
+    WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    if frame <= 1.0 {
 		WorkModule::set_int(weapon.module_accessor, life, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
 	}
-	if life < 20 {
-		StatusModule::change_status_force(weapon.module_accessor, WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_BREAK, false);
-	}
+    if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) 
+    || life < 20 {
+        StatusModule::change_status_force(weapon.module_accessor, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_BREAK, false);
+    }
 	0.into()
 }
 

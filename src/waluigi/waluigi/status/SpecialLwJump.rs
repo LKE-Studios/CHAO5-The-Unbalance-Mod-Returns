@@ -2,7 +2,8 @@ use crate::imports::BuildImports::*;
 
 pub static max_speed_x : f32 = 1.5;
 pub static x_acl_air : f32 = 0.05;
-pub static y_acl_air : f32 = 0.7;
+pub static y_acl_air : f32 = 0.06;
+pub static gravity_speed : f32 = 0.4;
 pub static ground_jump_x_dist : f32 = 1.0;
 pub static init_speed_y : f32 = 1.7;
 
@@ -11,7 +12,7 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_Pre(fighter: &mut L2CFighterCo
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let WALUIGI = color >= 120 && color <= 130;
 	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {   
-        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, true, *FIGHTER_TREADED_KIND_ENABLE, true, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32, 0);
         0.into()
     }
@@ -28,15 +29,18 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_Init(fighter: &mut L2CFighterC
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL_FREE);
             sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
             sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
             sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
-            sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, y_acl_air);
-            sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, y_acl_air);
             sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
             sv_kinetic_energy!(controller_set_accel_x_add, fighter, 0.0);
-            sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, 0.0, 0.0, 0.0, 0.0);
+            let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
+            let speed_y = KineticEnergy::get_speed_y(gravity);
+            sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
+            sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
+            sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
+            KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         }
         0.into()
@@ -55,7 +59,6 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_Main(fighter: &mut L2CFighterC
             fighter.set_situation(SITUATION_KIND_AIR.into());
             WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_STOP);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_air_jump"), 0.0, 1.0, false, 0.0, false, false);
         }
         else {
@@ -87,9 +90,6 @@ unsafe extern "C" fn waluigi_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCom
     }
     if fighter.sub_air_check_fall_common().get_bool() {
         return 1.into();
-    }
-    if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 1.0, z: 0.0});
     }
     let lr = PostureModule::lr(fighter.module_accessor); 
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
@@ -124,9 +124,9 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_End(fighter: &mut L2CFighterCo
 
 pub fn install() {
     Agent::new("dolly")
-    .status(Pre, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Pre)
-    .status(Init, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Init)
-    .status(Main, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Main)
-    .status(End, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_End)
+    .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Pre)
+    .status(Init, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Init)
+    .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Main)
+    .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_End)
     .install();
 }

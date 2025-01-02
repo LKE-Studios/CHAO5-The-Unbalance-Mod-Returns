@@ -3,7 +3,7 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn status_trail_SpecialS_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_change_motion_by_situation(Hash40::new("special_s_start").into(), Hash40::new("special_air_s_start").into(), false.into());
     fighter.sub_set_special_start_common_kinetic_setting(hash40("param_special_s").into());
-    WorkModule::on_flag(fighter.module_accessor, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
     fighter.sub_shift_status_main(L2CValue::Ptr(trail_SpecialS_Main_loop as *const () as _))
 }
 

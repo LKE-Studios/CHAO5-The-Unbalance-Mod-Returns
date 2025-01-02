@@ -283,7 +283,7 @@ unsafe extern "C" fn sound_waluigi_DownAttackU(fighter: &mut L2CAgentBase) {
 
 //SpecialN
 unsafe extern "C" fn sound_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
-    let dice_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
 	frame(fighter.lua_state_agent, 0.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));
@@ -303,7 +303,7 @@ unsafe extern "C" fn sound_waluigi_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn sound_waluigi_SpecialAirN(fighter: &mut L2CAgentBase) {
-    let dice_num = WorkModule::get_int(fighter.module_accessor, FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
+    let dice_num = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_NUMBER);
 	frame(fighter.lua_state_agent, 0.0);
 	if is_excute(fighter) {
 		PLAY_SE(fighter, Hash40::new("se_dolly_superspecial_ok"));

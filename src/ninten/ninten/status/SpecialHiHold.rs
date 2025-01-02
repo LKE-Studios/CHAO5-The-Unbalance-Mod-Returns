@@ -56,8 +56,8 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Main(fighter: &mut L2CFighterCo
         else {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_hold"), 0.0, 1.0, true, 0.0, false, false);
         }
-        let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
-        WorkModule::set_int(fighter.module_accessor, warp_time, FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+        let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+        WorkModule::set_int(fighter.module_accessor, warp_time, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
         fighter.sub_shift_status_main(L2CValue::Ptr(ninten_SpecialHiHold_Main_loop as *const () as _))
     }
     else {
@@ -76,8 +76,8 @@ unsafe extern "C" fn ninten_SpecialHiHold_Main_loop(fighter: &mut L2CFighterComm
             return 1.into();
         }
     }
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
-    WorkModule::dec_int(fighter.module_accessor, FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+    let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+    WorkModule::dec_int(fighter.module_accessor, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
         fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK.into(), true.into());
         return 0.into();
@@ -87,7 +87,7 @@ unsafe extern "C" fn ninten_SpecialHiHold_Main_loop(fighter: &mut L2CFighterComm
         return 0.into();
     }
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-        WorkModule::add_int(fighter.module_accessor, button_add_warp_time, FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+        WorkModule::add_int(fighter.module_accessor, button_add_warp_time, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
     }
     if MotionModule::is_end(fighter.module_accessor) || int_time == 0 {
         fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END.into(), false.into());

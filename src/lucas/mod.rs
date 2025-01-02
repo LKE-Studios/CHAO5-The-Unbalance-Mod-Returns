@@ -8,4 +8,5 @@ pub fn install() {
     lucas_pkfire::install(); 
     lucas_pkstarstorm::install(); 
     lucas_pkthunder::install(); 
+    smashline::add_param_object("lucas", "param_critical");
 }

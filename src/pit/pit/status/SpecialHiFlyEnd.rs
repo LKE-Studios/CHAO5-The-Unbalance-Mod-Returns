@@ -33,8 +33,8 @@ pub unsafe extern "C" fn status_pit_SpecialHiFlyEnd_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("pit")
-    .status(Pre, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_Pre)
-    .status(Main, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_Main)
-    .status(End, FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_End)
+    .status(Pre, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_Pre)
+    .status(Main, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_Main)
+    .status(End, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY_END, status_pit_SpecialHiFlyEnd_End)
     .install();
 }

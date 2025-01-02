@@ -101,8 +101,8 @@ unsafe extern "C" fn status_waluigi_SpecialLwSpecial_End(fighter: &mut L2CFighte
 
 pub fn install() {
     Agent::new("dolly")
-    .status(Pre, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_Pre)
-    .status(Main, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_Main)
-    .status(End, FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_End)
+    .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_Pre)
+    .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_Main)
+    .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_SPECIAL, status_waluigi_SpecialLwSpecial_End)
     .install();
 }

@@ -5,8 +5,7 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
-    //Inner Meta Mechanic
-    FighterSpecializer_MetaKnight::meta_power(fighter);
+    FighterSpecializer_MetaKnight::meta_power(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
         let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
         let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
@@ -47,13 +46,8 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     }
 }
 
-unsafe extern "C" fn frame_metaknight_Exec(fighter: &mut L2CFighterCommon) {
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("haver"), &Vector3f{x: 1.05, y: 1.05, z: 1.05});
-}
-
 pub fn install() {
     Agent::new("metaknight")
     .on_line(Main, frame_metaknight_Main)
-    .on_line(Exec, frame_metaknight_Exec)
     .install();
 }
