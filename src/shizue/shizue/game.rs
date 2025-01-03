@@ -676,6 +676,9 @@ unsafe extern "C" fn game_shizue_DownAttackU(fighter: &mut L2CAgentBase) {
 //SpecialN
 unsafe extern "C" fn game_shizue_SpecialN(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_KIND) == *FIGHTER_KIND_KIRBY {
+        if is_excute(fighter) {
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_FLAG_RANDOM_SHOT);
+        }
 		frame(fighter.lua_state_agent, 7.0);
 		if is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_SPECIAL_N_FLAG_SEARCH);
@@ -687,9 +690,7 @@ unsafe extern "C" fn game_shizue_SpecialN(fighter: &mut L2CAgentBase) {
 	} 
     else {
 		if is_excute(fighter) {
-			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			let rand_val = sv_math::rand(hash40("fighter"), 8);
-			SHIZUE_SHOT_KIND[ENTRY_ID] = rand_val + 1;
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_FLAG_RANDOM_SHOT);
 		}
 		FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 		frame(fighter.lua_state_agent, 8.0);
@@ -706,6 +707,9 @@ unsafe extern "C" fn game_shizue_SpecialN(fighter: &mut L2CAgentBase) {
 //SpecialAirN
 unsafe extern "C" fn game_shizue_SpecialAirN(fighter: &mut L2CAgentBase) {
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_KIND) == *FIGHTER_KIND_KIRBY {
+        if is_excute(fighter) {
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_FLAG_RANDOM_SHOT);
+        }
 		frame(fighter.lua_state_agent, 7.0);
 		if is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_SPECIAL_N_FLAG_SEARCH);
@@ -717,9 +721,7 @@ unsafe extern "C" fn game_shizue_SpecialAirN(fighter: &mut L2CAgentBase) {
 	} 
     else {
 		if is_excute(fighter) {
-			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			let rand_val = sv_math::rand(hash40("fighter"), 8);
-			SHIZUE_SHOT_KIND[ENTRY_ID] = rand_val + 1;
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_FLAG_RANDOM_SHOT);
 		}
 		FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 		frame(fighter.lua_state_agent, 8.0);

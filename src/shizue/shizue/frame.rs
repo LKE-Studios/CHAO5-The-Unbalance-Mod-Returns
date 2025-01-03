@@ -24,7 +24,7 @@ pub unsafe extern "C" fn frame_shizue_Main(fighter : &mut L2CFighterCommon) {
     }
     if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) 
     || !sv_information::is_ready_go() {
-        SHIZUE_SHOT_KIND[ENTRY_ID] = 1;
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_SHOT_KIND);
     };
     if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR].contains(&status_kind) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_PICOPICOHAMMER, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));

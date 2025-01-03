@@ -37,7 +37,7 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
         COUNTER[ENTRY_ID] += 1;
         IS_CRIT[ENTRY_ID] = true;
         if COUNTER[ENTRY_ID] < 2 {
-            EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, true, true);
+            EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), false, true, true);
             CURRENT_ON_FRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
             SlowModule::set_whole(fighter.module_accessor, 2, 0);
             SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_criticalhit"), true, false, false, false, enSEType(0));
@@ -50,7 +50,7 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
         COUNTER[ENTRY_ID] = 0;
         SlowModule::clear_whole(fighter.module_accessor);
         CameraModule::reset_all(fighter.module_accessor);
-        EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
+        EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), 0);
         HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         if StatusModule::status_kind(fighter.module_accessor) != 510 {
             CAM_ZOOM_OUT(fighter);
@@ -59,7 +59,7 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     if IS_CRIT[ENTRY_ID] && MotionModule::frame(fighter.module_accessor) < 2.0 {
         CAM_ZOOM_OUT(fighter);
         IS_CRIT[ENTRY_ID] = false;
-        EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
+        EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), 0);
         HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         SlowModule::clear_whole(fighter.module_accessor);
     };
@@ -426,11 +426,11 @@ pub unsafe extern "C" fn ac_update(fighter: &mut L2CFighterCommon) {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     if status_kind == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH {
         let object_id = WorkModule::get_int(fighter.module_accessor,*FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_TARGET_OBJECT_ID) as u32;
-        if object_id == 0 || object_id == 0x50000000 {return;}
+        if object_id == 0 || object_id == *BATTLE_OBJECT_ID_INVALID as u32 {return;}
         let object_boma = sv_battle_object::module_accessor(object_id);
         if is_cloned_article(object_boma) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_FAILURE, false);
-            WorkModule::set_int(fighter.module_accessor, 0x50000000, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_TARGET_OBJECT_ID);
+            WorkModule::set_int(fighter.module_accessor, *BATTLE_OBJECT_ID_INVALID, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_TARGET_OBJECT_ID);
             let weapon = get_fighter_common_from_accessor(&mut *object_boma);
             notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
             let pos = *PostureModule::pos(object_boma);
@@ -456,7 +456,7 @@ pub unsafe extern "C" fn set_arrow_fuse_params(module_accessor: *mut smash::app:
                 WorkModule::set_int(owner_module_accessor, item_kind, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
             }
             else if owner_kind == *FIGHTER_KIND_KIRBY {
-                WorkModule::set_int(owner_module_accessor, item_kind, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+                WorkModule::set_int(owner_module_accessor, item_kind, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
             }
             let item_id = ItemModule::get_have_item_id(owner_module_accessor, 0) as i32;
             WorkModule::set_int(module_accessor, item_id, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);
@@ -526,7 +526,7 @@ pub unsafe extern "C" fn set_elemental_fuse(weapon: &mut L2CFighterBase, element
         WorkModule::set_int(owner_module_accessor, element, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
     }
     else {
-        WorkModule::set_int(owner_module_accessor, element, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+        WorkModule::set_int(owner_module_accessor, element, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
     }
     let pos_x = PostureModule::pos_x(weapon.module_accessor);
     let pos_y = PostureModule::pos_y(weapon.module_accessor);

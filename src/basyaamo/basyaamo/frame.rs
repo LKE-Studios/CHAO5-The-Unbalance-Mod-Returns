@@ -8,7 +8,8 @@ pub unsafe extern "C" fn frame_basyaamo_Main(fighter: &mut L2CFighterCommon) {
     if BASYAAMO {
         if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAN_SPECIAL_COMMAND);
-        } else {
+        } 
+        else {
             WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAN_SPECIAL_COMMAND);
         }
     }

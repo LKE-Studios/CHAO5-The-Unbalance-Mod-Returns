@@ -3,5 +3,22 @@
 		{
 			"path": "src"
 		}
-	]
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.foreground": "#fffeed",
+			"activityBar.background": "#080808",
+			"activityBar.inactiveForeground": "#ffee00",
+			"activityBarBadge.background": "#ff0000",
+			"tab.inactiveBackground": "#080808",
+			"tab.activeForeground": "#ffffff",
+			"menubar.selectionBackground": "#006aff",
+		},
+		"editor.tokenColorCustomizations": {
+
+		},
+		"editor.semanticTokenColorCustomizations": {
+			
+		}
+	}
 }

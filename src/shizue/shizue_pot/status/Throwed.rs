@@ -1,50 +1,40 @@
 use crate::imports::BuildImports::*;
 
-pub static mut SHIZUE_SHOT_KIND: [i32; 8] = [1; 8];
-
 pub unsafe extern "C" fn status_shizue_pot_Throwed_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    let owner_target_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-	let owner_module_accessor = sv_battle_object::module_accessor(owner_target_id);
-	let ENTRY_ID = WorkModule::get_int(&mut *owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if utility::get_kind(&mut *owner_module_accessor) == *FIGHTER_KIND_SHIZUE {
-        shizue_furniture_visibility_all_false(weapon);
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 1 {
-            shizue_furniture_picture(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_1"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 2 {
-            shizue_furniture_rug(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_2"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 3 {
-            shizue_furniture_triforce(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_3"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 4 {
-            shizue_furniture_table(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_4"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 5 {
-            shizue_furniture_trophy(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_5"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 6 {
-            shizue_furniture_froggy(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_6"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 7 {
-            shizue_furniture_moyai(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_7"), 0.0, 1.0, false, 0.0, false, false);
-        }
-        if SHIZUE_SHOT_KIND[ENTRY_ID] == 8 {
-            shizue_furniture_couch(weapon);
-            MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_8"), 0.0, 1.0, false, 0.0, false, false);
-        }
-    }
-    else {
-        shizue_furniture_visibility_all_false(weapon);
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let rand_num = WorkModule::get_int(owner_module_accessor, *FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_SHOT_KIND);
+    shizue_furniture_visibility_all_false(weapon);
+    if rand_num == 0 {
         shizue_furniture_picture(weapon);
         MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_1"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 1 {
+        shizue_furniture_rug(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_2"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 2 {
+        shizue_furniture_triforce(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_3"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 3 {
+        shizue_furniture_table(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_4"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 4 {
+        shizue_furniture_trophy(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_5"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 5 {
+        shizue_furniture_froggy(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_6"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 6 {
+        shizue_furniture_moyai(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_7"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    if rand_num == 7 {
+        shizue_furniture_couch(weapon);
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("item_8"), 0.0, 1.0, false, 0.0, false, false);
     }
     original_status(Main, weapon, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED)(weapon)
 }

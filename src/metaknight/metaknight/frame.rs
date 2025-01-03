@@ -35,7 +35,7 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
             }
         }
     };
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW) {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) { 
             fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_LW.into(), false.into());
         }

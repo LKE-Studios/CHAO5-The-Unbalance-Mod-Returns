@@ -127,6 +127,7 @@ pub mod BuildImports {
         the_csk_collection_api::*,
         param_config::*,
         arcropolis_api::*,
+        smashline::api::*,
         lazy_static::lazy_static,
     };
 }

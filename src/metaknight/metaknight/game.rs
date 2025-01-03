@@ -234,7 +234,7 @@ unsafe extern "C" fn game_metaknight_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
-        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
     }
 }
@@ -259,7 +259,7 @@ unsafe extern "C" fn game_metaknight_AttackS3S2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
-        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_SPECIAL_LW);
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
     }
 }

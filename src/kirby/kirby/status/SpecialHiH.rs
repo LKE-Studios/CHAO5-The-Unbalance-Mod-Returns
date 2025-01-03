@@ -7,17 +7,17 @@ unsafe extern "C" fn status_kirby_SpecialHiH_Pre(fighter: &mut L2CFighterCommon)
 }
 
 unsafe extern "C" fn status_kirby_SpecialHiH_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    //let speed_x_mul_air = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_h"), hash40("speed_x_mul_air"));
-    //let speed_x_mul_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_h"), hash40("speed_x_mul_ground"));
+    let speed_x_mul_air = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_h"), hash40("speed_x_mul_air"));
+    let speed_x_mul_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi_h"), hash40("speed_x_mul_ground"));
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_h"), 0.0, 1.0, false, 0.0, false, false);
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-        sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, 2.2);
+        sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_x_mul_air);
     }
     else {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_h"), 0.0, 1.0, false, 0.0, false, false);
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
-        sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, 2.2);
+        sv_kinetic_energy!(set_speed_mul, fighter, FIGHTER_KINETIC_ENERGY_ID_MOTION, speed_x_mul_ground);
     }
     fighter.sub_shift_status_main(L2CValue::Ptr(kirby_SpecialHiH_Main_loop as *const () as _))
 }
@@ -57,8 +57,8 @@ unsafe extern "C" fn status_kirby_SpecialHiH_End(fighter: &mut L2CFighterCommon)
 
 pub fn install() {
     Agent::new("kirby")
-    .status(Pre, FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_Pre)
-    .status(Main, FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_Main)
-    .status(End, FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_End)
+    .status(Pre, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_Pre)
+    .status(Main, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_Main)
+    .status(End, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI_H, status_kirby_SpecialHiH_End)
     .install();
 }

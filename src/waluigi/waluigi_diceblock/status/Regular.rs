@@ -8,15 +8,6 @@ unsafe extern "C" fn status_waluigi_diceblock_Regular_Pre(weapon: &mut L2CWeapon
 unsafe extern "C" fn status_waluigi_diceblock_Regular_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
     waluigi_Regular_helper(weapon);
-    let diceblock_id = WorkModule::get_int(weapon.module_accessor, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
-    if diceblock_id == 0 && sv_battle_object::is_active(diceblock_id as u32) {
-        if diceblock_id == 1 && sv_battle_object::is_active(diceblock_id as u32) {
-            WorkModule::set_int(weapon.module_accessor, 1, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
-        }
-        else {
-            WorkModule::set_int(weapon.module_accessor, 0, *FIGHTER_WALUIGI_INSTANCE_WORK_ID_INT_DICEBLOCK_ID);
-        }
-    }
     weapon.fastshift(L2CValue::Ptr(waluigi_diceblock_Regular_Main_loop as *const () as _))
 }
 
@@ -188,7 +179,7 @@ unsafe extern "C" fn status_waluigi_diceblock_Regular_Exec(weapon: &mut L2CWeapo
     if frame <= 1.0 {
 		WorkModule::set_int(weapon.module_accessor, life, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
 	}
-    if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) 
+    if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_HIT | *COLLISION_KIND_MASK_SHIELD) 
     || life < 20 {
         StatusModule::change_status_force(weapon.module_accessor, *WEAPON_WALUIGI_DICEBLOCK_STATUS_KIND_BREAK, false);
     }

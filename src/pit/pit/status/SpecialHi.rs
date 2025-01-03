@@ -31,7 +31,7 @@ pub unsafe extern "C" fn status_pit_SpecialHi_Main(fighter: &mut L2CFighterCommo
     WorkModule::set_float(fighter.module_accessor, air_preserve_x, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_AIR_START_X_MUL);
     WorkModule::set_float(fighter.module_accessor, fall_x_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_CONST_FALL_X_MUL);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
-    WorkModule::set_int(fighter.module_accessor, fastest_landing_frame, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
+    WorkModule::set_int(fighter.module_accessor, fastest_landing_frame, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
     let sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let speed_y = sum_speed_y * air_preserve_y;
     sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, speed_y);
@@ -46,7 +46,7 @@ unsafe extern "C" fn pit_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -> 
         return 1.into();
     }
     if WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_MOTION_KIND) == hash40("special_hi_start") {
-        WorkModule::dec_int(fighter.module_accessor, FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
+        WorkModule::dec_int(fighter.module_accessor, *FIGHTER_PIT_STATUS_SPECIAL_HI_FLY_WORK_INT_LAND_TIME);
     }
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_FLY.into(), true.into());

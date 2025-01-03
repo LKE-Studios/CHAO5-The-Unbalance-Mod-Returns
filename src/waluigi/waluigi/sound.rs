@@ -419,36 +419,11 @@ unsafe extern "C" fn sound_waluigi_SpecialAirSFAttack(fighter: &mut L2CAgentBase
 unsafe extern "C" fn sound_waluigi_SpecialHi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
+        PLAY_SE(fighter, Hash40::new("vc_dolly_special_h01"));
     }
-    frame(fighter.lua_state_agent, 6.0);
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_COMMON_WORK_INT_STRENGTH) == *FIGHTER_DOLLY_STRENGTH_W {
-        frame(fighter.lua_state_agent, 8.0);
-        if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h01_s"));
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h02_s"));
-            PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_special_h01"));
-        }
-    }
-    frame(fighter.lua_state_agent, 14.0);
+    frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h03_s"));
-    }
-    frame(fighter.lua_state_agent, 20.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h04_s"));
-    }
-    frame(fighter.lua_state_agent, 23.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h05_s"));
-    }
-    else {
-        frame(fighter.lua_state_agent, 0.0);
-        if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h01_l"));
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h02_l"));
-            PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_special_h02"));
-        }
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_dolly_special_h01_l"));
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
@@ -468,36 +443,11 @@ unsafe extern "C" fn sound_waluigi_SpecialHi1(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_waluigi_SpecialAirHi1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        PLAY_SE_NO_3D(fighter, Hash40::new("vc_dolly_special_h01"));
+        PLAY_SE(fighter, Hash40::new("vc_dolly_special_h01"));
     }
-    frame(fighter.lua_state_agent, 6.0);
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_SPECIAL_COMMON_WORK_INT_STRENGTH) == *FIGHTER_DOLLY_STRENGTH_W {
-        frame(fighter.lua_state_agent, 8.0);
-        if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h01_s"));
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h02_s"));
-            PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_special_h01"));
-        }
-    }
-    frame(fighter.lua_state_agent, 14.0);
+    frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h03_s"));
-    }
-    frame(fighter.lua_state_agent, 20.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h04_s"));
-    }
-    frame(fighter.lua_state_agent, 23.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_h05_s"));
-    }
-    else {
-        frame(fighter.lua_state_agent, 0.0);
-        if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h01_l"));
-            PLAY_SE(fighter, Hash40::new("se_dolly_special_h02_l"));
-            PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_special_h02"));
-        }
+        PLAY_SE_REMAIN(fighter, Hash40::new("se_dolly_special_h01_l"));
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {

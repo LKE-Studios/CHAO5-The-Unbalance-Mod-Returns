@@ -44,8 +44,8 @@ unsafe extern "C" fn status_basyaamo_SpecialLwLoop_End(fighter: &mut L2CFighterC
 
 pub fn install() {
     Agent::new("captain")
-    .status(Pre, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_Pre)
-    .status(Main, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_Main)
-    .status(End, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_End)
+    .status(Pre, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_Pre)
+    .status(Main, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_Main)
+    .status(End, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_LW_LOOP, status_basyaamo_SpecialLwLoop_End)
     .install();
 }

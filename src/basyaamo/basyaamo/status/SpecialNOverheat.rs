@@ -38,8 +38,8 @@ unsafe extern "C" fn status_basyaamo_SpecialNOverheat_End(fighter: &mut L2CFight
 
 pub fn install() {
     Agent::new("captain")
-    .status(Pre, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_Pre)
-    .status(Main, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_Main)
-    .status(End, FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_End)
+    .status(Pre, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_Pre)
+    .status(Main, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_Main)
+    .status(End, *FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT, status_basyaamo_SpecialNOverheat_End)
     .install();
 }

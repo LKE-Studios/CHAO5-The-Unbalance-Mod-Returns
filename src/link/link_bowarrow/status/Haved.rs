@@ -17,7 +17,7 @@ unsafe extern "C" fn status_link_bowarrow_Haved_Main(weapon: &mut L2CFighterBase
             WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
         }
         else if owner_kind == *FIGHTER_KIND_KIRBY {
-            WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
+            WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_CURRENT_ARROW_FUSE);
         }
     }
     if WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {

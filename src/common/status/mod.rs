@@ -1,4 +1,5 @@
 mod JumpAerial;
+mod Float;
 mod Fly;
 pub mod GlideStart;
 pub mod Glide;
@@ -19,6 +20,7 @@ mod Rebirth;
 
 pub fn install() {
     JumpAerial::install();
+    Float::install();
     Fly::install();
     GlideStart::install();
     Glide::install();

@@ -6,7 +6,7 @@ unsafe extern "C" fn status_link_bowarrow_HitStick_End(weapon: &mut L2CFighterBa
         let owner_module_accessor = smash::app::sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_module_accessor);
         let team_no = if owner_kind == *FIGHTER_KIND_KIRBY {
-            WorkModule::get_int(owner_module_accessor, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_TEAM_NO)
+            WorkModule::get_int(owner_module_accessor, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_TEAM_NO)
         }
         else if [*FIGHTER_KIND_MURABITO, *FIGHTER_KIND_SHIZUE].contains(&owner_kind) {
             WorkModule::get_int(owner_module_accessor, FIGHTER_MURABTIO_INSTANCE_WORK_ID_INT_TEAM_NO)
