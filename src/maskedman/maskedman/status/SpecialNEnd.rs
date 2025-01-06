@@ -95,8 +95,8 @@ unsafe extern "C" fn status_maskedman_SpecialNEnd_End(fighter: &mut L2CFighterCo
 
 pub fn install() {
     Agent::new("lucas")
-    .status(Pre, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_Pre)
-    .status(Main, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_Main)
-    .status(End, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_End)
+    .status(Pre, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_Pre)
+    .status(Main, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_Main)
+    .status(End, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_END, status_maskedman_SpecialNEnd_End)
     .install();
 }

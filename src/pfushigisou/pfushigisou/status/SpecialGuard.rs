@@ -54,9 +54,9 @@ unsafe extern "C" fn pfushigisou_SpecialGuard_Main_loop(fighter: &mut L2CFighter
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_z_charge"), 0.0, 1.0, false, 0.0, false, false);
         }
     }     
-    let int_charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    let int_charge = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     let charge_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_frame"));
-    WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     if int_charge >= charge_frame {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT.into(), false.into());
@@ -127,9 +127,9 @@ pub unsafe extern "C" fn status_pfushigisou_SpecialGuard_End(fighter: &mut L2CFi
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .status(Pre, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Pre)
-    .status(Main, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Main)
-    .status(Exec, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Exec)
-    .status(End, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_End)
+    .status(Pre, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Pre)
+    .status(Main, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Main)
+    .status(Exec, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_Exec)
+    .status(End, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, status_pfushigisou_SpecialGuard_End)
     .install();
 }

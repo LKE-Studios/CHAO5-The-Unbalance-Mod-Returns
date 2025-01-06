@@ -41,7 +41,7 @@ unsafe extern "C" fn status_maskedman_SpecialHiEnd_Main(fighter: &mut L2CFighter
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let MASKEDMAN = color >= 120 && color <= 127;
 	if MASKEDMAN {
-        maskedman_SpecialHi_status_helper(fighter, true, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END);
+        maskedman_SpecialHi_status_helper(fighter, true, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END);
         fighter.sub_shift_status_main(L2CValue::Ptr(maskedman_SpecialHiEnd_Main_loop as *const () as _))
     }
     else {
@@ -86,9 +86,9 @@ unsafe extern "C" fn status_maskedman_SpecialHiEnd_End(fighter: &mut L2CFighterC
 
 pub fn install() {
     Agent::new("lucas")
-    .status(Pre, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Pre)
-    .status(Init, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Init)
-    .status(Main, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Main)
-    .status(End, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_End)
+    .status(Pre, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Pre)
+    .status(Init, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Init)
+    .status(Main, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_Main)
+    .status(End, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END, status_maskedman_SpecialHiEnd_End)
     .install();
 }

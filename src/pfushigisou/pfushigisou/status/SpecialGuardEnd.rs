@@ -49,8 +49,8 @@ pub unsafe extern "C" fn status_pfushigisou_SpecialGuardEnd_End(_fighter: &mut L
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .status(Pre, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_Pre)
-    .status(Main, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_Main)
-    .status(End, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_End)
+    .status(Pre, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_Pre)
+    .status(Main, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_Main)
+    .status(End, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_END, status_pfushigisou_SpecialGuardEnd_End)
     .install();
 }

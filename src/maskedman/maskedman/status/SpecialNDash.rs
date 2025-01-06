@@ -52,7 +52,7 @@ unsafe extern "C" fn status_maskedman_SpecialNDash_Main(fighter: &mut L2CFighter
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let MASKEDMAN = color >= 120 && color <= 127;
 	if MASKEDMAN {
-        let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+        let float_charge = WorkModule::get_float(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
         AttackModule::set_power_mul(fighter.module_accessor, 1.0 + (float_charge * 0.04));
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
@@ -108,17 +108,17 @@ unsafe extern "C" fn maskedman_SpecialNDash_Main_loop(fighter: &mut L2CFighterCo
 }
 
 unsafe extern "C" fn status_maskedman_SpecialNDash_End(fighter: &mut L2CFighterCommon) -> L2CValue {
-    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
     AttackModule::set_power_mul(fighter.module_accessor, 1.0);
-    WorkModule::off_flag(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE);
     0.into()
 }
 
 pub fn install() {
     Agent::new("lucas")
-    .status(Pre, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Pre)
-    .status(Init, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Init)
-    .status(Main, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Main)
-    .status(End, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_End)
+    .status(Pre, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Pre)
+    .status(Init, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Init)
+    .status(Main, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_Main)
+    .status(End, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_N_DASH, status_maskedman_SpecialNDash_End)
     .install();
 }

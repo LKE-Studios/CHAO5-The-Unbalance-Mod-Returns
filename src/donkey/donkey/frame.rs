@@ -1,31 +1,30 @@
 use crate::imports::BuildImports::*;
 
-pub static mut DONKEY_64_DANCE : [bool; 8] = [false; 8];
-pub static mut HOLD_TIME : [f32; 8] = [0.0; 8];
+pub static button_on_frame : f32 = 30.0;
 
 pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
-    if DONKEY_64_DANCE[ENTRY_ID] == true {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_APPEAL_SPECIAL) {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 0.0, 1.0, false, 0.0, false, false);
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
     };
     if status_kind == *FIGHTER_STATUS_KIND_APPEAL && [hash40("appeal_lw_r"), hash40("appeal_lw_l")].contains(&motion_kind) {
+        let frame_float = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_BUTTON_ON_FRAME);
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
-            HOLD_TIME[ENTRY_ID] += 1.0;
+            WorkModule::add_float(fighter.module_accessor, 1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_BUTTON_ON_FRAME);
         }
-        if HOLD_TIME[ENTRY_ID] == 30.0 {
-            DONKEY_64_DANCE[ENTRY_ID] = true;
+        if frame_float == button_on_frame {
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_APPEAL_SPECIAL);
         }
     }
     else {
-        HOLD_TIME[ENTRY_ID] = 0.0;
-        DONKEY_64_DANCE[ENTRY_ID] = false;
+        WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_BUTTON_ON_FRAME);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_APPEAL_SPECIAL);
     };
     if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
-        if ItemModule::is_have_item(fighter.module_accessor, 0) && ItemModule::get_have_item_kind(fighter.module_accessor, 0) == *ITEM_KIND_BARREL {
+        if ItemModule::is_have_item(fighter.module_accessor, 0) 
+        && ItemModule::get_have_item_kind(fighter.module_accessor, 0) == *ITEM_KIND_BARREL {
             fighter.change_status(FIGHTER_STATUS_KIND_ITEM_HEAVY_PICKUP.into(),false.into());
         }
     }
@@ -36,6 +35,11 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
     }
     SpecialHi2_Function(fighter);
     AppealLw2_Loop_Function(fighter);
+    if [*FIGHTER_DONKEY_STATUS_KIND_SUPER_LIFT_WAIT, *FIGHTER_DONKEY_STATUS_KIND_SUPER_LIFT_WALK,
+        *FIGHTER_DONKEY_STATUS_KIND_SUPER_LIFT_TURN, *FIGHTER_DONKEY_STATUS_KIND_SHOULDER_WAIT,
+        *FIGHTER_DONKEY_STATUS_KIND_SHOULDER_WALK, *FIGHTER_DONKEY_STATUS_KIND_SHOULDER_TURN].contains(&status_kind) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
 }     
 
 unsafe fn SpecialHi2_Function(fighter: &mut L2CFighterCommon) {

@@ -50,9 +50,9 @@ unsafe extern "C" fn status_maskedman_SpecialHiHold_Main(fighter: &mut L2CFighte
 	if MASKEDMAN {
         let landing_frame = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("landing_frame"));
         WorkModule::set_float(fighter.module_accessor, landing_frame, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
-        WorkModule::set_int(fighter.module_accessor, max_frame, FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_STOP_TIME);
-        WorkModule::set_int(fighter.module_accessor, max_frame, FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
-        maskedman_SpecialHi_status_helper(fighter, true, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD);
+        WorkModule::set_int(fighter.module_accessor, max_frame, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_STOP_TIME);
+        WorkModule::set_int(fighter.module_accessor, max_frame, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+        maskedman_SpecialHi_status_helper(fighter, true, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD);
         fighter.sub_shift_status_main(L2CValue::Ptr(maskedman_SpecialHiHold_Main_loop as *const () as _))
     }
     else {
@@ -77,7 +77,7 @@ unsafe extern "C" fn maskedman_SpecialHiHold_Main_loop(fighter: &mut L2CFighterC
         }
     }
     let sum_speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME) <= 0;
+    let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME) <= 0;
     if sum_speed_y <= 0.5 || int_time {
         fighter.change_status(FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END.into(),false.into());
         return 0.into();
@@ -91,7 +91,7 @@ unsafe extern "C" fn status_maskedman_SpecialHiHold_Exec(fighter: &mut L2CFighte
 	if MASKEDMAN {
         let lr = PostureModule::lr(fighter.module_accessor);
         let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
-        WorkModule::dec_int(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
+        WorkModule::dec_int(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
         fighter.clear_lua_stack();
         lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         let speed_x = sv_kinetic_energy::get_speed_x(fighter.lua_state_agent);
@@ -124,10 +124,10 @@ unsafe extern "C" fn status_maskedman_SpecialHiHold_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("lucas")
-    .status(Pre, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Pre)
-    .status(Init, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Init)
-    .status(Main, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Main)
-    .status(Exec, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Exec)
-    .status(End, FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_End)
+    .status(Pre, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Pre)
+    .status(Init, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Init)
+    .status(Main, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Main)
+    .status(Exec, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_Exec)
+    .status(End, *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD, status_maskedman_SpecialHiHold_End)
     .install();
 }

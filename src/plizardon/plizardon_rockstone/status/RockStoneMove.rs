@@ -6,7 +6,7 @@ pub unsafe extern "C" fn status_plizardon_RockStoneMove_Pre(weapon: &mut L2CWeap
 }
 
 pub unsafe extern "C" fn status_plizardon_RockStoneMove_Init(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    let angle = WorkModule::get_float(weapon.module_accessor, WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ANGLE);
+    let angle = WorkModule::get_float(weapon.module_accessor, *WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ANGLE);
     let lr = PostureModule::lr(weapon.module_accessor);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
     let speed = WorkModule::get_param_float(weapon.module_accessor, hash40("param_rockstone"), hash40("speed"));
@@ -37,7 +37,7 @@ pub unsafe extern "C" fn RockStone_remove(weapon: &mut L2CWeaponCommon) {
 }
 
 unsafe extern "C" fn plizardon_RockStoneMove_Main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    let rot = WorkModule::get_float(weapon.module_accessor, WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ROT);
+    let rot = WorkModule::get_float(weapon.module_accessor, *WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ROT);
     let rotation = Vector3f{x: rot, y: rot, z: rot};
     ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("needle"), &rotation, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
     WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
@@ -72,9 +72,9 @@ unsafe extern "C" fn status_plizardon_RockStoneMove_End(weapon: &mut L2CWeaponCo
 
 pub fn install() {
     Agent::new("plizardon_rockstone")
-    .status(Pre, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Pre)
-    .status(Init, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Init)
-    .status(Main, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Main)
-    .status(End, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_End)
+    .status(Pre, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Pre)
+    .status(Init, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Init)
+    .status(Main, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_Main)
+    .status(End, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, status_plizardon_RockStoneMove_End)
     .install();
 }

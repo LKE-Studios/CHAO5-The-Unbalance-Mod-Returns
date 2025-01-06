@@ -34,7 +34,7 @@ unsafe extern "C" fn status_maskedman_SpecialLw_Main(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn maskedman_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
+    let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
     if CancelModule::is_enable_cancel(fighter.module_accessor) {
         if fighter.sub_wait_ground_check_common(false.into()).get_bool()
         || fighter.sub_air_check_fall_common().get_bool() {
@@ -63,7 +63,7 @@ unsafe extern "C" fn maskedman_SpecialLw_Main_loop(fighter: &mut L2CFighterCommo
     || frame > 96.0 || int_time > 0 {
         MotionModule::set_rate(fighter.module_accessor, 0.0);
         StopModule::end_stop(fighter.module_accessor);
-        WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
+        WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
         if int_time == 4 {
             EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_direction"), false, false);
             effect!(fighter, *MA_MSC_CMD_EFFECT_EFFECT, hash40("sys_bomb_a"), hash40("throw"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false);
@@ -109,7 +109,7 @@ unsafe extern "C" fn status_maskedman_SpecialLw_End(fighter: &mut L2CFighterComm
     let MASKEDMAN = color >= 120 && color <= 127;
 	if MASKEDMAN {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_lucas_throw_l02"), 0);
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
         0.into()
     }
     else {

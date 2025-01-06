@@ -16,10 +16,10 @@ pub unsafe extern "C" fn status_plizardon_RockStoneStart_Init(weapon: &mut L2CWe
     while angle > 100.0 && angle < 260.0 {
         angle += 25.0;
     }
-    WorkModule::set_float(weapon.module_accessor, angle, WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ANGLE);
+    WorkModule::set_float(weapon.module_accessor, angle, *WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ANGLE);
     //Rot
     let rand_rot = sv_math::rand(hash40("fighter"), 360) as i32;
-    WorkModule::set_float(weapon.module_accessor, angle, WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ROT);
+    WorkModule::set_float(weapon.module_accessor, angle, *WEAPON_PLIZARDON_ROCKSTONE_INSTANCE_WORK_ID_FLOAT_ROT);
     //Snap to throw position
     let mut owner_pos = Vector3f{x: 0.0, y: 0.0, z: 0.0};
     let mut article_pos = Vector3f{x: 0.0, y: 0.0, z: 0.0};
@@ -44,7 +44,7 @@ unsafe extern "C" fn plizardon_RockStoneStart_Main_loop(weapon: &mut L2CWeaponCo
     WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     if life < 0 {
-        StatusModule::change_status_force(weapon.module_accessor, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, false);
+        StatusModule::change_status_force(weapon.module_accessor, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_MOVE, false);
         return 0.into();
     }
     0.into()
@@ -52,8 +52,8 @@ unsafe extern "C" fn plizardon_RockStoneStart_Main_loop(weapon: &mut L2CWeaponCo
 
 pub fn install() {
     Agent::new("plizardon_rockstone")
-    .status(Pre, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Pre)
-    .status(Init, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Init)
-    .status(Main, WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Main)
+    .status(Pre, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Pre)
+    .status(Init, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Init)
+    .status(Main, *WEAPON_PLIZARDON_ROCKSTONE_STATUS_KIND_START, status_plizardon_RockStoneStart_Main)
     .install();
 }

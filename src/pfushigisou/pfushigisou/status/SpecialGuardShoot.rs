@@ -51,16 +51,16 @@ unsafe extern "C" fn pfushigisou_SpecialGuardShoot_Main_loop(fighter: &mut L2CFi
 }
 
 pub unsafe extern "C" fn status_pfushigisou_SpecialGuardShoot_End(fighter: &mut L2CFighterCommon) -> L2CValue {
-    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_INSTANCE_WORK_ID_FLOAT_EFFECT_SCALE_MUL);
-    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_EFFECT_SCALE_MUL);
+    WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("finptrainer_solar_beam"), false, false);
     0.into()
 }
 
 pub fn install() {
     Agent::new("pfushigisou")
-    .status(Pre, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_Pre)
-    .status(Main, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_Main)
-    .status(End, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_End)
+    .status(Pre, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_Pre)
+    .status(Main, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_Main)
+    .status(End, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT, status_pfushigisou_SpecialGuardShoot_End)
     .install();
 }

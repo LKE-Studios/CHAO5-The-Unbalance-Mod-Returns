@@ -28,11 +28,13 @@ unsafe extern "C" fn status_metaknight_SpecialHiLoop_Main(fighter: &mut L2CFight
     WorkModule::set_float(fighter.module_accessor, trans_move_end_speed_y_mul, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_FLOAT_MOVE_TRANS_END_SPEED_Y_MUL);
     WorkModule::set_int(fighter.module_accessor, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_SUPER_JUMP_PUNCH_WORK_INT_STATUS_KIND_END);
     WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_GLIDE);
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
     fighter.super_jump_punch(L2CValue::Void());
     fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialHi_Main_loop as *const () as _))
 }
 
 unsafe extern "C" fn status_metaknight_SpecialHiLoop_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
     0.into()
 }
 

@@ -967,11 +967,11 @@ unsafe extern "C" fn game_plizardon_SpecialAirHi2Landing(fighter: &mut L2CAgentB
 pub unsafe extern "C" fn game_plizardon_SpecialZ(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, false, -1);      
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, false, -1);      
     }
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        ArticleModule::set_flag(fighter.module_accessor, FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, true, WEAPON_PLIZARDON_ROCK_INSTANCE_WORK_ID_FLAG_BREAK);
+        ArticleModule::set_flag(fighter.module_accessor, *FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, true, *WEAPON_PLIZARDON_ROCK_INSTANCE_WORK_ID_FLAG_BREAK);
         ATTACK(fighter, 1, 0, Hash40::new("top"), 58.0, 70, 25, 0, 18, 7.8, 0.0, 9.0, 11.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_HEAVY, *ATTACK_REGION_OBJECT);
     }
     frame(fighter.lua_state_agent, 26.0);
@@ -984,11 +984,11 @@ pub unsafe extern "C" fn game_plizardon_SpecialZ(fighter: &mut L2CAgentBase) {
 pub unsafe extern "C" fn game_plizardon_SpecialAirZ(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, false, -1);      
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, false, -1);      
     }
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
-        ArticleModule::set_flag(fighter.module_accessor, FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, true, WEAPON_PLIZARDON_ROCK_INSTANCE_WORK_ID_FLAG_BREAK);
+        ArticleModule::set_flag(fighter.module_accessor, *FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, true, *WEAPON_PLIZARDON_ROCK_INSTANCE_WORK_ID_FLAG_BREAK);
         ATTACK(fighter, 1, 0, Hash40::new("top"), 58.0, 70, 25, 0, 18, 7.8, 0.0, 9.0, 11.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_HEAVY, *ATTACK_REGION_OBJECT);
     }
     frame(fighter.lua_state_agent, 26.0);

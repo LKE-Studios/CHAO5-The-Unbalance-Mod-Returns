@@ -159,7 +159,7 @@ unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterC
 
 
 unsafe extern "C" fn lucario_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI) {
         false.into()
     }
     else {
@@ -169,7 +169,7 @@ unsafe extern "C" fn lucario_SpecialHi_callback(fighter: &mut L2CFighterCommon) 
 
 unsafe extern "C" fn lucario_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_ENABLE_SPECIAL_HI);
     }
     true.into()
 }
@@ -265,10 +265,10 @@ pub mod FighterSpecializer_MetaKnight {
         let hit_damage_mul = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("hit_damage_mul"));
         let effect_scale = WorkModule::get_param_float(module_accessor, hash40("param_meta_power"), hash40("effect_scale"));
         if WorkModule::is_flag(module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER) {
-            let effect_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            let sound_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            let effect_counter = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            let sound_counter = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            WorkModule::add_int(module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
             AttackModule::set_power_up(module_accessor, attack_mul);
             DamageModule::set_damage_mul_2nd(module_accessor, hit_damage_mul);
             DamageModule::set_reaction_mul(module_accessor, reaction_mul);
@@ -283,11 +283,11 @@ pub mod FighterSpecializer_MetaKnight {
                 EffectModule::set_rgb(module_accessor, effect_a as u32, 0.68, 0.87, 2.0);
                 let effect_b = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, effect_scale, true, 0, 0, 0, 0, 0, true, true);
                 EffectModule::set_rgb(module_accessor, effect_b as u32, 0.68, 0.87, 2.0);
-                WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+                WorkModule::set_int(module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             }
         }
         else {
-            WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            WorkModule::set_int(module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
         }
         if DamageModule::damage(module_accessor, 0) >= meta_power_damage {
             WorkModule::on_flag(module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_META_POWER);
@@ -325,8 +325,8 @@ pub mod FighterSpecializer_Palutena {
         let reaction_mul = WorkModule::get_param_float(module_accessor, hash40("param_divine_power_up"), hash40("reaction_mul"));
         let hit_damage_mul = WorkModule::get_param_float(module_accessor, hash40("param_divine_power_up"), hash40("hit_damage_mul"));
         if WorkModule::is_flag(module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER) {
-            let effect_counter = WorkModule::get_int(module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            WorkModule::add_int(module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            let effect_counter = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             DamageModule::set_damage_mul_2nd(module_accessor, hit_damage_mul);
             DamageModule::set_reaction_mul(module_accessor, reaction_mul);
             AttackModule::set_power_up(module_accessor, attack_mul);
@@ -334,7 +334,7 @@ pub mod FighterSpecializer_Palutena {
                 EffectModule::kill_kind(module_accessor, Hash40::new("sys_aura_light"), false, false);
                 let effect = EffectModule::req_follow(module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
                 EffectModule::set_rgb(module_accessor, effect as u32, 0.0, 2.55, 0.48);
-                WorkModule::set_int(module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+                WorkModule::set_int(module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             };
         };
         if status_kind == *FIGHTER_STATUS_KIND_DEAD || status_kind == *FIGHTER_STATUS_KIND_MISS_FOOT 

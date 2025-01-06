@@ -51,15 +51,31 @@ unsafe extern "C" fn Glide_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
     }
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)
-        || ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)
         || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
             fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_END.into(), false.into());
             return 0.into();
         }
-        if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GLIDE_ATTACK)
-        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-            fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
-            return 0.into();
+        if ItemModule::is_have_item(fighter.module_accessor, 0) {
+            if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                fighter.change_status(FIGHTER_STATUS_KIND_ITEM_THROW.into(), false.into());
+                return 0.into();
+            }
+            if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GLIDE_ATTACK)
+            && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
+                return 0.into();
+            }
+        }
+        else {
+            if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GLIDE_ATTACK)
+            && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_ATTACK.into(), true.into());
+                return 0.into();
+            }
+            if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                fighter.change_status(FIGHTER_STATUS_KIND_GLIDE_END.into(), false.into());
+                return 0.into();
+            }
         }
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
             fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());

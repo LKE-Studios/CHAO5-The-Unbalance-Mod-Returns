@@ -44,7 +44,7 @@ unsafe extern "C" fn frame_buddy(fighter: &mut L2CFighterCommon) {
         }
         let frame_partial = MotionModule::frame_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING);
         if frame_partial >= 4.0 && frame_partial < 5.0 {
-            PLAY_SE(fighter, Hash40::new("se_buddy_wing"));
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_buddy_wing"), true, false, false, false, enSEType(0));
         }
     }
     if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_GLIDE].contains(&status_kind) { 

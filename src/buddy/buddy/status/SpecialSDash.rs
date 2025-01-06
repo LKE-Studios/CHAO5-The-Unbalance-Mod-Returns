@@ -206,12 +206,7 @@ unsafe extern "C" fn buddy_special_s_dash_set_gravity(fighter: &mut L2CFighterCo
     let lr = PostureModule::lr(fighter.module_accessor);
     let degree_prev = WorkModule::get_float(fighter.module_accessor, *FIGHTER_BUDDY_STATUS_SPECIAL_S_FLOAT_GROUND_DEGREE_PREV);
     let new_speed = speed_x * lr * degree_prev.to_radians().sin();
-    sv_kinetic_energy!(
-        set_speed,
-        fighter,
-        FIGHTER_KINETIC_ENERGY_ID_GRAVITY,
-        new_speed
-    );
+    sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, new_speed);
     KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 }
 

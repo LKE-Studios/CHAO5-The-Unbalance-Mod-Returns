@@ -78,17 +78,17 @@ unsafe extern "C" fn plizardon_SpecialGuard_Main_loop(fighter: &mut L2CFighterCo
 }
 
 unsafe extern "C" fn status_plizardon_SpecialGuard_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let interval_count = WorkModule::get_int(fighter.module_accessor, FIGHTER_PLIZARDON_STATUS_ROCKSTONE_WORK_INT_INTERVAL_FRAME_COUNT);
+    let interval_count = WorkModule::get_int(fighter.module_accessor, *FIGHTER_PLIZARDON_STATUS_ROCKSTONE_WORK_INT_INTERVAL_FRAME_COUNT);
     if interval_count == 0 {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_PLIZARDON_STATUS_ROCKSTONE_FLAG_GENE_ROCK);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PLIZARDON_STATUS_ROCKSTONE_FLAG_GENE_ROCK);
     }
     let rock_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_rockstone"), hash40("rock_frame"));
-    WorkModule::set_int(fighter.module_accessor, rock_frame, FIGHTER_PLIZARDON_STATUS_ROCKSTONE_WORK_INT_INTERVAL_FRAME_COUNT);
+    WorkModule::set_int(fighter.module_accessor, rock_frame, *FIGHTER_PLIZARDON_STATUS_ROCKSTONE_WORK_INT_INTERVAL_FRAME_COUNT);
     0.into()
 }
 
 unsafe extern "C" fn status_plizardon_SpecialGuard_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
-    ArticleModule::remove_exist(fighter.module_accessor, FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PLIZARDON_GENERATE_ARTICLE_ROCK, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     0.into()
 }
 
@@ -98,11 +98,11 @@ unsafe extern "C" fn status_plizardon_SpecialGuard_End(fighter: &mut L2CFighterC
 
 pub fn install() {
     Agent::new("plizardon")
-    .status(Pre, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Pre)
-    .status(Init, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Init)
-    .status(Main, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Main)
-    .status(Exec, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exec)
-    .status(Exit, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exit)
-    .status(End, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_End)
+    .status(Pre, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Pre)
+    .status(Init, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Init)
+    .status(Main, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Main)
+    .status(Exec, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exec)
+    .status(Exit, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exit)
+    .status(End, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_End)
     .install();
 }

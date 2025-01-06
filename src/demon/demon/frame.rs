@@ -20,16 +20,12 @@ pub unsafe extern "C" fn frame_demon_Main(fighter : &mut L2CFighterCommon) {
         AttackModule::set_reaction_mul(fighter.module_accessor, 1.25);
     }
     else {
-        damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
         AttackModule::set_power_up(fighter.module_accessor, 1.0);
         AttackModule::set_reaction_mul(fighter.module_accessor, 1.0);
     };
     if [*FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2S, *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F, 
     *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2L].contains(&status_kind) {
         damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
-    }
-    else {
-        damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0);
     }
 }
 

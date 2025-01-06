@@ -639,6 +639,10 @@ unsafe extern "C" fn game_basyaamo_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialNOverheat
 unsafe extern "C" fn game_basyaamo_SpecialNOverheat(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("kneer"), 5.0, 368, 30, 0, 0, 6.0, -6.0, 0.0, 0.0, Some(6.0), Some(0.0), Some(0.0), 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -655,6 +659,7 @@ unsafe extern "C" fn game_basyaamo_SpecialNOverheat(fighter: &mut L2CAgentBase) 
     wait(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_NORMAL, 0);
     }
 }
 
@@ -681,6 +686,10 @@ unsafe extern "C" fn game_basyaamo_SpecialAirN(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn game_basyaamo_SpecialS(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("top"), 3.0, 367, 100, 90, 0, 6.0, 0.0, 10.0, -2.0, Some(0.0), Some(10.0), Some(8.0), 0.0, 0.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 1, false, false, false, true, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);
@@ -697,6 +706,10 @@ unsafe extern "C" fn game_basyaamo_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn game_basyaamo_SpecialAirS(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("hip"), 3.0, 367, 100, 90, 0, 6.0, -2.0, 0.0, 0.0, Some(8.0), Some(0.0), Some(0.0), 0.0, 0.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 1, false, false, false, true, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);

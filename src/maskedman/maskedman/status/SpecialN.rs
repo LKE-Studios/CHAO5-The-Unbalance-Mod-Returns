@@ -20,10 +20,10 @@ unsafe extern "C" fn status_maskedman_SpecialN_Main(fighter: &mut L2CFighterComm
     let MASKEDMAN = color >= 120 && color <= 127;
 	if MASKEDMAN {
         let stop_y_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("stop_y_time"));
-        let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+        let float_charge = WorkModule::get_float(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
         WorkModule::set_int(fighter.module_accessor, stop_y_time, *FIGHTER_LUCAS_STATUS_SPECIAL_N_WORK_INT_STOP_Y_TIME);
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE);
-        WorkModule::set_float(fighter.module_accessor, float_charge, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE);
+        WorkModule::set_float(fighter.module_accessor, float_charge, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_start"), 0.0, 1.0, false, 0.0, false, false);
@@ -61,8 +61,8 @@ unsafe extern "C" fn maskedman_SpecialN_Sub_Status(fighter: &mut L2CFighterCommo
 
 unsafe extern "C" fn maskedman_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
-    let float_charge = WorkModule::get_float(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
-    let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+    let float_charge = WorkModule::get_float(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+    let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_AIR_STOP);
@@ -86,14 +86,14 @@ unsafe extern "C" fn maskedman_SpecialN_Main_loop(fighter: &mut L2CFighterCommon
     if frame >= 13.0 {
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) 
         && float_charge < charge_frame_max {
-            if WorkModule::is_flag(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE) {
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_FLAG_CHARGE) {
                 MotionModule::set_rate(fighter.module_accessor, 0.0);
-                WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
-                WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+                WorkModule::add_float(fighter.module_accessor, 1.0, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_N_WORK_FLOAT_CHARGE);
+                WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
                 if effect_counter >= 6 {
                     EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_damage_elec"), Hash40::new("top"), &Vector3f { x: 0.0, y: 3.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 1.5, true, 0, 0, 0, 0, 0, true, true);
                     EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), &Vector3f { x: 0.0, y: 8.0, z: 4.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 1.0, true, 0, 0, 0, 0, 0, true, true);
-                    WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+                    WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
                 }
             }
         }

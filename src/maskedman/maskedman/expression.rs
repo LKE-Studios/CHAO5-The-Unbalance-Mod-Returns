@@ -57,7 +57,7 @@ unsafe extern "C" fn expression_maskedman_SpecialHiHold(fighter: &mut L2CAgentBa
 
 //SpecialLwStart
 unsafe extern "C" fn expression_maskedman_SpecialLwStart(fighter: &mut L2CAgentBase) {
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
+    let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
     if is_excute(fighter) {
         if int_time == 4 {
             QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
@@ -67,7 +67,7 @@ unsafe extern "C" fn expression_maskedman_SpecialLwStart(fighter: &mut L2CAgentB
 
 //SpecialAirLwStart
 unsafe extern "C" fn expression_maskedman_SpecialAirLwStart(fighter: &mut L2CAgentBase) {
-    let int_time = WorkModule::get_int(fighter.module_accessor, FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
+    let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_MASKEDMAN_STATUS_SPECIAL_LW_WORK_INT_TIME);
     if is_excute(fighter) {
         if int_time == 4 {
             QUAKE(fighter, *CAMERA_QUAKE_KIND_S);

@@ -8,13 +8,13 @@ unsafe extern "C" fn frame_pfushigisou_Main(fighter: &mut L2CFighterCommon) {
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         fighter.change_status(FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD.into(), false.into());
     }
-    let int_charge = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    let int_charge = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
     let charge_effect_scale_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_min"));
     let charge_effect_scale_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_max"));
-    let effect_counter = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+    let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     let mut size_mul = int_charge as f32 * 0.005;
     if int_charge > 0 {
-        WorkModule::add_int(fighter.module_accessor, 1, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+        WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     }
     size_mul = size_mul.clamp(charge_effect_scale_min, charge_effect_scale_max);
     if effect_counter >= 8 {
@@ -22,12 +22,12 @@ unsafe extern "C" fn frame_pfushigisou_Main(fighter: &mut L2CFighterCommon) {
         EffectModule::set_rgb(fighter.module_accessor, effect_a as u32, 2.0, 1.4, 0.0);
         let effect_b = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_damage_fire"), Hash40::new("flowerc"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, size_mul, true, 0, 0, 0, 0, 0, true, true);
         EffectModule::set_rgb(fighter.module_accessor, effect_b as u32, 1.1, 1.4, 0.0);
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     }
     println!("{}", size_mul);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N_END, 
-    FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT].contains(&status_kind) {
+        *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT].contains(&status_kind) {
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {

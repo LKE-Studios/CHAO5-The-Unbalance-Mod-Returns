@@ -33,8 +33,8 @@ pub unsafe extern "C" fn status_plizardon_SpecialHi2Landing_End(fighter: &mut L2
 
 pub fn install() {
     Agent::new("plizardon")
-    .status(Pre, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_Pre)
-    .status(Main, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_Main)
-    .status(End, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_End)
+    .status(Pre, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_Pre)
+    .status(Main, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_Main)
+    .status(End, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2_LANDING, status_plizardon_SpecialHi2Landing_End)
     .install();
 }

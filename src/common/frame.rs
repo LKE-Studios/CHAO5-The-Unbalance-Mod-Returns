@@ -31,6 +31,8 @@ pub unsafe extern "C" fn loupe(fighter : &mut L2CFighterCommon) {
     let camzones = get_camera_range();
     let threshold_left = camzones.left();
     let threshold_right = camzones.right();
+    let threshold_up = camzones.up();
+    let threshold_down = camzones.down();
     let is_too_left = pos_x < threshold_left;
     let is_too_right = pos_x > threshold_right;
     let loupe_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);

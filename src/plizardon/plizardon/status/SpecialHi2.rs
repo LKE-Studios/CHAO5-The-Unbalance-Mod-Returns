@@ -63,9 +63,9 @@ pub unsafe extern "C" fn status_plizardon_SpecialHi2_End(fighter: &mut L2CFighte
 
 pub fn install() {
     Agent::new("plizardon")
-    .status(Pre, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Pre)
-    .status(Main, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Main)
-    .status(Exec, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Exec)
-    .status(End, FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_End)
+    .status(Pre, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Pre)
+    .status(Main, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Main)
+    .status(Exec, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_Exec)
+    .status(End, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_HI2, status_plizardon_SpecialHi2_End)
     .install();
 }

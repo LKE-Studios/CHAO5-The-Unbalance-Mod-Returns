@@ -16,11 +16,11 @@ unsafe extern "C" fn status_maskedman_SpecialHi_Pre(fighter: &mut L2CFighterComm
 pub unsafe extern "C" fn maskedman_SpecialHi_status_helper(fighter: &mut L2CFighterCommon, is_start: bool, status: i32) {
     let motion_g;
     let motion_a;
-    if status == FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD {
+    if status == *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_HOLD {
         motion_g = Hash40::new("special_hi_hold");
         motion_a = Hash40::new("special_hi_hold");
     }
-    else if status == FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END {
+    else if status == *FIGHTER_MASKEDMAN_STATUS_KIND_SPECIAL_HI_END {
         motion_g = Hash40::new("special_hi_end");
         motion_a = Hash40::new("special_hi_end");
     }
