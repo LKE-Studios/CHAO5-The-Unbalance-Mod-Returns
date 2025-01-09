@@ -8,7 +8,7 @@ unsafe extern "C" fn status_ninten_SpecialHiAttack_Init(fighter: &mut L2CFighter
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK)(fighter)
+        0.into()
     }
 }
 
@@ -25,7 +25,7 @@ unsafe extern "C" fn status_ninten_SpecialHiAttack_Main(fighter: &mut L2CFighter
         fighter.sub_shift_status_main(L2CValue::Ptr(ninten_SpecialHiAttack_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK)(fighter)
+        0.into()
     }
 }
 
@@ -60,7 +60,7 @@ unsafe extern "C" fn status_ninten_SpecialHiAttack_Exec(fighter: &mut L2CFighter
         0.into()
     }
     else {
-        original_status(Exec, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK)(fighter)
+        0.into()
     }
 }
 
@@ -72,7 +72,7 @@ unsafe extern "C" fn status_ninten_SpecialHiAttack_ExecStop(fighter: &mut L2CFig
         0.into()
     }
     else {
-        original_status(ExecStop, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK)(fighter)
+        0.into()
     }
 }
 
@@ -85,16 +85,16 @@ unsafe extern "C" fn status_ninten_SpecialHiAttack_End(fighter: &mut L2CFighterC
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Init, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Init)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Main)
-    .status(Exec, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Exec)
-    .status(ExecStop, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_ExecStop)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_End)
+    .status(Init, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Init)
+    .status(Main, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Main)
+    .status(Exec, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_Exec)
+    .status(ExecStop, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_ExecStop)
+    .status(End, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK, status_ninten_SpecialHiAttack_End)
     .install();
 }

@@ -87,8 +87,8 @@ unsafe extern "C" fn status_kamek_SpecialNFire_End(fighter: &mut L2CFighterCommo
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Pre)
-    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Main)
-    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_End)
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Pre)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_Main)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE, status_kamek_SpecialNFire_End)
     .install();
 }

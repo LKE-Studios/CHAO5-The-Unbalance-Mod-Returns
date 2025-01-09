@@ -235,23 +235,8 @@ pub unsafe extern "C" fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2
     0.into()
 }
 
-#[skyline::hook(replace = L2CFighterCommon_bind_address_call_status_end_Glide)]
-pub unsafe fn bind_address_call_status_end_Glide(fighter: &mut L2CFighterCommon, _agent: &mut L2CAgent) -> L2CValue {
-    fighter.status_end_Glide()
-}
-
-#[skyline::hook(replace = L2CFighterCommon_status_end_Glide)]
-pub unsafe fn status_Glide_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe extern "C" fn status_Glide_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
-}
-
-fn nro_hook(info: &skyline::nro::NroInfo) {
-    if info.name == "common" {
-        skyline::install_hooks!(
-            bind_address_call_status_end_Glide, 
-            status_Glide_End
-        );
-    }
 }
 
 pub fn install() {
@@ -261,5 +246,6 @@ pub fn install() {
     .status(Main, *FIGHTER_STATUS_KIND_GLIDE, status_Glide_Main)
     .status(Exec, *FIGHTER_STATUS_KIND_GLIDE, status_Glide_Exec)
     .status(Exit, *FIGHTER_STATUS_KIND_GLIDE, status_Glide_Exit)
+    .status(End, *FIGHTER_STATUS_KIND_GLIDE, status_Glide_End)
     .install();
 }

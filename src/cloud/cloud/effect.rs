@@ -23,7 +23,7 @@ unsafe extern "C" fn effect_cloud_AttackAirF(fighter: &mut L2CAgentBase) {
 
 //SpecialLwLoop
 unsafe extern "C" fn effect_cloud_SpecialLwLoop(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             EFFECT_OFF_KIND(fighter, Hash40::new("cloud_limitcharge_hold"), false, false);
             EFFECT_FOLLOW(fighter, Hash40::new("cloud_limitcharge_hold"), Hash40::new("top"), 1, 10, 0, 0, 0, 0, 1, true);
@@ -39,7 +39,7 @@ unsafe extern "C" fn effect_cloud_SpecialLwLoop(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwLoop
 unsafe extern "C" fn effect_cloud_SpecialAirLwLoop(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("cloud_limitcharge_hold"), Hash40::new("top"), 1, 10, 0, 0, 0, 0, 1, true);
             EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);

@@ -110,11 +110,21 @@ unsafe extern "C" fn waluigi_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCom
     0.into()
 }
 
+unsafe extern "C" fn status_waluigi_SpecialLwJump_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let WALUIGI = color >= 120 && color <= 130;
+	if WALUIGI {
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
 unsafe extern "C" fn status_waluigi_SpecialLwJump_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let WALUIGI = color >= 120 && color <= 130;
-	if WALUIGI && fighter_kind == FIGHTER_KIND_DOLLY {
+	if WALUIGI {
         0.into()
     }
     else {
@@ -127,6 +137,7 @@ pub fn install() {
     .status(Pre, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Pre)
     .status(Init, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Init)
     .status(Main, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Main)
+    .status(Exec, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_Exec)
     .status(End, *FIGHTER_WALUIGI_STATUS_KIND_SPECIAL_LW_JUMP, status_waluigi_SpecialLwJump_End)
     .install();
 }

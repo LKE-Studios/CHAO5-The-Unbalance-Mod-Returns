@@ -44,11 +44,11 @@ pub unsafe extern "C" fn frame_ninten_Main(fighter: &mut L2CFighterCommon) {
                 }
             }
         }
-        if ControlModule::get_command_flag_cat(fighter.module_accessor, 0) == *FIGHTER_PAD_CMD_CAT1_SPECIAL_HI {
-            fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_HI.into(), true.into());
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.change_status(FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, 
-        *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD].contains(&status_kind) == true {
+            *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD].contains(&status_kind) == true {
             AbsorberModule::clear_all(fighter.module_accessor);
         };
         if status_kind == *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT {

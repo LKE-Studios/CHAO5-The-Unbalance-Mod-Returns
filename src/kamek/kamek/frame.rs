@@ -72,12 +72,8 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
                 }
             }
         };
-        if ![FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_FIRE].contains(&status_kind) 
-        || !sv_information::is_ready_go() {
-            FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE[ENTRY_ID] = 0.0;
-        }
-        if status_kind != *FIGHTER_STATUS_KIND_SPECIAL_S {
-            FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT[ENTRY_ID] = 0;
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW,
         *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD,

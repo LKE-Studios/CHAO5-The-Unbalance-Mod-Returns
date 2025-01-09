@@ -102,6 +102,46 @@ unsafe extern "C" fn sound_lucas_WessDance(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_lucas_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucas_rnd_futtobi01"), Hash40::new("seq_lucas_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_lucas_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucas_rnd_futtobi01"), Hash40::new("seq_lucas_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_lucas_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucas_rnd_futtobi01"), Hash40::new("seq_lucas_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_lucas_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucas_rnd_futtobi01"), Hash40::new("seq_lucas_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_lucas_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucas_rnd_futtobi01"), Hash40::new("seq_lucas_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("lucas")
     .sound_acmd("sound_attack13", sound_lucas_Attack13, Low)
@@ -111,5 +151,10 @@ pub fn install() {
     .sound_acmd("sound_appealsr", sound_lucas_AppealSR, Low)    
     .sound_acmd("sound_appealsl", sound_lucas_AppealSL, Low)      
     .sound_acmd("sound_wessdance", sound_lucas_WessDance, Low)
+    .sound_acmd("sound_damageflyhi", sound_lucas_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_lucas_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_lucas_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_lucas_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_lucas_DamageFlyRoll, Low)
     .install();
 }

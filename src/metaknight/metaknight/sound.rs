@@ -272,6 +272,46 @@ unsafe extern "C" fn sound_metaknight_SpecialAirZ(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_metaknight_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_metaknight_rnd_futtobi01"), Hash40::new("seq_metaknight_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_metaknight_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_metaknight_rnd_futtobi01"), Hash40::new("seq_metaknight_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_metaknight_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_metaknight_rnd_futtobi01"), Hash40::new("seq_metaknight_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_metaknight_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_metaknight_rnd_futtobi01"), Hash40::new("seq_metaknight_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_metaknight_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_metaknight_rnd_futtobi01"), Hash40::new("seq_metaknight_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .sound_acmd("sound_shieldbreakfly", sound_metaknight_ShieldBreakFly, Low)
@@ -293,5 +333,10 @@ pub fn install() {
     .sound_acmd("sound_specialairlwstart", sound_metaknight_SpecialAirLwStart, Low)
     .sound_acmd("sound_specialz", sound_metaknight_SpecialZ, Low)
     .sound_acmd("sound_specialairz", sound_metaknight_SpecialAirZ, Low)
+    .sound_acmd("sound_damageflyhi", sound_metaknight_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_metaknight_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_metaknight_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_metaknight_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_metaknight_DamageFlyRoll, Low)
     .install();
 }

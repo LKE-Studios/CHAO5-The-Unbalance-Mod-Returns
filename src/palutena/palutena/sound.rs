@@ -78,6 +78,46 @@ unsafe extern "C" fn sound_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_palutena_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_palutena_rnd_futtobi01"), Hash40::new("seq_palutena_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_palutena_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_palutena_rnd_futtobi01"), Hash40::new("seq_palutena_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_palutena_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_palutena_rnd_futtobi01"), Hash40::new("seq_palutena_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_palutena_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_palutena_rnd_futtobi01"), Hash40::new("seq_palutena_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_palutena_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_palutena_rnd_futtobi01"), Hash40::new("seq_palutena_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("palutena")
     .sound_acmd("sound_shieldbreakfly", sound_palutena_ShieldBreakFly, Low)
@@ -86,5 +126,10 @@ pub fn install() {
     .sound_acmd("sound_glidelanding", sound_palutena_GlideLanding, Low)
     .sound_acmd("sound_glideend", sound_palutena_GlideEnd, Low)
     .sound_acmd("sound_attackhi4", sound_palutena_AttackHi4, Low)
+    .sound_acmd("sound_damageflyhi", sound_palutena_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_palutena_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_palutena_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_palutena_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_palutena_DamageFlyRoll, Low)
     .install();
 }

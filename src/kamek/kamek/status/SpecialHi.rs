@@ -14,7 +14,7 @@ unsafe extern "C" fn status_kamek_SpecialHi_Pre(fighter: &mut L2CFighterCommon) 
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_HI)(fighter)
+        0.into()
     }
 }
 
@@ -39,11 +39,11 @@ unsafe extern "C" fn status_kamek_SpecialHi_Init(fighter: &mut L2CFighterCommon)
 pub unsafe extern "C" fn kamek_SpecialHi_status_helper(fighter: &mut L2CFighterCommon, is_start: bool, status: i32) {
     let motion_g;
     let motion_a;
-    if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP {
+    if status == *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP {
         motion_g = Hash40::new("special_hi_hold");
         motion_a = Hash40::new("special_hi_hold");
     }
-    else if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {
+    else if status == *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {
         motion_g = Hash40::new("special_hi_end");
         motion_a = Hash40::new("special_air_hi_end");
     }
@@ -60,8 +60,8 @@ pub unsafe extern "C" fn kamek_SpecialHi_status_helper(fighter: &mut L2CFighterC
     }
     let correct = if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {*GROUND_CORRECT_KIND_GROUND} else {*GROUND_CORRECT_KIND_AIR};
     GroundModule::set_correct(fighter.module_accessor, GroundCorrectKind(correct));
-    if status == *FIGHTER_STATUS_KIND_SPECIAL_HI || !is_start {
-        let air_kinetic = if status == FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {FIGHTER_KINETIC_TYPE_AIR_STOP} else {FIGHTER_KINETIC_TYPE_SHEIK_SPECIAL_HI_AIR};
+    if status == *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START || !is_start {
+        let air_kinetic = if status == *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_END {FIGHTER_KINETIC_TYPE_AIR_STOP} else {FIGHTER_KINETIC_TYPE_SHEIK_SPECIAL_HI_AIR};
         fighter.sub_change_kinetic_type_by_situation(FIGHTER_KINETIC_TYPE_GROUND_STOP.into(),air_kinetic.into());
     }   
 }
@@ -70,12 +70,12 @@ unsafe extern "C" fn status_kamek_SpecialHi_Main(fighter: &mut L2CFighterCommon)
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let KAMEK = color >= 64 && color <= 71;
 	if KAMEK {
-        kamek_SpecialHi_status_helper(fighter, true, *FIGHTER_STATUS_KIND_SPECIAL_HI);
+        kamek_SpecialHi_status_helper(fighter, true, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START);
         WorkModule::set_float(fighter.module_accessor, landing_frame, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialHi_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_HI)(fighter)
+        0.into()
     }
 }
 
@@ -92,7 +92,7 @@ unsafe extern "C" fn kamek_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -
     }
     if !StatusModule::is_changing(fighter.module_accessor)
     && StatusModule::is_situation_changed(fighter.module_accessor) {
-        kamek_SpecialHi_status_helper(fighter, false, *FIGHTER_STATUS_KIND_SPECIAL_HI);
+        kamek_SpecialHi_status_helper(fighter, false, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START);
     }
     if MotionModule::is_end(fighter.module_accessor) {
         fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP.into(),false.into());
@@ -114,9 +114,9 @@ unsafe extern "C" fn status_kamek_SpecialHi_End(fighter: &mut L2CFighterCommon) 
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_kamek_SpecialHi_Pre)
-    .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_kamek_SpecialHi_Init)
-    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_kamek_SpecialHi_Main)
-    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_kamek_SpecialHi_End)
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START, status_kamek_SpecialHi_Pre)
+    .status(Init, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START, status_kamek_SpecialHi_Init)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START, status_kamek_SpecialHi_Main)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START, status_kamek_SpecialHi_End)
     .install();
 }

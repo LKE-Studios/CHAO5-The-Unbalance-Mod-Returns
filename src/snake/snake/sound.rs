@@ -45,8 +45,53 @@ unsafe extern "C" fn sound_snake_AttackS4(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_snake_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_snake_rnd_futtobi01"), Hash40::new("seq_snake_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_snake_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_snake_rnd_futtobi01"), Hash40::new("seq_snake_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_snake_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_snake_rnd_futtobi01"), Hash40::new("seq_snake_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_snake_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_snake_rnd_futtobi01"), Hash40::new("seq_snake_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_snake_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_snake_rnd_futtobi01"), Hash40::new("seq_snake_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("snake")
     .sound_acmd("sound_attacks4", sound_snake_AttackS4, Low)
+    .sound_acmd("sound_damageflyhi", sound_snake_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_snake_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_snake_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_snake_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_snake_DamageFlyRoll, Low)
     .install();
 }

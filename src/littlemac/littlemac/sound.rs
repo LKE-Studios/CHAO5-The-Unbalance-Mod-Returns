@@ -120,6 +120,46 @@ unsafe extern "C" fn sound_littlemac_AppealSL(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_littlemac_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_littlemac_rnd_futtobi01"), Hash40::new("seq_littlemac_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_littlemac_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_littlemac_rnd_futtobi01"), Hash40::new("seq_littlemac_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_littlemac_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_littlemac_rnd_futtobi01"), Hash40::new("seq_littlemac_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_littlemac_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_littlemac_rnd_futtobi01"), Hash40::new("seq_littlemac_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_littlemac_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_littlemac_rnd_futtobi01"), Hash40::new("seq_littlemac_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("littlemac")
     .sound_acmd("sound_appealhir", sound_littlemac_AppealHiR, Low)
@@ -128,5 +168,10 @@ pub fn install() {
     .sound_acmd("sound_appeallwl", sound_littlemac_AppealLwL, Low)
     .sound_acmd("sound_appealsr", sound_littlemac_AppealSR, Low)
     .sound_acmd("sound_appealsl", sound_littlemac_AppealSL, Low)
+    .sound_acmd("sound_damageflyhi", sound_littlemac_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_littlemac_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_littlemac_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_littlemac_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_littlemac_DamageFlyRoll, Low)
     .install();
 }

@@ -75,6 +75,46 @@ unsafe extern "C" fn sound_pitb_GlideEnd(fighter: &mut L2CAgentBase) {
     }
 }   
 
+//DamageFlyHi
+unsafe extern "C" fn sound_pitb_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_pitb_rnd_futtobi01"), Hash40::new("seq_pitb_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_pitb_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_pitb_rnd_futtobi01"), Hash40::new("seq_pitb_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_pitb_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_pitb_rnd_futtobi01"), Hash40::new("seq_pitb_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_pitb_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_pitb_rnd_futtobi01"), Hash40::new("seq_pitb_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_pitb_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_pitb_rnd_futtobi01"), Hash40::new("seq_pitb_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("pitb")
     .sound_acmd("sound_jumpaerialf4", sound_pitb_JumpAerialF4, Low)
@@ -85,5 +125,10 @@ pub fn install() {
     .sound_acmd("sound_glideattack", sound_pitb_GlideAttack, Low)
     .sound_acmd("sound_glidelanding", sound_pitb_GlideLanding, Low)
     .sound_acmd("sound_glideend", sound_pitb_GlideEnd, Low)
+    .sound_acmd("sound_damageflyhi", sound_pitb_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_pitb_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_pitb_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_pitb_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_pitb_DamageFlyRoll, Low)
     .install();
 }

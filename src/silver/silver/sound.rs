@@ -617,6 +617,46 @@ unsafe extern "C" fn sound_silver_FinalAir(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_silver_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_mewtwo_rnd_futtobi01"), Hash40::new("seq_mewtwo_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_silver_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_mewtwo_rnd_futtobi01"), Hash40::new("seq_mewtwo_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_silver_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_mewtwo_rnd_futtobi01"), Hash40::new("seq_mewtwo_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_silver_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_mewtwo_rnd_futtobi01"), Hash40::new("seq_mewtwo_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_silver_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_mewtwo_rnd_futtobi01"), Hash40::new("seq_mewtwo_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("mewtwo")
     .sound_acmd("sound_attack11_silver", sound_silver_Attack11, Low)
@@ -672,6 +712,11 @@ pub fn install() {
     .sound_acmd("sound_appealhil_silver", sound_silver_AppealHiL, Low)
     .sound_acmd("sound_appeallwr_silver", sound_silver_AppealLwR, Low)
     .sound_acmd("sound_appeallwl_silver", sound_silver_AppealLwL, Low)
+    .sound_acmd("sound_damageflyhi_silver", sound_silver_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw_silver", sound_silver_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn_silver", sound_silver_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop_silver", sound_silver_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll_silver", sound_silver_DamageFlyRoll, Low)
     //.sound_acmd("sound_final_silver", sound_silver_Final, Low)
     //.sound_acmd("sound_finalair_silver", sound_silver_FinalAir, Low)
     .install();

@@ -34,9 +34,54 @@ unsafe extern "C" fn sound_kirby_SpecialAirHiH(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_kirby_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_kirby_rnd_futtobi01"), Hash40::new("seq_kirby_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_kirby_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_kirby_rnd_futtobi01"), Hash40::new("seq_kirby_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_kirby_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_kirby_rnd_futtobi01"), Hash40::new("seq_kirby_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_kirby_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_kirby_rnd_futtobi01"), Hash40::new("seq_kirby_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_kirby_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_kirby_rnd_futtobi01"), Hash40::new("seq_kirby_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("kirby")
     .sound_acmd("sound_specialhih", sound_kirby_SpecialHiH, Low)
     .sound_acmd("sound_specialairhih", sound_kirby_SpecialAirHiH, Low)
+    .sound_acmd("sound_damageflyhi", sound_kirby_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_kirby_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_kirby_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_kirby_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_kirby_DamageFlyRoll, Low)
     .install();
 }

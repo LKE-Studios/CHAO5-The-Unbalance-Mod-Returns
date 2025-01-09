@@ -95,7 +95,7 @@ unsafe extern "C" fn sound_link_AttachWall(fighter: &mut L2CAgentBase) {
 
 //AttachWallClimb
 unsafe extern "C" fn sound_link_AttachWallClimb(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_link_step_right_s_ft"));
         }
@@ -104,6 +104,46 @@ unsafe extern "C" fn sound_link_AttachWallClimb(fighter: &mut L2CAgentBase) {
             PLAY_SE(fighter, Hash40::new("se_link_step_left_s_ft"));
         }
         wait(fighter.lua_state_agent, 5.0);
+    }
+}
+
+//DamageFlyHi
+unsafe extern "C" fn sound_link_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_link_rnd_futtobi01"), Hash40::new("seq_link_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_link_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_link_rnd_futtobi01"), Hash40::new("seq_link_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_link_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_link_rnd_futtobi01"), Hash40::new("seq_link_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_link_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_link_rnd_futtobi01"), Hash40::new("seq_link_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_link_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_link_rnd_futtobi01"), Hash40::new("seq_link_rnd_futtobi02"));
     }
 }
 
@@ -117,5 +157,10 @@ pub fn install() {
     .sound_acmd("sound_revaliglidelanding", sound_link_RevaliGlideLanding, Low)
     .sound_acmd("sound_attachwall", sound_link_AttachWall, Low)
     .sound_acmd("sound_attachwallclimb", sound_link_AttachWallClimb, Low)
+    .sound_acmd("sound_damageflyhi", sound_link_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_link_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_link_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_link_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_link_DamageFlyRoll, Low)
     .install();
 }

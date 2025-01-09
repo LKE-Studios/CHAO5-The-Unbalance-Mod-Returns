@@ -95,6 +95,46 @@ unsafe extern "C" fn sound_ridley_GlideEnd(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_ridley_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_ridley_rnd_futtobi01"), Hash40::new("seq_ridley_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_ridley_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_ridley_rnd_futtobi01"), Hash40::new("seq_ridley_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_ridley_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_ridley_rnd_futtobi01"), Hash40::new("seq_ridley_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_ridley_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_ridley_rnd_futtobi01"), Hash40::new("seq_ridley_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_ridley_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_ridley_rnd_futtobi01"), Hash40::new("seq_ridley_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("ridley")
     .sound_acmd("sound_jumpaerialf3", sound_ridley_JumpAerialF3, Low)
@@ -105,5 +145,10 @@ pub fn install() {
     .sound_acmd("sound_glideattack", sound_ridley_GlideAttack, Low)
     .sound_acmd("sound_glidelanding", sound_ridley_GlideLanding, Low)
     .sound_acmd("sound_glideend", sound_ridley_GlideEnd, Low)
+    .sound_acmd("sound_damageflyhi", sound_ridley_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_ridley_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_ridley_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_ridley_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_ridley_DamageFlyRoll, Low)
     .install();
 }

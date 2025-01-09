@@ -6,7 +6,7 @@ pub mod Glide;
 pub mod GlideAttack;
 pub mod GlideEnd;
 pub mod GlideLanding;
-mod Sub_Glide_checks;
+mod Sub_Glide_Checks;
 mod Catch;
 mod Guard;
 mod Dash;
@@ -27,7 +27,7 @@ pub fn install() {
     GlideAttack::install();
     GlideEnd::install();
     GlideLanding::install();
-    Sub_Glide_checks::install();
+    Sub_Glide_Checks::install();
     Catch::install();
     Guard::install();
     Dash::install();
@@ -36,6 +36,6 @@ pub fn install() {
     SpecialHi::install();
     EscapeAir::install();
     Rebirth::install();
-    //Damage::install();
     //Dead::install();
+    //Damage::install();
 }

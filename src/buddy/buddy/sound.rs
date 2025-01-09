@@ -110,6 +110,46 @@ unsafe extern "C" fn sound_buddy_GlideLanding(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_buddy_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_buddy_rnd_futtobi01"), Hash40::new("seq_buddy_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_buddy_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_buddy_rnd_futtobi01"), Hash40::new("seq_buddy_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_buddy_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_buddy_rnd_futtobi01"), Hash40::new("seq_buddy_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_buddy_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_buddy_rnd_futtobi01"), Hash40::new("seq_buddy_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_buddy_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_buddy_rnd_futtobi01"), Hash40::new("seq_buddy_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("buddy")
     .sound_acmd("sound_jumpaerialf3", sound_buddy_JumpAerialF3, Low)
@@ -120,5 +160,10 @@ pub fn install() {
     .sound_acmd("sound_glideattack", sound_buddy_GlideAttack, Low)
     .sound_acmd("sound_glideend", sound_buddy_GlideEnd, Low)
     .sound_acmd("sound_glidelanding", sound_buddy_GlideLanding, Low)
+    .sound_acmd("sound_damageflyhi", sound_buddy_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_buddy_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_buddy_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_buddy_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_buddy_DamageFlyRoll, Low)
     .install();
 }

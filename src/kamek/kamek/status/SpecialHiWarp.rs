@@ -165,11 +165,11 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_End(fighter: &mut L2CFighterComm
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Pre)
-    .status(Init, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Init)
-    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Main)
-    .status(Exec, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exec)
-    .status(Exit, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exit)
-    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_End)
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Pre)
+    .status(Init, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Init)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Main)
+    .status(Exec, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exec)
+    .status(Exit, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_Exit)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_WARP, status_kamek_SpecialHiWarp_End)
     .install();
 }

@@ -2173,7 +2173,7 @@ unsafe extern "C" fn game_dolly_SuperSpecial2Start(fighter: &mut L2CAgentBase) {
 //SuperSpecial2
 unsafe extern "C" fn game_dolly_SuperSpecial2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        let rng_hitbox = smash::app::sv_math::rand(hash40("dolly"), 4);
+        let rng_hitbox = sv_math::rand(hash40("dolly"), 4);
         if rng_hitbox == 0 {
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
             ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 100.0, /*Angle*/ 45, /*KBG*/ 33, /*FKB*/ 0, /*BKB*/ 10, /*Hitlag*/ 0.8, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_ENERGY);

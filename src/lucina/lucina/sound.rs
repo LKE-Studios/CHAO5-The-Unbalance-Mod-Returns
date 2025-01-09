@@ -133,6 +133,46 @@ unsafe extern "C" fn sound_lucina_SpecialAirLwHit2(fighter: &mut L2CAgentBase) {
     }
 }
 
+//DamageFlyHi
+unsafe extern "C" fn sound_lucina_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucina_rnd_futtobi01"), Hash40::new("seq_lucina_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_lucina_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucina_rnd_futtobi01"), Hash40::new("seq_lucina_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_lucina_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucina_rnd_futtobi01"), Hash40::new("seq_lucina_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_lucina_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucina_rnd_futtobi01"), Hash40::new("seq_lucina_rnd_futtobi02"));
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_lucina_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_FLY_VOICE(fighter, Hash40::new("seq_lucina_rnd_futtobi01"), Hash40::new("seq_lucina_rnd_futtobi02"));
+    }
+}
+
 pub fn install() {
     Agent::new("lucina")
     .sound_acmd("sound_attack13", sound_lucina_Attack13, Low)
@@ -146,5 +186,10 @@ pub fn install() {
     .sound_acmd("sound_attackairb", sound_lucina_AttackAirB, Low)
     .sound_acmd("sound_speciallwhit2", sound_lucina_SpecialLwHit2, Low)
     .sound_acmd("sound_specialairlwhit2", sound_lucina_SpecialAirLwHit2, Low)
+    .sound_acmd("sound_damageflyhi", sound_lucina_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_lucina_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_lucina_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_lucina_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_lucina_DamageFlyRoll, Low)
     .install();
 }

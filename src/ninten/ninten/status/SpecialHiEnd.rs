@@ -7,7 +7,7 @@ unsafe extern "C" fn status_ninten_SpecialHiEnd_Init(fighter: &mut L2CFighterCom
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END)(fighter)
+        0.into()
     }
 }
 
@@ -23,7 +23,7 @@ unsafe extern "C" fn status_ninten_SpecialHiEnd_Main(fighter: &mut L2CFighterCom
         fighter.sub_shift_status_main(L2CValue::Ptr(ninten_SpecialHiEnd_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END)(fighter)
+        0.into()
     }
 }
 
@@ -65,8 +65,8 @@ unsafe extern "C" fn status_ninten_SpecialHiEnd_End(fighter: &mut L2CFighterComm
 
 pub fn install() {
     Agent::new("ness")
-    .status(Init, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_Init)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_Main)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_End)
+    .status(Init, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_Init)
+    .status(Main, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_Main)
+    .status(End, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_END, status_ninten_SpecialHiEnd_End)
     .install();
 }

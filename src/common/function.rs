@@ -398,7 +398,8 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_MARIO_FIREBALL
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LUIGI_FIREBALL
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KIRBY_FINALCUTTERSHOT
-    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_ROCKMAN_HARDKNUCKLE {
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_ROCKMAN_HARDKNUCKLE
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KOOPAJR_CANNONBALL {
         let owner_id = WorkModule::get_int(object_boma, *WEAPON_INSTANCE_WORK_ID_INT_ACTIVATE_FOUNDER_ID) as u32;
         let owner_boma = sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_boma);

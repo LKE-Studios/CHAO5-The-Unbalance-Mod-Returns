@@ -16,7 +16,7 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Pre(fighter: &mut L2CFighterCom
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
@@ -37,7 +37,7 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Init(fighter: &mut L2CFighterCo
         0.into()
     }
     else {
-        original_status(Init, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
@@ -61,7 +61,7 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_Main(fighter: &mut L2CFighterCo
         fighter.sub_shift_status_main(L2CValue::Ptr(ninten_SpecialHiHold_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter)
+        0.into()
     }
 }
 
@@ -79,7 +79,7 @@ unsafe extern "C" fn ninten_SpecialHiHold_Main_loop(fighter: &mut L2CFighterComm
     let int_time = WorkModule::get_int(fighter.module_accessor, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
     WorkModule::dec_int(fighter.module_accessor, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-        fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_ATTACK.into(), true.into());
+        fighter.change_status(FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_ATTACK.into(), true.into());
         return 0.into();
     }
     if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
@@ -90,14 +90,13 @@ unsafe extern "C" fn ninten_SpecialHiHold_Main_loop(fighter: &mut L2CFighterComm
         WorkModule::add_int(fighter.module_accessor, button_add_warp_time, *FIGHTER_NINTEN_STATUS_SPECIAL_HI_HOLD_WORK_INT_TIME);
     }
     if MotionModule::is_end(fighter.module_accessor) || int_time == 0 {
-        fighter.change_status(FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END.into(), false.into());
+        fighter.change_status(FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_END.into(), false.into());
     }
     0.into()
 }
 
 unsafe extern "C" fn status_ninten_SpecialHiHold_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
 	if NINTEN {
         JostleModule::set_status(fighter.module_accessor, true);
@@ -112,9 +111,9 @@ unsafe extern "C" fn status_ninten_SpecialHiHold_End(fighter: &mut L2CFighterCom
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Pre)
-    .status(Init, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Init)
-    .status(Main, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Main)
-    .status(End, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_End)
+    .status(Pre, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Pre)
+    .status(Init, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Init)
+    .status(Main, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_Main)
+    .status(End, *FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_HOLD, status_ninten_SpecialHiHold_End)
     .install();
 }

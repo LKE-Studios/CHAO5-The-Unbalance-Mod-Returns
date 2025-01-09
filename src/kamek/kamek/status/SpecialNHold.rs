@@ -129,8 +129,8 @@ unsafe extern "C" fn status_kamek_SpecialNHold_End(fighter: &mut L2CFighterCommo
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Pre)
-    .status(Main, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Main)
-    .status(End, FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_End)
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Pre)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_Main)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_HOLD, status_kamek_SpecialNHold_End)
     .install();
 }
