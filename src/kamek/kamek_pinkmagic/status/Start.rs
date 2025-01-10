@@ -21,8 +21,8 @@ unsafe extern "C" fn status_kamek_pinkmagic_Start_End(weapon: &mut L2CWeaponComm
 
 pub fn install() {
     Agent::new("ness_pinkmagic")
-	.status(Pre, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_Pre)
-	.status(Main, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_Main)
-    .status(End, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_End)
+	.status(Pre, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_Pre)
+	.status(Main, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_Main)
+    .status(End, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_START, status_kamek_pinkmagic_Start_End)
     .install();
 }

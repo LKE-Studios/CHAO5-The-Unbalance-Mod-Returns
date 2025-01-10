@@ -6,6 +6,9 @@ pub unsafe extern "C" fn frame_ninten_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let NINTEN = color >= 120 && color <= 127;
     if NINTEN {
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.change_status(FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
+        }
         if status_kind != *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD {
             for i in 0..12 {
                 let hit_status = if i == 11 {*HIT_STATUS_OFF} else {*HIT_STATUS_NORMAL};
@@ -43,9 +46,6 @@ pub unsafe extern "C" fn frame_ninten_Main(fighter: &mut L2CFighterCommon) {
                     }
                 }
             }
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-            fighter.change_status(FIGHTER_NINTEN_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
         }
         if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, 
             *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HOLD].contains(&status_kind) == true {

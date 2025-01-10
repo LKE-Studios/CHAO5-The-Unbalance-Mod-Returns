@@ -23,10 +23,10 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
         common_attack_critical_flag(fighter);
     }
-    loupe(fighter);
+    loupe_function(fighter);
 }
 
-pub unsafe extern "C" fn loupe(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn loupe_function(fighter : &mut L2CFighterCommon) {
     let pos_x = PostureModule::pos_x(fighter.module_accessor);
     let camzones = get_camera_range();
     let threshold_left = camzones.left();
@@ -36,17 +36,19 @@ pub unsafe extern "C" fn loupe(fighter : &mut L2CFighterCommon) {
     let is_too_left = pos_x < threshold_left;
     let is_too_right = pos_x > threshold_right;
     let loupe_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) 
-    && (is_too_left || is_too_right) && !CustomModule::is_operation_cpu(fighter.module_accessor) {
-        WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
-        println!("{}", loupe_frame);
-        if loupe_frame == 1 {
-            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
+    if !StopModule::is_stop(fighter.module_accessor) {
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_LOUPE) 
+        && (is_too_left || is_too_right) && !CustomModule::is_operation_cpu(fighter.module_accessor) {
+            WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
+            println!("{}", loupe_frame);
+            if loupe_frame == 1 {
+                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), true, false, false, false, enSEType(0));
+            }
         }
-    }
-    else {
-        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), 0);
-        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
+        else {
+            SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_warning_out"), 0);
+            WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_LOUPE_FRAME);
+        }
     }
 }
 

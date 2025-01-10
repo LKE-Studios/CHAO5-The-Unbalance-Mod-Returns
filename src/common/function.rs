@@ -5,6 +5,7 @@ pub static mut SFX_COUNTER : [i32; 8] = [0; 8];
 pub static mut COUNTER : [i32; 8] = [0; 8];
 pub static mut CURRENT_ON_FRAME : [f32; 8] = [0.0; 8];
 pub static mut IS_CRIT : [bool; 8] = [false; 8];
+pub static VECTOR_ZERO : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 const COMMON_WEAPON_ATTACK_CALLBACK : usize = 0x33BDC30;
 const ITEM_CREATOR : usize = 0x15DB0B0;
 const NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET : usize = 0x67A7B0;
@@ -729,7 +730,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let attacker_fighter_kind = sv_battle_object::kind(attacker_object_id);
     let defender_fighter_kind = sv_battle_object::kind(defender_object_id);
     let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
-    let spell_type = WorkModule::get_int(attacker_module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let spell_type = WorkModule::get_int(attacker_module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let CUSTOM_FIGHTER = color >= 64 && color <= 71;
     if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER {
         if utility::get_category(&mut *defender_module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {

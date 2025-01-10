@@ -11,7 +11,7 @@ unsafe extern "C" fn status_kamek_SpecialN_Pre(fighter: &mut L2CFighterCommon) -
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
+        0.into()
     }
 }
 
@@ -38,7 +38,7 @@ unsafe extern "C" fn status_kamek_SpecialN_Main(fighter: &mut L2CFighterCommon) 
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialN_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
+        0.into()
     }
 }
 
@@ -98,13 +98,13 @@ unsafe extern "C" fn status_kamek_SpecialN_End(fighter: &mut L2CFighterCommon) -
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, status_kamek_SpecialN_Main)
-    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_N, status_kamek_SpecialN_End)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START, status_kamek_SpecialN_Main)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START, status_kamek_SpecialN_End)
     .install();
 }

@@ -4,7 +4,7 @@ use crate::kamek::kamek::frame::*;
 //Move
 unsafe extern "C" fn effect_kamek_beam_Regular(fighter: &mut L2CAgentBase) {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let float_charge = WorkModule::get_float(owner_module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
+    let float_charge = WorkModule::get_float(owner_module_accessor, *FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
     let size = float_charge * 0.015;
     loop {
         if is_excute(fighter) {

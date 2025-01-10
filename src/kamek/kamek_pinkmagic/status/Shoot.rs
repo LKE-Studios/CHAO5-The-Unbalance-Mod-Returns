@@ -35,7 +35,7 @@ unsafe extern "C" fn status_kamek_pinkmagic_Shoot_Main(weapon: &mut L2CWeaponCom
     let lr = PostureModule::lr(weapon.module_accessor);
     let speed_x = angle.to_radians().sin() * speed_max * lr;
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let float_charge = WorkModule::get_float(owner_module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
+    let float_charge = WorkModule::get_float(owner_module_accessor, *FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
     AttackModule::set_power_mul(weapon.module_accessor, 1.0 + (float_charge * 0.038825));
     AttackModule::set_attack_scale(weapon.module_accessor, 1.0 + (float_charge * 0.025), true);
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("shoot"), 0.0, 1.0, false, 0.0, false, false);
@@ -49,7 +49,7 @@ unsafe extern "C" fn status_kamek_pinkmagic_Shoot_Main(weapon: &mut L2CWeaponCom
 unsafe extern "C" fn kamek_pinkmagic_Shoot_Main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    let float_charge = WorkModule::get_float(owner_module_accessor, FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
+    let float_charge = WorkModule::get_float(owner_module_accessor, *FIGHTER_KAMEK_INSTANCE_WORK_ID_FLOAT_CHARGE);
     let size = float_charge * 0.02;
     if GroundModule::is_wall_touch_line(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
         SoundModule::play_se(weapon.module_accessor, Hash40::new("se_ness_special_n04_m"), true, false, false, false, enSEType(0));
@@ -71,9 +71,9 @@ unsafe extern "C" fn status_kamek_pinkmagic_Shoot_Exec(weapon: &mut L2CWeaponCom
 
 pub fn install() {
     Agent::new("ness_pinkmagic")
-	.status(Pre, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Pre)
-    .status(Init, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Init)
-	.status(Main, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Main)
-    .status(Exec, WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Exec)
+	.status(Pre, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Pre)
+    .status(Init, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Init)
+	.status(Main, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Main)
+    .status(Exec, *WEAPON_KAMEK_PINKMAGIC_STATUS_KIND_SHOOT, status_kamek_pinkmagic_Shoot_Exec)
     .install();
 }

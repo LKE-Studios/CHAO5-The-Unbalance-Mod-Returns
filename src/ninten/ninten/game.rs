@@ -631,8 +631,6 @@ unsafe extern "C" fn game_ninten_DownAttackD(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn game_ninten_SpecialS(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
     frame(fighter.lua_state_agent, 20.0);
     FT_MOTION_RATE(fighter, 1.0);
     frame(fighter.lua_state_agent, 21.0);
@@ -645,8 +643,6 @@ unsafe extern "C" fn game_ninten_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn game_ninten_SpecialAirS(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
-    FT_MOTION_RATE_RANGE(fighter, 1.0, 20.0, 22.0);
     frame(fighter.lua_state_agent, 20.0);
     FT_MOTION_RATE(fighter, 1.0);
     frame(fighter.lua_state_agent, 21.0);

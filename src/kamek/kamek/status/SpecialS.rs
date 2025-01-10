@@ -14,7 +14,7 @@ unsafe extern "C" fn status_kamek_SpecialS_Pre(fighter: &mut L2CFighterCommon) -
         0.into()
     }
     else {
-        original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter)
+        0.into()
     }
 }
 
@@ -63,7 +63,7 @@ unsafe extern "C" fn status_kamek_SpecialS_Main(fighter: &mut L2CFighterCommon) 
         fighter.sub_shift_status_main(L2CValue::Ptr(kamek_SpecialS_Main_loop as *const () as _))
     }
     else {
-        original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter)
+        0.into()
     }
 }
 
@@ -115,7 +115,7 @@ unsafe extern "C" fn status_kamek_SpecialS_CheckAttack(fighter: &mut L2CFighterC
     let table = param3.get_table() as *mut smash2::lib::L2CTable;
     let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
     let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
-    let spell_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let spell_type = WorkModule::get_int(fighter.module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     if category == *BATTLE_OBJECT_CATEGORY_FIGHTER {
         if collision_kind == *COLLISION_KIND_HIT {
             let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
@@ -178,16 +178,16 @@ unsafe extern "C" fn status_kamek_SpecialS_End(fighter: &mut L2CFighterCommon) -
         0.into()
     }
     else {
-        original_status(End, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter)
+        0.into()
     }
 }
 
 pub fn install() {
     Agent::new("ness")
-    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Pre)
-    .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Init)
-    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Main)
-    .status(CheckAttack, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_CheckAttack)
-    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_End)
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Pre)
+    .status(Init, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Init)
+    .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_Main)
+    .status(CheckAttack, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_CheckAttack)
+    .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S, status_kamek_SpecialS_End)
     .install();
 }

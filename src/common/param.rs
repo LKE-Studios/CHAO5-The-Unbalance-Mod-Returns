@@ -234,8 +234,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_int_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("life"), 2000));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("angle_ground"), 0.0));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("angle_air"), -25.0));
-    param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("speed_ground"), 3.0));
-    param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("speed_air"), 3.4));
+    param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("speed_ground"), 3.5));
+    param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("speed_air"), 4.0));
     param_config::update_int_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("pillar_life"), 10));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("pillar_damage_mul"), 4.0));
     param_config::update_float_2(-*WEAPON_KIND_NESS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_pkfire"), hash40("pillar_scale_min"), 1.0));

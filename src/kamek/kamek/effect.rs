@@ -763,7 +763,7 @@ unsafe extern "C" fn effect_kamek_SpecialAirNFire(fighter: &mut L2CAgentBase) {
 
 //SpecialS
 unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
-    let magic_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let magic_type = WorkModule::get_int(fighter.module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
@@ -789,7 +789,7 @@ unsafe extern "C" fn effect_kamek_SpecialS(fighter: &mut L2CAgentBase) {
 
 //SpecialAirS
 unsafe extern "C" fn effect_kamek_SpecialAirS(fighter: &mut L2CAgentBase) {
-    let magic_type = WorkModule::get_int(fighter.module_accessor, FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
+    let magic_type = WorkModule::get_int(fighter.module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let rand_num = sv_math::rand(hash40("ness"), 100);
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {

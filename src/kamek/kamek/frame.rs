@@ -1,8 +1,5 @@
 use crate::imports::BuildImports::*;
 
-pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_N_CHARGE : [f32; 8] = [0.0; 8];
-pub static mut FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_ID_EFFECT : [i32; 8] = [0; 8];
-pub static mut ATTTACK_LW4_SPIN_EFFECT : [i32; 8] = [0; 8];
 pub static mut N1 : Vector3f = Vector3f { x: 0.0, y: 3.0, z: -15.0 };
 pub static mut N2 : Vector3f = Vector3f { x: 0.0, y: 8.0, z: -24.0 };
 pub static mut F2 : [u32; 8] = [0; 8];
@@ -24,57 +21,69 @@ pub static NONE : Vector3f = Vector3f { x: 0.0, y: 5.0, z: 0.0 };
 pub static mut CSTICK_DIRECTION : [f32; 8] = [0.0; 8];
 
 pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);    
     let status_kind = StatusModule::status_kind(fighter.module_accessor); 
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
-    let cstick_x = ControlModule::get_attack_air_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
-    let cstick_y = ControlModule::get_attack_air_stick_y(fighter.module_accessor);
-    CSTICK_DIRECTION[ENTRY_ID] = ControlModule::get_attack_air_stick_dir(fighter.module_accessor) * (180.0 / PI);
+    let lr = PostureModule::lr(fighter.module_accessor);
     let KAMEK = color >= 64 && color <= 71;
     if KAMEK {
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START.into(), true.into());
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S.into(), true.into());
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_LW.into(), true.into());
+        }
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW4 {
+            let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_KAMEK_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             if frame > 17.0 && frame < 32.0 {
-				if ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] == 0 {
+				if effect_counter == 0 {
 					AttackLw4_Function(fighter);
-				};
-				ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] += 1;
-				if ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] > 4 {
-					ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] = 0;
-				};
+				}
+                WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_KAMEK_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+				if effect_counter > 4 {
+                    WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_KAMEK_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+				}
 			} 
             else {
-				ATTTACK_LW4_SPIN_EFFECT[ENTRY_ID] = 0;
-			};
+				WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_KAMEK_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+			}
         };
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
-            if PostureModule::lr(fighter.module_accessor) == -1.0 {
+            if lr == -1.0 {
                 ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("kamek_box"), &Vector3f{x: 0.0, y: 180.0 , z: 0.0 },  MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
             }
         }
-        if [hash40("attack_air_f")].contains(&MotionModule::motion_kind(fighter.module_accessor)) {
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        let cstick_x = ControlModule::get_attack_air_stick_x(fighter.module_accessor);
+        let cstick_y = ControlModule::get_attack_air_stick_y(fighter.module_accessor);
+        let mut cstick_direction = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_CSTICK_DIRECTION);
+        cstick_direction = ControlModule::get_attack_air_stick_dir(fighter.module_accessor) * (180.0 / PI);
+        if motion_kind == hash40("attack_air_f") {
             if frame <= 1.0 {
-                if ControlModule::get_attack_air_stick_x(fighter.module_accessor) >= -0.2 && ControlModule::get_attack_air_stick_x(fighter.module_accessor) <= 0.2 && ControlModule::get_attack_air_stick_y(fighter.module_accessor) >= -0.2 && ControlModule::get_attack_air_stick_y(fighter.module_accessor) <= 0.2 {
-                    CSTICK_DIRECTION[ENTRY_ID] = 361.0;
+                if cstick_x >= -0.2 && cstick_x <= 0.2 && cstick_y >= -0.2 && cstick_y <= 0.2 {
+                    WorkModule::set_float(fighter.module_accessor, 361.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_CSTICK_DIRECTION);
                 } 
-                else if CSTICK_DIRECTION[ENTRY_ID] <= -67.5 {
-                    CSTICK_DIRECTION[ENTRY_ID] *= -1.0;
-                };
-                if CSTICK_DIRECTION[ENTRY_ID] >= -67.5 && CSTICK_DIRECTION[ENTRY_ID] < -20.0 && cstick_x > 0.0 { //3 (Angled Down)
+                else if cstick_direction <= -67.5 {
+                    WorkModule::mul_float(fighter.module_accessor, -1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_CSTICK_DIRECTION);
+                }
+                if cstick_direction >= -67.5 && cstick_direction < -20.0 && cstick_x * lr > 0.0 { //3 (Angled Down)
                     param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), -20.0);
                 }
-                else if CSTICK_DIRECTION[ENTRY_ID] >= -20.0 && CSTICK_DIRECTION[ENTRY_ID] <= 20.0 && cstick_x > 0.0 { //6 (No Angle)
+                else if cstick_direction >= -20.0 && cstick_direction <= 20.0 && cstick_x * lr > 0.0 { //6 (No Angle)
                     param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), 0.0);
                 }
-                else if CSTICK_DIRECTION[ENTRY_ID] > 20.0 && CSTICK_DIRECTION[ENTRY_ID] <= 67.5 && cstick_x > 0.0 { //9 (Angled Up)
+                else if cstick_direction > 20.0 && cstick_direction <= 67.5 && cstick_x * lr > 0.0 { //9 (Angled Up)
                     param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), 20.0);
                 }
             }
         };
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-            fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_HI_START.into(), true.into());
-        }
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW,
         *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_FIRE, *FIGHTER_NESS_STATUS_KIND_SPECIAL_N_HOLD,
         *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_END, *FIGHTER_NESS_STATUS_KIND_SPECIAL_LW_HIT,

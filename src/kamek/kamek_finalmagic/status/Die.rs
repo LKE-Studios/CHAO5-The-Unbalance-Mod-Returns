@@ -27,8 +27,8 @@ pub unsafe extern "C" fn status_kamek_finalmagic_Die_End(weapon: &mut L2CWeaponC
 
 pub fn install() {
     Agent::new("ness_finalmagic")
-	.status(Pre, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_Pre)
-	.status(Main, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_Main)
-    .status(End, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Die_End)
+	.status(Pre, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_DIE, status_kamek_finalmagic_Die_Pre)
+	.status(Main, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_DIE, status_kamek_finalmagic_Die_Main)
+    .status(End, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_DIE, status_kamek_finalmagic_Die_End)
     .install();
 }

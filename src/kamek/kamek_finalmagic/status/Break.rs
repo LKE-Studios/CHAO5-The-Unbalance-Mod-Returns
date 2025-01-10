@@ -13,7 +13,7 @@ unsafe extern "C" fn status_kamek_finalmagic_Break_Main(weapon: &mut L2CFighterC
 }
 
 pub unsafe extern "C" fn kamek_finalmagic_Break_Main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    StatusModule::change_status_force(weapon.module_accessor, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_DIE, false);
+    StatusModule::change_status_force(weapon.module_accessor, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_DIE, false);
 	0.into()
 }
 
@@ -23,8 +23,8 @@ pub unsafe extern "C" fn status_kamek_finalmagic_Break_End(weapon: &mut L2CWeapo
 
 pub fn install() {
     Agent::new("ness_finalmagic")
-	.status(Pre, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_Pre)
-	.status(Main, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_Main)
-    .status(End, WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_End)
+	.status(Pre, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_Pre)
+	.status(Main, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_Main)
+    .status(End, *WEAPON_KAMEK_FINALMAGIC_STATUS_KIND_EXPLODE, status_kamek_finalmagic_Break_End)
     .install();
 }
