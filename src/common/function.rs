@@ -280,9 +280,9 @@ pub mod FighterSpecializer_MetaKnight {
                 println!("{}", sound_counter);
             }
             if effect_counter >= 6 {
-                let effect_a = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, effect_scale, true, 0, 0, 0, 0, 0, true, true);
+                let effect_a = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("haver"), &VECTOR_ZERO, &VECTOR_ZERO, effect_scale, true, 0, 0, 0, 0, 0, true, true);
                 EffectModule::set_rgb(module_accessor, effect_a as u32, 0.68, 0.87, 2.0);
-                let effect_b = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, effect_scale, true, 0, 0, 0, 0, 0, true, true);
+                let effect_b = EffectModule::req_follow(module_accessor, Hash40::new("sys_hit_purple"), Hash40::new("havel"), &VECTOR_ZERO, &VECTOR_ZERO, effect_scale, true, 0, 0, 0, 0, 0, true, true);
                 EffectModule::set_rgb(module_accessor, effect_b as u32, 0.68, 0.87, 2.0);
                 WorkModule::set_int(module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             }
@@ -393,6 +393,7 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
     let color = WorkModule::get_int(object_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let ADDED_FIGHTER = color >= 120 && color <= 130;
     let ADDED_FIGHTER_2 = color >= 64 && color <= 71;
+    let ADDED_FIGHTER_3 = color >= 96 && color <= 103;
     if utility::get_kind(&mut *object_boma) == *WEAPON_KIND_SHEIK_NEEDLE 
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOOMERANG 
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_PITB_BOWARROW 
@@ -416,7 +417,7 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
         if owner_kind == *FIGHTER_KIND_DOLLY && ADDED_FIGHTER { //WALUIGI
             return true;
         }
-        if owner_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_2 { //KAMEK
+        if owner_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_3 { //KAMEK
             return true;
         }
     }
@@ -684,11 +685,12 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
     let opponent_id = (*collision_log).collider_id;
     let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let CUSTOM_FIGHTER_2 = color >= 64 && color <= 71;
+    let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
     let CUSTOM_FIGHTER = color >= 120 && color <= 127;
     if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 && CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
         *(weapon as *mut bool).add(0x90) = true;
     }
-    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 && CUSTOM_FIGHTER_2 && owner_kind == *FIGHTER_KIND_NESS {
+    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 && CUSTOM_FIGHTER_3 && owner_kind == *FIGHTER_KIND_NESS {
         *(weapon as *mut bool).add(0x90) = true;
     }
     call_original!(vtable, weapon, log)
@@ -732,7 +734,8 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let spell_type = WorkModule::get_int(attacker_module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let CUSTOM_FIGHTER = color >= 64 && color <= 71;
-    if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER {
+    let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
+    if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER_3 {
         if utility::get_category(&mut *defender_module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
             if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
                 if spell_type == 8 {

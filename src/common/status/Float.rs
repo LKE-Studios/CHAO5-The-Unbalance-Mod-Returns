@@ -16,7 +16,11 @@ pub unsafe extern "C" fn status_Float_Pre(fighter: &mut L2CFighterCommon) -> L2C
 }
 
 pub unsafe extern "C" fn status_Float_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let speed_x_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_uniq_float"), hash40("speed_x_max"));
+    let speed_y_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_uniq_float"), hash40("speed_y_max"));
     sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, 0.0, 0.0, 0.0, 0.0);
+    sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_max, speed_y_max);
+    sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x_max, speed_y_max);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     let pos_x = PostureModule::pos_x(fighter.module_accessor);
     let pos_y = PostureModule::pos_y(fighter.module_accessor);
@@ -111,11 +115,18 @@ unsafe fn float_set_aerial(fighter: &mut L2CFighterCommon) {
 }
 
 unsafe extern "C" fn Float_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     if fighter.global_table[CURRENT_FRAME].get_f32() == 3.0
     && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_OMNI_FLOAT) {
-        let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        let air_accel_x = WorkModule::get_param_float(fighter.module_accessor, hash40("param_uniq_float"), hash40("air_accel_x"));
+        let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_uniq_float"), hash40("air_accel_y"));
+        let accel_x = air_accel_x * stick_x;
+        let accel_y = air_accel_y * stick_y;
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, ENERGY_CONTROLLER_RESET_TYPE_FREE, 0.0, 0.0, 0.0, 0.0, 0.0);
-        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x, 0.0);
+        sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
+        sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, accel_x, accel_y);
     }
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();

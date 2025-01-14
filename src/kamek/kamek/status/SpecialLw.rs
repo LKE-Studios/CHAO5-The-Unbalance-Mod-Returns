@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_kamek_SpecialLw_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, *FIGHTER_STATUS_ATTR_START_TURN as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32, 0);
@@ -15,7 +15,7 @@ unsafe extern "C" fn status_kamek_SpecialLw_Pre(fighter: &mut L2CFighterCommon) 
 
 unsafe extern "C" fn status_kamek_SpecialLw_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         WorkModule::set_int(fighter.module_accessor, -1, *FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_SE_HANDLE);
         WorkModule::set_int(fighter.module_accessor, -1, *FIGHTER_NESS_STATUS_SPECIAL_LW_WORK_INT_EFFECT_HANDLE);
@@ -28,7 +28,7 @@ unsafe extern "C" fn status_kamek_SpecialLw_Init(fighter: &mut L2CFighterCommon)
 
 unsafe extern "C" fn status_kamek_SpecialLw_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x32de6245ed), *FIGHTER_HAVE_ITEM_WORK_MAIN, true);
         let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_lw"), hash40("time"));
@@ -93,7 +93,7 @@ unsafe extern "C" fn kamek_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
 
 unsafe extern "C" fn status_kamek_SpecialLw_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         0.into()
     }

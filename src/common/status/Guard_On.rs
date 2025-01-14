@@ -5,8 +5,7 @@ unsafe extern "C" fn sub_ftStatusUniqProcessGuardOn_initStatus_common(fighter: &
     ShieldModule::set_status(fighter.module_accessor, *FIGHTER_SHIELD_KIND_GUARD, ShieldStatus(*SHIELD_STATUS_NORMAL), 0);
     if FighterUtil::is_valid_just_shield(fighter.module_accessor)
     && ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8) < 6 
-    && (ControlModule::get_trigger_count_prev(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8) > 20 
-    || StatusModule::prev_status_kind(fighter.module_accessor, 0) == *FIGHTER_STATUS_KIND_GUARD_DAMAGE) {
+    && ControlModule::get_trigger_count_prev(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8) > 20 {
         let shield_just_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("shield_just_frame")) as f32;
         let just_shield_check_frame = WorkModule::get_param_float(fighter.module_accessor, hash40("just_shield_check_frame"), 0);
         let just_frame = (shield_just_frame * just_shield_check_frame + 0.5) as i32;
@@ -91,12 +90,50 @@ unsafe extern "C" fn sub_guard_on_uniq(fighter: &mut L2CFighterCommon, param_1: 
     0.into()
 }
 
+#[skyline::hook(replace = L2CFighterCommon_status_GuardOn_Main)]
+unsafe extern "C" fn status_GuardOn_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GUARD_ON_WORK_FLAG_EFFECT) {
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x262a7a102d));
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_GUARD_ON_WORK_FLAG_EFFECT);
+    }
+    if fighter.sub_status_guard_on_main_air_common().get_bool() {
+        return 0.into();
+    }
+    if fighter.sub_guard_cont().get_bool() {
+        return 0.into();
+    }
+    if fighter.status_guard_main_common().get_bool() {
+        return 0.into();
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+        fighter.change_status(FIGHTER_STATUS_KIND_GUARD.into(), false.into());
+    }
+    0.into()
+}
+
+#[skyline::hook(replace = L2CFighterCommon_sub_status_end_guard_on_common)]
+unsafe extern "C" fn sub_status_end_guard_on_common(fighter: &mut L2CFighterCommon, param_1: L2CValue) {
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
+    if status_kind != *FIGHTER_STATUS_KIND_GUARD
+    && status_kind != *FIGHTER_STATUS_KIND_GUARD_DAMAGE {
+        effect!(fighter, MA_MSC_CMD_EFFECT_EFFECT_OFF_KIND, Hash40::new("sys_shield"), true, true);
+        effect!(fighter, MA_MSC_CMD_EFFECT_EFFECT_OFF_KIND, Hash40::new("sys_shield_smoke"), true, true);
+    }
+    else if !param_1.get_bool() {
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x262a7a102d));
+    }
+}
+
+
+
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
             sub_ftStatusUniqProcessGuardOn_initStatus_common,
             sub_status_guard_on_common,
-            sub_guard_on_uniq
+            sub_guard_on_uniq,
+            status_GuardOn_Main,
+            sub_status_end_guard_on_common
         );
     }
 }

@@ -1,5 +1,4 @@
 use crate::imports::BuildImports::*;
-use crate::kamek::kamek::frame::*;
 
 unsafe extern "C" fn status_kamek_pinkmagic_Start_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_GROUND), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_NONE as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);

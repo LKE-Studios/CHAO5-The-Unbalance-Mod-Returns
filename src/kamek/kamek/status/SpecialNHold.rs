@@ -5,7 +5,7 @@ pub static charge_frame : f32 = 85.0;
 
 unsafe extern "C" fn status_kamek_SpecialNHold_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {	
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON | *FIGHTER_LOG_MASK_FLAG_SHOOT) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
@@ -18,7 +18,7 @@ unsafe extern "C" fn status_kamek_SpecialNHold_Pre(fighter: &mut L2CFighterCommo
 
 unsafe extern "C" fn status_kamek_SpecialNHold_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         let time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("time"));
         let nobang_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("nobang_time"));
@@ -114,7 +114,7 @@ unsafe extern "C" fn kamek_SpecialNHold_Main_loop(fighter: &mut L2CFighterCommon
 unsafe extern "C" fn status_kamek_SpecialNHold_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);    
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {	
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_light"), false, false);
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("rosetta_wand_stardust"), false, false);

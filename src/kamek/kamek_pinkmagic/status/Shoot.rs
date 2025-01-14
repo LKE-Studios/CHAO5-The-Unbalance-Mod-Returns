@@ -1,5 +1,6 @@
 use crate::imports::BuildImports::*;
-use crate::kamek::kamek::frame::*;
+
+pub static NONE : Vector3f = Vector3f {x: 0.0, y: 5.0, z: 0.0};
 
 unsafe extern "C" fn status_kamek_pinkmagic_Shoot_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_GROUND), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
@@ -41,8 +42,10 @@ unsafe extern "C" fn status_kamek_pinkmagic_Shoot_Main(weapon: &mut L2CWeaponCom
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("shoot"), 0.0, 1.0, false, 0.0, false, false);
     let size_a = float_charge * 0.02;
     let size_b = float_charge * 0.01;
-    EffectModule::req_follow(weapon.module_accessor, Hash40::new("lucario_hadoudan"), Hash40::new("top"), &N1, &NONE, 0.75 + size_a, true, 0, 0, 0, 0, 0, true, true);
-    EffectModule::req_follow(weapon.module_accessor, Hash40::new("stg_mariou_water_magic_bright2"), Hash40::new("top"), &NONE, &NONE, 0.4 + size_b, true, 0, 0, 0, 0, 0, true, true);
+    if !StopModule::is_stop(weapon.module_accessor) {
+        EffectModule::req_follow(weapon.module_accessor, Hash40::new("lucario_hadoudan"), Hash40::new("top"), &Vector3f{x: 0.0, y: 3.0, z: -15.0}, &NONE, 0.75 + size_a, true, 0, 0, 0, 0, 0, true, true);
+        EffectModule::req_follow(weapon.module_accessor, Hash40::new("stg_mariou_water_magic_bright2"), Hash40::new("top"), &NONE, &NONE, 0.4 + size_b, true, 0, 0, 0, 0, 0, true, true);
+    }
     weapon.fastshift(L2CValue::Ptr(kamek_pinkmagic_Shoot_Main_loop as *const () as _))
 }
 

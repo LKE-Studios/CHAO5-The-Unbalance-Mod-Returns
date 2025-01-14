@@ -8,7 +8,7 @@ pub static button_add_warp_time : i32 = 5;
 
 unsafe extern "C" fn status_kamek_SpecialHiWarp_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_FREE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), false, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_HI | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64, (*FIGHTER_STATUS_ATTR_DISABLE_DISSOLVE_CURSOR | *FIGHTER_STATUS_ATTR_HIDE_NAME_CURSOR) as u32, (*FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_HI) as u32, 0);
@@ -21,7 +21,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Pre(fighter: &mut L2CFighterComm
 
 unsafe extern "C" fn status_kamek_SpecialHiWarp_Init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
@@ -64,7 +64,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Init(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn status_kamek_SpecialHiWarp_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         WorkModule::set_float(fighter.module_accessor, landing_frame, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
         WorkModule::set_int(fighter.module_accessor, max_frame, *FIGHTER_NESS_STATUS_SPECIAL_HI_WORK_INT_STOP_TIME);
@@ -128,7 +128,7 @@ unsafe extern "C" fn kamek_SpecialHiWarp_Main_loop(fighter: &mut L2CFighterCommo
 
 unsafe extern "C" fn status_kamek_SpecialHiWarp_Exec(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         WorkModule::dec_int(fighter.module_accessor, *FIGHTER_NESS_STATUS_SPECIAL_HI_WORK_INT_TIME);
         0.into()
@@ -141,7 +141,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Exec(fighter: &mut L2CFighterCom
 unsafe extern "C" fn status_kamek_SpecialHiWarp_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         WorkModule::set_flag(fighter.module_accessor, true,*FIGHTER_INSTANCE_WORK_ID_FLAG_NAME_CURSOR);
         VisibilityModule::set_whole(fighter.module_accessor, true);
@@ -154,7 +154,7 @@ unsafe extern "C" fn status_kamek_SpecialHiWarp_Exit(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn status_kamek_SpecialHiWarp_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         0.into()
     }

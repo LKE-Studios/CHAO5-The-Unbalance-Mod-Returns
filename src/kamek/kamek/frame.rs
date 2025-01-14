@@ -18,7 +18,6 @@ pub static mut STAR4 :  Vector3f =  Vector3f { x: 0.0, y: 8.25, z: 6.5 };
 pub static mut STAR5 :  Vector3f =  Vector3f { x: 0.0, y: 8.25, z: -6.5 };
 pub static mut NO_SPIN :  Vector3f =  Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 pub static NONE : Vector3f = Vector3f { x: 0.0, y: 5.0, z: 0.0 };
-pub static mut CSTICK_DIRECTION : [f32; 8] = [0.0; 8];
 
 pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);    
@@ -26,7 +25,7 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
     if KAMEK {
         if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
             fighter.change_status(FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START.into(), true.into());
@@ -74,13 +73,13 @@ pub unsafe extern "C" fn frame_kamek_Main(fighter: &mut L2CFighterCommon) {
                     WorkModule::mul_float(fighter.module_accessor, -1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_CSTICK_DIRECTION);
                 }
                 if cstick_direction >= -67.5 && cstick_direction < -20.0 && cstick_x * lr > 0.0 { //3 (Angled Down)
-                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), -20.0);
+                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![96,97,98,99,100,101,102,103], (hash40("param_pkfire"),hash40("angle_air")), -20.0);
                 }
                 else if cstick_direction >= -20.0 && cstick_direction <= 20.0 && cstick_x * lr > 0.0 { //6 (No Angle)
-                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), 0.0);
+                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![96,97,98,99,100,101,102,103], (hash40("param_pkfire"),hash40("angle_air")), 0.0);
                 }
                 else if cstick_direction > 20.0 && cstick_direction <= 67.5 && cstick_x * lr > 0.0 { //9 (Angled Up)
-                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![64,65,66,67,68,69,70,71], (hash40("param_pkfire"),hash40("angle_air")), 20.0);
+                    param_config::update_float(-*WEAPON_KIND_NESS_PK_FIRE, vec![96,97,98,99,100,101,102,103], (hash40("param_pkfire"),hash40("angle_air")), 20.0);
                 }
             }
         };

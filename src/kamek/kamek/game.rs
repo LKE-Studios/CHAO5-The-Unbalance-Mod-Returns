@@ -1,5 +1,4 @@
 use crate::imports::BuildImports::*;
-use crate::kamek::kamek::frame::*;
 
 //JumpAerialFront
 unsafe extern "C" fn game_kamek_JumpAerialFront(fighter: &mut L2CAgentBase) {

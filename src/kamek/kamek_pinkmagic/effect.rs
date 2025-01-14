@@ -1,5 +1,4 @@
 use crate::imports::BuildImports::*;
-use crate::kamek::kamek::frame::*;
 
 //Move
 unsafe extern "C" fn effect_kamek_beam_Regular(fighter: &mut L2CAgentBase) {
@@ -8,11 +7,11 @@ unsafe extern "C" fn effect_kamek_beam_Regular(fighter: &mut L2CAgentBase) {
     let size = float_charge * 0.015;
     loop {
         if is_excute(fighter) {
-            EffectModule::req_follow(fighter.module_accessor, Hash40::new("kamek_magicball_flame"), Hash40::new("top"), &NONE, &NONE, 0.3 + size, true, 0, 0, 0, 0, 0, true, true);
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("kamek_magicball_flame"), Hash40::new("top"), &VECTOR_ZERO, &VECTOR_ZERO, 0.3 + size, true, 0, 0, 0, 0, 0, true, true);
         }
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
-            EffectModule::req_follow(fighter.module_accessor, Hash40::new("kamek_magicball_flame"), Hash40::new("top"), &NONE, &NONE, 0.4 + size, true, 0, 0, 0, 0, 0, true, true);
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("kamek_magicball_flame"), Hash40::new("top"), &VECTOR_ZERO, &VECTOR_ZERO, 0.4 + size, true, 0, 0, 0, 0, 0, true, true);
         }
         wait_loop_clear(fighter);
     }

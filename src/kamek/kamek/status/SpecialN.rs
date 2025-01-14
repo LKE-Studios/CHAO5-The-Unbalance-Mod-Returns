@@ -3,9 +3,8 @@ use crate::kamek::kamek::frame::*;
 
 unsafe extern "C" fn status_kamek_SpecialN_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {	
-        fighter.sub_status_pre_SpecialNCommon();
         StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_UNIQ, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
         FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON | *FIGHTER_LOG_MASK_FLAG_SHOOT) as u64, 0, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32, 0);
         0.into()
@@ -17,7 +16,7 @@ unsafe extern "C" fn status_kamek_SpecialN_Pre(fighter: &mut L2CFighterCommon) -
 
 unsafe extern "C" fn status_kamek_SpecialN_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {
         let stop_y_time = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("stop_y_time"));
         WorkModule::set_int(fighter.module_accessor, stop_y_time, *FIGHTER_NESS_STATUS_SPECIAL_N_WORK_INT_STOP_Y_TIME);
@@ -93,7 +92,7 @@ unsafe extern "C" fn kamek_SpecialN_Main_loop(fighter: &mut L2CFighterCommon) ->
 
 unsafe extern "C" fn status_kamek_SpecialN_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let KAMEK = color >= 64 && color <= 71;
+    let KAMEK = color >= 96 && color <= 103;
 	if KAMEK {	
         0.into()
     }
@@ -104,6 +103,7 @@ unsafe extern "C" fn status_kamek_SpecialN_End(fighter: &mut L2CFighterCommon) -
 
 pub fn install() {
     Agent::new("ness")
+    .status(Pre, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START, status_kamek_SpecialN_Pre)
     .status(Main, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START, status_kamek_SpecialN_Main)
     .status(End, *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_N_START, status_kamek_SpecialN_End)
     .install();
