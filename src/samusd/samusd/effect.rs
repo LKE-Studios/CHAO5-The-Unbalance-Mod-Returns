@@ -354,6 +354,7 @@ pub fn install() {
     .effect_acmd("effect_attacks3lw", effect_samusd_AttackS3Lw, Low)
     .effect_acmd("effect_attackhi3", effect_samusd_AttackHi3, Low)
     .effect_acmd("effect_attacklw3", effect_samusd_AttackLw3, Low)
+    .effect_acmd("effect_attacklw4", effect_samusd_AttackLw4, Low)
     .effect_acmd("effect_attackairn", effect_samusd_AttackAirN, Low)
     .effect_acmd("effect_attackairf", effect_samusd_AttackAirF, Low)
     .effect_acmd("effect_attackairb", effect_samusd_AttackAirB, Low)

@@ -1,7 +1,7 @@
 mod game;
-mod status;
+//mod status;
 
 pub fn install() {
     game::install(); 
-    status::install();
+    //status::install();
 }

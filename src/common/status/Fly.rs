@@ -1,5 +1,5 @@
 use crate::imports::BuildImports::*;
-use super::super::is_glider;
+use super::super::can_use_glide;
 
 #[skyline::hook(replace = L2CFighterCommon_status_FlySub)]
 unsafe fn status_FlySub(fighter: &mut L2CFighterCommon) {
@@ -25,7 +25,7 @@ unsafe fn status_FlySub(fighter: &mut L2CFighterCommon) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_MINI_ATTACK);
     }
     // Enable Gliding
-    if is_glider(fighter.global_table[FIGHTER_KIND].get_i32()) {
+    if can_use_glide(fighter.global_table[FIGHTER_KIND].get_i32()) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_AVAILABLE_GLIDE);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE);
     }

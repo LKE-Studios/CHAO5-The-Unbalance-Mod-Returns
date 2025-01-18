@@ -4,7 +4,7 @@ unsafe extern "C" fn frame_plizardon_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_S_END, 
-        *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD].contains(&status_kind) {
+        *FIGHTER_STATUS_KIND_SPECIAL_GUARD].contains(&status_kind) {
         if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
             fighter.sub_air_check_dive();
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) {
@@ -36,7 +36,7 @@ unsafe extern "C" fn frame_plizardon_Main(fighter: &mut L2CFighterCommon) {
     }
     if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) 
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-        fighter.change_status(FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD.into(), true.into());
+        fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_GUARD.into(), true.into());
     }
 }
 

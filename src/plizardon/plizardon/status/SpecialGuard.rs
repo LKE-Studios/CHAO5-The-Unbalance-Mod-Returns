@@ -98,11 +98,11 @@ unsafe extern "C" fn status_plizardon_SpecialGuard_End(fighter: &mut L2CFighterC
 
 pub fn install() {
     Agent::new("plizardon")
-    .status(Pre, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Pre)
-    .status(Init, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Init)
-    .status(Main, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Main)
-    .status(Exec, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exec)
-    .status(Exit, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exit)
-    .status(End, *FIGHTER_PLIZARDON_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_End)
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Pre)
+    .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Init)
+    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Main)
+    .status(Exec, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exec)
+    .status(Exit, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_Exit)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_plizardon_SpecialGuard_End)
     .install();
 }

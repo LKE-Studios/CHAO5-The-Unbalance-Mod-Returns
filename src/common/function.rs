@@ -82,8 +82,9 @@ pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
     LAST_EFFECT_SET_COLOR(fighter, 0.831, 0.686, 0.216);
 }
 
-unsafe extern "C" fn Start_special_flag_checks_Init(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn start_special_flag_checks_Init(fighter: &mut L2CFighterCommon) {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
         fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialN_callback as *const () as _));
         fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialS_callback as *const () as _));
@@ -143,13 +144,9 @@ unsafe extern "C" fn metaknight_SpecialLw_callback(fighter: &mut L2CFighterCommo
 }
 
 unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
-    *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
@@ -185,13 +182,9 @@ unsafe extern "C" fn simon_SpecialHi_callback(fighter: &mut L2CFighterCommon) ->
 }
 
 unsafe extern "C" fn simon_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
-    *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
     }
     true.into()
@@ -216,13 +209,9 @@ unsafe extern "C" fn trail_SpecialHi_callback(fighter: &mut L2CFighterCommon) ->
 }
 
 unsafe extern "C" fn trail_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_MISS_FOOT, *FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_SONG, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_SONG_FALL, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR, *FIGHTER_STATUS_KIND_DAMAGE_SLEEP_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D, 
-    *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_JUMP_BOARD, 
-    *FIGHTER_STATUS_KIND_ICE].contains(&status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
     }
     true.into()
@@ -333,7 +322,7 @@ pub mod FighterSpecializer_Palutena {
             AttackModule::set_power_up(module_accessor, attack_mul);
             if effect_counter >= 20 {
                 EffectModule::kill_kind(module_accessor, Hash40::new("sys_aura_light"), false, false);
-                let effect = EffectModule::req_follow(module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, &Vector3f { x: 0.0, y: 0.0, z: 0.0 }, 5.0, true, 0, 0, 0, 0, 0, true, true);
+                let effect = EffectModule::req_follow(module_accessor, Hash40::new("sys_aura_light"), Hash40::new("waist"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 5.0, true, 0, 0, 0, 0, 0, true, true);
                 EffectModule::set_rgb(module_accessor, effect as u32, 0.0, 2.55, 0.48);
                 WorkModule::set_int(module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
             };
@@ -698,16 +687,34 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
 
 pub(crate) unsafe fn ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = sv_math::rand(hash40("fighter"), 12);
-	match rand_val {
-		0 => PLAY_SE(fighter, Hash40::new("vc_ness_attack01")),
-		1 => PLAY_SE(fighter, Hash40::new("vc_ness_attack02")),
-		2 => PLAY_SE(fighter, Hash40::new("vc_ness_attack03")),
-		3 => PLAY_SE(fighter, Hash40::new("vc_ness_attack04")),
-		4 => PLAY_SE(fighter, Hash40::new("vc_ness_attack05")),
-        5 => PLAY_SE(fighter, Hash40::new("vc_ness_attack06")),
-        6 => PLAY_SE(fighter, Hash40::new("vc_ness_attack07")),
-		_ => println!("kamek is silent"),
-	}
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let ADDED_FIGHTER = color >= 120 && color <= 130;
+    let ADDED_FIGHTER_2 = color >= 64 && color <= 71;
+    let ADDED_FIGHTER_3 = color >= 96 && color <= 103;
+    if fighter_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_3 {
+        match rand_val {
+            0 => PLAY_SE(fighter, Hash40::new("vc_ness_attack01")),
+            1 => PLAY_SE(fighter, Hash40::new("vc_ness_attack02")),
+            2 => PLAY_SE(fighter, Hash40::new("vc_ness_attack03")),
+            3 => PLAY_SE(fighter, Hash40::new("vc_ness_attack04")),
+            4 => PLAY_SE(fighter, Hash40::new("vc_ness_attack05")),
+            5 => PLAY_SE(fighter, Hash40::new("vc_ness_attack06")),
+            6 => PLAY_SE(fighter, Hash40::new("vc_ness_attack07")),
+            _ => println!("Kamek is silent"),
+        }
+    }
+    if fighter_kind == *FIGHTER_KIND_MEWTWO && ADDED_FIGHTER {
+        match rand_val {
+            0 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack01")),
+            1 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack02")),
+            2 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack03")),
+            3 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack04")),
+            4 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack05")),
+            5 => PLAY_SE(fighter, Hash40::new("vc_silver_attack06")),
+            _ => println!("Silver is silent"),
+        }
+    }
 }
 
 pub unsafe fn get_table_value(table: *mut smash2::lib::L2CTable, key: &str) -> smash2::lib::L2CValue {
@@ -797,7 +804,7 @@ pub static semitone_16_up : f32 = 2.51984;
 
 pub fn install() {
     Agent::new("fighter")
-    .on_start(Start_special_flag_checks_Init)
+    .on_start(start_special_flag_checks_Init)
     .install();
     Agent::new("murabito")
     .on_line(Main, ac_update)

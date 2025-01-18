@@ -39,10 +39,28 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         ModelModule::set_scale(fighter.module_accessor, 0.865);
         AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
         GrabModule::set_size_mul(fighter.module_accessor, 0.865);
-        silver_float(fighter);
         misc_silver(fighter);
         motion_main_silver(fighter);
         special_hi_silver(fighter);
+        if status_kind == *FIGHTER_STATUS_KIND_FLOAT {
+            let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            let sound_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+            if effect_counter >= 4 {
+                BURN_COLOR(fighter, 0.0, 2.55, 2.55, 0.5);
+                FLASH(fighter, 0.3, 0.7, 0.7, 0.3);
+                EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), -1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+                EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+                WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
+            }
+            if sound_counter == 1 {
+                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_mewtwo_special_n09"), true, false, false, false, enSEType(0));
+            }
+        }
+        else {
+            WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
+        }
         if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR && SPECIAL_N_HAS_STALL[ENTRY_ID] {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -218,18 +236,6 @@ pub unsafe extern "C" fn misc_silver(fighter: &mut L2CFighterCommon) {
         BASE_TRAIL2 = Vector3f { x: 0.0, y: 2.8, z: -25.0 };
         BASE_TRAIL3 = Vector3f { x: 0.0, y: 2.8, z: -34.0 };
         BASE_TRAIL4 = Vector3f { x: 0.0, y: 2.8, z: -43.0 };
-    };
-}
-
-pub unsafe extern "C" fn silver_float(fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if FLOAT[ENTRY_ID] % 5 == 0 && FLOAT[ENTRY_ID] > 1 {
-        BURN_COLOR(fighter, 0.0, 2.55, 2.55, 0.5);
-        FLASH(fighter, 0.3, 0.7, 0.7, 0.3);
-        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), -1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
-        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
-        PLAY_SE(fighter, Hash40::new("se_mewtwo_special_n09"));
-        KILL_EFFECTS[ENTRY_ID] = true;
     };
 }
 

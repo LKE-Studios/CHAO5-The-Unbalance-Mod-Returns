@@ -10,4 +10,5 @@ pub fn install() {
     edge_flare2::install(); 
     edge_flash::install(); 
     edge_fire::install();
+    smashline::add_param_object("edge", "param_uniq_float");
 }

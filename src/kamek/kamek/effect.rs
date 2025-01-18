@@ -22,6 +22,7 @@ unsafe extern "C" fn effect_kamek_JumpAerialBack(fighter: &mut L2CAgentBase) {
     }
 }
 
+//Run
 unsafe extern "C" fn effect_kamek_Run(fighter: &mut L2CAgentBase) {
     loop {
         frame(fighter.lua_state_agent, 6.0);

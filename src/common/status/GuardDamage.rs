@@ -216,22 +216,25 @@ unsafe extern "C" fn status_GuardDamage_common(fighter: &mut L2CFighterCommon, p
         let prev_shield_scale = fighter.FighterStatusGuard__calc_shield_scale(prev_shield.into()).get_f32();
         let shield_hp = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD);
         let shield_scale = fighter.FighterStatusGuard__calc_shield_scale(shield_hp.into()).get_f32();
-        let module_accessor = fighter.global_table[MODULE_ACCESSOR].get_ptr() as *mut smash::app::BattleObjectModuleAccessor;
-        let team_color = FighterUtil::get_team_color(module_accessor);
-        let effect_team_color = FighterUtil::get_effect_team_color(EColorKind(team_color as i32), Hash40::new("shield_effect_color"));
-        EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage3"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false);
-        EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
-        let effect_glass_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("shield_damage_glass"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.11, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false);
-        EffectModule::set_rgb(module_accessor, effect_glass_handle as u32, 0.4 + effect_team_color.value[0], 0.4 + effect_team_color.value[1], 0.4 + effect_team_color.value[2]);
-        let effect2_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage2"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false) as u32;
-        EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
-        WorkModule::set_int(fighter.module_accessor, effect2_handle as i32, *FIGHTER_STATUS_GUARD_ON_WORK_INT_SHIELD_DAMAGE2_EFFECT_HANDLE);
-        let effect_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 1.0, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false) as u32;
-        EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
-        WorkModule::set_int(fighter.module_accessor, effect_handle as i32, *FIGHTER_STATUS_GUARD_ON_WORK_INT_SHIELD_DAMAGE_EFFECT_HANDLE);
-        if effect_handle != 0 {
-            let effect_scale = 0.1 * (shield_scale / prev_shield_scale);
-            EffectModule::set_scale(fighter.module_accessor, effect_handle, &(Vector3f {x: effect_scale, y: effect_scale, z: effect_scale}));
+        let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
+        if fighter_kind != *FIGHTER_KIND_YOSHI {
+            let module_accessor = fighter.global_table[MODULE_ACCESSOR].get_ptr() as *mut smash::app::BattleObjectModuleAccessor;
+            let team_color = FighterUtil::get_team_color(module_accessor);
+            let effect_team_color = FighterUtil::get_effect_team_color(EColorKind(team_color as i32), Hash40::new("shield_effect_color"));
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage3"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false);
+            EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
+            let effect_glass_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("shield_damage_glass"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.11, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false);
+            EffectModule::set_rgb(module_accessor, effect_glass_handle as u32, 0.4 + effect_team_color.value[0], 0.4 + effect_team_color.value[1], 0.4 + effect_team_color.value[2]);
+            let effect2_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage2"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false) as u32;
+            EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
+            WorkModule::set_int(fighter.module_accessor, effect2_handle as i32, *FIGHTER_STATUS_GUARD_ON_WORK_INT_SHIELD_DAMAGE2_EFFECT_HANDLE);
+            let effect_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 1.0, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 1, false, false) as u32;
+            EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
+            WorkModule::set_int(fighter.module_accessor, effect_handle as i32, *FIGHTER_STATUS_GUARD_ON_WORK_INT_SHIELD_DAMAGE_EFFECT_HANDLE);
+            if effect_handle != 0 {
+                let effect_scale = 0.1 * (shield_scale / prev_shield_scale);
+                EffectModule::set_scale(fighter.module_accessor, effect_handle, &(Vector3f {x: effect_scale, y: effect_scale, z: effect_scale}));
+            }
         }
     }
     if !StopModule::is_stop(fighter.module_accessor) {

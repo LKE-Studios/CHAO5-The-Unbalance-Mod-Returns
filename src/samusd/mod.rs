@@ -16,4 +16,5 @@ pub fn install() {
     samusd_laser3::install();    
     samusd_missile::install(); 
     samusd_supermissile::install();    
+    smashline::add_param_object("samusd", "param_uniq_float");
 }

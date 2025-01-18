@@ -88,7 +88,7 @@ pub mod BuildImports {
         crate::common::{*,
             consts::*,
             function::{*, KineticUtility, Rect, get_camera_range},
-            frame::frame_common,
+            frame::{frame_common, conditional_statuses},
             FIGHTER_BOOL_1,
             FIGHTER_BOOL_2,
             FIGHTER_BOOL_3,

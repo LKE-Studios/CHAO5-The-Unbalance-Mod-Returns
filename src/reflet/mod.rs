@@ -8,4 +8,5 @@ pub fn install() {
     reflet_thunder::install();
     reflet_gigafire::install();
     reflet_elwind::install();
+    smashline::add_param_object("reflet", "param_uniq_float");
 }

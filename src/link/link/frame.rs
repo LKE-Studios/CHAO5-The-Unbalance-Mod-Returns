@@ -4,33 +4,6 @@ pub unsafe extern "C" fn frame_link_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     activate_ascend_revali(fighter);
-    //Boomerang
-    if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOOMERANG) {
-        if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM) {
-            WorkModule::set_int(fighter.module_accessor, *BATTLE_OBJECT_ID_INVALID, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE_ID);
-            WorkModule::set_int(fighter.module_accessor, *ITEM_KIND_NONE, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE);
-        }
-        else {
-            let boomerang_fuse_item_id = WorkModule::get_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE_ID) as u32;
-            if sv_battle_object::is_active(boomerang_fuse_item_id) {
-                let item_module_accessor = smash::app::sv_battle_object::module_accessor(boomerang_fuse_item_id);
-                if StatusModule::status_kind(item_module_accessor) == *ITEM_STATUS_KIND_HAVE {
-                    if smash::app::utility::get_kind(&mut *item_module_accessor) != *ITEM_KIND_LINKBOMB {
-                        let item_manager = *(singletons::ItemManager() as *mut *mut smash::app::ItemManager);
-                        smash::app::lua_bind::ItemManager::remove_item_from_id(item_manager, boomerang_fuse_item_id);
-                    }
-                    else {
-                        StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_THROW, false);
-                        WorkModule::set_int(fighter.module_accessor, *BATTLE_OBJECT_ID_INVALID, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE_ID);
-                        WorkModule::set_int(fighter.module_accessor, *ITEM_KIND_NONE, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE);
-                    }
-                }
-            }
-        }
-        if ItemModule::is_have_item(fighter.module_accessor, 0) {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM);
-        }
-    }
     //Bomb
     if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_BOMB_FUSED) {
         let item_id = WorkModule::get_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID) as u32;
@@ -65,7 +38,7 @@ pub unsafe extern "C" fn activate_ascend_revali(fighter : &mut L2CFighterCommon)
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let prev_status_kind = StatusModule::prev_status_kind(fighter.module_accessor, 0);
-    let mut on_frame = WorkModule::get_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME);
+    let mut on_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME);
     if ![FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_TURN, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, 
     FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, FIGHTER_LINK_STATUS_KIND_ASCEND_START, FIGHTER_LINK_STATUS_KIND_ASCEND, FIGHTER_LINK_STATUS_KIND_ASCEND_END, 
     FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND_END, *FIGHTER_STATUS_KIND_SLEEP, *FIGHTER_STATUS_KIND_ATTACK_AIR, 
@@ -74,14 +47,14 @@ pub unsafe extern "C" fn activate_ascend_revali(fighter : &mut L2CFighterCommon)
     *FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && situation_kind == *SITUATION_KIND_AIR {
         let jump_button_on_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_ascend_revali"), hash40("jump_button_on_frame"));
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
-            WorkModule::inc_int(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME);
+            WorkModule::inc_int(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME);
         }
         if on_frame >= jump_button_on_frame {
             fighter.change_status(FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND.into(), true.into());
         }
     }
     else {
-        WorkModule::set_int(fighter.module_accessor, 0, FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME)
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_JUMP_BUTTON_ON_FRAME)
     }
 }
 
@@ -114,7 +87,7 @@ pub unsafe extern "C" fn frame_link_boomerang_Main(weapon : &mut L2CFighterBase)
         TeamModule::set_team(item_module_accessor, team_no, true);
         TeamModule::set_team_owner_id(item_module_accessor, team_owner_id);
     }
-    if (AttackModule::is_infliction(weapon.module_accessor,*COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction(weapon.module_accessor,*COLLISION_KIND_MASK_SHIELD))
+    if (AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_SHIELD))
     && [*WN_LINK_BOOMERANG_STATUS_KIND_TURN, *WN_LINK_BOOMERANG_STATUS_KIND_SWALLOWED].contains(&status_kind)
     && WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
         if WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_FUSE_REFLECT) {

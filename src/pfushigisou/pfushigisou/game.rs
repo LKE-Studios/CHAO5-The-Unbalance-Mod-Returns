@@ -857,8 +857,6 @@ unsafe extern "C" fn game_pfushigisou_SpecialHi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_pfushigisou_SpecialAirHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: 3.3, z: 0.0});
-    }
-    if is_excute(fighter) {
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, -1);
         ArticleModule::set_visibility_whole(fighter.module_accessor, *FIGHTER_PFUSHIGISOU_GENERATE_ARTICLE_VINE, false, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_PFUSHIGISOU_STATUS_SPECIAL_HI_SET_MAP_COLL_OFFSET);

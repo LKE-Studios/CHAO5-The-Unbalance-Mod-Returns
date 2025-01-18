@@ -8,4 +8,5 @@ pub fn install() {
     mewtwo_shadowball::install();
     mewtwo_bindball::install();
     mewtwo_psychobreak::install();
+    smashline::add_param_object("mewtwo", "param_uniq_float");
 }

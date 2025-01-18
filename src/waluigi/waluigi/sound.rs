@@ -531,7 +531,7 @@ unsafe extern "C" fn sound_waluigi_SpecialLwAttack3(fighter: &mut L2CAgentBase) 
 unsafe extern "C" fn sound_waluigi_SpecialLwAttackSpecial1(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_dolly_special_n02"));
+        PLAY_SE(fighter, Hash40::new("se_dolly_special_n01"));
         PLAY_SEQUENCE(fighter, Hash40::new("seq_dolly_rnd_attack_l"));
     }
 }

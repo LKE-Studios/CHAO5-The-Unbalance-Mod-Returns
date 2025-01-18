@@ -22,9 +22,6 @@ unsafe fn sub_glide_stick_check_uniq(fighter: &mut L2CFighterCommon) {
 
 #[skyline::hook(replace = L2CFighterCommon_sub_glide_check)]
 unsafe fn sub_glide_check(fighter: &mut L2CFighterCommon) -> L2CValue {
-    /*if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_GLIDE) {
-        return false.into();
-    }*/
     let jump_button_on_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_JUMP_WORK_INT_BUTTON_ON_FRAME);
     let jump_button_hold_glide_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_glide"), hash40("jump_button_hold_glide_frame"));
     if jump_button_on_frame <= jump_button_hold_glide_frame {

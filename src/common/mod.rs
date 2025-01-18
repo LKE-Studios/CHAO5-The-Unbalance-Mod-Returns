@@ -38,7 +38,7 @@ pub mod function;
 pub mod frame;
 pub mod vtable;
 
-pub fn is_glider(kind: i32) -> bool {
+pub fn can_use_glide(kind: i32) -> bool {
     [
         *FIGHTER_KIND_METAKNIGHT,
         *FIGHTER_KIND_PIT,

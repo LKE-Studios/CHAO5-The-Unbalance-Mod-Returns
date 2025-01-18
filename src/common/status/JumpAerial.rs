@@ -1,11 +1,12 @@
 use crate::imports::BuildImports::*;
-use super::super::is_glider;
+use super::super::can_use_glide;
 
 #[skyline::hook(replace = L2CFighterCommon_status_JumpAerialSub)]
-unsafe fn status_jumpaerialsub(fighter: &mut L2CFighterCommon, motion: L2CValue, keep_jump: L2CValue) -> L2CValue {
+unsafe fn status_JumpAerialSub(fighter: &mut L2CFighterCommon, motion: L2CValue, keep_jump: L2CValue) -> L2CValue {
     let ret = call_original!(fighter, motion, keep_jump);
+    let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
     // Enable Gliding
-    if is_glider(fighter.global_table[FIGHTER_KIND].get_i32()) {
+    if can_use_glide(fighter_kind) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_AVAILABLE_GLIDE);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_JUMP_FLAG_GLIDE_ENABLE);
     }
@@ -13,7 +14,7 @@ unsafe fn status_jumpaerialsub(fighter: &mut L2CFighterCommon, motion: L2CValue,
 }
 
 #[skyline::hook(replace = L2CFighterCommon_status_JumpAerial_Main)]
-unsafe fn status_jumpaerial_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe fn status_JumpAerial_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.sub_glide_check().get_bool() {
         return 0.into();
     }
@@ -36,8 +37,8 @@ unsafe fn status_jumpaerial_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
-            status_jumpaerialsub,
-            status_jumpaerial_main
+            status_JumpAerialSub,
+            status_JumpAerial_Main
         );
     }
 }
