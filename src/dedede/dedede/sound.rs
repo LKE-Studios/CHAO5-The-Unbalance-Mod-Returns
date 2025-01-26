@@ -56,6 +56,30 @@ unsafe extern "C" fn sound_dedede_JumpAerialF9(fighter: &mut L2CAgentBase) {
     }
 }
 
+//AppealHiR2
+unsafe extern "C" fn sound_dedede_AppealHiR2(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        PLAY_STEP(fighter, Hash40::new("se_dedede_step_right_l"));
+    }
+    frame(fighter.lua_state_agent, 42.0);
+    if is_excute(fighter) {
+        PLAY_STEP(fighter, Hash40::new("se_dedede_step_left_l"));
+    }
+    frame(fighter.lua_state_agent, 82.0);
+    if is_excute(fighter) {
+        PLAY_STEP(fighter, Hash40::new("se_dedede_step_right_l"));
+    }
+}
+
+//AppealHiR2End
+unsafe extern "C" fn sound_dedede_AppealHiR2End(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 30.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_dedede_appeal02"));
+    }
+}
+
 //DamageFlyHi
 unsafe extern "C" fn sound_dedede_DamageFlyHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
@@ -105,6 +129,8 @@ pub fn install() {
     .sound_acmd("sound_jumpaerialf7", sound_dedede_JumpAerialF7, Low)
     .sound_acmd("sound_jumpaerialf8", sound_dedede_JumpAerialF8, Low)
     .sound_acmd("sound_jumpaerialf9", sound_dedede_JumpAerialF9, Low)
+    .sound_acmd("sound_appealhir2", sound_dedede_AppealHiR2, Low)
+    .sound_acmd("sound_appealhir2end", sound_dedede_AppealHiR2End, Low)
     .sound_acmd("sound_damageflyhi", sound_dedede_DamageFlyHi, Low)
     .sound_acmd("sound_damageflylw", sound_dedede_DamageFlyLw, Low)
     .sound_acmd("sound_damageflyn", sound_dedede_DamageFlyN, Low)

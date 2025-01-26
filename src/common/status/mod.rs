@@ -17,8 +17,8 @@ mod Edge_Cancel;
 mod SpecialHi;
 mod EscapeAir;
 mod Rebirth;
+mod Damage;
 //mod Dead;
-//mod Damage;
 
 pub fn install() {
     JumpAerial::install();
@@ -40,6 +40,6 @@ pub fn install() {
     SpecialHi::install();
     EscapeAir::install();
     Rebirth::install();
+    Damage::install();
     //Dead::install();
-    //Damage::install();
 }

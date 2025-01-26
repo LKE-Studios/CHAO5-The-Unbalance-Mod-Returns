@@ -80,6 +80,12 @@ unsafe extern "C" fn silver_SpecialHi3_Main_loop(fighter: &mut L2CFighterCommon)
     let speed_x = special_hi_accel_x_add * stick_x;
     sv_kinetic_energy!(set_accel, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, speed_x * lr, 0.0);
     sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, 0.0, special_hi_speed_y_max);
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true.into());
+    }
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+    }
     if MotionModule::is_end(fighter.module_accessor) {
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());

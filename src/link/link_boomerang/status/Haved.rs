@@ -56,7 +56,7 @@ unsafe extern "C" fn status_link_boomerang_Haved_End(weapon: &mut L2CFighterBase
         let item_module_accessor = smash::app::sv_battle_object::module_accessor(item_id);
         StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_FALL, false);
         if !ItemModule::is_have_item(owner_module_accessor, 0) {
-            WorkModule::on_flag(owner_module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM);
+            WorkModule::on_flag(owner_module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM);
         }
     }
     0.into()

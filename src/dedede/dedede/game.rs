@@ -1608,8 +1608,20 @@ unsafe extern "C" fn game_dedede_AppealHiL(fighter: &mut L2CAgentBase) {
     }
 }
 
+//AppealHiR2
+unsafe extern "C" fn game_dedede_AppealHiR2(fighter: &mut L2CAgentBase) {
+    let rand_effect = [Hash40::new("collision_attr_bind"), Hash40::new("collision_attr_bury"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_saving")];
+    let rng = sv_math::rand(hash40("dedede"), rand_effect.len() as i32);
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 50.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(5.0), /*Z2*/ Some(0.0), /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 60, /*Trip*/ 0.0, /*Rehit*/ 60, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ rand_effect[rng as usize], /*SFXLevel*/ *ATTACK_SOUND_LEVEL_LL, /*SFXType*/ *COLLISION_SOUND_ATTR_DEDEDE, /*Type*/ *ATTACK_REGION_BODY);
+        AttackModule::set_attack_level(fighter.module_accessor, 0, *FIGHTER_RYU_SAVING_LV_3 as u8);
+    }
+}
+
 //AppealSR
 unsafe extern "C" fn game_dedede_AppealSR(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 70, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(-4.0), /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_DEDEDE, /*Type*/ *ATTACK_REGION_BODY);
     }
@@ -1617,6 +1629,7 @@ unsafe extern "C" fn game_dedede_AppealSR(fighter: &mut L2CAgentBase) {
 
 //AppealSL
 unsafe extern "C" fn game_dedede_AppealSL(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 70, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 35, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 4.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(-4.0), /*Hitlag*/ 4.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_DEDEDE, /*Type*/ *ATTACK_REGION_BODY);
     }
@@ -1728,6 +1741,7 @@ pub fn install() {
     .game_acmd("game_appealsr", game_dedede_AppealSR, Low)
     .game_acmd("game_appealsl", game_dedede_AppealSL, Low)
     .game_acmd("game_appealhir", game_dedede_AppealHiR, Low)
+    .game_acmd("game_appealhir2", game_dedede_AppealHiR2, Low)
     .game_acmd("game_appealhil", game_dedede_AppealHiL, Low)
     .game_acmd("game_appeallwr", game_dedede_AppealLwR, Low)
     .game_acmd("game_appeallwl", game_dedede_AppealLwL, Low)

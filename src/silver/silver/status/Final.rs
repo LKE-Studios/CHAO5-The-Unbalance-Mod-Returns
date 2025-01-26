@@ -24,23 +24,11 @@ unsafe extern "C" fn status_silver_Final_Main(fighter: &mut L2CFighterCommon) ->
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_FORCE_LOUPE);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-            if motion_kind == hash40("final") {
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final_air"), -1.0, 1.0, 0.0, false, false);
-            }
-            else {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("final_air"), 0.0, 1.0, false, 0.0, false, false);
-            }
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("final_air"), 0.0, 1.0, false, 0.0, false, false);
         }
         else {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
-            let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-            if motion_kind == hash40("final_air") {
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final"), -1.0, 1.0, 0.0, false, false);
-            }
-            else {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("final"), 0.0, 1.0, false, 0.0, false, false);
-            }
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("final"), 0.0, 1.0, false, 0.0, false, false);
         }
         fighter.sub_shift_status_main(L2CValue::Ptr(silver_Final_Main_loop as *const () as _))
     }    
@@ -50,16 +38,16 @@ unsafe extern "C" fn status_silver_Final_Main(fighter: &mut L2CFighterCommon) ->
 }
 
 unsafe extern "C" fn silver_Final_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !StatusModule::is_changing(fighter.module_accessor) {
-        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
-            if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final_air"), -1.0, 1.0, 0.0, false, false);
-            }
+    if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final_air"), -1.0, 1.0, 0.0, false, false);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         }
-        else {
-            if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final"), -1.0, 1.0, 0.0, false, false);
-            }
+    }
+    else {
+        if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("final"), -1.0, 1.0, 0.0, false, false);
+            GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
         }
     }
     if MotionModule::is_end(fighter.module_accessor) {

@@ -6,6 +6,14 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    if status_kind == *FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_CANCEL {
+        if situation_kind == *SITUATION_KIND_AIR {
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE) == *FIGHTER_DONKEY_SPECIAL_N_CANCEL_TYPE_AIR_ESCAPE_AIR {
+                WorkModule::set_int(fighter.module_accessor, *FIGHTER_DONKEY_SPECIAL_N_CANCEL_TYPE_NONE, *FIGHTER_DONKEY_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE);
+            }
+        }
+    }
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_APPEAL_SPECIAL) {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r_2"), 0.0, 1.0, false, 0.0, false, false);
     };

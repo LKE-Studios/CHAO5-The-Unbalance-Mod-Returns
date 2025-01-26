@@ -1,5 +1,24 @@
 use crate::imports::BuildImports::*;
 
+//SpecialSHold
+unsafe extern "C" fn sound_luigi_SpecialSHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        sound!(fighter, *MA_MSC_CMD_SOUND_STOP_SE_STATUS);
+        PLAY_STATUS(fighter, Hash40::new("se_luigi_special_s02"));
+    }
+}
+
+//SpecialAirSHold
+unsafe extern "C" fn sound_luigi_SpecialAirSHold(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        sound!(fighter, *MA_MSC_CMD_SOUND_STOP_SE_STATUS);
+        PLAY_STATUS(fighter, Hash40::new("se_luigi_special_s02"));
+    }
+}
+
+
 //DamageFlyHi
 unsafe extern "C" fn sound_luigi_DamageFlyHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
@@ -42,6 +61,8 @@ unsafe extern "C" fn sound_luigi_DamageFlyRoll(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("luigi")
+    .sound_acmd("sound_specialshold", sound_luigi_SpecialSHold, Low)
+    .sound_acmd("sound_specialairshold", sound_luigi_SpecialAirSHold, Low)
     .sound_acmd("sound_damageflyhi", sound_luigi_DamageFlyHi, Low)
     .sound_acmd("sound_damageflylw", sound_luigi_DamageFlyLw, Low)
     .sound_acmd("sound_damageflyn", sound_luigi_DamageFlyN, Low)

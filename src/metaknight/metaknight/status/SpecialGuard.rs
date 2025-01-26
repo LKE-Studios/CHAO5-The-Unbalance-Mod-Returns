@@ -72,9 +72,9 @@ unsafe extern "C" fn status_metaknight_SpecialGuard_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("metaknight")
-    .status(Pre, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Pre)
-    .status(Main, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Main)
-    .status(End, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_End)
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Pre)
+    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_Main)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_metaknight_SpecialGuard_End)
     .install();
 }
 

@@ -34,10 +34,11 @@ pub fn special_zoom_critical(module_accessor: *mut smash::app::BattleObjectModul
 pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let special_zoom_effect = WorkModule::get_int(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_EFFECT);
+    let counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CRITICAL_COUNTER);
     if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-        COUNTER[ENTRY_ID] += 1;
-        IS_CRIT[ENTRY_ID] = true;
-        if COUNTER[ENTRY_ID] < 2 {
+        WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_CRITICAL_COUNTER);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CHECK_CRITICAL);
+        if counter < 2 {
             EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), false, true, true);
             CURRENT_ON_FRAME[ENTRY_ID] = MotionModule::frame(fighter.module_accessor);
             SlowModule::set_whole(fighter.module_accessor, 2, 0);
@@ -47,8 +48,9 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
             CAM_ZOOM_IN_arg5(fighter, /*frames*/ 4.0,/*no*/ 0.0,/*zoom*/ 2.1,/*yrot*/ 0.0,/*xrot*/ 0.0 * lr);
         }
     }
-    if MotionModule::frame(fighter.module_accessor) >= (CURRENT_ON_FRAME[ENTRY_ID] + 1.0) && IS_CRIT[ENTRY_ID] {
-        COUNTER[ENTRY_ID] = 0;
+    if MotionModule::frame(fighter.module_accessor) >= (CURRENT_ON_FRAME[ENTRY_ID] + 1.0) 
+    && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CHECK_CRITICAL) {
+        WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_CRITICAL_COUNTER);
         SlowModule::clear_whole(fighter.module_accessor);
         CameraModule::reset_all(fighter.module_accessor);
         EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), 0);
@@ -57,9 +59,10 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
             CAM_ZOOM_OUT(fighter);
         }
     }
-    if IS_CRIT[ENTRY_ID] && MotionModule::frame(fighter.module_accessor) < 2.0 {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CHECK_CRITICAL) 
+    && MotionModule::frame(fighter.module_accessor) < 2.0 {
         CAM_ZOOM_OUT(fighter);
-        IS_CRIT[ENTRY_ID] = false;
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CHECK_CRITICAL);
         EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_criticalhit"), 0);
         HitModule::set_status_all(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
         SlowModule::clear_whole(fighter.module_accessor);
@@ -782,6 +785,76 @@ unsafe fn fix_chara_replace(ctx: &skyline::hooks::InlineCtx) {
     *ptr2.add(0x3) = *ptr1.add(0x3);
     *ptr2.add(0x4) = *ptr1.add(0x4);
 }
+
+pub mod CustomModule {
+    use super::*;
+
+    // A shortcut to reset i32 variables to 0.
+    pub unsafe fn reset_i32(module_accessor: *mut smash::app::BattleObjectModuleAccessor, flag: i32) {
+        WorkModule::set_int(module_accessor, 0, flag);
+    }
+
+    // A shortcut to reset f32 variables to 0.
+    pub unsafe fn reset_f32(module_accessor: *mut smash::app::BattleObjectModuleAccessor, flag: i32) {
+        WorkModule::set_float(module_accessor, 0.0, flag);
+    }
+
+    // A shortcut to add a value to an i32 variable.
+    pub unsafe fn add_i32(module_accessor: *mut smash::app::BattleObjectModuleAccessor, flag: i32, amount: i32) {
+        let counter = WorkModule::get_int(module_accessor, flag) + amount;
+        WorkModule::set_int(module_accessor, counter, flag);
+    }
+
+    // A shortcut to add a value to an f32 variable.
+    pub unsafe fn add_f32(module_accessor: *mut smash::app::BattleObjectModuleAccessor, flag: i32, amount: f32) {
+        let counter = WorkModule::get_float(module_accessor, flag) + amount;
+        WorkModule::set_float(module_accessor, counter, flag);
+    }
+
+    // A function for incrementing an f32 variable by an amount.
+    // This function takes into account the effects of slowdown, such as from
+    // Bayonetta's Witch Time or from the Timer item.
+    pub unsafe fn count_down(module_accessor: *mut smash::app::BattleObjectModuleAccessor, flag: i32, amount: f32) {
+        let slow_rate = SlowModule::rate(module_accessor);
+        let global_slow_rate = sv_information::slow_rate();
+        let counter = WorkModule::get_float(module_accessor, flag) - (amount * slow_rate * global_slow_rate);
+        WorkModule::set_float(module_accessor, counter, flag);
+    }
+
+    pub unsafe fn is_operation_cpu(module_accessor: *mut smash::app::BattleObjectModuleAccessor) -> bool {
+        if utility::get_category(&mut *module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+            return false;
+        }
+        let entry_id = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as i32;
+        let fighterentryid = smash::app::FighterEntryID(entry_id);
+        let fighterinformation = smash::app::lua_bind::FighterManager::get_fighter_information(singletons::FighterManager(), fighterentryid);
+        smash::app::lua_bind::FighterInformation::is_operation_cpu(fighterinformation)
+    }
+
+    pub unsafe extern "C" fn play_dedede_bgm(module_accessor: *mut smash::app::BattleObjectModuleAccessor) -> i32 {
+        let fighter_kind = smash::app::utility::get_kind(&mut *module_accessor);
+        let ui_sound_mgr = ((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64 + 0x5329f38) as *const u64).read();
+        let song = hash40("f43_dedede_waddledeearmy");
+        play_bgm_override(ui_sound_mgr, song, -1)
+    }
+
+    pub unsafe extern "C" fn stop_dedede_bgm(module_accessor: *mut smash::app::BattleObjectModuleAccessor) {
+        let fighter_kind = smash::app::utility::get_kind(&mut *module_accessor);
+        let dedede_id = WorkModule::get_int(module_accessor, *FIGHTER_DEDEDE_INSTANCE_WORK_ID_INT_BGM_ID);
+        let bgm_index = dedede_id;
+        stop_status_bgm(((module_accessor as u64) + 0x148) as *const u64, bgm_index);
+    }
+}
+
+// 1: UiSoundManager(?) | 2: hash40 of song name | 3: priority - lowest value wins
+// returns: index to be used in the stop function
+#[skyline::from_offset(0x23edd60)]
+pub unsafe extern "C" fn play_bgm_override(param1: u64, param2: u64, priority: i32) -> i32;
+
+// sound_module: agent.module_accessor + 0x148
+// param2: the index received from play_bgm_override earlier
+#[skyline::from_offset(0x6e63d0)]
+pub unsafe extern "C" fn stop_status_bgm(sound_module: *const u64, param2: i32);
 
 //Sound pitch change values
 pub static semitone_0_up : f32 = 1.0;

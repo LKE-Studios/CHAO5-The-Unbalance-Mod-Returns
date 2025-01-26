@@ -55,7 +55,7 @@ unsafe extern "C" fn effect_metaknight_GlideLanding(fighter: &mut L2CAgentBase) 
 
 //Attack100
 unsafe extern "C" fn effect_metaknight_Attack100(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0.0, 0, 0, 0, 0, 0, 1, true);
             EffectModule::set_disable_render_offset_last(fighter.module_accessor); 
@@ -86,7 +86,7 @@ unsafe extern "C" fn effect_metaknight_Attack100(fighter: &mut L2CAgentBase) {
 
 //Attack100
 unsafe extern "C" fn effect_metaknight_Attack100_B(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("metaknight_sword"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.0, true);
         }

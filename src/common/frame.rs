@@ -4,7 +4,6 @@ use crate::imports::BuildImports::*;
 pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
     let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
     if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_ON].contains(&status_kind) {
         if !GroundModule::is_passable_ground(fighter.module_accessor) {

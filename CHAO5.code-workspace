@@ -6,6 +6,11 @@
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
+		
+
+
+
+
 			"activityBar.foreground": "#fffeed",
 			"activityBar.background": "#080808",
 			"activityBar.inactiveForeground": "#ffee00",

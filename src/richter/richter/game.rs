@@ -1093,9 +1093,7 @@ unsafe extern "C" fn game_richter_SpecialHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear(fighter.module_accessor, /*ID*/ 0, false);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 1, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 61, /*KBG*/ 86, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 26.0, /*Z*/ 9.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(7.5), /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_WHIP);
-        EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 0.0, 0.0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.45, /*B*/ 1.0);
-        PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+        EFFECT(fighter, Hash40::new("sys_freezer"), Hash40::new("top"), 0, 8, 12, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 360, true);
     }
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {
@@ -1137,9 +1135,7 @@ unsafe extern "C" fn game_richter_SpecialAirHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         AttackModule::clear(fighter.module_accessor, /*ID*/ 0, false);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 1, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 61, /*KBG*/ 86, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 15.0, /*X*/ 0.0, /*Y*/ 26.0, /*Z*/ 9.5, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(7.5), /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_WHIP);
-        EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 0.0, 0.0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
-        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 0.45, /*B*/ 1.0);
-        PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+        EFFECT(fighter, Hash40::new("sys_freezer"), Hash40::new("top"), 0, 8, 12, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 360, true);
     }
     frame(fighter.lua_state_agent, 22.0);
     if is_excute(fighter) {

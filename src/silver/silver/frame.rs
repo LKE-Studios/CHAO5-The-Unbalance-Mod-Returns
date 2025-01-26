@@ -41,108 +41,13 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         GrabModule::set_size_mul(fighter.module_accessor, 0.865);
         misc_silver(fighter);
         motion_main_silver(fighter);
-        special_hi_silver(fighter);
-        if status_kind == *FIGHTER_STATUS_KIND_FLOAT {
-            let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            let sound_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-            if effect_counter >= 4 {
-                BURN_COLOR(fighter, 0.0, 2.55, 2.55, 0.5);
-                FLASH(fighter, 0.3, 0.7, 0.7, 0.3);
-                EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), -1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
-                EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_hand"), Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), 1, 0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
-                WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-            }
-            if sound_counter == 1 {
-                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_mewtwo_special_n09"), true, false, false, false, enSEType(0));
-            }
-        }
-        else {
-            WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_SOUND_COUNTER);
-        }
         if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT {
             if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR && SPECIAL_N_HAS_STALL[ENTRY_ID] {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
                 SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 SPECIAL_N_HAS_STALL[ENTRY_ID] = false;
             };
-            if frame >= 20.0 && frame <= 40.0 && !SPECIAL_N_GET_ANGLE[ENTRY_ID] {
-                if stick_x >= -0.2 && stick_x <= 0.2 
-                && stick_y >= -0.2 && stick_y <= 0.2 {
-                    stick_dir = 361.0;
-                } else if stick_dir <= -67.5 {
-                    stick_dir *= -1.0;
-                };
-                if stick_dir >= -67.5 && stick_dir < -22.5 && stick_x < 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 1;
-                }
-                else if stick_dir >= 67.5 && stick_dir <= 90.0 && stick_y < 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 2;
-                }
-                else if stick_dir >= -67.5 && stick_dir < -22.5 && stick_x > 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 3;
-                }
-                else if stick_dir >= -22.5 && stick_dir <= 22.5 && stick_x < 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 4;
-                }
-                else if stick_dir == 361.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 5;
-                }
-                else if stick_dir >= -22.5 && stick_dir <= 22.5 && stick_x > 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 6;
-                }
-                else if stick_dir > 22.5 && stick_dir <= 67.5 && stick_x < 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 7;
-                }
-                else if stick_dir > 67.5 && stick_dir <= 90.0 && stick_y > 0.0 {
-                    SPECIAL_N_DIR[ENTRY_ID] = 8;
-                }
-                else  {
-                    SPECIAL_N_DIR[ENTRY_ID] = 9;
-                };
-                //SpecialN Drift
-                if SPECIAL_N_DIR[ENTRY_ID] == 1 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = -1.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 2 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = -1.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 3 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = -1.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 4 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 5 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 6 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 7 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 8 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-                else if SPECIAL_N_DIR[ENTRY_ID] == 9 {
-                    SPECIAL_N_ANGLE[ENTRY_ID] = 0.0;
-                    SPECIAL_N_GET_ANGLE[ENTRY_ID] = true;
-                }
-            };
-        } 
-        if status_kind != *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT {
-            SPECIAL_N_GET_ANGLE[ENTRY_ID] = false;
-        }   
+        }
     }
 }
 
@@ -156,40 +61,6 @@ pub unsafe extern "C" fn motion_main_silver(fighter: &mut L2CFighterCommon) {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_mewtwo_special_n01"), 0);
     };
     
-}
-
-pub unsafe extern "C" fn special_hi_silver(fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let lr = PostureModule::lr(fighter.module_accessor);
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
-    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3 && !HAS_ALREADY_TELECANCEL[ENTRY_ID] {
-        ATTACK_AIR_WINDOW[ENTRY_ID] += 1;
-    } 
-    else {
-        ATTACK_AIR_WINDOW[ENTRY_ID] = 0;
-    };
-    if ATTACK_AIR_WINDOW[ENTRY_ID] >= 15 && ATTACK_AIR_WINDOW[ENTRY_ID] <= MAX_ATTACK_AIR_WINDOW && StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-            HAS_ATTACK_AIR[ENTRY_ID] = true;
-            HAS_ALREADY_TELECANCEL[ENTRY_ID] = true;
-            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-        };
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) {
-            HAS_ATTACK_AIR[ENTRY_ID] = true;
-            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
-        };
-    };
-    if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
-        HAS_ALREADY_TELECANCEL[ENTRY_ID] = false;
-        HAS_ATTACK_AIR[ENTRY_ID] = false;
-    };
-    if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || !sv_information::is_ready_go() {
-        HAS_ATTACK_AIR[ENTRY_ID] = false;
-        ATTACK_AIR_WINDOW[ENTRY_ID] = 0;
-    };
 }
 
 pub unsafe extern "C" fn final_silver(fighter: &mut L2CFighterCommon) {

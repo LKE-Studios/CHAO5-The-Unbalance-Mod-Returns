@@ -7,12 +7,12 @@ unsafe extern "C" fn frame_pfushigisou_Main(fighter: &mut L2CFighterCommon) {
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_GUARD.into(), false.into());
     }
-    let int_charge = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CHARGE);
+    let float_charge = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_CHARGE_FRAME);
     let charge_effect_scale_min = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_min"));
     let charge_effect_scale_max = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_guard"), hash40("charge_effect_scale_max"));
     let effect_counter = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
-    let mut size_mul = int_charge as f32 * 0.005;
-    if int_charge > 0 {
+    let mut size_mul = float_charge * 0.005;
+    if float_charge > 0.0 {
         WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     }
     size_mul = size_mul.clamp(charge_effect_scale_min, charge_effect_scale_max);
@@ -23,7 +23,7 @@ unsafe extern "C" fn frame_pfushigisou_Main(fighter: &mut L2CFighterCommon) {
         EffectModule::set_rgb(fighter.module_accessor, effect_b as u32, 1.1, 1.4, 0.0);
         WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_INSTANCE_WORK_ID_INT_EFFECT_COUNTER);
     }
-    println!("{}", size_mul);
+    println!("{}", float_charge);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_N_END, 
         *FIGHTER_STATUS_KIND_SPECIAL_GUARD, *FIGHTER_PFUSHIGISOU_STATUS_KIND_SPECIAL_GUARD_SHOOT].contains(&status_kind) {

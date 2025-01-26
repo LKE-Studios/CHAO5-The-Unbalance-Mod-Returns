@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 pub unsafe extern "C" fn start_link_Init(fighter : &mut L2CFighterCommon) {
     let team_no = TeamModule::team_no(fighter.module_accessor) as i32;
-    WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM);
+    WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_PICK_ITEM);
     WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_BOMB_FUSED);
     WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
     WorkModule::set_int(fighter.module_accessor, *BATTLE_OBJECT_ID_INVALID, FIGHTER_LINK_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID);

@@ -46,6 +46,7 @@ pub unsafe extern "C" fn status_Float_Main(fighter: &mut L2CFighterCommon) -> L2
 }
 
 unsafe extern "C" fn Float_effect_function(fighter: &mut L2CFighterCommon) {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
     if fighter_kind == *FIGHTER_KIND_REFLET {
         SoundModule::play_se(fighter.module_accessor, Hash40::new("se_reflet_appear01"), true, false, false, false, enSEType(0));
@@ -67,6 +68,17 @@ unsafe extern "C" fn Float_effect_function(fighter: &mut L2CFighterCommon) {
         EffectModule::req_follow(fighter.module_accessor, Hash40::new("samusd_win3_aura"), Hash40::new("footl"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 2.1, true, 0, 0, 0, 0, 0, true, true);
         EffectModule::req_follow(fighter.module_accessor, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 1.9, true, 0, 0, 0, 0, 0, true, true);
         EffectModule::req_follow(fighter.module_accessor, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 2.0, true, 0, 0, 0, 0, 0, true, true);
+    }
+    if fighter_kind == *FIGHTER_KIND_MEWTWO {
+        let SILVER = color >= 120 && color <= 127;
+        EffectModule::req_follow(fighter.module_accessor, Hash40::new("mewtwo_pk_hand"), Hash40::new("havel"), &Vector3f{x: 1.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 0.3, true, 0, 0, 0, *EF_FLIP_YZ, 0, true, true);
+        EffectModule::req_follow(fighter.module_accessor, Hash40::new("mewtwo_pk_hand"), Hash40::new("haver"), &Vector3f{x: -1.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 0.3, true, 0, 0, 0, *EF_FLIP_YZ, 0, true, true);
+        if SILVER {
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_mewtwo_special_n09"), true, false, false, false, enSEType(0));
+        }
+        else {
+            SoundModule::play_se(fighter.module_accessor, Hash40::new("se_mewtwo_appeal_l01"), true, false, false, false, enSEType(0));
+        }
     }
 }
 

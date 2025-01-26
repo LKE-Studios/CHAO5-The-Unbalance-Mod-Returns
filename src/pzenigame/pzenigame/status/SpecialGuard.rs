@@ -52,8 +52,8 @@ pub unsafe extern "C" fn status_pzenigame_SpecialGuard_End(fighter: &mut L2CFigh
 
 pub fn install() {
     Agent::new("pzenigame")
-    .status(Pre, FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_Pre)
-    .status(Main, FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_Main)
-    .status(End, FIGHTER_PZENIGAME_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_End)
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_Pre)
+    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_Main)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_GUARD, status_pzenigame_SpecialGuard_End)
     .install();
 }
