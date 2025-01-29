@@ -260,15 +260,15 @@ pub unsafe fn FighterStatusDamage__is_enable_damage_fly_effect(fighter: &mut L2C
     let speed = sv_math::vec2_length(sum_speed_x_main + sum_speed_x_damage, sum_speed_y_main + sum_speed_y_damage);
     let fly_effect_smoke_speed = WorkModule::get_param_float(fighter.module_accessor, hash40("common"), hash40("fly_effect_smoke_speed"));
     if ret.get_bool() {
-        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_DAMAGE_WORK_INT_FRAME) < 2 {
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_DAMAGE_WORK_INT_FRAME) < 3 {
             if speed > 0.0
             && speed < fly_effect_smoke_speed + 1.0 {
                 WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_DAMAGE_FLAG_NO_SMOKE);
             }
-            return L2CValue::Bool(false);
+            return false.into();
         }
         else if speed < fly_effect_smoke_speed {
-            return L2CValue::Bool(false);
+            return false.into();
         }
     }
     ret

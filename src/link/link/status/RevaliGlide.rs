@@ -75,9 +75,9 @@ unsafe extern "C" fn status_link_RevaliGlide_End(fighter: &mut L2CFighterCommon)
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Pre)
-    .status(Init, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Init)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Main)
-    .status(End, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Pre)
+    .status(Init, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Init)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_Main)
+    .status(End, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE, status_link_RevaliGlide_End)
     .install();
 }

@@ -2,6 +2,7 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_metaknight_SpecialLw_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+    KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_METAKNIGHT_GENERATE_ARTICLE_MANTLE, false, -1);
     WorkModule::set_int64(fighter.module_accessor, hash40("special_lw_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
     WorkModule::set_int64(fighter.module_accessor, hash40("special_air_lw_start") as i64, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_AIR_KIND);
@@ -10,6 +11,7 @@ unsafe extern "C" fn status_metaknight_SpecialLw_Main(fighter: &mut L2CFighterCo
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_START_FLAG_ADVANCE_STATUS);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_LW_ATTACK_FLAG_FB);
     WorkModule::on_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
+    WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
     if !StopModule::is_stop(fighter.module_accessor) {
         metaknight_SpecialLw_Sub_Status(fighter, false.into());
     }
@@ -107,8 +109,24 @@ unsafe extern "C" fn metaknight_SpecialLw_Main_Sub(fighter: &mut L2CFighterCommo
     0.into()
 }
 
+unsafe extern "C" fn status_metaknight_SpecialLw_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
+    if fighter.global_table[STATUS_KIND].get_i32() != *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_ATTACK {
+        if fighter.global_table[STATUS_KIND].get_i32() != *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_LW_END {
+            HitModule::set_whole(fighter.module_accessor, HitStatus(*HIT_STATUS_NORMAL), 0);
+            VisibilityModule::set_whole(fighter.module_accessor, true);
+            if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_METAKNIGHT_GENERATE_ARTICLE_MANTLE) {
+                ArticleModule::remove(fighter.module_accessor, *FIGHTER_METAKNIGHT_GENERATE_ARTICLE_MANTLE, ArticleOperationTarget(0));
+            }
+            VisibilityModule::set_status_default_int64(fighter.module_accessor, hash40("mantle") as i64, hash40("mantle_normal") as i64);
+        }
+    }
+    0.into()
+}
+
 pub fn install() {
     Agent::new("metaknight")
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_metaknight_SpecialLw_Main)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_metaknight_SpecialLw_End)
     .install();
 }

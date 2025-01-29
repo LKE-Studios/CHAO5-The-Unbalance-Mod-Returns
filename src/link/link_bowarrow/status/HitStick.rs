@@ -1,7 +1,7 @@
 use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_link_bowarrow_HitStick_End(weapon: &mut L2CFighterBase) -> L2CValue {
-    if WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_FUSE_REFLECT) {
+    if WorkModule::is_flag(weapon.module_accessor, *WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_FUSE_REFLECT) {
         let owner_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let owner_module_accessor = smash::app::sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_module_accessor);
@@ -12,11 +12,11 @@ unsafe extern "C" fn status_link_bowarrow_HitStick_End(weapon: &mut L2CFighterBa
             WorkModule::get_int(owner_module_accessor, FIGHTER_MURABTIO_INSTANCE_WORK_ID_INT_TEAM_NO)
         }
         else {
-            WorkModule::get_int(owner_module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_TEAM_NO)
+            WorkModule::get_int(owner_module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_TEAM_NO)
         };
         TeamModule::set_team(weapon.module_accessor, team_no, true);
         TeamModule::set_team_owner_id(weapon.module_accessor, (*(owner_module_accessor)).battle_object_id);
-        WorkModule::set_flag(weapon.module_accessor, false, WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_FUSE_REFLECT);
+        WorkModule::set_flag(weapon.module_accessor, false, *WN_LINK_BOWARROW_INSTANCE_WORK_ID_FLAG_FUSE_REFLECT);
     }
     0.into()
 }

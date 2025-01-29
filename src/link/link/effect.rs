@@ -57,7 +57,7 @@ unsafe extern "C" fn effect_link_AscendAirJump(fighter: &mut L2CAgentBase) {
 //AscendStart
 unsafe extern "C" fn effect_link_AscendStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {        
-        let target_y = WorkModule::get_float(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+        let target_y = WorkModule::get_float(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
         let pos_y = PostureModule::pos_y(fighter.module_accessor);
         EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("top"), 0, target_y - pos_y + 5.0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
         LAST_EFFECT_SET_COLOR(fighter, 0.25, 1.0, 0.5);
@@ -77,7 +77,7 @@ unsafe extern "C" fn effect_link_AscendStart(fighter: &mut L2CAgentBase) {
 //Ascend
 unsafe extern "C" fn effect_link_Ascend(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {        
-        let target_y = WorkModule::get_float(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+        let target_y = WorkModule::get_float(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
         let pos_y = PostureModule::pos_y(fighter.module_accessor);
         EFFECT(fighter, Hash40::new("sys_flash"), Hash40::new("top"), 0, target_y - pos_y + 5.0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
         LAST_EFFECT_SET_COLOR(fighter, 0.25, 1.0, 0.5);

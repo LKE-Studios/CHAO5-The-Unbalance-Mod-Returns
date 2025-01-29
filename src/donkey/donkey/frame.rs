@@ -37,7 +37,9 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
         }
     }
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && motion_kind == hash40("special_hi") {
-        if frame <= 10.0 && ControlModule::get_stick_y(fighter.module_accessor) <= -0.5 {
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+        let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+        if frame <= 10.0 && stick_y <= -0.5 {
             MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi_2"), -1.0, 1.0, 0.0, false, false);
         }
     }

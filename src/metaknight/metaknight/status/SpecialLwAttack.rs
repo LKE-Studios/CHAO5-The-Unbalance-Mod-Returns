@@ -1,6 +1,7 @@
 use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn status_metaknight_SpecialLwAttack_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     let mot_kind = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_KIND);
     let mot_air_kind = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_WORK_INT_MOT_AIR_KIND);

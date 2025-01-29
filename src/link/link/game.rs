@@ -13,7 +13,7 @@ unsafe extern "C" fn game_link_AscendJump(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
         ArticleModule::set_visibility_whole(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_PARASAIL, true, ArticleOperationTarget(0));
         ATTACK(fighter, 0, 0, Hash40::new("top"), 16.0, 60, 100, 0, 50, 6.0, 0.0, 4.0, 5.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
@@ -24,7 +24,7 @@ unsafe extern "C" fn game_link_AscendJump(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
@@ -45,7 +45,7 @@ unsafe extern "C" fn game_link_AscendAirJump(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        WorkModule::set_flag(fighter.module_accessor, true, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
         ArticleModule::set_visibility_whole(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_PARASAIL, true, ArticleOperationTarget(0));
         ATTACK(fighter, 0, 0, Hash40::new("top"), 16.0, 60, 100, 0, 50, 6.0, 0.0, 4.0, 5.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
@@ -56,7 +56,7 @@ unsafe extern "C" fn game_link_AscendAirJump(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {

@@ -38,6 +38,7 @@ unsafe extern "C" fn status_metaknight_SpecialSEnd_Main(fighter: &mut L2CFighter
     }
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_WAIT);
     WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FALL);
+    KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     fighter.sub_shift_status_main(L2CValue::Ptr(metaknight_SpecialSEnd_Main_Sub as *const () as _))
 }
 

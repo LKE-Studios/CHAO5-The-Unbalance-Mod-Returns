@@ -39,9 +39,9 @@ unsafe extern "C" fn status_link_AscendStart_End(fighter: &mut L2CFighterCommon)
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Pre)
-    .status(Init, FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Init)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Main)
-    .status(End, FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Pre)
+    .status(Init, *FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Init)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_Main)
+    .status(End, *FIGHTER_LINK_STATUS_KIND_ASCEND_START, status_link_AscendStart_End)
     .install();
 }

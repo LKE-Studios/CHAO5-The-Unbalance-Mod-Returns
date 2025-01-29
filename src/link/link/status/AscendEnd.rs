@@ -45,18 +45,18 @@ unsafe extern "C" fn link_AscendEnd_Main_loop(fighter: &mut L2CFighterCommon) ->
     0.into()
 }
 
-unsafe extern "C" fn status_link_AscendEnd_End(fighter: &mut L2CFighterCommon) -> L2CValue { 
-    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
-    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_START_Y);
-    WorkModule::set_float(fighter.module_accessor, 0.0, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
+unsafe extern "C" fn status_link_AscendEnd_Exit(fighter: &mut L2CFighterCommon) -> L2CValue { 
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_START_Y);
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
     0.into()
 }
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Pre)
-    .status(Init, FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Init)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Main)
-    .status(Exit, FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Pre)
+    .status(Init, *FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Init)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Main)
+    .status(Exit, *FIGHTER_LINK_STATUS_KIND_ASCEND_END, status_link_AscendEnd_Exit)
     .install();
 }

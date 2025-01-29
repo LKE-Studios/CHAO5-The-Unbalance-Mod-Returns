@@ -49,6 +49,7 @@ unsafe extern "C" fn Glide_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
     if fighter.sub_transition_group_check_air_landing().get_bool() {
         return 0.into();
     }
+    WorkModule::add_float(fighter.module_accessor, 1.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GLIDE_FRAME);
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)
         || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_FLAG_STOP) {
@@ -206,6 +207,7 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
         println!("{}", angle);
     }
     else {
+        //This bracket isn't even used...
         fighter.clear_lua_stack();
         lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
         let brake = sv_kinetic_energy::get_brake_x(fighter.pop_lua_stack(0).into());
@@ -232,6 +234,7 @@ unsafe extern "C" fn status_Glide_Exec(fighter: &mut L2CFighterCommon) -> L2CVal
 
 pub unsafe extern "C" fn status_Glide_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_METAKNIGHT_MOTION_PART_SET_KIND_WING, false);
+    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GLIDE_FRAME);
     0.into()
 }
 

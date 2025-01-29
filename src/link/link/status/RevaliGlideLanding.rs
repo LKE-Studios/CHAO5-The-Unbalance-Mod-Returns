@@ -40,8 +40,8 @@ unsafe extern "C" fn status_link_RevaliGlideLanding_End(fighter: &mut L2CFighter
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_Pre)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_Main)
-    .status(End, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_Pre)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_Main)
+    .status(End, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_LANDING, status_link_RevaliGlideLanding_End)
     .install();
 }

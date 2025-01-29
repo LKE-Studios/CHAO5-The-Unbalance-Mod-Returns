@@ -5,13 +5,24 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
+    let prev_status_kind = StatusModule::prev_status_kind(fighter.module_accessor, 0);
     FighterSpecializer_MetaKnight::meta_power(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_GLIDE {
         let mut angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
         let angle_se_pitch_ratio = WorkModule::get_param_float(fighter.module_accessor, hash40("param_glide"), hash40("angle_se_pitch_ratio"));
         KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         SoundModule::set_se_pitch_ratio(fighter.module_accessor, Hash40::new("se_metaknight_glide_loop"), 1.0 + angle * angle_se_pitch_ratio);
+        if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&prev_status_kind) {
+            let glide_frame = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GLIDE_FRAME);
+            if glide_frame < 60.0 {
+                WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
+            }
+            else {
+                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_DEAD);
+            }
+        }
     }
     if ![*FIGHTER_STATUS_KIND_GLIDE_START, *FIGHTER_STATUS_KIND_GLIDE, *FIGHTER_STATUS_KIND_SPECIAL_HI, 
         *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_HI_LOOP].contains(&status_kind) { 
@@ -27,6 +38,7 @@ unsafe extern "C" fn frame_metaknight_Main(fighter: &mut L2CFighterCommon) {
     //Specials
     if status_kind == *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH {
         KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             DamageModule::heal(fighter.module_accessor, -1.2, 0);
             EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_recovery"), Hash40::new("top"), &VECTOR_ZERO, &VECTOR_ZERO, 1.0, true, 0, 0, 0, 0, 0, true, true);

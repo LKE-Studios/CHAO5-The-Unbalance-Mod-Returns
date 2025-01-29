@@ -2,8 +2,8 @@ use crate::imports::BuildImports::*;
 
 //Fly 
 unsafe extern "C" fn game_link_bowarrow_Fly(fighter: &mut L2CAgentBase) {
-    if WorkModule::get_int(fighter.module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG) == FuseType::ELEMENTAL {
-        let fuse_item_kind = WorkModule::get_int(fighter.module_accessor, WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_KIND);
+    if WorkModule::get_int(fighter.module_accessor, *WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_SPECIAL_FLAG) == FuseType::ELEMENTAL {
+        let fuse_item_kind = WorkModule::get_int(fighter.module_accessor, *WN_LINK_BOWARROW_INSTANCE_WORK_ID_INT_FUSE_ITEM_KIND);
         if fuse_item_kind == *ITEM_KIND_FIREFLOWER {
             if is_excute(fighter) {
                 ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 71, 0, 10, 1.5, 0.0, 0.0, 0.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0.0, 0.0, 0.0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_OBJECT);

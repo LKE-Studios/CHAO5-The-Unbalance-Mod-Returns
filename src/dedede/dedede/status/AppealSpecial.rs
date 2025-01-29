@@ -8,6 +8,7 @@ pub unsafe extern "C" fn status_dedede_AppealSpecial_Pre(fighter: &mut L2CFighte
 
 pub unsafe extern "C" fn status_dedede_AppealSpecial_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
     VisibilityModule::set_int64(fighter.module_accessor, hash40("hammer") as i64, hash40("hammer_disp_off") as i64);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_hi_r_2_start"), 0.0, 1.25, false, 0.0, false, false);
     let bgm_index = CustomModule::play_dedede_bgm(fighter.module_accessor);

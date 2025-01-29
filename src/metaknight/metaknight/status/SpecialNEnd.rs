@@ -10,6 +10,7 @@ unsafe extern "C" fn status_metaknight_SpecialNEnd_Main(fighter: &mut L2CFighter
     let remove_effect_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("remove_effect_frame"));
     WorkModule::set_int(fighter.module_accessor, remove_effect_frame, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_WORK_INT_EFFECT_REMOVE_FRAME);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_STATUS_SPECIAL_N_SPIN_FLAG_EFFECT_REMOVE);
+    KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     metaknight_SpecialNEnd_motion_handler(fighter);
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));

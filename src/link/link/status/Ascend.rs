@@ -26,15 +26,15 @@ unsafe extern "C" fn status_link_Ascend_Main(fighter: &mut L2CFighterCommon) -> 
 }
 
 unsafe extern "C" fn link_Ascend_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {    
-    let current_frame = WorkModule::get_float(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
-    let target_y = WorkModule::get_float(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+    let current_frame = WorkModule::get_float(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
+    let target_y = WorkModule::get_float(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
     let height = WorkModule::get_param_float(fighter.module_accessor, hash40("height"), 0);
     let pos_x = PostureModule::pos_x(fighter.module_accessor);
     let pos_y = PostureModule::pos_y(fighter.module_accessor);
     let ground_hit_pos = &mut Vector2f{x: 0.0, y: 0.0};
     let mut max_y = target_y + height + 20.0;
     let modulo = current_frame % 10.0;
-    WorkModule::add_float(fighter.module_accessor, 1.0, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
+    WorkModule::add_float(fighter.module_accessor, 1.0, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_ASCEND_FRAME);
     let ascend_height = WorkModule::get_param_float(fighter.module_accessor, hash40("param_ascend_revali"), hash40("ascend_height"));
     KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: 0.0, y: ascend_height, z: 0.0});
     if GroundModule::ray_check_hit_pos(fighter.module_accessor, &Vector2f{x: pos_x, y: pos_y + 4.0}, &Vector2f{x: 0.0, y: -height / 1.5}, ground_hit_pos, true) && pos_y >= max_y - (height * 2.0) {
@@ -46,7 +46,7 @@ unsafe extern "C" fn link_Ascend_Main_loop(fighter: &mut L2CFighterCommon) -> L2
     if modulo < 1.0 {
         if GroundModule::ray_check(fighter.module_accessor, &Vector2f{x: pos_x, y: target_y + 5.0}, &Vector2f{x: 0.0, y: -10.0}, true) != 1 {
             if GroundModule::ray_check_hit_pos(fighter.module_accessor, &Vector2f{x: pos_x, y: target_y + 20.0}, &Vector2f{x: 0.0, y: -40.0}, ground_hit_pos, true) {
-                WorkModule::set_float(fighter.module_accessor, ground_hit_pos.y, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+                WorkModule::set_float(fighter.module_accessor, ground_hit_pos.y, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
                 max_y = ground_hit_pos.y;
             }
             else {
@@ -77,9 +77,9 @@ unsafe extern "C" fn status_link_Ascend_Exit(fighter: &mut L2CFighterCommon) -> 
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Pre)
-    .status(Init, FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Init)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Main)
-    .status(Exit, FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Exit)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Pre)
+    .status(Init, *FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Init)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Main)
+    .status(Exit, *FIGHTER_LINK_STATUS_KIND_ASCEND, status_link_Ascend_Exit)
     .install();
 }

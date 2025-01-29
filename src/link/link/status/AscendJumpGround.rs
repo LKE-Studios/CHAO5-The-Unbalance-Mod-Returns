@@ -54,7 +54,7 @@ unsafe extern "C" fn link_AscendJumpGround_Main_loop(fighter: &mut L2CFighterCom
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("ascend_air_jump"), -1.0, 1.0, 0.0, false, false);
     }
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND) {
         let pos_x = PostureModule::pos_x(fighter.module_accessor);
         let pos_y = PostureModule::pos_y(fighter.module_accessor);     
         let height = WorkModule::get_param_float(fighter.module_accessor, hash40("height"), 0);  
@@ -66,8 +66,8 @@ unsafe extern "C" fn link_AscendJumpGround_Main_loop(fighter: &mut L2CFighterCom
         }
         let ground = find_ascendable_ground(fighter.module_accessor, pos_x, min_pos_y + height, pos_y + 100.0, height);
         if pos_y < ground && ground < pos_y + 100.0 {
-            WorkModule::set_float(fighter.module_accessor, pos_y, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_START_Y);
-            WorkModule::set_float(fighter.module_accessor, ground + 5.0, FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
+            WorkModule::set_float(fighter.module_accessor, pos_y, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_START_Y);
+            WorkModule::set_float(fighter.module_accessor, ground + 5.0, *FIGHTER_LINK_INSTANCE_WORK_ID_FLOAT_ASCEND_TARGET_Y);
             fighter.change_status(FIGHTER_LINK_STATUS_KIND_ASCEND_START.into(), false.into());
             return 0.into();
         }
@@ -79,14 +79,14 @@ unsafe extern "C" fn link_AscendJumpGround_Main_loop(fighter: &mut L2CFighterCom
 }
 
 unsafe extern "C" fn status_link_AscendJumpGround_End(fighter: &mut L2CFighterCommon) -> L2CValue {
-    WorkModule::set_flag(fighter.module_accessor, false, FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
+    WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_LINK_INSTANCE_WORK_ID_FLAG_CAN_ASCEND);
     0.into()
 }
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_Pre)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_Main)
-    .status(End, FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_Pre)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_Main)
+    .status(End, *FIGHTER_LINK_STATUS_KIND_ASCEND_JUMP_GROUND, status_link_AscendJumpGround_End)
     .install();
 }

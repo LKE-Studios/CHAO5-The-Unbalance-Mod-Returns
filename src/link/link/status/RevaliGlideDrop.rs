@@ -35,8 +35,8 @@ unsafe extern "C" fn status_link_RevaliGlideDrop_End(fighter: &mut L2CFighterCom
 
 pub fn install() {
     Agent::new("link")
-    .status(Pre, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_Pre)
-    .status(Main, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_Main)
-    .status(End, FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_End)
+    .status(Pre, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_Pre)
+    .status(Main, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_Main)
+    .status(End, *FIGHTER_LINK_STATUS_KIND_REVALI_GLIDE_DROP, status_link_RevaliGlideDrop_End)
     .install();
 }

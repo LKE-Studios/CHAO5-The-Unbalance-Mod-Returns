@@ -15,11 +15,11 @@ unsafe extern "C" fn status_link_boomerang_Haved_Main(weapon: &mut L2CFighterBas
         }
         else {
             if owner_kind == *FIGHTER_KIND_LINK {
-                WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE);
+                WorkModule::set_int(owner_module_accessor, *ITEM_KIND_NONE, *FIGHTER_LINK_INSTANCE_WORK_ID_INT_CURRENT_BOOMERANG_FUSE);
             }
         }
-        if WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
-            let item_id = WorkModule::get_int(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID) as u32;
+        if WorkModule::is_flag(weapon.module_accessor, *WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
+            let item_id = WorkModule::get_int(weapon.module_accessor, *WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID) as u32;
             let item_module_accessor = smash::app::sv_battle_object::module_accessor(item_id);
             LinkModule::remove_model_constraint(item_module_accessor, true);
             if LinkModule::is_link(item_module_accessor, *ITEM_LINK_NO_HAVE) {
@@ -51,8 +51,8 @@ unsafe extern "C" fn link_boomerang_Haved_Main_loop(weapon: &mut L2CFighterBase)
 
 unsafe extern "C" fn status_link_boomerang_Haved_End(weapon: &mut L2CFighterBase) -> L2CValue {
     let owner_module_accessor = smash::app::sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    if StatusModule::status_kind(owner_module_accessor) == *FIGHTER_LINK_STATUS_KIND_SPECIAL_S2 && WorkModule::is_flag(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
-        let item_id = WorkModule::get_int64(weapon.module_accessor, WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID) as u32;
+    if StatusModule::status_kind(owner_module_accessor) == *FIGHTER_LINK_STATUS_KIND_SPECIAL_S2 && WorkModule::is_flag(weapon.module_accessor, *WN_LINK_BOOMERANG_INSTANCE_WORK_ID_FLAG_ITEM_FUSED) {
+        let item_id = WorkModule::get_int64(weapon.module_accessor, *WN_LINK_BOOMERANG_INSTANCE_WORK_ID_INT_FUSE_ITEM_ID) as u32;
         let item_module_accessor = smash::app::sv_battle_object::module_accessor(item_id);
         StatusModule::change_status_request(item_module_accessor, *ITEM_STATUS_KIND_FALL, false);
         if !ItemModule::is_have_item(owner_module_accessor, 0) {

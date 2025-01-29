@@ -26,6 +26,9 @@ unsafe extern "C" fn frame_dedede_Main(fighter: &mut L2CFighterCommon) {
     if status_kind == *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_HI_FAILURE && situation_kind == SITUATION_KIND_AIR {
         StatusModule::change_status_force(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
     }
+    let damage_energy = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE) as *mut smash::app::KineticEnergy;
+    let damage_speed = lua_bind::KineticEnergy::get_speed(damage_energy);
+    println!("{}", damage_speed);
     if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_END,
         *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_SPIT, *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_SWALLOW,
         *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_EAT_FALL, *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_EAT_JUMP1, *FIGHTER_DEDEDE_STATUS_KIND_SPECIAL_N_EAT_JUMP2,
