@@ -744,16 +744,15 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let spell_type = WorkModule::get_int(attacker_module_accessor, *FIGHTER_KAMEK_STATUS_SPECIAL_S_WORK_INT_MAGIC_TYPE);
     let CUSTOM_FIGHTER = color >= 64 && color <= 71;
+    let CUSTOM_FIGHTER_2 = color >= 120 && color <= 127;
     let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
     if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER_3 {
-        if utility::get_category(&mut *defender_module_accessor) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
-            if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
-                if spell_type == 8 {
-                    if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
-                        SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
-                        EffectModule::req_time_follow(defender_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 720, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.1, false, 0);
-                        SoundModule::play_se(defender_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
-                    }
+        if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            if spell_type == 8 {
+                if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
+                    SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
+                    EffectModule::req_time_follow(defender_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 720, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.0, false, 0);
+                    SoundModule::play_se(defender_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
                 }
             }
         }
@@ -767,7 +766,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
                     for i in 1..num_players {
                         let opponent_module_accessor = sv_battle_object::module_accessor(Fighter::get_id_from_entry_id(i)); //All Opponents
                         SlowModule::set(opponent_module_accessor, 0, 20, 300, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
-                        EffectModule::req_time_follow(opponent_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 300, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.1, false, 0);
+                        EffectModule::req_time_follow(opponent_module_accessor, Hash40::new("sys_timer"), Hash40::new("hip"), 300, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 1.0, false, 0);
                         SoundModule::play_se(opponent_module_accessor, Hash40::new("se_timer_slow_all"), true, false, false, false, enSEType(0));
                     }
                 }

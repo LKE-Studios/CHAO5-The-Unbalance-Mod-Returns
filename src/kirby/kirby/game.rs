@@ -1160,12 +1160,21 @@ unsafe extern "C" fn game_kirby_SpecialHi2(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_SPECIAL_HI_FLAG_CANCEL);
         WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 10.0, /*Angle*/ 275, /*KBG*/ 100, /*FKB*/ 96, /*BKB*/ 0, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(20.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(20.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
+    }
+}
+
+//SpecialHi3
+unsafe extern "C" fn game_kirby_SpecialHi3(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, Hash40::new("special_hi3"), false, -1.0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_SPECIAL_HI_FLAG_CANCEL);
     }
 }
 
@@ -1234,12 +1243,21 @@ unsafe extern "C" fn game_kirby_SpecialAirHi2(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_SPECIAL_HI_FLAG_CANCEL);
         WHOLE_HIT(fighter, *HIT_STATUS_NORMAL);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 10.0, /*Angle*/ 275, /*KBG*/ 100, /*FKB*/ 96, /*BKB*/ 0, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(20.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
     }
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 180, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(20.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
+    }
+}
+
+//SpecialAirHi3
+unsafe extern "C" fn game_kirby_SpecialAirHi3(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, Hash40::new("special_hi3"), false, -1.0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_SPECIAL_HI_FLAG_CANCEL);
     }
 }
 
@@ -1821,6 +1839,8 @@ pub fn install() {
     .game_acmd("game_specialairsmax", game_kirby_SpecialAirSMax, Low)
     .game_acmd("game_specialhi2", game_kirby_SpecialHi2, Low)
     .game_acmd("game_specialairhi2", game_kirby_SpecialAirHi2, Low)
+    .game_acmd("game_specialhi3", game_kirby_SpecialHi3, Low)
+    .game_acmd("game_specialairhi3", game_kirby_SpecialAirHi3, Low)
     .game_acmd("game_specialhih", game_kirby_SpecialHiH, Low)
     .game_acmd("game_specialairhih", game_kirby_SpecialAirHiH, Low)
     .game_acmd("game_speciallw", game_kirby_SpecialLw, Low)
