@@ -747,7 +747,7 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
     let CUSTOM_FIGHTER_2 = color >= 120 && color <= 127;
     let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
     if attacker_fighter_kind == *FIGHTER_KIND_NESS && CUSTOM_FIGHTER_3 {
-        if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_S {
+        if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_KAMEK_STATUS_KIND_SPECIAL_S {
             if spell_type == 8 {
                 if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
                     SlowModule::set(defender_module_accessor, 0, 25, 720, true, *FIGHTER_SLOW_KIND_NORMAL as u32);
