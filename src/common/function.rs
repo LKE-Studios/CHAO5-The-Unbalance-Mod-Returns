@@ -149,7 +149,11 @@ unsafe extern "C" fn metaknight_SpecialLw_callback(fighter: &mut L2CFighterCommo
 unsafe extern "C" fn metaknight_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) 
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAPTURE_YOSHI)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_GROUND)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_AIR)
+    || !sv_information::is_ready_go() {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_N);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_METAKNIGHT_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
@@ -187,7 +191,11 @@ unsafe extern "C" fn simon_SpecialHi_callback(fighter: &mut L2CFighterCommon) ->
 unsafe extern "C" fn simon_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) 
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAPTURE_YOSHI)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_GROUND)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_AIR)
+    || !sv_information::is_ready_go() {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SIMON_INSTANCE_WORK_ID_FLAG_DISABLE_SPECIAL_HI);
     }
     true.into()
@@ -214,7 +222,11 @@ unsafe extern "C" fn trail_SpecialHi_callback(fighter: &mut L2CFighterCommon) ->
 unsafe extern "C" fn trail_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
     let status_kind = fighter.global_table[STATUS_KIND].get_i32();
     let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) || sv_information::is_ready_go() == false {
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) 
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAPTURE_YOSHI)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_GROUND)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_AIR)
+    || !sv_information::is_ready_go() {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
     }
     true.into()
@@ -785,6 +797,9 @@ unsafe fn fix_chara_replace(ctx: &skyline::hooks::InlineCtx) {
     *ptr2.add(0x4) = *ptr1.add(0x4);
 }
 
+#[skyline::from_offset(0x3ac560)]
+pub fn get_battle_object_from_id(id: u32) -> *mut BattleObject;
+
 pub mod CustomModule {
     use super::*;
 
@@ -842,6 +857,12 @@ pub mod CustomModule {
         let dedede_id = WorkModule::get_int(module_accessor, *FIGHTER_DEDEDE_INSTANCE_WORK_ID_INT_BGM_ID);
         let bgm_index = dedede_id;
         stop_status_bgm(((module_accessor as u64) + 0x148) as *const u64, bgm_index);
+    }
+
+    pub unsafe extern "C" fn get_article_module_accessor(modules: *mut smash::app::BattleObjectModuleAccessor, article_type: skyline::libc::c_int) -> *mut smash::app::BattleObjectModuleAccessor {
+        let article = ArticleModule::get_article(modules, article_type);
+        let object_id = smash::app::lua_bind::Article::get_battle_object_id(article) as u32;
+        return sv_battle_object::module_accessor(object_id);
     }
 }
 

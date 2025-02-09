@@ -155,6 +155,7 @@ mod eflame;
 mod elight;
 mod falco;
 mod fox;
+mod funky;
 mod gamewatch;
 mod ganon;
 mod gaogaen;
@@ -438,6 +439,7 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_ninten")); //Ninten
         allow_ui_chara_hash_online(hash40("ui_chara_maskedman")); //Masked Man
         allow_ui_chara_hash_online(hash40("ui_chara_kamek")); //Kamek
+        allow_ui_chara_hash_online(hash40("ui_chara_funky")); //Funky Kong
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
@@ -547,6 +549,7 @@ pub fn main() {
     ninten::install();
     maskedman::install();
     kamek::install();
+    funky::install();
     //knuckles::install();
     skyline::install_hooks!(
         declare_const_hook, 
