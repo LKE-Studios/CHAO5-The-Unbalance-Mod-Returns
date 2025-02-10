@@ -19,6 +19,7 @@ unsafe extern "C" fn sound_funky_AttackDash(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SEQUENCE(fighter, Hash40::new("seq_donkey_rnd_attack"));
         PLAY_SE(fighter, Hash40::new("se_donkey_attackdash"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_l"));
     }
 }
 
@@ -310,6 +311,14 @@ unsafe extern "C" fn sound_funky_SpecialSStart(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialAirSStart
+unsafe extern "C" fn sound_funky_SpecialAirSStart(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_final05"));
+    }
+}
+
 //SpecialSLanding
 unsafe extern "C" fn sound_funky_SpecialSLanding(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
@@ -368,7 +377,7 @@ unsafe extern "C" fn sound_funky_SpecialAirHiLaunch(fighter: &mut L2CAgentBase) 
 unsafe extern "C" fn sound_funky_SpecialHi_C2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_donkey_special_h01"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h01_01"));
     }
 }
 
@@ -376,11 +385,11 @@ unsafe extern "C" fn sound_funky_SpecialHi_C2(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_funky_SpecialAirHi_C2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        PLAY_STATUS(fighter, Hash40::new("se_donkey_special_h02"));
+        PLAY_STATUS(fighter, Hash40::new("se_donkey_special_h01_02"));
     }
     frame(fighter.lua_state_agent, 54.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h01_03"));
     }
 }
 
@@ -416,7 +425,7 @@ unsafe extern "C" fn sound_funky_SpecialLwJump(fighter: &mut L2CAgentBase) {
 
 //SpecialLwMusic
 unsafe extern "C" fn sound_funky_SpecialLwMusic(fighter: &mut L2CAgentBase) {
-    let rand_val = sv_math::rand(hash40("fighter"), 2);
+    let rand_val = sv_math::rand(hash40("donkey"), 2);
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         if rand_val == 0 {
@@ -432,7 +441,7 @@ unsafe extern "C" fn sound_funky_SpecialLwMusic(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_funky_SpecialLwPose(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("se_donkey_swing_m"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_m"));
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
@@ -484,7 +493,7 @@ unsafe extern "C" fn sound_funky_SpecialAirLwJump(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLwMusic
 unsafe extern "C" fn sound_funky_SpecialAirLwMusic(fighter: &mut L2CAgentBase) {
-    let rand_val = sv_math::rand(hash40("fighter"), 2);
+    let rand_val = sv_math::rand(hash40("donkey"), 2);
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         if rand_val == 0 {
@@ -500,7 +509,7 @@ unsafe extern "C" fn sound_funky_SpecialAirLwMusic(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_funky_SpecialAirLwPose(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        PLAY_SEQUENCE(fighter, Hash40::new("se_donkey_swing_m"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_m"));
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
@@ -661,7 +670,7 @@ unsafe extern "C" fn sound_funky_Win1(fighter: &mut L2CAgentBase) {
 }
 
 //DamageFlyHi
-unsafe extern "C" fn sound_donkey_DamageFlyHi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_funky_DamageFlyHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_FLY_VOICE(fighter, Hash40::new("seq_donkey_rnd_futtobi01"), Hash40::new("seq_donkey_rnd_futtobi02"));
@@ -669,7 +678,7 @@ unsafe extern "C" fn sound_donkey_DamageFlyHi(fighter: &mut L2CAgentBase) {
 }
 
 //DamageFlyLw
-unsafe extern "C" fn sound_donkey_DamageFlyLw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_funky_DamageFlyLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_FLY_VOICE(fighter, Hash40::new("seq_donkey_rnd_futtobi01"), Hash40::new("seq_donkey_rnd_futtobi02"));
@@ -677,7 +686,7 @@ unsafe extern "C" fn sound_donkey_DamageFlyLw(fighter: &mut L2CAgentBase) {
 }
 
 //DamageFlyN
-unsafe extern "C" fn sound_donkey_DamageFlyN(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_funky_DamageFlyN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_FLY_VOICE(fighter, Hash40::new("seq_donkey_rnd_futtobi01"), Hash40::new("seq_donkey_rnd_futtobi02"));
@@ -685,7 +694,7 @@ unsafe extern "C" fn sound_donkey_DamageFlyN(fighter: &mut L2CAgentBase) {
 }
 
 //DamageFlyTop
-unsafe extern "C" fn sound_donkey_DamageFlyTop(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_funky_DamageFlyTop(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_FLY_VOICE(fighter, Hash40::new("seq_donkey_rnd_futtobi01"), Hash40::new("seq_donkey_rnd_futtobi02"));
@@ -693,7 +702,7 @@ unsafe extern "C" fn sound_donkey_DamageFlyTop(fighter: &mut L2CAgentBase) {
 }
 
 //DamageFlyRoll
-unsafe extern "C" fn sound_donkey_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_funky_DamageFlyRoll(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_FLY_VOICE(fighter, Hash40::new("seq_donkey_rnd_futtobi01"), Hash40::new("seq_donkey_rnd_futtobi02"));
@@ -729,6 +738,7 @@ pub fn install() {
     .sound_acmd("sound_specialairnmax_funky", sound_funky_SpecialAirNMax, Low)
     .sound_acmd("sound_specialsstart_funky", sound_funky_SpecialSStart, Low)
     .sound_acmd("sound_specialslanding_funky", sound_funky_SpecialSLanding, Low)
+    .sound_acmd("sound_specialairsstart_funky", sound_funky_SpecialAirSStart, Low)
     .sound_acmd("sound_specialairsdirection_funky", sound_funky_SpecialAirSDirection, Low)
     .sound_acmd("sound_specialairsend_funky", sound_funky_SpecialAirSEnd, Low)
     .sound_acmd("sound_specialairhi_funky", sound_funky_SpecialAirHi, Low)

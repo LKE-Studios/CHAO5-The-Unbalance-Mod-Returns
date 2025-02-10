@@ -14,11 +14,12 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
     let x_spd_max_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("x_spd_max_ground"));
     let y_spd_air = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("y_spd_air"));
     let y_acl_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("y_acl_mul"));
-    let air_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+    let mut accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
     KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+    accel_y *= y_acl_mul;
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, ENERGY_CONTROLLER_RESET_TYPE_FALL_ADJUST, 0.0, 0.0, 0.0, 0.0, 0.0);
         sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
@@ -27,7 +28,7 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
         sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_air, 0.0);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, y_spd_air, 0.0, 0.0, 0.0);
         sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, y_spd_air);
-        sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -air_accel_y * y_acl_mul);
+        sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -accel_y);
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
     }
     else {
@@ -37,7 +38,7 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_ground, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_ground, 0.0);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, 0.0, 0.0, 0.0, 0.0);
-        sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -air_accel_y * y_acl_mul);
+        sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -accel_y);
     }
     sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
     KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
@@ -161,7 +162,7 @@ unsafe extern "C" fn funky_SpecialHi_C2_Main_loop(fighter: &mut L2CFighterCommon
     }
     if MotionModule::is_end(fighter.module_accessor) {
         if situation_kind != *SITUATION_KIND_GROUND {
-            fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL_AERIAL.into(), false.into());
         }
         else {
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());

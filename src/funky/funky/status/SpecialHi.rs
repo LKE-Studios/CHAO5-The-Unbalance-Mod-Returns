@@ -29,7 +29,10 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Init(fighter: &mut L2CFighterCom
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
         let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
-        WorkModule::set_flag(fighter.module_accessor, situation_kind == *SITUATION_KIND_AIR, *FIGHTER_DONKEY_STATUS_SPECIAL_HI_FLAG_START);
+        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+        KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
+        WorkModule::set_flag(fighter.module_accessor, situation_kind == *SITUATION_KIND_AIR, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_BARREL_START);
         if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
             sv_kinetic_energy!(clear_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
             sv_kinetic_energy!(clear_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
@@ -38,7 +41,7 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Init(fighter: &mut L2CFighterCom
             VisibilityModule::set_model_visible(fighter.module_accessor, false);
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL,true,0);
             if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL) {
-                barrel_modules = CustomMOdule::get_article_module_accessor(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL);
+                barrel_modules = CustomModule::get_article_module_accessor(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL);
                 KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL, Hash40::new("special_air_hi"), true, 0.0);
                 PostureModule::set_lr(barrel_modules, 1.0);
@@ -62,9 +65,10 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Main(fighter: &mut L2CFighterCom
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi"), 0.0, 1.0, false, 0.0, false, false)
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi"), 0.0, 1.0, false, 0.0, false, false);
         }
         else {
             fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), false.into());
@@ -92,8 +96,11 @@ unsafe extern "C" fn funky_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -
         }
     }
     let frame = MotionModule::frame(fighter.module_accessor);
-    if frame >= 5.0 {
-        MotionModule::set_rate(fighter.module_accessor, 0.0);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    if motion_kind == hash40("special_air_hi") {
+        if frame >= 5.0 {
+            MotionModule::set_rate(fighter.module_accessor, 0.0);
+        }
     }
     if MotionModule::is_end(fighter.module_accessor) 
     && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_GROUND_END) {
@@ -112,7 +119,8 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exec(fighter: &mut L2CFighterCom
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
-        let frame = MotionModule::frame(fighter.module_accessor);
+        let frame = MotionModule::frame(fighter.module_accessor);                    
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_BARREL_START) {
             return 0.into();
         }
@@ -151,11 +159,6 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exec(fighter: &mut L2CFighterCom
                     StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_GROUND), false);
                     fighter.change_status(FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL.into(), true.into());
                 }
-                if frame >= special_hi_c2_frame {
-                    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-                        fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), false.into());
-                    }
-                }
             }
             else {
                 sv_kinetic_energy!(clear_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP);
@@ -163,11 +166,11 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exec(fighter: &mut L2CFighterCom
                 KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
                 if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL) {
                     if frame > 2.0 {
-                        fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), false.into());
+                        fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), false.into());
                     }
-                    return;
+                    return 0.into();
                 }
-                let barrel_modules = CustomMOdule::get_article_module_accessor(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL);
+                let barrel_modules = CustomModule::get_article_module_accessor(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL);
                 let barrel_motion = MotionModule::motion_kind(barrel_modules);
                 let barrel_frame = MotionModule::frame(barrel_modules);
                 let can_launch = barrel_motion == hash40("special_air_hi_aim");
@@ -202,6 +205,7 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exec(fighter: &mut L2CFighterCom
                         MotionAnimcmdModule::call_script_single(fighter.module_accessor, *FIGHTER_ANIMCMD_EXPRESSION, Hash40::new("expression_specialairhilaunch_funky"), -1);
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_launch"), 0.0, 1.0, false, 0.0, false, false);
                         VisibilityModule::set_model_visible(fighter.module_accessor, true);
+                        ModelModule::set_visibility(fighter.module_accessor, true);
                         if (barrel_angle.abs() > 1.0) {
                             PostureModule::set_lr(fighter.module_accessor, barrel_angle.signum());
                             PostureModule::update_rot_y_lr(fighter.module_accessor);
@@ -209,20 +213,25 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exec(fighter: &mut L2CFighterCom
                         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_SUPER_JUMP_PUNCH_AIR);
                         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
                         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                        let speed_x = (angle.to_radians()).sin() * special_hi_barrel_speed;
-                        let speed_y = (angle.to_radians()).cos() * (special_hi_barrel_speed * special_hi_barrel_speed_y_mul);
+                        let speed_x = (barrel_angle.to_radians()).sin() * special_hi_barrel_speed;
+                        let speed_y = (barrel_angle.to_radians()).cos() * (special_hi_barrel_speed * special_hi_barrel_speed_y_mul);
                         let lr = PostureModule::lr(fighter.module_accessor);
                         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x * lr, speed_y);
                         sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_STOP, speed_x * lr, speed_y);
                         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_LAUNCH);
                     }
+                    if frame >= special_hi_c2_frame && motion_kind == hash40("special_air_hi_launch") {
+                        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+                            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), false.into());
+                        }
+                    }
                 }
             }
         }
         else {
-            return 0.into();
+            //Nothing LOL
         }
-        return false.into()
+        0.into()
     }
     else {
         0.into()
@@ -237,7 +246,7 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Exit(fighter: &mut L2CFighterCom
         let start = WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_BARREL_START);
         let launch = WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_LAUNCH);
         if start && !launch {
-            EffectModule::req_follow(module_accessor, Hash40::new("donkey_entry"), Hash40::new("top"), &Vector3f{x: 0.0, y: 2.0, z: 0.0}, &VECTOR_ZERO, 1.0, true, 0, 0, 0, 0, 0, true, true);
+            EffectModule::req_follow(fighter.module_accessor, Hash40::new("donkey_entry"), Hash40::new("top"), &Vector3f{x: 0.0, y: 2.0, z: 0.0}, &VECTOR_ZERO, 1.0, true, 0, 0, 0, 0, 0, true, true);
             SoundModule::play_se(fighter.module_accessor, Hash40::new("se_donkey_appear01"), true, false, false, false, enSEType(0));
             if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL) {
                 ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_DONKEY_GENERATE_ARTICLE_DKBARREL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -257,4 +266,5 @@ pub fn install() {
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_funky_SpecialHi_Main)
     .status(Exec, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_funky_SpecialHi_Exec)
     .status(Exit, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_funky_SpecialHi_Exit)
+    .install();
 }

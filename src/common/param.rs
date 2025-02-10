@@ -315,6 +315,17 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(-*WEAPON_KIND_LUCAS_PK_FIRE, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_pkfire"), hash40("pillar_scale_min"), 0.0));
     param_config::disable_kirby_copy(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone());
     param_config::disable_villager_pocket(*FIGHTER_KIND_LUCAS, vec![120,121,122,123,124,125,126,127].clone(), 0);
+
+    //FUNKY
+    param_config::disable_kirby_copy(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(), 0);
+    param_config::update_int_2(-*WEAPON_KIND_DONKEY_DKBARREL, vec![120,121,122,123,124,125,126,127].clone(), (hash40("article_use_type"), 0, 1));
+    param_config::update_int_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(), (hash40("attack_combo_max"), 0, 1));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_spd_air"), 1.2));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_spd_max_ground"), 2.0));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_acl_air"), 0.4));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_spd_max_air"), 3.0));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("ground_mot_frame"), 62.0));
 }
 
 pub fn install() {

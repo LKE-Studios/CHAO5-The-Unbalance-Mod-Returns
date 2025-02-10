@@ -199,19 +199,19 @@ unsafe extern "C" fn effect_funky_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if get_value_float(fighter.lua_state_agent, *SO_VAR_FLOAT_LR) < 0.0 {
         if is_excute(fighter) {
-            EFFECT_FOLLOW(fighter, Hash40::new("pzenieffect_water_cutter"), Hash40::new("top"), 3, -1.5, -2, 0, 0, 0, 0.9, true);
-            EFFECT_FOLLOW(fighter, Hash40::new("pzenieffect_water_smash"), Hash40::new("top"), 3, -2, -2, 10, 180, 0, 0.9, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_water_cutter"), Hash40::new("top"), 3, -1.5, -2, 0, 0, 0, 0.9, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_water_smash"), Hash40::new("top"), 3, -2, -2, 10, 180, 0, 0.9, true);
         }
     }
     else {
         if is_excute(fighter) {
-            EFFECT_FOLLOW(fighter, Hash40::new("pzenieffect_water_cutter_r"), Hash40::new("top"), 3, -1.5, -2, 0, 0, 0, 0.9, true);
-            EFFECT_FOLLOW(fighter, Hash40::new("pzenieffect_water_smash_r"), Hash40::new("top"), 3, -2, -2, 10, 0, 0, 0.9, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_water_cutter_r"), Hash40::new("top"), 3, -1.5, -2, 0, 0, 0, 0.9, true);
+            EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_water_smash_r"), Hash40::new("top"), 3, -2, -2, 10, 0, 0, 0.9, true);
         }
     }
     frame(fighter.lua_state_agent, 32.0);
     if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("pzenieffect_mouth_water"), false, false);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pzenigame_mouth_water"), false, false);
     }
 }
 
@@ -264,13 +264,13 @@ unsafe extern "C" fn effect_funky_AttackAirHi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_funky_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("pzeniexpression_takinobori_splash"), Hash40::new("top"), 0, 2.0, -5, 0, 0, 0, 1.05, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("pzeniexpression_takinobori"), Hash40::new("top"), 0, 8, -5, 5, 0, 0, 0.7, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_takinobori_splash"), Hash40::new("top"), 0, 2.0, -5, 0, 0, 0, 1.05, true);
+        EFFECT_FOLLOW(fighter, Hash40::new("pzenigame_takinobori"), Hash40::new("top"), 0, 8, -5, 5, 0, 0, 0.7, true);
     }
     frame(fighter.lua_state_agent, 30.0);
     if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("pzeniexpression_takinobori_splash"), false, false);
-        EFFECT_OFF_KIND(fighter, Hash40::new("pzeniexpression_takinobori"), false, false);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pzenigame_takinobori_splash"), false, false);
+        EFFECT_OFF_KIND(fighter, Hash40::new("pzenigame_takinobori"), false, false);
     }
 }
 

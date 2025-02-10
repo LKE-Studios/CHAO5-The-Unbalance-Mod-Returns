@@ -88,6 +88,12 @@ pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
 unsafe extern "C" fn start_special_flag_checks_Init(fighter: &mut L2CFighterCommon) {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let status_kind = fighter.global_table[STATUS_KIND].get_i32();
+    if fighter_kind == *FIGHTER_KIND_DONKEY {
+        fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(donkey_SpecialS_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(donkey_SpecialHi_callback as *const () as _));
+        fighter.global_table[CHECK_SPECIAL_LW_UNIQ].assign(&L2CValue::Ptr(donkey_SpecialLw_callback as *const () as _));
+        fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(donkey_change_status_callback as *const () as _)); 
+    }
     if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
         fighter.global_table[CHECK_SPECIAL_N_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialN_callback as *const () as _));
         fighter.global_table[CHECK_SPECIAL_S_UNIQ].assign(&L2CValue::Ptr(metaknight_SpecialS_callback as *const () as _));
@@ -108,6 +114,48 @@ unsafe extern "C" fn start_special_flag_checks_Init(fighter: &mut L2CFighterComm
         fighter.global_table[CHECK_SPECIAL_HI_UNIQ].assign(&L2CValue::Ptr(trail_SpecialHi_callback as *const () as _));  
         fighter.global_table[STATUS_END_CONTROL].assign(&L2CValue::Ptr(trail_change_status_callback as *const () as _));   
     }
+}
+
+unsafe extern "C" fn donkey_SpecialS_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn donkey_SpecialHi_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn donkey_SpecialLw_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == *SITUATION_KIND_AIR && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW) {
+        false.into()
+    }
+    else {
+        true.into()
+    }
+}
+
+unsafe extern "C" fn donkey_change_status_callback(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let status_kind = fighter.global_table[STATUS_KIND].get_i32();
+    let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
+    if situation_kind != *SITUATION_KIND_AIR || conditional_statuses(status_kind) 
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAPTURE_YOSHI)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_GROUND)
+    || WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GANON_SPECIAL_S_DAMAGE_FALL_AIR)
+    || !sv_information::is_ready_go() {
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_S);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_HI);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_FUNKY_INSTANCE_WORK_ID_FLAG_DISABLE_AIR_SPECIAL_LW);
+    }
+    true.into()
 }
 
 unsafe extern "C" fn metaknight_SpecialN_callback(fighter: &mut L2CFighterCommon) -> L2CValue {

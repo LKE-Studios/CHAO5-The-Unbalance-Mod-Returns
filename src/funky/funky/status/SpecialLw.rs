@@ -22,20 +22,22 @@ pub unsafe extern "C" fn status_funky_SpecialLw_Init(fighter: &mut L2CFighterCom
 	if FUNKY {
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
         sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, special_lw_speed_x_max, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, special_lw_speed_x_max, 0.0);
         let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
         let speed_y = KineticEnergy::get_speed_y(gravity);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
-        sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
-        sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, gravity_speed);
+        sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, special_lw_gravity_speed);
+        sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, special_lw_gravity_speed);
+        0.into()
     }
     else {
         0.into()
     }
 }
 
-unsafe fn funky_SpecialN_motion_helper(fighter: &mut L2CFighterCommon, situation_change: bool) {
+unsafe fn funky_SpecialLw_motion_helper(fighter: &mut L2CFighterCommon, situation_change: bool) {
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         if !situation_change {
@@ -46,13 +48,12 @@ unsafe fn funky_SpecialN_motion_helper(fighter: &mut L2CFighterCommon, situation
         }
     }
     else {
-        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
-        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION);
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
         if !situation_change {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_start"), 0.0, 1.0, false, 0.0, false, false);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_start"), 0.0, 1.0, false, 0.0, false, false);
         }
         else {
-            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_lw_start"), -1.0, 1.0, 0.0, false, false);
+            MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_lw_start"), -1.0, 1.0, 0.0, false, false);
         }
     }
 }
@@ -62,7 +63,8 @@ pub unsafe extern "C" fn status_funky_SpecialLw_Main(fighter: &mut L2CFighterCom
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
         fighter.set_situation(SITUATION_KIND_AIR.into());
-        funky_SpecialN_motion_helper(fighter, false);
+        funky_SpecialLw_motion_helper(fighter, false);
+        JostleModule::set_status(fighter.module_accessor, false);
         fighter.sub_shift_status_main(L2CValue::Ptr(funky_SpecialLw_Main_loop as *const () as _))
     }
     else {
@@ -82,7 +84,7 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
         return 0.into();
     }
     if fighter.global_table[SITUATION_KIND].get_i32() != fighter.global_table[PREV_SITUATION_KIND].get_i32() {
-        funky_SpecialN_motion_helper(fighter, true);
+        funky_SpecialLw_motion_helper(fighter, true);
     }
     if frame == 2.0 {
         StatusModule::set_keep_situation_air(fighter.module_accessor, true);
@@ -101,17 +103,17 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
             //Nothing LOL            
         }
         else if (stick_direction >= 67.5 && stick_direction <= 90.0 && stick_y < 0.0) 
-        && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_music"), -1.0, 1.0, false, 0.0, false, false);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_music"), 0.0, 1.0, false, 0.0, false, false);
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
         }
         else if stick_direction >= -67.5 && stick_direction < -22.5 && stick_x > 0.0 {
             //Nothing Again LOL    
         }
         else if (stick_direction >= -22.5 && stick_direction <= 22.5 && stick_x < 0.0) 
-        && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_flip"), -1.0, 1.0, false, 0.0, false, false);
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_flip"), 0.0, 1.0, false, 0.0, false, false);
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
             KineticModule::clear_speed_all(fighter.module_accessor);
@@ -120,8 +122,8 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
             //Nothing Again LOL    
         }
         else if (stick_direction >= -22.5 && stick_direction <= 22.5 && stick_x > 0.0) 
-        && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_jump"), -1.0, 1.0, false, 0.0, false, false);
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_jump"), 0.0, 1.0, false, 0.0, false, false);
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
             KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
             KineticModule::clear_speed_all(fighter.module_accessor);
@@ -130,9 +132,9 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
             //Nothing Again LOL
         }
         else if (stick_direction > 67.5 && stick_direction <= 90.0 && stick_y > 0.0) 
-        && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_pose"), -1.0, 1.0, false, 0.0, false, false);
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_pose"), 0.0, 1.0, false, 0.0, false, false);
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
         }
         else {
@@ -150,6 +152,29 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
     0.into()
 }
 
+unsafe extern "C" fn status_funky_SpecialLw_CheckAttack(fighter: &mut L2CFighterCommon, param2: &L2CValue, param3: &L2CValue) -> L2CValue {
+    let attacker_module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let table = param3.get_table() as *mut smash2::lib::L2CTable;
+    let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
+    let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
+    let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let FUNKY = color >= 120 && color <= 127;
+    if utility::get_kind(attacker_module_accessor) == *FIGHTER_KIND_DONKEY && FUNKY && category == *BATTLE_OBJECT_CATEGORY_FIGHTER 
+    && (MotionModule::motion_kind(attacker_module_accessor) == hash40("special_lw_music") 
+    || MotionModule::motion_kind(attacker_module_accessor) == hash40("special_air_lw_music")) {
+        if collision_kind == *COLLISION_KIND_HIT {
+            let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
+            let module_accessor = sv_battle_object::module_accessor(object_id);
+            let rand_val = sv_math::rand(hash40("fighter"), 3);
+            if StatusModule::situation_kind(module_accessor) == *SITUATION_KIND_GROUND {
+                fighter.change_status(FIGHTER_STATUS_KIND_APPEAL.into(), true.into());
+            }
+        }
+    }
+    
+    0.into()
+}
+
 pub unsafe extern "C" fn status_funky_SpecialLw_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("poke_mijumaeu_wave"), false, false);
     EffectModule::kill_kind(fighter.module_accessor, Hash40::new("poke_mijumaeu_ripple"), false, false);
@@ -162,6 +187,7 @@ pub fn install() {
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Pre)
     .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Init)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Main)
+    .status(CheckAttack, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_CheckAttack)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_End)    
     .install();
 }

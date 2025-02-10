@@ -14,9 +14,9 @@ pub unsafe extern "C" fn frame_funky_Main(fighter: &mut L2CFighterCommon) {
         funky_update(fighter);
         let scale = WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0);
         if ModelModule::scale(fighter.module_accessor) == scale {
-            ModelModule::set_scale(fighter.module_accessor, 0.92);
-            AttackModule::set_attack_scale(fighter.module_accessor, 0.92, true);
-            GrabModule::set_size_mul(fighter.module_accessor, 0.92);
+            ModelModule::set_scale(fighter.module_accessor, 1.0);
+            AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
+            GrabModule::set_size_mul(fighter.module_accessor, 1.0);
         };
         if status_kind == *FIGHTER_STATUS_KIND_DAMAGE_AIR || status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR {
             EffectModule::kill_kind(fighter.module_accessor, Hash40::new("pzenigame_takinobori_splash"), false, false);
@@ -53,6 +53,10 @@ pub unsafe extern "C" fn frame_funky_Main(fighter: &mut L2CFighterCommon) {
                     WorkModule::set_int(fighter.module_accessor, *FIGHTER_DONKEY_SPECIAL_N_CANCEL_TYPE_NONE, *FIGHTER_DONKEY_STATUS_SPECIAL_N_WORK_INT_CANCEL_TYPE);
                 }
             }
+        }
+        if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind)
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
+            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), true.into());
         }  
     }
 }     
