@@ -19,7 +19,7 @@ unsafe extern "C" fn frame_krystal_Main(fighter: &mut L2CFighterCommon) {
         AttackModule::set_attack_scale(fighter.module_accessor, 0.89, true);
         GrabModule::set_size_mul(fighter.module_accessor, 0.89);
         if ![*FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4].contains(&status_kind) {
-            WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED);
+            WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_LW4_IS_CHARGED);
         };
         if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) {
             STOP_SE(fighter, Hash40::new("se_pitb_special_h02"));

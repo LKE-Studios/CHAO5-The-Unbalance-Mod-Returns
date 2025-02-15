@@ -347,11 +347,11 @@ unsafe extern "C" fn game_palutena_AttackS4(fighter: &mut L2CAgentBase) {
 //AttackHi4Charge 
 unsafe extern "C" fn game_palutena_AttackHi4Charge(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
     }
     frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
     }
 }
 
@@ -364,7 +364,7 @@ unsafe extern "C" fn game_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
     }
     frame(fighter.lua_state_agent, 17.0);
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
         frame(fighter.lua_state_agent, 18.0);
         if is_excute(fighter) {
             ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 25.5, /*Angle*/ 88, /*KBG*/ 84, /*FKB*/ 0, /*BKB*/ 48, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 21.0, /*Z*/ 9.7, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(9.7), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_ice"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -414,7 +414,7 @@ unsafe extern "C" fn game_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 36.0);
     if is_excute(fighter) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED);
     }
 }
 

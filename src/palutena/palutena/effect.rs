@@ -91,7 +91,7 @@ unsafe extern "C" fn effect_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
         }
     }
     frame(fighter.lua_state_agent, 17.0);
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
         frame(fighter.lua_state_agent, 23.0);
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("palutena_pressure"), Hash40::new("top"), 0, 0, 25.0, 0, 0, 0, 0.9, true);

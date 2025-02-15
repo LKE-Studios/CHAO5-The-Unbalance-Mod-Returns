@@ -27,6 +27,7 @@ unsafe extern "C" fn effect_funky_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        EFFECT_FOLLOW_FLIP(fighter, Hash40::new("donkey_attack_line"), Hash40::new("donkey_attack_line"), Hash40::new("top"), 0.0, 8.0, -5.0, 0, 0, 0, 1.6, true, *EF_FLIP_YZ);
     }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
@@ -184,12 +185,12 @@ unsafe extern "C" fn effect_funky_AttackLw4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
         LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
     }
     frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        EFFECT(fighter, Hash40::new("donkey_handslap"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
         LANDING_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
     }
 }
@@ -341,14 +342,27 @@ unsafe extern "C" fn effect_funky_ThrowLw(fighter: &mut L2CAgentBase) {
 }
 
 //CliffAttack
-unsafe extern "C" fn effect_funky_CliffAttack(fighter: &mut L2CAgentBase) {}
+unsafe extern "C" fn effect_funky_CliffAttack(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 6.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 17.0, -22.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+    wait(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    wait(fighter.lua_state_agent, 20.0);
+    if is_excute(fighter) {
+        LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 12.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    } 
+}
 
 //SpecialN
 unsafe extern "C" fn effect_funky_SpecialN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
-        EFFECT(fighter, Hash40::new("diddy_popgun_break_a"), Hash40::new("boot"), 0, 0, 4, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("diddy_popgun_break_a"), Hash40::new("boot"), 0, 0, 4, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
     }
 }
 
@@ -405,7 +419,7 @@ unsafe extern "C" fn effect_funky_SpecialNMax(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_funky_SpecialAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("diddy_popgun_break_a"), Hash40::new("boot"), 0, 0, 4, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("diddy_popgun_break_a"), Hash40::new("boot"), 0, 0, 4, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
     }
 }
 
@@ -557,6 +571,7 @@ unsafe extern "C" fn effect_funky_SpecialAirHi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_funky_SpecialAirHiLaunch(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("donkey_entry"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
     }
 }
 

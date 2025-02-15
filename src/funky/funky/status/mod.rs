@@ -9,6 +9,10 @@ mod SpecialSLanding;
 mod SpecialHi;
 mod SpecialHi_C2;
 mod SpecialLw;
+mod SpecialLwMusic;
+mod SpecialLwFlip;
+mod SpecialLwJump;
+mod SpecialLwPose;
 
 pub fn install() {
     Wait::install();
@@ -22,4 +26,8 @@ pub fn install() {
     SpecialHi::install();
     SpecialHi_C2::install();
     SpecialLw::install();
+    SpecialLwMusic::install();
+    SpecialLwFlip::install();    
+    SpecialLwJump::install();
+    SpecialLwPose::install();
 }

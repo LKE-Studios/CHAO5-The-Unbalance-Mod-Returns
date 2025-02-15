@@ -7,7 +7,7 @@ unsafe extern "C" fn effect_snake_AttackS4(fighter: &mut L2CAgentBase) {
         EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), -4, 13, 8, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
     }
     frame(fighter.lua_state_agent, 40.0);
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED) {
         frame(fighter.lua_state_agent, 41.0);
         if is_excute(fighter) {
             EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("snake_atk_s4s_shot"), Hash40::new("haver"), 0, 1.4, -4, 0, 0, 0, 0.75, true);

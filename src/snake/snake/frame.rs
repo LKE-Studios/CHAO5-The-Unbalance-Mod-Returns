@@ -28,7 +28,7 @@ unsafe extern "C" fn frame_snake_Main(fighter: &mut L2CFighterCommon) {
         }
     }
     if ![*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
     }
 }
 

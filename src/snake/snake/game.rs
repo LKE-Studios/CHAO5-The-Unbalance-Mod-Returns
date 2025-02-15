@@ -182,11 +182,11 @@ unsafe extern "C" fn game_snake_AttackLw3(fighter: &mut L2CAgentBase) {
 //AttackS4Charge 
 unsafe extern "C" fn game_snake_AttackS4Charge(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
     }
     frame(fighter.lua_state_agent, 51.0);
     if is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
     }
 }
 
@@ -204,7 +204,7 @@ unsafe extern "C" fn game_snake_AttackS4(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 40.0);
     FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED) {
         frame(fighter.lua_state_agent, 41.0);
         if is_excute(fighter) {
             MotionModule::set_rate(fighter.module_accessor, 0.5);
@@ -300,7 +300,7 @@ unsafe extern "C" fn game_snake_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 68.0);
     if is_excute(fighter) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_S4_IS_CHARGED);
     }
 }
 

@@ -817,6 +817,17 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
             }
         }
     }
+    /*if attacker_fighter_kind == *FIGHTER_KIND_DONKEY && CUSTOM_FIGHTER_2 {
+        if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_LW 
+        && (MotionModule::motion_kind(attacker_module_accessor) == hash40("special_lw_music") 
+        || MotionModule::motion_kind(attacker_module_accessor) == hash40("special_air_lw_music")) {
+            if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
+                if StatusModule::situation_kind(defender_module_accessor) == *SITUATION_KIND_GROUND {
+                    
+                }
+            }  
+        }
+    }*/
     let num_players = Fighter::get_fighter_entry_count();
     if attacker_fighter_kind == *FIGHTER_KIND_TRAIL {
         let motion_kind = MotionModule::motion_kind(attacker_module_accessor);

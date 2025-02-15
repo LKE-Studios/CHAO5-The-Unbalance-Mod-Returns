@@ -103,30 +103,27 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
             //Nothing LOL            
         }
         else if (stick_direction >= 67.5 && stick_direction <= 90.0 && stick_y < 0.0) 
-        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_music"), 0.0, 1.0, false, 0.0, false, false);
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) 
+        || ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_LW_MUSIC.into(), false.into());
         }
         else if stick_direction >= -67.5 && stick_direction < -22.5 && stick_x > 0.0 {
             //Nothing Again LOL    
         }
         else if (stick_direction >= -22.5 && stick_direction <= 22.5 && stick_x < 0.0) 
-        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_flip"), 0.0, 1.0, false, 0.0, false, false);
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
-            KineticModule::clear_speed_all(fighter.module_accessor);
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) || 
+        (ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) 
+        && stick_x < -0.25) {
+            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_LW_FLIP.into(), false.into());
         }
         else if stick_direction == 361.0 {
             //Nothing Again LOL    
         }
         else if (stick_direction >= -22.5 && stick_direction <= 22.5 && stick_x > 0.0) 
-        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_jump"), 0.0, 1.0, false, 0.0, false, false);
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
-            KineticModule::clear_speed_all(fighter.module_accessor);
+        && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) 
+        || (ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) 
+        && stick_x > 0.25) {
+            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_LW_JUMP.into(), false.into());
         }
         else if stick_direction > 22.5 && stick_direction <= 67.5 && stick_x < 0.0 {
             //Nothing Again LOL
@@ -142,36 +139,13 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
         };
     }
     if MotionModule::is_end(fighter.module_accessor) {
-        if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
+        if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
         }
         else {
-            fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
     }
-    0.into()
-}
-
-unsafe extern "C" fn status_funky_SpecialLw_CheckAttack(fighter: &mut L2CFighterCommon, param2: &L2CValue, param3: &L2CValue) -> L2CValue {
-    let attacker_module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    let table = param3.get_table() as *mut smash2::lib::L2CTable;
-    let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
-    let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
-    let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
-    let FUNKY = color >= 120 && color <= 127;
-    if utility::get_kind(attacker_module_accessor) == *FIGHTER_KIND_DONKEY && FUNKY && category == *BATTLE_OBJECT_CATEGORY_FIGHTER 
-    && (MotionModule::motion_kind(attacker_module_accessor) == hash40("special_lw_music") 
-    || MotionModule::motion_kind(attacker_module_accessor) == hash40("special_air_lw_music")) {
-        if collision_kind == *COLLISION_KIND_HIT {
-            let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
-            let module_accessor = sv_battle_object::module_accessor(object_id);
-            let rand_val = sv_math::rand(hash40("fighter"), 3);
-            if StatusModule::situation_kind(module_accessor) == *SITUATION_KIND_GROUND {
-                fighter.change_status(FIGHTER_STATUS_KIND_APPEAL.into(), true.into());
-            }
-        }
-    }
-    
     0.into()
 }
 
@@ -187,7 +161,6 @@ pub fn install() {
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Pre)
     .status(Init, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Init)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_Main)
-    .status(CheckAttack, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_CheckAttack)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_funky_SpecialLw_End)    
     .install();
 }

@@ -54,6 +54,36 @@ pub unsafe extern "C" fn frame_funky_Main(fighter: &mut L2CFighterCommon) {
                 }
             }
         }
+        if status_kind == *FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_LOOP {
+            let charge_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_SPECIAL_N_COUNT);
+            let max_charge_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_special_n"), hash40("max_charge_frame"));
+            if charge_frame == max_charge_frame {
+                SoundModule::play_se(fighter.module_accessor, Hash40::new("se_donkey_special_n07"), true, false, false, false, enSEType(0));
+            }
+        }
+        if status_kind == *FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_ATTACK {
+            fighter.sub_wait_ground_check_common(false.into());
+            fighter.sub_air_check_fall_common();
+            if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_SPECIAL_N_FLAG_MAX) {
+                let lr = PostureModule::lr(fighter.module_accessor);
+                let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+                let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+                let mut stick_direction = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_STICK_DIRECTION);
+                stick_direction = ControlModule::get_stick_dir(fighter.module_accessor) * (180.0 / PI);
+                if stick_x >= -0.2 && stick_x <= 0.2 && stick_y >= -0.2 && stick_y <= 0.2 {
+                    WorkModule::set_float(fighter.module_accessor, 361.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_STICK_DIRECTION);
+                } 
+                else if stick_direction <= -67.5 {
+                    WorkModule::mul_float(fighter.module_accessor, -1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_STICK_DIRECTION);
+                }
+                if stick_direction >= -67.5 && stick_direction < -20.0 && stick_x * lr > 0.0 { //(Angled Down)
+                    param_config::update_float(-*WEAPON_KIND_LUIGI_FIREBALL, vec![120,121,122,123,124,125,126,127], (hash40("param_boot"),hash40("angle")), -25.0);
+                }
+                else if stick_direction > 20.0 && stick_direction <= 67.5 && stick_x * lr > 0.0 { //(Angled Up)
+                    param_config::update_float(-*WEAPON_KIND_LUIGI_FIREBALL, vec![120,121,122,123,124,125,126,127], (hash40("param_boot"),hash40("angle_air")), 30.0);
+                }
+            }
+        }
         if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind)
         && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
             fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_HI_C2.into(), true.into());

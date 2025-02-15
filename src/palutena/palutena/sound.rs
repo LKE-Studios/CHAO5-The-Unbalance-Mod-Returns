@@ -66,7 +66,7 @@ unsafe extern "C" fn sound_palutena_AttackHi4(fighter: &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("vc_palutena_attack07"));
         PLAY_SE(fighter, Hash40::new("se_palutena_smash_h01"));
     }
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ATTACK_HI4_IS_CHARGED) {
         frame(fighter.lua_state_agent, 23.0);
         if is_excute(fighter) {
             PLAY_SE(fighter, Hash40::new("se_palutena_smash_h01"));

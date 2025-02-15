@@ -16,7 +16,6 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
     let y_acl_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("y_acl_mul"));
     let mut accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
-    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     accel_y *= y_acl_mul;
@@ -125,12 +124,12 @@ unsafe extern "C" fn funky_SpecialHi_C2_Main_loop(fighter: &mut L2CFighterCommon
                 let x_dcl_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("x_dcl_ground"));
                 MotionModule::change_motion_force_inherit_frame(fighter.module_accessor, Hash40::new("special_hi_c2"), ground_mot_frame, 1.0, 0.0);
                 WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_SPECIAL_HI_FLAG_GROUND_SPINEND);
-                sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x * x_dcl_ground, 0.0);
+                sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, sum_speed_x * x_dcl_ground, 0.0);
             }
             else {
                 MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi_c2"), -1.0, 1.0, 0.0, false, false);
                 let x_dcl_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("x_dcl_ground"));
-                let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                sv_kinetic_energy!(set_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, sum_speed_x * x_dcl_ground, 0.0);
             }
         }
         else {

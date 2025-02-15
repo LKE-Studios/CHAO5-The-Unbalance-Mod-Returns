@@ -33,6 +33,20 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
             WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_INSTANCE_WORK_ID_FLAG_ENABLE_FLOAT);
         }  
     }
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    if status_kind == *FIGHTER_STATUS_KIND_APPEAL && motion_kind == 0 {
+        println!("Motion Kind: {}", motion_kind);
+        let rand_val = sv_math::rand(hash40("fighter"), 3);
+        if rand_val == 0 {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_hi_r"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        else if rand_val == 1 {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_s_r"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        else {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r"), 0.0, 1.0, false, 0.0, false, false);
+        }
+    }
 }
 
 pub unsafe extern "C" fn loupe_function(fighter : &mut L2CFighterCommon) {

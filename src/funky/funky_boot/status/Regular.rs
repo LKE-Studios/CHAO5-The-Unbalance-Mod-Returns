@@ -14,7 +14,10 @@ unsafe extern "C" fn funky_boot_Regular_Main_loop(weapon: &mut L2CWeaponCommon) 
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let remaining_life = life <= 0;
     if GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
+        SoundModule::play_se(weapon.module_accessor, Hash40::new("se_common_bomb_m"), true, false, false, false, enSEType(0));
+        effect!(weapon, *MA_MSC_CMD_EFFECT_EFFECT, hash40("diddy_popgun_break_a"), hash40("rot"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false);
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+        return 1.into();
     }
     if !remaining_life {
         if !GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
