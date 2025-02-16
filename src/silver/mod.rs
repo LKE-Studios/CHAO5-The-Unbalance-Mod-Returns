@@ -14,5 +14,5 @@ pub fn install() {
     silver_mewtwom::install();
     silver_psychobreak::install();
     silver_search::install();
-    smashline::clone_weapon("luigi", *WEAPON_KIND_LUIGI_FIREBALL, "mewtwo", "box", false);
+    smashline::clone_weapon("luigi", *WEAPON_KIND_LUIGI_FIREBALL, "mewtwo", "wave", false);
 }

@@ -36,6 +36,12 @@ unsafe extern "C" fn funky_SpecialLwJump_Main_loop(fighter: &mut L2CFighterCommo
             return 0.into();
         }
     }
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true.into());
+    }
+    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+    }
     if MotionModule::is_end(fighter.module_accessor) {
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());

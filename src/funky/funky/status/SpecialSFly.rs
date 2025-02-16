@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static propeller_rate : f32 = 0.5;
+pub static propeller_effect_rate : f32 = 0.5;
 pub static fly_frame : f32 = 420.0;
 pub static angle_up_max : f32 = 60.0;
 pub static angle_down_max : f32 = -50.0;
@@ -16,10 +16,11 @@ pub static angle_accel_up : f32 = 0.55;
 pub static angle_accel_down : f32 = 0.7;
 pub static angle_speed_max : f32 = 4.5;
 pub static angle_speed_stick_add : f32 = 1.0;
-pub static glide_landing_frame : f32 = 60.0;
-pub static glide_landing_speed : f32 = 1.0;
+pub static flight_landing_frame : f32 = 60.0;
+pub static flight_landing_speed : f32 = 1.0;
 pub static radial_stick_sensitivity : f32 = 0.25;
-pub static glide_touch_decel : f32 = 0.0;
+pub static flight_touch_decel : f32 = 0.0;
+pub static propeller_spin_speed : f32 = 90.0;
 pub static angle_se_pitch_ratio : f32 = -0.002;
 
 pub unsafe extern "C" fn status_funky_SpecialSFly_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -61,9 +62,11 @@ pub unsafe extern "C" fn status_funky_SpecialSFly_Main(fighter: &mut L2CFighterC
 	if FUNKY {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
         WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
+        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.0);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_direction"), 90.0, 0.0, true, 0.0, false, false);
-        let effect_a = EffectModule::req_follow(fighter.module_accessor, Hash40::new("krool_propeller"), Hash40::new("propeller"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 90.0, z: 0.0}, 0.8, true, 0, 0, 0, 0, 0, true, true);
-        EffectModule::set_rate(fighter.module_accessor, effect_a as u32, propeller_rate);
+        MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, Hash40::new("special_air_s_propeller"), 0.0, propeller_spin_speed, true, false, 0.0, false, true, false);
+        let effect_a = EffectModule::req_follow(fighter.module_accessor, Hash40::new("krool_propeller"), Hash40::new("propeller"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 90.0, z: 0.0}, 0.9, true, 0, 0, 0, 0, 0, true, true);
+        EffectModule::set_rate(fighter.module_accessor, effect_a as u32, propeller_effect_rate);
         WorkModule::set_int(fighter.module_accessor, effect_a as i32, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_INT_PROPELLER_EFFECT_HANDLE);
         WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_FLOAT_PROPELLER_EFFECT_ANGLE);
         fighter.sub_shift_status_main(L2CValue::Ptr(funky_SpecialSFly_Main_loop as *const () as _))
@@ -79,9 +82,9 @@ unsafe extern "C" fn funky_SpecialSFly_Main_loop(fighter: &mut L2CFighterCommon)
     }
     if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
         let frame = MotionModule::frame(fighter.module_accessor);
-        if glide_landing_frame <= frame {
+        if flight_landing_frame <= frame {
             let sum_speed_length = KineticModule::get_sum_speed_length(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-            if glide_landing_speed <= sum_speed_length {
+            if flight_landing_speed <= sum_speed_length {
                 fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_LANDING.into(), false.into());
                 return 0.into();
             }
@@ -161,7 +164,7 @@ pub unsafe extern "C" fn status_funky_SpecialSFly_Exec(fighter: &mut L2CFighterC
         let mut power = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
         power -= angle * angle_power_rate / 90.0;
         if GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
-            power -= glide_touch_decel;
+            power -= flight_touch_decel;
         }
         if power < 0.0 {
             power = 0.0
@@ -197,29 +200,50 @@ pub unsafe extern "C" fn status_funky_SpecialSFly_Exec(fighter: &mut L2CFighterC
         WorkModule::set_float(fighter.module_accessor, power, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_POWER);
         MotionModule::set_frame(fighter.module_accessor, 90.0 - angle, false);
         WorkModule::set_float(fighter.module_accessor, angle, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_ANGLE);
-        let frame = MotionModule::frame(fighter.module_accessor);
-        let effect_handle = WorkModule::get_int(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_INT_PROPELLER_EFFECT_HANDLE);
-        let effect_angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_FLOAT_PROPELLER_EFFECT_ANGLE);
-        WorkModule::add_float(fighter.module_accessor, 5.0, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_FLOAT_PROPELLER_EFFECT_ANGLE);
-        if frame == 90.0 {
-            EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z: 0.0});
+        funky_SpecialSFly_effect_function(fighter);
+        let fly_frame_float = WorkModule::get_float(fighter.module_accessor, *FIGHTER_STATUS_GLIDE_WORK_FLOAT_GLIDE_FRAME);
+        if fly_frame_float == 120.0 || fly_frame_float == 240.0 || fly_frame_float == 360.0 {
+            funky_SpecialSFly_effect_function(fighter);
         }
-        else if frame > 90.0 {
-            if PostureModule::lr(fighter.module_accessor) == 1.0 {
-                EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / -2.0) - 7.5});
-            }
-            else {
-                EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / 2.0) + 7.5});
-            }
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
+unsafe fn funky_SpecialSFly_effect_function(fighter: &mut L2CFighterCommon) {
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let effect_handle = WorkModule::get_int(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_INT_PROPELLER_EFFECT_HANDLE);
+    let effect_angle = WorkModule::get_float(fighter.module_accessor, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_FLOAT_PROPELLER_EFFECT_ANGLE);
+    WorkModule::add_float(fighter.module_accessor, 5.0, *FIGHTER_FUNKY_STATUS_SPECIAL_S_WORK_FLOAT_PROPELLER_EFFECT_ANGLE);
+    if frame == 90.0 {
+        EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z: 0.0});
+    }
+    else if frame > 90.0 {
+        if PostureModule::lr(fighter.module_accessor) == 1.0 {
+            EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / -2.0) - 7.5});
         }
-        else if frame < 90.0 {
-            if PostureModule::lr(fighter.module_accessor) == 1.0 {
-                EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / -2.0) + 7.5});
-            }
-            else {
-                EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / 2.0) - 7.5});
-            }
+        else {
+            EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / 2.0) + 7.5});
         }
+    }
+    else if frame < 90.0 {
+        if PostureModule::lr(fighter.module_accessor) == 1.0 {
+            EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / -2.0) + 7.5});
+        }
+        else {
+            EffectModule::set_rot(fighter.module_accessor, effect_handle as u32, &Vector3f{x: effect_angle, y: 0.0, z:((frame - 90.0) / 2.0) - 7.5});
+        }
+    }
+}
+
+pub unsafe extern "C" fn status_funky_SpecialSFly_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let FUNKY = color >= 120 && color <= 127;
+	if FUNKY {
+        MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, false);
+        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
         0.into()
     }
     else {
@@ -250,6 +274,7 @@ pub fn install() {
     .status(Init, *FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_FLY, status_funky_SpecialSFly_Init)
     .status(Main, *FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_FLY, status_funky_SpecialSFly_Main)
     .status(Exec, *FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_FLY, status_funky_SpecialSFly_Exec)
+    .status(Exit, *FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_FLY, status_funky_SpecialSFly_Exit)
     .status(End, *FIGHTER_FUNKY_STATUS_KIND_SPECIAL_S_FLY, status_funky_SpecialSFly_End)
     .install();
 }

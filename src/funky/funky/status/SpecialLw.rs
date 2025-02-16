@@ -23,8 +23,8 @@ pub unsafe extern "C" fn status_funky_SpecialLw_Init(fighter: &mut L2CFighterCom
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
         KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-        sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, special_lw_speed_x_max, 0.0);
-        sv_kinetic_energy!(set_limit_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, special_lw_speed_x_max, 0.0);
+        sv_kinetic_energy!(set_stable_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, special_lw_speed_x_max, 0.0);
+        sv_kinetic_energy!(set_limit_speed, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, special_lw_speed_x_max, 0.0);
         let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
         let speed_y = KineticEnergy::get_speed_y(gravity);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);
@@ -74,7 +74,8 @@ pub unsafe extern "C" fn status_funky_SpecialLw_Main(fighter: &mut L2CFighterCom
 
 unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+    let lr = PostureModule::lr(fighter.module_accessor);
+    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let mut stick_direction = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_STICK_DIRECTION);
     stick_direction = ControlModule::get_stick_dir(fighter.module_accessor) * (180.0 / PI);

@@ -413,6 +413,10 @@ unsafe extern "C" fn effect_funky_SpecialNMax(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.0, 0.0);
         LAST_EFFECT_SET_ALPHA(fighter, 0.7);
     }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
+    }
 }
 
 //SpecialAirN
@@ -469,6 +473,10 @@ unsafe extern "C" fn effect_funky_SpecialAirNMax(fighter: &mut L2CAgentBase) {
         EFFECT_FLIP(fighter, Hash40::new("donkey_giantpunch_impact"), Hash40::new("donkey_giantpunch_impact"), Hash40::new("boot"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ);
         LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.0, 0.0);
         LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+    }
+    frame(fighter.lua_state_agent, 10.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
 }
 
@@ -571,7 +579,7 @@ unsafe extern "C" fn effect_funky_SpecialAirHi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_funky_SpecialAirHiLaunch(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("donkey_entry"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 2.6, 0, 0, 0, 0, 0, 0, true);
     }
 }
 

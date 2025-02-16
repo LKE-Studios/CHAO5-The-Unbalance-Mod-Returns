@@ -1,4 +1,5 @@
 use crate::imports::BuildImports::*;
+use crate::funky::funky::status::SpecialSFly::*;
 
 pub static fly_landing_speed_x : f32 = 1.7;
 pub static speed_x_stop_frame : f32 = 30.0;
@@ -83,6 +84,7 @@ pub unsafe extern "C" fn status_funky_SpecialSLanding_End(fighter: &mut L2CFight
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
+        MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, false);
         0.into()
     }
     else {

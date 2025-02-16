@@ -281,6 +281,7 @@ unsafe extern "C" fn sound_funky_SpecialNMax(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_lifeup"));
         PLAY_SE(fighter, Hash40::new("se_donkey_special_n02"));
         PLAY_SE(fighter, Hash40::new("se_donkey_special_n05"));
     }
@@ -318,6 +319,7 @@ unsafe extern "C" fn sound_funky_SpecialAirNMax(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_lifeup"));
         PLAY_SE(fighter, Hash40::new("se_donkey_special_n02"));
         PLAY_SE(fighter, Hash40::new("se_donkey_special_n05"));
     }
