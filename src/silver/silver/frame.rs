@@ -67,10 +67,10 @@ pub unsafe extern "C" fn final_silver(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
-    if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX) && motion_kind != hash40("final") && motion_kind != hash40("final_air") {
+    if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_BOX) && motion_kind != hash40("final") && motion_kind != hash40("final_air") {
         EFFECT_OFF_KIND(fighter, Hash40::new("sys_bg_black"), false, false);
     };
-    if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX) {
+    if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_BOX) {
         DID_EFF[ENTRY_ID] = false;
         BOX_HIT[ENTRY_ID] = false;
     };

@@ -587,19 +587,11 @@ unsafe extern "C" fn game_silver_SpecialNShoot(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 41.0);
     FT_MOTION_RATE(fighter, 1.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
-    }
-    frame(fighter.lua_state_agent, 42.0);
-    if is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_WAVE, false, -1);
     }
     frame(fighter.lua_state_agent, 51.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
-    }
-    frame(fighter.lua_state_agent, 52.0);
-    if is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_WAVE, false, -1);
     }
 }
 
@@ -612,19 +604,11 @@ unsafe extern "C" fn game_silver_SpecialAirNShoot(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 41.0);
     FT_MOTION_RATE(fighter, 1.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
-    }
-    frame(fighter.lua_state_agent, 42.0);
-    if is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_WAVE, false, -1);
     }
     frame(fighter.lua_state_agent, 51.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, false, -1);
-    }
-    frame(fighter.lua_state_agent, 52.0);
-    if is_excute(fighter) {
-        ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MEWTWO_GENERATE_ARTICLE_SHADOWBALL, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_WAVE, false, -1);
     }
 }
 
@@ -923,7 +907,7 @@ unsafe extern "C" fn game_silver_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
     }
     frame(fighter.lua_state_agent, 67.0);
     if is_excute(fighter) {
@@ -948,7 +932,7 @@ unsafe extern "C" fn game_silver_FinalAir(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 60.0);
     if is_excute(fighter) {
-        ArticleModule::generate_article(fighter.module_accessor, FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SILVER_GENERATE_ARTICLE_BOX, false, -1);
     }
     frame(fighter.lua_state_agent, 67.0);
     if is_excute(fighter) {

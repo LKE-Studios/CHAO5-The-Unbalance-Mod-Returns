@@ -42,8 +42,13 @@ unsafe extern "C" fn funky_SpecialSLanding_Main_loop(fighter: &mut L2CFighterCom
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }
-    if fighter.sub_transition_group_check_air_landing().get_bool() {
-        return 0.into();
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool() {
+            return 1.into();
+        }
+    }
+    if fighter.sub_air_check_fall_common().get_bool() {
+        return 1.into();
     }
     let frame = MotionModule::frame(fighter.module_accessor);
     if frame > speed_x_stop_frame {

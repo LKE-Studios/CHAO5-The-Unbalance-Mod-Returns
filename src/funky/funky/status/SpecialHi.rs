@@ -29,6 +29,7 @@ pub unsafe extern "C" fn status_funky_SpecialHi_Init(fighter: &mut L2CFighterCom
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
         let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
+        KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
         KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
         KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
         WorkModule::set_flag(fighter.module_accessor, situation_kind == *SITUATION_KIND_AIR, *FIGHTER_FUNKY_STATUS_SPECIAL_HI_FLAG_BARREL_START);

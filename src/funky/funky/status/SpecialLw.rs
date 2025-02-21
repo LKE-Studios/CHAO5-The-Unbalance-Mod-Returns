@@ -131,9 +131,7 @@ unsafe extern "C" fn funky_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -
         }
         else if (stick_direction > 67.5 && stick_direction <= 90.0 && stick_y > 0.0) 
         && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_pose"), 0.0, 1.0, false, 0.0, false, false);
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            fighter.change_status(FIGHTER_FUNKY_STATUS_KIND_SPECIAL_LW_POSE.into(), false.into());
         }
         else {
             //Nothing for the last time LOL   

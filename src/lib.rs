@@ -219,6 +219,7 @@ mod roy;
 mod ryu;
 mod samus;
 mod samusd;
+mod sans;
 mod sheik;
 mod shizue;
 mod shulk;
@@ -550,6 +551,7 @@ pub fn main() {
     maskedman::install();
     kamek::install();
     funky::install();
+    sans::install();
     //knuckles::install();
     skyline::install_hooks!(
         declare_const_hook, 

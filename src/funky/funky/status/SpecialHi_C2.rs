@@ -16,6 +16,7 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
     let y_acl_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("y_acl_mul"));
     let mut accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
+    KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
     KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     accel_y *= y_acl_mul;

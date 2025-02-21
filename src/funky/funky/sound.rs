@@ -85,6 +85,7 @@ unsafe extern "C" fn sound_funky_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_donkey_attackhard_h01"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_l"));
     }
 }
 
@@ -132,6 +133,7 @@ unsafe extern "C" fn sound_funky_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_donkey_special_h02"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_l"));
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
@@ -160,6 +162,7 @@ unsafe extern "C" fn sound_funky_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_donkey_special_h06"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_l"));
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
@@ -172,6 +175,7 @@ unsafe extern "C" fn sound_funky_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_donkey_special_h06"));
+        PLAY_SE(fighter, Hash40::new("se_donkey_swing_l"));
     }
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
