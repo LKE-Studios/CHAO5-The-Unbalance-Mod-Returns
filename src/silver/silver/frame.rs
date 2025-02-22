@@ -39,13 +39,21 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         ModelModule::set_scale(fighter.module_accessor, 0.865);
         AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
         GrabModule::set_size_mul(fighter.module_accessor, 0.865);
-        misc_silver(fighter);
+        if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL);
+            BASE = Vector3f { x: 0.0, y: 2.8, z: -7.0 };
+            BASE_TRAIL = Vector3f { x: 0.0, y: 2.8, z: -16.0 };
+            BASE_TRAIL2 = Vector3f { x: 0.0, y: 2.8, z: -25.0 };
+            BASE_TRAIL3 = Vector3f { x: 0.0, y: 2.8, z: -34.0 };
+            BASE_TRAIL4 = Vector3f { x: 0.0, y: 2.8, z: -43.0 };
+        };
         motion_main_silver(fighter);
         if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT {
-            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR && SPECIAL_N_HAS_STALL[ENTRY_ID] {
+            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR 
+            && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL) {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-                SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                SPECIAL_N_HAS_STALL[ENTRY_ID] = false;
+                KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL);
             };
         }
     }
@@ -95,18 +103,6 @@ pub unsafe extern "C" fn final_silver(fighter: &mut L2CFighterCommon) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
             StatusModule::set_situation_kind(fighter.module_accessor, SituationKind(*SITUATION_KIND_AIR), true);
         };
-    };
-}
-
-pub unsafe extern "C" fn misc_silver(fighter: &mut L2CFighterCommon) {
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
-        SPECIAL_N_HAS_STALL[ENTRY_ID] = true;
-        BASE = Vector3f { x: 0.0, y: 2.8, z: -7.0 };
-        BASE_TRAIL = Vector3f { x: 0.0, y: 2.8, z: -16.0 };
-        BASE_TRAIL2 = Vector3f { x: 0.0, y: 2.8, z: -25.0 };
-        BASE_TRAIL3 = Vector3f { x: 0.0, y: 2.8, z: -34.0 };
-        BASE_TRAIL4 = Vector3f { x: 0.0, y: 2.8, z: -43.0 };
     };
 }
 

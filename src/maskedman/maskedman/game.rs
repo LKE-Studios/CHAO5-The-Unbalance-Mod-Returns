@@ -768,7 +768,35 @@ unsafe extern "C" fn game_maskedman_Final(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 90.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 0, 0, Hash40::new("top"), 500.0, 72, 42, 0, 40, 100.0, 0.0, 5.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 5, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_THROW);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 500.0, 72, 42, 0, 40, 100.0, 0.0, 5.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_THROW);
+    }
+    frame(fighter.lua_state_agent, 96.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn game_maskedman_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
+        SLOW_OPPONENT(fighter, 5.0, 60.0);
+    }
+    frame(fighter.lua_state_agent, 35.0);
+    if is_excute(fighter) {
+        FT_SET_FINAL_FEAR_FACE(fighter, 60);
+        REQ_FINAL_START_CAMERA(fighter, Hash40::new("d04final.nuanmb"), false);
+        FT_START_CUTIN(fighter);
+    }
+    frame(fighter.lua_state_agent, 61.0);
+    if is_excute(fighter) {
+        CAM_ZOOM_OUT(fighter);
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_RECT, 50, -50, 50, -10);
+    }
+    frame(fighter.lua_state_agent, 90.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 500.0, 72, 42, 0, 40, 100.0, 0.0, 5.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, f32::NAN, 0.0, 0, false, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_THROW);
     }
     frame(fighter.lua_state_agent, 96.0);
     if is_excute(fighter) {
@@ -827,5 +855,6 @@ pub fn install() {
     .game_acmd("game_appeallwr_maskedman", game_maskedman_AppealLwR, Low)
     .game_acmd("game_appeallwl_maskedman", game_maskedman_AppealLwL, Low)
     .game_acmd("game_final_maskedman", game_maskedman_Final, Low)
+    .game_acmd("game_finalair_maskedman", game_maskedman_FinalAir, Low)
     .install();
 }

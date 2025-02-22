@@ -1,13 +1,11 @@
-mod GlideStart;
-mod Glide;
-mod GlideAttack;
-mod GlideEnd;
-mod GlideLanding;
+mod SpecialHi;
+mod SpecialHi3;
+mod SpecialLw;
+mod Final;
 
 pub fn install() {
-    GlideStart::install();
-    Glide::install();
-    GlideAttack::install();
-    GlideEnd::install();
-    GlideLanding::install();
+    SpecialHi::install();
+    SpecialHi3::install();
+    SpecialLw::install();
+    Final::install();
 }

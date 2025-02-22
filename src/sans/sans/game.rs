@@ -621,11 +621,43 @@ unsafe extern "C" fn game_sans_SpecialAirHiStart(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialHi
+unsafe extern "C" fn game_sans_SpecialHi(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 47, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_BODY);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    }
+    wait(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+    }
+}
+
+//SpecialAirHi
+unsafe extern "C" fn game_sans_SpecialAirHi(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 40.0, /*Angle*/ 47, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.2, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0.0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_BODY);
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    }
+    wait(fighter.lua_state_agent, 3.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if is_excute(fighter) {
+        JostleModule::set_status(fighter.module_accessor, false);
+    }
+}
+
 //SpecialLw
 unsafe extern "C" fn game_sans_SpecialLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 1, 0, Hash40::new("articlebone"), 50.0, 361, 40, 0, 0, 5.0, -5.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, true, false, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 1, 0, Hash40::new("articlebone"), 10.0, 361, 40, 0, 0, 5.0, -5.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, true, false, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_BODY);
     }
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
@@ -637,7 +669,7 @@ unsafe extern "C" fn game_sans_SpecialLw(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_sans_SpecialAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
-        ATTACK(fighter, 1, 0, Hash40::new("articlebone"), 50.0, 361, 40, 0, 0, 5.0, -5.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, true, false, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_BODY);
+        ATTACK(fighter, 1, 0, Hash40::new("articlebone"), 10.0, 361, 40, 0, 0, 5.0, -5.0, 0.0, 0.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, true, false, true, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_none"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_BODY);
     }
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {
@@ -649,10 +681,8 @@ unsafe extern "C" fn game_sans_SpecialAirLw(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_sans_AppealHiR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEART), 0, 0, false, false);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 150.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("attack_hi_r"), false, -1.0);   
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 361, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(11.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_slip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
     }
 }
 
@@ -660,92 +690,128 @@ unsafe extern "C" fn game_sans_AppealHiR(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_sans_AppealHiL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         KineticModule::set_consider_ground_friction(fighter.module_accessor, false, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_HEART), 0, 0, false, false);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 0, /*KBG*/ 0, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 150.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ true, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_flower"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_BODY);
-        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, false, -1);
-        ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, Hash40::new("attack_hi_l"), false, -1.0);
+        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 20.0, /*Angle*/ 361, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(11.0), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_slip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
     }
 }
 
 //AppealSR
 unsafe extern "C" fn game_sans_AppealSR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(13.4), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 1, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(19.7), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 25, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
     }
 }
 
 //AppealSL
 unsafe extern "C" fn game_sans_AppealSL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_BACKSHIELD), 0, 0, false, false);
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 30.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(13.4), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_BODY);
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 35.0, /*Angle*/ 361, /*KBG*/ 1, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ 8.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(19.7), /*Hitlag*/ 0.0, /*SDI*/ 0.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 25, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bind"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_SLAP, /*Type*/ *ATTACK_REGION_BODY);
     }
 }
 
 //AppealLwR
 unsafe extern "C" fn game_sans_AppealLwR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
     }
 }
 
 //AppealLwL
 unsafe extern "C" fn game_sans_AppealLwL(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ItemModule::have_item(fighter.module_accessor, ItemKind(*ITEM_KIND_STAFF), 0, 0, false, false);
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PALUTENA_INSTANCE_WORK_ID_FLAG_DIVINE_POWER);
+        DamageModule::heal(fighter.module_accessor, -15.0, 0);
+    }
+}
+
+//Final
+unsafe extern "C" fn game_sans_Final(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 13, 0, 0);
+        SLOW_OPPONENT(fighter, 6.0, 200.0);
+        REQ_FINAL_START_CAMERA_arg3(fighter, Hash40::new("d04final.nuanmb"), false, false);
+    }
+    WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA);
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 2);
+        FT_START_CUTIN(fighter);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_ANGLE);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_SIZE);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER, false, -1);
+    }
+}
+
+//FinalAir
+unsafe extern "C" fn game_sans_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 13, 0, 0);
+        SLOW_OPPONENT(fighter, 6.0, 200.0);
+        REQ_FINAL_START_CAMERA_arg3(fighter, Hash40::new("d04final.nuanmb"), false, false);
+    }
+    WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA);
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        camera!(fighter, *MA_MSC_CMD_CAMERA_CAM_OFFSET, 0, 2);
+        FT_START_CUTIN(fighter);
+    }
+    frame(fighter.lua_state_agent, 28.0);
+    if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
+        WorkModule::set_flag(fighter.module_accessor, false, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_ANGLE);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_SIZE);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER, false, -1);
     }
 }
 
 pub fn install() {
     Agent::new("palutena")
-    .game_acmd("game_shieldbreakfly", game_sans_ShieldBreakFly, Low)
-    .game_acmd("game_glidedirection", game_sans_GlideDirection, Low)
-    .game_acmd("game_glideattack", game_sans_GlideAttack, Low)
-    .game_acmd("game_glidelanding", game_sans_GlideLanding, Low)    
-    .game_acmd("game_glideend", game_sans_GlideEnd, Low)
-    .game_acmd("game_attack11", game_sans_Attack11, Low)
-    .game_acmd("game_attack100", game_sans_Attack100, Low)
-    .game_acmd("game_attack100sub", game_sans_Attack100Sub, Low)
-    .game_acmd("game_attack100end", game_sans_Attack100End, Low)
-    .game_acmd("game_attackdash", game_sans_AttackDash, Low)
-    .game_acmd("game_attacks3", game_sans_AttackS3, Low)
-    .game_acmd("game_attackhi3", game_sans_AttackHi3, Low)
-    .game_acmd("game_attacklw3", game_sans_AttackLw3, Low)
-    .game_acmd("game_attacks4", game_sans_AttackS4, Low)
-    .game_acmd("game_attackhi4charge", game_sans_AttackHi4Charge, Low)
-    .game_acmd("game_attackhi4", game_sans_AttackHi4, Low)
-    .game_acmd("game_attacklw4", game_sans_AttackLw4, Low)
-    .game_acmd("game_attackairn", game_sans_AttackAirN, Low)
-    .game_acmd("game_attackairf", game_sans_AttackAirF, Low)    
-    .game_acmd("game_attackairb", game_sans_AttackAirB, Low)
-    .game_acmd("game_attackairhi", game_sans_AttackAirHi, Low)
-    .game_acmd("game_attackairlw", game_sans_AttackAirLw, Low)
-    .game_acmd("game_catch", game_sans_Catch, Low)
-    .game_acmd("game_catchdash", game_sans_CatchDash, Low)
-    .game_acmd("game_catchturn", game_sans_CatchTurn, Low)
-    .game_acmd("game_catchattack", game_sans_CatchAttack, Low)
-    .game_acmd("game_throwf", game_sans_ThrowF, Low)
-    .game_acmd("game_throwb", game_sans_ThrowB, Low)
-    .game_acmd("game_throwhi", game_sans_ThrowHi, Low)
-    .game_acmd("game_throwlw", game_sans_ThrowLw, Low)
-    .game_acmd("game_downattackd", game_sans_DownAttackD, Low)
-    .game_acmd("game_downattacku", game_sans_DownAttackU, Low)
-    .game_acmd("game_cliffattack", game_sans_CliffAttack, Low)
-    .game_acmd("game_slipattack", game_sans_SlipAttack, Low)
-    .game_acmd("game_specialhistart", game_sans_SpecialHiStart, Low)
-    .game_acmd("game_specialairhistart", game_sans_SpecialAirHiStart, Low)
-    .game_acmd("game_speciallw", game_sans_SpecialLw, Low)
-    .game_acmd("game_speciallwattack", game_sans_SpecialLwAttack, Low)
-    .game_acmd("game_specialairlw", game_sans_SpecialAirLw, Low)
-    .game_acmd("game_specialairlwattack", game_sans_SpecialAirLwAttack, Low)
-    .game_acmd("game_appealsr", game_sans_AppealSR, Low)
-    .game_acmd("game_appealsl", game_sans_AppealSL, Low)
-    .game_acmd("game_appealhir", game_sans_AppealHiR, Low)
-    .game_acmd("game_appealhil", game_sans_AppealHiL, Low)
-    .game_acmd("game_appeallwr", game_sans_AppealLwR, Low)
-    .game_acmd("game_appeallwl", game_sans_AppealLwL, Low)
+    .game_acmd("game_attack11_sans", game_sans_Attack11, Low)
+    .game_acmd("game_attack12_sans", game_sans_Attack12, Low)
+    .game_acmd("game_attackdash_sans", game_sans_AttackDash, Low)
+    .game_acmd("game_attacks3_sans", game_sans_AttackS3, Low)
+    .game_acmd("game_attackhi3_sans", game_sans_AttackHi3, Low)
+    .game_acmd("game_attacklw3_sans", game_sans_AttackLw3, Low)
+    .game_acmd("game_attacks4_sans", game_sans_AttackS4, Low)
+    .game_acmd("game_attackhi4_sans", game_sans_AttackHi4, Low)
+    .game_acmd("game_attacklw4_sans", game_sans_AttackLw4, Low)
+    .game_acmd("game_attackairn_sans", game_sans_AttackAirN, Low)
+    .game_acmd("game_attackairf_sans", game_sans_AttackAirF, Low)    
+    .game_acmd("game_attackairb_sans", game_sans_AttackAirB, Low)
+    .game_acmd("game_attackairhi_sans", game_sans_AttackAirHi, Low)
+    .game_acmd("game_attackairlw_sans", game_sans_AttackAirLw, Low)
+    .game_acmd("game_catch_sans", game_sans_Catch, Low)
+    .game_acmd("game_catchdash_sans", game_sans_CatchDash, Low)
+    .game_acmd("game_catchturn_sans", game_sans_CatchTurn, Low)
+    .game_acmd("game_catchattack_sans", game_sans_CatchAttack, Low)
+    .game_acmd("game_throwf_sans", game_sans_ThrowF, Low)
+    .game_acmd("game_throwb_sans", game_sans_ThrowB, Low)
+    .game_acmd("game_throwhi_sans", game_sans_ThrowHi, Low)
+    .game_acmd("game_throwlw_sans", game_sans_ThrowLw, Low)
+    .game_acmd("game_downattackd_sans", game_sans_DownAttackD, Low)
+    .game_acmd("game_downattacku_sans", game_sans_DownAttackU, Low)
+    .game_acmd("game_cliffattack_sans", game_sans_CliffAttack, Low)
+    .game_acmd("game_slipattack_sans", game_sans_SlipAttack, Low)
+    .game_acmd("game_specialn_sans", game_sans_SpecialN, Low)
+    .game_acmd("game_specialairn_sans", game_sans_SpecialAirN, Low)
+    .game_acmd("game_specials_sans", game_sans_SpecialS, Low)
+    .game_acmd("game_specialairs_sans", game_sans_SpecialAirS, Low)
+    .game_acmd("game_specialhistart_sans", game_sans_SpecialHiStart, Low)
+    .game_acmd("game_specialairhistart_sans", game_sans_SpecialAirHiStart, Low)
+    .game_acmd("game_specialhi_sans", game_sans_SpecialHi, Low)
+    .game_acmd("game_specialairhi_sans", game_sans_SpecialAirHi, Low)
+    .game_acmd("game_speciallw_sans", game_sans_SpecialLw, Low)
+    .game_acmd("game_specialairlw_sans", game_sans_SpecialAirLw, Low)
+    .game_acmd("game_appealsr_sans", game_sans_AppealSR, Low)
+    .game_acmd("game_appealsl_sans", game_sans_AppealSL, Low)
+    .game_acmd("game_appealhir_sans", game_sans_AppealHiR, Low)
+    .game_acmd("game_appealhil_sans", game_sans_AppealHiL, Low)
+    .game_acmd("game_appeallwr_sans", game_sans_AppealLwR, Low)
+    .game_acmd("game_appeallwl_sans", game_sans_AppealLwL, Low)
+    .game_acmd("game_final_sans", game_sans_Final, Low)
+    .game_acmd("game_finalair_sans", game_sans_FinalAir, Low)
     .install();
 }

@@ -860,6 +860,23 @@ unsafe extern "C" fn effect_maskedman_Final(fighter: &mut L2CAgentBase) {
     }
 }
 
+//FinalAir
+unsafe extern "C" fn effect_maskedman_FinalAir(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_bg_black"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("lucas_final_psi"), Hash40::new("top"), 0, 5, 0, 0, 0, 0, 1.1, false);
+    }
+    frame(fighter.lua_state_agent, 90.0);
+    if is_excute(fighter) {
+        EFFECT_OFF_KIND(fighter, Hash40::new("sys_bg_black"), false, false);
+        EFFECT_OFF_KIND(fighter, Hash40::new("lucas_final_psi"), false, false);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_assist_deathflash"), Hash40::new("top"), 0, 5, 0, 0, 0, 0, 42.0, false);
+    }
+}
+
 pub fn install() {
     Agent::new("lucas")
     .effect_acmd("effect_entryl_maskedman", effect_maskedman_EntryL, Low)
@@ -906,5 +923,6 @@ pub fn install() {
     .effect_acmd("effect_appeallwr_maskedman", effect_maskedman_AppealLwR, Low)
     .effect_acmd("effect_appeallwl_maskedman", effect_maskedman_AppealLwL, Low)
     .effect_acmd("effect_final_maskedman", effect_maskedman_Final, Low)
+    .effect_acmd("effect_finalair_maskedman", effect_maskedman_FinalAir, Low)
     .install();
 }

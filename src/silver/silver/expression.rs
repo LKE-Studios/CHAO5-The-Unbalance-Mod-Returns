@@ -2,7 +2,7 @@ use crate::imports::BuildImports::*;
 
 //WalkSlow 
 unsafe extern "C" fn expression_silver_WalkSlow(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
         }
@@ -20,7 +20,7 @@ unsafe extern "C" fn expression_silver_WalkSlow(fighter: &mut L2CAgentBase) {
 
 //WalkMiddle 
 unsafe extern "C" fn expression_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
         }
@@ -38,7 +38,7 @@ unsafe extern "C" fn expression_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
 
 //WalkFast 
 unsafe extern "C" fn expression_silver_WalkFast(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 6);
         }
@@ -56,7 +56,7 @@ unsafe extern "C" fn expression_silver_WalkFast(fighter: &mut L2CAgentBase) {
 
 //Run 
 unsafe extern "C" fn expression_silver_Run(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         if is_excute(fighter) {
             AREA_WIND_2ND_arg10(fighter, 0, 2, 0, 300, 1, 13, 7, 32, 14, 30);
             slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);

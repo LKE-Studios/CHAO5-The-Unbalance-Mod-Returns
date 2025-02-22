@@ -2,13 +2,50 @@ use crate::imports::BuildImports::*;
 
 unsafe extern "C" fn frame_sans_Main(fighter: &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let SANS = color >= 120 && color <= 127; 
     if SANS {
-
+        let scale = WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0);
+        if ModelModule::scale(fighter.module_accessor) == scale {
+            ModelModule::set_scale(fighter.module_accessor, 1.15);
+            AttackModule::set_attack_scale(fighter.module_accessor, 1.15, true);
+            GrabModule::set_size_mul(fighter.module_accessor, 1.15);
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_ENTRY || !sv_information::is_ready_go() {
+            WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_SANS_INSTANCE_WORK_ID_INT_BONE_TYPE);
+            let custom_hurtboxes = [
+                //["bone", x1, y1, z1, x2, y2, z2, scale, collision_part, hit height]
+                [hash40("head") as f64, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.5, *COLLISION_PART_BODY_LEGS as f64, *HIT_HEIGHT_LOW as f64]
+            ];
+            let mut f = 0;
+            for i in custom_hurtboxes {
+                let mut vec1 = Vector3f{x: i[1] as f32, y: i[2] as f32, z: i[3] as f32};
+                let mut vec2 = Vector3f{x: i[4] as f32, y: i[5] as f32, z: i[6] as f32};
+                FighterUtil::set_hit_data(fighter.module_accessor, f, 0, &vec1, &vec2, i[7] as f32, Hash40::new_raw(i[0] as u64), CollisionPart(i[8] as i32), HitHeight(i[9] as i32), HitStatus(*HIT_STATUS_NORMAL), CollisionShapeType(*COLLISION_SHAPE_TYPE_CAPSULE));    
+                f += 1;
+            };
+        }
+        if motion_kind == hash40("attack_air_n") {
+            if frame >= 39.0 {
+                ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_whoopiecoushin"), false);
+                ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_cushionstrap"), false);
+            }
+            else {
+                ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_whoopiecoushin"), true);
+                ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_cushionstrap"), true);
+            };
+        }
+        else {
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_whoopiecoushin"), false);
+            ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("prop_cushionstrap"), false);
+        }
+        if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
+            EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_black"), false, false);
+        }
         if [*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_PALUTENA_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) {
             if !fighter.is_in_hitlag() && !StatusModule::is_changing(fighter.module_accessor) && situation_kind == *SITUATION_KIND_AIR {
                 fighter.sub_air_check_dive();
@@ -32,8 +69,29 @@ unsafe extern "C" fn frame_sans_Main(fighter: &mut L2CFighterCommon) {
     }
 }
 
+unsafe extern "C" fn frame_sans_gaster_Exec(weapon: &mut L2CFighterCommon) {
+    let gaster_module_accessor = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
+    let module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(gaster_module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    if !WorkModule::is_flag(gaster_module_accessor, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_SIZE) {
+        ModelModule::set_scale(gaster_module_accessor, 1.15);
+        AttackModule::set_attack_scale(gaster_module_accessor, 1.15, true);
+    }
+    else {
+        ModelModule::set_scale(gaster_module_accessor, 5.0);
+        AttackModule::set_attack_scale(gaster_module_accessor, 5.0, true);
+    };
+    if WorkModule::is_flag(gaster_module_accessor, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_ANGLE) {
+        let mut rotation = Vector3f{x: 20.0, y: 0.0 , z: 0.0 };
+        ModelModule::set_joint_rotate(gaster_module_accessor, Hash40::new("rot"), &rotation, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});	
+    };
+}
+
 pub fn install() {
     Agent::new("palutena")
     .on_line(Main, frame_sans_Main)
+    .install();
+
+    Agent::new("palutena_gaster")
+    .on_line(Exec, frame_sans_gaster_Exec)
     .install();
 }

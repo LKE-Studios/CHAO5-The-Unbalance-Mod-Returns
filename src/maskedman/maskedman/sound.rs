@@ -552,6 +552,21 @@ unsafe extern "C" fn sound_maskedman_Final(fighter: &mut L2CAgentBase) {
     }
 }
 
+//FinalAir
+unsafe extern "C" fn sound_maskedman_FinalAir(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 33.0);
+    for _ in 0..7 {
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_lucas_special_h02"));
+        }
+        wait(fighter.lua_state_agent, 8.0);
+    }
+    frame(fighter.lua_state_agent, 90.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_lucas_special_n04_ll"));
+    }
+}
+
 pub fn install() {
     Agent::new("lucas")
     .sound_acmd("sound_attack11_maskedman", sound_maskedman_Attack11, Low)
@@ -601,5 +616,6 @@ pub fn install() {
     .sound_acmd("sound_appeallwr_maskedman", sound_maskedman_AppealLwR, Low)
     .sound_acmd("sound_appeallwl_maskedman", sound_maskedman_AppealLwL, Low)
     .sound_acmd("sound_final_maskedman", sound_maskedman_Final, Low)
+    .sound_acmd("sound_finalair_maskedman", sound_maskedman_FinalAir, Low)
     .install();
 }

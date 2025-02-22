@@ -1256,7 +1256,7 @@ unsafe extern "C" fn effect_silver_EntryR(fighter: &mut L2CAgentBase) {
 
 //WalkSlow 
 unsafe extern "C" fn effect_silver_WalkSlow(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 6.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
@@ -1271,7 +1271,7 @@ unsafe extern "C" fn effect_silver_WalkSlow(fighter: &mut L2CAgentBase) {
 
 //WalkMiddle 
 unsafe extern "C" fn effect_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 4.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
@@ -1286,7 +1286,7 @@ unsafe extern "C" fn effect_silver_WalkMiddle(fighter: &mut L2CAgentBase) {
 
 //WalkFast 
 unsafe extern "C" fn effect_silver_WalkFast(fighter: &mut L2CAgentBase) {
-    for _ in 0..i32::MAX {
+    loop {
         frame(fighter.lua_state_agent, 2.0);
         if is_excute(fighter) {
             FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("footl"), 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
