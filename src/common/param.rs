@@ -347,11 +347,47 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_int_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("max_charge_frame"), 180));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("max_attack_add"), 66.0));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("add_motion_rate"), 0.01));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_acl_mul"), 0.01));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_spd_air"), 1.2));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_spd_max_ground"), 2.0));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_acl_air"), 0.4));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_spd_max_air"), 3.0));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("ground_mot_frame"), 62.0));
+
+    //SANS
+    param_config::disable_kirby_copy(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone());
+    param_config::disable_villager_pocket(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), 0);
+    param_config::update_int_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("attack_combo_max"), 0, 2));
+    param_config::update_int_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("attack100_type"), 0, 0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("combo_attack_12_end"), 0, 20.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("shield_radius"), 0, 9.6));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_accel_x_mul"), 0, 0.1 / 0.134));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_accel_x_add"), 0, 0.04 / 0.11));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_accel_x_stable"), 0, 1.212 / 1.44784));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("air_brake_x"), 0, 0.009 / 0.01));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("dive_speed_y"), 0, 2.66 / 2.84));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("walk_accel_add"), 0, 0.08 / 0.155));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("walk_accel_mul"), 0, 0.15 / 0.28));    
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("walk_speed_max"), 0, 1.48 / 1.671));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("ground_brake"), 0, 0.05 / 0.106));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("dash_speed"), 0, 3.25 / 6.35));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("run_accel_mul"), 0, 0.115 / 0.6991));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("run_accel_add"), 0, 0.47 / 0.986));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("run_speed_max"), 0, 3.0 / 6.1));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_speed_x"), 0, 0.62 / 0.72));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_speed_x_mul"), 0, 0.6 / 0.7));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_speed_x_max"), 0, 1.22 / 1.1));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_y"), 0, 36.0 / 35.9));
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_aerial_y"), 0, 38.2 / 35.9));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("weight"), 0, 65.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_lw"), 0, 6.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_hi"), 0, 4.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_f"), 0, 2.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_b"), 0, 4.0));
+    param_config::update_float_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("landing_attack_air_frame_n"), 0, 2.0));
+    param_config::update_int_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_glide"), hash40("jump_button_hold_glide_frame"), 9999));
+    param_config::update_int_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("param_special_hi"), hash40("special_hi_move_time"), 50));
+    param_config::update_int_2(*FIGHTER_KIND_PALUTENA, vec![120,121,122,123,124,125,126,127].clone(), (hash40("jump_count_max"), 0, 4));
 }
 
 pub fn install() {

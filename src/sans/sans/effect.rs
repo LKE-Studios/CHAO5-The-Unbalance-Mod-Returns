@@ -549,6 +549,7 @@ unsafe extern "C" fn effect_sans_SpecialS(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
         if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
             EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 8, 11, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
             LAST_EFFECT_SET_COLOR(fighter, 2.0, 2.0, 2.0);
@@ -561,6 +562,7 @@ unsafe extern "C" fn effect_sans_SpecialS(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn effect_sans_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_recovery"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, true);
         if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
             EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 8, 11, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
             LAST_EFFECT_SET_COLOR(fighter, 2.0, 2.0, 2.0);
@@ -768,28 +770,10 @@ unsafe extern "C" fn effect_sans_SpecialAirLw(fighter: &mut L2CAgentBase) {
 }
 
 //AppealHiR
-unsafe extern "C" fn effect_sans_AppealHiR(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 46.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), -5, 23, 0, 0, 90, 0, 1, true, 0.7);
-    }
-    frame(fighter.lua_state_agent, 50.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("palutena_appeal_feather"), Hash40::new("top"), 0, 18, 0, 0, 180, 0, 1, true);
-    }
-}
+unsafe extern "C" fn effect_sans_AppealHiR(fighter: &mut L2CAgentBase) {}
 
 //AppealHiL
-unsafe extern "C" fn effect_sans_AppealHiL(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 46.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), -5, 23, 0, 0, 90, 0, 1, true, 0.7);
-    }
-    frame(fighter.lua_state_agent, 50.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("palutena_appeal_feather"), Hash40::new("top"), 0, 18, 0, 0, 180, 0, 1, true);
-    }
-}
+unsafe extern "C" fn effect_sans_AppealHiL(fighter: &mut L2CAgentBase) {}
 
 //AppealSR
 unsafe extern "C" fn effect_sans_AppealSR(fighter: &mut L2CAgentBase) {
@@ -808,32 +792,10 @@ unsafe extern "C" fn effect_sans_AppealSL(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwR
-unsafe extern "C" fn effect_sans_AppealLwR(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 54.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("palutena_appeal_twinkle"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 0.7, true);
-        EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), 3, 21, -2, 0, -50, 0, 1, true, 0.9);
-        LAST_EFFECT_SET_RATE(fighter, 0.8);
-    }
-    frame(fighter.lua_state_agent, 60.0);
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("palutena_appeal_twinkle"), false, false);
-    }
-}
+unsafe extern "C" fn effect_sans_AppealLwR(fighter: &mut L2CAgentBase) {}
 
 //AppealLwL
-unsafe extern "C" fn effect_sans_AppealLwL(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 54.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("palutena_appeal_twinkle"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 0.7, true);
-        EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("palutena_backlight"), Hash40::new("top"), 3, 21, -2, 0, -50, 0, 1, true, 0.9);
-        LAST_EFFECT_SET_RATE(fighter, 0.8);
-    }
-    frame(fighter.lua_state_agent, 60.0);
-    if is_excute(fighter) {
-        EFFECT_OFF_KIND(fighter, Hash40::new("palutena_appeal_twinkle"), false, false);
-    }
-}
+unsafe extern "C" fn effect_sans_AppealLwL(fighter: &mut L2CAgentBase) {}
 
 //EntryL
 unsafe extern "C" fn effect_sans_EntryL(fighter: &mut L2CAgentBase) {

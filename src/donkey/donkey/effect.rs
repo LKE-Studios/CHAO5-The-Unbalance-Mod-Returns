@@ -34,7 +34,7 @@ unsafe extern "C" fn effect_donkey_SpecialAirHi(fighter: &mut L2CAgentBase) {
         EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
     frame(fighter.lua_state_agent, 9.0);
-    for _ in 0..8 {
+    for _ in 0..14 {
         if is_excute(fighter) {
             EFFECT_FOLLOW(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, true);
             EFFECT_FOLLOW_FLIP(fighter, Hash40::new("donkey_spin_wind"), Hash40::new("donkey_spin_wind"), Hash40::new("top"), 0, 10.0, -3.0, 0, 0, 5, 2.7, true, *EF_FLIP_YZ);

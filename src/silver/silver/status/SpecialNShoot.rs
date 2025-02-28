@@ -13,8 +13,20 @@ unsafe extern "C" fn status_silver_SpecialNShoot_Pre(fighter: &mut L2CFighterCom
     }
 }
 
+unsafe extern "C" fn status_silver_SpecialNShoot_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let SILVER = color >= 120 && color <= 127;
+    if SILVER {
+        0.into()
+    }
+    else {
+        0.into()
+    }
+}
+
 pub fn install() {
     Agent::new("mewtwo")
     .status(Pre, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, status_silver_SpecialNShoot_Pre)
+    .status(Exit, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, status_silver_SpecialNShoot_Exit)
     .install();
 }

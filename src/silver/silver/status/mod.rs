@@ -7,6 +7,7 @@ pub mod SpecialHi;
 mod SpecialHi2;
 mod SpecialHi3;
 mod SpecialLw;
+mod Dead;
 //mod Final;
 
 pub fn install() {
@@ -19,5 +20,6 @@ pub fn install() {
     SpecialHi2::install();
     SpecialHi3::install();
     SpecialLw::install(); 
+    Dead::install();
     //Final::install(); 
 }

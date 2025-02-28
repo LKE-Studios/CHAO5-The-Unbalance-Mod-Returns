@@ -66,7 +66,7 @@ unsafe extern "C" fn status_sans_SpecialHi_End(fighter: &mut L2CFighterCommon) -
 
 pub fn install() {
     Agent::new("palutena")
-    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_sans_SpecialHi_Main)
+    //.status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_sans_SpecialHi_Main)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_sans_SpecialHi_End)
     .install();
 }

@@ -2,6 +2,8 @@ mod Wait;
 mod ShoulderStart;
 mod SpecialN;
 mod SpecialNLoop;
+mod SpecialNCancel;
+mod SpecialNEnd;
 mod SpecialS;
 mod SpecialSFly;
 mod SpecialSEnd;
@@ -19,6 +21,8 @@ pub fn install() {
     ShoulderStart::install();
     SpecialN::install();
     SpecialNLoop::install();
+    SpecialNCancel::install();
+    SpecialNEnd::install();
     SpecialS::install();
     SpecialSFly::install();
     SpecialSEnd::install();

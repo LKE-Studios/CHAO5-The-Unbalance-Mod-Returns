@@ -1,5 +1,11 @@
 use crate::imports::BuildImports::*;
 
+pub static mut DEAD : bool = false;
+pub static mut STOP : bool = false;
+pub static mut ENTRY_ID : usize = 0;
+pub static mut DECREASING : bool = false;
+pub static mut INITIAL_STOCK_COUNT : u64 = 0;
+
 pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 	let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 	let motion_kind = MotionModule::motion_kind(module_accessor);
@@ -23,7 +29,7 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 		globals["giga_situation"] = 0.into();
 		globals["giga_globals_set"] = true.into();
 	}
-	if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+	if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
 		if dtilt_input(module_accessor) {
 			*DTILT_INPUT = true;
 			globals["giga_buffer_timer"] = 6.0.into();
@@ -32,7 +38,7 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 			*DTILT_INPUT = false;
 		}
 	}
-	if ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+	if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
 		if globals["giga_buffer_timer"].get_num() > 0.0 {
 			globals["giga_buffer_timer"] = (globals["giga_buffer_timer"].get_num() - 1.0).into();
 		}
@@ -41,37 +47,37 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 		}
 	}
 	if situation_kind == SITUATION_KIND_GROUND {
-		if *DTILT_INPUT && WorkModule::is_enable_transition_term(module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI3) 
+		if *DTILT_INPUT && WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI3) 
 		&& motion_kind != hash40("attack_lw3") 
 		&& status_kind != *FIGHTER_STATUS_KIND_ATTACK_S3 
 		&& motion_kind != hash40("rebound") {
-			StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
 			ControlModule::clear_command(module_accessor, true);
 			*GIGA_DTILT = true;
 		}
 	}
 	if status_kind == *FIGHTER_STATUS_KIND_RUN {
-		if ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_CATCH) {
-			StatusModule::change_status_force(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-			StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+		if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_CATCH) {
+			StatusModule::change_status_force(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
 			*GIGA_DASH_ATTACK = true;
 		}
 	}
 	if motion_kind == hash40("attack_dash") {
-		PostureModule::update_rot_y_lr(module_accessor);
-		if MotionModule::frame(module_accessor) >= 58.0 {
+		PostureModule::update_rot_y_lr(fighter.module_accessor);
+		if MotionModule::frame(fighter.module_accessor) >= 58.0 {
 			if *DTILT_INPUT {
-				MotionModule::change_motion(module_accessor, Hash40::new("attack_lw3"), 0.0, 1.0, false, 0.0, false, false);
+				MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_lw3"), 0.0, 1.0, false, 0.0, false, false);
 				*DTILT_INPUT = false;	
 			}
 			else {
-				if ControlModule::get_stick_y(module_accessor) < -0.66 {
-					MotionModule::change_motion(module_accessor, Hash40::new("squat"), 0.0, 1.0, false, 0.0, false, false);
-					StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_SQUAT, true);							
+				if ControlModule::get_stick_y(fighter.module_accessor) < -0.66 {
+					MotionModule::change_motion(fighter.module_accessor, Hash40::new("squat"), 0.0, 1.0, false, 0.0, false, false);
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SQUAT, true);							
 				}
 				else {
-					MotionModule::change_motion(module_accessor, Hash40::new("wait"), 0.0, 1.0, false, 0.0, false, false);
-					StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+					MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), 0.0, 1.0, false, 0.0, false, false);
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
 				}
 			}
 		}
@@ -125,7 +131,8 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_RUN);
 	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_SLIP);
 	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_OTTOTTO);
-	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_MINI_JUMP);		
+	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_MINI_JUMP);	
+	Other_Function(fighter);	
 }
 
 pub unsafe extern "C" fn shield_functions(fighter : &mut L2CFighterCommon) {
@@ -146,7 +153,7 @@ pub unsafe extern "C" fn shield_functions(fighter : &mut L2CFighterCommon) {
 	}
 }
 
-pub unsafe  extern "C" fn dtilt_input(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+pub unsafe extern "C" fn dtilt_input(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
 	if ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_ATTACK) 
 	&& ControlModule::get_stick_y(module_accessor) <= -0.25 
 	&& (
@@ -158,6 +165,74 @@ pub unsafe  extern "C" fn dtilt_input(module_accessor: &mut smash::app::BattleOb
 	}
 	else {
 		return false;
+	}
+}
+
+unsafe fn Other_Function(fighter: &mut L2CFighterCommon) {
+	ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if stage::get_stage_id() != 0x139 {
+		let fighter_manager = *(FIGHTER_MANAGER as *mut *mut smash::app::FighterManager);
+		FighterManager::set_cursor_whole(fighter_manager, false);
+		if sv_information::is_ready_go() == false {
+			DEAD = false;
+			STOP = false;
+			DECREASING = false;
+			if FighterUtil::is_hp_mode(fighter.module_accessor) {
+				INITIAL_STOCK_COUNT = FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32)));
+			}
+		}
+		if sv_information::is_ready_go() {
+			DamageModule::set_reaction_mul(fighter.module_accessor, 0.0);
+			DamageModule::set_reaction_mul_2nd(fighter.module_accessor, 0.0);
+			DamageModule::set_reaction_mul_4th(fighter.module_accessor, 0.0);
+		}
+		if is_training_mode() == false {
+			if DamageModule::damage(fighter.module_accessor, 0) >= 600.0 && FighterUtil::is_hp_mode(fighter.module_accessor) == false
+			&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
+				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD,true);
+			}
+		}
+		// DECREASING FOR STAMINA MODE
+		if StatusModule::status_kind(fighter.module_accessor) == 470 || StatusModule::status_kind(fighter.module_accessor) == 181 {
+			if FighterUtil::is_hp_mode(fighter.module_accessor) && is_training_mode() == false {
+				if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
+					if DECREASING && FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) == 0 {
+						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
+						INITIAL_STOCK_COUNT = 0;
+						DECREASING = false;
+					}
+					if DECREASING && FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) != 0 {
+						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
+					}
+					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) < INITIAL_STOCK_COUNT {
+						DECREASING = true;
+					}
+				}
+			}
+		}
+		if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_DEAD && is_training_mode() == false {
+			DEAD = true;
+		}
+		if is_training_mode() == false {
+			if DEAD == true {
+				if STOP == false {
+					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) != 0
+					&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
+						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
+					}
+					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) == 0
+					&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
+						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
+						STOP = true;
+					}
+				}
+				if STOP == true {
+					if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_REBIRTH {
+						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_STANDBY, true);
+					}
+				}
+			}
+		}
 	}
 }
 

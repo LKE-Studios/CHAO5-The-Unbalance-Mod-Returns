@@ -1,15 +1,16 @@
 use crate::imports::BuildImports::*;
 
-//Shot
-unsafe extern "C" fn game_palutena_autoaimbullet_Shot(fighter: &mut L2CAgentBase) {
+//Regular
+unsafe extern "C" fn game_sans_upbone_Regular(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 16.0, /*Angle*/ 361, /*KBG*/ 64, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 3.3, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -1.7, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_palutena_bullet"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_ENERGY);
-        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_beamss"), 0, false, 0);
-    }  
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 32.0, 361, 66, 0, 25, 9.2, 0.0, 0.0, 0.0, None,None,None, 0.6, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_curse_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_HEAVY, *ATTACK_REGION_MAGIC);
+        AttackModule::set_poison_param(fighter.module_accessor, 0, 420, 40, 3.0, false);
+        AttackModule::enable_safe_pos(fighter.module_accessor);
+    } 
 }
 
 pub fn install() {
-    Agent::new("palutena_autoaimbullet")
-    .game_acmd("game_shot", game_palutena_autoaimbullet_Shot, Low)
+    Agent::new("palutena_upbone")
+    .game_acmd("game_regular", game_sans_upbone_Regular, Low)
     .install();
 }

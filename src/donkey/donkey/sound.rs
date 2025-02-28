@@ -78,6 +78,30 @@ unsafe extern "C" fn sound_donkey_SpecialAirHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
     }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
+    wait(fighter.lua_state_agent, 7.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_donkey_special_h07"));
+    }
 }
 
 //DamageFlyHi

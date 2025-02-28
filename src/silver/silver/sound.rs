@@ -14,7 +14,7 @@ unsafe extern "C" fn sound_silver_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -23,7 +23,7 @@ unsafe extern "C" fn sound_silver_AttackS3Hi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -32,7 +32,7 @@ unsafe extern "C" fn sound_silver_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -41,7 +41,7 @@ unsafe extern "C" fn sound_silver_AttackS3Lw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_dash_stop"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -50,7 +50,7 @@ unsafe extern "C" fn sound_silver_AttackHi3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attack100_02"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -140,7 +140,7 @@ unsafe extern "C" fn sound_silver_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_silver_attackair_f02"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 41.0);
     if is_excute(fighter) {
@@ -161,7 +161,7 @@ unsafe extern "C" fn sound_silver_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_l02"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -170,7 +170,7 @@ unsafe extern "C" fn sound_silver_AttackAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_attackair_f01"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -179,7 +179,7 @@ unsafe extern "C" fn sound_silver_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_mewtwo_throw_f02"));
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 

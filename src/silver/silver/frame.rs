@@ -29,6 +29,7 @@ pub static mut CLOUD_ROT : Vector3f = Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let situation_kind = fighter.global_table[SITUATION_KIND].get_i32();
     let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
     let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
@@ -40,7 +41,6 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
         GrabModule::set_size_mul(fighter.module_accessor, 0.865);
         if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
-            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL);
             BASE = Vector3f { x: 0.0, y: 2.8, z: -7.0 };
             BASE_TRAIL = Vector3f { x: 0.0, y: 2.8, z: -16.0 };
             BASE_TRAIL2 = Vector3f { x: 0.0, y: 2.8, z: -25.0 };
@@ -49,12 +49,13 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         };
         motion_main_silver(fighter);
         if status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT {
-            if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR 
-            && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL) {
-                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-                KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-                WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SILVER_STATUS_SPECIAL_N_WORK_ID_FLAG_AIR_STALL);
-            };
+            if situation_kind == *SITUATION_KIND_AIR {
+                if SPECIAL_N_HAS_STALL[ENTRY_ID] {
+                    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+                    SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                    SPECIAL_N_HAS_STALL[ENTRY_ID] = false;
+                }
+            }
         }
     }
 }

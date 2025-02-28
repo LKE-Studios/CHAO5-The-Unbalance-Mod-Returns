@@ -4,19 +4,42 @@ pub static attack_power : f32 = 50.0;
 pub static size : f32 = 13.0;
 pub static bonecage_frame : f32 = 20.0;
 
+unsafe extern "C" fn status_sans_SpecialLw_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let SANS = color >= 120 && color <= 127;
+    if SANS {
+        StatusModule::init_settings(fighter.module_accessor, SituationKind(*SITUATION_KIND_NONE), *FIGHTER_KINETIC_TYPE_NONE, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE), true, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT, *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT, 0);
+        FighterStatusModuleImpl::set_fighter_status_data(fighter.module_accessor, false, *FIGHTER_TREADED_KIND_NO_REAC, false, false, false, (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64, *FIGHTER_STATUS_ATTR_START_TURN as u32, *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32, 0);
+        0.into()
+    }
+    else {
+        original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_LW)(fighter)
+    } 
+}
+
 unsafe extern "C" fn status_sans_SpecialLw_Main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let SANS = color >= 120 && color <= 127;
     if SANS {
-        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_PALUTENA_STATUS_SPECIAL_LW_FLAG_CONTINUE_MOT);
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PALUTENA_STATUS_SPECIAL_LW_FLAG_IS_SPECIAL_LW);
+        let lr = PostureModule::lr(fighter.module_accessor);
+        WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_BONECAGE_EFFECT);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw"), 0.0, 1.0, false, 0.0, false, false);
+            if lr >= 0.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_r"), 0.0, 1.0, false, 0.0, false, false);
+            }
+            else {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_l"), 0.0, 1.0, false, 0.0, false, false);
+            }
         }
         else {
             GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw"), 0.0, 1.0, false, 0.0, false, false);
+            if lr >= 0.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_r"), 0.0, 1.0, false, 0.0, false, false);
+            }
+            else {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_l"), 0.0, 1.0, false, 0.0, false, false);
+            }
         }
         fighter.sub_shift_status_main(L2CValue::Ptr(sans_SpecialLw_Main_loop as *const () as _))
     }
@@ -26,6 +49,7 @@ unsafe extern "C" fn status_sans_SpecialLw_Main(fighter: &mut L2CFighterCommon) 
 }
 
 unsafe extern "C" fn sans_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let lr = PostureModule::lr(fighter.module_accessor);
     if CancelModule::is_enable_cancel(fighter.module_accessor) {
         if fighter.sub_wait_ground_check_common(false.into()).get_bool() 
         || fighter.sub_air_check_fall_common().get_bool() {
@@ -37,14 +61,24 @@ unsafe extern "C" fn sans_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) ->
             if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
                 GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_lw"), -1.0, 1.0, 0.0, false, false);
+                if lr >= 0.0 {
+                    MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_lw_r"), -1.0, 1.0, 0.0, false, false);
+                }
+                else {
+                    MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_air_lw_l"), -1.0, 1.0, 0.0, false, false); 
+                }
             }
         }
         if fighter.global_table[PREV_SITUATION_KIND].get_i32() == *SITUATION_KIND_AIR {
             if fighter.global_table[SITUATION_KIND].get_i32() == *SITUATION_KIND_GROUND {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
                 GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_lw"), -1.0, 1.0, 0.0, false, false);
+                if lr >= 0.0 {
+                    MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_lw_r"), -1.0, 1.0, 0.0, false, false);
+                }
+                else {
+                    MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_lw_l"), -1.0, 1.0, 0.0, false, false);
+                }
             }
         }
     }
@@ -83,6 +117,29 @@ unsafe extern "C" fn sans_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon) ->
     0.into()
 }
 
+unsafe extern "C" fn status_sans_SpecialLw_CheckAttack(fighter: &mut L2CFighterCommon, param2: &L2CValue, param3: &L2CValue) -> L2CValue {
+    let attacker_module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let table = param3.get_table() as *mut smash2::lib::L2CTable;
+    let category = get_table_value(table, "object_category_").try_integer().unwrap() as i32;
+    let collision_kind = get_table_value(table, "kind_").try_integer().unwrap() as i32;
+    let color = WorkModule::get_int(attacker_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let SANS = color >= 120 && color <= 127;
+    if collision_kind == *COLLISION_KIND_HIT && SANS {
+        let object_id = get_table_value(table, "object_id_").try_integer().unwrap() as u32;
+        let module_accessor = sv_battle_object::module_accessor(object_id);
+        WorkModule::set_flag(attacker_module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_BONECAGE_HIT);
+        WorkModule::set_flag(attacker_module_accessor, false, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_BONECAGE_EFFECT);
+        AttackModule::clear(attacker_module_accessor, 1, false);
+        ModelModule::set_mesh_visibility(attacker_module_accessor,Hash40::new("sans_bonecage"), true);
+        DamageModule::heal(attacker_module_accessor, -15.0, 0);
+        if DamageModule::damage(attacker_module_accessor, 0) > 0.0 {
+            SoundModule::play_se(attacker_module_accessor, Hash40::new("se_common_lifeup"), true, false, false, false, enSEType(0));
+        }
+        EffectModule::req_follow(attacker_module_accessor, Hash40::new("sys_recovery"), Hash40::new("top"), &VECTOR_ZERO, &VECTOR_ZERO, 1.0, true, 0, 0, 0, 0, 0, true, true);
+    }
+    0.into()
+}
+
 unsafe extern "C" fn status_sans_SpecialLw_End(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let SANS = color >= 120 && color <= 127;
@@ -100,7 +157,9 @@ unsafe extern "C" fn status_sans_SpecialLw_End(fighter: &mut L2CFighterCommon) -
 
 pub fn install() {
     Agent::new("palutena")
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_sans_SpecialLw_Pre)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_sans_SpecialLw_Main)
+    .status(CheckAttack, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_sans_SpecialLw_CheckAttack)
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, status_sans_SpecialLw_End)
     .install();
 }

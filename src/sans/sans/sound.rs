@@ -352,6 +352,7 @@ unsafe extern "C" fn sound_sans_SpecialS(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_lifeup"));
         if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
             WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_SE);
         }
@@ -375,6 +376,7 @@ unsafe extern "C" fn sound_sans_SpecialAirS(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 26.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_common_lifeup"));
         if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SANS_GENERATE_ARTICLE_GASTER) {
             WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_SE);
         }
@@ -495,28 +497,10 @@ unsafe extern "C" fn sound_sans_AppealSL(fighter: &mut L2CAgentBase) {
 }
 
 //AppealLwR
-unsafe extern "C" fn sound_sans_AppealLwR(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 19.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("vc_palutena_appeal03"));
-    }
-    frame(fighter.lua_state_agent, 55.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_palutena_appeal_l01"));
-    }
-}
+unsafe extern "C" fn sound_sans_AppealLwR(fighter: &mut L2CAgentBase) {}
 
 //AppealLwL
-unsafe extern "C" fn sound_sans_AppealLwL(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 19.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("vc_palutena_appeal03"));
-    }
-    frame(fighter.lua_state_agent, 55.0);
-    if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_palutena_appeal_l01"));
-    }
-}
+unsafe extern "C" fn sound_sans_AppealLwL(fighter: &mut L2CAgentBase) {}
 
 //EntryL
 unsafe extern "C" fn sound_sans_EntryL(fighter: &mut L2CAgentBase) {

@@ -92,7 +92,7 @@ unsafe extern "C" fn sound_kamek_AttackDash(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackS3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -164,7 +164,7 @@ unsafe extern "C" fn sound_kamek_AttackLw4(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
@@ -180,7 +180,7 @@ unsafe extern "C" fn sound_kamek_AttackAirF(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -188,7 +188,7 @@ unsafe extern "C" fn sound_kamek_AttackAirF(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     } 
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
@@ -204,7 +204,7 @@ unsafe extern "C" fn sound_kamek_AttackAirHi(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
 }
 
@@ -212,7 +212,7 @@ unsafe extern "C" fn sound_kamek_AttackAirHi(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_kamek_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
-        ATTACK_VC(fighter);
+        PLAY_ATTACK_VC(fighter);
     }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {

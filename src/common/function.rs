@@ -472,6 +472,12 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
         if owner_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_3 { //KAMEK
             return true;
         }
+        if owner_kind == *FIGHTER_KIND_DONKEY && ADDED_FIGHTER { //FUNKY
+            return true;
+        }
+        if owner_kind == *FIGHTER_KIND_PALUTENA && ADDED_FIGHTER { //SANS
+            return true;
+        }
     }
     return false;
 }
@@ -735,27 +741,43 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
     let collision_log = *(log as *const u64).add(0x10/0x8);
     let collision_log = collision_log as *const CollisionLog;
     let opponent_id = (*collision_log).collider_id;
-    let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let color = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let CUSTOM_FIGHTER_2 = color >= 64 && color <= 71;
     let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
     let CUSTOM_FIGHTER = color >= 120 && color <= 127;
-    if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 && CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
-        *(weapon as *mut bool).add(0x90) = true;
+    if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 { 
+        if CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
+            *(weapon as *mut bool).add(0x90) = true;
+        }
     }
     if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAJR_CANNONBALL as u32 && CUSTOM_FIGHTER_3 && owner_kind == *FIGHTER_KIND_NESS {
+        *(weapon as *mut bool).add(0x90) = true;
+    }
+    if (*weapon).battle_object.kind == *WEAPON_KIND_MARIOD_DRCAPSULE as u32 { 
+        if CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_PALUTENA {
+            SoundModule::play_se(module_accessor, Hash40::new("se_palutena_attackair_b01"), true, false, false, false, enSEType(0));
+            *(weapon as *mut bool).add(0x90) = true;
+        }
+    }
+    if (*weapon).battle_object.kind == *WEAPON_KIND_ROCKMAN_HARDKNUCKLE as u32 { 
+        if CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_PALUTENA {
+            SoundModule::play_se(module_accessor, Hash40::new("se_palutena_attackair_h01"), true, false, false, false, enSEType(0));
+        }
+    }
+    if (*weapon).battle_object.kind == *WEAPON_KIND_ROCKMAN_ROCKBUSTER as u32 && owner_kind == *FIGHTER_KIND_PALUTENA {
         *(weapon as *mut bool).add(0x90) = true;
     }
     call_original!(vtable, weapon, log)
 }
 
-pub(crate) unsafe fn ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
-	let rand_val = sv_math::rand(hash40("fighter"), 12);
+pub(crate) unsafe fn PLAY_ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
     let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let ADDED_FIGHTER = color >= 120 && color <= 130;
     let ADDED_FIGHTER_2 = color >= 64 && color <= 71;
     let ADDED_FIGHTER_3 = color >= 96 && color <= 103;
     if fighter_kind == *FIGHTER_KIND_NESS && ADDED_FIGHTER_3 {
+        let rand_val = sv_math::rand(hash40("fighter"), 12);
         match rand_val {
             0 => PLAY_SE(fighter, Hash40::new("vc_ness_attack01")),
             1 => PLAY_SE(fighter, Hash40::new("vc_ness_attack02")),
@@ -768,6 +790,7 @@ pub(crate) unsafe fn ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
         }
     }
     if fighter_kind == *FIGHTER_KIND_MEWTWO && ADDED_FIGHTER {
+        let rand_val = sv_math::rand(hash40("fighter"), 12);
         match rand_val {
             0 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack01")),
             1 => PLAY_SE(fighter, Hash40::new("vc_mewtwo_attack02")),
@@ -777,6 +800,62 @@ pub(crate) unsafe fn ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
             5 => PLAY_SE(fighter, Hash40::new("vc_silver_attack06")),
             _ => println!("Silver is silent"),
         }
+    }
+    if fighter_kind == *FIGHTER_KIND_SHIZUE {
+        let rand_val = sv_math::rand(hash40("fighter"), 8);
+        let sound = match rand_val {
+            0 => "vc_shizue_attack01",
+            1 => "vc_shizue_attack02",
+            2 => "vc_shizue_attack03",
+            3 => "vc_shizue_attack04",
+            4 => "vc_shizue_attack05",
+            _ => "null",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+    }
+}
+
+pub(crate) unsafe fn PLAY_ATTACK_HEAVY_VC(fighter: &mut L2CAgentBase) -> () {
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_SHIZUE {
+        let rand_val = sv_math::rand(hash40("fighter"), 7);
+        let sound = match rand_val {
+            0 => "vc_shizue_attack_heavy01",
+            1 => "vc_shizue_attack_heavy02",
+            2 => "vc_shizue_attack_heavy03",
+            3 => "vc_shizue_attack_heavy04",
+            _ => "null",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+    }
+}
+
+pub(crate) unsafe fn PLAY_DAMAGE_VC(fighter: &mut L2CAgentBase) -> () {
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_SHIZUE {
+        let rand_val = sv_math::rand(hash40("fighter"), 4);
+        let sound = match rand_val {
+            0 => "vc_shizue_damage01",
+            1 => "vc_shizue_damage02",
+            _ => "vc_shizue_damage03",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+    }
+}
+
+pub(crate) unsafe fn PLAY_DAMAGEFLY_VC(fighter: &mut L2CAgentBase) -> () {
+    let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
+    if fighter_kind == *FIGHTER_KIND_SHIZUE {
+        let rand_val = sv_math::rand(hash40("fighter"), 3);
+        let sound = match rand_val {
+            0 => "vc_shizue_damagefly01",
+            _ => "vc_shizue_damagefly02",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
     }
 }
 
@@ -817,17 +896,6 @@ pub unsafe fn notify_log_event_collision_hit_replace(fighter_manager: *mut smash
             }
         }
     }
-    /*if attacker_fighter_kind == *FIGHTER_KIND_DONKEY && CUSTOM_FIGHTER_2 {
-        if StatusModule::status_kind(attacker_module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_LW 
-        && (MotionModule::motion_kind(attacker_module_accessor) == hash40("special_lw_music") 
-        || MotionModule::motion_kind(attacker_module_accessor) == hash40("special_air_lw_music")) {
-            if AttackModule::is_infliction(attacker_module_accessor, *COLLISION_KIND_MASK_HIT) {
-                if StatusModule::situation_kind(defender_module_accessor) == *SITUATION_KIND_GROUND {
-                    
-                }
-            }  
-        }
-    }*/
     let num_players = Fighter::get_fighter_entry_count();
     if attacker_fighter_kind == *FIGHTER_KIND_TRAIL {
         let motion_kind = MotionModule::motion_kind(attacker_module_accessor);
@@ -973,7 +1041,7 @@ pub fn install() {
         captain_on_attack,
         common_weapon_attack_callback,
         notify_log_event_collision_hit_replace,
-        fix_chara_replace
+        fix_chara_replace,
     );
     #[cfg(feature = "dev")]
     let _ = skyline::patching::Patch::in_text(0x8b8c88).nop();

@@ -50,6 +50,7 @@ unsafe extern "C" fn status_sans_Final_End(fighter: &mut L2CFighterCommon) -> L2
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let SANS = color >= 120 && color <= 127;
     if SANS {
+        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x1e0aba2d68));
         EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_black"), false, false);
         if fighter.global_table[STATUS_KIND].get_i32() != *FIGHTER_PALUTENA_STATUS_KIND_FINAL_WAIT {
             SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_palutena_final02"), 0);

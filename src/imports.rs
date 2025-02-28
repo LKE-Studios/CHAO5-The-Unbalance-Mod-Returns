@@ -27,6 +27,7 @@ pub mod BuildImports {
                 KineticEnergyNormal,
                 FighterCutInManager,
                 FighterManager,
+                FighterInformation,
                 BattleObjectWorld,
                 BattleObjectManager,
                 AttackData,
@@ -51,7 +52,8 @@ pub mod BuildImports {
                 GimmickEventLadder
             },
             Fighter, 
-            sv_information    
+            sv_information ,
+            smashball::is_training_mode   
         },
         smash::phx::{Hash40, Vector2f, Vector3f, Vector4f},
         smash::{hash40},

@@ -13,8 +13,25 @@ pub unsafe extern "C" fn status_funky_SpecialN_Pre(fighter: &mut L2CFighterCommo
     }
 }
 
+pub unsafe extern "C" fn status_funky_SpecialN_End(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let FUNKY = color >= 120 && color <= 127;
+	if FUNKY {
+        let status_kind = fighter.global_table[STATUS_KIND].get_i32();
+        if ![*FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_LOOP, *FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_CANCEL, *FIGHTER_DONKEY_STATUS_KIND_SPECIAL_N_ATTACK].contains(&status_kind) {
+            WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_SPECIAL_N_COUNT);
+            SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_donkey_special_n06"), 0);
+        }
+        0.into()
+    }
+    else {
+        original_status(End, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter)
+    }
+}
+
 pub fn install() {
     Agent::new("donkey")
-    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, status_funky_SpecialN_Pre)    
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, status_funky_SpecialN_Pre)
+    .status(End, *FIGHTER_STATUS_KIND_SPECIAL_N, status_funky_SpecialN_End)    
     .install();
 }

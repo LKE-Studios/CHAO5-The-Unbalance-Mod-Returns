@@ -1,53 +1,57 @@
 use crate::imports::BuildImports::*;
 
-//Explode
-unsafe extern "C" fn game_palutena_explosiveflame_Explode(fighter: &mut L2CAgentBase) {
+//Fire
+unsafe extern "C" fn game_sans_gaster_Fire(fighter: &mut L2CAgentBase) {
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let rand_effect = [Hash40::new("collision_attr_elec"), Hash40::new("collision_attr_paralyze"), Hash40::new("collision_attr_sleep"), Hash40::new("collision_attr_ink_hit"), Hash40::new("collision_attr_death")];
+    let rng = sv_math::rand(hash40("palutena"), rand_effect.len() as i32);
+    frame(fighter.lua_state_agent, 25.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.2, /*Angle*/ 160, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 11.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ -0.7, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
-        AttackModule::set_no_damage_fly_smoke_all(fighter.module_accessor, true, false);
+        if !WorkModule::is_flag(owner_module_accessor, *FIGHTER_SANS_INSTANCE_WORK_ID_FLAG_GASTER_ANGLE) {
+            ATTACK(fighter, 0, 0, Hash40::new("top"), 150.0, 60, 30, 0, 10, 4.0, 0.0, 7.0, 13.25, Some(0.0), Some(7.0), Some(146.5), 0.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -100, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, rand_effect[rng as usize], *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, /*Ink*/ 100.0);
+        }
+        else {
+            ATTACK(fighter, 0, 0, Hash40::new("top"), 150.0, 60, 30, 0, 10, 4.0, 0.0, 7.0, 13.25, Some(0.0), Some(-49.0), Some(135.0), 0.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -100, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, rand_effect[rng as usize], *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+            AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, /*Ink*/ 100.0);
+        }
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
     }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 6.0);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 7.2);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 8.4);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 9.6);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 12.0);
-    }
-    wait(fighter.lua_state_agent, 4.0);
-    if is_excute(fighter) {
-        AttackModule::set_size(fighter.module_accessor, /*ID*/ 0, /*Size*/ 15.0);
-    }
-    wait(fighter.lua_state_agent, 4.0);
+    frame(fighter.lua_state_agent, 58.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-        AREA_WIND_2ND_RAD(fighter, 0, 1, 0.02, 1000, 1, 0, 0, 29);
-        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_explosion"), 0, false, 0);
     }
-    wait(fighter.lua_state_agent, 1.0);
+}
+
+//Final
+unsafe extern "C" fn game_sans_gaster_Final(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 45.0);
     if is_excute(fighter) {
-        ATTACK(fighter, /*ID*/ 0, /*Part*/ 1, /*Bone*/ Hash40::new("top"), /*Damage*/ 24.0, /*Angle*/ 84, /*KBG*/ 91, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 40.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 0.4, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -10.0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_BOMB);
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
     }
-    wait(fighter.lua_state_agent, 1.0);
+}
+
+//FinalFire
+unsafe extern "C" fn game_sans_gaster_FinalFire(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 25.0);
+    if is_excute(fighter) {
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 30, 0, 20, 20, 8.8, 0.0, 4.0, 2.25, Some(0.0), Some(4.0), Some(500.5), 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 1, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+    }
+    frame(fighter.lua_state_agent, 55.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 8000.0, 361, 60, 0, 60, 100.0, 0.0, 4.0, 2.25, Some(0.0), Some(4.0), Some(500.5), 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, f32::NAN, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_death"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+    }
+    frame(fighter.lua_state_agent, 58.0);
     if is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
 }
 
 pub fn install() {
-    Agent::new("palutena_explosiveflame")
-    .game_acmd("game_explode", game_palutena_explosiveflame_Explode, Low)
+    Agent::new("palutena_gaster")
+    .game_acmd("game_fire", game_sans_gaster_Fire, Low)
+    .game_acmd("game_final", game_sans_gaster_Final, Low)
+    .game_acmd("game_finalfire", game_sans_gaster_FinalFire, Low)
     .install();
 }

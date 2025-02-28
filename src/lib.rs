@@ -383,8 +383,8 @@ pub unsafe fn new_fighter(module_accessor: *mut BattleObjectModuleAccessor) -> b
 #[arcropolis_api::arc_callback]
 fn file_callback(hash: u64, data: &mut [u8]) -> Option<usize> {
     let mut new_fighter: bool = false;
-    let color = the_csk_collection_api::get_color_from_entry_id(0);
-    let ui_chara = the_csk_collection_api::get_ui_chara_from_entry_id(0);
+    let color = get_color_from_entry_id(0);
+    let ui_chara = get_ui_chara_from_entry_id(0);
     unsafe {
         if MARKED_COLORS[color as usize] && ui_chara == hash40("ui_chara_claus") {
             new_fighter = true;
@@ -441,6 +441,7 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_maskedman")); //Masked Man
         allow_ui_chara_hash_online(hash40("ui_chara_kamek")); //Kamek
         allow_ui_chara_hash_online(hash40("ui_chara_funky")); //Funky Kong
+        allow_ui_chara_hash_online(hash40("ui_chara_sans")); //Sans
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;
@@ -450,6 +451,21 @@ pub fn main() {
             DECLARE_CONST_OFFSET = offset;
         }
     }
+    add_series_db_entry_info(
+        SeriesDatabaseEntry {
+            clone_from_ui_series_id: Some(hash40("ui_series_palutena")),
+            ui_series_id: hash40("ui_series_undertale"),
+            name_id: StringType::Overwrite(CStrCSK::new("undertale")),
+            disp_order: SignedByteType::Overwrite(40), 
+            disp_order_sound: SignedByteType::Overwrite(40), 
+            save_no: SignedByteType::Overwrite(0), 
+            shown_as_series_in_directory: BoolType::Overwrite(false), 
+            is_dlc: BoolType::Overwrite(false), 
+            is_patch: BoolType::Overwrite(false), 
+            dlc_chara_id: Hash40Type::Overwrite(hash40("")),
+            is_use_amiibo_bg: BoolType::Overwrite(false), 
+        },
+    );
     mario::install();
     donkey::install();
     link::install();

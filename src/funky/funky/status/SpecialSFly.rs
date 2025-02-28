@@ -3,7 +3,7 @@ use crate::imports::BuildImports::*;
 pub static propeller_effect_rate : f32 = 0.5;
 pub static fly_frame : f32 = 420.0;
 pub static angle_up_max : f32 = 60.0;
-pub static angle_down_max : f32 = -50.0;
+pub static angle_down_max : f32 = -55.0;
 pub static base_power : f32 = 1.9;
 pub static angle_power_rate : f32 = 0.0;
 pub static max_speed : f32 = 2.4;
@@ -20,7 +20,7 @@ pub static flight_landing_frame : f32 = 60.0;
 pub static flight_landing_speed : f32 = 1.0;
 pub static radial_stick_sensitivity : f32 = 0.25;
 pub static flight_touch_decel : f32 = 0.0;
-pub static propeller_spin_speed : f32 = 90.0;
+pub static propeller_spin_speed : f32 = 50.0;
 pub static angle_se_pitch_ratio : f32 = -0.002;
 
 pub unsafe extern "C" fn status_funky_SpecialSFly_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
