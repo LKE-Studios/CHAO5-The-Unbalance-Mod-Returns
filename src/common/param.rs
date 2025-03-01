@@ -346,8 +346,8 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(), (hash40("weight"), 0, 160.0));
     param_config::update_int_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("max_charge_frame"), 180));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("max_attack_add"), 66.0));
-    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("add_motion_rate"), 0.01));
-    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_acl_mul"), 0.01));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_n"), hash40("add_motion_rate"), 0.006));
+    param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_acl_mul"), 0.005));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("y_spd_air"), 1.2));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_spd_max_ground"), 2.0));
     param_config::update_float_2(*FIGHTER_KIND_DONKEY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("param_special_hi"), hash40("x_acl_air"), 0.4));

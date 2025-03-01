@@ -4,7 +4,7 @@ pub static max_speed_x : f32 = 1.5;
 pub static x_acl_air : f32 = 0.05;
 pub static y_acl_air : f32 = 0.06;
 pub static gravity_speed : f32 = 0.4;
-pub static ground_jump_x_dist : f32 = 1.0;
+pub static ground_jump_x_dist : f32 = 4.0;
 pub static init_speed_y : f32 = 1.7;
 
 unsafe extern "C" fn status_waluigi_SpecialLwJump_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -30,11 +30,10 @@ unsafe extern "C" fn status_waluigi_SpecialLwJump_Init(fighter: &mut L2CFighterC
         let sum_speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL_FREE);
-            sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
+            sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_acl_air, 0.0);
             sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
             sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, max_speed_x, 0.0);
             sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
-            sv_kinetic_energy!(controller_set_accel_x_add, fighter, 0.0);
             let gravity = KineticModule::get_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY) as *mut smash::app::KineticEnergy;
             let speed_y = KineticEnergy::get_speed_y(gravity);
             sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, speed_y, 0.0, 0.0, 0.0);

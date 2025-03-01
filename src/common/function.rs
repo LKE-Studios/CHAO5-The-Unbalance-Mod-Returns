@@ -812,7 +812,7 @@ pub(crate) unsafe fn PLAY_ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
             _ => "null",
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
-        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
 }
 
@@ -828,7 +828,7 @@ pub(crate) unsafe fn PLAY_ATTACK_HEAVY_VC(fighter: &mut L2CAgentBase) -> () {
             _ => "null",
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
-        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
 }
 
@@ -842,7 +842,7 @@ pub(crate) unsafe fn PLAY_DAMAGE_VC(fighter: &mut L2CAgentBase) -> () {
             _ => "vc_shizue_damage03",
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
-        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
 }
 
@@ -855,7 +855,7 @@ pub(crate) unsafe fn PLAY_DAMAGEFLY_VC(fighter: &mut L2CAgentBase) -> () {
             _ => "vc_shizue_damagefly02",
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
-        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.75, 0);
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
 }
 

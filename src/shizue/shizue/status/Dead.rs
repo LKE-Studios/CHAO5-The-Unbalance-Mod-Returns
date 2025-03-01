@@ -14,11 +14,11 @@ unsafe extern "C" fn status_shizue_Dead_Main(fighter: &mut L2CFighterCommon) -> 
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
         SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 1.2, 0);
-        let dead_reason = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_REASON);
-        if dead_reason == *FIGHTER_DEAD_REASON_KNOCKOUT_DEATH {
-            let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new("vc_shizue_damage_twinkle"), true, false, false, false, enSEType(0));
-            SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 1.0, 0);
-        }
+    }
+    let dead_reason = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_REASON);
+    if dead_reason == *FIGHTER_DEAD_REASON_KNOCKOUT_DEATH {
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new("vc_shizue_damage_twinkle"), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 1.0, 0);
     }
     original_status(Main, fighter, *FIGHTER_STATUS_KIND_DEAD)(fighter)
 }

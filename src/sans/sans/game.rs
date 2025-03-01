@@ -561,6 +561,7 @@ unsafe extern "C" fn game_sans_SpecialN(fighter: &mut L2CAgentBase) {
 
 //SpecialAirN
 unsafe extern "C" fn game_sans_SpecialAirN(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
         if WorkModule::get_int(fighter.module_accessor, *FIGHTER_SANS_INSTANCE_WORK_ID_INT_BONE_TYPE) == 1 {

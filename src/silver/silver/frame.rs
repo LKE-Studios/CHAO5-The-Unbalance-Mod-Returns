@@ -41,6 +41,7 @@ pub unsafe extern "C" fn frame_silver_Main(fighter: &mut L2CFighterCommon) {
         AttackModule::set_attack_scale(fighter.module_accessor, 0.865, true);
         GrabModule::set_size_mul(fighter.module_accessor, 0.865);
         if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
+            SPECIAL_N_HAS_STALL[ENTRY_ID] = true;
             BASE = Vector3f { x: 0.0, y: 2.8, z: -7.0 };
             BASE_TRAIL = Vector3f { x: 0.0, y: 2.8, z: -16.0 };
             BASE_TRAIL2 = Vector3f { x: 0.0, y: 2.8, z: -25.0 };

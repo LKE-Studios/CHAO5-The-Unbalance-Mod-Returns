@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static special_lw_speed_x_max : f32 = 1.5;
+pub static special_lw_speed_x_max : f32 = 2.5;
 pub static special_lw_gravity_speed : f32 = 0.35;
 
 pub unsafe extern "C" fn status_funky_SpecialLw_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
