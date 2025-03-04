@@ -4,7 +4,7 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn sound_koopag_Run(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        PLAY_STATUS(fighter, Hash40::new("se_koopag_001"));
+        PLAY_STATUS(fighter, Hash40::new("se_koopag_run_loop"));
     }
 }
 
@@ -71,6 +71,54 @@ unsafe extern "C" fn sound_koopag_DownBoundU(fighter: &mut L2CAgentBase) {
     }
 }
 
+//Damage
+unsafe extern "C" fn sound_koopag_Damage(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGE_VC(fighter);
+    }
+}
+
+//DamageFlyHi
+unsafe extern "C" fn sound_koopag_DamageFlyHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGEFLY_VC(fighter);
+    }
+}
+
+//DamageFlyLw
+unsafe extern "C" fn sound_koopag_DamageFlyLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGEFLY_VC(fighter);
+    }
+}
+
+//DamageFlyN
+unsafe extern "C" fn sound_koopag_DamageFlyN(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGEFLY_VC(fighter);
+    }
+}
+
+//DamageFlyTop
+unsafe extern "C" fn sound_koopag_DamageFlyTop(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGEFLY_VC(fighter);
+    }
+}
+
+//DamageFlyRoll
+unsafe extern "C" fn sound_koopag_DamageFlyRoll(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if is_excute(fighter) {
+        PLAY_DAMAGEFLY_VC(fighter);
+    }
+}
+
 pub fn install() {
     Agent::new("koopag")
 	.sound_acmd("sound_specialnstart", sound_koopag_SpecialNStart, Low)
@@ -78,5 +126,19 @@ pub fn install() {
     .sound_acmd("sound_run", sound_koopag_Run, Low)
     .sound_acmd("sound_downboundd", sound_koopag_DownBoundD, Low)
     .sound_acmd("sound_downboundu", sound_koopag_DownBoundU, Low)
+    .sound_acmd("sound_damagen1", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagen2", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagen3", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagehi1", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagehi2", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagehi3", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagelw1", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagelw2", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damagelw3", sound_koopag_Damage, Low)
+    .sound_acmd("sound_damageflyhi", sound_koopag_DamageFlyHi, Low)
+    .sound_acmd("sound_damageflylw", sound_koopag_DamageFlyLw, Low)
+    .sound_acmd("sound_damageflyn", sound_koopag_DamageFlyN, Low)
+    .sound_acmd("sound_damageflytop", sound_koopag_DamageFlyTop, Low)
+    .sound_acmd("sound_damageflyroll", sound_koopag_DamageFlyRoll, Low)
     .install();
 }

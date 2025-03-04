@@ -170,68 +170,44 @@ pub unsafe extern "C" fn dtilt_input(module_accessor: &mut smash::app::BattleObj
 
 unsafe fn Other_Function(fighter: &mut L2CFighterCommon) {
 	ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if stage::get_stage_id() != 0x139 {
-		let fighter_manager = *(FIGHTER_MANAGER as *mut *mut smash::app::FighterManager);
-		FighterManager::set_cursor_whole(fighter_manager, false);
-		if sv_information::is_ready_go() == false {
-			DEAD = false;
-			STOP = false;
-			DECREASING = false;
-			if FighterUtil::is_hp_mode(fighter.module_accessor) {
-				INITIAL_STOCK_COUNT = FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32)));
+	let fighter_info = FighterManager::get_fighter_information(FighterManager(), FighterEntryID(ENTRY_ID as i32));
+	let status_kind = StatusModule::status_kind(fighter.module_accessor);
+	if FighterManager::is_final(FighterManager()) {
+		WorkModule::enable_transition_term_forbid(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_FINAL);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_FINAL);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_FINAL_STATUS);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_EFFECT_SCREEN_NO_FINAL_BG);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_EFFECT_SCREEN_NO_FINAL_FLASH);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_FINAL_AVAILABLE);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_FINAL_CHARGE);
+		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IS_DISCRETION_FINAL_USED);
+		FighterManager::set_visible_finalbg(FighterManager(), false);
+	}
+	let hit_point = FighterInformation::hit_point(fighter_info);
+	let stock_count = FighterInformation::stock_count(fighter_info);
+	if FighterUtil::is_hp_mode(fighter.module_accessor) && !is_training_mode() {
+		if hit_point <= 0.0 && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ALLOT_STATUSES) {
+			fighter.change_status(FIGHTER_STATUS_KIND_DEAD.into(), false.into());
+			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_ALLOT_STATUSES);
+		}
+		if status_kind != *FIGHTER_STATUS_KIND_DEAD && stock_count == 1 {
+			if hit_point <= 0.0 {
+				fighter.change_status(FIGHTER_STATUS_KIND_DEAD.into(), false.into());
 			}
 		}
-		if sv_information::is_ready_go() {
-			DamageModule::set_reaction_mul(fighter.module_accessor, 0.0);
-			DamageModule::set_reaction_mul_2nd(fighter.module_accessor, 0.0);
-			DamageModule::set_reaction_mul_4th(fighter.module_accessor, 0.0);
-		}
-		if is_training_mode() == false {
-			if DamageModule::damage(fighter.module_accessor, 0) >= 600.0 && FighterUtil::is_hp_mode(fighter.module_accessor) == false
-			&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
-				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD,true);
-			}
-		}
-		// DECREASING FOR STAMINA MODE
-		if StatusModule::status_kind(fighter.module_accessor) == 470 || StatusModule::status_kind(fighter.module_accessor) == 181 {
-			if FighterUtil::is_hp_mode(fighter.module_accessor) && is_training_mode() == false {
-				if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
-					if DECREASING && FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) == 0 {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
-						INITIAL_STOCK_COUNT = 0;
-						DECREASING = false;
-					}
-					if DECREASING && FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) != 0 {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
-					}
-					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) < INITIAL_STOCK_COUNT {
-						DECREASING = true;
-					}
-				}
-			}
-		}
-		if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_DEAD && is_training_mode() == false {
-			DEAD = true;
-		}
-		if is_training_mode() == false {
-			if DEAD == true {
-				if STOP == false {
-					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) != 0
-					&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
-					}
-					if FighterInformation::stock_count(FighterManager::get_fighter_information(fighter_manager, FighterEntryID(ENTRY_ID as i32))) == 0
-					&& StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_STATUS_KIND_DEAD {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DEAD, true);
-						STOP = true;
-					}
-				}
-				if STOP == true {
-					if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_REBIRTH {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_STANDBY, true);
-					}
-				}
-			}
+	}
+}
+
+pub unsafe extern "C" fn frame_koopag_breath_Main(weapon : &mut L2CFighterBase) {
+	let status_kind = StatusModule::status_kind(weapon.module_accessor);
+	if status_kind == *WEAPON_KOOPA_BREATH_STATUS_KIND_MOVE {
+		let pos = PostureModule::pos(weapon.module_accessor);
+		if GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) 
+		|| AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_SHIELD) {
+			EffectModule::req(weapon.module_accessor, Hash40::new("brave_fire2_hit"), pos, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 2.0, 0, -1, false, 0);
+			SoundModule::play_se(weapon.module_accessor, Hash40::new("se_common_bomb_m"), true, false, false, false, enSEType(0));
+			SoundModule::play_se(weapon.module_accessor, Hash40::new("se_koopag_fireball_impact01"), true, false, false, false, enSEType(0));
+			notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
 		}
 	}
 }
@@ -239,5 +215,9 @@ unsafe fn Other_Function(fighter: &mut L2CFighterCommon) {
 pub fn install() {
     Agent::new("koopag")
     .on_line(Main, frame_koopag_Main)
+    .install();
+
+	Agent::new("koopag_breath")
+    .on_line(Main, frame_koopag_breath_Main)
     .install();
 }

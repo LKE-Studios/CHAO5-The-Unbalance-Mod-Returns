@@ -745,6 +745,12 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
     let CUSTOM_FIGHTER_2 = color >= 64 && color <= 71;
     let CUSTOM_FIGHTER_3 = color >= 96 && color <= 103;
     let CUSTOM_FIGHTER = color >= 120 && color <= 127;
+    if (*weapon).battle_object.kind == *WEAPON_KIND_KOOPAG_BREATH as u32 { 
+        if owner_kind == *FIGHTER_KIND_KOOPAG {
+            SoundModule::play_se(module_accessor, Hash40::new("se_koopag_fireball_impact01"), true, false, false, false, enSEType(0));
+            *(weapon as *mut bool).add(0x90) = true;
+        }
+    }
     if (*weapon).battle_object.kind == *WEAPON_KIND_LUIGI_FIREBALL as u32 { 
         if CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_MEWTWO {
             *(weapon as *mut bool).add(0x90) = true;
@@ -814,6 +820,17 @@ pub(crate) unsafe fn PLAY_ATTACK_VC(fighter: &mut L2CAgentBase) -> () {
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
         SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
+    if fighter_kind == *FIGHTER_KIND_KOOPAG {
+        let rand_val = sv_math::rand(hash40("fighter"), 10);
+        match rand_val {
+            0 => PLAY_SE(fighter, Hash40::new("vc_koopag_attack01")),
+            1 => PLAY_SE(fighter, Hash40::new("vc_koopag_attack02")),
+            2 => PLAY_SE(fighter, Hash40::new("vc_koopag_attack03")),
+            3 => PLAY_SE(fighter, Hash40::new("vc_koopag_attack04")),
+            4 => PLAY_SE(fighter, Hash40::new("vc_koopag_attack05")),
+            _ => println!("KoopaG is silent"),
+        }
+    }
 }
 
 pub(crate) unsafe fn PLAY_ATTACK_HEAVY_VC(fighter: &mut L2CAgentBase) -> () {
@@ -844,6 +861,15 @@ pub(crate) unsafe fn PLAY_DAMAGE_VC(fighter: &mut L2CAgentBase) -> () {
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
         SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
     }
+    if fighter_kind == *FIGHTER_KIND_KOOPAG {
+        let rand_val = sv_math::rand(hash40("fighter"), 4);
+        let sound = match rand_val {
+            0 => "vc_koopag_damage01",
+            _ => "vc_koopag_damage02",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 1.0, 0);
+    }
 }
 
 pub(crate) unsafe fn PLAY_DAMAGEFLY_VC(fighter: &mut L2CAgentBase) -> () {
@@ -856,6 +882,15 @@ pub(crate) unsafe fn PLAY_DAMAGEFLY_VC(fighter: &mut L2CAgentBase) -> () {
         };
         let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
         SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 0.7, 0);
+    }
+    if fighter_kind == *FIGHTER_KIND_KOOPAG {
+        let rand_val = sv_math::rand(hash40("fighter"), 3);
+        let sound = match rand_val {
+            0 => "vc_koopag_damagefly01",
+            _ => "vc_koopag_damagefly02",
+        };
+        let se_handle = SoundModule::play_se(fighter.module_accessor, Hash40::new(sound), true, false, false, false, enSEType(0));
+        SoundModule::set_se_vol(fighter.module_accessor, se_handle as i32, 1.0, 0);
     }
 }
 
@@ -872,6 +907,18 @@ pub unsafe fn get_table_value(table: *mut smash2::lib::L2CTable, key: &str) -> s
 extern "C" {
     #[link_name = "_ZN3lib9SingletonIN3app11ItemManagerEE9instance_E"]
     pub static ITEM_MANAGER: *mut smash::app::ItemManager;
+}
+
+#[skyline::hook(replace = WorkModule::is_enable_transition_term)]
+pub unsafe fn disable_final_smash(module_accessor: &mut smash::app::BattleObjectModuleAccessor, term: i32) -> bool {
+	let fighter_kind = smash::app::utility::get_kind(module_accessor);
+	let ret = original!()(module_accessor, term);
+	if fighter_kind == *FIGHTER_KIND_KOOPAG {
+		if term == *FIGHTER_STATUS_TRANSITION_TERM_ID_FINAL {
+			return false;
+		}
+	}
+	return ret;
 }
 
 #[skyline::hook(offset = NOTIFY_LOG_EVENT_COLLISION_HIT_OFFSET)]
@@ -1042,6 +1089,7 @@ pub fn install() {
         common_weapon_attack_callback,
         notify_log_event_collision_hit_replace,
         fix_chara_replace,
+        disable_final_smash
     );
     #[cfg(feature = "dev")]
     let _ = skyline::patching::Patch::in_text(0x8b8c88).nop();

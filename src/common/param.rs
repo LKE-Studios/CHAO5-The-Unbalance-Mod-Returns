@@ -36,7 +36,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_attribute_mul_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_x_stable"), 0, 1.14688 / 1.792));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_y_stable"), 0, 1.7 / 0.85));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("jump_aerial_y"), 0, 40.358 / 59.35));
-    param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 82.0));
+    param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 85.0));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("shield_radius"), 0, 11.968));
     param_config::update_float_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("scale"), 0, 0.865));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_MEWTWO, vec![120,121,122,123,124,125,126,127].clone(),(hash40("jump_speed_x_mul"), 0, 0.5075 / 0.7));
@@ -86,7 +86,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_attribute_mul_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_accel_x_add"), 0, 0.02 / 0.067));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_x_stable"), 0, 1.74 / 1.4618));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_y_stable"), 0, 2.0 / 1.48));
-    param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 93.0));
+    param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 94.0));
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("shield_radius"), 0, 13.5));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("dive_speed_y"), 0, 2.2 / 2.78));
     param_config::update_float_2(*FIGHTER_KIND_DOLLY, vec![120,121,122,123,124,125,126,127].clone(),(hash40("landing_attack_air_frame_n"), 0, 8.0));
@@ -128,7 +128,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_attribute_mul_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_accel_x_mul"), 0, 0.0917 / 0.75));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_accel_x_add"), 0, 0.04 / 0.05));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("air_speed_x_stable"), 0, 1.57 / 1.65));
-    param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 90.0));
+    param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("weight"), 0, 93.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("scale"), 0, 1.0));
     param_config::update_float_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("shield_radius"), 0, 12.2));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_CAPTAIN, vec![120,121,122,123,124,125,126,127].clone(),(hash40("dive_speed_y"), 0, 2.756 / 3.284));
@@ -160,7 +160,7 @@ extern "C" fn new_fighter_params(_ev: Event) {
     param_config::update_attribute_mul_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("air_brake_x"), 0, 0.015 / 0.008));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("dive_speed_y"), 0, 3.24 / 2.368));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("air_accel_y"), 0, 0.19 / 0.081));
-    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("weight"), 0, 76.0));
+    param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("weight"), 0, 86.0));
     param_config::update_attribute_mul_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("fly_speed_y_mul"), 0, 2.0 / 1.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("landing_attack_air_frame_n"), 0, 5.0));
     param_config::update_float_2(*FIGHTER_KIND_PITB, vec![64,65,66,67,68,69,70,71].clone(),(hash40("landing_attack_air_frame_f"), 0, 3.0));
