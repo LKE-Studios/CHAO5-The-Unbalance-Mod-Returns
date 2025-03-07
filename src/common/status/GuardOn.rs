@@ -117,14 +117,13 @@ unsafe extern "C" fn sub_status_end_guard_on_common(fighter: &mut L2CFighterComm
     if status_kind != *FIGHTER_STATUS_KIND_GUARD
     && status_kind != *FIGHTER_STATUS_KIND_GUARD_DAMAGE {
         effect!(fighter, MA_MSC_CMD_EFFECT_EFFECT_OFF_KIND, Hash40::new("sys_shield"), true, true);
+        effect!(fighter, MA_MSC_CMD_EFFECT_EFFECT_OFF_KIND, Hash40::new("shield_ripple"), true, true);
         effect!(fighter, MA_MSC_CMD_EFFECT_EFFECT_OFF_KIND, Hash40::new("sys_shield_smoke"), true, true);
     }
     else if !param_1.get_bool() {
         notify_event_msc_cmd!(fighter, Hash40::new_raw(0x262a7a102d));
     }
 }
-
-
 
 fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {

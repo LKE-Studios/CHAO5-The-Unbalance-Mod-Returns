@@ -225,6 +225,8 @@ unsafe extern "C" fn status_GuardDamage_common(fighter: &mut L2CFighterCommon, p
             EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
             let effect_glass_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("shield_damage_glass"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, 0, 0, 0, *EFFECT_FLIP_NONE, 0, false, false);
             EffectModule::set_rgb(module_accessor, effect_glass_handle as u32, 0.4 + effect_team_color.value[0], 0.4 + effect_team_color.value[1], 0.4 + effect_team_color.value[2]);
+            let effect4_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("shield_damage4"), Hash40::new("throw"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &VECTOR_ZERO, 0.16, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, -1, *EFFECT_FLIP_NONE, 0, false, false);
+            EffectModule::set_rgb(module_accessor, effect4_handle as u32, 0.25 + effect_team_color.value[0], 0.25 + effect_team_color.value[1], 0.25 + effect_team_color.value[2]);
             let effect2_handle = EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_shield_damage2"), Hash40::new("throw"), &VECTOR_ZERO, &VECTOR_ZERO, 0.1, false, *EFFECT_SUB_ATTRIBUTE_NONE as u32, 0, 0, *EFFECT_FLIP_NONE, 0, false, false) as u32;
             EffectModule::set_rgb_partial_last(fighter.module_accessor, effect_team_color.value[0], effect_team_color.value[1], effect_team_color.value[2]);
             WorkModule::set_int(fighter.module_accessor, effect2_handle as i32, *FIGHTER_STATUS_GUARD_ON_WORK_INT_SHIELD_DAMAGE2_EFFECT_HANDLE);
