@@ -4,6 +4,7 @@ mod status;
 mod effect;
 mod expression;
 mod sound;
+mod init;
 
 pub fn install() {
     game::install();  
@@ -12,4 +13,5 @@ pub fn install() {
     effect::install();
     expression::install();
     sound::install();
+    init::install();
 }

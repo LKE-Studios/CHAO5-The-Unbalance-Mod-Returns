@@ -2,14 +2,14 @@
 use crate::imports::BuildImports::*;
 
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
-unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+pub unsafe fn is_valid_just_shield_reflector(_module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
     return true;
 }
 
 /*SHIELD STATUSES*/
 //Sub Guard Cont Pre
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_sub_guard_cont_pre)]
-unsafe fn status_sub_guard_cont_pre(fighter: &mut L2CFighterCommon) {
+pub unsafe fn status_sub_guard_cont_pre(fighter: &mut L2CFighterCommon) {
     if fighter.global_table[STATUS_KIND_INTERRUPT].get_i32() == *FIGHTER_STATUS_KIND_GUARD_ON
     && fighter.global_table[PREV_STATUS_KIND].get_i32() == *FIGHTER_STATUS_KIND_RUN {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_TURN);
@@ -33,9 +33,41 @@ unsafe fn status_sub_guard_cont_pre(fighter: &mut L2CFighterCommon) {
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_GROUND_JUMP);
 }
 
+#[skyline::hook(replace = L2CFighterCommon_status_guard_main_common_air)]
+pub unsafe fn status_guard_common_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[SITUATION_KIND] == SITUATION_KIND_AIR {
+        fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+        ControlModule::clear_command(fighter.module_accessor, true);
+        true.into()
+    } 
+    else {
+        false.into()
+    }
+}
+
+#[skyline::hook(replace = L2CFighterCommon_status_guard_main_common)]
+pub unsafe fn status_guard_main_common(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let shield_hp = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD);
+    if shield_hp < 0.0 {
+        fighter.change_status(FIGHTER_STATUS_KIND_SHIELD_BREAK_FLY.into(), false.into());
+        true.into()
+    } 
+    else {
+        if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) 
+        && WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_GUARD_ON_WORK_INT_MIN_FRAME) <= 0 
+        && fighter.global_table[SITUATION_KIND] == SITUATION_KIND_GROUND {
+            fighter.change_status(FIGHTER_STATUS_KIND_GUARD_OFF.into(), true.into());
+            true.into()
+        }
+        else {
+            false.into()
+        }
+    }
+}
+
 //Sub Guard Cont
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_sub_guard_cont)]
-unsafe fn status_sub_guard_cont(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub unsafe fn status_sub_guard_cont(fighter: &mut L2CFighterCommon) -> L2CValue {
     let cont_stick_x = fighter.global_table[STICK_X].get_f32();
     let lr = PostureModule::lr(fighter.module_accessor);
     let stick_x = cont_stick_x * lr;
@@ -143,6 +175,8 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
     if info.name == "common" {
         skyline::install_hooks!(
             status_sub_guard_cont_pre,
+            status_guard_common_air,
+            status_guard_main_common,
             status_sub_guard_cont,
             status_end_Guard
         );

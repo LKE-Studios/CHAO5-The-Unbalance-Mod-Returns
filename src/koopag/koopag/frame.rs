@@ -125,7 +125,6 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 	else {
 		globals["giga_neutral_b"] = false.into();
 	}
-	shield_functions(fighter);
 	//Enabling certain status changes
 	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
 	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_RUN);
@@ -135,30 +134,11 @@ pub unsafe extern "C" fn frame_koopag_Main(fighter : &mut L2CFighterCommon) {
 	Other_Function(fighter);	
 }
 
-pub unsafe extern "C" fn shield_functions(fighter : &mut L2CFighterCommon) {
-	let status_kind = StatusModule::status_kind(fighter.module_accessor);
-	if status_kind == *FIGHTER_STATUS_KIND_GUARD_ON && MotionModule::frame(fighter.module_accessor) >= 9.0 {
-		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD, true);
-	}
-	if status_kind == *FIGHTER_STATUS_KIND_GUARD {
-		MotionModule::set_frame(fighter.module_accessor, 180.0, true);
-		if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-			if WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD) <= WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MIN) {
-				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SHIELD_BREAK_FLY, true);
-			}
-		}
-	}
-	if status_kind == *FIGHTER_STATUS_KIND_SHIELD_BREAK_FLY {
-		MotionModule::change_motion(fighter.module_accessor, Hash40::new("damage_fly_top"), 0.0, 1.0, false, 0.0, false, false);
-	}
-}
-
 pub unsafe extern "C" fn dtilt_input(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	let stick_y = ControlModule::get_stick_y(module_accessor);
+	let flick_y = ControlModule::get_flick_y(module_accessor);
 	if ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_ATTACK) 
-	&& ControlModule::get_stick_y(module_accessor) <= -0.25 
-	&& (
-		ControlModule::get_stick_y(module_accessor) > -0.72 || ControlModule::get_flick_y(module_accessor) > 4
-	) 
+	&& stick_y <= -0.25 && (stick_y > -0.72 || flick_y > 4) 
 	&& ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_GUARD) 
 	&& ControlModule::check_button_off(module_accessor, *CONTROL_PAD_BUTTON_CATCH) {
 		return true;

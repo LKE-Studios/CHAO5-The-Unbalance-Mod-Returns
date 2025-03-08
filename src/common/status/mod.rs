@@ -1,4 +1,5 @@
 mod JumpAerial;
+pub mod FighterStatusGuard;
 mod Float;
 mod Fly;
 pub mod GlideStart;
@@ -8,7 +9,7 @@ pub mod GlideEnd;
 pub mod GlideLanding;
 mod Sub_Glide_Checks;
 mod Catch;
-mod Guard;
+pub mod Guard;
 mod GuardOn;
 mod GuardDamage;
 mod Dash;
@@ -21,6 +22,7 @@ mod Damage;
 
 pub fn install() {
     JumpAerial::install();
+    FighterStatusGuard::install();
     Float::install();
     Fly::install();
     GlideStart::install();

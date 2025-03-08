@@ -47,6 +47,8 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_lw_r"), 0.0, 1.0, false, 0.0, false, false);
         }
     }
+    let shield_hp = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD);
+	println!("{}", shield_hp);
 }
 
 pub unsafe extern "C" fn loupe_function(fighter : &mut L2CFighterCommon) {

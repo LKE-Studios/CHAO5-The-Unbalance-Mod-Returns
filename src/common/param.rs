@@ -7,10 +7,13 @@ static mut INT_OFFSET : usize = 0x4e53a0; //13.0.2
 extern "C" fn new_fighter_params(_ev: Event) {
     //Notes: To assign new attribute param value as of param_config update 6.0, divide added character's value by the base character's one
     //LINK
-    param_config::update_int_2(-*WEAPON_KIND_LINK_PARASAIL, vec![-1].clone(),(hash40("article_use_type"), 0, 1));
+    param_config::update_int_2(-*WEAPON_KIND_LINK_PARASAIL, vec![-1].clone(), (hash40("article_use_type"), 0, 1));
     
     //MARIO
-    param_config::update_float_2(*FIGHTER_KIND_MARIO, vec![9].clone(),(hash40("param_special_hi"), hash40("cappy_prob"), 0.0));
+    param_config::update_float_2(*FIGHTER_KIND_MARIO, vec![9].clone(), (hash40("param_special_hi"), hash40("cappy_prob"), 0.0));
+
+    //KOOPAG
+    param_config::update_float_2(*FIGHTER_KIND_KOOPAG, vec![-1].clone(), (hash40("common"), hash40("shield_max"), 150.0));
 
     //CLAUS
     param_config::update_attribute_mul_2(*FIGHTER_KIND_LUCAS, vec![64,65,66,67,68,69,70,71].clone(), (hash40("walk_speed_max"), 0, 1.47015 / 1.65));
