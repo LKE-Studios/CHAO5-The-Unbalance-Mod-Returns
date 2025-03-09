@@ -530,7 +530,7 @@ unsafe extern "C" fn game_brave_ThrowF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         CHECK_FINISH_CAMERA(fighter, 14, 3);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:7.5,y:1.0,z:0.0});
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 7.5, y: 1.0, z: 0.0});
     }        
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
@@ -551,7 +551,7 @@ unsafe extern "C" fn game_brave_ThrowB(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PostureModule::reverse_lr(fighter.module_accessor);
         CHECK_FINISH_CAMERA(fighter, 11, 6);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:9.5,y:0.5,z:0.0});
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 9.5, y: 0.5, z: 0.0});
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
@@ -572,7 +572,7 @@ unsafe extern "C" fn game_brave_ThrowHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         CHECK_FINISH_CAMERA(fighter, 0, 31);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.6);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:2.0,y:8.5,z:0.0});     
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 2.0, y: 8.5, z: 0.0});     
     }
     frame(fighter.lua_state_agent, 17.0);
     if is_excute(fighter) {
@@ -594,7 +594,7 @@ unsafe extern "C" fn game_brave_ThrowLw(fighter: &mut L2CAgentBase) {
         FT_CATCH_STOP(fighter, 9.0, 1.0);
         CHECK_FINISH_CAMERA(fighter, 3, 0);
         FighterCutInManager::set_throw_finish_zoom_rate(FighterCutInManager(), 1.2);
-        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x:2.5,y:0.5,z:0.0});
+        FighterCutInManager::set_throw_finish_offset(FighterCutInManager(), Vector3f{x: 2.5, y: 0.5, z: 0.0});
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {

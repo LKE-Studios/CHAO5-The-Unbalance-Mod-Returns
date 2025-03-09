@@ -1,5 +1,12 @@
 use crate::imports::BuildImports::*;
 
+//ShieldBreakFly
+unsafe extern "C" fn effect_sans_ShieldBreakFly(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        EFFECT_FLW_POS(fighter, Hash40::new("sys_piyopiyo"), Hash40::new("head"), 0, 2, 0, 0, 0, 0, 1.4, true);
+    }
+}
+
 //Wait3
 unsafe extern "C" fn effect_sans_Wait3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 284.0);
@@ -937,6 +944,7 @@ unsafe extern "C" fn effect_sans_FinalAir(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("palutena")
+    .effect_acmd("effect_shieldbreakfly_sans", effect_sans_ShieldBreakFly, Low)
     .effect_acmd("effect_wait3_sans", effect_sans_Wait3, Low)
     .effect_acmd("effect_escapeb_sans", effect_sans_EscapeB, Low)
     .effect_acmd("effect_escapef_sans", effect_sans_EscapeF, Low)

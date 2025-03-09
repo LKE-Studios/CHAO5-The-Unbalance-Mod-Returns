@@ -1,5 +1,21 @@
 use crate::imports::BuildImports::*;
 
+//Run
+unsafe extern "C" fn sound_sans_Run(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 1.0);
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_palutena_step_left_m"));
+        }
+        wait(fighter.lua_state_agent, 18.0);
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_palutena_step_right_m"));
+        }
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
+    }
+}
+
 //EscapeN
 unsafe extern "C" fn sound_sans_EscapeN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
@@ -604,6 +620,7 @@ unsafe extern "C" fn sound_sans_DamageFlyRoll(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("palutena")
+    .sound_acmd("sound_run_sans", sound_sans_Run, Low)
     .sound_acmd("sound_escapen_sans", sound_sans_EscapeN, Low)
     .sound_acmd("sound_escapeair_sans", sound_sans_EscapeAir, Low)
     .sound_acmd("sound_attack11_sans", sound_sans_Attack11, Low)
