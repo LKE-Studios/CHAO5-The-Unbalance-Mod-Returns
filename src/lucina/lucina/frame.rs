@@ -4,7 +4,7 @@ pub unsafe extern "C" fn frame_lucina_Main(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if WorkModule::is_flag(fighter.module_accessor, FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2) {
         if situation_kind == *SITUATION_KIND_GROUND {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_hit_2"), 0.0, 1.0, false, 0.0, false, false);
         }
@@ -45,11 +45,11 @@ pub unsafe extern "C" fn frame_lucina_Exec(fighter : &mut L2CFighterCommon) {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW && [hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) {
         if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            WorkModule::on_flag(fighter.module_accessor, FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2);
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2);
         };
     }
     else {
-        WorkModule::off_flag(fighter.module_accessor, FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2);
+        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_LUCINA_STATUS_SPECIAL_LW_FLAG_ACTIVATE_SPECIAL_LW_HIT2);
     }
 }
 

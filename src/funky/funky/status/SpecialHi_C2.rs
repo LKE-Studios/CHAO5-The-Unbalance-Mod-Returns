@@ -16,12 +16,10 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
     let y_acl_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("y_acl_mul"));
     let mut accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_RESET);
-    KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_ENV_WIND);
     accel_y *= y_acl_mul;
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, ENERGY_CONTROLLER_RESET_TYPE_FALL_ADJUST, 0.0, 0.0, 0.0, 0.0, 0.0);
         sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_air);
-        sv_kinetic_energy!(controller_set_accel_x_add, fighter, x_acl_air);
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_air, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_air, 0.0);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, y_spd_air, 0.0, 0.0, 0.0);
@@ -32,13 +30,13 @@ unsafe extern "C" fn status_funky_SpecialHi_C2_Init(fighter: &mut L2CFighterComm
     else {
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL, ENERGY_CONTROLLER_RESET_TYPE_DASH, 0.0, 0.0, 0.0, 0.0, 0.0);
         sv_kinetic_energy!(controller_set_accel_x_mul, fighter, x_acl_ground);
-        sv_kinetic_energy!(controller_set_accel_x_add, fighter, x_acl_ground);
         sv_kinetic_energy!(set_stable_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_ground, 0.0);
         sv_kinetic_energy!(set_limit_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, x_spd_max_ground, 0.0);
         sv_kinetic_energy!(reset_energy, fighter, FIGHTER_KINETIC_ENERGY_ID_GRAVITY, ENERGY_GRAVITY_RESET_TYPE_GRAVITY, 0.0, 0.0, 0.0, 0.0, 0.0);
         sv_kinetic_energy!(set_accel, fighter, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY, -accel_y);
     }
     sv_kinetic_energy!(set_speed, fighter, *FIGHTER_KINETIC_ENERGY_ID_CONTROL, sum_speed_x, 0.0);
+    sv_kinetic_energy!(controller_set_accel_x_add, fighter, 0.0);
     KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
     0.into()
 }

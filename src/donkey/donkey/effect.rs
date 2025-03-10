@@ -4,6 +4,7 @@ use crate::imports::BuildImports::*;
 unsafe extern "C" fn effect_donkey_SpecialHi2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        LAST_EFFECT_SET_COLOR(fighter, /*R*/ 0.0, /*G*/ 1.0, /*B*/ 0.6);
     }
     frame(fighter.lua_state_agent, 14.0);
     for _ in 0..5 {

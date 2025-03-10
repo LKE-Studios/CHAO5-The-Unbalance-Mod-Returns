@@ -138,9 +138,9 @@ unsafe extern "C" fn status_lucina_SpecialLw2Hit_End(fighter: &mut L2CFighterCom
 
 pub fn install() {
     Agent::new("lucina")
-    .status(Pre, FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Pre)
-    .status(Init, FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Init)
-    .status(Main, FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Main)
-    .status(End, FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_End)
+    .status(Pre, *FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Pre)
+    .status(Init, *FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Init)
+    .status(Main, *FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_Main)
+    .status(End, *FIGHTER_LUCINA_STATUS_KIND_SPECIAL_LW_HIT2, status_lucina_SpecialLw2Hit_End)
     .install();
 }

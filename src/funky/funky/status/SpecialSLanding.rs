@@ -24,6 +24,7 @@ pub unsafe extern "C" fn status_funky_SpecialSLanding_Main(fighter: &mut L2CFigh
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
         KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: fly_landing_speed_x, y: 0.0, z: 0.0});
+        HitModule::set_check_catch(fighter.module_accessor, false, 0);
         if !MotionModule::is_anim_resource(fighter.module_accessor, Hash40::new("special_s_landing")) {
             WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DOWN_STAND);
         }
@@ -90,6 +91,7 @@ pub unsafe extern "C" fn status_funky_SpecialSLanding_End(fighter: &mut L2CFight
     let FUNKY = color >= 120 && color <= 127;
 	if FUNKY {
         MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, false);
+        HitModule::set_check_catch(fighter.module_accessor, true, 0);
         0.into()
     }
     else {

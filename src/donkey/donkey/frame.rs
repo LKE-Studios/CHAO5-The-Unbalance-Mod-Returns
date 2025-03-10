@@ -39,11 +39,12 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_ITEM_HEAVY_PICKUP.into(),false.into());
             }
         }
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && motion_kind == hash40("special_hi") {
-            let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && situation_kind == *SITUATION_KIND_GROUND {
             let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-            if frame <= 10.0 && stick_y <= -0.5 {
-                MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new("special_hi_2"), -1.0, 1.0, 0.0, false, false);
+            if motion_kind == hash40("special_hi") {
+                if frame <= 10.0 && stick_y <= -0.5 {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
+                }
             }
         }
         SpecialHi2_Function(fighter);
@@ -61,6 +62,7 @@ unsafe fn SpecialHi2_Function(fighter: &mut L2CFighterCommon) {
     let lr = PostureModule::lr(fighter.module_accessor);
     let x_acl_ground = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("x_acl_ground"));
     if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_hi_2") {
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
         if ControlModule::get_stick_x(fighter.module_accessor) * lr < 0.0 {
             KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -x_acl_ground, y: 0.0, z: 0.0});
         }

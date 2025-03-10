@@ -63,6 +63,7 @@ pub unsafe extern "C" fn status_funky_SpecialSFly_Main(fighter: &mut L2CFighterC
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_GLIDE_LANDING);
         WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
         DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.0);
+        HitModule::set_check_catch(fighter.module_accessor, false, 0);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_direction"), 90.0, 0.0, true, 0.0, false, false);
         MotionModule::add_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, Hash40::new("special_air_s_propeller"), 0.0, propeller_spin_speed, true, false, 0.0, false, true, false);
         let effect_a = EffectModule::req_follow(fighter.module_accessor, Hash40::new("krool_propeller"), Hash40::new("propeller"), &Vector3f{x: 0.0, y: 0.0, z: 0.0}, &Vector3f{x: 0.0, y: 90.0, z: 0.0}, 0.9, true, 0, 0, 0, 0, 0, true, true);
@@ -244,6 +245,7 @@ pub unsafe extern "C" fn status_funky_SpecialSFly_Exit(fighter: &mut L2CFighterC
 	if FUNKY {
         MotionModule::remove_motion_partial(fighter.module_accessor, *FIGHTER_MOTION_PART_SET_KIND_UPPER_BODY, false);
         DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+        HitModule::set_check_catch(fighter.module_accessor, true, 0);
         0.into()
     }
     else {

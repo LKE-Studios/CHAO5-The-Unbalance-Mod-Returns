@@ -19,6 +19,7 @@ mod SpecialHi;
 mod EscapeAir;
 mod Rebirth;
 mod Damage;
+mod Ground;
 
 pub fn install() {
     JumpAerial::install();
@@ -42,4 +43,5 @@ pub fn install() {
     EscapeAir::install();
     Rebirth::install();
     Damage::install();
+    Ground::install();
 }
