@@ -3159,7 +3159,6 @@ unsafe extern "C" fn game_jack_SpecialLwCounter(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 666.0, /*Angle*/ 361, /*KBG*/ 51, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 25.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ -5.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(10.0), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
     }
     frame(fighter.lua_state_agent, 8.0);
@@ -3193,7 +3192,6 @@ unsafe extern "C" fn game_jack_SpecialAirLwCounter(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 666.0, /*Angle*/ 361, /*KBG*/ 51, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 25.0, /*X*/ 0.0, /*Y*/ 10.5, /*Z*/ -5.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.5), /*Z2*/ Some(10.0), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_death"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_ENERGY);
-        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
         AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
     }
     frame(fighter.lua_state_agent, 8.0);

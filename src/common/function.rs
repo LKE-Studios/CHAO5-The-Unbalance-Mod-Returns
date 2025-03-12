@@ -69,6 +69,23 @@ pub unsafe fn common_attack_critical_flag(fighter: &mut L2CFighterCommon) {
     };
 }
 
+pub unsafe fn check_ultra_armor_flag(fighter: &mut L2CFighterCommon) {
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_FLAG_ULTRA_ARMOR) {
+        DamageModule::set_no_reaction_mode_status(fighter.module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_ALWAYS as u8}, -1.0, -1.0, -1);
+        DamageModule::set_reaction_mul(fighter.module_accessor, 0.0);
+        DamageModule::set_reaction_mul_2nd(fighter.module_accessor, 0.0);
+        DamageModule::set_reaction_mul_4th(fighter.module_accessor, 0.0);
+        HitModule::set_check_catch(fighter.module_accessor, false, 0);
+    }
+    else {
+        DamageModule::set_no_reaction_mode_status(fighter.module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_NORMAL as u8}, -1.0, -1.0, -1);
+        DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+        DamageModule::set_reaction_mul_2nd(fighter.module_accessor, 1.0);
+        DamageModule::set_reaction_mul_4th(fighter.module_accessor, 1.0);
+        HitModule::set_check_catch(fighter.module_accessor, true, 0);
+    }    
+}
+
 pub unsafe fn gimmick_flash(fighter: &mut L2CFighterCommon) {
     let lr = PostureModule::lr(fighter.module_accessor);
     let offset = WorkModule::get_param_float(fighter.module_accessor, hash40("height"), 0);
@@ -1037,6 +1054,24 @@ pub mod CustomModule {
         let article = ArticleModule::get_article(modules, article_type);
         let object_id = smash::app::lua_bind::Article::get_battle_object_id(article) as u32;
         return sv_battle_object::module_accessor(object_id);
+    }
+
+    pub unsafe extern "C" fn check_ultra_armor_flag(module_accessor: *mut smash::app::BattleObjectModuleAccessor) {
+        if WorkModule::is_flag(module_accessor, *FIGHTER_STATUS_WORK_FLAG_ULTRA_ARMOR) {
+            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_ALWAYS as u8}, -1.0, -1.0, -1);
+            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_REACTION_VALUE as u8}, INFINITY, -1.0, -1);
+            DamageModule::set_reaction_mul(module_accessor, 0.0);
+            DamageModule::set_reaction_mul_2nd(module_accessor, 0.0);
+            DamageModule::set_reaction_mul_4th(module_accessor, 0.0);
+            HitModule::set_check_catch(module_accessor, false, 0);
+        }
+        else {
+            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_NORMAL as u8}, -1.0, -1.0, -1);
+            DamageModule::set_reaction_mul(module_accessor, 1.0);
+            DamageModule::set_reaction_mul_2nd(module_accessor, 1.0);
+            DamageModule::set_reaction_mul_4th(module_accessor, 1.0);
+            HitModule::set_check_catch(module_accessor, true, 0);
+        }    
     }
 }
 

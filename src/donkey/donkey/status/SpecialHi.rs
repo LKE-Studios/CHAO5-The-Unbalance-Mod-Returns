@@ -12,8 +12,14 @@ unsafe extern "C" fn status_donkey_SpecialHi_Exec(fighter: &mut L2CFighterCommon
     0.into()
 }
 
+unsafe extern "C" fn status_donkey_SpecialHi_Exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    DamageModule::set_no_reaction_mode_status(fighter.module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_NORMAL as u8}, -1.0, -1.0, -1);
+    0.into()
+}
+
 pub fn install() {
     Agent::new("donkey")
     .status(Exec, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_donkey_SpecialHi_Exec)
+    .status(Exit, *FIGHTER_STATUS_KIND_SPECIAL_HI, status_donkey_SpecialHi_Exit)
     .install();
 }

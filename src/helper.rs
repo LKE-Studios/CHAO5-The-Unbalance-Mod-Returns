@@ -315,3 +315,13 @@ pub unsafe fn FOOT_EFFECT_FLIP(
     sv_animcmd::FOOT_EFFECT_FLIP(fighter.lua_state_agent);
     fighter.clear_lua_stack();
 }
+
+pub unsafe fn IS_RANDOM(
+    fighter: &mut L2CAgentBase,
+    unk1: i32,
+){
+    fighter.clear_lua_stack();
+    lua_args!(fighter, unk1);
+    sv_animcmd::IS_RANDOM(fighter.lua_state_agent);
+    fighter.clear_lua_stack();
+}

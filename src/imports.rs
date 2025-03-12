@@ -118,11 +118,13 @@ pub mod BuildImports {
             CHECK_VALID_START_CAMERA,
             SET_TAKEOUT_SE_STATUS,
             EFFECT_FOLLOW_COLOR,
-            FOOT_EFFECT_FLIP
+            FOOT_EFFECT_FLIP,
+            IS_RANDOM
         },
         skyline::{c_str, from_c_str, nn::ro::LookupSymbol},
         skyline::nro::{self, NroInfo},
         std::f32::consts::PI,
+        std::f32::{INFINITY, MAX, MIN},
         smash2,
         smash2::app::BattleObjectModuleAccessor,
         skyline::hooks::InlineCtx,

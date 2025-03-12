@@ -848,6 +848,15 @@ unsafe extern "C" fn game_ike_SpecialAirSEnd(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialHi1
+unsafe extern "C" fn game_ike_SpecialHi1(fighter: &mut L2CAgentBase) {
+    FT_MOTION_RATE(fighter, 0.82);
+    frame(fighter.lua_state_agent, 4.0);
+    if is_excute(fighter) {
+        damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+    }
+}
+
 //SpecialHi2
 unsafe extern "C" fn game_ike_SpecialHi2(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
@@ -969,6 +978,42 @@ unsafe extern "C" fn game_ike_SpecialAirHi2(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialLwHit
+unsafe extern "C" fn game_ike_SpecialLwHit(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 100, 0, 48, 9.0, 0.0, 8.0, 18.0, Some(0.0), Some(8.0), Some(5.0), 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_IKE_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT) {
+        if is_excute(fighter) {
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 0, Hash40::new("se_ike_criticalhit"));
+        }
+    }
+    frame(fighter.lua_state_agent, 7.0);
+    FT_MOTION_RATE(fighter, 1.3);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+//SpecialAirLwHit
+unsafe extern "C" fn game_ike_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 100, 0, 48, 9.0, 0.0, 8.0, 18.0, Some(0.0), Some(8.0), Some(5.0), 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_IKE_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT) {
+        if is_excute(fighter) {
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 0, Hash40::new("se_ike_criticalhit"));
+        }
+    }
+    frame(fighter.lua_state_agent, 7.0);
+    FT_MOTION_RATE(fighter, 1.3);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
 //AppealHiR
 unsafe extern "C" fn game_ike_AppealHiR(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -1086,9 +1131,12 @@ pub fn install() {
     .game_acmd("game_specialsend", game_ike_SpecialSEnd, Low)  
     .game_acmd("game_specialairsattack", game_ike_SpecialAirSAttack, Low)  
     .game_acmd("game_specialairsend", game_ike_SpecialAirSEnd, Low)
+    .game_acmd("game_specialhi1", game_ike_SpecialHi1, Low)
     .game_acmd("game_specialhi2", game_ike_SpecialHi2, Low)
     .game_acmd("game_specialhi3", game_ike_SpecialHi3, Low)
     .game_acmd("game_specialhi4", game_ike_SpecialHi4, Low)
+    .game_acmd("game_speciallwhit", game_ike_SpecialLwHit, Low)
+    .game_acmd("game_specialairlwhit", game_ike_SpecialAirLwHit, Low)
     .game_acmd("game_appealsr", game_ike_AppealSR, Low)
     .game_acmd("game_appealsl", game_ike_AppealSL, Low)
     .game_acmd("game_appealhir", game_ike_AppealHiR, Low)

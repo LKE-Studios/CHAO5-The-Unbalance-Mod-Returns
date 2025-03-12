@@ -945,6 +945,7 @@ unsafe extern "C" fn game_koopa_SpecialLw(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_koopa_SpecialAirLw(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         damage!(fighter, MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ DAMAGE_NO_REACTION_MODE_ALWAYS, 0);
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_FLAG_ULTRA_ARMOR);
     }
     frame(fighter.lua_state_agent, 31.0);
     if is_excute(fighter) {

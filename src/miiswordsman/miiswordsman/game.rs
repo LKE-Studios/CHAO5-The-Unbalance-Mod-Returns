@@ -1437,7 +1437,23 @@ unsafe extern "C" fn game_miiswordsman_SpecialLw1Hit(fighter: &mut L2CAgentBase)
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 300, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(3.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-        AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIISWORDSMAN_STATUS_COUNTER_FLAG_GRAVITY_ON);
+    }
+    FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
+}
+
+//SpecialAirLw1Hit
+unsafe extern "C" fn game_miiswordsman_SpecialAirLw1Hit(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIISWORDSMAN_STATUS_COUNTER_FLAG_GRAVITY_OFF);
+    }
+    frame(fighter.lua_state_agent, 21.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 300, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 10.8, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(3.0), /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_purple"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
     }
     frame(fighter.lua_state_agent, 23.0);
     if is_excute(fighter) {
@@ -1518,7 +1534,6 @@ unsafe extern "C" fn game_miiswordsman_SpecialAirLw2(fighter: &mut L2CAgentBase)
         WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIISWORDSMAN_STATUS_REVERSE_SLASH_FLAG_SPECIAL_FALL);
     }
 }
-
 
 //SpecialLw3
 unsafe extern "C" fn game_miiswordsman_SpecialLw3(fighter: &mut L2CAgentBase) {
@@ -1724,6 +1739,7 @@ pub fn install() {
     .game_acmd("game_specialairhi3", game_miiswordsman_SpecialAirHi3, Low)
     .game_acmd("game_specialhi3start", game_miiswordsman_SpecialHi3Start, Low)
     .game_acmd("game_speciallw1hit", game_miiswordsman_SpecialLw1Hit, Low)
+    .game_acmd("game_specialairlw1hit", game_miiswordsman_SpecialAirLw1Hit, Low)
     .game_acmd("game_speciallw2", game_miiswordsman_SpecialLw2, Low)
     .game_acmd("game_specialairlw2", game_miiswordsman_SpecialAirLw2, Low)
     .game_acmd("game_speciallw3", game_miiswordsman_SpecialLw3, Low)

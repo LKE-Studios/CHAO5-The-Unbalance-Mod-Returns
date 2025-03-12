@@ -39,11 +39,13 @@ pub unsafe extern "C" fn frame_donkey(fighter: &mut L2CFighterCommon) {
                 fighter.change_status(FIGHTER_STATUS_KIND_ITEM_HEAVY_PICKUP.into(),false.into());
             }
         }
-        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && situation_kind == *SITUATION_KIND_GROUND {
-            let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-            if motion_kind == hash40("special_hi") {
-                if frame <= 10.0 && stick_y <= -0.5 {
-                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI { 
+            if situation_kind == *SITUATION_KIND_GROUND {
+                let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+                if motion_kind == hash40("special_hi") {
+                    if frame <= 10.0 && stick_y <= -0.5 {
+                        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
+                    }
                 }
             }
         }

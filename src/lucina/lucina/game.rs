@@ -1226,6 +1226,52 @@ unsafe extern "C" fn game_lucina_SpecialAirHi(fighter: &mut L2CAgentBase) {
     }
 }
 
+//SpecialLwHit
+unsafe extern "C" fn game_lucina_SpecialLwHit(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("sword1"), 10.0, 361, 60, 0, 90, 9.5, 1.5, 0.0, 1.5, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 1, 0, Hash40::new("armr"), 10.0, 361, 60, 0, 90, 9.5, 0.0, 1.0, 0.0, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 2, 0, Hash40::new("claviclel"), 10.0, 361, 60, 0, 90, 9.5, 0.0, 1.0, 0.0, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 3, 0, Hash40::new("sword1"), 10.0, 361, 60, 0, 90, 9.5, 1.5, 0.0, 6.5, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARTH_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT) {
+        if is_excute(fighter) {
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 0, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 1, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 2, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 3, Hash40::new("se_lucina_criticalhit"));
+        }
+    }
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+//SpecialAirLwHit
+unsafe extern "C" fn game_lucina_SpecialAirLwHit(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if is_excute(fighter) {
+        ATTACK(fighter, 0, 0, Hash40::new("sword1"), 10.0, 361, 60, 0, 90, 9.5, 1.5, 0.0, 1.5, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 1, 0, Hash40::new("armr"), 10.0, 361, 60, 0, 90, 9.5, 0.0, 1.0, 0.0, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 2, 0, Hash40::new("claviclel"), 10.0, 361, 60, 0, 90, 9.5, 0.0, 1.0, 0.0, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+        ATTACK(fighter, 3, 0, Hash40::new("sword1"), 10.0, 361, 60, 0, 90, 9.5, 1.5, 0.0, 6.5, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_SWORD);
+    }
+    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_MARTH_STATUS_SPECIAL_LW_FLAG_SPECIAL_EFFECT) {
+        if is_excute(fighter) {
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 0, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 1, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 2, Hash40::new("se_lucina_criticalhit"));
+            AttackModule::set_optional_hit_sound(fighter.module_accessor, 3, Hash40::new("se_lucina_criticalhit"));
+        }
+    }
+    frame(fighter.lua_state_agent, 8.0);
+    if is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
 //SpecialLwHit2
 unsafe extern "C" fn game_lucina_SpecialLwHit2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -1395,6 +1441,8 @@ pub fn install() {
     .game_acmd("game_specialairs4lw", game_lucina_SpecialAirS4Lw, Low)
     .game_acmd("game_specialhi", game_lucina_SpecialHi, Low)
     .game_acmd("game_specialairhi", game_lucina_SpecialAirHi, Low)
+    .game_acmd("game_speciallwhit", game_lucina_SpecialLwHit, Low)
+    .game_acmd("game_specialairlwhit", game_lucina_SpecialAirLwHit, Low)
     .game_acmd("game_speciallwhit2", game_lucina_SpecialLwHit2, Low)
     .game_acmd("game_specialairlwhit2", game_lucina_SpecialAirLwHit2, Low)
     .game_acmd("game_appealsr", game_lucina_AppealSR, Low)
