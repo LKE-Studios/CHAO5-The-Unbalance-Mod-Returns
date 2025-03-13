@@ -135,6 +135,7 @@ pub mod globals {
     pub const SQUAT_COMMON_UNIQ: i32 = 0x5A;
 }
 
+mod bandana;
 mod basyaamo;
 mod bayonetta;
 mod brave;
@@ -568,6 +569,7 @@ pub fn main() {
     kamek::install();
     funky::install();
     sans::install();
+    bandana::install();
     //knuckles::install();
     skyline::install_hooks!(
         declare_const_hook, 

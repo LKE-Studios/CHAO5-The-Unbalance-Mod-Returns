@@ -1056,22 +1056,11 @@ pub mod CustomModule {
         return sv_battle_object::module_accessor(object_id);
     }
 
-    pub unsafe extern "C" fn check_ultra_armor_flag(module_accessor: *mut smash::app::BattleObjectModuleAccessor) {
-        if WorkModule::is_flag(module_accessor, *FIGHTER_STATUS_WORK_FLAG_ULTRA_ARMOR) {
-            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_ALWAYS as u8}, -1.0, -1.0, -1);
-            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_REACTION_VALUE as u8}, INFINITY, -1.0, -1);
-            DamageModule::set_reaction_mul(module_accessor, 0.0);
-            DamageModule::set_reaction_mul_2nd(module_accessor, 0.0);
-            DamageModule::set_reaction_mul_4th(module_accessor, 0.0);
-            HitModule::set_check_catch(module_accessor, false, 0);
-        }
-        else {
-            DamageModule::set_no_reaction_mode_status(module_accessor, DamageNoReactionMode {_address: *DAMAGE_NO_REACTION_MODE_NORMAL as u8}, -1.0, -1.0, -1);
-            DamageModule::set_reaction_mul(module_accessor, 1.0);
-            DamageModule::set_reaction_mul_2nd(module_accessor, 1.0);
-            DamageModule::set_reaction_mul_4th(module_accessor, 1.0);
-            HitModule::set_check_catch(module_accessor, true, 0);
-        }    
+    pub unsafe extern "C" fn is_exist_fire(owner_modules: *mut smash::app::BattleObjectModuleAccessor) -> bool {
+        let a_id = WorkModule::get_int64(owner_modules, FIGHTER_EDGE_INSTANCE_WORK_ID_INT_FIRE_ID);
+        let is_active = sv_battle_object::is_active(a_id as u32);
+        let a_boma = smash::app::sv_battle_object::module_accessor(a_id as u32);
+        a_id != 0 && is_active
     }
 }
 

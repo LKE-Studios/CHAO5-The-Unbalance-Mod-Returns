@@ -21,7 +21,6 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_WORK_FLAG_CRITICAL) {
         common_attack_critical_flag(fighter);
     }
-    CustomModule::check_ultra_armor_flag(fighter.module_accessor);
     loupe_function(fighter);
     let fighter_kind = fighter.global_table[FIGHTER_KIND].get_i32();
     if can_use_float(fighter_kind) {

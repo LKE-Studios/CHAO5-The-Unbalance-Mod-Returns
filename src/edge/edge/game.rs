@@ -155,8 +155,8 @@ unsafe extern "C" fn game_edge_AttackHi3(fighter: &mut L2CAgentBase) {
         AttackModule::disable_tip(fighter.module_accessor);
         ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 368, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 5.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.5), /*Z2*/ Some(5.0), /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
         ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 368, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 0, /*Size*/ 9.5, /*X*/ 0.0, /*Y*/ 8.5, /*Z*/ 9.5, /*X2*/ Some(0.0), /*Y2*/ Some(8.5), /*Z2*/ Some(10.0), /*Hitlag*/ 0.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_NONE);
-        AttackModule::set_vec_target_pos(fighter.module_accessor, 0, Hash40::new("top"), &smash::phx::Vector2f{x: 2.0, y: 45.0}, 5, false);
-        AttackModule::set_vec_target_pos(fighter.module_accessor, 1, Hash40::new("top"), &smash::phx::Vector2f{x: 0.0, y: 56.0}, 6, false);
+        AttackModule::set_vec_target_pos(fighter.module_accessor, 0, Hash40::new("top"), &Vector2f{x: 2.0, y: 45.0}, 5, false);
+        AttackModule::set_vec_target_pos(fighter.module_accessor, 1, Hash40::new("top"), &Vector2f{x: 0.0, y: 56.0}, 6, false);
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
@@ -1015,7 +1015,11 @@ unsafe extern "C" fn game_edge_SpecialAirHi2End(fighter: &mut L2CAgentBase) {
 
 //SpecialLw
 unsafe extern "C" fn game_edge_SpecialLw(fighter: &mut L2CAgentBase) {
-    if IS_RANDOM(fighter, 2) {
+    if { 
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 2);
+        sv_animcmd::IS_RANDOM(fighter.lua_state_agent)
+    } == true {
         if is_excute(fighter) {
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_EDGE_STATUS_SPECIAL_LW_FLAG_VOICE);
         }
@@ -1037,7 +1041,11 @@ unsafe extern "C" fn game_edge_SpecialLw(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLw
 unsafe extern "C" fn game_edge_SpecialAirLw(fighter: &mut L2CAgentBase) {
-    if IS_RANDOM(fighter, 2) {
+    if { 
+        fighter.clear_lua_stack();
+        lua_args!(fighter, 2);
+        sv_animcmd::IS_RANDOM(fighter.lua_state_agent)
+    } == true {
         if is_excute(fighter) {
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_EDGE_STATUS_SPECIAL_LW_FLAG_VOICE);
         }

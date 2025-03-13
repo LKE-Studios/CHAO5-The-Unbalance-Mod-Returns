@@ -73,6 +73,13 @@ pub const FIGHTER_STATUS_KIND_SPECIAL_GUARD: LuaConst = LuaConst::new(0x643);
 pub const FIGHTER_STATUS_KIND_FLOAT: LuaConst = LuaConst::new(0x644);
 pub const COLLISION_KIND_MASK_PARRY: LuaConst = LuaConst::new(0x80);
 
+//BANDANA
+pub const FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_CHARGE: LuaConst = LuaConst::new(0x100000D0);
+pub const FIGHTER_BANDANA_GENERATE_ARTICLE_APPLE: LuaConst = LuaConst::new(0x5);
+pub const FIGHTER_BANDANA_GENERATE_ARTICLE_SPEAR: LuaConst = LuaConst::new(0x6);
+pub const FIGHTER_BANDANA_GENERATE_ARTICLE_SPEAR2: LuaConst = LuaConst::new(0x7);
+pub const FIGHTER_BANDANA_GENERATE_ARTICLE_SPEAR3: LuaConst = LuaConst::new(0x8);
+
 //BASYAAMO
 pub const FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_N_OVERHEAT: LuaConst = LuaConst::new(0x1F3);
 pub const FIGHTER_BASYAAMO_STATUS_KIND_SPECIAL_HI_OVERHEAT: LuaConst = LuaConst::new(0x1EE);
