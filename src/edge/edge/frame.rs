@@ -12,26 +12,30 @@ static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 1.24; //Max Vertical movespeed
 
 pub unsafe extern "C" fn frame_edge_Main(fighter : &mut L2CFighterCommon) {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let EDGE = color >= 0 && color <= 16;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) {
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.65);
-        DamageModule::set_reaction_mul(fighter.module_accessor, 0.65);
-    }
-    else {
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-        DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-    };
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
-    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_N_CANCEL {
-        if situation_kind == *SITUATION_KIND_AIR {
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS) == *FIGHTER_STATUS_KIND_ESCAPE_AIR {
-                WorkModule::set_int(fighter.module_accessor, *STATUS_KIND_NONE, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS);
-                ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_AIR_ESCAPE);
-            }
+    if EDGE {
+        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.65);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 0.65);
         }
-    };
+        else {
+            DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
+            DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
+        };
+        let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+        let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+        if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_N_CANCEL {
+            if situation_kind == *SITUATION_KIND_AIR {
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS) == *FIGHTER_STATUS_KIND_ESCAPE_AIR {
+                    WorkModule::set_int(fighter.module_accessor, *STATUS_KIND_NONE, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS);
+                    ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_AIR_ESCAPE);
+                }
+            }
+        };
+    }
 }
 
 pub unsafe extern "C" fn frame_edge_Exec(fighter : &mut L2CFighterCommon) {

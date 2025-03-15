@@ -1074,6 +1074,16 @@ pub unsafe extern "C" fn play_bgm_override(param1: u64, param2: u64, priority: i
 #[skyline::from_offset(0x6e63d0)]
 pub unsafe extern "C" fn stop_status_bgm(sound_module: *const u64, param2: i32);
 
+#[skyline::hook(offset = 0x9df9a0, inline)]
+unsafe extern "C" fn event_edge_OnAttack_inline(ctx: &mut skyline::hooks::InlineCtx) {
+    let module_accessor = *ctx.registers[21].x.as_ref() as *mut smash::app::BattleObjectModuleAccessor;
+    let color = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
+    let BANDANA = color >= 120 && color <= 127;
+    if !BANDANA {
+        MotionAnimcmdModule::call_script_single(module_accessor, *FIGHTER_ANIMCMD_EFFECT, Hash40::new("effect_attackdashhit"), -1);
+    }
+}
+
 //Sound pitch change values
 pub static semitone_0_up : f32 = 1.0;
 pub static semitone_1_up : f32 = 1.05946;
@@ -1113,8 +1123,10 @@ pub fn install() {
         common_weapon_attack_callback,
         notify_log_event_collision_hit_replace,
         fix_chara_replace,
-        disable_final_smash
+        disable_final_smash,
+        event_edge_OnAttack_inline
     );
     #[cfg(feature = "dev")]
     let _ = skyline::patching::Patch::in_text(0x8b8c88).nop();
+    let _ = skyline::patching::Patch::in_text(0x9df9c0).nop().unwrap();
 }

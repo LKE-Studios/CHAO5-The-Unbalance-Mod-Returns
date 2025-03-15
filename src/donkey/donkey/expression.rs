@@ -1,5 +1,26 @@
 use crate::imports::BuildImports::*;
 
+//SpecialNMax
+unsafe extern "C" fn expression_donkey_SpecialNMax(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(fighter.lua_state_agent, 17.0);
+    if is_excute(fighter) {
+        ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitll"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if is_excute(fighter) {
+        QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+        slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+        RUMBLE_HIT(fighter, Hash40::new("rbkind_attackll"), 0);
+    }
+    frame(fighter.lua_state_agent, 21.0);
+    if is_excute(fighter) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DONKEY_STATUS_SPECIAL_N_FLAG_CANCEL_FACE);
+    }
+}
+
 //SpecialHi2
 unsafe extern "C" fn expression_donkey_SpecialHi2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
@@ -117,6 +138,7 @@ unsafe extern "C" fn expression_donkey_SpecialAirHi(fighter: &mut L2CAgentBase) 
 
 pub fn install() {
     Agent::new("donkey")
+    .expression_acmd("expression_specialnmax", expression_donkey_SpecialNMax, Low)
     .expression_acmd("expression_specialhi2", expression_donkey_SpecialHi2, Low)
     .expression_acmd("expression_specialairhi", expression_donkey_SpecialAirHi, Low)
     .install();

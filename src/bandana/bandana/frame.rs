@@ -1,71 +1,120 @@
 use crate::imports::BuildImports::*;
 
-static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
-static mut START_FLOAT : [bool; 8] = [false; 8];
-static mut CHECK_FLOAT : [i32; 8] = [0; 8];
-static mut CHECK_FLOAT_MAX : i32 = 10; //Frames where jump needs to be held to start floating
-static mut X : [f32; 8] = [0.0; 8]; //Logs speed
-static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
-static mut FLOAT_MAX : i32 = 1200; //Frames this bitch can float (In frames, 300 = 5 seconds)
-static mut X_MAX : f32 = 1.81; //Max Horizontal movespeed
-static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
-static mut Y_MAX : f32 = 1.24; //Max Vertical movespeed
-
-pub unsafe extern "C" fn frame_edge_Main(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_bandana_Main(fighter : &mut L2CFighterCommon) {
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let BANDANA = color >= 120 && color <= 127;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_EDGE_INSTANCE_WORK_ID_FLAG_ONE_WINGED_ACTIVATED) {
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 0.65);
-        DamageModule::set_reaction_mul(fighter.module_accessor, 0.65);
-    }
-    else {
-        DamageModule::set_damage_mul_2nd(fighter.module_accessor, 1.0);
-        DamageModule::set_reaction_mul(fighter.module_accessor, 1.0);
-    };
-    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
-    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-    if status_kind == *FIGHTER_EDGE_STATUS_KIND_SPECIAL_N_CANCEL {
-        if situation_kind == *SITUATION_KIND_AIR {
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS) == *FIGHTER_STATUS_KIND_ESCAPE_AIR {
-                WorkModule::set_int(fighter.module_accessor, *STATUS_KIND_NONE, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CANCEL_STATUS);
-                ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_AIR_ESCAPE);
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if BANDANA {
+        if status_kind == *FIGHTER_STATUS_KIND_ENTRY || !sv_information::is_ready_go() {
+            let custom_hurtboxes = [
+                [hash40("toer") as f64, 0.0, 0.0, 0.0, 1.6, 0.0, 0.0, 1.8, *COLLISION_PART_BODY_LEGS as f64, *HIT_HEIGHT_LOW as f64],
+                [hash40("toel") as f64, 0.0, 0.0, 0.0, 1.6, 0.0, 0.0, 1.8, *COLLISION_PART_BODY_LEGS as f64, *HIT_HEIGHT_LOW as f64],
+                [hash40("body") as f64, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.2, *COLLISION_PART_BODY as f64, *HIT_HEIGHT_HIGH as f64]
+            ];
+            let mut f = 0;
+            for i in custom_hurtboxes {
+                let mut vec1 = Vector3f{x: i[1] as f32, y: i[2] as f32, z: i[3] as f32};
+                let mut vec2 = Vector3f{x: i[4] as f32, y: i[5] as f32, z: i[6] as f32};
+                FighterUtil::set_hit_data(fighter.module_accessor, f, 0, &vec1, &vec2,i[7] as f32, Hash40::new_raw(i[0] as u64), CollisionPart(i[8] as i32), HitHeight(i[9] as i32), HitStatus(*HIT_STATUS_NORMAL), CollisionShapeType(*COLLISION_SHAPE_TYPE_CAPSULE));    
+                f += 1;
             }
         }
-    };
+        if motion_kind == hash40("jump_aerial_f1") {
+            if frame < 20.0 {
+                WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL);
+                WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON);
+            }
+            else {
+                WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL);
+                WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
+            let attack_hi4_effect = EffectModule::req_follow(fighter.module_accessor, Hash40::new("kirby_vacuum"), Hash40::new("top"), &Vector3f{x:0.0, y:9.0, z:0.0}, &Vector3f{x: -90.0, y: 90.0, z: 0.0}, 0.6, true, 0, 0, 0, 0, 0, true, true);
+            WorkModule::set_int(fighter.module_accessor, attack_hi4_effect, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_ATTACK_HI4_EFFECT_HANDLE);
+            let effect_handle = WorkModule::get_int(fighter.module_accessor, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_ATTACK_HI4_EFFECT_HANDLE);
+            if frame == 15.0 {
+                EffectModule::set_scale(fighter.module_accessor, effect_handle as u32, &Vector3f{x: 1.25, y: 0.6, z: 0.6});
+            }
+            if frame >= 47.0 {
+                EffectModule::set_scale(fighter.module_accessor, effect_handle as u32, &Vector3f{x: 0.0, y: 0.0, z: 0.0});
+                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("kirby_vacuum"), false, true);
+            }
+        }
+    }
 }
 
-pub unsafe extern "C" fn frame_edge_Exec(fighter : &mut L2CFighterCommon) {
+pub unsafe extern "C" fn frame_bandana_Exec(fighter: &mut L2CFighterCommon) {
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordl1"), &Vector3f{x:1.15, y:1.0, z:1.0});
     ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordr1"), &Vector3f{x:1.15, y:1.0, z:1.0});
 }
 
-pub unsafe extern "C" fn frame_edge_flare(weapon : &mut L2CFighterBase) {
-    let status = StatusModule::status_kind(weapon.module_accessor);
-    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-    if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_S].contains(&status) {
-        if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_S, false);
+pub unsafe extern "C" fn frame_bandana_spear2_Exec(weapon: &mut L2CFighterBase) {
+    
+    let status_kind = StatusModule::status_kind(weapon.module_accessor);
+    let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
+    let frame = MotionModule::frame(weapon.module_accessor);
+    if motion_kind == hash40("stick") {
+        if frame == 1.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 4.71623, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
         }
-    }
-    if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_M].contains(&status) {
-        if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_M, false);
+        else if frame == 2.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -4.71623, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
         }
-    }
-    if [*WEAPON_EDGE_FIRE_STATUS_KIND_FLY_L].contains(&status) {
-        if ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(owner_module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
-            StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_EDGE_FIRE_STATUS_KIND_BURST_L, false);
+        else if frame == 3.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -4.71623, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 4.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 4.71623, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 5.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 4.48, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 6.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -4.48, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 7.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -4.48, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 8.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 4.48, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 9.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 3.5, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 10.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -3.5, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 11.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -3.5, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 12.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 3.5, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 13.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 2.15, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 14.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -2.15, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 15.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: -2.15, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+        }
+        else if frame == 16.0 {
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new_raw(hash40("root")), &Vector3f{x: 2.15, y: 0.0, z: 0.0}, MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8}, MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
         }
     }
 }
 
 pub fn install() {
     Agent::new("edge")
-    .on_line(Main, frame_edge_Main)
-    .on_line(Exec, frame_edge_Exec)
+    .on_line(Main, frame_bandana_Main)
+    .on_line(Exec, frame_bandana_Exec)
     .install();
     
-    Agent::new("edge_fire")
-    .on_line(Main, frame_edge_flare)
+    Agent::new("edge_spear2")
+    .on_line(Exec, frame_bandana_spear2_Exec)
     .install();
 }
