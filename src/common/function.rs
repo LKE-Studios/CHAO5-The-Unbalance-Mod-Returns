@@ -470,7 +470,11 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LUIGI_FIREBALL
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KIRBY_FINALCUTTERSHOT
     || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_ROCKMAN_HARDKNUCKLE
-    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KOOPAJR_CANNONBALL {
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_KOOPAJR_CANNONBALL
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_MASTER_ARROW1
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_YOUNGLINK_BOWARROW
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_TOONLINK_BOWARROW
+    || utility::get_kind(&mut *object_boma) == *WEAPON_KIND_LINK_BOWARROW {
         let owner_id = WorkModule::get_int(object_boma, *WEAPON_INSTANCE_WORK_ID_INT_ACTIVATE_FOUNDER_ID) as u32;
         let owner_boma = sv_battle_object::module_accessor(owner_id);
         let owner_kind = utility::get_kind(&mut *owner_boma);
@@ -493,6 +497,9 @@ pub unsafe extern "C" fn is_cloned_article(object_boma: *mut smash::app::BattleO
             return true;
         }
         if owner_kind == *FIGHTER_KIND_PALUTENA && ADDED_FIGHTER { //SANS
+            return true;
+        }
+        if owner_kind == *FIGHTER_KIND_EDGE && ADDED_FIGHTER { //BANDANA
             return true;
         }
     }
@@ -790,6 +797,11 @@ unsafe extern "C" fn common_weapon_attack_callback(vtable: u64, weapon: *mut sma
     if (*weapon).battle_object.kind == *WEAPON_KIND_ROCKMAN_ROCKBUSTER as u32 && owner_kind == *FIGHTER_KIND_PALUTENA {
         *(weapon as *mut bool).add(0x90) = true;
     }
+    if (*weapon).battle_object.kind == *WEAPON_KIND_EDGE_FIRE as u32 {
+        if CUSTOM_FIGHTER && owner_kind == *FIGHTER_KIND_EDGE {
+            *(weapon as *mut bool).add(0x90) = true;
+        }
+    }
     call_original!(vtable, weapon, log)
 }
 
@@ -1057,7 +1069,7 @@ pub mod CustomModule {
     }
 
     pub unsafe extern "C" fn is_exist_fire(owner_modules: *mut smash::app::BattleObjectModuleAccessor) -> bool {
-        let a_id = WorkModule::get_int64(owner_modules, FIGHTER_EDGE_INSTANCE_WORK_ID_INT_FIRE_ID);
+        let a_id = WorkModule::get_int64(owner_modules, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_FIRE_ID);
         let is_active = sv_battle_object::is_active(a_id as u32);
         let a_boma = smash::app::sv_battle_object::module_accessor(a_id as u32);
         a_id != 0 && is_active

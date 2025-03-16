@@ -7,19 +7,13 @@ unsafe extern "C" fn status_bandana_JumpAerial_Main(fighter: &mut L2CFighterComm
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
         let jump_count = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX);
         let jump_count_max = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
-        if jump_count_max - jump_count > 1 {
-            if motion_kind != hash40("jump_aerial_f1") {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("jump_aerial_f1"), -1.0, 1.0, false, 0.0, false, false);
-                fighter.status_JumpAerial()
-            }
+        if jump_count > 2 {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("jump_aerial_f1"), 0.0, 1.0, false, 0.0, false, false);
+            fighter.status_JumpAerial()
         }
         else {
-            if motion_kind != hash40("jump_aerial_f") {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("jump_aerial_f"), -1.0, 1.0, false, 0.0, false, false);
-                fighter.status_JumpAerial()
-            }
+            fighter.status_JumpAerial()
         }
-        0.into()
     }
     else {
         original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_AERIAL)(fighter)

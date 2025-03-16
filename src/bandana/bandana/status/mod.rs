@@ -9,6 +9,7 @@ mod SpecialN;
 mod SpecialSCharge;
 mod SpecialHi;
 mod SpecialLw;
+mod SpecialLwEnd;
 mod Final;
 mod FinalEnd;
 
@@ -24,6 +25,7 @@ pub fn install() {
     SpecialSCharge::install();
     SpecialHi::install();
     SpecialLw::install();
+    SpecialLwEnd::install();
     Final::install();
     FinalEnd::install();
 }

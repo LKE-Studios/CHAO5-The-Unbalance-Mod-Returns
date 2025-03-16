@@ -443,6 +443,7 @@ pub fn main() {
         allow_ui_chara_hash_online(hash40("ui_chara_kamek")); //Kamek
         allow_ui_chara_hash_online(hash40("ui_chara_funky")); //Funky Kong
         allow_ui_chara_hash_online(hash40("ui_chara_sans")); //Sans
+        allow_ui_chara_hash_online(hash40("ui_chara_bandana")); //Bandana Dee
     }
     unsafe {
         let text_ptr = getRegionAddress(Region::Text) as *const u8;

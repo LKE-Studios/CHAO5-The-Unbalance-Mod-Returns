@@ -9,10 +9,10 @@ unsafe extern "C" fn effect_bandana_fire_SpecialN1(fighter: &mut L2CAgentBase) {
 
 //BurstS
 unsafe extern "C" fn effect_bandana_fire_BurstS(fighter: &mut L2CAgentBase) {
-    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let store_frame = WorkModule::get_int(owner_module_accessor, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_STORE_FRAME);
     if is_excute(fighter) {
-        if store_frame == 30 {
+        if store_frame >= 30 {
             EFFECT(fighter, Hash40::new("ness_pkfl_bomb"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
         }
         else {

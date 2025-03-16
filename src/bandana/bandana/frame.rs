@@ -4,9 +4,16 @@ pub unsafe extern "C" fn frame_bandana_Main(fighter : &mut L2CFighterCommon) {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     let BANDANA = color >= 120 && color <= 127;
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     if BANDANA {
+        let scale = WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0);
+        if ModelModule::scale(fighter.module_accessor) == scale {
+            ModelModule::set_scale(fighter.module_accessor, 0.9);
+            AttackModule::set_attack_scale(fighter.module_accessor, 0.9, true);
+            GrabModule::set_size_mul(fighter.module_accessor, 0.9);
+        };
         if status_kind == *FIGHTER_STATUS_KIND_ENTRY || !sv_information::is_ready_go() {
             let custom_hurtboxes = [
                 [hash40("toer") as f64, 0.0, 0.0, 0.0, 1.6, 0.0, 0.0, 1.8, *COLLISION_PART_BODY_LEGS as f64, *HIT_HEIGHT_LOW as f64],
@@ -32,10 +39,10 @@ pub unsafe extern "C" fn frame_bandana_Main(fighter : &mut L2CFighterCommon) {
             }
         }
         if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
-            let attack_hi4_effect = EffectModule::req_follow(fighter.module_accessor, Hash40::new("kirby_vacuum"), Hash40::new("top"), &Vector3f{x:0.0, y:9.0, z:0.0}, &Vector3f{x: -90.0, y: 90.0, z: 0.0}, 0.6, true, 0, 0, 0, 0, 0, true, true);
-            WorkModule::set_int(fighter.module_accessor, attack_hi4_effect, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_ATTACK_HI4_EFFECT_HANDLE);
             let effect_handle = WorkModule::get_int(fighter.module_accessor, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_ATTACK_HI4_EFFECT_HANDLE);
             if frame == 15.0 {
+                let attack_hi4_effect = EffectModule::req_follow(fighter.module_accessor, Hash40::new("kirby_vacuum"), Hash40::new("top"), &Vector3f{x: 0.0, y: 9.0, z: 0.0}, &Vector3f{x: -90.0, y: 90.0, z: 0.0}, 0.6, true, 0, 0, 0, 0, 0, true, true);
+                WorkModule::set_int(fighter.module_accessor, attack_hi4_effect as i32, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_ATTACK_HI4_EFFECT_HANDLE);
                 EffectModule::set_scale(fighter.module_accessor, effect_handle as u32, &Vector3f{x: 1.25, y: 0.6, z: 0.6});
             }
             if frame >= 47.0 {
@@ -43,13 +50,29 @@ pub unsafe extern "C" fn frame_bandana_Main(fighter : &mut L2CFighterCommon) {
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("kirby_vacuum"), false, true);
             }
         }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
+            if frame == 100.0 {
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_warpstar_break"), Hash40::new("top"), &Vector3f{x: 0.0, y: 1.5, z: 0.0}, &Vector3f{x: 0.0, y: 0.0, z: 0.0}, 0.33, true, 0, 0, 0, 0, 0, true, true);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+            if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                DamageModule::heal(fighter.module_accessor, -16.0, 0);
+                if DamageModule::damage(fighter.module_accessor, 0) > 0.0 {
+                    EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_recovery"), Hash40::new("top"), &VECTOR_ZERO, &VECTOR_ZERO, 1.0, true, 0, 0, 0, 0, 0, true, true);
+                    SoundModule::play_se(fighter.module_accessor, Hash40::new("se_common_lifeup"), true, false, false, false, enSEType(0));
+                }
+            }
+        };
     }
 }
 
-pub unsafe extern "C" fn frame_bandana_Exec(fighter: &mut L2CFighterCommon) {
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordl1"), &Vector3f{x:1.15, y:1.0, z:1.0});
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordr1"), &Vector3f{x:1.15, y:1.0, z:1.0});
-}
+pub unsafe extern "C" fn frame_bandana_Exec(fighter: &mut L2CFighterCommon) {}
 
 pub unsafe extern "C" fn frame_bandana_spear2_Exec(weapon: &mut L2CFighterBase) {
     

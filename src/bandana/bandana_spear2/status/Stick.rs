@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static stick_frame : i32 = 60;
+pub static stick_frame : i32 = 120;
 
 unsafe extern "C" fn status_bandana_spear2_Stick_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_NONE), *WEAPON_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
@@ -24,7 +24,6 @@ unsafe extern "C" fn status_bandana_spear2_Stick_Main(weapon: &mut L2CWeaponComm
     }
     weapon.global_table[SUB_STATUS].assign(&L2CValue::Ptr(bandana_spear2_Stick_SubStatus as *const () as _));
     weapon.fastshift(L2CValue::Ptr(bandana_spear2_Stick_Main_loop as *const () as _))
-    0.into()
 }
 
 unsafe extern "C" fn bandana_spear2_Stick_SubStatus(weapon: &mut L2CWeaponCommon, life_dec: L2CValue) -> L2CValue {

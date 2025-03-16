@@ -3,29 +3,29 @@ use crate::imports::BuildImports::*;
 pub static fly_speed_x : f32 = 2.2;
 pub static fly_speed_y : f32 = 0.8;
 pub static life : i32 = 480;
-pub static air_accel_y : f32 = 0.3;
-pub static air_accel_y_mul : f32 = 0.05;
+pub static air_accel_y : f32 = 0.05;
+pub static air_accel_y_mul : f32 = 0.5;
 
 unsafe extern "C" fn status_bandana_spear3_Fly_Pre(weapon: &mut L2CFighterCommon) -> L2CValue {
     let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let lr = PostureModule::lr(owner_module_accessor);
-    let owner_pos_x = PostureModule::pos_x(owner_module_accessor);
-    let owner_pos_y = PostureModule::pos_y(owner_module_accessor);
-    let owner_pos_z = PostureModule::pos_z(owner_module_accessor);
+    let pos_x = PostureModule::pos_x(weapon.module_accessor);
+    let pos_y = PostureModule::pos_y(weapon.module_accessor);
+    let pos_z = PostureModule::pos_z(weapon.module_accessor);
     let kind = utility::get_kind(&mut *weapon.module_accessor);
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_AIR), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
     if WorkModule::get_int(owner_module_accessor, *FIGHTER_EDGE_STATUS_SPECIAL_N_WORK_INT_CHARGE_KIND) != *FIGHTER_EDGE_SPECIAL_N_L {
-        PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x + (25.0 * lr), y: owner_pos_y + 5.0, z: owner_pos_z});
+        PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: pos_x + (25.0 * lr), y: pos_y + 5.0, z: pos_z});
     }
     else {
         if kind == *WEAPON_KIND_YOUNGLINK_BOWARROW {
-            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x, y: owner_pos_y + 10.0, z: owner_pos_z});
+            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: pos_x, y: pos_y + 10.0, z: pos_z});
         }
         else if kind == *WEAPON_KIND_TOONLINK_BOWARROW {
-            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x, y: owner_pos_y + 10.0, z: owner_pos_z});
+            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: pos_x, y: pos_y + 10.0, z: pos_z});
         }
         else {
-            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x + (12.5 * lr), y: owner_pos_y - 3.5, z: owner_pos_z});
+            PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: pos_x + (12.5 * lr), y: pos_y - 3.5, z: pos_z});
         }
     }
     0.into()

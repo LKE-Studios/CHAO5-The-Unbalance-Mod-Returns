@@ -1,25 +1,68 @@
 use crate::imports::BuildImports::*;
 
+//WalkSlow
+unsafe extern "C" fn sound_bandana_WalkSlow(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 20.0);
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_left_s"));
+        }
+        frame(fighter.lua_state_agent, 42.0);
+        PLAY_STEP(fighter, Hash40::new("se_edge_step_right_s"));
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
+    }
+}
+
+//WalkMiddle
+unsafe extern "C" fn sound_bandana_WalkMiddle(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 8.0);
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_left_m"));
+        }
+        frame(fighter.lua_state_agent, 30.0);
+        PLAY_STEP(fighter, Hash40::new("se_edge_step_right_m"));
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
+    }
+}
+
+//WalkFast
+unsafe extern "C" fn sound_bandana_WalkFast(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 6.0);
+        if is_excute(fighter) {
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_left_m"));
+        }
+        frame(fighter.lua_state_agent, 20.0);
+        PLAY_STEP(fighter, Hash40::new("se_edge_step_right_m"));
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
+    }
+}
+
 //Run
 unsafe extern "C" fn sound_bandana_Run(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     loop {
         if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_edge_step_left_m"));
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_left_m"));
         }
         wait(fighter.lua_state_agent, 12.0);
         if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_edge_step_right_m"));
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_right_m"));
         }
         wait(fighter.lua_state_agent, 12.0);
         if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_edge_step_left_m"));
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_left_m"));
         }
         wait(fighter.lua_state_agent, 10.0);
         if is_excute(fighter) {
-            PLAY_SE(fighter, Hash40::new("se_edge_step_right_m"));
+            PLAY_STEP(fighter, Hash40::new("se_edge_step_right_m"));
         }
-        wait(fighter.lua_state_agent, 9.0);
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
     }
 }
 
@@ -44,11 +87,16 @@ unsafe extern "C" fn sound_bandana_Attack13(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
     }
 }
 
 //Attack100 
 unsafe extern "C" fn sound_bandana_Attack100(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_attack09"));
+    }
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_attackair_f03_1"));
@@ -71,6 +119,7 @@ unsafe extern "C" fn sound_bandana_AttackDash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_attackdash01"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
     }
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
@@ -84,6 +133,10 @@ unsafe extern "C" fn sound_bandana_AttackDash(fighter: &mut L2CAgentBase) {
 
 //AttackS3Hi
 unsafe extern "C" fn sound_bandana_AttackS3Hi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
@@ -92,6 +145,10 @@ unsafe extern "C" fn sound_bandana_AttackS3Hi(fighter: &mut L2CAgentBase) {
 
 //AttackS3
 unsafe extern "C" fn sound_bandana_AttackS3(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
@@ -100,6 +157,10 @@ unsafe extern "C" fn sound_bandana_AttackS3(fighter: &mut L2CAgentBase) {
 
 //AttackS3Lw
 unsafe extern "C" fn sound_bandana_AttackS3Lw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 13.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
@@ -108,6 +169,10 @@ unsafe extern "C" fn sound_bandana_AttackS3Lw(fighter: &mut L2CAgentBase) {
 
 //AttackHi3
 unsafe extern "C" fn sound_bandana_AttackHi3(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 15.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
@@ -118,6 +183,7 @@ unsafe extern "C" fn sound_bandana_AttackHi3(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_AttackLw3(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
         PLAY_SE(fighter, Hash40::new("se_edge_final02_03"));
     }
 }
@@ -131,6 +197,7 @@ unsafe extern "C" fn sound_bandana_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_attackhard_s02"));
+        PLAY_SE(fighter, Hash40::new("vc_edge_attack08"));
     }
 }
 
@@ -139,6 +206,8 @@ unsafe extern "C" fn sound_bandana_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
+        PLAY_SE(fighter, Hash40::new("se_edge_smash_h02"));
+        PLAY_SE(fighter, Hash40::new("vc_edge_attack05"));
     }
     frame(fighter.lua_state_agent, 18.0);
     if is_excute(fighter) {
@@ -178,6 +247,7 @@ unsafe extern "C" fn sound_bandana_AttackHi4(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_AttackLw4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_attack07"));
         PLAY_SE(fighter, Hash40::new("se_edge_attackair_f04"));
     }
     frame(fighter.lua_state_agent, 36.0);
@@ -190,6 +260,7 @@ unsafe extern "C" fn sound_bandana_AttackLw4(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_AttackAirN(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
         PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
     }
     frame(fighter.lua_state_agent, 8.0);
@@ -215,6 +286,7 @@ unsafe extern "C" fn sound_bandana_AttackAirF(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_swing_m01"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
     }
 }
 
@@ -223,14 +295,17 @@ unsafe extern "C" fn sound_bandana_AttackAirB(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_swing_l01"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
     }
 }        
 
 //AttackAirHi
 unsafe extern "C" fn sound_bandana_AttackAirHi(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 12.0);
+    frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_sheildguard"));
+        PLAY_SE(fighter, Hash40::new("se_edge_attackair_h02"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+        PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
     }
 }
 
@@ -239,6 +314,7 @@ unsafe extern "C" fn sound_bandana_AttackAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_attackair_l01"));
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
     }
 }
 
@@ -247,6 +323,7 @@ unsafe extern "C" fn sound_bandana_LandingAirLw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_down_m_01"));
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n02"));
     }
 }
 
@@ -317,16 +394,7 @@ unsafe extern "C" fn sound_bandana_ThrowB(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_ThrowHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
-        LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 3, 0, 0, 0, false);
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.93, 0, 0, 3, 0, 0, 0, false);
-    }
-    frame(fighter.lua_state_agent, 40.0);
-    if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("peach_back_atk_heart"), Hash40::new("top"), 0, 19, 1.5, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("peach_back_atk"), Hash40::new("top"), 1, 19, 1.5, 0, 0, 0, 1.5, true);
+        PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
     }
 }   
 
@@ -412,6 +480,10 @@ unsafe extern "C" fn sound_bandana_SpecialNStart(fighter: &mut L2CAgentBase) {
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
         PLAY_SE(fighter, Hash40::new("se_edge_special_n03_01"));
     }
+    frame(fighter.lua_state_agent, 137.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
+    }
 }
 
 //SpecialAirNStart
@@ -424,12 +496,20 @@ unsafe extern "C" fn sound_bandana_SpecialAirNStart(fighter: &mut L2CAgentBase) 
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
         PLAY_SE(fighter, Hash40::new("se_edge_special_n03_01"));
     }
+    frame(fighter.lua_state_agent, 137.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
+    }
 }
 
 //SpecialN1
 unsafe extern "C" fn sound_bandana_SpecialN1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
     }
 }
 
@@ -438,12 +518,20 @@ unsafe extern "C" fn sound_bandana_SpecialAirN1(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
     }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
+    }
 }
 
 //SpecialN2
 unsafe extern "C" fn sound_bandana_SpecialN2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
     }
 }
 
@@ -452,12 +540,17 @@ unsafe extern "C" fn sound_bandana_SpecialAirN2(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         STOP_SE(fighter, Hash40::new("se_edge_special_n02_03"));
     }
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_n01"));
+    }
 }
 
 //SpecialS
 unsafe extern "C" fn sound_bandana_SpecialS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_s01"));
         if !CustomModule::is_exist_fire(fighter.module_accessor) {
             PLAY_SE(fighter, Hash40::new("se_edge_special_n04_01"));
         }
@@ -471,6 +564,7 @@ unsafe extern "C" fn sound_bandana_SpecialS(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_SpecialAirS(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_special_s01"));
         if !CustomModule::is_exist_fire(fighter.module_accessor) {
             PLAY_SE(fighter, Hash40::new("se_edge_special_n04_01"));
         }
@@ -514,6 +608,10 @@ unsafe extern "C" fn sound_bandana_SpecialAirHi(fighter: &mut L2CAgentBase) {
 
 //SpecialLw
 unsafe extern "C" fn sound_bandana_SpecialLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_special_l02_02"));
@@ -522,6 +620,10 @@ unsafe extern "C" fn sound_bandana_SpecialLw(fighter: &mut L2CAgentBase) {
 
 //SpecialAirLw
 unsafe extern "C" fn sound_bandana_SpecialAirLw(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 9.0);
+    if is_excute(fighter) {
+        PLAY_SEQUENCE(fighter, Hash40::new("seq_edge_rnd_attack"));
+    }
     frame(fighter.lua_state_agent, 20.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_special_l02_02"));
@@ -529,7 +631,7 @@ unsafe extern "C" fn sound_bandana_SpecialAirLw(fighter: &mut L2CAgentBase) {
 }
 
 //SpecialAirLwLand
-unsafe extern "C" fn game_bandana_SpecialAirLwLand(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_bandana_SpecialAirLwLand(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_famicom_hit"));
@@ -622,7 +724,11 @@ unsafe extern "C" fn sound_bandana_FinalStart(fighter: &mut L2CAgentBase) {
 } 
 
 //FinalHold
-unsafe extern "C" fn sound_bandana_FinalHold(fighter: &mut L2CAgentBase) { } 
+unsafe extern "C" fn sound_bandana_FinalHold(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_final01"));
+    }
+} 
 
 //FinalEnd
 unsafe extern "C" fn sound_bandana_FinalEnd(fighter: &mut L2CAgentBase) {
@@ -646,7 +752,11 @@ unsafe extern "C" fn sound_bandana_FinalAirStart(fighter: &mut L2CAgentBase) {
 } 
 
 //FinalAirHold
-unsafe extern "C" fn sound_bandana_FinalAirHold(fighter: &mut L2CAgentBase) {} 
+unsafe extern "C" fn sound_bandana_FinalAirHold(fighter: &mut L2CAgentBase) {
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("vc_edge_final01"));
+    }
+} 
 
 //FinalAirEnd
 unsafe extern "C" fn sound_bandana_FinalAirEnd(fighter: &mut L2CAgentBase) {
@@ -779,6 +889,9 @@ unsafe extern "C" fn sound_bandana_DamageFlyRoll(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("edge")
+    .sound_acmd("sound_walkslow_bandana", sound_bandana_WalkSlow, Low)
+    .sound_acmd("sound_walkmiddle_bandana", sound_bandana_WalkMiddle, Low)
+    .sound_acmd("sound_walkfast_bandana", sound_bandana_WalkFast, Low)
     .sound_acmd("sound_run_bandana", sound_bandana_Run, Low)
     .sound_acmd("sound_attack11_bandana", sound_bandana_Attack11, Low)
     .sound_acmd("sound_attack12_bandana", sound_bandana_Attack12, Low)
@@ -822,6 +935,7 @@ pub fn install() {
     .sound_acmd("sound_specialshold_bandana", sound_bandana_SpecialSHold, Low)
     .sound_acmd("sound_specialairshold_bandana", sound_bandana_SpecialAirSHold, Low)
     .sound_acmd("sound_specialhi_bandana", sound_bandana_SpecialHi, Low)
+    .sound_acmd("sound_specialairhi_bandana", sound_bandana_SpecialAirHi, Low)
     .sound_acmd("sound_speciallw_bandana", sound_bandana_SpecialLw, Low)
     .sound_acmd("sound_specialairlw_bandana", sound_bandana_SpecialAirLw, Low)
     .sound_acmd("sound_specialairlwland_bandana", sound_bandana_SpecialAirLwLand, Low)
@@ -831,10 +945,10 @@ pub fn install() {
     .sound_acmd("sound_appealhil_bandana", sound_bandana_AppealHiL, Low)
     .sound_acmd("sound_appeallwr_bandana", sound_bandana_AppealLwR, Low)
     .sound_acmd("sound_appeallwl_bandana", sound_bandana_AppealLwL, Low)
-    .sound_acmd("sound_finalstart_bandana", sound_bandana_FinalStart, Low)
+    .sound_acmd("sound_final_bandana", sound_bandana_FinalStart, Low)
     .sound_acmd("sound_finalhold_bandana", sound_bandana_FinalHold, Low)
     .sound_acmd("sound_finalend_bandana", sound_bandana_FinalEnd, Low)
-    .sound_acmd("sound_finalairstart_bandana", sound_bandana_FinalAirStart, Low)
+    .sound_acmd("sound_finalair_bandana", sound_bandana_FinalAirStart, Low)
     .sound_acmd("sound_finalairhold_bandana", sound_bandana_FinalAirHold, Low)
     .sound_acmd("sound_finalairend_bandana", sound_bandana_FinalAirEnd, Low)
     .sound_acmd("sound_entryl_bandana", sound_bandana_EntryL, Low)

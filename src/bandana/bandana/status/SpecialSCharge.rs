@@ -49,6 +49,7 @@ unsafe extern "C" fn bandana_SpecialSCharge_Main_loop(fighter: &mut L2CFighterCo
         bandana_kinetic_function(fighter, false);
     }
     WorkModule::add_int(fighter.module_accessor, 1, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_CHARGE);
+    WorkModule::inc_int(fighter.module_accessor, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_STORE_FRAME);
     if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         if fighter.global_table[CURRENT_FRAME].get_f32() > 0.0 {
             bandana_SpecialS_reverse_function(fighter);

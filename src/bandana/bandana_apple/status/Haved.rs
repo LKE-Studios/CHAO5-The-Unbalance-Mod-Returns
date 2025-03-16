@@ -6,7 +6,7 @@ unsafe extern "C" fn status_bandana_apple_Haved_Pre(weapon: &mut L2CWeaponCommon
 }
 
 unsafe extern "C" fn status_bandana_apple_Haved_Main(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    weapon.change_status(WEAPON_MASTER_ARROW1_STATUS_KIND_FLY, true.into());
+    weapon.change_status(WEAPON_MASTER_ARROW1_STATUS_KIND_FLY.into(), true.into());
     0.into()
 }
 

@@ -52,12 +52,12 @@ unsafe extern "C" fn effect_bandana_Attack100(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 1.0);
     loop {
-        if is_excute(fighter.lua_state_agent) {
+        if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 15, 11, 0, 0, 0, 0, 0.5, 5, 4, 2, 0, 0, 360, false);
             LAST_EFFECT_SET_ALPHA(fighter, 0.5);
         }
         wait(fighter.lua_state_agent, 5.0);
-        if is_excute(fighter.lua_state_agent) {
+        if is_excute(fighter) {
             EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 16.5, 5.55, 0, 0, 0, 0, 0.55, 5, 4, 2, 0, 0, 360, false);
             LAST_EFFECT_SET_ALPHA(fighter, 0.5);
         }
@@ -188,12 +188,12 @@ unsafe extern "C" fn effect_bandana_AttackS3(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 16.0);
     if is_excute(fighter) {
-        EFFECT(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0.0, 6, 10, -17, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+        EFFECT(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0.0, 5.2, 10, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
         LAST_EFFECT_SET_COLOR(fighter, 71.0 / 255.0, 31.0 / 255.0, 0.0);
     }
     frame(fighter.lua_state_agent, 19.0);
     if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 9.5, 24, 0, 0, 0, 0.68, false);
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 5, 24.5, 0, 0, 0, 0.68, false);
     }
 }
 
@@ -277,6 +277,18 @@ unsafe extern "C" fn effect_bandana_AttackLw3(fighter: &mut L2CAgentBase) {
     }
 }
 
+//AttackS4Charge
+unsafe extern "C" fn effect_bandana_AttackS4Charge(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 5.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 10, 0, 4, 0, 0, 0, false);
+        }
+        wait(fighter.lua_state_agent, 5.0);
+        EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("haver"), 0, 6.5, 0, 0, 0, 0, 1, 2, 3, 3, 0, 0, 0, true);
+    }
+}
+
 //AttackS4
 unsafe extern "C" fn effect_bandana_AttackS4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
@@ -304,6 +316,18 @@ unsafe extern "C" fn effect_bandana_AttackS4(fighter: &mut L2CAgentBase) {
         LAST_EFFECT_SET_RATE(fighter, 0.75);
         EFFECT(fighter, Hash40::new("kamui_water_sibuki_s"), Hash40::new("top"), 0, 4.5, 33, 0, 180, 90, 1, 0, 0, 0, 0, 0, 0, true);
         LAST_EFFECT_SET_RATE(fighter, 0.85);
+    }
+}
+
+//AttackHi4Charge
+unsafe extern "C" fn effect_bandana_AttackHi4Charge(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 5.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 10, 0, 4, 0, 0, 0, false);
+        }
+        wait(fighter.lua_state_agent, 5.0);
+        EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("haver"), 0, 6.5, 0, 0, 0, 0, 1, 2, 3, 3, 0, 0, 0, true);
     }
 }
 
@@ -346,6 +370,18 @@ unsafe extern "C" fn effect_bandana_AttackHi4(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 47.0);
     if is_excute(fighter) {
         AFTER_IMAGE_OFF(fighter, 1);
+    }
+}
+
+//AttackLw4Charge
+unsafe extern "C" fn effect_bandana_AttackLw4Charge(fighter: &mut L2CAgentBase) {
+    loop {
+        frame(fighter.lua_state_agent, 5.0);
+        if is_excute(fighter) {
+            FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 10, 0, 4, 0, 0, 0, false);
+        }
+        wait(fighter.lua_state_agent, 5.0);
+        EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("haver"), 0, 6.5, 0, 0, 0, 0, 1, 2, 3, 3, 0, 0, 0, true);
     }
 }
 
@@ -659,24 +695,6 @@ unsafe extern "C" fn effect_bandana_SpecialNStart(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("kirby_star"), Hash40::new("top"), -7, 7, 2, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
     }
-    frame(fighter.lua_state_agent, 100.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-    }
     frame(fighter.lua_state_agent, 136.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 0.8, 0, 0, 4, 0, 0, 0, false);
@@ -704,24 +722,6 @@ unsafe extern "C" fn effect_bandana_SpecialAirNStart(fighter: &mut L2CAgentBase)
     frame(fighter.lua_state_agent, 45.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("kirby_star"), Hash40::new("top"), -7, 7, 2, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
-    }
-    frame(fighter.lua_state_agent, 100.0);
-    if is_excute(fighter) {
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
-        EFFECT_FOLLOW(fighter, Hash40::new("sys_warpstar_break"), Hash40::new("top"), 0, 1.5, 0, 0, 0, 0, 0.33, true);
     }
     frame(fighter.lua_state_agent, 136.0);
     if is_excute(fighter) {
@@ -867,6 +867,10 @@ unsafe extern "C" fn effect_bandana_SpecialAirSHold(fighter: &mut L2CAgentBase) 
 
 //SpecialHi
 unsafe extern "C" fn effect_bandana_SpecialHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 6.0);
     if is_excute(fighter) {
         LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.95, 0, 0, 0, 0, 0, 0, false);
@@ -891,6 +895,10 @@ unsafe extern "C" fn effect_bandana_SpecialHi(fighter: &mut L2CAgentBase) {
 
 //SpecialAirHi
 unsafe extern "C" fn effect_bandana_SpecialAirHi(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 1.0);
+    if is_excute(fighter) {
+        EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         match WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) % 8 {
@@ -1210,6 +1218,9 @@ pub fn install() {
     .effect_acmd("effect_attacks3lw_bandana", effect_bandana_AttackS3Lw, Low)
     .effect_acmd("effect_attackhi3_bandana", effect_bandana_AttackHi3, Low)
     .effect_acmd("effect_attacklw3_bandana", effect_bandana_AttackLw3, Low)
+    .effect_acmd("effect_attacks4charge_bandana", effect_bandana_AttackS4Charge, Low)
+    .effect_acmd("effect_attackhi4charge_bandana", effect_bandana_AttackHi4Charge, Low)
+    .effect_acmd("effect_attacklw4charge_bandana", effect_bandana_AttackLw4Charge, Low)
     .effect_acmd("effect_attacks4_bandana", effect_bandana_AttackS4, Low)
     .effect_acmd("effect_attackhi4_bandana", effect_bandana_AttackHi4, Low)
     .effect_acmd("effect_attacklw4_bandana", effect_bandana_AttackLw4, Low)
@@ -1239,6 +1250,7 @@ pub fn install() {
     .effect_acmd("effect_specialshold_bandana", effect_bandana_SpecialSHold, Low)
     .effect_acmd("effect_specialairshold_bandana", effect_bandana_SpecialAirSHold, Low)
     .effect_acmd("effect_specialhi_bandana", effect_bandana_SpecialHi, Low)
+    .effect_acmd("effect_specialairhi_bandana", effect_bandana_SpecialAirHi, Low)
     .effect_acmd("effect_speciallw_bandana", effect_bandana_SpecialLw, Low)
     .effect_acmd("effect_specialairlw_bandana", effect_bandana_SpecialAirLw, Low)
     .effect_acmd("effect_specialairlwland_bandana", effect_bandana_SpecialAirLwLand, Low)
@@ -1248,10 +1260,10 @@ pub fn install() {
     .effect_acmd("effect_appealhil_bandana", effect_bandana_AppealHiL, Low)
     .effect_acmd("effect_appeallwr_bandana", effect_bandana_AppealLwR, Low)
     .effect_acmd("effect_appeallwl_bandana", effect_bandana_AppealLwL, Low)
-    .effect_acmd("effect_finalstart_bandana", effect_bandana_FinalStart, Low)
+    .effect_acmd("effect_final_bandana", effect_bandana_FinalStart, Low)
     .effect_acmd("effect_finalhold_bandana", effect_bandana_FinalHold, Low)
     .effect_acmd("effect_finalend_bandana", effect_bandana_FinalEnd, Low)
-    .effect_acmd("effect_finalairstart_bandana", effect_bandana_FinalAirStart, Low)
+    .effect_acmd("effect_finalair_bandana", effect_bandana_FinalAirStart, Low)
     .effect_acmd("effect_finalairhold_bandana", effect_bandana_FinalAirHold, Low)
     .effect_acmd("effect_finalairend_bandana", effect_bandana_FinalAirEnd, Low)
     .effect_acmd("effect_entryl_bandana", effect_bandana_EntryL, Low)

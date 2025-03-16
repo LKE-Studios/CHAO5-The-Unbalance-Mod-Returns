@@ -39,6 +39,7 @@ unsafe extern "C" fn status_bandana_Final_Main(fighter: &mut L2CFighterCommon) -
 unsafe extern "C" fn bandana_Final_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let module_accessor = sv_system::battle_object_module_accessor(fighter.lua_state_agent);
     if [hash40("final"), hash40("final_air")].contains(&motion_kind) {
         if frame >= 25.0 && frame < 54.0 {
             KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);

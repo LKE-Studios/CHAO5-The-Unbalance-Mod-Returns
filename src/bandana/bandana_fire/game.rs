@@ -11,16 +11,16 @@ unsafe extern "C" fn game_bandana_fire_SpecialN1(fighter: &mut L2CAgentBase) {
 
 //BurstS
 unsafe extern "C" fn game_bandana_fire_BurstS(fighter: &mut L2CAgentBase) {
-    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+    let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
     let store_frame = WorkModule::get_int(owner_module_accessor, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_STORE_FRAME);
     if is_excute(fighter) {
-        if store_frame == 30 {
+        if store_frame >= 30 {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_furafura"), 9, false, 0);
         }
     }
     frame(fighter.lua_state_agent, 2.0);
     if is_excute(fighter) {
-        if store_frame == 30 {
+        if store_frame >= 30 {
             ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_explosionm"), 6, false, 0);
             QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
             AttackModule::disable_tip(fighter.module_accessor);

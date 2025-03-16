@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static fly_speed_x : f32 = 1.5;
+pub static fly_speed_x : f32 = 3.0;
 pub static fly_speed_y : f32 = 0.775;
 pub static life : i32 = 120;
 pub static air_accel_y : f32 = 0.3;
