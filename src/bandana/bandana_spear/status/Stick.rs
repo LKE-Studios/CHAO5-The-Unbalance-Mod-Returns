@@ -1,6 +1,6 @@
 use crate::imports::BuildImports::*;
 
-pub static stick_frame : i32 = 120;
+pub static stick_frame : i32 = 300;
 
 unsafe extern "C" fn status_bandana_spear_Stick_Pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
     StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_NONE), *WEAPON_KINETIC_TYPE_RESET, *GROUND_CORRECT_KIND_KEEP as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);

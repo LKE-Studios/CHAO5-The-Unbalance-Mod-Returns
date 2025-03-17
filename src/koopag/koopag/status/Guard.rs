@@ -8,7 +8,7 @@ unsafe extern "C" fn status_koopag_Guard_Main(fighter: &mut L2CFighterCommon) ->
 
 unsafe extern "C" fn koopag_Guard_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     if !status_guard_common_air(fighter).get_bool() {
-        if !status_sub_guard_cont(fighter).get_bool() {
+        if !fighter.sub_guard_cont().get_bool() {
             status_guard_main_common(fighter);
         }
     }

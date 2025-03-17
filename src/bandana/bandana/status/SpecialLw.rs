@@ -5,6 +5,7 @@ pub static move_speed_x_air : f32 = 2.5;
 pub static move_speed_y : f32 = 3.0;
 pub static move_start_frame : f32 = 20.0;
 pub static move_end_frame : f32 = 52.0;
+pub static cancel_frame : f32 = 18.0;
 
 unsafe extern "C" fn status_bandana_SpecialLw_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
@@ -81,14 +82,16 @@ unsafe extern "C" fn bandana_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon)
             return 0.into();
         }
     }
-    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
-    }
     if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {
         if frame >= move_start_frame {
             KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        }
+        if frame >= cancel_frame {
+            if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+                fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+            }
         }
         if stick_y <= -0.5 {
             GroundModule::pass_floor(fighter.module_accessor);
@@ -105,6 +108,11 @@ unsafe extern "C" fn bandana_SpecialLw_Main_loop(fighter: &mut L2CFighterCommon)
         }
     }
     else {
+        if frame >= cancel_frame {
+            if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+                fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), true.into());
+            }
+        }
         if frame >= move_start_frame {
             KineticModule::unable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_STOP);
             KineticModule::enable_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);

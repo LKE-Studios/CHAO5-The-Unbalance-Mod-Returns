@@ -39,8 +39,12 @@ pub unsafe extern "C" fn frame_edge_Main(fighter : &mut L2CFighterCommon) {
 }
 
 pub unsafe extern "C" fn frame_edge_Exec(fighter : &mut L2CFighterCommon) {
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordl1"), &Vector3f{x:1.15, y:1.0, z:1.0});
-    ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordr1"), &Vector3f{x:1.15, y:1.0, z:1.0});
+    let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    let EDGE = color >= 0 && color <= 16;
+    if EDGE {
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordl1"), &Vector3f{x:1.15, y:1.0, z:1.0});
+        ModelModule::set_joint_scale(fighter.module_accessor, Hash40::new("swordr1"), &Vector3f{x:1.15, y:1.0, z:1.0});
+    }
 }
 
 pub unsafe extern "C" fn frame_edge_flare(weapon : &mut L2CFighterBase) {

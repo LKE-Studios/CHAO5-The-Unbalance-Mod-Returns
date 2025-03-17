@@ -5,6 +5,7 @@ pub static special_hi_accel_x_add : f32 = 0.03;
 pub static special_hi_speed_x_max : f32 = 1.4;
 pub static special_hi_speed_y_max : f32 = 1.7;
 pub static special_hi_speed_y_min : f32 = 0.6;
+pub static cancel_frame : f32 = 20.0;
 
 unsafe extern "C" fn status_bandana_SpecialHi_Pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let color = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);     
@@ -63,6 +64,7 @@ unsafe extern "C" fn status_bandana_SpecialHi_Main(fighter: &mut L2CFighterCommo
 }
 
 unsafe extern "C" fn bandana_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let frame = MotionModule::frame(fighter.module_accessor);
     if fighter.sub_transition_group_check_air_cliff().get_bool() {
         return 1.into();
     }
@@ -72,11 +74,13 @@ unsafe extern "C" fn bandana_SpecialHi_Main_loop(fighter: &mut L2CFighterCommon)
             return 0.into();
         }
     }
-    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-        fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true.into());
-    }
-    if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-        fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+    if frame >= cancel_frame {
+        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+            fighter.change_status(FIGHTER_STATUS_KIND_ATTACK_AIR.into(), true.into());
+        }
+        if ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
+            fighter.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), true.into());
+        }
     }
     if MotionModule::is_end(fighter.module_accessor) {
         if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_GROUND {

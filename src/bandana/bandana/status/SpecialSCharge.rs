@@ -70,6 +70,7 @@ unsafe extern "C" fn status_bandana_SpecialSCharge_End(fighter: &mut L2CFighterC
     let BANDANA = color >= 120 && color <= 127;
     if BANDANA {
         SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_common_spirits_floor_ice_loop"), 0);
+        SoundModule::stop_se(fighter.module_accessor, Hash40::new("se_edge_special_n04_03"), 0);
         WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_BANDANA_INSTANCE_WORK_ID_INT_SPECIAL_S_CHARGE);
         0.into()
     }

@@ -75,7 +75,6 @@ pub unsafe extern "C" fn frame_bandana_Main(fighter : &mut L2CFighterCommon) {
 pub unsafe extern "C" fn frame_bandana_Exec(fighter: &mut L2CFighterCommon) {}
 
 pub unsafe extern "C" fn frame_bandana_spear2_Exec(weapon: &mut L2CFighterBase) {
-    
     let status_kind = StatusModule::status_kind(weapon.module_accessor);
     let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
     let frame = MotionModule::frame(weapon.module_accessor);

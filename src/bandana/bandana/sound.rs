@@ -576,17 +576,35 @@ unsafe extern "C" fn sound_bandana_SpecialAirS(fighter: &mut L2CAgentBase) {
 
 //SpecialSHold
 unsafe extern "C" fn sound_bandana_SpecialSHold(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
+        PLAY_SE(fighter, Hash40::new("se_edge_special_n04_03"));
+    }
+    loop {
+        frame(fighter.lua_state_agent, 6.0);
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
+        }
+        wait(fighter.lua_state_agent, 6.0);
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
     }
 }
 
 //SpecialAirSHold
 unsafe extern "C" fn sound_bandana_SpecialAirSHold(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_spirits_floor_ice_loop"));
+        PLAY_SE(fighter, Hash40::new("se_edge_special_n04_03"));
+    }
+    loop {
+        frame(fighter.lua_state_agent, 6.0);
+        if is_excute(fighter) {
+            PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
+        }
+        wait(fighter.lua_state_agent, 6.0);
+        fighter.clear_lua_stack();
+        wait_loop_sync_mot(fighter.lua_state_agent);
     }
 }
 
@@ -596,6 +614,10 @@ unsafe extern "C" fn sound_bandana_SpecialHi(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_special_h01"));
     }
+    frame(fighter.lua_state_agent, 96.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_edge_special_h02"));
+    }
 }
 
 //SpecialAirHi
@@ -603,6 +625,10 @@ unsafe extern "C" fn sound_bandana_SpecialAirHi(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_edge_special_h01"));
+    }
+    frame(fighter.lua_state_agent, 96.0);
+    if is_excute(fighter) {
+        PLAY_SE(fighter, Hash40::new("se_edge_special_h02"));
     }
 }
 
@@ -634,7 +660,7 @@ unsafe extern "C" fn sound_bandana_SpecialAirLw(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn sound_bandana_SpecialAirLwLand(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if is_excute(fighter) {
-        PLAY_SE(fighter, Hash40::new("se_common_famicom_hit"));
+        PLAY_SE(fighter, Hash40::new("se_edge_special_l04"));
     }
 }
 
@@ -691,6 +717,7 @@ unsafe extern "C" fn sound_bandana_AppealLwR(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 74.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_system_infowindow_open"));
+        PLAY_SE(fighter, Hash40::new("se_edge_appeal_l01"));
     }
 }
 
@@ -707,6 +734,7 @@ unsafe extern "C" fn sound_bandana_AppealLwL(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 74.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_system_infowindow_open"));
+        PLAY_SE(fighter, Hash40::new("se_edge_appeal_l01"));
     }
 }
 

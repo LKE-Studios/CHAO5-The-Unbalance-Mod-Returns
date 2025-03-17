@@ -11,7 +11,7 @@ pub unsafe extern "C" fn frame_common(fighter : &mut L2CFighterCommon) {
                 ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) || 
                 ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || 
                 ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) {
-                EFFECT(fighter, Hash40::new("sys_kusudama"), Hash40::new("top"), 0, 28, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_kusudama"), Hash40::new("top"), &Vector3f{x: 0.0, y: 28.0, z: 0.0}, &VECTOR_ZERO, 0.75, true, 0, 0, 0, 0, 0, true, true);
             }
         }
     };
